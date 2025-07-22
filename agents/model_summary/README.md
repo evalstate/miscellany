@@ -52,6 +52,9 @@ _eval/optimiser_ and ask for an optimised prompt.
 
 - The `summary-prompt.md` can also use in-context learning with examples between  `---USER` and `---ASSISTANT` delimeters.
 
+- Provide access to the Hugging Face MCP Server to get associated dataset information, current inference providers etc.
+
+- Use Hugging Face documentation to produce up-to-date code samples/snippets for using the model.
 
 ### Improve Fetching
 
