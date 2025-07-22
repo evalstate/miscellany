@@ -55,8 +55,6 @@ async def main():
     # use the --model command line switch or agent arguments to change model
     async with fast.run() as agent:
 
-        await agent.reach_vb.apply_prompt("auto-vb")
-
         model_id = None
         if "--research" in sys.argv:
             model_id = sys.argv[sys.argv.index("--research") + 1]
@@ -102,8 +100,6 @@ async def main():
             "summary-prompt", {"research_report": research_report}
         )
 
-        await agent.reach_vb.send(final_report)
-        # show the interactive prompt for follow up questions
         await agent.interactive("summariser")
 
 
