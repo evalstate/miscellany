@@ -92,11 +92,10 @@ async def main():
 
         research_report = format_research_report(sources)
 
-        # Send the combined information to the user
         await agent.summariser.apply_prompt(
             "Model Card Template", {"model_id": model_id}
         )
-        final_report = await agent.summariser.apply_prompt(
+        await agent.summariser.apply_prompt(
             "summary-prompt", {"research_report": research_report}
         )
 

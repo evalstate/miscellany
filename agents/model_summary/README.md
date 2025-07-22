@@ -55,6 +55,8 @@ _eval/optimiser_ and ask for an optimised prompt.
 
 ### Improve Fetching
 
+- Use `parallel` models for extraction, compare and tune the extraction prompt to perform better.
+
 - For markdown conversion it's possible to use `jiniai/readerlm2` locally for content extraction (add new tool to MCP
 server to attempt CURL extraction).
 
