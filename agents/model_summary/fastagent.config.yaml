@@ -34,7 +34,7 @@ mcp:
     servers:
         prompts:
             command: "prompt-server"
-            args: ["fetch-prompt.md","summary-prompt.md"]
+            args: ["fetch-prompt.md","summary-prompt.md","auto-vb.md"]
         model_server: # returns model cards
             command: "uv"
             args: ["run", "model_server.py"]

@@ -32,7 +32,14 @@ DEFAULT_RESEARCH_MODEL = "HuggingFaceTB/SmolLM3-3B"
     instruction="""
 We are researching a Machine Learning model. You will be presented with a set of URLs
 extracted from the Model Card. Assess which URLs are likely to contain useful additional
-content, and indicate whether they should be fetched with a reason for your decision.""",
+content, and indicate whether they should be fetched with a reason for your decision. 
+
+Change  arXiv 'PDF' urls to be 'HTML' instead. for example: 
+
+https://arxiv.org/pdf/2507.14311v1 becomes https://arxiv.org/html/2507.14311v1 
+
+Return the adjusted URL in the supplied `url` field.
+""",
 )
 @fast.agent(
     name="research_fetch",
@@ -43,9 +50,12 @@ You are an AI Agent that fetches information from the internet to assist in rese
 Your output will later be used to generate a summary, so optimise your responses for clarity and relevance.
 """,
 )
+
 async def main():
     # use the --model command line switch or agent arguments to change model
     async with fast.run() as agent:
+
+        await agent.reach_vb.apply_prompt("auto-vb")
 
         model_id = None
         if "--research" in sys.argv:
@@ -88,10 +98,11 @@ async def main():
         await agent.summariser.apply_prompt(
             "Model Card Template", {"model_id": model_id}
         )
-        await agent.summariser.apply_prompt(
+        final_report = await agent.summariser.apply_prompt(
             "summary-prompt", {"research_report": research_report}
         )
 
+        await agent.reach_vb.send(final_report)
         # show the interactive prompt for follow up questions
         await agent.interactive("summariser")
 

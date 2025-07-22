@@ -37,6 +37,10 @@ If no research model id is specified, a sample default is used (`HuggingFaceTB/S
 To save the results type `***SAVE_HISTORY <filename.md>`. To save the results as JSON use `***SAVE_HISTORY <filename.json>`
 Use `CTRL+Y` to copy the plain markdown to the clipboard.
 
+## Bonus
+
+Produce an insightful social media post with `uv run reach-vb.py`. Paste a model summary in and 💥.
+
 ## Next Steps
 
 ### Tune Summarisation Prompt
@@ -51,8 +55,11 @@ _eval/optimiser_ and ask for an optimised prompt.
 
 ### Improve Fetching
 
-For markdown conversion it's possible to use `jiniai/readerlm2` locally for content extraction (add new tool to MCP
+- For markdown conversion it's possible to use `jiniai/readerlm2` locally for content extraction (add new tool to MCP
 server to attempt CURL extraction).
 
-Add additional "fetch" mechanisms as a fallback for 400's or errors (e.g. add `mcp-server-fetch` as an additional option), or
+- Add additional "fetch" mechanisms as a fallback for 400's or errors (e.g. add `mcp-server-fetch` as an additional option), or
 even add a "playwright" agent if wanted.
+
+- Adjust arXiv URLs to attempt to get `/html` rather than summary `/abs` identifying whether they are core to the model or
+supplementary information.
