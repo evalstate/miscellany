@@ -24,7 +24,7 @@ uv sync
 
 By default it's configured to use OpenAI GPT-4.1 (that's what it's been tested with) either
 set an API key (`OPENAI_API_KEY`) or edit the config file (`fast-agent setup` to create
-a sample. Use `fast-agent check` to confirm API key is found.
+a sample. Use `fast-agent check` to confirm API key is found.)
 
 To run:
 
