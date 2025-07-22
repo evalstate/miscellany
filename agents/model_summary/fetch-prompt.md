@@ -1,0 +1,1 @@
+Fetch {{url}} and produce a summary that would be interesting or surprising to an AI Model researcher. Return 'NO USEFUL CONTENT' if there is no useful additional information. Do not repeat information that is already within the Model Card unless it is a unique point worth reinforcing for effect.  
