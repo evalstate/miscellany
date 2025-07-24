@@ -1,8 +1,8 @@
 import asyncio
+from pathlib import Path
 import sys
 from typing import List
 from mcp import GetPromptResult
-from mcp_agent import PromptMessageMultipart
 from mcp_agent.core.prompt import Prompt
 from mcp_agent.core.fastagent import FastAgent
 from research_utils import (
@@ -29,17 +29,7 @@ DEFAULT_RESEARCH_MODEL = "HuggingFaceTB/SmolLM3-3B"
 )
 @fast.agent(
     name="url_picker",
-    instruction="""
-We are researching a Machine Learning model. You will be presented with a set of URLs
-extracted from the Model Card. Assess which URLs are likely to contain useful additional
-content, and indicate whether they should be fetched with a reason for your decision. 
-
-Change  arXiv 'PDF' urls to be 'HTML' instead. for example: 
-
-https://arxiv.org/pdf/2507.14311v1 becomes https://arxiv.org/html/2507.14311v1 
-
-Return the adjusted URL in the supplied `url` field.
-""",
+    instruction=Path("url_prompt.md")
 )
 @fast.agent(
     name="research_fetch",
@@ -80,12 +70,10 @@ async def main():
             )
             for URLWithReason in to_access.urls:
                 if URLWithReason.fetch:
-                    fetch_prompt = await agent.research_fetch.get_prompt(
+                    fetch_prompt: GetPromptResult= await agent.research_fetch.get_prompt(
                         "fetch-prompt", {"url": URLWithReason.url}
                     )
-                    messages = await agent.research_fetch.generate(
-                        PromptMessageMultipart.from_get_prompt_result(fetch_prompt)
-                    )
+                    messages = await agent.research_fetch.generate(fetch_prompt.messages)
                     content = messages.last_text()
                     if "NO USEFUL CONTENT" not in content:
                         sources.append((URLWithReason.url, content))

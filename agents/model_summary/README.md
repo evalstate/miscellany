@@ -56,6 +56,8 @@ _eval/optimiser_ and ask for an optimised prompt.
 
 - Use Hugging Face documentation to produce up-to-date code samples/snippets for using the model.
 
+- Select images for Social Media resharing (`reach-vb`)
+
 ### Improve Fetching
 
 - Use `parallel` models for extraction, compare and tune the extraction prompt to perform better.
@@ -68,3 +70,5 @@ even add a "playwright" agent if wanted.
 
 - Adjust arXiv URLs to attempt to get `/html` rather than summary `/abs` identifying whether they are core to the model or
 supplementary information.
+
+- Include images for Vision Models
