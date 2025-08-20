@@ -3,6 +3,7 @@ from pathlib import Path
 import sys
 from typing import List
 from mcp import GetPromptResult
+from mcp_agent import PromptMessage, TextContent
 from mcp_agent.core.prompt import Prompt
 from mcp_agent.core.fastagent import FastAgent
 from research_utils import (
@@ -23,7 +24,12 @@ DEFAULT_RESEARCH_MODEL = "HuggingFaceTB/SmolLM3-3B"
 # Define the agent
 @fast.agent(
     name="summariser",
-    instruction="You are a helpful AI Agent",
+    instruction="""
+You are a helpful AI Agent. You will be producing a summary report for a model. In addition, you must also produce:
+
+a) A "Prompting Guide" that describes the best way to prompt the model.
+b) An example "Tool Description" and "Parameter Descriptions" to help an LLM Produce optimal outputs for the model",
+""",
     use_history=True,
     servers=["model_server", "prompts"],
 )
@@ -37,7 +43,7 @@ DEFAULT_RESEARCH_MODEL = "HuggingFaceTB/SmolLM3-3B"
     servers=["pulse_fetch", "model_server", "prompts"],
     instruction="""
 You are an AI Agent that fetches information from the internet to assist in research.
-Your output will later be used to generate a summary, so optimise your responses for clarity and relevance.
+Your output will later be used to produce a prompting guide, so optimise your responses for clarity and relevance.
 """,
 )
 
@@ -56,7 +62,7 @@ async def main():
             model_id = DEFAULT_RESEARCH_MODEL
 
         model: GetPromptResult = await agent.summariser.get_prompt(
-            "Model Card", {"model_id": model_id}
+            "Model Details", {"model_id": model_id}
         )
 
         urls: str = extract_urls_from_model_card(model.messages[-1].content.text)
@@ -80,9 +86,9 @@ async def main():
 
         research_report = format_research_report(sources)
 
-        await agent.summariser.apply_prompt(
-            "Model Card Template", {"model_id": model_id}
-        )
+        model.messages.append(PromptMessage(role="assistant",content=TextContent(type="text",text="Thank you. I will refer to this model card in my future responses")))
+        await agent.summariser.apply_prompt(model,as_template=True)
+        
         await agent.summariser.apply_prompt(
             "summary-prompt", {"research_report": research_report}
         )
