@@ -102,6 +102,14 @@ section.transition {
   --transitionpage-color: #247397;
 
 }
+
+section.transition h1 .mcp-model {
+  color: #FF9D00;
+}
+
+section.transition h1 .mcp-context {
+  color: #6b7280;
+}
 /* -------------------- TRANSITION ---------------------------------*/
 section.transition2 {
   
