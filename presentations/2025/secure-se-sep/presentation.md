@@ -4,13 +4,38 @@ theme: freud
 paginate: true
 ---
 
+
+<style>
+     .cite-author {  
+      text-align        : right;
+   }
+   .cite-author:after {
+      color             : orangered;
+      font-size         : 125%;
+      /* font-style        : italic; */
+      font-weight       : bold;
+      font-family       : Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+      padding-right     : 130px;
+   }
+   .cite-author[data-text]:after {
+      content           : " - "attr(data-text) " - ";      
+   }
+
+   .cite-author p {
+      padding-bottom : 40px
+   }
+</style>
+
 <!-- _class: titlepage -->
 
 <div class="title"         > Securing the Model Context Protocol</div>
 <div class="subtitle"      > securese.ai, Stockholm   </div>
 <div class="author"        > Shaun Smith                       </div>
 <div class="date"          > Sep 2025                                    </div>
-<div class="organization"  > huggingface.co github.com/evalstate x.com/evalstate</div>
+<div class="organization"  > huggingface.co/evalstate</div>
+<div class="organization"  > huggingface.co/evalstate</div>
+<div class="organization"  > github.com/evalstate</div>
+<div class="organization"  > x.com/evalstate</div>
 
 <!-- -->
 
@@ -36,7 +61,166 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 
 ---
 
-## Part 1 - The Model
+# The Model
+
+![w:700](./images/model_parameters.png)
+
+---
+
+<!-- _class: dataset-makeup -->
+
+<style scoped>
+  section.dataset-makeup table td:first-child {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  section.dataset-makeup table tr:hover {
+    background-color: var(--table-hover-background-color) !important;
+    color: var(--table-hover-color) !important;
+    font-weight: 700;
+  }
+</style>
+
+# Training Data Makeup __Meta Llama 2023__
+
+
+| Source | Content | Weighting | Size (GB) |
+| --- | --- | --- | ---: |
+| **🌐 English CommonCrawl** | English language web content | Very High (73.7%) | 3,379 |
+| **🌐 C4** | Cleaned web pages | High (15.9%) | 783 |
+| **💻 GitHub** | Open-source code | Medium (2.9%) | 328 |
+| **📚 Wikipedia** | Encyclopedia articles in 20 languages | Medium (11.0%) | 83 |
+| **📘 Books** | Project Gutenberg and Books3 collection | Medium (10.0%) | 85 |
+| **🧪 ArXiv** | Scientific papers | Low (2.7%) | 92 |
+| **💬 Stack Exchange** | Q&amp;A from various domains | Low (2.1%) | 78 |
+
+<p class="small">Sizes normalized to gigabytes for straightforward comparisons.</p>
+
+---
+
+<!-- _class: mcp-features -->
+
+<style scoped>
+  section.mcp-features table {
+    width: 100%;
+    margin-top: 1.1rem;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 1.02rem;
+  }
+  section.mcp-features thead th {
+    padding: 0 0.75rem 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.74rem;
+    font-weight: 600;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.3);
+    color: rgba(0, 0, 0, 0.68);
+  }
+  section.mcp-features tbody td {
+    padding: 0.65rem 0.75rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    vertical-align: top;
+  }
+  section.mcp-features tbody tr:last-child td {
+    border-bottom: none;
+  }
+  section.mcp-features table td:first-child {
+    font-weight: 700;
+  }
+  section.mcp-features table tr:nth-child(even),
+  section.mcp-features table tr:nth-child(odd) {
+    background-color: transparent !important;
+  }
+  section.mcp-features table tr:hover {
+    background-color: var(--table-hover-background-color) !important;
+    color: var(--table-hover-color) !important;
+    font-weight: 700;
+  }
+  section.mcp-features .cell-title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  section.mcp-features .cell-title::before {
+    content: "";
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 24px 24px;
+    opacity: 0.92;
+  }
+  section.mcp-features .cell-title.is-tools::before {
+    background-image: url("./images/lucide-wrench.svg");
+  }
+  section.mcp-features .cell-title.is-resources::before {
+    background-image: url("./images/lucide-database-zap.svg");
+  }
+  section.mcp-features .cell-title.is-prompts::before {
+    background-image: url("./images/lucide-sparkles.svg");
+  }
+  section.mcp-features .examples {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+</style>
+
+# MCP Server Feature Roles
+
+| Feature | Explanation | Examples | Control  |
+| --- | --- | --- | ---: |
+| <span class="cell-title is-tools">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Search flights</span><span>Send messages</span><span>Create calendar events</span></div> | Model |
+| <span class="cell-title is-resources">Resources</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span><span>Access knowledge bases</span><span>Read calendars</span></div> | Application |
+| <span class="cell-title is-prompts">Prompts</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Plan a vacation</span><span>Summarize my meetings</span><span>Draft an email</span></div> | User |
+
+
+---
+
+# privacy
+
+![w:600](./images/chatgpt-privacy.png)
+
+---
+
+# completions[0..1]
+
+<div class="columns">
+<div>
+
+![w:700](./images/completion-1-lightbox.png)
+
+</div>
+<div>
+
+![w:700](./images/completion-2-lightbox.png)
+
+</div>
+
+</div>
+
+---
+
+# foobar
+
+<div align="center">
+
+## poifsdfsfsf nt one
+## point two
+
+| foo | bar | baz |
+|-----|-----|-----|
+| test | test | test |
+
+
+
+</div>
+
+---
+
 
 <!-- points to make here -->
 Models are trained using lots of text. 
@@ -55,9 +239,12 @@ Instruction Training.
 How do we make a model?
 Ingredients. Lots of CPU, lots of compute.
 
-Text Completions -->
+Text Completions 
+
  given . The text we ask it to complete is known as the "Context".
 Computational Complexity and Model Size.
+
+-->
 
 ---
 
