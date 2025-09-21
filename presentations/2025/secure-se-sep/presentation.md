@@ -31,7 +31,7 @@ paginate: false
 <div class="title"         > Securing the Model Context Protocol</div>
 <div class="subtitle"      > securese.ai, Stockholm   </div>
 <div class="author"        > Shaun Smith                       </div>
-<div class="date"          > Sep 2025                                    </div>
+<div class="date"          > September 2025                                    </div>
 <div class="organization"  > huggingface.co/evalstate</div>
 <div class="organization"  > github.com/evalstate</div>
 <div class="organization"  > x.com/evalstate</div>
@@ -46,9 +46,9 @@ paginate: false
 <!-- who knows about mcp, who i am, what the presentation entails -->
 
 MCP Steering Group Member
-Community Moderator, Working Groups.
+<!-- Community Moderator, Working Groups. -->
 
-Work @ Hugging Face on MCP and Open Source initiatives.
+<!-- Work @ Hugging Face on MCP and Open Source initiatives. -->
 
 <!-- if you are using MCP you are an LLM Systems integrator -->
 
@@ -62,7 +62,9 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 
 # The Model
 
-![w:700](./images/model_parameters.png)
+![w:400](./images/model_parameters.png)
+
+Continues generating text from a prompt
 
 ---
 
@@ -82,7 +84,6 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 
 # Training Data Composition __Meta Llama 2023__
 
-
 | Source | Content | Weighting | Size (GB) |
 | --- | --- | --- | ---: |
 | **🌐 English CommonCrawl** | English language web content | Very High (73.7%) | 3,379 |
@@ -95,10 +96,9 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 
 <p class="small">Sizes normalized to gigabytes for straightforward comparisons.</p>
 
-
 ---
 
-# privacy
+# Privacy
 
 <div align="center">
 
@@ -108,7 +108,16 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 
 ---
 
-# completions[0..1]
+# Guardrails
+
+(donald trump clause)
+
+https://docs.claude.com/en/release-notes/system-prompts#august-5-2025
+
+
+---
+
+# Completions[0..1]
 
 <div class="columns">
 <div>
@@ -127,6 +136,54 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 ---
 
 
+# Frozen weights, fleeting context
+
+<div class="footprint-nesting">
+  <div class="box">
+    <strong>Parameters stay resident</strong>
+    <p class="small">~60 GB loaded for inference at all times.</p>
+    <div class="chip">weights</div>
+    <p class="small">Sharded across multiple accelerators to keep latency down.</p>
+    <div class="inner">~0.5 MB live context</div>
+  </div>
+  <div class="box emphasis">
+    <strong>Context stream resets</strong>
+    <p class="small">131,072 tokens per turn (~95k words).</p>
+    <div class="chip">conversation</div>
+    <ul>
+      <li>Rebuilt for every request.</li>
+      <li>Tool outputs and prompts fight for headroom.</li>
+      <li>Older turns vanish first when the window fills.</li>
+    </ul>
+  </div>
+</div>
+
+<p class="small">Inference runs on a huge static memory map, while the conversational working set remains a tiny, constantly refreshed slice.</p>
+
+
+---
+
+
+
+<!-- _class: transition -->
+
+# <span class="mcp-model">Model Context Protocol</span> is an open-source standard for connecting AI applications to external systems.
+
+
+#### Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.
+
+---
+
+# Architecture
+
+![650px](./images/architecture_1.png)
+
+
+
+---
+
+
+
 
 <!-- _class: mcp-features -->
 
@@ -134,9 +191,9 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 
 | Icon | Feature | Explanation | Example | 
 | --- | --- | --- | --- | 
-| <span class="feature-icon"><img src="./images/lucide-wrench.svg" alt="Tools" width="100%" /></span> | <span class="cell-title">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Send messages</span></div> | Model |
-| <span class="feature-icon"><img src="./images/lucide-database-zap.svg" alt="Resources" width="100%" /></span> | <span class="cell-title">Resources</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span></div> | Application |
-| <span class="feature-icon"><img src="./images/lucide-messages-square.svg" alt="Prompts" width="100%"/></span> | <span class="cell-title">Prompts</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
+| <span class="feature-icon"><img src="./images/lucide-wrench.svg" alt="Tools" width="100%" /></span> | <span class="cell-title">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files,  workflows. | <div class="examples"><span>Send messages</span></div> | Model |
+| <span class="feature-icon"><img src="./images/lucide-database-zap.svg" alt="Resources" width="100%" /></span> | <span class="cell-title">Resources</span> | Read-only data sources like file contents, schemas, and documents that enrich prompts without. | <div class="examples"><span>Attach  documents</span></div> | Application |
+| <span class="feature-icon"><img src="./images/lucide-messages-square.svg" alt="Prompts" width="100%"/></span> | <span class="cell-title">Prompts</span> | Instruction templates that steer the model to for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
 
 
 ---
@@ -147,34 +204,148 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 
 | Icon | Feature | Explanation | Example | 
 | --- | --- | --- | --- | 
-| <span class="feature-icon"><img src="./images/folders.svg" alt="Roots" width="100%" /></span> | <span class="cell-title">Roots</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Share Local Files</span></div> | Model |
-| <span class="feature-icon"><img src="./images/cpu.svg" width="100%" alt="Sampling" /></span> | <span class="cell-title">Sampling</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span></div> | Application |
-| <span class="feature-icon"><img src="./images/message-circle-question-mark.svg" width="100%" alt="Elicitations" /></span> | <span class="cell-title">Elicitations</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
+| <span class="feature-icon"><img src="./images/folders.svg" alt="Roots" width="100%" /></span> | <span class="cell-title">Roots</span> | Specify which files and directories the Server can access | <div class="examples"><span>Share Local Files</span></div> | Model |
+| <span class="feature-icon"><img src="./images/cpu.svg" width="100%" alt="Sampling" /></span> | <span class="cell-title">Sampling</span> | Allow the MCP Server to request an LLM Completion. | <div class="examples"><span>Process unstructured data</span></div> | Application |
+| <span class="feature-icon"><img src="./images/message-circle-question-mark.svg" width="100%" alt="Elicitations" /></span> | <span class="cell-title">Elicitations</span> | Request specific information from the User, bypassing the LLM | <div class="examples"><span>Collect booking information</span></div> | User |
 
 
 ---
+
+# Transports/Distribution __Dev Preview Nov 2024__
+
+Protocol defines a minimum __how__ Client and Server connect and communicate, which official SDKs must support.
 
 <div class="columns">
 
 <div>
 
-# STDIO
+## STDIO (Local)
+
+Run Locally (within the Host Process)
+Running at User Privilege Level 
+_Ad-hoc distribution_
 
 </div>
 
-<div>
+<div class="sse-deprecated">
 
+## SSE
 
-# SSE (Remote)
+<p class="note">Deprecated transport — retained here for historical context only.</p>
+Remote Hosting (ex. Process)
+Limited Host Application Support
+_No standard authentication_
 
 </div>
-
-
 
 </div>
 
 ---
 
+# Locally Deployed Servers
+
+<div class="columns">
+
+<div align="center">
+
+![w:560px](./images/local_context.png)
+
+</div>
+
+<div>
+
+- ### Usually started as a sub-process from the Host Application
+- ### Access to local resources and files.
+- ### Can execute commands on the Users computer
+- ### Especially useful for Developer Tools
+- ### Updates, Usage and Telemetry Data can be difficult to capture +/-
+
+</div>
+
+</div>
+
+---
+
+# OAuth 2.1 and Streamable HTTP __2025-06-18__
+
+- ## First Protocol update (__2025-03-26__) introduced a new Streamable HTTP Transport for Remote Servers and OAuth authentication.
+- ## OAuth spec was revised to simplify implementation for MCP Server authors. 
+  - ### No need to implement Authorization Server (can easily use 3rd Party) 
+  - ### Straightforward redirect from MCP Server so Client can handle authorization flow.
+
+<!-- works really nicely demo HF MCP Integration -->
+
+---
+
+# Registries and MCP Bundle Format
+
+
+<div class="columns">
+
+<div>
+
+### Recent launch of  [registry.modelcontextprotocol.io](registry.modelcontextprotocol.io) - standardises MCP Server description format and provides a basic level of assurance.
+<!-- Speak well of the community efforts here -->
+
+</div>
+
+<div>
+
+<img src="./images/local_context.png">
+
+
+</div>
+
+
+
+---
+
+# Instruction and Tool Challenges
+
+- LLM may not distinguish between intended and unintended instructions
+- MCP Servers can add Instructions - most hosts inject these in to the System Prompt
+- Tool Descriptions may not match 
+- Tool can look safe (but run later)
+- Entire Tool list can change 
+- Tool Results may be unwelcome
+
+---
+
+# Distribution
+
+- Lots of competing registries
+- Emergence of hosting platforms
+- OAuth Enabled and Curated Platforms.
+
+---
+
+---
+
+# Risks
+
+- Lots of competing registries
+- Emergence of hosting platforms
+- OAuth Enabled and Curated Platforms.
+
+---
+
+
+<!-- _class: transition -->
+
+# <span class="mcp-model">Community and Contributing</span>
+
+---
+
+# Getting Involved
+
+- Open Source Specification and SDKs
+- Recently updated governance model
+- Built in the open via the SEP Process
+- Active discussion on Discord
+- https://modelcontextprotocol.io/
+- https://github.com/modelcontextprotocol/
+
+---
 
 <!-- 
 
@@ -206,322 +377,12 @@ Generations are intentionally different each time (completions[0])
 
 ---
 
-
-<!-- _class: columns -->
-
-## Model Footprint vs Context Window
-
-<div class="columns">
-  <div>
-    <h3>Weights</h3>
-    <p><strong>gpt-oss-120b</strong></p>
-    <p class="small">~60 GB to keep resident (8-bit sharded weights)</p>
-    <p>Multiple GPUs just to host the parameters.</p>
-  </div>
-  <div>
-    <h3>Active Context</h3>
-    <p><strong>131,072 tokens</strong></p>
-    <p class="small">~95k words (~400 printed pages)</p>
-    <p>Only a few MB of live conversation at a time.</p>
-  </div>
-</div>
-
-<p class="small">We pour gigabytes into the model weights, yet the working memory per turn stays comparatively tiny.</p>
-
-
 ---
-
-## Model Memory Budget
-
-<div class="footprint-bars">
-  <div class="row">
-    <div class="label">
-      <strong>Model weights</strong>
-      <div class="meta">gpt-oss-120b • ~60 GB resident across shards</div>
-    </div>
-    <div class="bar" data-note="full scale (1.0)">
-      <div class="fill" style="--scale: 1;">
-        <span>~60 GB</span>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="label">
-      <strong>Live context</strong>
-      <div class="meta">131,072 tokens • ~0.5 MB transient buffer</div>
-    </div>
-    <div class="bar" data-note="visual x50">
-      <div class="fill is-tiny" style="--scale: 0.02;">
-        <span>~0.5 MB</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="footprint-note">Actual memory budget ratio is roughly 120000:1 in favor of the weights.</div>
-
-
----
-
-## Frozen weights, fleeting context
-
-<div class="footprint-nesting">
-  <div class="box">
-    <strong>Parameters stay resident</strong>
-    <p class="small">~60 GB loaded for inference at all times.</p>
-    <div class="chip">weights</div>
-    <p class="small">Sharded across multiple accelerators to keep latency down.</p>
-    <div class="inner">~0.5 MB live context</div>
-  </div>
-  <div class="box emphasis">
-    <strong>Context stream resets</strong>
-    <p class="small">131,072 tokens per turn (~95k words).</p>
-    <div class="chip">conversation</div>
-    <ul>
-      <li>Rebuilt for every request.</li>
-      <li>Tool outputs and prompts fight for headroom.</li>
-      <li>Older turns vanish first when the window fills.</li>
-    </ul>
-  </div>
-</div>
-
-<p class="small">Inference runs on a huge static memory map, while the conversational working set remains a tiny, constantly refreshed slice.</p>
-
-
----
-
-## Scale at a glance
-
-<div class="footprint-grid">
-  <div class="panel weights" data-caption="resident on accelerators">
-    <small>Model weights</small>
-    <strong>~60 GB</strong>
-    <p>Each inference node keeps the complete parameter shard map warm, trading cost for latency and throughput.</p>
-  </div>
-  <div class="panel context" data-caption="rebuilt per turn">
-    <small>Context window</small>
-    <strong>131k tokens</strong>
-    <p>Roughly 0.5 MB of conversational state—orders of magnitude smaller than the model it steers.</p>
-  </div>
-</div>
-
-<p class="small">Area ratio is illustrative: even when we exaggerate the context box, it barely registers next to the weight footprint.</p>
-
-
----
-
-## Context windows keep stretching
-
-<div class="window-grid">
-  <div class="window-card" data-year="2020">
-    <strong>GPT-3 (davinci)</strong>
-    <div class="tokens">2,048 tokens <span>~1.5k words • ~6 pages</span></div>
-    <p>The original production window: enough for a prompt, a short brief, and a small completion.</p>
-    <div class="badge">baseline</div>
-  </div>
-  <div class="window-card" data-year="2023">
-    <strong>GPT-3.5 Turbo 16k</strong>
-    <div class="tokens">16,385 tokens <span>~12k words • ~49 pages</span></div>
-    <p>Extended chat history and lightweight tool transcripts became practical at this scale.</p>
-    <div class="badge">multi-turn</div>
-  </div>
-  <div class="window-card" data-year="2023">
-    <strong>GPT-4 Turbo / GPT-4o</strong>
-    <div class="tokens">128,000 tokens <span>~96k words • ~384 pages</span></div>
-    <p>Full product manuals and large retrieval blocks can live in a single request.</p>
-    <div class="badge">128k</div>
-  </div>
-  <div class="window-card" data-year="2024">
-    <strong>Claude 3 Opus (Projects)</strong>
-    <div class="tokens">256,000 tokens <span>~192k words • ~768 pages</span></div>
-    <p>Anthropic’s Workspace mode lets the assistant reason across multi-volume dossiers.</p>
-    <div class="badge">256k</div>
-  </div>
-  <div class="window-card" data-year="2024">
-    <strong>Gemini 1.5 Pro</strong>
-    <div class="tokens">1,000,000 tokens <span>~750k words • ~3,000 pages</span></div>
-    <p>Streaming multimodal context; entire product repositories or video transcripts at once.</p>
-    <div class="badge">1m window</div>
-  </div>
-  <div class="window-card" data-year="2024">
-    <strong>Claude 3.5 Sonnet (Projects)</strong>
-    <div class="tokens">1,000,000 tokens <span>~750k words • ~3,000 pages</span></div>
-    <p>Beta “Projects” mode mirrors Gemini-scale context, aimed at long-running workflows.</p>
-    <div class="badge">1m window</div>
-  </div>
-</div>
-
-
----
-
-## What fits inside?
-
-<div class="analog-table">
-  <table>
-    <thead>
-      <tr>
-        <th>Window / Model</th>
-        <th>≈ Words</th>
-        <th>≈ Pages*</th>
-        <th>Comparable text</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>GPT-3 · 2,048 tokens</td>
-        <td>~1,500</td>
-        <td>~6</td>
-        <td>Executive brief or short story draft</td>
-      </tr>
-      <tr>
-        <td>GPT-3.5 Turbo · 16,385 tokens</td>
-        <td>~12,300</td>
-        <td>~49</td>
-        <td>Conference paper plus reviewer discussion</td>
-      </tr>
-      <tr>
-        <td>GPT-4o · 128,000 tokens</td>
-        <td>~96,000</td>
-        <td>~384</td>
-        <td>Full-length novel or product spec binder</td>
-      </tr>
-      <tr>
-        <td>Claude 3 Opus · 256,000 tokens</td>
-        <td>~192,000</td>
-        <td>~768</td>
-        <td>Two packed technical manuals back-to-back</td>
-      </tr>
-      <tr>
-        <td>Gemini / Claude Projects · 1,000,000 tokens</td>
-        <td>~750,000</td>
-        <td>~3,000</td>
-        <td>The entire Bible plus appendices &amp; footnotes</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="analog-notes">*Pages estimated at 250 words each; words ≈ tokens × 0.75.</div>
-
-
----
-
-## Reference texts by tokens
-
-<div class="window-grid">
-  <div class="window-card" data-year="">
-    <strong>Average contemporary novel</strong>
-    <div class="tokens">~120,000 tokens <span>~90k words • ~360 pages</span></div>
-    <p>Fits comfortably inside a 128k window—GPT-4o can absorb an entire book-length draft.</p>
-    <div class="badge">book-length</div>
-  </div>
-  <div class="window-card" data-year="1851">
-    <strong>Moby-Dick (Melville)</strong>
-    <div class="tokens">~280,000 tokens <span>~210k words • ~840 pages</span></div>
-    <p>Requires a 256k-class context; too large for 128k without chunking.</p>
-    <div class="badge">epic</div>
-  </div>
-  <div class="window-card" data-year="1st c.">
-    <strong>The Bible (complete)</strong>
-    <div class="tokens">~1,040,000 tokens <span>~783k words • ~3,100 pages</span></div>
-    <p>Only the emerging 1M-token windows can take the entire canon in one pass.</p>
-    <div class="badge">1m scale</div>
-  </div>
-</div>
-
-
-Set the context of Large Language Models, training data, context windows.
-Age of Prompt Engineering.
-What goes in, model ownership is important.
-
-What if we add training that's conversational? We'll have lots of human/assistant pairs and show it how to act conversationally?
-
-- Appears knowledgeable
-- Semantic understanding of text
-- Better.
-
-Donald Trump clause in the System Prompt.
-
-- How do we make it better. We have bigger and bigger models; 
-
-- Training data
-- OpenAI training data opt-in (future models may know).
-- The era of Prompt Engineering
-  - Inference. 
-
-HuggingFace Smol 3b training set.
-
-If you don't own the model, you don't own the weights.
-What facts the model has been trained on. What biases the model has are out of your control.
-
-- Copy and Paste context management. Custom RAG systems.
-
-Where that data comes from. Anthropic $1.5bn books, shredding.
-OpenAI Privacy dialgoue.
-The model may end up knowing a suspicous 
-
-Security Risks?
- Cognitive Risks.
- Bias Risks.
- Training Data.
-
-Need to trust the model, trust the provider.
-
-
-## Part 2 - The Context
-
-Trained on chat
-Trained on instruction
-
-
-
-OpenAI Codex
-
-
-
-## Part 2 - Tools and Agents
-
-It's all the same trick!
-Live demonstration : Teach our model to do Tool Calling.
-
-The age of Agents.
-What is an Agent
-
-- Harness that self-adjusts its context. 
-- 
-Prompt Injection.
-
-
----
-
-IGNORE ALL PREVIOUS INSTRUCTONS
-
-similar problem to "solving hallucinations".
-
-
-
----
-
-## 
-
----
-
-## 
 
 Assume that the data in your context window is privileged. 
 
 The reason for the preamble is so that we can have a balanced discussion about MCP Security
 
----
-
-<!-- _class: transition -->
-
-# <span class="mcp-model">Model Context Protocol</span> is an open-source standard for connecting AI applications to external systems.
-
-
-#### Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.
-
----
 
 # Architecture
 
@@ -600,16 +461,6 @@ The rise of Hosting Services and Proxies.
 
 ---
 
-# Instruction and Tool Challenges
-
-- MCP Servers can add Instructions - most hosts inject these in to the System Prompt
-- Tool Descriptions may not match 
-- Tool can look safe (but run later)
-- Entire Tool list can change 
-- Tool Results may be unwelcome
-
----
-
 # Early days of MCP. Server List. 
 
 Review the Server, make sure there are no obvious.
@@ -682,3 +533,7 @@ Vulnerabilities.
 - Non-text content.
 
 ---
+
+<!--
+
+>
