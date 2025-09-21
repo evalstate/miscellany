@@ -24,24 +24,39 @@ paginate: false
    .cite-author p {
       padding-bottom : 40px
    }
+
 </style>
 
 <!-- _class: titlepage -->
 
 <div class="title"         > Securing the Model Context Protocol</div>
-<div class="subtitle"      > securese.ai, Stockholm   </div>
+<div class="subtitle"      > secureai.se, Stockholm   </div>
 <div class="author"        > Shaun Smith                       </div>
 <div class="date"          > September 2025                                    </div>
-<div class="organization"  > huggingface.co/evalstate</div>
-<div class="organization"  > github.com/evalstate</div>
-<div class="organization"  > x.com/evalstate</div>
+<table class="social-table">
+  <tbody>
+    <tr>
+      <td><img src="./images/huggingface-mark-logo.svg" alt="Hugging Face" /></td>
+      <td><a class="organization" href="https://huggingface.co/evalstate">huggingface.co/evalstate</a></td>
+    </tr>
+    <tr>
+      <td><img src="./images/github-mark.svg" alt="GitHub" /></td>
+      <td><a class="organization" href="https://github.com/evalstate">github.com/evalstate</a></td>
+    </tr>
+    <tr>
+      <td><img src="./images/xcom-logo-black.png" alt="X" /></td>
+      <td><a class="organization" href="https://x.com/evalstate">x.com/evalstate</a></td>
+    </tr>
+  </tbody>
+</table>
 
 <!-- -->
 
 
 ---
 
-## Part 0 - Introduction
+
+![w:400](./images/greeting_huggy_left.png)
 
 <!-- who knows about mcp, who i am, what the presentation entails -->
 
@@ -229,12 +244,14 @@ _Ad-hoc distribution_
 
 <div class="sse-deprecated">
 
-## SSE
+## <strike>SSE (Remote)</strike>
 
-<p class="note">Deprecated transport — retained here for historical context only.</p>
+<strike>
+
 Remote Hosting (ex. Process)
 Limited Host Application Support
 _No standard authentication_
+</strike>
 
 </div>
 
@@ -269,9 +286,9 @@ _No standard authentication_
 # OAuth 2.1 and Streamable HTTP __2025-06-18__
 
 - ## First Protocol update (__2025-03-26__) introduced a new Streamable HTTP Transport for Remote Servers and OAuth authentication.
-- ## OAuth spec was revised to simplify implementation for MCP Server authors. 
-  - ### No need to implement Authorization Server (can easily use 3rd Party) 
-  - ### Straightforward redirect from MCP Server so Client can handle authorization flow.
+- ## OAuth spec was revised to simplify implementation for MCP Server authors: 
+  - ## No need to implement Authorization Server (easily use 3rd Party) 
+  - ## Straightforward redirect from MCP Server so Client can handle authorization flow.
 
 <!-- works really nicely demo HF MCP Integration -->
 
@@ -284,40 +301,108 @@ _No standard authentication_
 
 <div>
 
-### Recent launch of  [registry.modelcontextprotocol.io](registry.modelcontextprotocol.io) - standardises MCP Server description format and provides a basic level of assurance.
+### [registry.modelcontextprotocol.io](registry.modelcontextprotocol.io) 
+
+Standardises MCP Server description format and provides a basic level of assurance.
 <!-- Speak well of the community efforts here -->
+
+### [MCP Bundle Format](https://github.com/anthropics/mcpb) (formerly DXT)
+
+__MCPB__ archive distribution format for local MCP Servers to make __curation__, installation and update easier for End Users. 
 
 </div>
 
 <div>
 
-<img src="./images/local_context.png">
+<br />
+<img src="./images/ecosystem-diagram.excalidraw.svg">
 
 
 </div>
 
+---
+
+# Registries and Curation
+
+<div class="registry-layout">
+  <div class="text-column">
+    <h3>MCP  Registries</h3>
+    <ul>
+      <li><p>Trusted Sources (e.g. Claude MCP Partners)</p></li>
+      <li><p>Managed MCP Enterprise Registry (e.g. Azure)</p></li>
+      <li><p>Tool Integration (e.g. VSCode + GitHub)
+   </ul>
+  </div>
+  <div class="collage-column">
+    <div class="registry-collage">
+      <img class="shot-azure" src="./images/azure_registry.png" alt="Azure registry screenshot" />
+      <img class="shot-claude" src="./images/claude_mcp_partners.png" alt="Claude MCP partners screenshot" />
+      <img class="shot-github" src="./images/github_mcp_registry.png" alt="GitHub MCP registry screenshot" />
+    </div>
+  </div>
+
+</div>
+
+---
+
+
+# Residual Risks
+
+- MCP Servers are Software: Standard Supply-Chain risk management is required.
+- 
+
+---
+
+# LLM Integration Risks - Lethal Trifecta
+
+
+<div class="columns"> 
+
+<div>
+
+
+- ### Access to your private data—one of the most common purposes of tools in the first place!
+- ### Exposure to untrusted content—any mechanism by which text (or images) controlled by a malicious attacker could become available to your LLM
+- ### The ability to externally communicate in a way that could be used to steal your data
+
+> Source: https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
+
+</div>
+
+<div>
+
+<br />
+
+![](./images/lethaltrifecta.jpg)
+
+</div>
+
+---
+
+
+
+# LLM Integration Risks - Context Management
+
+- ### LLM not able to distinguish between intended, unintended and malicious instructions
+- ### Enabling an MCP Server with Tools will add Tool and Parameter descriptions to your Context.
+- ### Exfiltration may not look obvious...
+- ### Tool Descriptions may not match 
+- ### Tool can look safe (but run later)
+- ### Tool Results may be unwelcome
+- ### Tools should not reference other Tools.
+- _Host Application rendering_ of Images/Markdown/Mermaid links
 
 
 ---
 
-# Instruction and Tool Challenges
+# MCP Specific Guidance
 
-- LLM may not distinguish between intended and unintended instructions
-- MCP Servers can add Instructions - most hosts inject these in to the System Prompt
-- Tool Descriptions may not match 
-- Tool can look safe (but run later)
-- Entire Tool list can change 
-- Tool Results may be unwelcome
+- ### Review for 
+- ### MCP Server `instructions` may be added to the Context.
+- ### Multimodal Content 
+- ### MCP Server Tool List Change Notifications - revalidation 
 
----
-
-# Distribution
-
-- Lots of competing registries
-- Emergence of hosting platforms
-- OAuth Enabled and Curated Platforms.
-
----
+(Read Ola's Post).
 
 ---
 
@@ -338,12 +423,12 @@ _No standard authentication_
 
 # Getting Involved
 
-- Open Source Specification and SDKs
-- Recently updated governance model
-- Built in the open via the SEP Process
-- Active discussion on Discord
-- https://modelcontextprotocol.io/
-- https://github.com/modelcontextprotocol/
+- ### Open Source Specification and SDKs
+- ### Recently updated governance model - in the open via SEP Process
+- ### Active community discussions on Discord
+- ### https://modelcontextprotocol.io/community
+- ### https://github.com/modelcontextprotocol/
+- ### Huge ecosystem of Open Source MCP Clients and Servers
 
 ---
 
@@ -382,9 +467,6 @@ Generations are intentionally different each time (completions[0])
 Assume that the data in your context window is privileged. 
 
 The reason for the preamble is so that we can have a balanced discussion about MCP Security
-
-
-# Architecture
 
 <!-- launched in november last year, and immediately proved popular -->
 <!-- why? for the first time rather than handling complex RAG or custom tool calling you had ready-made applications to integrate with 
@@ -474,66 +556,10 @@ Context co-mingling.
 Data sent to the LLM 
 Tools that know about each other
 
-Tool Descriptions narrow. Do they mutate? ToolListChangedNotifications.
-
-
-Data is accessible at the privilege level of the User.
-https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
-
----
 
 # Distribution
 
 - StreamableHTTP gives deployment options, and the latest OAuth is intended to make integration easier.
 - This makes deployment - and auditing easier. far better to have telemetry from your MCP Infrastructure than having people copy-paste from unknown sources.
 
-
 ---
-
-<!-- >
-# MCP "Server"
-
-MCP Server is a bad name. We are used to Servers . MCP Servers can actively contact the Host Application, or User.
-With Sampling and Elicitations
-
----
-
-
-# Problems
-
-We've integrated data and actions from different systems via a Host Application.
-
-Co-mingling of data.
-Co-mingling of instructions.
-
--->
----
-
-# Registry
-# MCP-B
-# Registries
-# Demo Claude Registry
-
-### Distribution
-
- - Demo Claude registry
- - Community Registry
-
-### 
-
-Architecture. 
-
-Host, Client and Server
-
-Primitives, Transport. 
-
-
-Vulnerabilities.
-- Session 
-- Non-text content.
-
----
-
-<!--
-
->
