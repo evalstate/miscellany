@@ -55,8 +55,9 @@ paginate: false
 
 ---
 
+# Hello!
 
-![w:400](./images/greeting_huggy_left.png)
+![w:500](./images/greeting_huggy_left.png)
 
 <!-- who knows about mcp, who i am, what the presentation entails -->
 
@@ -289,7 +290,7 @@ _No standard authentication_
 - ## OAuth spec was revised to simplify implementation for MCP Server authors: 
   - ## No need to implement Authorization Server (easily use 3rd Party) 
   - ## Straightforward redirect from MCP Server so Client can handle authorization flow.
-
+- ## First-Party Remote Servers will often have Privacy, Access policies in place. 
 <!-- works really nicely demo HF MCP Integration -->
 
 ---
