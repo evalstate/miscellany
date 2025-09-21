@@ -1,7 +1,7 @@
 ---
 marp: true
 theme: freud
-paginate: true
+paginate: false
 ---
 
 
@@ -32,7 +32,6 @@ paginate: true
 <div class="subtitle"      > securese.ai, Stockholm   </div>
 <div class="author"        > Shaun Smith                       </div>
 <div class="date"          > Sep 2025                                    </div>
-<div class="organization"  > huggingface.co/evalstate</div>
 <div class="organization"  > huggingface.co/evalstate</div>
 <div class="organization"  > github.com/evalstate</div>
 <div class="organization"  > x.com/evalstate</div>
@@ -108,14 +107,8 @@ Work @ Hugging Face on MCP and Open Source initiatives.
     border-collapse: collapse;
     font-size: 1.02rem;
   }
-  section.mcp-features thead th {
-    padding: 0 0.75rem 0.55rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-size: 0.74rem;
-    font-weight: 600;
-    border-bottom: 1.5px solid rgba(0, 0, 0, 0.3);
-    color: rgba(0, 0, 0, 0.68);
+  section.mcp-features table thead {
+    display: none;
   }
   section.mcp-features tbody td {
     padding: 0.65rem 0.75rem;
@@ -125,7 +118,12 @@ Work @ Hugging Face on MCP and Open Source initiatives.
   section.mcp-features tbody tr:last-child td {
     border-bottom: none;
   }
-  section.mcp-features table td:first-child {
+  section.mcp-features table td:first-child,
+  section.mcp-features table th:first-child {
+    text-align: center;
+    width: 3rem;
+  }
+  section.mcp-features table td:nth-child(2) {
     font-weight: 700;
   }
   section.mcp-features table tr:nth-child(even),
@@ -138,29 +136,29 @@ Work @ Hugging Face on MCP and Open Source initiatives.
     font-weight: 700;
   }
   section.mcp-features .cell-title {
+    display: inline-block;
+  }
+  section.mcp-features .feature-icon {
     display: inline-flex;
     align-items: center;
-    gap: 0.6rem;
-  }
-  section.mcp-features .cell-title::before {
-    content: "";
-    display: inline-block;
-    width: 28px;
-    height: 28px;
-    flex-shrink: 0;
+    justify-content: center;
+    width: 4rem;
+    height: 4rem;
+    margin: 0 auto;
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 24px 24px;
-    opacity: 0.92;
+    background-size: 2.75rem 2.75rem;
+    border-radius: 1.25rem;
+    background-color: rgba(0, 0, 0, 0.05);
   }
-  section.mcp-features .cell-title.is-tools::before {
+  section.mcp-features .feature-icon.is-tools {
     background-image: url("./images/lucide-wrench.svg");
   }
-  section.mcp-features .cell-title.is-resources::before {
+  section.mcp-features .feature-icon.is-resources {
     background-image: url("./images/lucide-database-zap.svg");
   }
-  section.mcp-features .cell-title.is-prompts::before {
-    background-image: url("./images/lucide-sparkles.svg");
+  section.mcp-features .feature-icon.is-prompts {
+    background-image: url("./images/lucide-messages-square.svg");
   }
   section.mcp-features .examples {
     display: flex;
@@ -169,20 +167,39 @@ Work @ Hugging Face on MCP and Open Source initiatives.
   }
 </style>
 
-# MCP Server Feature Roles
+# MCP Server Capabilities
 
-| Feature | Explanation | Examples | Control  |
-| --- | --- | --- | ---: |
-| <span class="cell-title is-tools">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Search flights</span><span>Send messages</span><span>Create calendar events</span></div> | Model |
-| <span class="cell-title is-resources">Resources</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span><span>Access knowledge bases</span><span>Read calendars</span></div> | Application |
-| <span class="cell-title is-prompts">Prompts</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Plan a vacation</span><span>Summarize my meetings</span><span>Draft an email</span></div> | User |
+| Icon | Feature | Explanation | Example | 
+| --- | --- | --- | --- | 
+| <span class="feature-icon is-tools"></span> | <span class="cell-title">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Send messages</span></div> | Model |
+| <span class="feature-icon is-resources"></span> | <span class="cell-title">Resources</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span></div> | Application |
+| <span class="feature-icon is-prompts"></span> | <span class="cell-title">Prompts</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
+
+
+---
+
+<!-- _class: mcp-features -->
+
+# MCP Server Capabilities
+
+| Icon | Feature | Explanation | Example | 
+| --- | --- | --- | --- | 
+| <span class="feature-icon is-tools"></span> | <span class="cell-title">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Send messages</span></div> | Model |
+| <span class="feature-icon is-resources"></span> | <span class="cell-title">Resources</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span></div> | Application |
+| <span class="feature-icon is-prompts"></span> | <span class="cell-title">Prompts</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
+
+
 
 
 ---
 
 # privacy
 
+<div align="center">
+
 ![w:600](./images/chatgpt-privacy.png)
+
+</div>
 
 ---
 
