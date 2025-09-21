@@ -80,7 +80,7 @@ Work @ Hugging Face on MCP and Open Source initiatives.
   }
 </style>
 
-# Training Data Makeup __Meta Llama 2023__
+# Training Data Composition __Meta Llama 2023__
 
 
 | Source | Content | Weighting | Size (GB) |
@@ -94,101 +94,6 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 | **💬 Stack Exchange** | Q&amp;A from various domains | Low (2.1%) | 78 |
 
 <p class="small">Sizes normalized to gigabytes for straightforward comparisons.</p>
-
----
-
-<!-- _class: mcp-features -->
-
-<style scoped>
-  section.mcp-features table {
-    width: 100%;
-    margin-top: 1.1rem;
-    table-layout: fixed;
-    border-collapse: collapse;
-    font-size: 1.02rem;
-  }
-  section.mcp-features table thead {
-    display: none;
-  }
-  section.mcp-features tbody td {
-    padding: 0.65rem 0.75rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-    vertical-align: top;
-  }
-  section.mcp-features tbody tr:last-child td {
-    border-bottom: none;
-  }
-  section.mcp-features table td:first-child,
-  section.mcp-features table th:first-child {
-    text-align: center;
-    width: 3rem;
-  }
-  section.mcp-features table td:nth-child(2) {
-    font-weight: 700;
-  }
-  section.mcp-features table tr:nth-child(even),
-  section.mcp-features table tr:nth-child(odd) {
-    background-color: transparent !important;
-  }
-  section.mcp-features table tr:hover {
-    background-color: var(--table-hover-background-color) !important;
-    color: var(--table-hover-color) !important;
-    font-weight: 700;
-  }
-  section.mcp-features .cell-title {
-    display: inline-block;
-  }
-  section.mcp-features .feature-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 4rem;
-    height: 4rem;
-    margin: 0 auto;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 2.75rem 2.75rem;
-    border-radius: 1.25rem;
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-  section.mcp-features .feature-icon.is-tools {
-    background-image: url("./images/lucide-wrench.svg");
-  }
-  section.mcp-features .feature-icon.is-resources {
-    background-image: url("./images/lucide-database-zap.svg");
-  }
-  section.mcp-features .feature-icon.is-prompts {
-    background-image: url("./images/lucide-messages-square.svg");
-  }
-  section.mcp-features .examples {
-    display: flex;
-    flex-direction: column;
-    gap: 0.35rem;
-  }
-</style>
-
-# MCP Server Capabilities
-
-| Icon | Feature | Explanation | Example | 
-| --- | --- | --- | --- | 
-| <span class="feature-icon is-tools"></span> | <span class="cell-title">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Send messages</span></div> | Model |
-| <span class="feature-icon is-resources"></span> | <span class="cell-title">Resources</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span></div> | Application |
-| <span class="feature-icon is-prompts"></span> | <span class="cell-title">Prompts</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
-
-
----
-
-<!-- _class: mcp-features -->
-
-# MCP Server Capabilities
-
-| Icon | Feature | Explanation | Example | 
-| --- | --- | --- | --- | 
-| <span class="feature-icon is-tools"></span> | <span class="cell-title">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Send messages</span></div> | Model |
-| <span class="feature-icon is-resources"></span> | <span class="cell-title">Resources</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span></div> | Application |
-| <span class="feature-icon is-prompts"></span> | <span class="cell-title">Prompts</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
-
-
 
 
 ---
@@ -221,16 +126,48 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 
 ---
 
-# foobar
 
-<div align="center">
 
-## poifsdfsfsf nt one
-## point two
+<!-- _class: mcp-features -->
 
-| foo | bar | baz |
-|-----|-----|-----|
-| test | test | test |
+# MCP Server Capabilities
+
+| Icon | Feature | Explanation | Example | 
+| --- | --- | --- | --- | 
+| <span class="feature-icon"><img src="./images/lucide-wrench.svg" alt="Tools" width="100%" /></span> | <span class="cell-title">Tools</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Send messages</span></div> | Model |
+| <span class="feature-icon"><img src="./images/lucide-database-zap.svg" alt="Resources" width="100%" /></span> | <span class="cell-title">Resources</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span></div> | Application |
+| <span class="feature-icon"><img src="./images/lucide-messages-square.svg" alt="Prompts" width="100%"/></span> | <span class="cell-title">Prompts</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
+
+
+---
+
+<!-- _class: mcp-features -->
+
+# MCP Client Primitives
+
+| Icon | Feature | Explanation | Example | 
+| --- | --- | --- | --- | 
+| <span class="feature-icon"><img src="./images/folders.svg" alt="Roots" width="100%" /></span> | <span class="cell-title">Roots</span> | Functions the model may call to act on the world: write to databases, invoke APIs, modify files, or trigger workflows. | <div class="examples"><span>Share Local Files</span></div> | Model |
+| <span class="feature-icon"><img src="./images/cpu.svg" width="100%" alt="Sampling" /></span> | <span class="cell-title">Sampling</span> | Read-only context surfaces like file contents, schemas, and docs that enrich prompts without side effects. | <div class="examples"><span>Retrieve documents</span></div> | Application |
+| <span class="feature-icon"><img src="./images/message-circle-question-mark.svg" width="100%" alt="Elicitations" /></span> | <span class="cell-title">Elicitations</span> | Instruction templates that steer the model to combine tools and resources for specific workflows. | <div class="examples"><span>Draft an email</span></div> | User |
+
+
+---
+
+<div class="columns">
+
+<div>
+
+# STDIO
+
+</div>
+
+<div>
+
+
+# SSE (Remote)
+
+</div>
 
 
 
@@ -239,14 +176,13 @@ Work @ Hugging Face on MCP and Open Source initiatives.
 ---
 
 
-<!-- points to make here -->
+<!-- 
+
+points to make here 
 Models are trained using lots of text. 
 Models were then trained to be conversational
 Models were then trained to follow instructions
 Models generate text using probabilities. [SHOW DEMO]
-
-
-<!-- 
 
 This isn't a long "history lesson" style talk; but i wanted to reground us 
 
@@ -261,22 +197,15 @@ Text Completions
  given . The text we ask it to complete is known as the "Context".
 Computational Complexity and Model Size.
 
--->
-
----
-
-<!-- points to make here -->
 The context is _tiny_ compared to the model
 The context is precious
 Instruction following has a precedence problem
 Generations are intentionally different each time (completions[0])
 
+-->
+
 ---
 
-## Transition
-
-<!-- points to make here -->
-There's quite a lot of hyperbole around MCP Security; 
 
 <!-- _class: columns -->
 
@@ -573,7 +502,31 @@ similar problem to "solving hallucinations".
 
 ---
 
+## 
 
+---
+
+## 
+
+Assume that the data in your context window is privileged. 
+
+The reason for the preamble is so that we can have a balanced discussion about MCP Security
+
+---
+
+<!-- _class: transition -->
+
+# <span class="mcp-model">Model Context Protocol</span> is an open-source standard for connecting AI applications to external systems.
+
+
+#### Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.
+
+---
+
+# Architecture
+
+<!-- launched in november last year, and immediately proved popular -->
+<!-- why? for the first time rather than handling complex RAG or custom tool calling you had ready-made applications to integrate with 
 ## Part 3 - MCP
 
 ### Introduction
@@ -612,30 +565,10 @@ Bi-Directional Communication
 co-minglign
 
 
-## 
-
----
-
-## 
-
-Assume that the data in your context window is privileged. 
-
-The reason for the preamble is so that we can have a balanced discussion about MCP Security
-
----
 
 
-# Model Context Protocol is an open-source standard for connecting AI applications to external systems.
 
-
-> Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.
-
----
-
-# Architecture
-
-<!-- launched in november last year, and immediately proved popular -->
-<!-- why? for the first time rather than handling complex RAG or custom tool calling you had ready-made applications to integrate with -->
+-->
 - Parts (MCP Servers, Host Application, Model)
 
 - MCP Servers: Primitives
@@ -654,37 +587,9 @@ The reason for the preamble is so that we can have a balanced discussion about M
 
 ---
 
-# Primitives (Server)
-
-Primitives, Transports
-
-When using an MCP Server
-
-- Prompts
-- Resources
-- Tools
-- _Instructions_
-
-<writing style suite>
-<use these things> 
-
 
 <!-- maybe i'm always tired of typing the same thing -->
 <!-- maybe there's a website link the host application should follow -->
-
----
-
-
-# Primitives (Host/Client)
-
-- Sampling
-- Elicitation
-- Logging
-
----
-
-
-
 
 # Transports (and Distribution)
 
@@ -694,6 +599,7 @@ Streamable HTTP
 The rise of Hosting Services and Proxies.
 
 ---
+
 # Instruction and Tool Challenges
 
 - MCP Servers can add Instructions - most hosts inject these in to the System Prompt
@@ -709,7 +615,6 @@ The rise of Hosting Services and Proxies.
 Review the Server, make sure there are no obvious.
 
 # What happens
-
 
 MCP Server Instructions injected in to Context.
 Auto-injection in to the Context.
@@ -734,12 +639,14 @@ https://simonwillison.net/2025/Jun/16/the-lethal-trifecta/
 
 ---
 
+<!-- >
 # MCP "Server"
 
 MCP Server is a bad name. We are used to Servers . MCP Servers can actively contact the Host Application, or User.
 With Sampling and Elicitations
 
 ---
+
 
 # Problems
 
@@ -748,7 +655,7 @@ We've integrated data and actions from different systems via a Host Application.
 Co-mingling of data.
 Co-mingling of instructions.
 
-
+-->
 ---
 
 # Registry

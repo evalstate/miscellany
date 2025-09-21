@@ -1,0 +1,78 @@
+/* @theme evalstate-extensions
+   Custom slide utilities for Evalstate decks.
+*/
+
+section.mcp-features table {
+  width: 100%;
+  margin-top: 1.1rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 1.02rem;
+}
+
+section:not(.titlepage) {
+  padding: 64px 72px !important;
+}
+
+section.mcp-features table thead {
+  display: none;
+}
+
+section.mcp-features tbody td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  vertical-align: top;
+}
+
+section.mcp-features tbody tr:last-child td {
+  border-bottom: none;
+}
+
+section.mcp-features table td:first-child,
+section.mcp-features table th:first-child {
+  text-align: center;
+  width: 5.5rem;
+}
+
+section.mcp-features table td:nth-child(2) {
+  font-weight: 700;
+}
+
+section.mcp-features table tr:nth-child(even),
+section.mcp-features table tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+section.mcp-features table tr:hover {
+  background-color: var(--table-hover-background-color) !important;
+  color: var(--table-hover-color) !important;
+  font-weight: 700;
+}
+
+section.mcp-features .cell-title {
+  display: inline-block;
+}
+
+section.mcp-features .feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0 auto;
+  border-radius: 1.2rem;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+section.mcp-features .feature-icon img {
+  max-width: 68%;
+  max-height: 68%;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+section.mcp-features .examples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
