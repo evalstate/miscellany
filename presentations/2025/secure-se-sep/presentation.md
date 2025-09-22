@@ -54,7 +54,6 @@ paginate: false
 
 <!-- -->
 
-
 ---
 
 # Hello!
@@ -252,13 +251,11 @@ Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
 
 <p class="small">Inference runs on a huge static memory map, while the conversational working set remains a tiny, constantly refreshed slice.</p>
 
-
 ---
 
 <!-- _class: transition -->
 
 # <span class="mcp-model">Model Context Protocol</span> is an open-source standard for connecting AI applications to external systems.
-
 
 #### Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.
 
@@ -277,7 +274,6 @@ Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
 
 </div>
 
-
 <div>
 
 ## Agents
@@ -286,9 +282,7 @@ Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
 
 </div>
 
-
 </div>
-
 
 ---
 
@@ -296,12 +290,7 @@ Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
 
 ![650px](./images/architecture_1.png)
 
-
-
 ---
-
-
-
 
 <!-- _class: mcp-features -->
 
@@ -452,20 +441,12 @@ __MCPB__ archive distribution format for local MCP Servers to make __curation__,
 ---
 
 
-# Residual Risks
-
-- MCP Servers are Software: Standard Supply-Chain risk management is required.
-- 
-
----
-
 # LLM Integration Risks - Lethal Trifecta
 
 
 <div class="columns"> 
 
 <div>
-
 
 - ### Access to your private data—one of the most common purposes of tools in the first place!
 - ### Exposure to untrusted content—any mechanism by which text (or images) controlled by a malicious attacker could become available to your LLM
@@ -507,8 +488,6 @@ __MCPB__ archive distribution format for local MCP Servers to make __curation__,
 - ### Tools should not reference other Tools (especially NOT other MCP Servers) 
 - ### Prioritise which things need Human-in-the-Loop 
 - ### Risk assess specific Server/Tool mixes.
-
-
 
 > (Read Ola's Post).
 
