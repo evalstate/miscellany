@@ -181,7 +181,7 @@ paginate: false
 
 # Completions[0..1]
 
-## Identical Prompt, Identical Model... 
+## Identical Prompt, Identical Model, Two Generations... 
 
 <div class="columns">
   <div class="center">
@@ -189,7 +189,7 @@ paginate: false
           tabindex="0"
           style="--magnify-image: url('./images/completion-1-lightbox.png');
                  --magnify-scale: 2.0;
-                 --magnify-size: 240px;
+                 --magnify-size: 280px;
                  --magnify-position-x: 50%;
                  --magnify-position-y: 50%;
                  --magnify-focus-x: 85%;
@@ -204,7 +204,7 @@ paginate: false
           tabindex="0"
           style="--magnify-image: url('./images/completion-2-lightbox.png');
                  --magnify-scale: 2.0;
-                 --magnify-size: 240px;
+                 --magnify-size: 280px;
                  --magnify-position-x: 50%;
                  --magnify-position-y: 50%;
                  --magnify-focus-x: 105%;
@@ -258,35 +258,45 @@ _Excerpt from the Anthropic System Prompt for Opus 4.1_
 
 ---
 
-
-
-Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
-
----
-
-# Frozen weights, fleeting context
+# Context - OpenAI GPT-OSS-120B
 
 <div class="footprint-nesting">
   <div class="box">
-    <strong>Parameters stay resident</strong>
+    <strong>Model Parameters</strong>
+    <div class="chip">model weights</div>
     <p class="small">~60 GB loaded for inference at all times.</p>
-    <div class="chip">weights</div>
-    <p class="small">Sharded across multiple accelerators to keep latency down.</p>
-    <div class="inner">~0.5 MB live context</div>
   </div>
   <div class="box emphasis">
-    <strong>Context stream resets</strong>
-    <p class="small">131,072 tokens per turn (~95k words).</p>
+    <strong>Context Window</strong>
     <div class="chip">conversation</div>
+    <p class="small">131,072 tokens per turn (~512Kb).</p>
+    0.000512GB
     <ul>
-      <li>Rebuilt for every request.</li>
-      <li>Tool outputs and prompts fight for headroom.</li>
-      <li>Older turns vanish first when the window fills.</li>
     </ul>
   </div>
 </div>
 
-<p class="small">Inference runs on a huge static memory map, while the conversational working set remains a tiny, constantly refreshed slice.</p>
+## Context Window is 100000:1 model weights
+## 13 seconds of audio. Phone Photograph won't fit.
+
+<!-- Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words> -->
+
+---
+
+# Solving a problem
+
+## Context Management - Cumbersome
+
+## Custom Development for Integrations
+
+## Take advantage of Function Calling Models
+
+## User-Friendly way of importing content to Context Window
+
+## Portability of Standard Functionality
+
+## Application Builder 
+
 
 ---
 
@@ -295,31 +305,6 @@ Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
 # <span class="mcp-model">Model Context Protocol</span> is an open-source standard for connecting AI applications to external systems.
 
 #### Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.
-
----
-
-# Solving a problem
-
-<div class="columns">
-
-<div>
-
-## Interactive
-
-- ### Copy/Paste Context Management
-- ### Custom RAG Pipelines and Integrations
-
-</div>
-
-<div>
-
-## Agents
-
-- ### Plug and Play
-
-</div>
-
-</div>
 
 ---
 
@@ -421,7 +406,7 @@ _No standard authentication_
 - ## OAuth spec was revised to simplify implementation for MCP Server authors: 
   - ## No need to implement Authorization Server (easily use 3rd Party) 
   - ## Straightforward redirect from MCP Server so Client can handle authorization flow.
-- ## First-Party Remote Servers will often have Privacy, Access policies in place. 
+- ## First-Party Remote Servers often have Privacy, Access policies in place. 
 <!-- works really nicely demo HF MCP Integration -->
 
 ---
@@ -545,9 +530,7 @@ __MCPB__ archive distribution format for local MCP Servers to make __curation__,
 - ### https://github.com/modelcontextprotocol/
 - ### Huge ecosystem of Open Source MCP Clients and Servers
 - ### Explore Open Source Models, Datasets and Training Courses on MCP, LLMs and Transformers on https://huggingface.co
-- ### Also use Open Source Models/Datasets
 
----
 
 <!-- 
 
@@ -575,15 +558,11 @@ The context is precious
 Instruction following has a precedence problem
 Generations are intentionally different each time (completions[0])
 
--->
-
----
-
----
-
 Assume that the data in your context window is privileged. 
 
 The reason for the preamble is so that we can have a balanced discussion about MCP Security
+
+-->
 
 <!-- launched in november last year, and immediately proved popular -->
 <!-- why? for the first time rather than handling complex RAG or custom tool calling you had ready-made applications to integrate with 
@@ -625,32 +604,6 @@ Bi-Directional Communication
 co-minglign
 
 
-
-
-
--->
-- Parts (MCP Servers, Host Application, Model)
-
-- MCP Servers: Primitives
-- MCP Servers: Connectivity
-- MCP Servers: Priniciple of simple development
-- Distribution Problem
-- Remote Servers had no Authentication.
-
-<!-- we'll do a high level walkthrough, then look at some of these in more detail -->
-<!-- we talk a lot about MCP Servers, and that's not quite the right name -->
-- Host
-- Client
-- Server
-- LLM (Model/Context)
-- User!
-
----
-
-
-<!-- maybe i'm always tired of typing the same thing -->
-<!-- maybe there's a website link the host application should follow -->
-
 # Transports (and Distribution)
 
 STDIO
@@ -679,4 +632,26 @@ Tools that know about each other
 - StreamableHTTP gives deployment options, and the latest OAuth is intended to make integration easier.
 - This makes deployment - and auditing easier. far better to have telemetry from your MCP Infrastructure than having people copy-paste from unknown sources.
 
----
+
+- Host
+- Client
+- Server
+- LLM (Model/Context)
+- User!
+- Parts (MCP Servers, Host Application, Model)
+
+- MCP Servers: Primitives
+- MCP Servers: Connectivity
+- MCP Servers: Priniciple of simple development
+- Distribution Problem
+- Remote Servers had no Authentication.
+
+-->
+
+
+<!-- we'll do a high level walkthrough, then look at some of these in more detail -->
+<!-- we talk a lot about MCP Servers, and that's not quite the right name -->
+
+
+<!-- maybe i'm always tired of typing the same thing -->
+<!-- maybe there's a website link the host application should follow -->
