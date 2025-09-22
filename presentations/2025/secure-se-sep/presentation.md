@@ -1,5 +1,7 @@
 ---
 marp: true
+html: true
+sanitize: false
 theme: freud
 paginate: false
 ---
@@ -57,11 +59,28 @@ paginate: false
 
 # Hello!
 
-![w:500](./images/greeting_huggy_left.png)
+<div class="columns">
 
+<div class="center">
+
+![w:350](./images/greeting_huggy_left.png)
+
+#### Hugging Face MCP/Open Source Projects
+
+</div>
+
+<div class="center">
+
+![w:350](./images/mcp-icon.svg)
+
+
+#### MCP Steering Committee Member
+
+</div>
+
+</div>
 <!-- who knows about mcp, who i am, what the presentation entails -->
 
-MCP Steering Group Member
 <!-- Community Moderator, Working Groups. -->
 
 <!-- Work @ Hugging Face on MCP and Open Source initiatives. -->
@@ -76,11 +95,22 @@ MCP Steering Group Member
 
 ---
 
-# The Model
+# Text Generation Models
 
-![w:400](./images/model_parameters.png)
+<div class="columns">
+
+<div class="center"> 
+
+![w:600](./images/model_parameters.png)
+
+</div>
+
+<div>
 
 Continues generating text from a prompt
+
+</div> 
+</div>
 
 ---
 
@@ -112,24 +142,22 @@ Continues generating text from a prompt
 
 <p class="small">Sizes normalized to gigabytes for straightforward comparisons.</p>
 
----
-
-# Privacy
-
-<div align="center">
-
-![w:600](./images/chatgpt-privacy.png)
-
-</div>
 
 ---
 
-# Guardrails
+<style scoped>
+  section iframe.web-embed {
+    width: 100%;
+    min-height: 520px;
+    border: 0;
+    border-radius: 18px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  }
+</style>
 
-(donald trump clause)
+# Token Prediction
 
-https://docs.claude.com/en/release-notes/system-prompts#august-5-2025
-
+<iframe class="web-embed" src="file:///X:/source/mikupad/mikupad.html" allowfullscreen loading="lazy" referrerpolicy="no-referrer"></iframe>
 
 ---
 
@@ -151,6 +179,32 @@ https://docs.claude.com/en/release-notes/system-prompts#august-5-2025
 
 ---
 
+
+# Privacy and Content
+
+<div class="center">
+
+![w:600](./images/chatgpt-privacy.png)
+
+</div>
+
+<!-- we trust providers to x,y,z -->
+
+---
+
+# Guardrails
+
+(donald trump clause)
+
+https://docs.claude.com/en/release-notes/system-prompts#august-5-2025
+
+
+---
+
+
+Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
+
+---
 
 # Frozen weights, fleeting context
 
@@ -222,8 +276,10 @@ https://docs.claude.com/en/release-notes/system-prompts#august-5-2025
 | --- | --- | --- | --- | 
 | <span class="feature-icon"><img src="./images/folders.svg" alt="Roots" width="100%" /></span> | <span class="cell-title">Roots</span> | Specify which files and directories the Server can access | <div class="examples"><span>Share Local Files</span></div> | Model |
 | <span class="feature-icon"><img src="./images/cpu.svg" width="100%" alt="Sampling" /></span> | <span class="cell-title">Sampling</span> | Allow the MCP Server to request an LLM Completion. | <div class="examples"><span>Process unstructured data</span></div> | Application |
-| <span class="feature-icon"><img src="./images/message-circle-question-mark.svg" width="100%" alt="Elicitations" /></span> | <span class="cell-title">Elicitations</span> | Request specific information from the User, bypassing the LLM | <div class="examples"><span>Collect booking information</span></div> | User |
+| <span class="feature-icon"><img src="./images/message-circle-question-mark.svg" width="100%" alt="Elicitations" /></span> | <span class="cell-title">Elicitations</span> | Request specific information from the User, bypassing the LLM | <div class="examples"><span>Collect specific booking information</span></div> | User |
 
+
+<!-- the name mcp server is a bit misleading -->
 
 ---
 
@@ -276,6 +332,7 @@ _No standard authentication_
 - ### Access to local resources and files.
 - ### Can execute commands on the Users computer
 - ### Especially useful for Developer Tools
+- ### Authentication through Config Files
 - ### Updates, Usage and Telemetry Data can be difficult to capture +/-
 
 </div>
@@ -380,41 +437,34 @@ __MCPB__ archive distribution format for local MCP Servers to make __curation__,
 
 ---
 
-
-
 # LLM Integration Risks - Context Management
 
-- ### LLM not able to distinguish between intended, unintended and malicious instructions
-- ### Enabling an MCP Server with Tools will add Tool and Parameter descriptions to your Context.
-- ### Exfiltration may not look obvious...
-- ### Tool Descriptions may not match 
-- ### Tool can look safe (but run later)
-- ### Tool Results may be unwelcome
-- ### Tools should not reference other Tools.
-- _Host Application rendering_ of Images/Markdown/Mermaid links
+- ### Function Calling includes Tool and Parameter descriptions to your Context.
+- ### LLM not able to distinguish between intended, unintended and malicious instructions.
+- ### Unused Tools / Servers degrade LLM Performance and increase inference costs.
+- ### Exfiltration may not always appear obvious: _Host Application rendering_ of Images/Markdown/Mermaid links
+- ### Tool can look safe on first run (pre-approval) but modify behaviour on second run.
+- ### Tool Results may include unvetted data (e.g. Instructions embedded in a GitHub Issue or JIRA Ticket or Word Document).
 
+<!-- similar risks exist for copy/paste context management -->
 
 ---
 
 # MCP Specific Guidance
 
-- ### Review for 
+- ### Review Tool, Parameter and Instructions inclusion
 - ### MCP Server `instructions` may be added to the Context.
-- ### Multimodal Content 
+- ### Multimodal Content (e.g. Images) returned via tools expose the same risks
 - ### MCP Server Tool List Change Notifications - revalidation 
+- ### Tools should not reference other Tools (especially NOT other MCP Servers) 
+- ### Prioritise which things need Human-in-the-Loop 
+- ### Risk assess specific Server/Tool mixes.
 
-(Read Ola's Post).
 
----
 
-# Risks
-
-- Lots of competing registries
-- Emergence of hosting platforms
-- OAuth Enabled and Curated Platforms.
+> (Read Ola's Post).
 
 ---
-
 
 <!-- _class: transition -->
 
@@ -430,6 +480,8 @@ __MCPB__ archive distribution format for local MCP Servers to make __curation__,
 - ### https://modelcontextprotocol.io/community
 - ### https://github.com/modelcontextprotocol/
 - ### Huge ecosystem of Open Source MCP Clients and Servers
+- ### Explore Open Source Models, Datasets and Training Courses on MCP, LLMs and Transformers on https://huggingface.co
+- ### Also use Open Source Models/Datasets
 
 ---
 
