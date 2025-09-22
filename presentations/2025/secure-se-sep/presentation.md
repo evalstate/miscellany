@@ -163,15 +163,17 @@ Continues generating text from a prompt
 
 # Completions[0..1]
 
+## Identical Prompt, Identical Model... 
+
 <div class="columns">
 <div>
 
-![w:700](./images/completion-1-lightbox.png)
+![w:600](./images/completion-1-lightbox.png)
 
 </div>
 <div>
 
-![w:700](./images/completion-2-lightbox.png)
+![w:600](./images/completion-2-lightbox.png)
 
 </div>
 
