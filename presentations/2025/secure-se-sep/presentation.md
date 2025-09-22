@@ -215,11 +215,17 @@ Continues generating text from a prompt
 
 # Guardrails (and Prompt Engineering)
 
-(donald trump clause)
+<center>
 
-https://docs.claude.com/en/release-notes/system-prompts#august-5-2025
+_Excerpt from the Anthropic System Prompt for Opus 4.1_
 
-## These are all things that LLM Systems Integrators need to consider.
+![w:700px](./images/guardrail.png)
+
+</center>
+
+> https://docs.claude.com/en/release-notes/system-prompts#august-5-2025
+
+<!-- ### These are all things that LLM Systems Integrators need to consider. -->
 
 ---
 
