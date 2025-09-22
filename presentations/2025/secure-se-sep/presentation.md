@@ -65,7 +65,7 @@ paginate: false
 
 ![w:350](./images/greeting_huggy_left.png)
 
-#### Hugging Face MCP/Open Source Projects
+### Hugging Face MCP/Open Source Projects
 
 </div>
 
@@ -74,11 +74,17 @@ paginate: false
 ![w:350](./images/mcp-icon.svg)
 
 
-#### MCP Steering Committee Member
+### MCP Steering Committee Member
 
 </div>
 
 </div>
+
+<center> 
+
+### `fast-agent.ai`
+
+</center>
 <!-- who knows about mcp, who i am, what the presentation entails -->
 
 <!-- Community Moderator, Working Groups. -->
@@ -161,6 +167,8 @@ Continues generating text from a prompt
 
 ---
 
+<!-- _class: completions-zoom -->
+
 # Completions[0..1]
 
 ## Identical Prompt, Identical Model... 
@@ -168,12 +176,24 @@ Continues generating text from a prompt
 <div class="columns">
 <div>
 
+<div class="zoom-target first" tabindex="0">
+
 ![w:600](./images/completion-1-lightbox.png)
+
+<span class="zoom-lens" aria-hidden="true"></span>
+
+</div>
 
 </div>
 <div>
 
+<div class="zoom-target second" tabindex="0">
+
 ![w:600](./images/completion-2-lightbox.png)
+
+<span class="zoom-lens" aria-hidden="true"></span>
+
+</div>
 
 </div>
 
@@ -194,15 +214,15 @@ Continues generating text from a prompt
 
 ---
 
-# Guardrails
+# Guardrails (and Prompt Engineering)
 
 (donald trump clause)
 
 https://docs.claude.com/en/release-notes/system-prompts#august-5-2025
 
+## These are all things that LLM Systems Integrators need to consider.
 
 ---
-
 
 Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
 
@@ -235,14 +255,40 @@ Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
 
 ---
 
-
-
 <!-- _class: transition -->
 
 # <span class="mcp-model">Model Context Protocol</span> is an open-source standard for connecting AI applications to external systems.
 
 
 #### Think of MCP like a USB-C port for AI applications. Just as USB-C provides a standardized way to connect electronic devices, MCP provides a standardized way to connect AI applications to external systems.
+
+---
+
+# Solving a problem
+
+<div class="columns">
+
+<div>
+
+## Interactive
+
+- ### Copy/Paste Context Management
+- ### Custom RAG Pipelines and Integrations
+
+</div>
+
+
+<div>
+
+## Agents
+
+- ### Plug and Play
+
+</div>
+
+
+</div>
+
 
 ---
 
