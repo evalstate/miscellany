@@ -100,22 +100,33 @@ paginate: false
 
 ---
 
-# Text Generation Models
+# Large Language Models
 
 <div class="columns">
 
 <div class="center"> 
 
-![w:600](./images/model_parameters.png)
+![w:500](./images/model_parameters.png)
+
+## _GPT 3_ - Trained in Conversation and Instruction Following
 
 </div>
 
 <div>
 
-Continues generating text from a prompt
+
+- **Scale:** They contain millions, billions, or even hundreds of billions of parameters
+
+- **General capabilities:** They can perform multiple tasks without task-specific training
+
+- **In-context learning:** They can learn from examples provided in the prompt
+
+- **Emergent abilities:** As these models grow in size, they demonstrate capabilities that weren’t explicitly programmed or anticipated
 
 </div> 
 </div>
+
+> https://huggingface.co/learn/llm-course/chapter1/2?fw=pt
 
 ---
 
@@ -173,43 +184,37 @@ Continues generating text from a prompt
 ## Identical Prompt, Identical Model... 
 
 <div class="columns">
-<div>
-
-<div class="zoom-target first" tabindex="0">
-
-![w:600](./images/completion-1-lightbox.png)
-
-<span class="zoom-lens" aria-hidden="true"></span>
-
+  <div class="center">
+    <span class="mcp-magnify"
+          tabindex="0"
+          style="--magnify-image: url('./images/completion-1-lightbox.png');
+                 --magnify-scale: 2.0;
+                 --magnify-size: 240px;
+                 --magnify-position-x: 50%;
+                 --magnify-position-y: 50%;
+                 --magnify-focus-x: 85%;
+                 --magnify-focus-y: 88%;">
+      <img src="./images/completion-1-lightbox.png"
+           alt="First completion screenshot"
+           width="600">
+    </span>
+  </div>
+  <div class="center">
+    <span class="mcp-magnify"
+          tabindex="0"
+          style="--magnify-image: url('./images/completion-2-lightbox.png');
+                 --magnify-scale: 2.0;
+                 --magnify-size: 240px;
+                 --magnify-position-x: 50%;
+                 --magnify-position-y: 50%;
+                 --magnify-focus-x: 105%;
+                 --magnify-focus-y: 105%;">
+      <img src="./images/completion-2-lightbox.png"
+           alt="Second completion screenshot"
+           width="600">
+    </span>
+  </div>
 </div>
-
-</div>
-<div>
-
-<div class="zoom-target second" tabindex="0">
-
-![w:600](./images/completion-2-lightbox.png)
-
-<span class="zoom-lens" aria-hidden="true"></span>
-
-</div>
-
-</div>
-
-</div>
-
----
-
-
-# Privacy and Content
-
-<div class="center">
-
-![w:600](./images/chatgpt-privacy.png)
-
-</div>
-
-<!-- we trust providers to x,y,z -->
 
 ---
 
@@ -228,6 +233,32 @@ _Excerpt from the Anthropic System Prompt for Opus 4.1_
 <!-- ### These are all things that LLM Systems Integrators need to consider. -->
 
 ---
+
+# Privacy and Content
+
+<div class="center">
+
+<span class="mcp-magnify"
+      tabindex="0"
+      style="--magnify-image: url('./images/chatgpt-privacy.png');
+             --magnify-scale: 2.2;
+             --magnify-size: 240px;
+             --magnify-position-x: 78%;
+             --magnify-position-y: 58%;
+             --magnify-focus-x: 78%;
+             --magnify-focus-y: 58%;">
+  <img src="./images/chatgpt-privacy.png"
+       alt="ChatGPT privacy modal"
+       width="600">
+</span>
+
+</div>
+
+<!-- we trust providers to x,y,z -->
+
+---
+
+
 
 Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words)
 

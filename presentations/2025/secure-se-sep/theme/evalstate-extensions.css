@@ -199,6 +199,54 @@ section.mcp-features .examples {
   background-color: transparent !important;
 }
 
+/* Magnifier hover effect: opt-in per image via wrapper */
+.mcp-magnify {
+  position: relative;
+  display: inline-block;
+  --magnify-image: none;
+  --magnify-scale: 2;
+  --magnify-size: 220px;
+  --magnify-focus-x: 50%;
+  --magnify-focus-y: 50%;
+  --magnify-position-x: 50%;
+  --magnify-position-y: 50%;
+  cursor: zoom-in;
+  isolation: isolate;
+}
+
+.mcp-magnify > img {
+  display: block;
+}
+
+.mcp-magnify::after {
+  content: "";
+  position: absolute;
+  width: var(--magnify-size);
+  height: var(--magnify-size);
+  left: var(--magnify-position-x);
+  top: var(--magnify-position-y);
+  transform: translate(-50%, -50%) scale(var(--magnify-scale));
+  transform-origin: 50% 50%;
+  background-image: var(--magnify-image);
+  background-repeat: no-repeat;
+  background-size: calc(100% * var(--magnify-scale)) calc(100% * var(--magnify-scale));
+  background-position: var(--magnify-focus-x) var(--magnify-focus-y);
+  border-radius: 50%;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  outline: 2px solid rgba(0, 0, 0, 0.25);
+  outline-offset: -1px;
+  opacity: 0;
+  transition: opacity 140ms ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, opacity;
+}
+
+.mcp-magnify:hover::after,
+.mcp-magnify:focus-within::after {
+  opacity: 1;
+}
+
 .social-table tr:nth-child(odd),
 .social-table tr:nth-child(even) {
   background-color: transparent !important;
