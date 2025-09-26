@@ -81,7 +81,7 @@ paginate: false
 
 <center> 
 
-### `fast-agent.ai`
+### `https://fast-agent.ai`
 
 </center>
 <!-- who knows about mcp, who i am, what the presentation entails -->
@@ -159,6 +159,9 @@ paginate: false
 <p class="small">Sizes normalized to gigabytes for straightforward comparisons.</p>
 
 
+
+<!-- Anthropic £1.5bn fine -->
+
 ---
 
 <style scoped>
@@ -185,30 +188,14 @@ paginate: false
 
 <div class="columns">
   <div class="center">
-    <span class="mcp-magnify"
-          tabindex="0"
-          style="--magnify-image: url('./images/completion-1-lightbox.png');
-                 --magnify-scale: 2.0;
-                 --magnify-size: 280px;
-                 --magnify-position-x: 50%;
-                 --magnify-position-y: 50%;
-                 --magnify-focus-x: 85%;
-                 --magnify-focus-y: 88%;">
+    <span class="mcp-magnify mcp-magnify--completion-1">
       <img src="./images/completion-1-lightbox.png"
            alt="First completion screenshot"
            width="600">
     </span>
   </div>
   <div class="center">
-    <span class="mcp-magnify"
-          tabindex="0"
-          style="--magnify-image: url('./images/completion-2-lightbox.png');
-                 --magnify-scale: 2.0;
-                 --magnify-size: 280px;
-                 --magnify-position-x: 50%;
-                 --magnify-position-y: 50%;
-                 --magnify-focus-x: 105%;
-                 --magnify-focus-y: 105%;">
+    <span class="mcp-magnify mcp-magnify--completion-2">
       <img src="./images/completion-2-lightbox.png"
            alt="Second completion screenshot"
            width="600">
@@ -236,17 +223,11 @@ _Excerpt from the Anthropic System Prompt for Opus 4.1_
 
 # Privacy and Content
 
+<div class="columns">
+
 <div class="center">
 
-<span class="mcp-magnify"
-      tabindex="0"
-      style="--magnify-image: url('./images/chatgpt-privacy.png');
-             --magnify-scale: 2.2;
-             --magnify-size: 240px;
-             --magnify-position-x: 78%;
-             --magnify-position-y: 58%;
-             --magnify-focus-x: 78%;
-             --magnify-focus-y: 58%;">
+<span class="mcp-magnify mcp-magnify--privacy">
   <img src="./images/chatgpt-privacy.png"
        alt="ChatGPT privacy modal"
        width="600">
@@ -254,6 +235,17 @@ _Excerpt from the Anthropic System Prompt for Opus 4.1_
 
 </div>
 
+<div>
+
+- ## Data Privacy and Sovereignty are important considerations for LLM Systems Integration.
+
+- ## Is Model Training and Alignment in line with _your_ requirements?
+
+- ## Will it stay that way?
+
+</div>
+
+</div>
 <!-- we trust providers to x,y,z -->
 
 ---
@@ -264,39 +256,39 @@ _Excerpt from the Anthropic System Prompt for Opus 4.1_
   <div class="box">
     <strong>Model Parameters</strong>
     <div class="chip">model weights</div>
-    <p class="small">~60 GB loaded for inference at all times.</p>
+
+## 60GB
+
   </div>
   <div class="box emphasis">
     <strong>Context Window</strong>
     <div class="chip">conversation</div>
-    <p class="small">131,072 tokens per turn (~512Kb).</p>
-    0.000512GB
-    <ul>
-    </ul>
+
+## 512kb
+
   </div>
 </div>
 
-## Context Window is 100000:1 model weights
-## 13 seconds of audio. Phone Photograph won't fit.
+<center>
+
+## Context Window is 100000:1 Model Weights
+## __13 seconds of audio.__
+
+</center>
 
 <!-- Charles Dickens, A Tale of Two Cities : 206,022 Tokens (139,000 Words> -->
 
 ---
 
-# Solving a problem
+# Managing Context?
 
-## Context Management - Cumbersome
+## Unaudited Copy / Paste Data Management
 
-## Custom Development for Integrations
+## Function Calling requiring Custom Development
 
-## Take advantage of Function Calling Models
+## Prompt Engineering Superstition
 
-## User-Friendly way of importing content to Context Window
-
-## Portability of Standard Functionality
-
-## Application Builder 
-
+## Custom Development for Integrations / RAG
 
 ---
 
@@ -501,17 +493,27 @@ __MCPB__ archive distribution format for local MCP Servers to make __curation__,
 
 ---
 
+# Human in the Loop
+
+<center>
+
+![h:550](./images/dangerous-permissions.gif)
+
+</center>
+
+---
+
 # MCP Specific Guidance
 
-- ### Review Tool, Parameter and Instructions inclusion
-- ### MCP Server `instructions` may be added to the Context.
-- ### Multimodal Content (e.g. Images) returned via tools expose the same risks
-- ### MCP Server Tool List Change Notifications - revalidation 
-- ### Tools should not reference other Tools (especially NOT other MCP Servers) 
-- ### Prioritise which things need Human-in-the-Loop 
 - ### Risk assess specific Server/Tool mixes.
+- ### Data and descriptions from different sources are co-mingling - and should not refer to each other 
+- ### Review Tool and Parameter descriptions and behaviour
+- ### MCP Server `instructions` may be added to the Context.
+- ### MCP Server Tool List Change Notifications - revalidation 
+- ### Multimodal Content (e.g. Images) returned via Tools, Prompts and Resources expose the same risks
+- ### Prioritise which things need Human-in-the-Loop 
 
-> (Read Ola's Post).
+> Ola Hungerford is releasing a community blog post soon.
 
 ---
 
