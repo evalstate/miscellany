@@ -28,6 +28,11 @@ Trade-offs
 Developer Experience - good.
 
 
+How to use the correct channel.
+    The requestId is a hint to the channel.
+
+    
+Differences between SDKs.
 
 ---
 
@@ -52,3 +57,13 @@ Optimized for what Clients/Users do?
 
 
 ---
+
+Data 
+
+- Without roadmap from claude.ai it's hard to know what mcp server developers can rely on .
+- surety from 
+- Coding Tools are reasonably well supported.
+- IDEs. Utility of MCP constrained due to Tool confusion; developer experience building custom solutions. Commoditized servers.
+
+---
+
