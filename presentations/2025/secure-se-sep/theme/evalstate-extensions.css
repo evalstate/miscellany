@@ -247,6 +247,37 @@ section.mcp-features .examples {
   opacity: 1;
 }
 
+/* Lens presets for specific slides */
+.mcp-magnify--completion-1 {
+  --magnify-image: url('./images/completion-1-lightbox.png');
+  --magnify-scale: 2;
+  --magnify-size: 280px;
+  --magnify-position-x: 50%;
+  --magnify-position-y: 50%;
+  --magnify-focus-x: 85%;
+  --magnify-focus-y: 88%;
+}
+
+.mcp-magnify--completion-2 {
+  --magnify-image: url('./images/completion-2-lightbox.png');
+  --magnify-scale: 2;
+  --magnify-size: 280px;
+  --magnify-position-x: 50%;
+  --magnify-position-y: 50%;
+  --magnify-focus-x: 105%;
+  --magnify-focus-y: 105%;
+}
+
+.mcp-magnify--privacy {
+  --magnify-image: url('./images/chatgpt-privacy.png');
+  --magnify-scale: 2.2;
+  --magnify-size: 240px;
+  --magnify-position-x: 78%;
+  --magnify-position-y: 58%;
+  --magnify-focus-x: 78%;
+  --magnify-focus-y: 58%;
+}
+
 .social-table tr:nth-child(odd),
 .social-table tr:nth-child(even) {
   background-color: transparent !important;
