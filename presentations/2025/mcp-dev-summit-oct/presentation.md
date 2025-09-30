@@ -126,7 +126,7 @@ If you don't need state. MCP SDK can still do some of the lifting for you. -->
 ```typescript
 new StreamableHTTPServerTransport(){
     // Note: Not Default!
-    enableJSONResponse: true 
+    enableJSONResponse: true
 }
 ```
 
@@ -159,19 +159,26 @@ If you don't need state. MCP SDK can still do some of the lifting for you. -->
 
 ### Rather than responding directly, we respond with an SSE Event Stream.
 
-### MCP Server should make sure Notifications are sent on the correct channel.
-
-```
-requestHandlerExtra etc.
-
-```
+### MCP Server developer should make sure Notifications are sent on the correct channel.
 
 
 </div>
 
 <div>
 
-DIAGRAM OF NOTIFICATIONS HERE
+![](./images/diag_notifications.png)
+
+
+```typescript
+server.setRequestHandler(
+  CallToolRequestSchema,
+  async (request, extra) => { 
+   ...
+   await extra.sendNotification({
+      method: "notifications/statusUpdate"
+      ...
+```
+
 
 
 </div>
@@ -205,7 +212,10 @@ DIAGRAM OF NOTIFICATIONS HERE
 
 <div>
 
-PICTURE OF AN ELICITATION TAKING PLACE
+![](./images/diag_request.png)
+
+
+### Note that the Elicitation Request 
 
 </div>
 
@@ -217,107 +227,88 @@ PICTURE OF AN ELICITATION TAKING PLACE
 
 # Server Request to Client (Server Initiated)
 
-
-![w:800](./images/diag_full_setup.png)
-<div class="columns">
-
-<div>
-
 ### To use Resource Subscriptions, List Change Notifications or Server-Initiated Sampling/Elicitation, we send the request over an HTTP GET SSE Stream the client opens after initialize.
 
 
+<div align="center"> 
 
-
-</div>
-
-<div>
-
-
-
-```typescript
-
-// big SDK Gotcha!
-
-
-```
-
+![w:800](./images/diag_full_setup.png)
 
 </div>
-
-</div>
-
 
 ---
 
-
-
-
-# The Full MCP Experience
-
-
-<div class="columns">
-
-<div>
-
-### Now we add a `GET` handler to maintain an open stream to send notifications to the Host.
-
-### Server needs to make sure Notifications and Requests are sent via the correct channel for correlation.
-
-</div>
-
-<div>
-
-
-
-```typescript
-
-// big SDK Gotcha!
-
-
-```
-
-
-</div>
-
-</div>
-
-
-
-<div class="bottom-image">
-  <img src="./images/capabilities_everything_4.png" alt="MCP Capabilities - Stateless" />
-</div>
-
----
 
 
 # Ping!
 
-The Host can `POST` to the Server to tell it's alive
-The Server can tell whether or not the Host is Responsive.
-Host Ping tells you if the POST endpoint works.
-Server Ping tells you if the GET channel is open.
+The Host can `POST` a Ping to the Server to tell it's alive.
+
 <div class="columns">
-
-<div>
-
-#### Examples: `webcam.fast-agent.ai/mcp`
-#### Hugging Face MCP Server in StreamableHTTP Mode.
-
-![w:500](./images/fa_ping.png)
-
-</div>
 
 <div>
 
 ![w:400](./images/ping.png)
 
+</div>
+
+<div>
+
+![w:500](./images/fa_ping.png)
+
 
 </div>
 
 </div>
 
+The Server can __Ping__ the Host via the `GET` Channel if open. 
 
 ---
+
+# Pain Point: `Mcp-Session-Id` for Routing
+
+<div class="columns">
+
+<div>
+
+![alt text](./images/deploy_pain_1.png)
+
+</div>
+
+<div>
+
+### With Multiple MCP Server instances, the Response needs to go the correct Server.
+
+### `Mcp-Session-Id` HTTP Header can be used for Routing to the initiating MCP Server (sticky sessions).
+
+### Sharing `Mcp-Session-Id` state amongst the cluster is not enough - Both `Mcp-Session-Id` and JSON-RPC `RequestId` are needed for correlation.
+
+</div>
+
+</div>
+
+---
+
+
+# Pain Point: `Mcp-Session-Id` for State
+
+<div class="columns">
+
+<div>
+
+
+</div>
+
+<div>
+
+
+</div>
+
+</div>
+
+---
+
+
 
 ## PAIN POINTS (SO FAR)
 
