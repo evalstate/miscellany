@@ -82,11 +82,40 @@ paginate: false
   </tbody>
 </table>
 
+
 <!-- -->
 
 ---
 
-## Huge Traffic Drop!
+<div class="columns">
+
+<div>
+
+# Shaun Smith `@evalstate`
+
+- ### @ Hugging Face MCP
+- ### MCP Maintainer / Transports WG
+- ### Transports WG
+- ### Maintainer of `fast-agent` 
+
+</div>
+
+
+
+<div align="center">
+
+![w:250](./images/hf_logo.svg)
+![w:250](./images/mcp-icon.svg)
+
+</div>
+
+
+</div>
+
+
+---
+
+# Hugging Face MCP Server: Huge Traffic Drop!
 
 ![w:1200](./images/traffic-aug.png)
 
@@ -170,15 +199,22 @@ If you don't need state. MCP SDK can still do some of the lifting for you. -->
 
 
 ```typescript
-server.setRequestHandler(
-  CallToolRequestSchema,
-  async (request, extra) => { 
-   ...
-   await extra.sendNotification({
-      method: "notifications/statusUpdate"
-      ...
+async (request, extra) => {
+  await server.notification({
+    method: "notifications/statusUpdate",
+    params: { /* your params */ }
+  }, { relatedRequestId: extra.requestId });
+};
+
 ```
 
+```python
+await session.send_progress_notification(
+    progress_token="token-789",
+    progress=50,
+    related_request_id="tool-call-456"  
+)
+```
 
 
 </div>
@@ -202,11 +238,11 @@ server.setRequestHandler(
 
 ### MCP Servers can make Sampling and Elicitation requests __to__ the Client associated with a Tool Call.
 
-### Server sends the Elicitation Request via the Post SSE response. 
+### Eliciation Request from Server delivered via the Post SSE response stream. 
 
-### Result is POSTed back to the MCP Server using the Request ID for association - and returns a 202.
+### Elicitation Result is POSTed returned with a __new__ POST using the Request ID for association - and returns a 202.
 
-### Server then returns the Result via the Post SSE Channel.
+### Server then returns the Tool Result via the original Post SSE stream.
 
 </div>
 
@@ -215,7 +251,8 @@ server.setRequestHandler(
 ![](./images/diag_request.png)
 
 
-### Note that the Elicitation Request 
+### Note that the Elicitation Request __must complete__ before the SSE Connection times out!
+
 
 </div>
 
@@ -265,7 +302,29 @@ The Server can __Ping__ the Host via the `GET` Channel if open.
 
 ---
 
-# Pain Point: `Mcp-Session-Id` for Routing
+
+# `Mcp-Session-Id` for State? 
+
+<div class="emphasis-box">
+
+### An MCP "session" consists of logically related interactions between a client and a server, beginning with the initialization phase.
+
+</div>
+
+## Sessions are controlled by the MCP Server, not the Host - and are tightly coupled to the Streamable HTTP Transport.
+
+## 
+## Typically OAuth used for Identity, Mcp-Session-Id used for correlation .
+
+## Causes the "Conversational Context" problem.
+
+## VSCode uses a new Connection per Conversation Thread (find discord image)
+
+## Spec just says "Related Messages"
+
+---
+
+# `Mcp-Session-Id` for Routing
 
 <div class="columns">
 
@@ -277,7 +336,11 @@ The Server can __Ping__ the Host via the `GET` Channel if open.
 
 <div>
 
+<div class="emphasis-box">
+
 ### With Multiple MCP Server instances, the Response needs to go the correct Server.
+
+</div>
 
 ### `Mcp-Session-Id` HTTP Header can be used for Routing to the initiating MCP Server (sticky sessions).
 
@@ -287,49 +350,20 @@ The Server can __Ping__ the Host via the `GET` Channel if open.
 
 </div>
 
+
 ---
 
+# Hugging Face MCP Server: Huge Traffic Drop!
 
-# Pain Point: `Mcp-Session-Id` for State
+![w:1200](./images/traffic-aug.png)
 
-<div class="columns">
+<div class="zoom-effect zoom-effect--claude">
 
-<div>
-
-
-</div>
-
-<div>
-
-
-</div>
+![w:600](./images/claude_enhancements.png)
 
 </div>
 
 ---
-
-
-
-## PAIN POINTS (SO FAR)
-
-- Using the wrong "Channel"
-- Maintaining the GET channel Open
-- Handling PING failures.
-- Python ALWAYS opens GET when used as a Server.
-- Silent failures in SDK on transmission failures
-
-- Jeff R. [Elicitation for agreeing to return PII]
-- Jsff R. [MS Teams] conversation to file defect, make sure template is filled out (select template to fill out defect template).
-
----
-
-![w:700](./images/traffic-aug.png)
-![w:500](./images/claude_enhancements.png)
-
-
----
-
-
 
 ### MCP Method Call Ratios / Hugging Face MCP Server)
 <!-- _class: mcp-features -->
@@ -512,229 +546,47 @@ Usage Guide:
 
 | Icon | Feature | Usage |
 | --- | --- | --- |
-| <span class="feature-icon"><img src="./images/folders.svg" alt="Roots" width="100%" /></span> | <span class="cell-title">Roots</span> | _7.1%_ of all sessions, _33.6%_ of sessions that use tools <br /> Not currently useful for Remote Servers |
-| <span class="feature-icon"><img src="./images/cpu.svg" width="100%" alt="Sampling" /></span> | <span class="cell-title">Sampling</span> | _0.9%_ of all sessions, _22.2%_ of sessions that use tools |
-| <span class="feature-icon"><img src="./images/message-circle-question-mark.svg" width="100%" alt="Elicitations" /></span> | <span class="cell-title">Elicitations</span> | _3.2%_ of all sessions, _21.6%_ of sessions that use tools |
-| <span class="feature-icon"><img src="./images/trash-2.svg" alt="Session Deletion" width="100%" /></span> | <span class="cell-title">Session Deletion</span> | 4 of the top 20 clients delete sessions, only _6.64%_ of sessions get deleted overall |
+| <span class="feature-icon"><img src="./images/folders.svg" alt="Roots" width="100%" /></span> | <span class="cell-title">__Roots__</span> | _7.1%_ of all sessions, _33.6%_ of sessions that use tools <br /> __Not currently useful for Remote Servers__ |
+| <span class="feature-icon"><img src="./images/cpu.svg" width="100%" alt="Sampling" /></span> | <span class="cell-title">__Sampling__</span> | _0.9%_ of all sessions, _22.2%_ of sessions that use tools |
+| <span class="feature-icon"><img src="./images/message-circle-question-mark.svg" width="100%" alt="Elicitations" /></span> | <span class="cell-title">__Elicitations__</span> | _3.2%_ of all sessions, _21.6%_ of sessions that use tools |
+| <span class="feature-icon"><img src="./images/trash-2.svg" alt="Session Deletion" width="100%" /></span> | <span class="cell-title">__Session Deletion__</span> | 4 of the top 20 clients delete sessions, only _6.64%_ of sessions get deleted overall |
 
 
 ---
 
-# Try it out!
+# Thoughts and Guidance
 
-## Hugging Face MCP Server supports STDIO, and Stateful + Stateless Deployment Modes. One Click Deployment to a FreeCPU Space via Docker.
+- #### Hugging Face MCP Server supports STDIO, and Stateful + Stateless Deployment Modes. One Click Deployment to a FreeCPU Space via Docker. Link from `huggingface.co/mcp`
 
+- #### `mcp-remote` used to be the most popular Client... Streamable HTTP Support in Hosts has picked up. Also means people are actively managing config?
 
+- #### SDK DevEx differs between Transports and Capability usage - cosider deployment options carefully. Don't forget to Use `extra`/`related-request-id`  and configure `JSON-RPC` mode. `fast-agent` can help with diagnosis and debugging.
 
----
+- #### Consider whether Server -> Client features are necessary for your use-case - especially in an uncontrolled environment. If they are, ![h:50](./images/ultrathink.gif) harder!
 
-
-
-# Allocating a "GET" to each user
-
-## Data c/o Jeff Richter , Microsoft Azure.
-
-Jeff's Graph Here showing top-out
-
-## GET Disconnect behaviour (silent failures).
-
----
-
-# Thread of Execution? Handling POST Responses.
-
-## Hosts responding to a Request from _either_ the `GET` or `POST SSE` stream send their Response with a new `POST` to which the MCP Server responds with a 202. 
-
-## In a multi-server environment (e.g. load balanced), it requires either a sticky session or.
-
-## Scale 
-
-
----
-
-# Sessions
-
-## Typically OAuth used for Identity, Mcp-Session-Id used for correlation .
-
-## Causes the "Conversational Context" problem.
-
-## VSCode uses a new Connection per Conversation Thread (find discord image)
-
----
-
-# Relevant SEPs
-
-## Initialize Language Wording - Allow us to 
-
-## Elevate Sessions #1364 - Host controlled Sessions, SessionId to the Data, not Transport layer.
-
-## SEP #1442 - 
-
-## HTTP/gRPC Transport Proposals - Reduce overhead
-
----
-
-
-
-## Request associated Sampling and Elicitation
-
-If the Server wants to use Sampling or Elicitation we can send those on the associated SSE stream. The Client handles them, and sends the response back with a POST message.
-
-**MAKE SURE YOU HAVE ALLOCATED A SESSION ID** so the Response can be associated with the request. The server responds with a 202 only (no new streams etc).
-
----
-
-# Allocating an Mcp-Session-Id
-
-### Server Controlled
-### Only need it request/response association
-### If you are using SDK this will all happen anyway.
-### We need to decide on the. The SDK _should_ reset timeout counters on received events....
-
----
-
-## Server initiated Sampling and Elicitation, 
-
-In this case we need to maintain an open GET channel. 
-
-Client Listens, handles requests it receives, and POSTs back as previously. 
-
-- SDK behaviour:
-
-
----
-
-## Change Notifications Subscriptions.
-
-Per-Server state - now I need to think about saving state somehow - what things are switched on/off? So persistence becomes the issue. 
-
-Although these are separate methods, the request is the same: re-read.
-
-(Note this isn't an actual requirement - the notification just says read the list again - but practically....)
-
----
-
-# Session Deletion
-
-At the end. Reconstruct that state. 
-
----
-
-# Identity and State
-
-Hugging Face MCP Server in Production allows configuration of Tools per User. We use the OAuth identity to enable that. 
-
-OAUTH : Persistent Settings for User
-SessionID : Host/Conversational State
-
-| OAuth / API Key | SessionID |
-|----------------|------------|
-| User Identity  | Conversational State |
-| (MCP Server Configuration) | ???? |
-
----
-
-# Host Application and User Behaviour. 
-
-- Users install MCP Servers in Host Applications create, but don't delete Sessions.
-- If you are using MCP Sessions this creates resource demands.
-
----
-
-Back to the Chart of "what happened".
-
----
-
-# 
-
-# For simple JSON-RPC, MCP has overhead
-
-## Lots of calls (e.g. 2 step initialization, followed by prompts listings etc.)
-
-## Having to inspect JSON-RPC packets for routing rather than typical HTTP handler patterns (makes caching even of static things like Tool Lists hard)
-## Has to handle the JSON-RPC body to identify the requested operation. (Writing low-value code to fulfil the transport requirements).
-
-
----
-
-## Client / User Behaviour
-
-Show ratio of initialization to Tool Calls. Note that lots of initialize != lots of usage necessarily.
-
----
-
-# Allocating a "GET" to each user
-
-## Data c/o Jeff Richter , Microsoft Azure.
+- #### Don't rely on Clients managing sessions - for now consider what you want to use `Mcp-Session-Id` for.
 
 
 ---
 
 
+# Transport WG / Relevant SEPs
 
----
+- ## Make Initialize Step Optional (Spec Change)
 
-# In Practice
+- ## Elevate Sessions #1364 - Host controlled Sessions, SessionId to the Data, not Transport layer.
 
-Load Balancing and Fault Tolerance
+- ## Delaminate JSON-RPC layer from Protocol.
 
-1. Sampling/Elicitation - we expect a response on our own Thread of execution.
-1. 
+- ## SEP #1442 - Make MCP Stateless by Default.
 
----
-
-STDIO; serializing requests
-blocking behaviour, "taking turns". Use of STDOUT breaks connection.
-
-Single Process, Single "User".
-No "Sessions", isolation through instancing.
-
-I want to connect by LLM . "just works"
-
-How does it work?
-
-Trade-offs
-
-Developer Experience - good.
-
-
-How to use the correct channel.
-    The requestId is a hint to the channel.
-
-Differences between SDKs.
-
----
-
-
-
-
----
-### section
-
-
-What do we mean by Statelessness of the Protocol vs. Sessions
-
-- Interesting Stats
-- Clients that Delete Sessions
-- "Chattiness"
-- User Behaviour
-
----
-
-Options. 
-
-Supporting Multiple Threads/Agents.
-
-Optimized for what Clients/Users do?
+- ## Pure HTTP Transport - `https://github.com/mikekistler/pure-http-transport`
 
 
 ---
 
-Data 
+<!-- _class: transition -->
 
-- Without roadmap from claude.ai it's hard to know what mcp server developers can rely on .
-- surety from 
-- Coding Tools are reasonably well supported.
-- IDEs. Utility of MCP constrained due to Tool confusion; developer experience building custom solutions. Commoditized servers.
+The end
 
 ---
-

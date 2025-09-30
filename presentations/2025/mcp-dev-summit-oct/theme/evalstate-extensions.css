@@ -2,6 +2,12 @@
    Custom slide utilities for Evalstate decks.
 */
 
+/* Inline images should align with text baseline */
+li img {
+  vertical-align: middle;
+  margin: 0 0.2em;
+}
+
 section.mcp-features table {
   width: 100%;
   margin-top: 0.5rem;
@@ -331,6 +337,50 @@ section.mcp-features .examples {
   --magnify-position-y: 58%;
   --magnify-focus-x: 78%;
   --magnify-focus-y: 58%;
+}
+
+/* Zoom-in animation effect for images */
+@keyframes zoomToPosition {
+  0% {
+    transform: scale(var(--zoom-start-scale, 3)) translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translate(var(--zoom-end-x, 0), var(--zoom-end-y, 0));
+    opacity: 1;
+  }
+}
+
+.zoom-effect {
+  position: relative;
+  display: inline-block;
+  --zoom-start-scale: 3;
+  --zoom-end-x: 0;
+  --zoom-end-y: 0;
+  --zoom-duration: 10s;
+}
+
+.zoom-effect img {
+  display: block;
+  animation: zoomToPosition var(--zoom-duration) ease-out forwards;
+  transform-origin: center center;
+}
+
+/* Preset for claude_enhancements zoom */
+.zoom-effect--claude {
+  --zoom-start-scale: 4;
+  --zoom-end-x: 500px;
+  --zoom-end-y: -450px;
+  --zoom-duration: 3s;
+}
+
+/* Emphasis box for important quotes/callouts */
+.emphasis-box {
+  background-color: #fef3c7;
+  padding: 0.75rem;
+  border-left: 4px solid #f59e0b;
+  border-radius: 2px;
+  margin: 1rem 0;
 }
 
 .social-table tr:nth-child(odd),
