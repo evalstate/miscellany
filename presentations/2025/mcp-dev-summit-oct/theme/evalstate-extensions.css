@@ -4,23 +4,42 @@
 
 section.mcp-features table {
   width: 100%;
-  margin-top: 1.1rem;
+  margin-top: 0.5rem;
   table-layout: fixed;
   border-collapse: collapse;
-  font-size: 1.02rem;
+  font-size: 0.82rem;
 }
 
 section:not(.titlepage) {
   padding: 64px 72px !important;
 }
 
+/* Hide headers for icon-based tables, show for data tables */
 section.mcp-features table thead {
   display: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+section.mcp-features table.show-headers thead {
+  display: table-header-group;
+}
+
+section.mcp-features table thead th {
+  padding: 0.35rem 0.55rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #64748b;
+  background-color: transparent;
+}
+
+section.mcp-features table thead th:not(:first-child) {
+  text-align: right;
 }
 
 section.mcp-features tbody td {
-  padding: 0.65rem 0.75rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 0.32rem 0.55rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   vertical-align: top;
 }
 
@@ -30,11 +49,17 @@ section.mcp-features tbody tr:last-child td {
 
 section.mcp-features table td:first-child,
 section.mcp-features table th:first-child {
-  text-align: center;
-  width: 5.5rem;
+  text-align: left;
+  width: auto;
 }
 
-section.mcp-features table td:nth-child(2) {
+/* August column (2nd column) - normal weight */
+section.mcp-features table.show-headers td:nth-child(2) {
+  font-weight: 400;
+}
+
+/* September column (3rd column) - bold */
+section.mcp-features table.show-headers td:nth-child(3) {
   font-weight: 700;
 }
 
@@ -49,6 +74,36 @@ section.mcp-features table tr:hover {
   font-weight: 700;
 }
 
+/* Highlight row for important metrics - nice blue color */
+section.mcp-features tbody tr.highlight-row,
+section.mcp-features tbody tr.highlight-row:hover {
+  background-color: #dbeafe !important;
+}
+
+section.mcp-features tbody tr.highlight-row td,
+section.mcp-features tbody tr.highlight-row:hover td {
+  font-weight: 700 !important;
+  color: #1e40af !important;
+  padding-top: 0.45rem !important;
+  padding-bottom: 0.45rem !important;
+}
+
+/* Warning row for unsupported methods */
+section.mcp-features tbody tr.warning-row td {
+  color: #991b1b !important;
+  font-weight: 600 !important;
+}
+
+/* Fix horizontal scroll - ensure table doesn't overflow */
+section.mcp-features table {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+section.mcp-features .columns > div:last-child {
+  padding-left: 2rem;
+}
+
 section.mcp-features .cell-title {
   display: inline-block;
 }
@@ -57,16 +112,16 @@ section.mcp-features .feature-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 4.5rem;
-  height: 4.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
   margin: 0 auto;
-  border-radius: 1.2rem;
+  border-radius: 0.9rem;
   background-color: rgba(0, 0, 0, 0.06);
 }
 
 section.mcp-features .feature-icon img {
-  max-width: 68%;
-  max-height: 68%;
+  max-width: 62%;
+  max-height: 62%;
   box-shadow: none;
   border-radius: 0;
 }
@@ -475,6 +530,30 @@ section.top-clients .icon-alert img {
   border-radius: 0;
   /* Red/orange color for alert icon */
   filter: invert(35%) sepia(89%) saturate(2270%) hue-rotate(343deg) brightness(96%) contrast(92%);
+}
+
+/* Legend styling */
+section.top-clients .legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.8rem;
+  padding: 0.5rem 0.6rem;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  justify-content: center;
+  align-items: center;
+}
+
+section.top-clients .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+section.top-clients .legend-item .legend-label {
+  color: #64748b;
+  font-weight: 500;
 }
 
 /* Legacy text-based icons (for backward compatibility) */

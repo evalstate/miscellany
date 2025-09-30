@@ -94,7 +94,7 @@ paginate: false
 
 ---
 
-# Simple Request/Response MCP Server
+# Simplest Streamable HTTP MCP Server
 
 
 <!-- Stateless JSON-RPC. All we can do is respond. Fine!
@@ -103,37 +103,46 @@ If you don't need state. MCP SDK can still do some of the lifting for you. -->
 <!-- when i was here last time, i said the great thing about MCP was it just worked -->
 <!-- we have lots of options for Streamable HTTP and not much time, so we'll build up -->
 
+### 
 
 <div class="columns">
 
 <div>
 
-### Examples - HuggingFace MCP Server with analytics OFF.
 
-### Simple `POST` Handler that returns the JSON-RPC Repsonse.
+### Set up an ordinary HTTP `POST` Handler that directly returns the JSON-RPC in the response.
 
-### Return a 405 from the `GET` handler.
+### If all you need is Tools, Prompts, Resources (and Completions) this is enough!
+
+###  `enableJSONResponse` can give 10-20% improvement in throughput and latency
 
 </div>
 
 <div align="center">
 
-![w:200](./images/diag_rpc_post.png)
+![w:500](./images/diag_rpc_post.png)
 
 
-> technically possible to run without the Initialize lifecycle events [we'll comeback to that later]
+```typescript
+new StreamableHTTPServerTransport(){
+    // Note: Not Default!
+    enableJSONResponse: true 
+}
+```
+
 
 </div>
 
 </div>
 
-<div class="bottom-image">
+<!-- <div class="bottom-image">
   <img src="./images/capabilities_stateless_1.png" alt="MCP Capabilities - Stateless" />
 </div>
+-->
 
 ---
 
-# Stateless HTTP MCP Server
+# Adding Tool Progress Notifications
 
 
 <!-- Stateless JSON-RPC. All we can do is respond. Fine!
@@ -145,89 +154,84 @@ If you don't need state. MCP SDK can still do some of the lifting for you. -->
 
 <div>
 
-## For Simple Tools `enableJSONResponse` gives 10-20% improvement in throughput and latency
 
+### Long running tools (like Image Generation) can send Progress Updates.
 
-</div>
+### Rather than responding directly, we respond with an SSE Event Stream.
 
-<div>
+### MCP Server should make sure Notifications are sent on the correct channel.
 
-
-
-```typescript
-
-new StreamableHTTPServerTransport(){
-    sessionIdGenerator: undefined,
-    // NB: Not Default
-    enableJSONResponse: true
-}
+```
+requestHandlerExtra etc.
 
 ```
 
 
 </div>
 
+<div>
+
+DIAGRAM OF NOTIFICATIONS HERE
+
+
 </div>
 
+</div>
+
+<!-- >
 <div class="bottom-image">
   <img src="./images/capabilities_stateless_1.png" alt="MCP Capabilities - Stateless" />
 </div>
+-->
 
 ---
 
-# Tool Progress Notifications
+# Server Request to Client - (Client Initiated)
 
 
 <div class="columns">
 
 <div>
 
-### Long Running Tools may wish to emit descriptive Progress Updates. 
+### MCP Servers can make Sampling and Elicitation requests __to__ the Client associated with a Tool Call.
 
-### The `POST` handler can decide to return an `event-stream` and send _related_ Notifications to the Host.
+### Server sends the Elicitation Request via the Post SSE response. 
 
-### Example: Gradio Tool Calls on Hugging Face
+### Result is POSTed back to the MCP Server using the Request ID for association - and returns a 202.
 
-</div>
-
-<div align="center">
-
-![w:400](./images/diag_sse_post.png)
+### Server then returns the Result via the Post SSE Channel.
 
 </div>
 
+<div>
+
+PICTURE OF AN ELICITATION TAKING PLACE
+
 </div>
 
-
-
-<div class="bottom-image">
-  <img src="./images/capabilities_stateless_with_progress_2.png" alt="MCP Capabilities - Stateless" />
 </div>
+
 
 ---
 
 
-# Sampling, Elicitations and Roots
+# Server Request to Client (Server Initiated)
 
 
+![w:800](./images/diag_full_setup.png)
 <div class="columns">
 
 <div>
 
+### To use Resource Subscriptions, List Change Notifications or Server-Initiated Sampling/Elicitation, we send the request over an HTTP GET SSE Stream the client opens after initialize.
 
-### We can use the `event-stream` to send a  _related_ Request to the Host.
 
-### Now the Host needs to send back the response via another `POST` request (and the server responds with a `202`). 
-### Example: Everything Server Elicitation
+
 
 </div>
 
 <div>
 
-### We need an associative JSON RequestId.
-
-### Final Result is returned on the SSE Stream.
-_Shaun to get his facts straight_
 
 
 ```typescript
@@ -242,11 +246,6 @@ _Shaun to get his facts straight_
 
 </div>
 
-
-
-<div class="bottom-image">
-  <img src="./images/capabilities_eclicitations_3.png" alt="MCP Capabilities - Stateless" />
-</div>
 
 ---
 
@@ -326,7 +325,7 @@ Server Ping tells you if the GET channel is open.
 - Maintaining the GET channel Open
 - Handling PING failures.
 - Python ALWAYS opens GET when used as a Server.
-
+- Silent failures in SDK on transmission failures
 
 - Jeff R. [Elicitation for agreeing to return PII]
 - Jsff R. [MS Teams] conversation to file defect, make sure template is filled out (select template to fill out defect template).
@@ -341,62 +340,80 @@ Server Ping tells you if the GET channel is open.
 
 
 
-# MCP Method Calls per 1,000,000 `intitalize`
-<!-- _class: dataset-makeup -->
+### MCP Method Call Ratios / Hugging Face MCP Server)
+<!-- _class: mcp-features -->
 
-<style scoped>
-  section.dataset-makeup table td:first-child {
-    font-weight: 700;
-    white-space: nowrap;
-  }
-  section.dataset-makeup table tr:hover {
-    background-color: var(--table-hover-background-color) !important;
-    color: var(--table-hover-color) !important;
-    font-weight: 700;
-  }
-</style>
+<div class="columns">
 
-_todo_ add august numbers for comparison.
-NB - This is Hugging Face Specific
+<div>
 
-| method | number |
-| --- | ---: |
-| `Actual Tool/Prompt Calls` | 31585 |
-| `initialize` | 1000000 |
-| `tools/list` | 1174585 |
-| `notifications/initialized` | 981514 |
-| `prompts/list` | 684883 |
-| `resources/list `|606454 |
-| `notifications/cancelled` | 150162 |
-| `ping` | 27129 |
-| `resources/templates/list` | 21795 |
+<table class="show-headers">
+<thead>
+<tr><th>MCP Method</th><th>Aug</th><th>Sep</th></tr>
+</thead>
+<tbody>
+<tr><td><code>initialize</code></td><td>1.000</td><td>1.000</td></tr>
+<tr><td><code>tools/list</code></td><td>0.400</td><td>1.175</td></tr>
+<tr><td><code>notifications/initialized</code></td><td>0.995</td><td>0.982</td></tr>
+<tr><td><code>prompts/list</code></td><td>1.081</td><td>0.685</td></tr>
+<tr class="warning-row"><td><code>resources/list</code></td><td>1.039</td><td>0.606</td></tr>
+<tr><td><code>notifications/cancelled</code></td><td>0.063</td><td>0.150</td></tr>
+<tr class="highlight-row"><td><code>Actual Tool/Prompt Calls</code></td><td>0.011</td><td>0.032</td></tr>
+<tr><td><code>ping</code></td><td>0.001</td><td>0.027</td></tr>
+<tr class="warning-row"><td><code>resources/templates/list</code></td><td>0.000</td><td>0.022</td></tr>
+</tbody>
+</table>
+
+</div>
+
+<div>
+
+### What This Shows
+
+Initialization sequence is usually at least 3 calls. 
+
+MCP has significant overhead. For September:
+ - We see __~3__ Tool/Prompt Calls per 100 Initialize events.
+ - and __~165__ MCP Method Calls for every Tool/Prompt Call. 
+ - compared to __547__ in August!
+
+
+The `resource` methods aren't supported, yet clients still request them.
+
+</div>
+
+</div>
 
 
 ---
 
 # Initialize != Usage
 
-## Two types of Clients
-
 <div class="columns">
 
 <div>
 
-## User Clients
+## Interactive Hosts (IDE/UI)
 
-### User installs MCP Server in Interactive Host.
-### Host 
-### Server may get called during session
+### Sessions may remain open for minutes/hours. 
+
+### Tool/Prompt Usage is User driven so idle sessions are normal.
+
+### VSCode has a high "efficiency ratio"
+
+### Examples are __claude-ai__, __windsurf-client__ and __mcp-inspector__.
 
 </div>
 
 <div>
 
-## Automations
+## Gateways / Embedded Hosts
 
-### MCP Server is used as part of an automation, or from a "Remote" Host - for example OpenAI Remote MCP.
+### MCP Server is used as part of an automation, from a "Remote" Host or a gateway. 
 
-### Burst of activity close
+### Burst of activity to Initialize and Call Tool that typically lasts under 5 seconds. 
+
+### Examples are __openai-mcp__, __docker-mcp-gateway__, and __javelin-mcp-client__.
 
 </div>
 
@@ -406,7 +423,7 @@ NB - This is Hugging Face Specific
 
 ---
 
-#### Client Top 20 and Features
+### Client Top 20 (by Usage) with Capabilities / Approx ~1.5m Sessions Sep '25
 
 <!-- _class: top-clients -->
 <!--
@@ -439,7 +456,7 @@ Usage Guide:
 </tr>
 <tr>
   <td>3</td><td>Visual Studio Code</td><td><div class="client-icons"><span class="capability-icon"><img src="./images/folders.svg" alt="R" /></span><span class="capability-icon"><img src="./images/cpu.svg" alt="S" /></span><span class="capability-icon"><img src="./images/message-circle-question-mark.svg" alt="E" /></span></div></td>
-  <td>13</td><td>openai-mcp</td><td><div class="client-icons"><span class="capability-icon disabled"><img src="./images/folders.svg" alt="R" /></span><span class="capability-icon disabled"><img src="./images/cpu.svg" alt="S" /></span><span class="capability-icon disabled"><img src="./images/message-circle-question-mark.svg" alt="E" /></span></div></td>
+  <td>13</td><td>openai-mcp</td><td><div class="client-icons"><span class="icon-delete"><img src="./images/trash-2.svg" alt="Delete" /></span><span class="capability-icon disabled"><img src="./images/folders.svg" alt="R" /></span><span class="capability-icon disabled"><img src="./images/cpu.svg" alt="S" /></span><span class="capability-icon disabled"><img src="./images/message-circle-question-mark.svg" alt="E" /></span></div></td>
 </tr>
 <tr>
   <td>4</td><td>test-client</td><td><div class="client-icons"><span class="icon-alert"><img src="./images/circle-alert.svg" alt="Alert" /></span><span class="capability-icon"><img src="./images/folders.svg" alt="R" /></span><span class="capability-icon"><img src="./images/cpu.svg" alt="S" /></span><span class="capability-icon disabled"><img src="./images/message-circle-question-mark.svg" alt="E" /></span></div></td>
@@ -472,8 +489,54 @@ Usage Guide:
 </tbody>
 </table>
 
+<div class="legend">
+  <div class="legend-item">
+    <span class="capability-icon"><img src="./images/folders.svg" alt="R" /></span>
+    <span class="legend-label">Roots</span>
+  </div>
+  <div class="legend-item">
+    <span class="capability-icon"><img src="./images/cpu.svg" alt="S" /></span>
+    <span class="legend-label">Sampling</span>
+  </div>
+  <div class="legend-item">
+    <span class="capability-icon"><img src="./images/message-circle-question-mark.svg" alt="E" /></span>
+    <span class="legend-label">Elicitation</span>
+  </div>
+  <div class="legend-item">
+    <span class="icon-delete"><img src="./images/trash-2.svg" alt="Delete" /></span>
+    <span class="legend-label">Session Deletion</span>
+  </div>
+  <div class="legend-item">
+    <span class="icon-alert"><img src="./images/circle-alert.svg" alt="Alert" /></span>
+    <span class="legend-label">Invalid Capabilities</span>
+  </div>
+</div>
+
 
 ---
+
+<!-- _class: mcp-features -->
+
+# MCP Client Primitives
+
+| Icon | Feature | Usage |
+| --- | --- | --- |
+| <span class="feature-icon"><img src="./images/folders.svg" alt="Roots" width="100%" /></span> | <span class="cell-title">Roots</span> | _7.1%_ of all sessions, _33.6%_ of sessions that use tools <br /> Not currently useful for Remote Servers |
+| <span class="feature-icon"><img src="./images/cpu.svg" width="100%" alt="Sampling" /></span> | <span class="cell-title">Sampling</span> | _0.9%_ of all sessions, _22.2%_ of sessions that use tools |
+| <span class="feature-icon"><img src="./images/message-circle-question-mark.svg" width="100%" alt="Elicitations" /></span> | <span class="cell-title">Elicitations</span> | _3.2%_ of all sessions, _21.6%_ of sessions that use tools |
+| <span class="feature-icon"><img src="./images/trash-2.svg" alt="Session Deletion" width="100%" /></span> | <span class="cell-title">Session Deletion</span> | 4 of the top 20 clients delete sessions, only _6.64%_ of sessions get deleted overall |
+
+
+---
+
+# Try it out!
+
+## Hugging Face MCP Server supports STDIO, and Stateful + Stateless Deployment Modes. One Click Deployment to a FreeCPU Space via Docker.
+
+
+
+---
+
 
 
 # Allocating a "GET" to each user
