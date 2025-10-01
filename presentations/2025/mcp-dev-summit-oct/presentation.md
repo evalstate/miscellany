@@ -102,7 +102,7 @@ paginate: false
 
 
 
-<div align="center">
+<div class="center">
 
 ![w:250](./images/hf_logo.svg)
 ![w:250](./images/mcp-icon.svg)
@@ -147,7 +147,7 @@ If you don't need state. MCP SDK can still do some of the lifting for you. -->
 
 </div>
 
-<div align="center">
+<div class="center">
 
 ![w:500](./images/diag_rpc_post.png)
 
@@ -267,14 +267,13 @@ await session.send_progress_notification(
 ### To use Resource Subscriptions, List Change Notifications or Server-Initiated Sampling/Elicitation, we send the request over an HTTP GET SSE Stream the client opens after initialize.
 
 
-<div align="center"> 
+<center> 
 
 ![w:800](./images/diag_full_setup.png)
 
-</div>
-
+</center>
+>
 ---
-
 
 
 # Ping!
@@ -302,6 +301,21 @@ The Server can __Ping__ the Host via the `GET` Channel if open.
 
 ---
 
+<!-- _class: mcp-features -->
+
+### _REFERENCE: Capabilities Matrix_
+
+| | |
+| --- | --- |
+| __POST/JSON__ | ![](./images/capabilities_stateless_1.png) |
+| __POST/SSE__ | ![](./images/capabilities_stateless_with_progress_2.png) |
+| __POST/SSE__<br />__+Response__ | ![](./images/capabilities_eclicitations_3.png) |
+| __POST/SSE__<br />__GET/SSE__<br />__+Response__ | ![](./images/capabilities_everything_4.png) |
+
+<center>
+https://huggingface.co/evalstate https://github.com/evalstate
+</center>
+---
 
 # `Mcp-Session-Id` for State? 
 
@@ -336,11 +350,8 @@ The Server can __Ping__ the Host via the `GET` Channel if open.
 
 <div>
 
-<div class="emphasis-box">
-
 ### With Multiple MCP Server instances, the Response needs to go the correct Server.
 
-</div>
 
 ### `Mcp-Session-Id` HTTP Header can be used for Routing to the initiating MCP Server (sticky sessions).
 
@@ -393,7 +404,6 @@ The Server can __Ping__ the Host via the `GET` Channel if open.
 
 <div>
 
-### What This Shows
 
 Initialization sequence is usually at least 3 calls. 
 
@@ -402,9 +412,9 @@ MCP has significant overhead. For September:
  - and __~165__ MCP Method Calls for every Tool/Prompt Call. 
  - compared to __547__ in August!
 
-
 The `resource` methods aren't supported, yet clients still request them.
 
+JSON-RPC content stops standard HTTP Cache mechanisms.
 </div>
 
 </div>
@@ -556,18 +566,22 @@ Usage Guide:
 
 # Thoughts and Guidance
 
-- #### Hugging Face MCP Server supports STDIO, and Stateful + Stateless Deployment Modes. One Click Deployment to a FreeCPU Space via Docker. Link from `huggingface.co/mcp`
+- #### _Try it out:_ Hugging Face MCP Server supports all deployment modes. One Click Deployment to a FreeCPU Space via Docker. Link from `huggingface.co/mcp`
+
+- #### SDK DevEx differs between Transports and Capability usage - consider deployment options carefully and _be intentional_. Don't forget to Use `extra`/`related-request-id`  and configure `JSON-RPC` mode. `fast-agent` can help with diagnosis and debugging.
 
 - #### `mcp-remote` used to be the most popular Client... Streamable HTTP Support in Hosts has picked up. Also means people are actively managing config?
-
-- #### SDK DevEx differs between Transports and Capability usage - cosider deployment options carefully. Don't forget to Use `extra`/`related-request-id`  and configure `JSON-RPC` mode. `fast-agent` can help with diagnosis and debugging.
 
 - #### Consider whether Server -> Client features are necessary for your use-case - especially in an uncontrolled environment. If they are, ![h:50](./images/ultrathink.gif) harder!
 
 - #### Don't rely on Clients managing sessions - for now consider what you want to use `Mcp-Session-Id` for.
 
+---
+
+- Opening and maintaining a GET connection for notifications and For Clients that idle 
 
 ---
+
 
 
 # Transport WG / Relevant SEPs
@@ -587,6 +601,5 @@ Usage Guide:
 
 <!-- _class: transition -->
 
-The end
+### https://github.com/evalstate
 
----
