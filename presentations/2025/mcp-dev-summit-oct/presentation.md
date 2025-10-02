@@ -2,6 +2,7 @@
 marp: true
 theme: freud
 paginate: false
+header: '<span class="header-logos"><img src="./images/hf_logo.svg"   /><img src="./images/github-mark.svg" />github.com/evalstate</span>'
 ---
 
 
@@ -123,7 +124,7 @@ paginate: false
 
 ---
 
-# Simplest Streamable HTTP MCP Server
+# Request/Response Streamable HTTP MCP Server
 
 
 <!-- Stateless JSON-RPC. All we can do is respond. Fine!
@@ -138,19 +139,22 @@ If you don't need state. MCP SDK can still do some of the lifting for you. -->
 
 <div>
 
+### If all you need are __Tools__, __Prompts__, __Resources__ (and __Completions__) this is enough!
 
-### Set up an ordinary HTTP `POST` Handler that directly returns the JSON-RPC in the response.
+### Client `POST`'s its Request to the MCP Server - which returns a JSON-RPC response.
 
-### If all you need is Tools, Prompts, Resources (and Completions) this is enough!
+### Normal HTTP!
 
-###  `enableJSONResponse` can give 10-20% improvement in throughput and latency
 
 </div>
 
-<div class="center">
+<div class="no-shadow">
+
+<center>
 
 ![w:500](./images/diag_rpc_post.png)
 
+</center>
 
 ```typescript
 new StreamableHTTPServerTransport(){
@@ -173,30 +177,31 @@ new StreamableHTTPServerTransport(){
 
 # Adding Tool Progress Notifications
 
-
-<!-- Stateless JSON-RPC. All we can do is respond. Fine!
-
-If you don't need state. MCP SDK can still do some of the lifting for you. -->
-
-
 <div class="columns">
 
 <div>
 
+### Longer running Tools (like Image Generation) can send __Progress Notifications__.
 
-### Long running tools (like Image Generation) can send Progress Updates.
+### MCP Server responds to the `POST` Request with an `SSE` Stream.
 
-### Rather than responding directly, we respond with an SSE Event Stream.
+### Server Streams notifications to Client, then the Response, and closes.
 
-### MCP Server developer should make sure Notifications are sent on the correct channel.
+<div class="emphasis-box">
 
+MCP Server developer should make sure Notifications are sent on the correct channel.
 
 </div>
 
-<div>
+</div>
 
-![](./images/diag_notifications.png)
+<div class="no-shadow">
 
+<center>
+
+![w:500](./images/diag_notifications.png)
+
+</center>
 
 ```typescript
 async (request, extra) => {
@@ -229,30 +234,31 @@ await session.send_progress_notification(
 
 ---
 
-# Server Request to Client - (Client Initiated)
+# Server Elicitation Request related to Tool Call
 
 
 <div class="columns">
 
 <div>
 
-### MCP Servers can make Sampling and Elicitation requests __to__ the Client associated with a Tool Call.
+### MCP can be _bi-directional_: Servers can make Sampling and Elicitation requests _to_ the Client.
 
-### Eliciation Request from Server delivered via the Post SSE response stream. 
+### Server sends its Elicitation Request via the Tool's Response SSE stream. 
 
-### Elicitation Result is POSTed returned with a __new__ POST using the Request ID for association - and returns a 202.
+### Elicitation Result is POSTed to the MCP Server with it's `Request-ID` for association - and returns a 202.
 
 ### Server then returns the Tool Result via the original Post SSE stream.
 
 </div>
 
-<div>
+<div class="no-shadow">
 
 ![](./images/diag_request.png)
 
 
-### Note that the Elicitation Request __must complete__ before the SSE Connection times out!
+### Note that the Elicitation Request __should complete__ before the SSE Connection times out!
 
+> This applies to any associated Request / Response method, but Tool and Elicitation chosen to keep example simple.
 
 </div>
 
@@ -264,40 +270,48 @@ await session.send_progress_notification(
 
 # Server Request to Client (Server Initiated)
 
-### To use Resource Subscriptions, List Change Notifications or Server-Initiated Sampling/Elicitation, we send the request over an HTTP GET SSE Stream the client opens after initialize.
-
+Server Initiated communications happen over a `GET SSE` Stream. This includes __Resource Subscriptions__,__List Change Notifications__ or Server-Initiated __Sampling/Elicitation__.
 
 <center> 
 
-![w:800](./images/diag_full_setup.png)
+<div class="no-shadow">
+
+![w:850](./images/diag_full_setup.png)
+
+</div>
 
 </center>
->
+
 ---
 
 
 # Ping!
 
-The Host can `POST` a Ping to the Server to tell it's alive.
 
 <div class="columns">
 
-<div>
-
-![w:400](./images/ping.png)
-
-</div>
 
 <div>
+
+The Host can `POST` a Ping to the Server to tell it's alive.
+The Server can __Ping__ the Host via the `GET SSE` Channel (if open). 
 
 ![w:500](./images/fa_ping.png)
 
+</div>
+
+<div>
+
+<center>
+
+![w:450](./images/ping.png)
+
+</center>
 
 </div>
 
 </div>
 
-The Server can __Ping__ the Host via the `GET` Channel if open. 
 
 ---
 
@@ -312,29 +326,87 @@ The Server can __Ping__ the Host via the `GET` Channel if open.
 | __POST/SSE__<br />__+Response__ | ![](./images/capabilities_eclicitations_3.png) |
 | __POST/SSE__<br />__GET/SSE__<br />__+Response__ | ![](./images/capabilities_everything_4.png) |
 
-<center>
-https://huggingface.co/evalstate https://github.com/evalstate
-</center>
 ---
 
-# `Mcp-Session-Id` for State? 
+# Using `Mcp-Session-Id`
 
 <div class="emphasis-box">
 
-### An MCP "session" consists of logically related interactions between a client and a server, beginning with the initialization phase.
+#### An MCP "session" consists of logically related interactions between a client and a server, beginning with the initialization phase.
 
 </div>
 
-## Sessions are controlled by the MCP Server, not the Host - and are tightly coupled to the Streamable HTTP Transport.
+### Sessions are controlled by the MCP Server, not the Host - and are embedded within the Streamable HTTP Transport.
 
-## 
-## Typically OAuth used for Identity, Mcp-Session-Id used for correlation .
+### Knowledge about the User is usually handled with OAuth Identity or API key (e.g. ZeroGPU Quota, Selected Spaces).
 
-## Causes the "Conversational Context" problem.
+---
 
-## VSCode uses a new Connection per Conversation Thread (find discord image)
+# `Mcp-Session-Id` for Conversational State?
 
-## Spec just says "Related Messages"
+<div class="columns">
+
+<div>
+
+#### The `Mcp-Session-Id` is `NOT` a Chat ID.
+
+> VSCode uses one Transport Session per Chat
+
+</div>
+
+<div>
+
+### Desirable or undesirable this behaviour should be _intentional_.
+
+</div>
+
+</div>
+
+<!-- ![w:300](./images/session_per_chat.png) -->
+<!-- _class: conversational-state -->
+
+<table class="state-table show-headers">
+<thead>
+<tr>
+  <th>Server State</th>
+  <th>Chat 1: "Production Issue"</th>
+  <th>Chat 2: "Testing Cleanup"</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td><code>DB: staging</code></td>
+  <td></td>
+  <td>"Show me the test data"</td>
+</tr>
+<tr>
+  <td><code>DB: staging</code></td>
+  <td>"I need to check production"</td>
+  <td></td>
+</tr>
+<tr>
+  <td><code>DB: staging</code></td>
+  <td>"Switch to production database"</td>
+  <td></td>
+</tr>
+<tr class="state-change-row">
+  <td><code>DB: production</code></td>
+  <td>"What are the recent orders?"</td>
+  <td></td>
+</tr>
+<tr class="danger-row">
+  <td><code>DB: production</code></td>
+  <td></td>
+  <td>"Delete those old records"</td>
+</tr>
+<tr class="danger-row">
+  <td><code>DB: production</code></td>
+  <td></td>
+  <td><strong>💥 Deletes production data!</strong></td>
+</tr>
+</tbody>
+</table>
+
 
 ---
 
@@ -342,7 +414,7 @@ https://huggingface.co/evalstate https://github.com/evalstate
 
 <div class="columns">
 
-<div>
+<div class="no-shadow">
 
 ![alt text](./images/deploy_pain_1.png)
 
@@ -350,12 +422,11 @@ https://huggingface.co/evalstate https://github.com/evalstate
 
 <div>
 
-### With Multiple MCP Server instances, the Response needs to go the correct Server.
+### With Multiple MCP Server instances, _Client to Server Responses_ needs to go the correct Server.
 
+### `Mcp-Session-Id` HTTP Header can be used for Routing to the correct Server (sticky sessions).
 
-### `Mcp-Session-Id` HTTP Header can be used for Routing to the initiating MCP Server (sticky sessions).
-
-### Sharing `Mcp-Session-Id` state amongst the cluster is not enough - Both `Mcp-Session-Id` and JSON-RPC `RequestId` are needed for correlation.
+### Sharing `Mcp-Session-Id` state amongst the cluster is not enough: Both `Mcp-Session-Id` and Elicitation `RequestId` are needed for correlation.
 
 </div>
 
@@ -578,7 +649,12 @@ Usage Guide:
 
 ---
 
-- Opening and maintaining a GET connection for notifications and For Clients that idle 
+# Some pain points
+
+- ### `GET` Handler: For Interactive Hosts it's expensive (especially for speculative Tool Change Notifications). For Transactional Hosts it's unnecessary. Can be used for SSE Failure resumption - hard in practice. Management in elastic environments tricky.
+- ### MCP Protocol Overhead - JSON-RPC Packaging requires inspection for Processing and Return - prohibiting standard HTTP Caching. Protocol is "Chatty" in practice.
+- ### Sessions are coupled to the Transport implementation and State. Deploying in a Cluster means Sticky Sessions. Server Initiated Requests must be identified by both  `Mcp-Session-Id + JSON-RPC-RequestId`
+- ### Timeout Handling - Progress Notifications resetting HTTP timeouts for example is not consistent Client behaviour.
 
 ---
 
@@ -586,13 +662,9 @@ Usage Guide:
 
 # Transport WG / Relevant SEPs
 
-- ## Make Initialize Step Optional (Spec Change)
-
-- ## Elevate Sessions #1364 - Host controlled Sessions, SessionId to the Data, not Transport layer.
-
-- ## Delaminate JSON-RPC layer from Protocol.
-
-- ## SEP #1442 - Make MCP Stateless by Default.
+- ## Handle inconsistencies between transports
+- ## Separate JSON-RPC layer from Protocol Data Layer.
+- ## SEP #1442 - Make MCP Stateless by Default: Move State captured in Initialize to Request/Response cycle.
 
 - ## Pure HTTP Transport - `https://github.com/mikekistler/pure-http-transport`
 
@@ -601,5 +673,16 @@ Usage Guide:
 
 <!-- _class: transition -->
 
-### https://github.com/evalstate
+### _Thanks to the Transport Working Group_
 
+
+<!-- _class: biblio -->
+
+![bg left:33% opacity:20% blur:8px](https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)
+
+1. Everything Server PR 1: 
+1. Everything Server PR 2:
+1. Hugging Face MCP Server: 
+1. MCP community Working Groups https://modelcontextprotocol-community.github.io/working-groups/
+
+---

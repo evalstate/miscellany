@@ -377,10 +377,10 @@ section.mcp-features .examples {
 /* Emphasis box for important quotes/callouts */
 .emphasis-box {
   background-color: #fef3c7;
-  padding: 0.75rem;
+  padding: 0.5rem;
   border-left: 4px solid #f59e0b;
   border-radius: 2px;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .social-table tr:nth-child(odd),
@@ -628,4 +628,175 @@ section.top-clients .client-icon.icon-delete {
 section.top-clients .client-icon.icon-capability {
   background-color: #3b82f6;
   color: white;
+}
+
+/* Header logos using Marp's header feature */
+section header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  height: 28px;
+  z-index: 1000;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Hide header on titlepage and transition slides */
+section.titlepage header,
+section.transition header {
+  display: none;
+}
+
+.header-logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logos img {
+  height: 28px;
+  width: auto;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  object-fit: contain;
+}
+
+/* Make HF logo slightly larger to match GitHub visually */
+.header-logos img[src*="hf_logo"] {
+  height: 32px;
+}
+
+/* Global image shadow control */
+/* Turn off all shadows by default - uncomment the rule below */
+/* section img {
+  box-shadow: none !important;
+} */
+
+/* Or use classes for fine control */
+.no-shadow img,
+img.no-shadow {
+  box-shadow: none !important;
+}
+
+.shadow img,
+img.shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Conversational state problem table - compact like top-20 clients */
+section.conversational-state .state-table {
+  width: 100%;
+  margin-top: 0.6rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+section.conversational-state .state-table thead {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+section.conversational-state .state-table.show-headers thead {
+  display: table-header-group;
+}
+
+section.conversational-state .state-table thead th {
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #1f2937;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+section.conversational-state .state-table thead th:first-child {
+  text-align: center;
+  font-weight: 700;
+  background-color: rgba(59, 130, 246, 0.08);
+  color: #1e40af;
+}
+
+section.conversational-state .state-table tbody td {
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.3;
+}
+
+section.conversational-state .state-table tbody td:first-child {
+  font-weight: 700;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #1f2937;
+  font-family: 'Fira Code', monospace;
+}
+
+section.conversational-state .state-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+section.conversational-state .state-table tr:nth-child(even),
+section.conversational-state .state-table tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+section.conversational-state .state-table tr:hover td {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+}
+
+section.conversational-state .state-table tr:hover td:first-child {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+/* State change row - yellow/warning */
+section.conversational-state .state-table tr.state-change-row td:first-child {
+  background-color: rgba(251, 191, 36, 0.2);
+  color: #92400e;
+}
+
+section.conversational-state .state-table tr.state-change-row td {
+  background-color: rgba(251, 191, 36, 0.08);
+}
+
+/* Danger row - red */
+section.conversational-state .state-table tr.danger-row td:first-child {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #991b1b;
+}
+
+section.conversational-state .state-table tr.danger-row td {
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+/* Reusable corner logo divs for bottom corners (if needed) */
+.corner-logo {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #333;
+  z-index: 1000;
+}
+
+.corner-logo img {
+  height: 24px;
+  width: auto;
+}
+
+.corner-logo-bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.corner-logo-bottom-right {
+  bottom: 20px;
+  right: 20px;
 }
