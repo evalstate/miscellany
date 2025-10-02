@@ -447,7 +447,7 @@ The Server can __Ping__ the Host via the `GET SSE` Channel (if open).
 
 ---
 
-### MCP Method Call Ratios / Hugging Face MCP Server)
+### Tool Call : MCP Method Ratio (Hugging Face MCP Server)
 <!-- _class: mcp-features -->
 
 <div class="columns">
@@ -680,9 +680,9 @@ Usage Guide:
 
 ![bg left:33% opacity:20% blur:8px](https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)
 
-1. Everything Server PR 1: 
-1. Everything Server PR 2:
-1. Hugging Face MCP Server: 
+1. Everything Server PR 1: https://github.com/modelcontextprotocol/servers/pull/2789
+1. Everything Server PR 2: https://github.com/modelcontextprotocol/servers/pull/2672
+1. Hugging Face MCP Server: https://huggingface.co/mcp
 1. MCP community Working Groups https://modelcontextprotocol-community.github.io/working-groups/
 
 ---
