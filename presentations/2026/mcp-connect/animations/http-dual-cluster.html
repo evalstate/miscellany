@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #fafafa;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 20px 10px;
+    }
+
+    .diagram {
+      position: relative;
+      width: 1000px;
+      height: 280px;
+    }
+
+    .entity {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* User */
+    .user { left: 0; top: 90px; }
+    .user .entity-box {
+      width: 80px;
+      height: 60px;
+      border-radius: 30px;
+      background: #f3e5f5;
+      border: 3px solid #7b1fa2;
+      color: #7b1fa2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.4s ease;
+    }
+    .user .entity-box.active {
+      background: #e1bee7;
+      box-shadow: 0 4px 15px rgba(123, 31, 162, 0.3);
+    }
+
+    /* Load Balancers */
+    .lb { top: 95px; }
+    .lb-1 { left: 130px; }
+    .lb-2 { left: 560px; }
+    .lb .entity-box {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(180deg, #fafafa 0%, #e0e0e0 100%);
+      border: 2px solid #9e9e9e;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #616161;
+      font-weight: 600;
+      font-size: 11px;
+    }
+
+    /* Cluster bounding boxes */
+    .cluster {
+      position: absolute;
+      border-radius: 16px;
+      top: 0;
+      height: 280px;
+    }
+
+    .client-cluster {
+      left: 200px;
+      width: 340px;
+      border: 3px solid #1976d2;
+      background: rgba(227, 242, 253, 0.3);
+    }
+
+    .server-cluster {
+      left: 640px;
+      width: 360px;
+      border: 3px solid #ef6c00;
+      background: rgba(255, 243, 224, 0.3);
+    }
+
+    .cluster-label {
+      position: absolute;
+      top: -12px;
+      left: 16px;
+      background: #fafafa;
+      padding: 2px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .client-cluster .cluster-label { color: #1976d2; }
+    .server-cluster .cluster-label { color: #ef6c00; }
+
+    /* Client nodes */
+    .client {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      left: 220px;
+    }
+    .client-1 { top: 15px; }
+    .client-2 { top: 110px; }
+    .client-3 { top: 205px; }
+
+    .client .entity-box {
+      width: 80px;
+      height: 45px;
+      border-radius: 10px;
+      background: #f5f5f5;
+      border: 2px solid #90caf9;
+      color: #64b5f6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 11px;
+      transition: all 0.4s ease;
+    }
+
+    .client .entity-box.alive {
+      background: #e3f2fd;
+      border-color: #1976d2;
+      color: #1976d2;
+    }
+
+    .client .entity-box.active {
+      background: #bbdefb;
+      border-color: #1976d2;
+      color: #1976d2;
+      box-shadow: 0 3px 15px rgba(25, 118, 210, 0.3);
+    }
+
+    .client .entity-box.error {
+      background: #ffebee;
+      border-color: #c62828;
+      color: #c62828;
+      animation: shake 0.4s ease;
+    }
+
+    /* Server nodes */
+    .server {
+      flex-direction: row;
+      align-items: center;
+      gap: 8px;
+      left: 660px;
+    }
+    .server-1 { top: 15px; }
+    .server-2 { top: 110px; }
+    .server-3 { top: 205px; }
+
+    .server .entity-box {
+      width: 80px;
+      height: 45px;
+      border-radius: 10px;
+      background: #f5f5f5;
+      border: 2px solid #ffcc80;
+      color: #ffa726;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 11px;
+      transition: all 0.4s ease;
+    }
+
+    .server .entity-box.alive {
+      background: #fff3e0;
+      border-color: #ef6c00;
+      color: #ef6c00;
+    }
+
+    .server .entity-box.active {
+      background: #ffe0b2;
+      border-color: #ef6c00;
+      color: #ef6c00;
+      box-shadow: 0 3px 15px rgba(239, 108, 0, 0.3);
+    }
+
+    .server .entity-box.error {
+      background: #ffebee;
+      border-color: #c62828;
+      color: #c62828;
+      animation: shake 0.4s ease;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-4px); }
+      75% { transform: translateX(4px); }
+    }
+
+    /* State badges */
+    .state-badge {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 5px 8px;
+      border-radius: 6px;
+      font-size: 8px;
+      opacity: 0;
+      transition: all 0.3s ease;
+      min-width: 95px;
+    }
+
+    .state-badge.visible { opacity: 1; }
+
+    .client .state-badge {
+      background: #e3f2fd;
+      border: 1px solid #90caf9;
+      color: #1565c0;
+    }
+    .client .state-badge.empty {
+      background: #f5f5f5;
+      border-color: #e0e0e0;
+      color: #9e9e9e;
+    }
+    .client .state-badge.error {
+      background: #ffebee;
+      border-color: #ef9a9a;
+      color: #c62828;
+    }
+
+    .server .state-badge {
+      background: #fff3e0;
+      border: 1px solid #ffcc80;
+      color: #e65100;
+    }
+    .server .state-badge.empty {
+      background: #f5f5f5;
+      border-color: #e0e0e0;
+      color: #9e9e9e;
+    }
+    .server .state-badge.error {
+      background: #ffebee;
+      border-color: #ef9a9a;
+      color: #c62828;
+    }
+
+    .state-badge .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .state-badge .badge-label {
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      font-size: 7px;
+      color: #888;
+    }
+
+    .state-badge .badge-value {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 8px;
+    }
+
+    /* Connection lines */
+    .connection {
+      position: absolute;
+      height: 2px;
+      background: #ccc;
+      top: 120px;
+    }
+    .conn-user-lb1 { left: 85px; width: 45px; }
+    .conn-lb1-clients { left: 185px; width: 15px; }
+    .conn-clients-lb2 { left: 540px; width: 20px; }
+    .conn-lb2-servers { left: 615px; width: 25px; }
+
+    /* Moving message */
+    .message {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 100;
+      transform: translateX(-50%);
+    }
+
+    .message.visible { opacity: 1; }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .message-arrow {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .message-type {
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 9px;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
+    .message-session {
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 7px;
+      font-family: 'SF Mono', Monaco, monospace;
+    }
+
+    .message.user-request .message-arrow { color: #7b1fa2; }
+    .message.user-request .message-type { background: #7b1fa2; color: white; }
+    .message.user-request .message-session { background: #f3e5f5; color: #7b1fa2; border: 1px solid #ce93d8; }
+
+    .message.client-request .message-arrow { color: #1976d2; }
+    .message.client-request .message-type { background: #1976d2; color: white; }
+    .message.client-request .message-session { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+
+    .message.server-response .message-arrow { color: #ef6c00; }
+    .message.server-response .message-type { background: #ef6c00; color: white; }
+    .message.server-response .message-session { background: #fff3e0; color: #e65100; border: 1px solid #ffcc80; }
+
+    .message.client-response .message-arrow { color: #1976d2; }
+    .message.client-response .message-type { background: #1976d2; color: white; }
+    .message.client-response .message-session { background: #e3f2fd; color: #1565c0; border: 1px solid #90caf9; }
+
+    .message.error-response .message-arrow { color: #c62828; }
+    .message.error-response .message-type { background: #c62828; color: white; }
+    .message.error-response .message-session { background: #ffebee; color: #c62828; border: 1px solid #ef9a9a; }
+
+    /* Narration */
+    .narration {
+      margin-top: 20px;
+      padding: 12px 20px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #333;
+      max-width: 800px;
+      text-align: center;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .narration .step-num {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: #9e9e9e;
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 24px;
+      text-align: center;
+      margin-right: 10px;
+      flex-shrink: 0;
+    }
+
+    .narration.user-state .step-num { background: #7b1fa2; }
+    .narration.client-state .step-num { background: #1976d2; }
+    .narration.server-state .step-num { background: #ef6c00; }
+    .narration.error-state .step-num { background: #c62828; }
+    .narration.error-state { border-color: #ef9a9a; background: #fff8f8; }
+    .narration.success-state .step-num { background: #4caf50; }
+  </style>
+</head>
+<body>
+  <div class="diagram">
+    <!-- User -->
+    <div class="entity user">
+      <div class="entity-box" id="user-box">User</div>
+    </div>
+
+    <!-- LB 1 -->
+    <div class="entity lb lb-1">
+      <div class="entity-box">LB</div>
+    </div>
+
+    <!-- Client Cluster -->
+    <div class="cluster client-cluster">
+      <div class="cluster-label">MCP Clients</div>
+    </div>
+
+    <!-- Client Nodes -->
+    <div class="entity client client-1">
+      <div class="entity-box" id="client-1-box">Client 1</div>
+      <div class="state-badge visible empty" id="client-1-state">
+        <div class="badge-row"><span class="badge-label">user:</span><span class="badge-value" id="client-1-user">—</span></div>
+        <div class="badge-row"><span class="badge-label">server:</span><span class="badge-value" id="client-1-server">—</span></div>
+      </div>
+    </div>
+    <div class="entity client client-2">
+      <div class="entity-box" id="client-2-box">Client 2</div>
+      <div class="state-badge visible empty" id="client-2-state">
+        <div class="badge-row"><span class="badge-label">user:</span><span class="badge-value">—</span></div>
+        <div class="badge-row"><span class="badge-label">server:</span><span class="badge-value">—</span></div>
+      </div>
+    </div>
+    <div class="entity client client-3">
+      <div class="entity-box" id="client-3-box">Client 3</div>
+      <div class="state-badge visible empty" id="client-3-state">
+        <div class="badge-row"><span class="badge-label">user:</span><span class="badge-value" id="client-3-user">—</span></div>
+        <div class="badge-row"><span class="badge-label">server:</span><span class="badge-value" id="client-3-server">—</span></div>
+      </div>
+    </div>
+
+    <!-- LB 2 -->
+    <div class="entity lb lb-2">
+      <div class="entity-box">LB</div>
+    </div>
+
+    <!-- Server Cluster -->
+    <div class="cluster server-cluster">
+      <div class="cluster-label">MCP Servers</div>
+    </div>
+
+    <!-- Server Nodes -->
+    <div class="entity server server-1">
+      <div class="entity-box" id="server-1-box">Server 1</div>
+      <div class="state-badge visible empty" id="server-1-state">
+        <div class="badge-row"><span class="badge-label">session:</span><span class="badge-value" id="server-1-session">—</span></div>
+        <div class="badge-row"><span class="badge-label">caps:</span><span class="badge-value" id="server-1-caps">—</span></div>
+      </div>
+    </div>
+    <div class="entity server server-2">
+      <div class="entity-box" id="server-2-box">Server 2</div>
+      <div class="state-badge visible empty" id="server-2-state">
+        <div class="badge-row"><span class="badge-label">session:</span><span class="badge-value">—</span></div>
+        <div class="badge-row"><span class="badge-label">caps:</span><span class="badge-value">—</span></div>
+      </div>
+    </div>
+    <div class="entity server server-3">
+      <div class="entity-box" id="server-3-box">Server 3</div>
+      <div class="state-badge visible empty" id="server-3-state">
+        <div class="badge-row"><span class="badge-label">session:</span><span class="badge-value" id="server-3-session">—</span></div>
+        <div class="badge-row"><span class="badge-label">caps:</span><span class="badge-value" id="server-3-caps">—</span></div>
+      </div>
+    </div>
+
+    <!-- Connections -->
+    <div class="connection conn-user-lb1"></div>
+    <div class="connection conn-lb1-clients"></div>
+    <div class="connection conn-clients-lb2"></div>
+    <div class="connection conn-lb2-servers"></div>
+
+    <!-- Message -->
+    <div class="message" id="message">
+      <div class="message-header">
+        <span class="message-type" id="message-type">request</span>
+        <span class="message-arrow" id="message-arrow">→</span>
+      </div>
+      <div class="message-session" id="message-session">session_123</div>
+    </div>
+  </div>
+
+  <div class="narration" id="narration">
+    <span class="step-num" id="step-num">○</span>
+    <span id="narration-text">Dual-cluster deployment...</span>
+  </div>
+
+  <script>
+    const message = document.getElementById('message');
+    const messageType = document.getElementById('message-type');
+    const messageArrow = document.getElementById('message-arrow');
+    const messageSession = document.getElementById('message-session');
+    const narration = document.getElementById('narration');
+    const narrationText = document.getElementById('narration-text');
+    const stepNum = document.getElementById('step-num');
+
+    const userBox = document.getElementById('user-box');
+    const client1Box = document.getElementById('client-1-box');
+    const client2Box = document.getElementById('client-2-box');
+    const client3Box = document.getElementById('client-3-box');
+    const server1Box = document.getElementById('server-1-box');
+    const server2Box = document.getElementById('server-2-box');
+    const server3Box = document.getElementById('server-3-box');
+
+    const client1State = document.getElementById('client-1-state');
+    const client1User = document.getElementById('client-1-user');
+    const client1Server = document.getElementById('client-1-server');
+    const client3State = document.getElementById('client-3-state');
+    const client3User = document.getElementById('client-3-user');
+
+    const server1State = document.getElementById('server-1-state');
+    const server1Session = document.getElementById('server-1-session');
+    const server1Caps = document.getElementById('server-1-caps');
+    const server3State = document.getElementById('server-3-state');
+    const server3Session = document.getElementById('server-3-session');
+
+    // Positions
+    const pos = {
+      user: 40,
+      lb1: 155,
+      client1: 260, client2: 260, client3: 260,
+      lb2: 585,
+      server1: 700, server2: 700, server3: 700
+    };
+    const yUser = 105;
+    const yRow1 = 25, yRow2 = 120, yRow3 = 215;
+
+    function setPos(x, y) {
+      message.style.left = x + 'px';
+      message.style.top = y + 'px';
+    }
+
+    function animate(fromX, fromY, toX, toY, dur, cb) {
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / dur, 1);
+        const e = 1 - Math.pow(1 - p, 3);
+        setPos(fromX + (toX - fromX) * e, fromY + (toY - fromY) * e);
+        if (p < 1) requestAnimationFrame(step);
+        else if (cb) cb();
+      }
+      requestAnimationFrame(step);
+    }
+
+    function path(pts, durs, cb) {
+      let i = 0;
+      function next() {
+        if (i < pts.length - 1) {
+          animate(pts[i].x, pts[i].y, pts[i+1].x, pts[i+1].y, durs[i], () => { i++; next(); });
+        } else if (cb) cb();
+      }
+      next();
+    }
+
+    function config(type, arrow, label, session, dir) {
+      message.className = `message ${type} visible`;
+      messageType.textContent = label;
+      messageArrow.textContent = arrow;
+      messageSession.textContent = session;
+      messageSession.style.display = session ? 'block' : 'none';
+      message.querySelector('.message-header').style.flexDirection = dir === 'left' ? 'row-reverse' : 'row';
+    }
+
+    function reset() {
+      message.className = 'message';
+      userBox.classList.remove('active');
+      [client1Box, client2Box, client3Box].forEach(b => b.className = 'entity-box');
+      [server1Box, server2Box, server3Box].forEach(b => b.className = 'entity-box');
+      client1State.className = 'state-badge visible empty';
+      client1User.textContent = '—';
+      client1Server.textContent = '—';
+      client3State.className = 'state-badge visible empty';
+      client3User.textContent = '—';
+      server1State.className = 'state-badge visible empty';
+      server1Session.textContent = '—';
+      server1Caps.textContent = '—';
+      server3State.className = 'state-badge visible empty';
+      server3Session.textContent = '—';
+    }
+
+    const steps = [
+      // 0: Initial
+      { setup: () => { reset(); stepNum.textContent = '○'; narrationText.textContent = 'User connects to MCP Client pool, which connects to MCP Server pool...'; narration.className = 'narration'; },
+        run: (done) => setTimeout(done, 2500), after: () => {} },
+
+      // 1: User → LB1 → Client1
+      { setup: () => { config('user-request', '→', 'connect', 'user_xyz', 'right'); setPos(pos.user, yUser); stepNum.textContent = '1'; narrationText.textContent = 'User connects to Client 1'; narration.className = 'narration user-state'; userBox.classList.add('active'); },
+        run: (done) => path([{x:pos.user,y:yUser},{x:pos.lb1,y:yUser},{x:pos.client1,y:yRow1}], [200,250], done),
+        after: () => { userBox.classList.remove('active'); client1Box.classList.add('alive','active'); } },
+
+      // 2: Client1 → LB2 → Server1 (init)
+      { setup: () => { config('client-request', '→', 'initialize', '', 'right'); setPos(pos.client1, yRow1); stepNum.textContent = '2'; narrationText.textContent = 'Client 1 initializes session with Server 1'; narration.className = 'narration client-state'; },
+        run: (done) => path([{x:pos.client1,y:yRow1},{x:pos.lb2,y:yUser},{x:pos.server1,y:yRow1}], [300,250], done),
+        after: () => { client1Box.classList.remove('active'); server1Box.classList.add('alive','active'); } },
+
+      // 3: Server1 → Client1 (session)
+      { setup: () => { config('server-response', '←', 'initialized', 'srv_sess_42', 'left'); setPos(pos.server1, yRow1); stepNum.textContent = '3'; narrationText.textContent = 'Server 1 creates session, returns Mcp-Session-Id'; narration.className = 'narration server-state'; 
+          server1State.className = 'state-badge visible'; server1Session.textContent = 'srv_sess_42'; server1Caps.textContent = 'sampling ✓'; },
+        run: (done) => path([{x:pos.server1,y:yRow1},{x:pos.lb2,y:yUser},{x:pos.client1,y:yRow1}], [250,300], done),
+        after: () => { server1Box.classList.remove('active'); client1Box.classList.add('active'); 
+          client1State.className = 'state-badge visible'; client1User.textContent = 'user_xyz'; client1Server.textContent = 'srv_sess_42'; } },
+
+      // 4: Client1 → User (ready)
+      { setup: () => { config('client-response', '←', 'ready', 'user_xyz', 'left'); setPos(pos.client1, yRow1); stepNum.textContent = '4'; narrationText.textContent = 'Client 1 ready — has User session + Server session'; narration.className = 'narration client-state'; },
+        run: (done) => path([{x:pos.client1,y:yRow1},{x:pos.lb1,y:yUser},{x:pos.user,y:yUser}], [250,200], done),
+        after: () => { client1Box.classList.remove('active'); } },
+
+      // 5: User → LB1 → Client3 (WRONG!)
+      { setup: () => { config('user-request', '→', 'tools/call', 'user_xyz', 'right'); setPos(pos.user, yUser); stepNum.textContent = '5'; narrationText.textContent = 'User sends request... LB routes to Client 3!'; narration.className = 'narration user-state'; userBox.classList.add('active'); },
+        run: (done) => path([{x:pos.user,y:yUser},{x:pos.lb1,y:yUser},{x:pos.client3,y:yRow3}], [200,300], done),
+        after: () => { userBox.classList.remove('active'); client3Box.classList.add('alive'); } },
+
+      // 6: Client3 error - no user session
+      { setup: () => { config('error-response', '←', '404 Not Found', 'user_xyz ?', 'left'); setPos(pos.client3, yRow3); stepNum.textContent = '✗'; narrationText.textContent = 'Client 3 has no session for user_xyz — fails at first hop!'; narration.className = 'narration error-state';
+          client3Box.classList.add('error'); client3State.className = 'state-badge visible error'; client3User.textContent = 'user_xyz ?'; },
+        run: (done) => path([{x:pos.client3,y:yRow3},{x:pos.lb1,y:yUser},{x:pos.user,y:yUser}], [300,200], done),
+        after: () => {} },
+
+      // 7: Summary
+      { setup: () => { message.className = 'message'; stepNum.textContent = '!'; narrationText.textContent = 'State required at BOTH tiers — two LBs, two routing problems'; narration.className = 'narration error-state'; },
+        run: (done) => setTimeout(done, 4000), after: () => reset() }
+    ];
+
+    let cur = 0;
+    function run() {
+      const s = steps[cur];
+      s.setup();
+      setTimeout(() => s.run(() => { s.after(); cur = (cur + 1) % steps.length; setTimeout(run, cur === 0 ? 1500 : 900); }), 350);
+    }
+    setTimeout(run, 500);
+  </script>
+</body>
+</html>

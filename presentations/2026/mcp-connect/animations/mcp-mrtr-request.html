@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100%;
+      font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+      padding: 10px;
+    }
+    
+    .api-window {
+      background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
+      border-radius: 16px;
+      padding: 16px;
+      width: 520px;
+      min-height: 460px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .api-header {
+      color: #888;
+      font-size: 11px;
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #333;
+    }
+
+    .request-label {
+      color: #569cd6;
+      font-size: 10px;
+      margin-bottom: 6px;
+      opacity: 0;
+    }
+    .request-label.show { animation: fadeIn 0.3s ease forwards; }
+    .request-label.fade-out { animation: fadeOut 0.8s ease forwards; }
+
+    .api-content {
+      font-size: 10px;
+      line-height: 1.45;
+    }
+
+    .json-brace { color: #d4d4d4; }
+    .json-key { color: #9cdcfe; }
+    .json-string { color: #ce9178; }
+    .json-bracket { color: #d4d4d4; }
+    .json-bool { color: #569cd6; }
+    
+    .msg-block {
+      opacity: 0;
+      transform: translateX(-10px);
+      margin: 2px 0;
+      padding: 3px 0 3px 8px;
+    }
+
+    .msg-block.show {
+      animation: slideInLeft 0.4s ease forwards;
+    }
+
+    .msg-block.fade-out {
+      animation: fadeOut 0.8s ease forwards;
+    }
+
+    .msg-block.client-req { border-left: 2px solid #0b93f6; }
+    .msg-block.server-req { border-left: 2px solid #f5a623; }
+    .msg-block.client-resp { border-left: 2px solid #34c759; }
+
+    .static-content {
+      opacity: 0;
+    }
+    .static-content.show { animation: fadeIn 0.3s ease forwards; }
+    .static-content.fade-out { animation: fadeOut 0.8s ease forwards; }
+
+    .request-group {
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px dashed #333;
+    }
+
+    .request-group:last-child {
+      border-bottom: none;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .dim { opacity: 0.5; }
+  </style>
+</head>
+<body>
+  <div class="api-window">
+    <div class="api-header">POST /mcp (Client → Server)</div>
+    <div class="api-content">
+      
+      <!-- Request 1: Initial CallToolRequest -->
+      <div class="request-group">
+        <div class="request-label" data-delay="0">Request #1</div>
+        <div class="msg-block client-req" data-delay="0">
+          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,
+          <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span>, <span class="json-key">"env"</span>: <span class="json-string">"production"</span> <span class="json-brace">}}</span>
+        </div>
+      </div>
+
+      <!-- Request 2: CallToolRequest + ElicitationRequest + ElicitationResponse -->
+      <div class="request-group">
+        <div class="request-label" data-delay="5000">Request #2 — includes prior context</div>
+        <div class="msg-block client-req dim" data-delay="5000">
+          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>, <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}}</span>
+        </div>
+        <div class="msg-block server-req dim" data-delay="5200">
+          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"elicitation/request"</span>, <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"message"</span>: <span class="json-string">"Confirm deploy?"</span> <span class="json-brace">}}</span>
+        </div>
+        <div class="msg-block client-resp" data-delay="5400">
+          <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"confirmed"</span>: <span class="json-bool">true</span> <span class="json-brace">}}</span>
+        </div>
+      </div>
+
+      <!-- Request 3: Everything + SamplingRequest + SamplingResponse -->
+      <div class="request-group">
+        <div class="request-label" data-delay="10000">Request #3 — full conversation</div>
+        <div class="msg-block client-req dim" data-delay="10000">
+          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>, <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}}</span>
+        </div>
+        <div class="msg-block server-req dim" data-delay="10100">
+          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"elicitation/request"</span>, ... <span class="json-brace">}</span>
+        </div>
+        <div class="msg-block client-resp dim" data-delay="10200">
+          <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"confirmed"</span>: <span class="json-bool">true</span> <span class="json-brace">}}</span>
+        </div>
+        <div class="msg-block server-req dim" data-delay="10300">
+          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"sampling/request"</span>, <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"prompt"</span>: <span class="json-string">"Generate summary"</span> <span class="json-brace">}}</span>
+        </div>
+        <div class="msg-block client-resp" data-delay="10500">
+          <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"content"</span>: <span class="json-string">"Deployed v2.1.0 to prod..."</span> <span class="json-brace">}}</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const blocks = document.querySelectorAll('.msg-block');
+    const labels = document.querySelectorAll('.request-label');
+    const CYCLE_PAUSE = 3000;
+    
+    function runAnimation() {
+      blocks.forEach(b => b.classList.remove('show', 'fade-out'));
+      labels.forEach(l => l.classList.remove('show', 'fade-out'));
+      
+      blocks.forEach((block) => {
+        const delay = parseInt(block.dataset.delay) || 0;
+        setTimeout(() => block.classList.add('show'), delay);
+      });
+
+      labels.forEach((label) => {
+        const delay = parseInt(label.dataset.delay) || 0;
+        setTimeout(() => label.classList.add('show'), delay);
+      });
+      
+      const lastDelay = 12500;
+      const fadeOutTime = lastDelay + 4000;
+      
+      setTimeout(() => {
+        blocks.forEach(b => b.classList.add('fade-out'));
+        labels.forEach(l => l.classList.add('fade-out'));
+      }, fadeOutTime);
+      
+      setTimeout(runAnimation, fadeOutTime + 1000 + CYCLE_PAUSE);
+    }
+    
+    setTimeout(runAnimation, 500);
+  </script>
+</body>
+</html>

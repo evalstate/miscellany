@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 10px;
+    }
+    
+    .flow-window {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 16px;
+      padding: 20px;
+      width: 420px;
+      min-height: 460px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    }
+
+    .flow-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #333;
+    }
+
+    .flow-header span {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .client-label { color: #0b93f6; }
+    .server-label { color: #f5a623; }
+
+    .flow-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .flow-msg {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .flow-msg.show {
+      animation: slideIn 0.4s ease forwards;
+    }
+
+    .flow-msg.fade-out {
+      animation: fadeOut 0.8s ease forwards;
+    }
+
+    .flow-msg.client-msg { flex-direction: row; }
+    .flow-msg.server-msg { flex-direction: row-reverse; }
+
+    .arrow {
+      font-size: 18px;
+      flex-shrink: 0;
+      width: 30px;
+      text-align: center;
+    }
+
+    .client-msg .arrow { color: #0b93f6; }
+    .server-msg .arrow { color: #f5a623; }
+
+    .msg-content {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .client-msg .msg-content {
+      background: linear-gradient(135deg, #0b93f6 0%, #007AFF 100%);
+      color: white;
+      border-bottom-left-radius: 3px;
+    }
+
+    .server-msg .msg-content {
+      background: linear-gradient(135deg, #f5a623 0%, #f09819 100%);
+      color: white;
+      border-bottom-right-radius: 3px;
+    }
+
+    .msg-type {
+      font-weight: 600;
+      font-size: 11px;
+      opacity: 0.9;
+      margin-bottom: 4px;
+    }
+
+    .msg-detail {
+      font-size: 11px;
+      opacity: 0.85;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="flow-window">
+    <div class="flow-header">
+      <span class="client-label">Client</span>
+      <span class="server-label">Server</span>
+    </div>
+    <div class="flow-messages">
+      <div class="flow-msg client-msg" data-delay="0">
+        <div class="msg-content">
+          <div class="msg-type">CallToolRequest</div>
+          <div class="msg-detail">tool: "deploy_app", env: "production"</div>
+        </div>
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="flow-msg server-msg" data-delay="2500">
+        <div class="msg-content">
+          <div class="msg-type">ElicitationRequest</div>
+          <div class="msg-detail">"Confirm deployment to production?"</div>
+        </div>
+        <div class="arrow">←</div>
+      </div>
+
+      <div class="flow-msg client-msg" data-delay="5000">
+        <div class="msg-content">
+          <div class="msg-type">ElicitationResponse</div>
+          <div class="msg-detail">confirmed: true</div>
+        </div>
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="flow-msg server-msg" data-delay="7500">
+        <div class="msg-content">
+          <div class="msg-type">SamplingRequest</div>
+          <div class="msg-detail">"Generate deployment summary"</div>
+        </div>
+        <div class="arrow">←</div>
+      </div>
+
+      <div class="flow-msg client-msg" data-delay="10000">
+        <div class="msg-content">
+          <div class="msg-type">SamplingResponse</div>
+          <div class="msg-detail">"Deployed v2.1.0 to prod cluster..."</div>
+        </div>
+        <div class="arrow">→</div>
+      </div>
+
+      <div class="flow-msg server-msg" data-delay="12500">
+        <div class="msg-content">
+          <div class="msg-type">CallToolResult</div>
+          <div class="msg-detail">status: "success" ✓</div>
+        </div>
+        <div class="arrow">←</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const messages = document.querySelectorAll('.flow-msg');
+    const CYCLE_PAUSE = 3000;
+    
+    function runAnimation() {
+      messages.forEach(msg => msg.classList.remove('show', 'fade-out'));
+      
+      messages.forEach((msg) => {
+        const delay = parseInt(msg.dataset.delay) || 0;
+        setTimeout(() => msg.classList.add('show'), delay);
+      });
+      
+      const lastDelay = parseInt(messages[messages.length - 1].dataset.delay) || 0;
+      const fadeOutTime = lastDelay + 4000;
+      
+      setTimeout(() => {
+        messages.forEach(msg => msg.classList.add('fade-out'));
+      }, fadeOutTime);
+      
+      setTimeout(runAnimation, fadeOutTime + 1000 + CYCLE_PAUSE);
+    }
+    
+    setTimeout(runAnimation, 500);
+  </script>
+</body>
+</html>

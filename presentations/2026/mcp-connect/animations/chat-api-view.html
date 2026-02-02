@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100%;
+      font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    }
+    
+    .api-window {
+      background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
+      border-radius: 16px;
+      padding: 20px;
+      width: 580px;
+      min-height: 420px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .api-header {
+      color: #888;
+      font-size: 11px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #333;
+    }
+
+    .api-content {
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .json-brace { color: #d4d4d4; }
+    .json-key { color: #9cdcfe; }
+    .json-string { color: #ce9178; }
+    .json-bracket { color: #d4d4d4; }
+    
+    .message-block {
+      opacity: 0;
+      transform: translateX(-10px);
+      margin-left: 20px;
+      padding: 4px 0;
+    }
+
+    .message-block.show {
+      animation: slideInLeft 0.4s ease forwards;
+    }
+
+    .message-block.fade-out {
+      animation: fadeOut 0.8s ease forwards;
+    }
+
+    .role-user { border-left: 3px solid #0b93f6; padding-left: 10px; }
+    .role-assistant { border-left: 3px solid #34c759; padding-left: 10px; }
+
+    .static-content {
+      opacity: 0;
+    }
+    .static-content.show {
+      animation: fadeIn 0.3s ease forwards;
+    }
+    .static-content.fade-out {
+      animation: fadeOut 0.8s ease forwards;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .content-truncated {
+      color: #666;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="api-window">
+    <div class="api-header">POST /v1/chat/completions</div>
+    <div class="api-content">
+      <div class="static-content" data-delay="0" id="openBrace">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"messages"</span><span class="json-brace">:</span> <span class="json-bracket">[</span>
+      </div>
+
+      <div class="message-block role-user" data-delay="0">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"user"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Can you help me find information about MCP servers?"</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-assistant" data-delay="2000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"assistant"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Of course! I can search for MCP server documentation..."</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-user" data-delay="4000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"user"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Great, what transport options are available?"</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-assistant" data-delay="6000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"assistant"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"MCP supports STDIO, Streamable HTTP, and..."</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-user" data-delay="8000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"user"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Can servers make requests back to clients?"</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-assistant" data-delay="10000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"assistant"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Yes! Servers can request Sampling and Elicitation..."</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="static-content" data-delay="0" id="closeBrace">
+        &nbsp;&nbsp;<span class="json-bracket">]</span><br>
+        <span class="json-brace">}</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const messages = document.querySelectorAll('.message-block');
+    const staticContent = document.querySelectorAll('.static-content');
+    const CYCLE_PAUSE = 2000;
+    
+    function runAnimation() {
+      // Reset all
+      messages.forEach(msg => msg.classList.remove('show', 'fade-out'));
+      staticContent.forEach(el => el.classList.remove('show', 'fade-out'));
+      
+      // Show static wrapper immediately
+      staticContent.forEach((el) => {
+        const delay = parseInt(el.dataset.delay) || 0;
+        setTimeout(() => el.classList.add('show'), delay);
+      });
+
+      // Show messages with delays
+      messages.forEach((msg) => {
+        const delay = parseInt(msg.dataset.delay) || 0;
+        setTimeout(() => msg.classList.add('show'), delay);
+      });
+      
+      // Calculate fade out time
+      const lastDelay = parseInt(messages[messages.length - 1].dataset.delay) || 0;
+      const fadeOutTime = lastDelay + 4000;
+      
+      // Fade out all
+      setTimeout(() => {
+        messages.forEach(msg => msg.classList.add('fade-out'));
+        staticContent.forEach(el => el.classList.add('fade-out'));
+      }, fadeOutTime);
+      
+      // Restart
+      setTimeout(runAnimation, fadeOutTime + 1000 + CYCLE_PAUSE);
+    }
+    
+    setTimeout(runAnimation, 500);
+  </script>
+</body>
+</html>
