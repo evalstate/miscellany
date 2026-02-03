@@ -225,14 +225,6 @@
       display: block;
     }
 
-    .state-badge.session .session-id {
-      display: block;
-    }
-
-    .state-badge.session .empty-state {
-      display: none;
-    }
-
     .state-badge .caps-row {
       display: none;
       gap: 4px;
@@ -438,8 +430,8 @@
         <span class="entity-status" id="client-status"></span>
       </div>
       <div class="state-badge" id="client-state">
-        <div class="badge-title">Connection State</div>
-        <div class="empty-state">Mcp-Session-Id: —</div>
+        <div class="badge-title">Cookie Jar</div>
+        <div class="empty-state">empty</div>
         <div class="session-id" id="client-session"></div>
         <div class="caps-row" id="client-caps"></div>
       </div>
@@ -456,7 +448,7 @@
 
     <!-- Server Cluster -->
     <div class="server-cluster">
-      <div class="cluster-label">Streamable HTTP (MCP Servers)</div>
+      <div class="cluster-label">Streamable HTTP (Cookies)</div>
     </div>
 
     <!-- Server Nodes with session badges to the right -->
@@ -466,8 +458,8 @@
         <span class="entity-status" id="server-1-status"></span>
       </div>
       <div class="state-badge" id="server-1-state">
-        <div class="badge-title">Connection State</div>
-        <div class="empty-state">Mcp-Session-Id: —</div>
+        <div class="badge-title">Known Cookie</div>
+        <div class="empty-state">none</div>
         <div class="session-id" id="server-1-session"></div>
         <div class="caps-row" id="server-1-caps"></div>
       </div>
@@ -479,10 +471,10 @@
         <span class="entity-status" id="server-2-status"></span>
       </div>
       <div class="state-badge" id="server-2-state">
-        <div class="badge-title">Connection State</div>
-        <div class="empty-state">Mcp-Session-Id: —</div>
-        <div class="session-id"></div>
-        <div class="caps-row"></div>
+        <div class="badge-title">Known Cookie</div>
+        <div class="empty-state">none</div>
+        <div class="session-id" id="server-2-session"></div>
+        <div class="caps-row" id="server-2-caps"></div>
       </div>
     </div>
 
@@ -492,8 +484,8 @@
         <span class="entity-status" id="server-3-status"></span>
       </div>
       <div class="state-badge" id="server-3-state">
-        <div class="badge-title">Connection State</div>
-        <div class="empty-state">Mcp-Session-Id: —</div>
+        <div class="badge-title">Known Cookie</div>
+        <div class="empty-state">none</div>
         <div class="session-id" id="server-3-session"></div>
         <div class="caps-row" id="server-3-caps"></div>
       </div>
@@ -505,14 +497,14 @@
         <span class="message-type" id="message-type">initialize</span>
         <span class="message-arrow" id="message-arrow">→</span>
       </div>
-      <div class="message-detail" id="message-detail">InitializeRequest</div>
-      <div class="message-session" id="message-session">Mcp-Session-Id: sess_abc123</div>
+      <div class="message-detail" id="message-detail">CallToolRequest</div>
+      <div class="message-session" id="message-session">MCP-Cookie: (none)</div>
     </div>
   </div>
 
   <div class="narration" id="narration">
     <span class="step-num" id="step-num">○</span>
-    <span id="narration-text">Client connects via HTTP...</span>
+    <span id="narration-text">Client uses MCP cookies for session semantics...</span>
   </div>
 
   <script src="shared/animation-config.js"></script>
@@ -539,6 +531,8 @@
     const server3State = document.getElementById('server-3-state');
     const server1Session = document.getElementById('server-1-session');
     const server1Caps = document.getElementById('server-1-caps');
+    const server2Session = document.getElementById('server-2-session');
+    const server2Caps = document.getElementById('server-2-caps');
     const server3Session = document.getElementById('server-3-session');
     const server3Caps = document.getElementById('server-3-caps');
 
@@ -643,6 +637,8 @@
       clientCaps.innerHTML = '';
       server1Session.textContent = '';
       server1Caps.innerHTML = '';
+      server2Session.textContent = '';
+      server2Caps.innerHTML = '';
       server3Session.textContent = '';
       server3Caps.innerHTML = '';
       message.className = 'message';
@@ -654,19 +650,19 @@
         setup: () => {
           resetAll();
           stepNum.textContent = '○';
-          narrationText.textContent = 'Client connects to server cluster via load balancer...';
+          narrationText.textContent = 'Client and server exchange cookies at the MCP layer';
           narration.className = 'narration';
         },
         animate: (done) => setTimeout(done, ANIMATION.INITIAL_PAUSE),
         after: () => {}
       },
-      // Step 1: Initialize request → LB → Node 1
+      // Step 1: tools/call → LB → Node 1 (no cookie yet)
       {
         setup: () => {
-          configMessage('request', '→', 'initialize', 'InitializeRequest', null, false, 'right');
+          configMessage('request', '→', 'tools/call', 'CallToolRequest', 'MCP-Cookie: (none)', false, 'right');
           setMessagePos(pos.client, yClient);
           stepNum.textContent = '1';
-          narrationText.textContent = 'Client sends InitializeRequest with capabilities';
+          narrationText.textContent = 'Client sends request without cookie (MCP JSON-RPC layer)';
           narration.className = 'narration request-state';
           clientBox.classList.add('alive', 'active');
         },
@@ -680,18 +676,16 @@
           server1Box.classList.add('alive', 'active');
         }
       },
-      // Step 2: Initialize result ← with session ID
+      // Step 2: tools/call result ← Node 1 issues cookie
       {
         setup: () => {
-          configMessage('response', '←', 'initialize', 'InitializeResult', 'Mcp-Session-Id: sess_abc123', false, 'left');
+          configMessage('response', '←', 'tools/call', 'CallToolResult', 'Set MCP-Cookie: cookie_4f2', false, 'left');
           setMessagePos(pos.server1, yServer1);
           stepNum.textContent = '2';
-          narrationText.textContent = 'Node 1 creates session, stores client capabilities';
+          narrationText.textContent = 'Server issues MCP cookie (can be copied to HTTP headers)';
           narration.className = 'narration response-state';
-          // Populate server 1 state
-          server1Session.textContent = 'sess_abc123';
-          server1Caps.innerHTML = '<span class="cap">sampling ✓</span>';
-          server1State.classList.add('session');
+          server1Session.textContent = 'cookie_4f2';
+          server1State.classList.add('active');
         },
         animate: (done) => animatePath(
           [{x: pos.server1, y: yServer1}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
@@ -700,119 +694,57 @@
         ),
         after: () => {
           server1Box.classList.remove('active');
-          clientSession.textContent = 'sess_abc123';
-          clientState.classList.add('session');
+          clientSession.textContent = 'cookie_4f2';
+          clientState.classList.add('active');
         }
       },
-      // Step 3: notifications/initialized → LB → Node 1
+      // Step 3: tools/call → LB → Node 2 (cookie included)
       {
         setup: () => {
-          configMessage('notification', '→', 'initialized', 'notification', 'Mcp-Session-Id: sess_abc123', false, 'right');
+          configMessage('request', '→', 'tools/call', 'CallToolRequest', 'MCP-Cookie: cookie_4f2', false, 'right');
           setMessagePos(pos.client, yClient);
           stepNum.textContent = '3';
-          narrationText.textContent = 'Client sends initialized notification';
-          narration.className = 'narration notification-state';
+          narrationText.textContent = 'Client returns cookie on the next request';
+          narration.className = 'narration request-state';
           clientBox.classList.add('active');
         },
         animate: (done) => animatePath(
-          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server1, y: yServer1}],
+          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server2, y: yServer2}],
           ANIMATION.MSG_DURATION,
           done
         ),
         after: () => {
           clientBox.classList.remove('active');
-          // Populate client state
-          clientSession.textContent = 'sess_abc123';
-          clientCaps.innerHTML = '<span class="cap">tools ✓</span><span class="cap">prompts ✓</span>';
-          clientState.classList.add('active');
-          server1State.classList.add('active');
+          server2Box.classList.add('alive', 'active');
         }
       },
-      // Step 4: tools/call → LB → Node 1 (correct)
+      // Step 4: tools/call result ← Node 2 recognizes cookie
       {
         setup: () => {
-          configMessage('request', '→', 'tools/call', 'CallToolRequest', 'Mcp-Session-Id: sess_abc123', false, 'right');
-          setMessagePos(pos.client, yClient);
+          configMessage('response', '←', 'tools/call', 'CallToolResult', 'MCP-Cookie: cookie_4f2', false, 'left');
+          setMessagePos(pos.server2, yServer2);
           stepNum.textContent = '4';
-          narrationText.textContent = 'Client calls tool with session ID';
-          narration.className = 'narration request-state';
-          clientBox.classList.add('active');
-        },
-        animate: (done) => animatePath(
-          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server1, y: yServer1}],
-          ANIMATION.MSG_DURATION,
-          done
-        ),
-        after: () => {
-          clientBox.classList.remove('active');
-          server1Box.classList.add('active');
-        }
-      },
-      // Step 5: tools/call result ←
-      {
-        setup: () => {
-          configMessage('response', '←', 'tools/call', 'CallToolResult', 'Mcp-Session-Id: sess_abc123', false, 'left');
-          setMessagePos(pos.server1, yServer1);
-          stepNum.textContent = '5';
-          narrationText.textContent = 'Node 1 has session + capabilities — success ✓';
+          narrationText.textContent = 'Server uses cookie to maintain session semantics';
           narration.className = 'narration response-state';
+          server2Session.textContent = 'cookie_4f2';
+          server2State.classList.add('active');
         },
         animate: (done) => animatePath(
-          [{x: pos.server1, y: yServer1}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
+          [{x: pos.server2, y: yServer2}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
           ANIMATION.MSG_DURATION,
           done
         ),
         after: () => {
-          server1Box.classList.remove('active');
+          server2Box.classList.remove('active');
         }
       },
-      // Step 6: Another request → LB → Node 3 (WRONG!)
-      {
-        setup: () => {
-          configMessage('request', '→', 'tools/call', 'CallToolRequest', 'Mcp-Session-Id: sess_abc123', false, 'right');
-          setMessagePos(pos.client, yClient);
-          stepNum.textContent = '6';
-          narrationText.textContent = 'Next request... LB routes to Node 3!';
-          narration.className = 'narration request-state';
-          clientBox.classList.add('active');
-        },
-        animate: (done) => animatePath(
-          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server3, y: yServer3}],
-          ANIMATION.MSG_DURATION,
-          done
-        ),
-        after: () => {
-          clientBox.classList.remove('active');
-          server3Box.classList.add('alive');
-        }
-      },
-      // Step 7: Error! Node 3 doesn't know this session
-      {
-        setup: () => {
-          configMessage('error-response', '←', '404 Not Found', 'Unknown session', 'Mcp-Session-Id: sess_abc123', true, 'left');
-          setMessagePos(pos.server3, yServer3);
-          stepNum.textContent = '✗';
-          narrationText.textContent = 'Node 3 has no session or capabilities — fails!';
-          narration.className = 'narration error-state';
-          server3Box.classList.add('error');
-          // Show error state with question marks
-          server3Session.textContent = 'sess_abc123 ?';
-          server3Caps.innerHTML = '<span class="cap">sampling ?</span>';
-          server3State.classList.add('error');
-        },
-        animate: (done) => animatePath(
-          [{x: pos.server3, y: yServer3}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
-          ANIMATION.MSG_DURATION,
-          done
-        ),
-        after: () => {
-          clientBox.classList.add('error');
-        }
-      },
-      // Step 8: Pause on error
+      // Step 5: Pause before restart
       {
         setup: () => {
           message.className = 'message';
+          stepNum.textContent = '✓';
+          narrationText.textContent = 'MCP cookies preserve client/server context across requests';
+          narration.className = 'narration success-state';
         },
         animate: (done) => setTimeout(done, ANIMATION.ERROR_PAUSE),
         after: () => {}

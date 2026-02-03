@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       background: transparent;
       display: flex;
@@ -16,9 +21,9 @@
     .api-window {
       background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
       border-radius: 16px;
-      padding: 20px;
+      padding: 16px;
       width: 580px;
-      min-height: 420px;
+      height: 500px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
       overflow: hidden;
     }
@@ -26,14 +31,15 @@
     .api-header {
       color: #888;
       font-size: 11px;
-      margin-bottom: 12px;
-      padding-bottom: 8px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
       border-bottom: 1px solid #333;
     }
 
     .api-content {
       font-size: 12px;
       line-height: 1.5;
+      color: #d4d4d4;
     }
 
     .json-brace { color: #d4d4d4; }

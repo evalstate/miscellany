@@ -4,6 +4,11 @@
   <meta charset="UTF-8">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       background: transparent;
       display: flex;
@@ -18,8 +23,9 @@
       border-radius: 16px;
       padding: 24px;
       width: 650px;
-      min-height: 420px;
+      height: 500px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
     }
 
     .chat-messages {
