@@ -176,29 +176,14 @@
     </div>
   </div>
 
+  <script src="shared/sequence-helpers.js"></script>
   <script>
-    const messages = document.querySelectorAll('.flow-msg');
-    const CYCLE_PAUSE = 3000;
-    
-    function runAnimation() {
-      messages.forEach(msg => msg.classList.remove('show', 'fade-out'));
-      
-      messages.forEach((msg) => {
-        const delay = parseInt(msg.dataset.delay) || 0;
-        setTimeout(() => msg.classList.add('show'), delay);
-      });
-      
-      const lastDelay = parseInt(messages[messages.length - 1].dataset.delay) || 0;
-      const fadeOutTime = lastDelay + 4000;
-      
-      setTimeout(() => {
-        messages.forEach(msg => msg.classList.add('fade-out'));
-      }, fadeOutTime);
-      
-      setTimeout(runAnimation, fadeOutTime + 1000 + CYCLE_PAUSE);
-    }
-    
-    setTimeout(runAnimation, 500);
+    runSequenceAnimation({
+      selectors: ['.flow-msg'],
+      cyclePause: 3000,
+      fadeOutOffset: 4000,
+      initialDelay: 500,
+    });
   </script>
 </body>
 </html>

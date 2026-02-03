@@ -157,37 +157,15 @@
     </div>
   </div>
 
+  <script src="shared/sequence-helpers.js"></script>
   <script>
-    const blocks = document.querySelectorAll('.msg-block');
-    const labels = document.querySelectorAll('.request-label');
-    const CYCLE_PAUSE = 3000;
-    
-    function runAnimation() {
-      blocks.forEach(b => b.classList.remove('show', 'fade-out'));
-      labels.forEach(l => l.classList.remove('show', 'fade-out'));
-      
-      blocks.forEach((block) => {
-        const delay = parseInt(block.dataset.delay) || 0;
-        setTimeout(() => block.classList.add('show'), delay);
-      });
-
-      labels.forEach((label) => {
-        const delay = parseInt(label.dataset.delay) || 0;
-        setTimeout(() => label.classList.add('show'), delay);
-      });
-      
-      const lastDelay = 12500;
-      const fadeOutTime = lastDelay + 4000;
-      
-      setTimeout(() => {
-        blocks.forEach(b => b.classList.add('fade-out'));
-        labels.forEach(l => l.classList.add('fade-out'));
-      }, fadeOutTime);
-      
-      setTimeout(runAnimation, fadeOutTime + 1000 + CYCLE_PAUSE);
-    }
-    
-    setTimeout(runAnimation, 500);
+    runSequenceAnimation({
+      selectors: ['.msg-block', '.request-label'],
+      cyclePause: 3000,
+      fadeOutOffset: 4000,
+      initialDelay: 500,
+      lastDelayOverride: 12500,
+    });
   </script>
 </body>
 </html>

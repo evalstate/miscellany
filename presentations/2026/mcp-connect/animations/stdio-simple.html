@@ -441,6 +441,7 @@
   </div>
 
   <script src="shared/animation-config.js"></script>
+  <script src="shared/diagram-helpers.js"></script>
   <script>
     const message = document.getElementById('message');
     const messageType = document.getElementById('message-type');
@@ -456,48 +457,36 @@
     const clientStatus = document.getElementById('client-status');
     const serverStatus = document.getElementById('server-status');
 
+
+    const messageElements = {
+      container: message,
+      header: message.querySelector('.message-header'),
+      type: messageType,
+      arrow: messageArrow,
+      detail: messageDetail,
+    };
+
     const clientCenter = 65;
     const serverCenter = 435;
     const msgY = 45;
 
+
     function setMessagePos(x, y) {
-      message.style.left = x + 'px';
-      message.style.top = y + 'px';
+      setMessagePosition(message, x, y);
     }
 
     function animateMessage(fromX, fromY, toX, toY, duration, callback) {
-      const startTime = performance.now();
-
-      function step(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        
-        const x = fromX + (toX - fromX) * eased;
-        const y = fromY + (toY - fromY) * eased;
-        setMessagePos(x, y);
-
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else if (callback) {
-          callback();
-        }
-      }
-      requestAnimationFrame(step);
+      animateMessageBetween(message, fromX, fromY, toX, toY, duration, callback);
     }
 
     function configMessage(type, arrow, method, detail, direction) {
-      message.className = `message ${type} visible`;
-      messageType.textContent = method;
-      messageArrow.textContent = arrow;
-      messageDetail.textContent = detail;
-      
-      const header = message.querySelector('.message-header');
-      if (direction === 'left') {
-        header.style.flexDirection = 'row-reverse';
-      } else {
-        header.style.flexDirection = 'row';
-      }
+      configureMessage(messageElements, {
+        type,
+        arrow,
+        method,
+        detail,
+        direction,
+      });
     }
 
     function setStatus(element, text, className) {
@@ -711,27 +700,7 @@
       }
     ];
 
-    let currentStep = 0;
-
-    function runStep() {
-      if (currentStep >= steps.length) {
-        currentStep = 0;
-      }
-      
-      const step = steps[currentStep];
-      step.setup();
-      
-      setTimeout(() => {
-        step.animate(() => {
-          step.after();
-          currentStep++;
-          setTimeout(runStep, ANIMATION.STEP_PAUSE);
-        });
-      }, 100);
-    }
-
-    // Start
-    runStep();
+    runStepSequence(steps);
   </script>
 </body>
 </html>

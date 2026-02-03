@@ -2,432 +2,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: #fafafa;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      padding: 30px 20px;
-    }
+  <link rel="stylesheet" href="shared/http-diagram.css">
 
-    .diagram {
-      position: relative;
-      width: 780px;
-      height: 320px;
-    }
-
-    /* Entity base styles */
-    .entity {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* Client - starts grey, becomes blue */
-    .client { left: 0; top: 100px; }
-    .client .entity-box {
-      width: 130px;
-      height: 80px;
-      border-radius: 16px;
-      background: #f5f5f5;
-      border: 3px solid #9e9e9e;
-      color: #9e9e9e;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 14px;
-      transition: all 0.5s ease;
-      text-align: center;
-      line-height: 1.3;
-      gap: 2px;
-    }
-
-    .client .entity-box.alive {
-      background: #e3f2fd;
-      border-color: #1976d2;
-      color: #1976d2;
-    }
-
-    .client .entity-box.active {
-      background: #bbdefb;
-      border-color: #1976d2;
-      color: #1976d2;
-      box-shadow: 0 4px 20px rgba(25, 118, 210, 0.3);
-    }
-
-    /* Load Balancer */
-    .lb { left: 200px; top: 105px; }
-    .lb .entity-box {
-      width: 80px;
-      height: 70px;
-      background: linear-gradient(180deg, #fafafa 0%, #e0e0e0 100%);
-      border: 2px solid #9e9e9e;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #616161;
-      font-weight: 600;
-      font-size: 13px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    /* Server cluster bounding box */
-    .server-cluster {
-      position: absolute;
-      left: 400px;
-      top: 0;
-      width: 300px;
-      height: 320px;
-      border: 3px solid #ef6c00;
-      border-radius: 20px;
-      background: rgba(255, 243, 224, 0.3);
-    }
-
-    .cluster-label {
-      position: absolute;
-      top: -14px;
-      left: 24px;
-      background: #fafafa;
-      padding: 4px 16px;
-      font-size: 16px;
-      font-weight: 600;
-      color: #ef6c00;
-      white-space: nowrap;
-    }
-
-    /* Server nodes - horizontal layout with badge to right */
-    .server {
-      flex-direction: row;
-      align-items: center;
-      gap: 12px;
-      left: 420px;
-    }
-    .server-1 { top: 25px; }
-    .server-2 { top: 130px; }
-    .server-3 { top: 235px; }
-
-    .server .entity-box {
-      width: 100px;
-      height: 55px;
-      border-radius: 12px;
-      background: #f5f5f5;
-      border: 3px solid #bdbdbd;
-      color: #9e9e9e;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      font-weight: 600;
-      font-size: 13px;
-      transition: all 0.5s ease;
-      text-align: center;
-      gap: 2px;
-    }
-
-    .server .entity-box.alive {
-      background: #fff3e0;
-      border-color: #ef6c00;
-      color: #ef6c00;
-    }
-
-    .server .entity-box.active {
-      background: #ffe0b2;
-      border-color: #ef6c00;
-      color: #ef6c00;
-      box-shadow: 0 4px 20px rgba(239, 108, 0, 0.3);
-    }
-
-    .server .entity-box.error {
-      background: #ffebee;
-      border-color: #c62828;
-      color: #c62828;
-      animation: shake 0.4s ease;
-    }
-
-    @keyframes shake {
-      0%, 100% { transform: translateX(0); }
-      25% { transform: translateX(-6px); }
-      75% { transform: translateX(6px); }
-    }
-
-    .entity-status {
-      font-size: 9px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-      padding: 2px 6px;
-      border-radius: 3px;
-    }
-
-    .entity-status.visible {
-      opacity: 1;
-    }
-
-    /* State badge - shows session + capabilities */
-    .state-badge {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 4px;
-      padding: 8px 10px;
-      border-radius: 8px;
-      font-size: 10px;
-      font-weight: 600;
-      transition: all 0.4s ease;
-      /* Default: gray/inactive state */
-      background: #f5f5f5;
-      border: 1px solid #e0e0e0;
-      color: #9e9e9e;
-      min-width: 140px;
-      min-height: 64px;
-    }
-
-    .state-badge.active {
-      background: #e8f5e9;
-      border: 1px solid #a5d6a7;
-      color: #2e7d32;
-    }
-
-    .state-badge.error {
-      background: #ffebee;
-      border-color: #ef9a9a;
-      color: #c62828;
-    }
-
-    .state-badge .badge-title {
-      font-size: 8px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: #888;
-      font-weight: 500;
-    }
-
-    .state-badge .session-id {
-      font-family: 'SF Mono', Monaco, monospace;
-      font-size: 10px;
-      display: none;
-    }
-
-    .state-badge.active .session-id,
-    .state-badge.error .session-id {
-      display: block;
-    }
-
-    .state-badge.session .session-id {
-      display: block;
-    }
-
-    .state-badge.session .empty-state {
-      display: none;
-    }
-
-    .state-badge .caps-row {
-      display: none;
-      gap: 4px;
-      flex-wrap: wrap;
-    }
-
-    .state-badge.active .caps-row,
-    .state-badge.error .caps-row {
-      display: flex;
-    }
-
-    .state-badge .cap {
-      font-family: 'SF Mono', Monaco, monospace;
-      font-size: 8px;
-      background: white;
-      padding: 1px 5px;
-      border-radius: 3px;
-      border: 1px solid #e0e0e0;
-    }
-
-    .state-badge.active .cap {
-      border-color: #c8e6c9;
-    }
-
-    .state-badge.error .cap {
-      border-color: #ef9a9a;
-    }
-
-    .state-badge .empty-state {
-      font-size: 9px;
-      color: #bdbdbd;
-      font-style: italic;
-    }
-
-    .state-badge.active .empty-state,
-    .state-badge.error .empty-state {
-      display: none;
-    }
-
-    /* Client state badge stays below */
-    .client .state-badge {
-      align-items: center;
-    }
-
-    .client .state-badge .caps-row {
-      justify-content: center;
-    }
-
-    /* Connection lines */
-    .connection {
-      position: absolute;
-      height: 2px;
-      background: #bdbdbd;
-    }
-
-    .conn-client-lb {
-      left: 140px;
-      width: 60px;
-      top: 140px;
-    }
-
-    .conn-lb-servers {
-      left: 290px;
-      width: 110px;
-      top: 140px;
-    }
-
-    /* The moving message */
-    .message {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      opacity: 0;
-      transition: opacity 0.2s ease;
-      pointer-events: none;
-      z-index: 100;
-      transform: translateX(-50%);
-    }
-
-    .message.visible {
-      opacity: 1;
-    }
-
-    .message-header {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .message-arrow {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    .message-type {
-      padding: 5px 10px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      white-space: nowrap;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
-    }
-
-    .message-detail {
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 9px;
-      font-family: 'SF Mono', Monaco, monospace;
-      background: rgba(255,255,255,0.95);
-      color: #666;
-      border: 1px solid #e0e0e0;
-    }
-
-    .message-session {
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 9px;
-      font-family: 'SF Mono', Monaco, monospace;
-      background: #e8f5e9;
-      color: #2e7d32;
-      border: 1px solid #a5d6a7;
-    }
-
-    .message-session.error {
-      background: #ffebee;
-      color: #c62828;
-      border-color: #ef9a9a;
-    }
-
-    .message.request .message-arrow { color: #1976d2; }
-    .message.request .message-type {
-      background: #1976d2;
-      color: white;
-    }
-
-    .message.response .message-arrow { color: #ef6c00; }
-    .message.response .message-type {
-      background: #ef6c00;
-      color: white;
-    }
-
-    .message.notification .message-arrow { color: #7b1fa2; }
-    .message.notification .message-type {
-      background: #7b1fa2;
-      color: white;
-    }
-
-    .message.error-response .message-arrow { color: #c62828; }
-    .message.error-response .message-type {
-      background: #c62828;
-      color: white;
-    }
-
-    /* Narration */
-    .narration {
-      margin-top: 25px;
-      padding: 14px 20px;
-      background: white;
-      border: 2px solid #e0e0e0;
-      border-radius: 12px;
-      font-size: 14px;
-      color: #333;
-      max-width: 700px;
-      text-align: center;
-      min-height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .narration .step-num {
-      display: inline-block;
-      width: 26px;
-      height: 26px;
-      background: #9e9e9e;
-      color: white;
-      border-radius: 50%;
-      font-size: 13px;
-      font-weight: 600;
-      line-height: 26px;
-      text-align: center;
-      margin-right: 12px;
-      flex-shrink: 0;
-      transition: background 0.3s ease;
-    }
-
-    .narration.request-state .step-num { background: #1976d2; }
-    .narration.response-state .step-num { background: #ef6c00; }
-    .narration.notification-state .step-num { background: #7b1fa2; }
-    .narration.error-state .step-num { background: #c62828; }
-    .narration.error-state { border-color: #ef9a9a; background: #fff8f8; }
-    .narration.success-state .step-num { background: #4caf50; }
-  </style>
 </head>
 <body>
   <div class="diagram">
@@ -516,6 +92,7 @@
   </div>
 
   <script src="shared/animation-config.js"></script>
+  <script src="shared/diagram-helpers.js"></script>
   <script>
     const message = document.getElementById('message');
     const messageType = document.getElementById('message-type');
@@ -542,6 +119,16 @@
     const server3Session = document.getElementById('server-3-session');
     const server3Caps = document.getElementById('server-3-caps');
 
+
+    const messageElements = {
+      container: message,
+      header: message.querySelector('.message-header'),
+      type: messageType,
+      arrow: messageArrow,
+      detail: messageDetail,
+      session: messageSession,
+    };
+
     // Positions (x centers)
     const pos = {
       client: 65,
@@ -555,78 +142,29 @@
     const yServer2 = 143;
     const yServer3 = 248;
 
+
     function setMessagePos(x, y) {
-      message.style.left = x + 'px';
-      message.style.top = y + 'px';
+      setMessagePosition(message, x, y);
     }
 
     function animateMessage(fromX, fromY, toX, toY, duration, callback) {
-      const startTime = performance.now();
-      function step(currentTime) {
-        const elapsed = currentTime - startTime;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        setMessagePos(
-          fromX + (toX - fromX) * eased,
-          fromY + (toY - fromY) * eased
-        );
-        if (progress < 1) {
-          requestAnimationFrame(step);
-        } else if (callback) {
-          callback();
-        }
-      }
-      requestAnimationFrame(step);
+      animateMessageBetween(message, fromX, fromY, toX, toY, duration, callback);
     }
 
     function animatePath(waypoints, totalDuration, callback) {
-      // Calculate total distance
-      let totalDist = 0;
-      for (let i = 0; i < waypoints.length - 1; i++) {
-        const dx = waypoints[i+1].x - waypoints[i].x;
-        const dy = waypoints[i+1].y - waypoints[i].y;
-        totalDist += Math.sqrt(dx*dx + dy*dy);
-      }
-      
-      // Calculate duration for each leg proportional to distance
-      const durations = [];
-      for (let i = 0; i < waypoints.length - 1; i++) {
-        const dx = waypoints[i+1].x - waypoints[i].x;
-        const dy = waypoints[i+1].y - waypoints[i].y;
-        const legDist = Math.sqrt(dx*dx + dy*dy);
-        durations.push((legDist / totalDist) * totalDuration);
-      }
-      
-      let i = 0;
-      function nextLeg() {
-        if (i < waypoints.length - 1) {
-          animateMessage(
-            waypoints[i].x, waypoints[i].y,
-            waypoints[i+1].x, waypoints[i+1].y,
-            durations[i],
-            () => { i++; nextLeg(); }
-          );
-        } else if (callback) {
-          callback();
-        }
-      }
-      nextLeg();
+      animatePathBetween(message, waypoints, totalDuration, callback);
     }
 
     function configMessage(type, arrow, method, detail, sessionText, sessionError, direction) {
-      message.className = `message ${type} visible`;
-      messageType.textContent = method;
-      messageArrow.textContent = arrow;
-      messageDetail.textContent = detail;
-      if (sessionText) {
-        messageSession.textContent = sessionText;
-        messageSession.style.display = 'block';
-        messageSession.className = 'message-session' + (sessionError ? ' error' : '');
-      } else {
-        messageSession.style.display = 'none';
-      }
-      const header = message.querySelector('.message-header');
-      header.style.flexDirection = direction === 'left' ? 'row-reverse' : 'row';
+      configureMessage(messageElements, {
+        type,
+        arrow,
+        method,
+        detail,
+        sessionText,
+        sessionError,
+        direction,
+      });
     }
 
     function resetAll() {
@@ -819,27 +357,7 @@
       }
     ];
 
-    let currentStep = 0;
-
-    function runStep() {
-      if (currentStep >= steps.length) {
-        currentStep = 0;
-      }
-      
-      const step = steps[currentStep];
-      step.setup();
-      
-      setTimeout(() => {
-        step.animate(() => {
-          step.after();
-          currentStep++;
-          setTimeout(runStep, ANIMATION.STEP_PAUSE);
-        });
-      }, 100);
-    }
-
-    // Start
-    runStep();
+    runStepSequence(steps);
   </script>
 </body>
 </html>
