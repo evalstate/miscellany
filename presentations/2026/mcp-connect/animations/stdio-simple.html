@@ -174,26 +174,30 @@
       border-radius: 10px;
       font-size: 11px;
       font-weight: 600;
-      opacity: 0;
-      transform: translateY(-5px);
       transition: all 0.4s ease;
+      min-width: 110px;
+      /* Default: gray/inactive state */
+      background: #f5f5f5;
+      border: 1px solid #e0e0e0;
+      color: #9e9e9e;
+    }
+
+    .state-badge.active {
       background: #e8f5e9;
       border: 1px solid #a5d6a7;
       color: #2e7d32;
-      min-width: 110px;
-    }
-
-    .state-badge.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .state-badge .badge-title {
       font-size: 9px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #666;
+      color: #999;
       font-weight: 500;
+    }
+
+    .state-badge.active .badge-title {
+      color: #666;
     }
 
     .state-badge .caps-list {
@@ -212,12 +216,29 @@
       background: white;
       padding: 2px 6px;
       border-radius: 4px;
-      border: 1px solid #c8e6c9;
+      border: 1px solid #e0e0e0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .state-badge.active .cap {
+      border-color: #c8e6c9;
+      opacity: 1;
     }
 
     .state-badge .cap .check {
       color: #4caf50;
       font-weight: bold;
+    }
+
+    .state-badge .empty-state {
+      font-size: 9px;
+      color: #bdbdbd;
+      font-style: italic;
+    }
+
+    .state-badge.active .empty-state {
+      display: none;
     }
 
     /* Connection line */
@@ -374,7 +395,8 @@
           <span class="entity-status" id="client-status"></span>
         </div>
         <div class="state-badge" id="client-state">
-          <div class="badge-title">Server Capabilities</div>
+          <div class="badge-title">Connection State</div>
+          <div class="empty-state">not connected</div>
           <div class="caps-list">
             <span class="cap"><span class="check">✓</span> tools</span>
             <span class="cap"><span class="check">✓</span> prompts</span>
@@ -394,7 +416,8 @@
           <span class="entity-status" id="server-status"></span>
         </div>
         <div class="state-badge" id="server-state">
-          <div class="badge-title">Client Capabilities</div>
+          <div class="badge-title">Connection State</div>
+          <div class="empty-state">not connected</div>
           <div class="caps-list">
             <span class="cap"><span class="check">✓</span> sampling</span>
           </div>
@@ -417,6 +440,7 @@
     <span id="narration-text">Client spawns server as subprocess...</span>
   </div>
 
+  <script src="shared/animation-config.js"></script>
   <script>
     const message = document.getElementById('message');
     const messageType = document.getElementById('message-type');
@@ -491,12 +515,12 @@
           narration.className = 'narration';
           clientBox.className = 'entity-box';
           serverBox.className = 'entity-box';
-          clientState.classList.remove('visible');
-          serverState.classList.remove('visible');
+          clientState.classList.remove('active');
+          serverState.classList.remove('active');
           setStatus(clientStatus, '', '');
           setStatus(serverStatus, '', '');
         },
-        animate: (done) => setTimeout(done, 3000),
+        animate: (done) => setTimeout(done, ANIMATION.INITIAL_PAUSE),
         after: () => {}
       },
       // Step 1: Initialize request Client → Server
@@ -509,7 +533,7 @@
           narration.className = 'narration request-state';
           clientBox.classList.add('alive', 'active');
         },
-        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, 700, done),
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => { 
           clientBox.classList.remove('active');
           serverBox.classList.add('alive', 'active');
@@ -524,7 +548,7 @@
           narrationText.textContent = 'Server responds with InitializeResult';
           narration.className = 'narration response-state';
         },
-        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, 700, done),
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => { 
           serverBox.classList.remove('active');
           clientBox.classList.add('active');
@@ -541,11 +565,11 @@
           narration.className = 'narration notification-state';
           clientBox.classList.add('active');
         },
-        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, 700, done),
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => { 
           clientBox.classList.remove('active');
-          clientState.classList.add('visible');
-          serverState.classList.add('visible');
+          clientState.classList.add('active');
+          serverState.classList.add('active');
         }
       },
       // Step 4: tools/list request
@@ -558,7 +582,7 @@
           narration.className = 'narration request-state';
           clientBox.classList.add('active');
         },
-        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, 700, done),
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => { 
           clientBox.classList.remove('active');
           serverBox.classList.add('active'); 
@@ -573,7 +597,7 @@
           narrationText.textContent = 'Server returns ListToolsResult';
           narration.className = 'narration response-state';
         },
-        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, 700, done),
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => { 
           serverBox.classList.remove('active');
         }
@@ -588,7 +612,7 @@
           narration.className = 'narration request-state';
           clientBox.classList.add('active');
         },
-        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, 700, done),
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => { 
           clientBox.classList.remove('active');
           serverBox.classList.add('active'); 
@@ -603,7 +627,7 @@
           narrationText.textContent = 'Server returns ListPromptsResult';
           narration.className = 'narration response-state';
         },
-        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, 700, done),
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => { 
           serverBox.classList.remove('active');
         }
@@ -618,7 +642,7 @@
           narration.className = 'narration request-state';
           clientBox.classList.add('active');
         },
-        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, 700, done),
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => { 
           clientBox.classList.remove('active');
           serverBox.classList.add('active');
@@ -637,7 +661,7 @@
           serverBox.classList.add('waiting');
           setStatus(serverStatus, 'WAITING', 'waiting');
         },
-        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, 700, done),
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => {
           clientBox.classList.add('active');
         }
@@ -649,9 +673,9 @@
           setMessagePos(clientCenter, msgY);
           stepNum.textContent = '10';
           narrationText.textContent = 'Client returns LLM response — server resumes';
-          narration.className = 'narration request-state';
+          narration.className = 'narration response-state';
         },
-        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, 700, done),
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
         after: () => {
           clientBox.classList.remove('active');
           serverBox.classList.remove('waiting');
@@ -668,48 +692,46 @@
           narrationText.textContent = 'Server completes tool call';
           narration.className = 'narration response-state';
         },
-        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, 700, done),
-        after: () => { 
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => {
           serverBox.classList.remove('active');
           setStatus(serverStatus, '', '');
         }
       },
-      // Summary pause
+      // Step 12: Pause before restart
       {
-        setup: () => { 
-          message.classList.remove('visible'); 
+        setup: () => {
+          message.className = 'message';
           stepNum.textContent = '✓';
-          narrationText.textContent = 'Bi-directional requests work — state lives in the process';
+          narrationText.textContent = 'Connection complete — both sides know capabilities';
           narration.className = 'narration success-state';
         },
-        animate: (done) => setTimeout(done, 3500),
-        after: () => {
-          clientBox.classList.remove('alive', 'active');
-          serverBox.classList.remove('alive', 'active', 'waiting');
-          clientState.classList.remove('visible');
-          serverState.classList.remove('visible');
-          setStatus(clientStatus, '', '');
-          setStatus(serverStatus, '', '');
-        }
+        animate: (done) => setTimeout(done, ANIMATION.ERROR_PAUSE),
+        after: () => {}
       }
     ];
 
     let currentStep = 0;
 
     function runStep() {
+      if (currentStep >= steps.length) {
+        currentStep = 0;
+      }
+      
       const step = steps[currentStep];
       step.setup();
       
       setTimeout(() => {
         step.animate(() => {
           step.after();
-          currentStep = (currentStep + 1) % steps.length;
-          setTimeout(runStep, currentStep === 0 ? 1500 : 1000);
+          currentStep++;
+          setTimeout(runStep, ANIMATION.STEP_PAUSE);
         });
-      }, 400);
+      }, 100);
     }
 
-    setTimeout(runStep, 500);
+    // Start
+    runStep();
   </script>
 </body>
 </html>

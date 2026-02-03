@@ -40,6 +40,7 @@
     .json-key { color: #9cdcfe; }
     .json-string { color: #ce9178; }
     .json-bracket { color: #d4d4d4; }
+    .json-punct { color: #d4d4d4; }
     
     .message-block {
       opacity: 0;
@@ -96,48 +97,48 @@
     <div class="api-content">
       <div class="static-content" data-delay="0" id="openBrace">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"messages"</span><span class="json-brace">:</span> <span class="json-bracket">[</span>
+        &nbsp;&nbsp;<span class="json-key">"messages"</span><span class="json-punct">:</span> <span class="json-bracket">[</span>
       </div>
 
       <div class="message-block role-user" data-delay="0">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"user"</span>,<br>
-        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Can you help me find information about MCP servers?"</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"user"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Can you help me find information about MCP servers?"</span><br>
         <span class="json-brace">}</span>
       </div>
 
       <div class="message-block role-assistant" data-delay="2000">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"assistant"</span>,<br>
-        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Of course! I can search for MCP server documentation..."</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"assistant"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Of course! I can search for MCP server documentation..."</span><br>
         <span class="json-brace">}</span>
       </div>
 
       <div class="message-block role-user" data-delay="4000">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"user"</span>,<br>
-        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Great, what transport options are available?"</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"user"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Great, what transport options are available?"</span><br>
         <span class="json-brace">}</span>
       </div>
 
       <div class="message-block role-assistant" data-delay="6000">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"assistant"</span>,<br>
-        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"MCP supports STDIO, Streamable HTTP, and..."</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"assistant"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"MCP supports STDIO, Streamable HTTP, and..."</span><br>
         <span class="json-brace">}</span>
       </div>
 
       <div class="message-block role-user" data-delay="8000">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"user"</span>,<br>
-        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Can servers make requests back to clients?"</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"user"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Can servers make requests back to clients?"</span><br>
         <span class="json-brace">}</span>
       </div>
 
       <div class="message-block role-assistant" data-delay="10000">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"role"</span>: <span class="json-string">"assistant"</span>,<br>
-        &nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Yes! Servers can request Sampling and Elicitation..."</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"assistant"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Yes! Servers can request Sampling and Elicitation..."</span><br>
         <span class="json-brace">}</span>
       </div>
 
