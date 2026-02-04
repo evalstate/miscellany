@@ -15,7 +15,7 @@ style: |
   }
 
   iframe.demo.demo--column {
-    height: 60vh;
+    height: 65vh;
   }
 
   iframe.demo.demo--short {
@@ -84,6 +84,65 @@ style: |
    }
 
 </style>
+
+<script>
+  (() => {
+    const slideSelector = 'svg[data-marpit-svg]';
+    const activeClass = 'bespoke-marp-active';
+
+    const reloadIframes = (slide) => {
+      const iframes = slide.querySelectorAll('iframe.demo');
+      iframes.forEach((iframe) => {
+        const baseSrc = iframe.dataset.baseSrc || iframe.getAttribute('src');
+        if (!baseSrc) {
+          return;
+        }
+
+        iframe.dataset.baseSrc = baseSrc;
+        const separator = baseSrc.includes('?') ? '&' : '?';
+        iframe.src = `${baseSrc}${separator}reload=${Date.now()}`;
+      });
+    };
+
+    let lastActiveSlide = null;
+    const handleSlideChange = () => {
+      const activeSlide = document.querySelector(`${slideSelector}.${activeClass}`) ||
+                          document.querySelector(`.${activeClass}${slideSelector}`);
+      if (!activeSlide || activeSlide === lastActiveSlide) {
+        return;
+      }
+
+      lastActiveSlide = activeSlide;
+      reloadIframes(activeSlide);
+    };
+
+    const observeSlides = () => {
+      const observer = new MutationObserver(handleSlideChange);
+      document.querySelectorAll(slideSelector).forEach((slide) => {
+        observer.observe(slide, { attributes: true, attributeFilter: ['class'] });
+      });
+
+      handleSlideChange();
+      window.addEventListener('pageshow', handleSlideChange);
+    };
+
+    // Wait for bespoke to initialize
+    const waitAndInit = () => {
+      const slides = document.querySelectorAll(slideSelector);
+      if (slides.length > 0) {
+        observeSlides();
+      } else {
+        requestAnimationFrame(waitAndInit);
+      }
+    };
+
+    if (document.readyState === 'complete') {
+      waitAndInit();
+    } else {
+      window.addEventListener('load', waitAndInit, { once: true });
+    }
+  })();
+</script>
 
 <!-- _class: titlepage -->
 
@@ -169,24 +228,22 @@ style: |
 
 ---
 
-# Measuring Activity
+# What's going on??
 
 <div class="columns">
 
 
 <div>
 
-
-## Initialize Requests
+## Initialize Requests?
 - ### 1% MCP Traffic -> Tool Call
 - ### Unreliable proxy for MCP install
 
 ## Tool Calls: More != Better
 - ### Human vs. Agent usage. High Call rate may indicate failure.
 
-## Sessions with > 1 Tool Call
+## *Sessions with at least 1 Tool Call*
 - ### 2% Conversion rate from initialize
-
 
 </div>
 
@@ -255,14 +312,8 @@ style: |
 
 # Preparing MCP for the future
 
-<iframe class="demo" src="./animations/stdio-simple.html"></iframe>
+<iframe class="demo" loading="lazy" src="./animations/stdio-simple.html"></iframe>
 
-
----
-
-# Streamable HTTP — Dual Cluster
-
-<iframe class="demo" src="./animations/http-dual-cluster.html"></iframe>
 
 ---
 
@@ -274,7 +325,7 @@ style: |
 
 <div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Future Protocol - No Initialize, Capabilities with Request/Response Pair</div>
 
-<iframe class="demo" src="./animations/http-multinode-stateless.html"></iframe>
+<iframe class="demo" loading="lazy" src="./animations/http-multinode-stateless.html"></iframe>
 
 <!-- discoverable with a "discovery" endpoint -->
 
@@ -282,13 +333,13 @@ style: |
 
 <div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Current Protocol - Stateful Connection</div>
 
-<iframe class="demo" src="./animations/http-multinode.html"></iframe>
+<iframe class="demo" loading="lazy" src="./animations/http-multinode.html"></iframe>
 
 ---
 
 <div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Sampling and Elicitation</div>
 
-<iframe class="demo" src="./animations/http-multinode-shared-storage.html"></iframe>
+<iframe class="demo" loading="lazy" src="./animations/http-multinode-shared-storage.html"></iframe>
 
 ---
 
@@ -300,7 +351,7 @@ style: |
 
 <div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Current Protocol - Needs to manage Request Id</div>
 
-<iframe class="demo" src="./animations/http-multinode-shared-storage.html"></iframe>
+<iframe class="demo" loading="lazy" src="./animations/http-multinode-shared-storage.html"></iframe>
 
 ---
 
@@ -311,13 +362,13 @@ style: |
 
 <div>
 
-<iframe class="demo demo--column" src="./animations/mcp-mrtr-flow.html"></iframe>
+<iframe class="demo demo--column" loading="lazy" src="./animations/mcp-mrtr-flow.html"></iframe>
 
 </div>
 
 <div>
 
-<iframe class="demo demo--column" src="./animations/mcp-stateful-request.html"></iframe>
+<iframe class="demo demo--column" loading="lazy" src="./animations/mcp-stateful-request.html"></iframe>
 
 </div>
 
@@ -332,13 +383,13 @@ style: |
 
 <div>
 
-<iframe class="demo demo--column" src="./animations/chat-demo.html"></iframe>
+<iframe class="demo demo--column" loading="lazy" src="./animations/chat-demo.html"></iframe>
 
 </div>
 
 <div>
 
-<iframe class="demo demo--column" src="./animations/chat-api-view.html"></iframe>
+<iframe class="demo demo--column" loading="lazy" src="./animations/chat-api-view.html"></iframe>
 
 </div>
 
@@ -353,13 +404,13 @@ style: |
 
 <div>
 
-<iframe class="demo demo--column" src="./animations/mcp-mrtr-flow.html"></iframe>
+<iframe class="demo demo--column" loading="lazy" src="./animations/mcp-mrtr-flow.html"></iframe>
 
 </div>
 
 <div>
 
-<iframe class="demo demo--column" src="./animations/mcp-mrtr-request.html"></iframe>
+<iframe class="demo demo--column" loading="lazy" src="./animations/mcp-mrtr-request.html"></iframe>
 
 </div>
 
@@ -376,7 +427,7 @@ style: |
 
 <div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">MCP cookies for session semantics</div>
 
-<iframe class="demo" src="./animations/http-multinode-cookie.html"></iframe>
+<iframe class="demo" loading="lazy" src="./animations/http-multinode-cookie.html"></iframe>
 
 ---
 
@@ -405,6 +456,9 @@ style: |
 
 ---
 
+
+---
+
 <!-- _class: transition -->
 
 ### _Thanks to the Transport Working Group_
@@ -417,3 +471,12 @@ style: |
 1. Everything Server PR 2: https://github.com/modelcontextprotocol/servers/pull/2672
 1. Hugging Face MCP Server: https://huggingface.co/mcp
 1. MCP community Working Groups https://modelcontextprotocol-community.github.io/working-groups/
+
+---
+
+
+# Streamable HTTP — Dual Cluster
+
+<iframe class="demo" loading="lazy" src="./animations/http-dual-cluster.html"></iframe>
+
+---
