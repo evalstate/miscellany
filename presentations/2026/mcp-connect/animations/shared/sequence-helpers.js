@@ -4,6 +4,7 @@ function runSequenceAnimation({
   fadeOutOffset = 4000,
   initialDelay = 500,
   lastDelayOverride,
+  onShow,
 } = {}) {
   const groups = (selectors || []).flatMap((selector) =>
     Array.from(document.querySelectorAll(selector))
@@ -22,7 +23,12 @@ function runSequenceAnimation({
 
     groups.forEach((el) => {
       const delay = parseInt(el.dataset.delay, 10) || 0;
-      setTimeout(() => el.classList.add('show'), delay);
+      setTimeout(() => {
+        el.classList.add('show');
+        if (onShow) {
+          onShow(el);
+        }
+      }, delay);
     });
 
     const fadeOutTime = finalDelay + fadeOutOffset;

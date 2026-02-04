@@ -89,7 +89,7 @@ function configureMessage(elements, {
 
   if (elements.session) {
     if (sessionText) {
-      elements.session.textContent = sessionText;
+      elements.session.innerHTML = sessionText;
       elements.session.style.display = 'block';
       elements.session.className = 'message-session' + (sessionError ? ' error' : '');
     } else {
