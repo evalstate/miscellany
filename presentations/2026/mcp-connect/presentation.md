@@ -278,7 +278,7 @@ style: |
 
 ---
 
-# Open Source Client Data!!
+# Open Source Client Data (HF Hub MCP)!!
 
 ## https://huggingface.co/datasets/evalstate/mcp-clients
 
@@ -323,17 +323,23 @@ style: |
 
 ---
 
-<div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Future Protocol - No Initialize, Capabilities with Request/Response Pair</div>
+<div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Current Protocol - Stateful Connection</div>
 
-<iframe class="demo" loading="lazy" src="./animations/http-multinode-stateless.html"></iframe>
+<iframe class="demo" loading="lazy" src="./animations/http-multinode.html"></iframe>
 
 <!-- discoverable with a "discovery" endpoint -->
 
 ---
 
-<div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Current Protocol - Stateful Connection</div>
+<div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Future Protocol - No Initialize, Capabilities with Request/Response Pair</div>
 
-<iframe class="demo" loading="lazy" src="./animations/http-multinode.html"></iframe>
+<iframe class="demo" loading="lazy" src="./animations/http-multinode-stateless.html"></iframe>
+
+---
+
+<!-- _class: transition -->
+
+# Change 2: - MRTR (Multi Round Trip Requests)
 
 ---
 
@@ -342,19 +348,6 @@ style: |
 <iframe class="demo" loading="lazy" src="./animations/http-multinode-shared-storage.html"></iframe>
 
 ---
-
-<!-- _class: transition -->
-
-# Change 2: - Multi Round Trip Requests
-
----
-
-<div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Current Protocol - Needs to manage Request Id</div>
-
-<iframe class="demo" loading="lazy" src="./animations/http-multinode-shared-storage.html"></iframe>
-
----
-
 
 <div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">Multi-round trip flow + stateful request</div>
 
@@ -398,7 +391,7 @@ style: |
 
 ---
 
-<div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">MRTR flow + accumulated request</div>
+<div style="text-align: center; font-size: 22px; font-weight: 600; margin-bottom: 6px;">MRTR flow + Cumulative Request</div>
 
 <div class="columns">
 
@@ -433,9 +426,9 @@ style: |
 
 # Supporting Changes
 
-## Duplication of JSON-RPC content within HTTP Headers.
+## Including MCP content within HTTP Headers.
 
-## Clarification of Sampling / Elicitation usage:
+## Clearer definition of Sampling / Elicitation usage:
 
 <center>
 

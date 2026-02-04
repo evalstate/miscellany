@@ -19,7 +19,7 @@
     .api-window {
       background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
       border-radius: 16px;
-      padding: 16px;
+      padding: 12px;
       width: 480px;
       height: 460px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
@@ -30,27 +30,27 @@
 
     .api-header {
       color: #888;
-      font-size: 12px;
-      margin-bottom: 6px;
-      padding-bottom: 4px;
+      font-size: 11px;
+      margin-bottom: 4px;
+      padding-bottom: 3px;
       border-bottom: 1px solid #333;
     }
 
     .request-label {
       color: #569cd6;
-      font-size: 11px;
-      margin-bottom: 3px;
+      font-size: 10px;
+      margin-bottom: 2px;
       opacity: 0;
     }
     .request-label.show { animation: fadeIn 0.3s ease forwards; }
     .request-label.fade-out { animation: fadeOut 0.8s ease forwards; }
 
     .api-content {
-      font-size: 11px;
-      line-height: 1.35;
+      font-size: 10px;
+      line-height: 1.3;
       flex: 1;
-      overflow: hidden;
-      padding-right: 0;
+      overflow: auto;
+      padding-right: 6px;
       scrollbar-width: none;
     }
 
@@ -67,8 +67,8 @@
     .msg-block {
       opacity: 0;
       transform: translateX(-10px);
-      margin: 2px 0;
-      padding: 2px 0 2px 8px;
+      margin: 1px 0;
+      padding: 1px 0 1px 6px;
       color: #d4d4d4;
     }
 
@@ -91,8 +91,8 @@
     .static-content.fade-out { animation: fadeOut 0.8s ease forwards; }
 
     .request-group {
-      margin-bottom: 4px;
-      padding-bottom: 4px;
+      margin-bottom: 2px;
+      padding-bottom: 2px;
       border-bottom: 1px dashed #333;
     }
 
@@ -136,11 +136,11 @@
 
       <!-- Response 1: Incomplete result with dependent requests -->
       <div class="request-group">
-        <div class="request-label" data-delay="4000">Response #1 — incomplete (dependent_requests)</div>
-        <div class="msg-block server-req" data-delay="4000">
+        <div class="request-label" data-delay="2500">Response #1 — incomplete (dependent_requests)</div>
+        <div class="msg-block server-req" data-delay="2500">
           <span class="json-brace">{</span><br>
           &nbsp;&nbsp;<span class="json-key">"dependent_requests"</span>: <span class="json-brace">{</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-string">"elicitation/create"</span>, <span class="json-key">"summary"</span>: <span class="json-string">"sampling/createMessage"</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-string">"elicitation/create"</span><br>
           &nbsp;&nbsp;<span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
         </div>
@@ -148,22 +148,48 @@
 
       <!-- Request 2: Retry with dependent responses -->
       <div class="request-group">
-        <div class="request-label" data-delay="8000">Request #2 — retry (includes prior responses)</div>
-        <div class="msg-block client-req" data-delay="8000">
+        <div class="request-label" data-delay="5000">Request #2 — retry (elicitation response)</div>
+        <div class="msg-block client-req" data-delay="5000">
           <span class="json-brace">{</span><br>
           &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"dependent_responses"</span>: <span class="json-brace">{</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-string">"accept"</span>, <span class="json-key">"summary"</span>: <span class="json-string">"..."</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"action"</span>: <span class="json-string">"accept"</span> <span class="json-brace">}</span> <span class="json-brace">}</span><br>
           &nbsp;&nbsp;<span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
         </div>
       </div>
 
-      <!-- Response 2: Final result -->
+      <!-- Response 2: Incomplete result with next dependent request -->
       <div class="request-group">
-        <div class="request-label" data-delay="11000">Response #2 — CallToolResult</div>
-        <div class="msg-block server-req" data-delay="11000">
+        <div class="request-label" data-delay="7500">Response #2 — sampling request (dependent_requests)</div>
+        <div class="msg-block server-req" data-delay="7500">
+          <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"dependent_requests"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"summary"</span>: <span class="json-string">"sampling/createMessage"</span><br>
+          &nbsp;&nbsp;<span class="json-brace">}</span><br>
+          <span class="json-brace">}</span>
+        </div>
+      </div>
+
+      <div class="request-group">
+        <div class="request-label" data-delay="10000">Request #3 — retry (sampling response added)</div>
+        <div class="msg-block client-req" data-delay="10000">
+          <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"dependent_responses"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"action"</span>: <span class="json-string">"accept"</span> <span class="json-brace">}</span> <span class="json-brace">}</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"summary"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"content"</span>: <span class="json-string">"..."</span> <span class="json-brace">}</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;<span class="json-brace">}</span><br>
+          <span class="json-brace">}</span>
+        </div>
+      </div>
+
+      <!-- Response 3: Final result -->
+      <div class="request-group">
+        <div class="request-label" data-delay="12500">Response #3 — CallToolResult</div>
+        <div class="msg-block server-req" data-delay="12500">
           <span class="json-brace">{</span><br>
           &nbsp;&nbsp;<span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"status"</span>: <span class="json-string">"success"</span> <span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
@@ -176,12 +202,30 @@
   <script src="shared/sequence-helpers.js"></script>
   <script src="shared/canvas-scale.js"></script>
   <script>
+    const apiContent = document.querySelector('.api-content');
+    const timelineItems = Array.from(document.querySelectorAll('.msg-block, .request-label'));
+    const delays = timelineItems.map((item) => parseInt(item.dataset.delay, 10) || 0);
+    const maxDelay = delays.length ? Math.max(...delays) : 0;
+    const FADE_OUT_OFFSET = 2500;
+    const CYCLE_PAUSE = 3500;
+    const cycleDuration = maxDelay + FADE_OUT_OFFSET + 1000 + CYCLE_PAUSE;
+
+    apiContent.scrollTop = 0;
+    setInterval(() => {
+      apiContent.scrollTop = 0;
+    }, cycleDuration);
+
     runSequenceAnimation({
       selectors: ['.msg-block', '.request-label'],
-      cyclePause: 3000,
-      fadeOutOffset: 4000,
+      cyclePause: CYCLE_PAUSE,
+      fadeOutOffset: FADE_OUT_OFFSET,
       initialDelay: 500,
-      lastDelayOverride: 11000,
+      lastDelayOverride: 12500,
+      onShow: (el) => {
+        if (el.classList.contains('msg-block')) {
+          el.scrollIntoView({ block: 'nearest' });
+        }
+      },
     });
     scaleCanvas();
   </script>

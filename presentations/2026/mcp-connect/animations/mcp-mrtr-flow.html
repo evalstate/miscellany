@@ -193,12 +193,27 @@
   <script src="shared/sequence-helpers.js"></script>
   <script src="shared/canvas-scale.js"></script>
   <script>
+    const flowMessages = document.querySelector('.flow-messages');
+    const flowItems = Array.from(document.querySelectorAll('.flow-msg'));
+    const delays = flowItems.map((item) => parseInt(item.dataset.delay, 10) || 0);
+    const maxDelay = delays.length ? Math.max(...delays) : 0;
+    const FADE_OUT_OFFSET = 2500;
+    const CYCLE_PAUSE = 3500;
+    const cycleDuration = maxDelay + FADE_OUT_OFFSET + 1000 + CYCLE_PAUSE;
+
+    flowMessages.scrollTop = 0;
+    setInterval(() => {
+      flowMessages.scrollTop = 0;
+    }, cycleDuration);
+
     runSequenceAnimation({
       selectors: ['.flow-msg'],
-      cyclePause: 3000,
-      fadeOutOffset: 4000,
+      cyclePause: CYCLE_PAUSE,
+      fadeOutOffset: FADE_OUT_OFFSET,
       initialDelay: 500,
-      scrollContainerSelector: '.flow-messages',
+      onShow: (el) => {
+        el.scrollIntoView({ block: 'nearest' });
+      },
     });
     scaleCanvas();
   </script>

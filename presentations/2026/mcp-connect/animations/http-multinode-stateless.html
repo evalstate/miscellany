@@ -3,7 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="shared/http-diagram.css">
+  <style>
+    /* Override message-session to be much larger for stateless demo */
+    .message-session.caps {
+      padding: 12px 16px;
+      border-radius: 12px;
+      min-width: 180px;
+      background: #e8f5e9;
+      border: 3px solid #66bb6a;
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.35);
+    }
 
+    .message-session .session-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #2e7d32;
+      margin-bottom: 8px;
+    }
+
+    .message-session .cap-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .message-session .cap-chip {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      font-weight: 600;
+      background: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 2px solid #a5d6a7;
+      color: #2e7d32;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Make server response caps orange themed */
+    .message.response .message-session.caps {
+      background: #fff3e0;
+      border-color: #ffa726;
+      box-shadow: 0 6px 20px rgba(255, 152, 0, 0.35);
+    }
+
+    .message.response .message-session .session-label {
+      color: #e65100;
+    }
+
+    .message.response .message-session .cap-chip {
+      border-color: #ffb74d;
+      color: #e65100;
+    }
+  </style>
 </head>
 <body>
   <div class="canvas-root">
@@ -147,7 +200,7 @@
     const yServer3 = 248;
 
     function buildCapsMarkup(label, caps) {
-      const chips = caps.map((cap) => `<span class="cap-chip">${cap}</span>`).join('');
+      const chips = caps.map((cap) => `<span class="cap-chip">${cap} ✓</span>`).join('');
       return `<div class="session-label">${label}</div><div class="cap-row">${chips}</div>`;
     }
 
