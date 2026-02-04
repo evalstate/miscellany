@@ -8,42 +8,54 @@
       background: transparent;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      min-height: 100%;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
       font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-      padding: 10px;
+      padding: 0;
+      overflow: hidden;
     }
     
     .api-window {
       background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
       border-radius: 16px;
       padding: 16px;
-      width: 520px;
-      min-height: 460px;
+      width: 480px;
+      height: 460px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .api-header {
       color: #888;
-      font-size: 11px;
-      margin-bottom: 10px;
-      padding-bottom: 8px;
+      font-size: 12px;
+      margin-bottom: 6px;
+      padding-bottom: 4px;
       border-bottom: 1px solid #333;
     }
 
     .request-label {
       color: #569cd6;
-      font-size: 10px;
-      margin-bottom: 6px;
+      font-size: 11px;
+      margin-bottom: 3px;
       opacity: 0;
     }
     .request-label.show { animation: fadeIn 0.3s ease forwards; }
     .request-label.fade-out { animation: fadeOut 0.8s ease forwards; }
 
     .api-content {
-      font-size: 10px;
-      line-height: 1.45;
+      font-size: 11px;
+      line-height: 1.35;
+      flex: 1;
+      overflow: hidden;
+      padding-right: 0;
+      scrollbar-width: none;
+    }
+
+    .api-content::-webkit-scrollbar {
+      display: none;
     }
 
     .json-brace { color: #d4d4d4; }
@@ -56,7 +68,7 @@
       opacity: 0;
       transform: translateX(-10px);
       margin: 2px 0;
-      padding: 3px 0 3px 8px;
+      padding: 2px 0 2px 8px;
       color: #d4d4d4;
     }
 
@@ -79,8 +91,8 @@
     .static-content.fade-out { animation: fadeOut 0.8s ease forwards; }
 
     .request-group {
-      margin-bottom: 8px;
-      padding-bottom: 8px;
+      margin-bottom: 4px;
+      padding-bottom: 4px;
       border-bottom: 1px dashed #333;
     }
 
@@ -107,50 +119,54 @@
   </style>
 </head>
 <body>
-  <div class="api-window">
+  <div class="api-window canvas-root">
     <div class="api-header">POST /mcp (Client → Server)</div>
     <div class="api-content">
       
       <!-- Request 1: Initial CallToolRequest -->
       <div class="request-group">
-        <div class="request-label" data-delay="0">Request #1</div>
+        <div class="request-label" data-delay="0">Request #1 — tools/call</div>
         <div class="msg-block client-req" data-delay="0">
-          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,
-          <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span>, <span class="json-key">"env"</span>: <span class="json-string">"production"</span> <span class="json-brace">}}</span>
+          <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span>, <span class="json-key">"env"</span>: <span class="json-string">"production"</span> <span class="json-brace">}</span><br>
+          <span class="json-brace">}</span>
         </div>
       </div>
 
-      <!-- Request 2: CallToolRequest + ElicitationRequest + ElicitationResponse -->
+      <!-- Response 1: Incomplete result with dependent requests -->
       <div class="request-group">
-        <div class="request-label" data-delay="5000">Request #2 — includes prior context</div>
-        <div class="msg-block client-req dim" data-delay="5000">
-          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>, <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}}</span>
-        </div>
-        <div class="msg-block server-req dim" data-delay="5200">
-          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"elicitation/request"</span>, <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"message"</span>: <span class="json-string">"Confirm deploy?"</span> <span class="json-brace">}}</span>
-        </div>
-        <div class="msg-block client-resp" data-delay="5400">
-          <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"confirmed"</span>: <span class="json-bool">true</span> <span class="json-brace">}}</span>
+        <div class="request-label" data-delay="4000">Response #1 — incomplete (dependent_requests)</div>
+        <div class="msg-block server-req" data-delay="4000">
+          <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"dependent_requests"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-string">"elicitation/create"</span>, <span class="json-key">"summary"</span>: <span class="json-string">"sampling/createMessage"</span><br>
+          &nbsp;&nbsp;<span class="json-brace">}</span><br>
+          <span class="json-brace">}</span>
         </div>
       </div>
 
-      <!-- Request 3: Everything + SamplingRequest + SamplingResponse -->
+      <!-- Request 2: Retry with dependent responses -->
       <div class="request-group">
-        <div class="request-label" data-delay="10000">Request #3 — full conversation</div>
-        <div class="msg-block client-req dim" data-delay="10000">
-          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>, <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}}</span>
+        <div class="request-label" data-delay="8000">Request #2 — retry (includes prior responses)</div>
+        <div class="msg-block client-req" data-delay="8000">
+          <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"dependent_responses"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-string">"accept"</span>, <span class="json-key">"summary"</span>: <span class="json-string">"..."</span><br>
+          &nbsp;&nbsp;<span class="json-brace">}</span><br>
+          <span class="json-brace">}</span>
         </div>
-        <div class="msg-block server-req dim" data-delay="10100">
-          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"elicitation/request"</span>, ... <span class="json-brace">}</span>
-        </div>
-        <div class="msg-block client-resp dim" data-delay="10200">
-          <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"confirmed"</span>: <span class="json-bool">true</span> <span class="json-brace">}}</span>
-        </div>
-        <div class="msg-block server-req dim" data-delay="10300">
-          <span class="json-brace">{</span> <span class="json-key">"method"</span>: <span class="json-string">"sampling/request"</span>, <span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"prompt"</span>: <span class="json-string">"Generate summary"</span> <span class="json-brace">}}</span>
-        </div>
-        <div class="msg-block client-resp" data-delay="10500">
-          <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"content"</span>: <span class="json-string">"Deployed v2.1.0 to prod..."</span> <span class="json-brace">}}</span>
+      </div>
+
+      <!-- Response 2: Final result -->
+      <div class="request-group">
+        <div class="request-label" data-delay="11000">Response #2 — CallToolResult</div>
+        <div class="msg-block server-req" data-delay="11000">
+          <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"status"</span>: <span class="json-string">"success"</span> <span class="json-brace">}</span><br>
+          <span class="json-brace">}</span>
         </div>
       </div>
 
@@ -158,14 +174,16 @@
   </div>
 
   <script src="shared/sequence-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
   <script>
     runSequenceAnimation({
       selectors: ['.msg-block', '.request-label'],
       cyclePause: 3000,
       fadeOutOffset: 4000,
       initialDelay: 500,
-      lastDelayOverride: 12500,
+      lastDelayOverride: 11000,
     });
+    scaleCanvas();
   </script>
 </body>
 </html>

@@ -6,7 +6,8 @@
 
 </head>
 <body>
-  <div class="diagram">
+  <div class="canvas-root">
+    <div class="diagram">
     <!-- Client -->
     <div class="entity client">
       <div class="entity-box" id="client-box">
@@ -86,13 +87,16 @@
     </div>
   </div>
 
-  <div class="narration" id="narration">
+    <div class="narration" id="narration">
     <span class="step-num" id="step-num">○</span>
     <span id="narration-text">Client sends stateless requests via HTTP...</span>
   </div>
 
+  </div>
+
   <script src="shared/animation-config.js"></script>
   <script src="shared/diagram-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
   <script>
     const message = document.getElementById('message');
     const messageType = document.getElementById('message-type');
@@ -141,6 +145,11 @@
     const yServer1 = 38;
     const yServer2 = 143;
     const yServer3 = 248;
+
+    function buildCapsMarkup(label, caps) {
+      const chips = caps.map((cap) => `<span class="cap-chip">${cap}</span>`).join('');
+      return `<div class="session-label">${label}</div><div class="cap-row">${chips}</div>`;
+    }
 
 
     function setMessagePos(x, y) {
@@ -201,7 +210,16 @@
       // Step 1: tools/call → LB → Node 2 (client caps included)
       {
         setup: () => {
-          configMessage('request', '→', 'tools/call', 'CallToolRequest', 'Client capabilities: tools, prompts', false, 'right');
+          configMessage(
+            'request',
+            '→',
+            'tools/call',
+            'CallToolRequest',
+            buildCapsMarkup('Client capabilities', ['tools', 'prompts']),
+            false,
+            'right'
+          );
+          messageSession.classList.add('caps');
           setMessagePos(pos.client, yClient);
           stepNum.textContent = '1';
           narrationText.textContent = 'Client sends tool call with capabilities on every request';
@@ -221,7 +239,16 @@
       // Step 2: tools/call result ← Node 2 (server caps included)
       {
         setup: () => {
-          configMessage('response', '←', 'tools/call', 'CallToolResult', 'Server capabilities: sampling', false, 'left');
+          configMessage(
+            'response',
+            '←',
+            'tools/call',
+            'CallToolResult',
+            buildCapsMarkup('Server capabilities', ['sampling']),
+            false,
+            'left'
+          );
+          messageSession.classList.add('caps');
           setMessagePos(pos.server2, yServer2);
           stepNum.textContent = '2';
           narrationText.textContent = 'Node 2 responds with result and server capabilities';
@@ -239,7 +266,16 @@
       // Step 3: prompts/list → LB → Node 3
       {
         setup: () => {
-          configMessage('request', '→', 'prompts/list', 'ListPromptsRequest', 'Client capabilities: tools, prompts', false, 'right');
+          configMessage(
+            'request',
+            '→',
+            'prompts/list',
+            'ListPromptsRequest',
+            buildCapsMarkup('Client capabilities', ['tools', 'prompts']),
+            false,
+            'right'
+          );
+          messageSession.classList.add('caps');
           setMessagePos(pos.client, yClient);
           stepNum.textContent = '3';
           narrationText.textContent = 'Next request can hit any node in the cluster';
@@ -259,7 +295,16 @@
       // Step 4: prompts/list result ← Node 3
       {
         setup: () => {
-          configMessage('response', '←', 'prompts/list', 'ListPromptsResult', 'Server capabilities: sampling', false, 'left');
+          configMessage(
+            'response',
+            '←',
+            'prompts/list',
+            'ListPromptsResult',
+            buildCapsMarkup('Server capabilities', ['sampling']),
+            false,
+            'left'
+          );
+          messageSession.classList.add('caps');
           setMessagePos(pos.server3, yServer3);
           stepNum.textContent = '4';
           narrationText.textContent = 'Node 3 replies with its capabilities and result';
@@ -288,6 +333,7 @@
     ];
 
     runStepSequence(steps);
+    scaleCanvas();
   </script>
 </body>
 </html>

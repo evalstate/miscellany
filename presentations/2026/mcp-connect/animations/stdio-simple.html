@@ -7,13 +7,21 @@
     body {
       background: #fafafa;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .canvas-root {
+      display: inline-flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       padding: 24px 20px;
-      overflow: hidden;
     }
 
     /* Process boundary container */
@@ -57,6 +65,7 @@
     .client { left: 0; top: 30px; }
     .client .entity-box {
       width: 130px;
+      min-height: 75px;
       height: 80px;
       border-radius: 16px;
       background: #f5f5f5;
@@ -91,6 +100,7 @@
     .server { right: 0; top: 30px; }
     .server .entity-box {
       width: 130px;
+      min-height: 75px;
       height: 80px;
       border-radius: 16px;
       background: #f5f5f5;
@@ -175,7 +185,8 @@
       font-size: 11px;
       font-weight: 600;
       transition: all 0.4s ease;
-      min-width: 110px;
+      width: 130px;
+      min-height: 75px;
       /* Default: gray/inactive state */
       background: #f5f5f5;
       border: 1px solid #e0e0e0;
@@ -384,7 +395,8 @@
   </style>
 </head>
 <body>
-  <div class="process-boundary">
+  <div class="canvas-root">
+    <div class="process-boundary">
     <div class="process-label">STDIO (Same Process)</div>
     
     <div class="diagram">
@@ -435,13 +447,16 @@
     </div>
   </div>
 
-  <div class="narration" id="narration">
+    <div class="narration" id="narration">
     <span class="step-num" id="step-num">○</span>
     <span id="narration-text">Client spawns server as subprocess...</span>
   </div>
 
+  </div>
+
   <script src="shared/animation-config.js"></script>
   <script src="shared/diagram-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
   <script>
     const message = document.getElementById('message');
     const messageType = document.getElementById('message-type');
@@ -701,6 +716,7 @@
     ];
 
     runStepSequence(steps);
+    scaleCanvas();
   </script>
 </body>
 </html>

@@ -7,11 +7,20 @@
     body {
       background: #fafafa;
       display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 0;
+    }
+
+    .canvas-root {
+      display: inline-flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       padding: 20px 10px;
     }
 
@@ -383,7 +392,8 @@
   </style>
 </head>
 <body>
-  <div class="diagram">
+  <div class="canvas-root">
+    <div class="diagram">
     <!-- User -->
     <div class="entity user">
       <div class="entity-box" id="user-box">User</div>
@@ -471,11 +481,14 @@
     </div>
   </div>
 
-  <div class="narration" id="narration">
+    <div class="narration" id="narration">
     <span class="step-num" id="step-num">○</span>
     <span id="narration-text">Dual-cluster deployment...</span>
   </div>
 
+  </div>
+
+  <script src="shared/canvas-scale.js"></script>
   <script>
     const message = document.getElementById('message');
     const messageType = document.getElementById('message-type');
@@ -624,6 +637,7 @@
       setTimeout(() => s.run(() => { s.after(); cur = (cur + 1) % steps.length; setTimeout(run, cur === 0 ? 1500 : 900); }), 350);
     }
     setTimeout(run, 500);
+    scaleCanvas();
   </script>
 </body>
 </html>

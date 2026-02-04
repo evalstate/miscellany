@@ -14,7 +14,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100%;
+      width: 100vw;
+      height: 100vh;
       font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
     }
     
@@ -22,10 +23,12 @@
       background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
       border-radius: 16px;
       padding: 16px;
-      width: 580px;
-      height: 500px;
+      width: 480px;
+      height: 460px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
       overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     .api-header {
@@ -40,6 +43,13 @@
       font-size: 12px;
       line-height: 1.5;
       color: #d4d4d4;
+      flex: 1;
+      overflow: auto;
+      scrollbar-width: none;
+    }
+
+    .api-content::-webkit-scrollbar {
+      display: none;
     }
 
     .json-brace { color: #d4d4d4; }
@@ -98,7 +108,7 @@
   </style>
 </head>
 <body>
-  <div class="api-window">
+  <div class="api-window canvas-root">
     <div class="api-header">POST /v1/chat/completions</div>
     <div class="api-content">
       <div class="static-content" data-delay="0" id="openBrace">
@@ -156,13 +166,31 @@
   </div>
 
   <script src="shared/sequence-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
   <script>
+    const apiContent = document.querySelector('.api-content');
+    const timelineItems = Array.from(document.querySelectorAll('.message-block, .static-content'));
+    const delays = timelineItems.map((item) => parseInt(item.dataset.delay, 10) || 0);
+    const maxDelay = delays.length ? Math.max(...delays) : 0;
+    const cycleDuration = maxDelay + 4000 + 1000 + 2000;
+    apiContent.scrollTop = 0;
+
+    setInterval(() => {
+      apiContent.scrollTop = 0;
+    }, cycleDuration);
+
     runSequenceAnimation({
       selectors: ['.message-block', '.static-content'],
       cyclePause: 2000,
       fadeOutOffset: 4000,
       initialDelay: 500,
+      onShow: (el) => {
+        if (el.classList.contains('message-block')) {
+          el.scrollIntoView({ block: 'nearest' });
+        }
+      },
     });
+    scaleCanvas();
   </script>
 </body>
 </html>

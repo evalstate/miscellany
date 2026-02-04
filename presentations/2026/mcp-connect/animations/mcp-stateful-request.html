@@ -8,10 +8,12 @@
       background: transparent;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      min-height: 100%;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
       font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-      padding: 10px;
+      padding: 0;
+      overflow: hidden;
     }
     
     .api-window {
@@ -19,7 +21,7 @@
       border-radius: 16px;
       padding: 20px;
       width: 480px;
-      min-height: 460px;
+      height: 460px;
       box-shadow: 0 10px 40px rgba(0,0,0,0.3);
       overflow: hidden;
       position: relative;
@@ -145,7 +147,7 @@
   </style>
 </head>
 <body>
-  <div class="api-window">
+  <div class="api-window canvas-root">
     <div class="api-header">Current: Individual Messages (Stateful)</div>
 
     <!-- Message 1: CallToolRequest -->
@@ -167,7 +169,7 @@
       <div class="direction-label to-client">← Server to Client</div>
       <div class="msg-box">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"elicitation/request"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"elicitation/create"</span>,<br>
         &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span><br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"message"</span>: <span class="json-string">"Confirm deployment to production?"</span><br>
         &nbsp;&nbsp;<span class="json-brace">}</span><br>
@@ -192,7 +194,7 @@
       <div class="direction-label to-client">← Server to Client</div>
       <div class="msg-box">
         <span class="json-brace">{</span><br>
-        &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"sampling/request"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"sampling/createMessage"</span>,<br>
         &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span><br>
         &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"prompt"</span>: <span class="json-string">"Generate deployment summary"</span><br>
         &nbsp;&nbsp;<span class="json-brace">}</span><br>
@@ -239,6 +241,7 @@
     </div>
   </div>
 
+  <script src="shared/canvas-scale.js"></script>
   <script>
     const messages = [
       document.getElementById('msg1'),
@@ -265,6 +268,9 @@
       messages.forEach(m => m.classList.remove('show', 'fade-out'));
       dots.forEach(d => d.classList.remove('active'));
       stateBox.classList.remove('show', 'fade-out');
+
+      // Force reflow to ensure class removal is processed
+      void document.body.offsetHeight;
 
       // Show state box
       setTimeout(() => stateBox.classList.add('show'), 200);
@@ -295,7 +301,18 @@
       setTimeout(runAnimation, totalTime + 1500 + CYCLE_PAUSE);
     }
 
-    setTimeout(runAnimation, 500);
+    function startAnimation() {
+      setTimeout(runAnimation, 500);
+    }
+
+    if (document.readyState === 'complete') {
+      startAnimation();
+    } else {
+      window.addEventListener('load', startAnimation, { once: true });
+    }
+
+    window.addEventListener('pageshow', startAnimation);
+    scaleCanvas();
   </script>
 </body>
 </html>

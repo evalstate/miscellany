@@ -6,7 +6,8 @@
 
 </head>
 <body>
-  <div class="diagram">
+  <div class="canvas-root">
+    <div class="diagram">
     <!-- Client -->
     <div class="entity client">
       <div class="entity-box" id="client-box">
@@ -86,13 +87,16 @@
     </div>
   </div>
 
-  <div class="narration" id="narration">
+    <div class="narration" id="narration">
     <span class="step-num" id="step-num">○</span>
     <span id="narration-text">Shared storage syncs initialize state across servers...</span>
   </div>
 
+  </div>
+
   <script src="shared/animation-config.js"></script>
   <script src="shared/diagram-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
   <script>
     const message = document.getElementById('message');
     const messageType = document.getElementById('message-type');
@@ -171,6 +175,11 @@
         sessionError,
         direction,
       });
+    }
+
+    function setStatus(element, text, className) {
+      element.textContent = text;
+      element.className = 'entity-status' + (text ? ' visible' : '') + (className ? ' ' + className : '');
     }
 
     function resetAll() {
@@ -331,7 +340,7 @@
       // Step 6: Error ← Node 3 doesn't know pending request
       {
         setup: () => {
-          configMessage('error-response', '←', '409 Conflict', 'Unknown requestId', 'RequestId: req_41', true, 'left');
+          configMessage('error-response', '←', 'ERROR', 'Unknown request', 'RequestId: req_41', true, 'left');
           setMessagePos(pos.server3, yServer3);
           stepNum.textContent = '✗';
           narrationText.textContent = 'Shared init state is not enough for server requests';
@@ -358,6 +367,7 @@
     ];
 
     runStepSequence(steps);
+    scaleCanvas();
   </script>
 </body>
 </html>

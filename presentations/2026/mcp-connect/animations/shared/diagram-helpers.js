@@ -102,13 +102,14 @@ function configureMessage(elements, {
   }
 }
 
-function runStepSequence(steps, { initialDelay = 100, stepPause } = {}) {
+function runStepSequence(steps, { initialDelay = 100, stepPause, startOnLoad = true } = {}) {
   if (!steps || steps.length === 0) {
     return;
   }
 
   const pause = stepPause ?? (typeof ANIMATION !== 'undefined' ? ANIMATION.STEP_PAUSE : 1500);
   let currentStep = 0;
+  let animationTimer = null;
 
   function runStep() {
     if (currentStep >= steps.length) {
@@ -118,16 +119,34 @@ function runStepSequence(steps, { initialDelay = 100, stepPause } = {}) {
     const step = steps[currentStep];
     step.setup();
 
-    setTimeout(() => {
+    animationTimer = setTimeout(() => {
       step.animate(() => {
         if (step.after) {
           step.after();
         }
         currentStep++;
-        setTimeout(runStep, pause);
+        animationTimer = setTimeout(runStep, pause);
       });
     }, initialDelay);
   }
 
-  runStep();
+  const start = () => {
+    if (animationTimer) {
+      clearTimeout(animationTimer);
+    }
+    currentStep = 0;
+    runStep();
+  };
+
+  if (startOnLoad) {
+    if (document.readyState === 'complete') {
+      start();
+    } else {
+      window.addEventListener('load', start, { once: true });
+    }
+
+    window.addEventListener('pageshow', start);
+  } else {
+    start();
+  }
 }
