@@ -209,22 +209,10 @@ style: |
 
 <center>
 
-![w:1500](./images/2026-02-03-mcpremote1.png)
+![w:1500](./images/2026-02-05-mcpremote1.png)
 
 </center>
 
-
-
-
----
-
-# HF Hub MCP Server API Activity (from Jun 2025)
-
-<center>
-
-![w:1500](./images/2026-02-03-mcpremote2.png)
-
-</center>
 
 ---
 
@@ -235,15 +223,15 @@ style: |
 
 <div>
 
-## Initialize Requests?
+## *Initialize Requests?*
 - ### 1% MCP Traffic -> Tool Call
 - ### Unreliable proxy for MCP install
 
-## Tool Calls: More != Better
-- ### Human vs. Agent usage. High Call rate may indicate failure.
+## *Tool Calls: More != Better*
+- ### Human vs. Agent usage... high call rate may indicate failure.
 
-## *Sessions with at least 1 Tool Call*
-- ### 2% Conversion rate from initialize
+## *Sessions with > 1 Tool Call*
+- ### 2% Conversion rate from Initialize
 
 </div>
 
@@ -426,9 +414,9 @@ style: |
 
 # Supporting Changes
 
-## Including MCP content within HTTP Headers.
-
-## Clearer definition of Sampling / Elicitation usage:
+### Server Cards for advertising capabilities
+### Including MCP data layer content within HTTP Headers.
+### Clearer definition of Sampling / Elicitation usage:
 
 <center>
 
@@ -440,15 +428,18 @@ style: |
 
 # Transport WG / Relevant SEPs
 
-- ## Handle inconsistencies between transports
-- ## Separate JSON-RPC layer from Protocol Data Layer.
-- ## SEP #1442 - Make MCP Stateless by Default: Move State captured in Initialize to Request/Response cycle.
+### [SEP-1442 - Make MCP Stateless by Default](https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1442)
+ - ### https://github.com/modelcontextprotocol/modelcontextprotocol/issues/1442
 
-- ## Pure HTTP Transport - `https://github.com/mikekistler/pure-http-transport`
+### [SEP-XXXX: Multi Round-Trip Requests](https://github.com/modelcontextprotocol/transports-wg/pull/12)
+ - ### https://github.com/modelcontextprotocol/transports-wg/pull/12
 
-
----
-
+### [SEP-XXXX: Notice to clarify Sampling and Elicitation Request behaviour](https://github.com/modelcontextprotocol/transports-wg/pull/8)
+ - ### https://github.com/modelcontextprotocol/transports-wg/pull/8
+ 
+### [SEP-XXXX: Notice to clarify Sampling and Elicitation Request behaviour](https://github.com/modelcontextprotocol/transports-wg/pull/3)
+ - ### https://github.com/modelcontextprotocol/transports-wg/pull/3
+ 
 
 ---
 
@@ -456,20 +447,3 @@ style: |
 
 ### _Thanks to the Transport Working Group_
 
-<!-- _class: biblio -->
-
-![bg left:33% opacity:20% blur:8px](https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80)
-
-1. Everything Server PR 1: https://github.com/modelcontextprotocol/servers/pull/2789
-1. Everything Server PR 2: https://github.com/modelcontextprotocol/servers/pull/2672
-1. Hugging Face MCP Server: https://huggingface.co/mcp
-1. MCP community Working Groups https://modelcontextprotocol-community.github.io/working-groups/
-
----
-
-
-# Streamable HTTP — Dual Cluster
-
-<iframe class="demo" loading="lazy" src="./animations/http-dual-cluster.html"></iframe>
-
----

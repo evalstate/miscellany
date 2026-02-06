@@ -150,32 +150,32 @@
 
       <div class="flow-msg server-msg" data-delay="2500">
         <div class="msg-content">
-          <div class="msg-type">elicitation/create</div>
-          <div class="msg-detail">server waits for client reply</div>
+          <div class="msg-type">dependent_requests</div>
+          <div class="msg-detail">elicitation/create needed</div>
         </div>
         <div class="arrow">←</div>
       </div>
 
       <div class="flow-msg client-msg" data-delay="5000">
         <div class="msg-content">
-          <div class="msg-type">elicitation/response</div>
-          <div class="msg-detail">client must retain request id</div>
+          <div class="msg-type">Retry tools/call</div>
+          <div class="msg-detail">includes dependent_responses</div>
         </div>
         <div class="arrow">→</div>
       </div>
 
       <div class="flow-msg server-msg" data-delay="7500">
         <div class="msg-content">
-          <div class="msg-type">sampling/createMessage</div>
-          <div class="msg-detail">server keeps call context</div>
+          <div class="msg-type">dependent_requests</div>
+          <div class="msg-detail">sampling/createMessage needed</div>
         </div>
         <div class="arrow">←</div>
       </div>
 
       <div class="flow-msg client-msg" data-delay="10000">
         <div class="msg-content">
-          <div class="msg-type">sampling/response</div>
-          <div class="msg-detail">client responds on new request</div>
+          <div class="msg-type">Retry tools/call</div>
+          <div class="msg-detail">adds sampling response</div>
         </div>
         <div class="arrow">→</div>
       </div>

@@ -128,8 +128,13 @@
         <div class="request-label" data-delay="0">Request #1 — tools/call</div>
         <div class="msg-block client-req" data-delay="0">
           <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"jsonrpc"</span>: <span class="json-string">"2.0"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"id"</span>: <span class="json-string">1</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,<br>
-          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span>, <span class="json-key">"env"</span>: <span class="json-string">"production"</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"arguments"</span>: <span class="json-brace">{</span> <span class="json-key">"env"</span>: <span class="json-string">"production"</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;<span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
         </div>
       </div>
@@ -139,8 +144,13 @@
         <div class="request-label" data-delay="2500">Response #1 — incomplete (dependent_requests)</div>
         <div class="msg-block server-req" data-delay="2500">
           <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"jsonrpc"</span>: <span class="json-string">"2.0"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"id"</span>: <span class="json-string">1</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"dependent_requests"</span>: <span class="json-brace">{</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-string">"elicitation/create"</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"elicitation/create"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"message"</span>: <span class="json-string">"Confirm deploy?"</span>, <span class="json-key">"requestedSchema"</span>: <span class="json-brace">{</span> <span class="json-key">"type"</span>: <span class="json-string">"object"</span> <span class="json-brace">}</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-brace">}</span><br>
           &nbsp;&nbsp;<span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
         </div>
@@ -151,10 +161,15 @@
         <div class="request-label" data-delay="5000">Request #2 — retry (elicitation response)</div>
         <div class="msg-block client-req" data-delay="5000">
           <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"jsonrpc"</span>: <span class="json-string">"2.0"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"id"</span>: <span class="json-string">2</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,<br>
-          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"arguments"</span>: <span class="json-brace">{</span> <span class="json-key">"env"</span>: <span class="json-string">"production"</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;<span class="json-brace">}</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"dependent_responses"</span>: <span class="json-brace">{</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"action"</span>: <span class="json-string">"accept"</span> <span class="json-brace">}</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"action"</span>: <span class="json-string">"accept"</span>, <span class="json-key">"content"</span>: <span class="json-brace">{</span> <span class="json-key">"confirmed"</span>: <span class="json-bool">true</span> <span class="json-brace">}</span> <span class="json-brace">}</span> <span class="json-brace">}</span><br>
           &nbsp;&nbsp;<span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
         </div>
@@ -165,8 +180,13 @@
         <div class="request-label" data-delay="7500">Response #2 — sampling request (dependent_requests)</div>
         <div class="msg-block server-req" data-delay="7500">
           <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"jsonrpc"</span>: <span class="json-string">"2.0"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"id"</span>: <span class="json-string">2</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"dependent_requests"</span>: <span class="json-brace">{</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"summary"</span>: <span class="json-string">"sampling/createMessage"</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"summary"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"sampling/createMessage"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"messages"</span>: <span class="json-bracket">[</span> <span class="json-string">"..."</span> <span class="json-bracket">]</span>, <span class="json-key">"maxTokens"</span>: <span class="json-string">120</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-brace">}</span><br>
           &nbsp;&nbsp;<span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
         </div>
@@ -176,11 +196,16 @@
         <div class="request-label" data-delay="10000">Request #3 — retry (sampling response added)</div>
         <div class="msg-block client-req" data-delay="10000">
           <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;<span class="json-key">"jsonrpc"</span>: <span class="json-string">"2.0"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"id"</span>: <span class="json-string">3</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,<br>
-          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span> <span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span> <span class="json-brace">}</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"arguments"</span>: <span class="json-brace">{</span> <span class="json-key">"env"</span>: <span class="json-string">"production"</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;<span class="json-brace">}</span>,<br>
           &nbsp;&nbsp;<span class="json-key">"dependent_responses"</span>: <span class="json-brace">{</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"action"</span>: <span class="json-string">"accept"</span> <span class="json-brace">}</span> <span class="json-brace">}</span>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"summary"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"content"</span>: <span class="json-string">"..."</span> <span class="json-brace">}</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirm"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"action"</span>: <span class="json-string">"accept"</span>, <span class="json-key">"content"</span>: <span class="json-brace">{</span> <span class="json-key">"confirmed"</span>: <span class="json-bool">true</span> <span class="json-brace">}</span> <span class="json-brace">}</span> <span class="json-brace">}</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"summary"</span>: <span class="json-brace">{</span> <span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"role"</span>: <span class="json-string">"assistant"</span>, <span class="json-key">"content"</span>: <span class="json-brace">{</span> <span class="json-key">"type"</span>: <span class="json-string">"text"</span>, <span class="json-key">"text"</span>: <span class="json-string">"Deploy summary..."</span> <span class="json-brace">}</span>, <span class="json-key">"model"</span>: <span class="json-string">"claude-3-sonnet"</span>, <span class="json-key">"stopReason"</span>: <span class="json-string">"endTurn"</span> <span class="json-brace">}</span> <span class="json-brace">}</span><br>
           &nbsp;&nbsp;<span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
         </div>
@@ -191,7 +216,12 @@
         <div class="request-label" data-delay="12500">Response #3 — CallToolResult</div>
         <div class="msg-block server-req" data-delay="12500">
           <span class="json-brace">{</span><br>
-          &nbsp;&nbsp;<span class="json-key">"result"</span>: <span class="json-brace">{</span> <span class="json-key">"status"</span>: <span class="json-string">"success"</span> <span class="json-brace">}</span><br>
+          &nbsp;&nbsp;<span class="json-key">"jsonrpc"</span>: <span class="json-string">"2.0"</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"id"</span>: <span class="json-string">3</span>,<br>
+          &nbsp;&nbsp;<span class="json-key">"result"</span>: <span class="json-brace">{</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-bracket">[</span> <span class="json-brace">{</span> <span class="json-key">"type"</span>: <span class="json-string">"text"</span>, <span class="json-key">"text"</span>: <span class="json-string">"Deployment queued."</span> <span class="json-brace">}</span> <span class="json-bracket">]</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"isError"</span>: <span class="json-bool">false</span><br>
+          &nbsp;&nbsp;<span class="json-brace">}</span><br>
           <span class="json-brace">}</span>
         </div>
       </div>

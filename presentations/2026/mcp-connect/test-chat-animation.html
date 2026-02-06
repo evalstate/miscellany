@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>MCP MRTR Animation Test</title>
+  <style>
+    body {
+      background: #0f0f23;
+      margin: 0;
+      padding: 30px;
+      min-height: 100vh;
+    }
+    
+    h2 {
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      text-align: center;
+      margin-bottom: 10px;
+      font-weight: 400;
+    }
+
+    .subtitle {
+      color: #666;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 14px;
+    }
+    
+    .demo-section {
+      margin-bottom: 50px;
+    }
+    
+    .side-by-side {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 25px;
+    }
+    
+    .panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .panel-label {
+      color: #888;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    iframe {
+      border: none;
+      border-radius: 16px;
+    }
+    
+    .arrow {
+      color: #444;
+      font-size: 32px;
+      align-self: center;
+      margin-top: 40px;
+    }
+    
+    hr {
+      border: none;
+      border-top: 1px solid #333;
+      margin: 40px 100px;
+    }
+
+    .section-number {
+      color: #f5a623;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      text-align: center;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+
+    .problem-tag {
+      background: #ff4d4d20;
+      color: #ff6b6b;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      margin-left: 10px;
+    }
+
+    .solution-tag {
+      background: #34c75920;
+      color: #34c759;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BEFORE: Current Stateful Approach -->
+  <div class="demo-section">
+    <div class="section-number">1 — Before</div>
+    <h2>Current MCP: Stateful Server <span class="problem-tag">Problem</span></h2>
+    <div class="subtitle">Each message sent individually — server must remember everything</div>
+    <div class="side-by-side">
+      <div class="panel">
+        <div class="panel-label">Message Flow</div>
+        <iframe src="./animations/mcp-mrtr-flow.html" width="440" height="500"></iframe>
+      </div>
+      
+      <div class="arrow">→</div>
+      
+      <div class="panel">
+        <div class="panel-label">What's Actually Sent</div>
+        <iframe src="./animations/mcp-stateful-request.html" width="500" height="500"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- REFERENCE: How Chat APIs Work -->
+  <div class="demo-section">
+    <div class="section-number">2 — Inspiration</div>
+    <h2>How Chat APIs Work</h2>
+    <div class="subtitle">Each request includes full conversation history — server can be stateless</div>
+    <div class="side-by-side">
+      <div class="panel">
+        <div class="panel-label">Chat Interface</div>
+        <iframe src="./animations/chat-demo.html" width="680" height="480"></iframe>
+      </div>
+      
+      <div class="arrow">→</div>
+      
+      <div class="panel">
+        <div class="panel-label">API Request (cumulative)</div>
+        <iframe src="./animations/chat-api-view.html" width="620" height="480"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- AFTER: MRTR Solution -->
+  <div class="demo-section">
+    <div class="section-number">3 — After</div>
+    <h2>MCP Multi-Round-Trip Request (MRTR) <span class="solution-tag">Solution</span></h2>
+    <div class="subtitle">Client sends cumulative context — server can be stateless</div>
+    <div class="side-by-side">
+      <div class="panel">
+        <div class="panel-label">Message Flow</div>
+        <iframe src="./animations/mcp-mrtr-flow.html" width="440" height="500"></iframe>
+      </div>
+      
+      <div class="arrow">→</div>
+      
+      <div class="panel">
+        <div class="panel-label">Client Request (cumulative)</div>
+        <iframe src="./animations/mcp-mrtr-request.html" width="550" height="500"></iframe>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
