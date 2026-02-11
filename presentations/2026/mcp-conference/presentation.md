@@ -75,12 +75,17 @@ style: |
      left: 0;
      right: 0;
      width: 100%;
+     margin: 0;
+     padding: 0;
    }
 
    .bottom-image-flush img {
      width: 100%;
      height: auto;
      object-fit: contain;
+     margin: 0;
+     padding: 0;
+     display: block;
    }
 
 </style>
@@ -393,24 +398,33 @@ async (request, extra) => {
 </div>
 
 
+
 ---
 
 # Agents with ACP
+# (Completing the Circle)
 
 <!-- _class: transition -->
-
 
 ---
 
 <!-- _class: transition -->
 
-<div style="position: absolute; top: 25%; left: 50%; transform: translateX(-50%); text-align: center; width: 90%; z-index: 10;">
+<div style="position: absolute; top: 20%; left: 50%; transform: translateX(-50%); text-align: center; width: 90%; z-index: 10;">
 
-# Thank You!
+## Thank You!
 
-<div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-top: 80px;">
-  <img src="./images/github-mark.svg" alt="GitHub" style="width: 80px; height: 80px; box-shadow: none !important;" />
-  <span style="font-size: 2.5em; font-weight: bold;">github.com/evalstate</span>
+  
+  <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+    <img src="./images/github-mark.svg" alt="GitHub" style="width: 60px; height: 60px; box-shadow: none !important;" />
+    <span style="font-size: 2em; font-weight: bold;">github.com/evalstate</span>
+  </div>
+
+  <div style="display: flex; align-items: center; justify-content: center; gap: 20px;">
+    <img src="./images/xcom-logo-black.png" alt="X" style="width: 60px; height: 60px; box-shadow: none !important;" />
+    <span style="font-size: 2em; font-weight: bold;">x.com/evalstate</span>
+  </div>
+
 </div>
 
 </div>
