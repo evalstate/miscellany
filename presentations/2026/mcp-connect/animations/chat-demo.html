@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    .chat-window {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      border-radius: 16px;
+      padding: 24px;
+      width: 480px;
+      height: 460px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+    }
+
+    .chat-messages {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .message {
+      display: flex;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .message.show {
+      animation: slideIn 0.5s ease forwards;
+    }
+
+    .message.fade-out {
+      animation: fadeOut 0.8s ease forwards;
+    }
+
+    .user-message { justify-content: flex-end; }
+    .assistant-message { justify-content: flex-start; }
+
+    .message-bubble {
+      max-width: 85%;
+      padding: 12px 16px;
+      border-radius: 18px;
+      font-size: 14px;
+      line-height: 1.45;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    .user-message .message-bubble {
+      background: linear-gradient(135deg, #0b93f6 0%, #007AFF 100%);
+      color: white;
+      border-bottom-right-radius: 4px;
+    }
+
+    .assistant-message .message-bubble {
+      background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
+      color: white;
+      border-bottom-left-radius: 4px;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; transform: translateY(0); }
+      to { opacity: 0; transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-window canvas-root">
+    <div class="chat-messages" id="chatMessages">
+      <div class="message user-message" data-delay="0">
+        <div class="message-bubble">Can you help me find information about MCP servers?</div>
+      </div>
+      <div class="message assistant-message" data-delay="2000">
+        <div class="message-bubble">Of course! I can search for MCP server documentation. Let me use the search tool...</div>
+      </div>
+      <div class="message user-message" data-delay="4000">
+        <div class="message-bubble">Great, what transport options are available?</div>
+      </div>
+      <div class="message assistant-message" data-delay="6000">
+        <div class="message-bubble">MCP supports STDIO, Streamable HTTP, and the deprecated SSE transport. HTTP is recommended for remote servers.</div>
+      </div>
+      <div class="message user-message" data-delay="8000">
+        <div class="message-bubble">Can servers make requests back to clients?</div>
+      </div>
+      <div class="message assistant-message" data-delay="10000">
+        <div class="message-bubble">Yes! Servers can request Sampling and Elicitation from clients. This enables interactive workflows.</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="shared/sequence-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
+  <script>
+    runSequenceAnimation({
+      selectors: ['.message'],
+      cyclePause: 2000,
+      fadeOutOffset: 4000,
+      initialDelay: 500,
+    });
+    scaleCanvas();
+  </script>
+</body>
+</html>

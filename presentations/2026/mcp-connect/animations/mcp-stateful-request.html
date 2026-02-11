@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+      padding: 0;
+      overflow: hidden;
+    }
+    
+    .api-window {
+      background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
+      border-radius: 16px;
+      padding: 20px;
+      width: 480px;
+      height: 460px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .api-header {
+      color: #888;
+      font-size: 11px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #333;
+    }
+
+    .direction-label {
+      font-size: 10px;
+      margin-bottom: 10px;
+      padding: 4px 8px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .to-server { background: #0b93f620; color: #0b93f6; }
+    .to-client { background: #f5a62320; color: #f5a623; }
+
+    .single-message {
+      position: absolute;
+      top: 80px;
+      left: 20px;
+      right: 20px;
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    .single-message.show {
+      animation: popIn 0.3s ease forwards;
+    }
+
+    .single-message.fade-out {
+      animation: popOut 0.25s ease forwards;
+    }
+
+    .msg-box {
+      padding: 16px;
+      border-radius: 10px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #d4d4d4;
+    }
+
+    .client-msg .msg-box {
+      background: linear-gradient(135deg, #0b93f615 0%, #007AFF15 100%);
+      border: 1px solid #0b93f640;
+    }
+
+    .server-msg .msg-box {
+      background: linear-gradient(135deg, #f5a62315 0%, #f0981915 100%);
+      border: 1px solid #f5a62340;
+    }
+
+    .json-brace { color: #d4d4d4; }
+    .json-key { color: #9cdcfe; }
+    .json-string { color: #ce9178; }
+    .json-bool { color: #569cd6; }
+
+    .state-indicator {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      padding: 12px;
+      background: #2d2d3a;
+      border-radius: 8px;
+      font-size: 10px;
+      color: #888;
+      opacity: 0;
+    }
+
+    .state-indicator.show {
+      animation: fadeIn 0.3s ease forwards;
+    }
+    .state-indicator.fade-out {
+      animation: fadeOut 0.5s ease forwards;
+    }
+
+    .state-indicator .label {
+      color: #f5a623;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .state-dots {
+      display: flex;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .state-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #444;
+    }
+    .state-dot.active { background: #f5a623; }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes popOut {
+      from { opacity: 1; transform: scale(1); }
+      to { opacity: 0; transform: scale(0.95); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="api-window canvas-root">
+    <div class="api-header">Current: Individual Messages (Stateful)</div>
+
+    <!-- Message 1: CallToolRequest -->
+    <div class="single-message client-msg" id="msg1">
+      <div class="direction-label to-server">→ Client to Server</div>
+      <div class="msg-box">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"tools/call"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"name"</span>: <span class="json-string">"deploy_app"</span>,<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"env"</span>: <span class="json-string">"production"</span><br>
+        &nbsp;&nbsp;<span class="json-brace">}</span><br>
+        <span class="json-brace">}</span>
+      </div>
+    </div>
+
+    <!-- Message 2: ElicitationRequest -->
+    <div class="single-message server-msg" id="msg2">
+      <div class="direction-label to-client">← Server to Client</div>
+      <div class="msg-box">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"elicitation/create"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"message"</span>: <span class="json-string">"Confirm deployment to production?"</span><br>
+        &nbsp;&nbsp;<span class="json-brace">}</span><br>
+        <span class="json-brace">}</span>
+      </div>
+    </div>
+
+    <!-- Message 3: ElicitationResponse -->
+    <div class="single-message client-msg" id="msg3">
+      <div class="direction-label to-server">→ Client to Server</div>
+      <div class="msg-box">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"result"</span>: <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"confirmed"</span>: <span class="json-bool">true</span><br>
+        &nbsp;&nbsp;<span class="json-brace">}</span><br>
+        <span class="json-brace">}</span>
+      </div>
+    </div>
+
+    <!-- Message 4: SamplingRequest -->
+    <div class="single-message server-msg" id="msg4">
+      <div class="direction-label to-client">← Server to Client</div>
+      <div class="msg-box">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"method"</span>: <span class="json-string">"sampling/createMessage"</span>,<br>
+        &nbsp;&nbsp;<span class="json-key">"params"</span>: <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"prompt"</span>: <span class="json-string">"Generate deployment summary"</span><br>
+        &nbsp;&nbsp;<span class="json-brace">}</span><br>
+        <span class="json-brace">}</span>
+      </div>
+    </div>
+
+    <!-- Message 5: SamplingResponse -->
+    <div class="single-message client-msg" id="msg5">
+      <div class="direction-label to-server">→ Client to Server</div>
+      <div class="msg-box">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"result"</span>: <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"content"</span>: <span class="json-string">"Deployed v2.1.0 to prod..."</span><br>
+        &nbsp;&nbsp;<span class="json-brace">}</span><br>
+        <span class="json-brace">}</span>
+      </div>
+    </div>
+
+    <!-- Message 6: CallToolResult -->
+    <div class="single-message server-msg" id="msg6">
+      <div class="direction-label to-client">← Server to Client</div>
+      <div class="msg-box">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"result"</span>: <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;&nbsp;&nbsp;<span class="json-key">"status"</span>: <span class="json-string">"success"</span><br>
+        &nbsp;&nbsp;<span class="json-brace">}</span><br>
+        <span class="json-brace">}</span>
+      </div>
+    </div>
+
+    <!-- State indicator -->
+    <div class="state-indicator" id="stateBox">
+      <div class="label">⚠ Server must maintain state</div>
+      <div>Remembering: tool call, elicitation, sampling context...</div>
+      <div class="state-dots">
+        <div class="state-dot" id="dot1"></div>
+        <div class="state-dot" id="dot2"></div>
+        <div class="state-dot" id="dot3"></div>
+        <div class="state-dot" id="dot4"></div>
+        <div class="state-dot" id="dot5"></div>
+        <div class="state-dot" id="dot6"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="shared/canvas-scale.js"></script>
+  <script>
+    const messages = [
+      document.getElementById('msg1'),
+      document.getElementById('msg2'),
+      document.getElementById('msg3'),
+      document.getElementById('msg4'),
+      document.getElementById('msg5'),
+      document.getElementById('msg6')
+    ];
+    const dots = [
+      document.getElementById('dot1'),
+      document.getElementById('dot2'),
+      document.getElementById('dot3'),
+      document.getElementById('dot4'),
+      document.getElementById('dot5'),
+      document.getElementById('dot6')
+    ];
+    const stateBox = document.getElementById('stateBox');
+    const CYCLE_PAUSE = 3000;
+    const MSG_DURATION = 2500;
+
+    function runAnimation() {
+      // Reset
+      messages.forEach(m => m.classList.remove('show', 'fade-out'));
+      dots.forEach(d => d.classList.remove('active'));
+      stateBox.classList.remove('show', 'fade-out');
+
+      // Force reflow to ensure class removal is processed
+      void document.body.offsetHeight;
+
+      // Show state box
+      setTimeout(() => stateBox.classList.add('show'), 200);
+
+      // Show each message one at a time
+      messages.forEach((msg, i) => {
+        const showTime = i * MSG_DURATION;
+        const hideTime = showTime + MSG_DURATION - 300;
+
+        setTimeout(() => {
+          // Hide previous
+          if (i > 0) messages[i-1].classList.add('fade-out');
+          // Show current
+          msg.classList.add('show');
+          // Activate dot
+          dots[i].classList.add('active');
+        }, showTime);
+      });
+
+      // Fade out last message and state
+      const totalTime = messages.length * MSG_DURATION;
+      setTimeout(() => {
+        messages[messages.length - 1].classList.add('fade-out');
+        stateBox.classList.add('fade-out');
+      }, totalTime);
+
+      // Restart
+      setTimeout(runAnimation, totalTime + 1500 + CYCLE_PAUSE);
+    }
+
+    function startAnimation() {
+      setTimeout(runAnimation, 500);
+    }
+
+    if (document.readyState === 'complete') {
+      startAnimation();
+    } else {
+      window.addEventListener('load', startAnimation, { once: true });
+    }
+
+    window.addEventListener('pageshow', startAnimation);
+    scaleCanvas();
+  </script>
+</body>
+</html>

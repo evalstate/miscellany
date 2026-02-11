@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    }
+    
+    .api-window {
+      background: linear-gradient(135deg, #1e1e1e 0%, #252526 100%);
+      border-radius: 16px;
+      padding: 16px;
+      width: 480px;
+      height: 460px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .api-header {
+      color: #888;
+      font-size: 11px;
+      margin-bottom: 8px;
+      padding-bottom: 6px;
+      border-bottom: 1px solid #333;
+    }
+
+    .api-content {
+      font-size: 12px;
+      line-height: 1.5;
+      color: #d4d4d4;
+      flex: 1;
+      overflow: auto;
+      scrollbar-width: none;
+    }
+
+    .api-content::-webkit-scrollbar {
+      display: none;
+    }
+
+    .json-brace { color: #d4d4d4; }
+    .json-key { color: #9cdcfe; }
+    .json-string { color: #ce9178; }
+    .json-bracket { color: #d4d4d4; }
+    .json-punct { color: #d4d4d4; }
+    
+    .message-block {
+      opacity: 0;
+      transform: translateX(-10px);
+      margin-left: 20px;
+      padding: 4px 0;
+    }
+
+    .message-block.show {
+      animation: slideInLeft 0.4s ease forwards;
+    }
+
+    .message-block.fade-out {
+      animation: fadeOut 0.8s ease forwards;
+    }
+
+    .role-user { border-left: 3px solid #0b93f6; padding-left: 10px; }
+    .role-assistant { border-left: 3px solid #34c759; padding-left: 10px; }
+
+    .static-content {
+      opacity: 0;
+    }
+    .static-content.show {
+      animation: fadeIn 0.3s ease forwards;
+    }
+    .static-content.fade-out {
+      animation: fadeOut 0.8s ease forwards;
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      from { opacity: 1; }
+      to { opacity: 0; }
+    }
+
+    .content-truncated {
+      color: #666;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <div class="api-window canvas-root">
+    <div class="api-header">POST /v1/chat/completions</div>
+    <div class="api-content">
+      <div class="static-content" data-delay="0" id="openBrace">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"messages"</span><span class="json-punct">:</span> <span class="json-bracket">[</span>
+      </div>
+
+      <div class="message-block role-user" data-delay="0">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"user"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Can you help me find information about MCP servers?"</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-assistant" data-delay="2000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"assistant"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Of course! I can search for MCP server documentation..."</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-user" data-delay="4000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"user"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Great, what transport options are available?"</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-assistant" data-delay="6000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"assistant"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"MCP supports STDIO, Streamable HTTP, and..."</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-user" data-delay="8000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"user"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Can servers make requests back to clients?"</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="message-block role-assistant" data-delay="10000">
+        <span class="json-brace">{</span><br>
+        &nbsp;&nbsp;<span class="json-key">"role"</span><span class="json-punct">:</span> <span class="json-string">"assistant"</span><span class="json-punct">,</span><br>
+        &nbsp;&nbsp;<span class="json-key">"content"</span><span class="json-punct">:</span> <span class="json-string">"Yes! Servers can request Sampling and Elicitation..."</span><br>
+        <span class="json-brace">}</span>
+      </div>
+
+      <div class="static-content" data-delay="0" id="closeBrace">
+        &nbsp;&nbsp;<span class="json-bracket">]</span><br>
+        <span class="json-brace">}</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="shared/sequence-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
+  <script>
+    const apiContent = document.querySelector('.api-content');
+    const timelineItems = Array.from(document.querySelectorAll('.message-block, .static-content'));
+    const delays = timelineItems.map((item) => parseInt(item.dataset.delay, 10) || 0);
+    const maxDelay = delays.length ? Math.max(...delays) : 0;
+    const cycleDuration = maxDelay + 4000 + 1000 + 2000;
+    apiContent.scrollTop = 0;
+
+    setInterval(() => {
+      apiContent.scrollTop = 0;
+    }, cycleDuration);
+
+    runSequenceAnimation({
+      selectors: ['.message-block', '.static-content'],
+      cyclePause: 2000,
+      fadeOutOffset: 4000,
+      initialDelay: 500,
+      onShow: (el) => {
+        if (el.classList.contains('message-block')) {
+          el.scrollIntoView({ block: 'nearest' });
+        }
+      },
+    });
+    scaleCanvas();
+  </script>
+</body>
+</html>

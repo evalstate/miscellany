@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="shared/http-diagram.css">
+  <style>
+    /* Override message-session to be much larger for stateless demo */
+    .message-session.caps {
+      padding: 12px 16px;
+      border-radius: 12px;
+      min-width: 180px;
+      background: #e8f5e9;
+      border: 3px solid #66bb6a;
+      box-shadow: 0 6px 20px rgba(76, 175, 80, 0.35);
+    }
+
+    .message-session .session-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #2e7d32;
+      margin-bottom: 8px;
+    }
+
+    .message-session .cap-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .message-session .cap-chip {
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 12px;
+      font-weight: 600;
+      background: white;
+      padding: 6px 12px;
+      border-radius: 8px;
+      border: 2px solid #a5d6a7;
+      color: #2e7d32;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    /* Make server response caps orange themed */
+    .message.response .message-session.caps {
+      background: #fff3e0;
+      border-color: #ffa726;
+      box-shadow: 0 6px 20px rgba(255, 152, 0, 0.35);
+    }
+
+    .message.response .message-session .session-label {
+      color: #e65100;
+    }
+
+    .message.response .message-session .cap-chip {
+      border-color: #ffb74d;
+      color: #e65100;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas-root">
+    <div class="diagram">
+    <!-- Client -->
+    <div class="entity client">
+      <div class="entity-box" id="client-box">
+        <span>MCP Client</span>
+        <span class="entity-status" id="client-status"></span>
+      </div>
+      <div class="state-badge" id="client-state">
+        <div class="badge-title">Connection State</div>
+        <div class="empty-state">stateless</div>
+        <div class="session-id" id="client-session"></div>
+        <div class="caps-row" id="client-caps"></div>
+      </div>
+    </div>
+
+    <!-- Load Balancer -->
+    <div class="entity lb">
+      <div class="entity-box">LB</div>
+    </div>
+
+    <!-- Connection lines -->
+    <div class="connection conn-client-lb"></div>
+    <div class="connection conn-lb-servers"></div>
+
+    <!-- Server Cluster -->
+    <div class="server-cluster">
+      <div class="cluster-label">Streamable HTTP (Stateless)</div>
+    </div>
+
+    <!-- Server Nodes with session badges to the right -->
+    <div class="entity server server-1">
+      <div class="entity-box" id="server-1-box">
+        <span>Node 1</span>
+        <span class="entity-status" id="server-1-status"></span>
+      </div>
+      <div class="state-badge" id="server-1-state">
+        <div class="badge-title">Connection State</div>
+        <div class="empty-state">stateless</div>
+        <div class="session-id" id="server-1-session"></div>
+        <div class="caps-row" id="server-1-caps"></div>
+      </div>
+    </div>
+
+    <div class="entity server server-2">
+      <div class="entity-box" id="server-2-box">
+        <span>Node 2</span>
+        <span class="entity-status" id="server-2-status"></span>
+      </div>
+      <div class="state-badge" id="server-2-state">
+        <div class="badge-title">Connection State</div>
+        <div class="empty-state">stateless</div>
+        <div class="session-id"></div>
+        <div class="caps-row"></div>
+      </div>
+    </div>
+
+    <div class="entity server server-3">
+      <div class="entity-box" id="server-3-box">
+        <span>Node 3</span>
+        <span class="entity-status" id="server-3-status"></span>
+      </div>
+      <div class="state-badge" id="server-3-state">
+        <div class="badge-title">Connection State</div>
+        <div class="empty-state">stateless</div>
+        <div class="session-id" id="server-3-session"></div>
+        <div class="caps-row" id="server-3-caps"></div>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div class="message" id="message">
+      <div class="message-header">
+        <span class="message-type" id="message-type">initialize</span>
+        <span class="message-arrow" id="message-arrow">→</span>
+      </div>
+      <div class="message-detail" id="message-detail">InitializeRequest</div>
+      <div class="message-session" id="message-session">Client capabilities: tools, prompts</div>
+    </div>
+  </div>
+
+    <div class="narration" id="narration">
+    <span class="step-num" id="step-num">○</span>
+    <span id="narration-text">Client sends stateless requests via HTTP...</span>
+  </div>
+
+  </div>
+
+  <script src="shared/animation-config.js"></script>
+  <script src="shared/diagram-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
+  <script>
+    const message = document.getElementById('message');
+    const messageType = document.getElementById('message-type');
+    const messageArrow = document.getElementById('message-arrow');
+    const messageDetail = document.getElementById('message-detail');
+    const messageSession = document.getElementById('message-session');
+    const narration = document.getElementById('narration');
+    const narrationText = document.getElementById('narration-text');
+    const stepNum = document.getElementById('step-num');
+    
+    const clientBox = document.getElementById('client-box');
+    const clientState = document.getElementById('client-state');
+    const clientSession = document.getElementById('client-session');
+    const clientCaps = document.getElementById('client-caps');
+    
+    const server1Box = document.getElementById('server-1-box');
+    const server2Box = document.getElementById('server-2-box');
+    const server3Box = document.getElementById('server-3-box');
+    const server1State = document.getElementById('server-1-state');
+    const server2State = document.getElementById('server-2-state');
+    const server3State = document.getElementById('server-3-state');
+    const server1Session = document.getElementById('server-1-session');
+    const server1Caps = document.getElementById('server-1-caps');
+    const server3Session = document.getElementById('server-3-session');
+    const server3Caps = document.getElementById('server-3-caps');
+
+
+    const messageElements = {
+      container: message,
+      header: message.querySelector('.message-header'),
+      type: messageType,
+      arrow: messageArrow,
+      detail: messageDetail,
+      session: messageSession,
+    };
+
+    // Positions (x centers)
+    const pos = {
+      client: 65,
+      lb: 240,
+      server1: 470,
+      server2: 470,
+      server3: 470
+    };
+    const yClient = 115;
+    const yServer1 = 38;
+    const yServer2 = 143;
+    const yServer3 = 248;
+
+    function buildCapsMarkup(label, caps) {
+      const chips = caps.map((cap) => `<span class="cap-chip">${cap} ✓</span>`).join('');
+      return `<div class="session-label">${label}</div><div class="cap-row">${chips}</div>`;
+    }
+
+
+    function setMessagePos(x, y) {
+      setMessagePosition(message, x, y);
+    }
+
+    function animateMessage(fromX, fromY, toX, toY, duration, callback) {
+      animateMessageBetween(message, fromX, fromY, toX, toY, duration, callback);
+    }
+
+    function animatePath(waypoints, totalDuration, callback) {
+      animatePathBetween(message, waypoints, totalDuration, callback);
+    }
+
+    function configMessage(type, arrow, method, detail, sessionText, sessionError, direction) {
+      configureMessage(messageElements, {
+        type,
+        arrow,
+        method,
+        detail,
+        sessionText,
+        sessionError,
+        direction,
+      });
+    }
+
+    function resetAll() {
+      clientBox.className = 'entity-box';
+      server1Box.className = 'entity-box';
+      server2Box.className = 'entity-box';
+      server3Box.className = 'entity-box';
+      clientState.className = 'state-badge';
+      server1State.className = 'state-badge';
+      server2State.className = 'state-badge';
+      server3State.className = 'state-badge';
+      // Clear dynamic content
+      clientSession.textContent = '';
+      clientCaps.innerHTML = '';
+      server1Session.textContent = '';
+      server1Caps.innerHTML = '';
+      server3Session.textContent = '';
+      server3Caps.innerHTML = '';
+      message.className = 'message';
+    }
+
+    const steps = [
+      // Step 0: Initial state
+      {
+        setup: () => {
+          resetAll();
+          stepNum.textContent = '○';
+          narrationText.textContent = 'Client sends stateless requests via load balancer...';
+          narration.className = 'narration';
+        },
+        animate: (done) => setTimeout(done, ANIMATION.INITIAL_PAUSE),
+        after: () => {}
+      },
+      // Step 1: tools/call → LB → Node 2 (client caps included)
+      {
+        setup: () => {
+          configMessage(
+            'request',
+            '→',
+            'tools/call',
+            'CallToolRequest',
+            buildCapsMarkup('Client capabilities', ['tools', 'prompts']),
+            false,
+            'right'
+          );
+          messageSession.classList.add('caps');
+          setMessagePos(pos.client, yClient);
+          stepNum.textContent = '1';
+          narrationText.textContent = 'Client sends tool call with capabilities on every request';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('alive', 'active');
+        },
+        animate: (done) => animatePath(
+          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server2, y: yServer2}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          clientBox.classList.remove('active');
+          server2Box.classList.add('alive', 'active');
+        }
+      },
+      // Step 2: tools/call result ← Node 2 (server caps included)
+      {
+        setup: () => {
+          configMessage(
+            'response',
+            '←',
+            'tools/call',
+            'CallToolResult',
+            buildCapsMarkup('Server capabilities', ['sampling']),
+            false,
+            'left'
+          );
+          messageSession.classList.add('caps');
+          setMessagePos(pos.server2, yServer2);
+          stepNum.textContent = '2';
+          narrationText.textContent = 'Node 2 responds with result and server capabilities';
+          narration.className = 'narration response-state';
+        },
+        animate: (done) => animatePath(
+          [{x: pos.server2, y: yServer2}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          server2Box.classList.remove('active');
+        }
+      },
+      // Step 3: prompts/list → LB → Node 3
+      {
+        setup: () => {
+          configMessage(
+            'request',
+            '→',
+            'prompts/list',
+            'ListPromptsRequest',
+            buildCapsMarkup('Client capabilities', ['tools', 'prompts']),
+            false,
+            'right'
+          );
+          messageSession.classList.add('caps');
+          setMessagePos(pos.client, yClient);
+          stepNum.textContent = '3';
+          narrationText.textContent = 'Next request can hit any node in the cluster';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('active');
+        },
+        animate: (done) => animatePath(
+          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server3, y: yServer3}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          clientBox.classList.remove('active');
+          server3Box.classList.add('alive', 'active');
+        }
+      },
+      // Step 4: prompts/list result ← Node 3
+      {
+        setup: () => {
+          configMessage(
+            'response',
+            '←',
+            'prompts/list',
+            'ListPromptsResult',
+            buildCapsMarkup('Server capabilities', ['sampling']),
+            false,
+            'left'
+          );
+          messageSession.classList.add('caps');
+          setMessagePos(pos.server3, yServer3);
+          stepNum.textContent = '4';
+          narrationText.textContent = 'Node 3 replies with its capabilities and result';
+          narration.className = 'narration response-state';
+        },
+        animate: (done) => animatePath(
+          [{x: pos.server3, y: yServer3}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          server3Box.classList.remove('active');
+        }
+      },
+      // Step 5: Pause before restart
+      {
+        setup: () => {
+          message.className = 'message';
+          stepNum.textContent = '✓';
+          narrationText.textContent = 'Stateless flow — capabilities travel with each message';
+          narration.className = 'narration success-state';
+        },
+        animate: (done) => setTimeout(done, ANIMATION.ERROR_PAUSE),
+        after: () => {}
+      }
+    ];
+
+    runStepSequence(steps);
+    scaleCanvas();
+  </script>
+</body>
+</html>

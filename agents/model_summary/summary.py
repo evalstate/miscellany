@@ -2,10 +2,8 @@ import asyncio
 from pathlib import Path
 import sys
 from typing import List
-from mcp import GetPromptResult
-from mcp.types import PromptMessage,TextContent
-from fast_agent.core.prompt import Prompt
-from fast_agent import FastAgent
+from fast_agent import FastAgent, Prompt
+from mcp.types import GetPromptResult, PromptMessage, TextContent
 from research_utils import (
     ExtraInformation,
     format_research_report,
@@ -50,7 +48,7 @@ Your output will later be used to produce a prompting guide, so optimise your re
 async def main():
     # use the --model command line switch or agent arguments to change model
     async with fast.run() as agent:
-
+        await agent.interactive()
         model_id = None
         if "--research" in sys.argv:
             model_id = sys.argv[sys.argv.index("--research") + 1]
@@ -79,8 +77,8 @@ async def main():
                         "fetch-prompt", {"url": URLWithReason.url}
                     )
                     messages = await agent.research_fetch.generate(fetch_prompt.messages)
-                    content = messages.last_text()
-                    if "NO USEFUL CONTENT" not in (content or ""):
+                    content = messages.last_text() or ""
+                    if "NO USEFUL CONTENT" not in content:
                         sources.append((URLWithReason.url, content))
 
         research_report = format_research_report(sources)

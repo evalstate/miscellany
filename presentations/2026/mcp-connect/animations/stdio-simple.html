@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #fafafa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .canvas-root {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 20px;
+    }
+
+    /* Process boundary container */
+    .process-boundary {
+      border: 2px dashed #9e9e9e;
+      border-radius: 20px;
+      padding: 30px 30px;
+      background: rgba(255, 255, 255, 0.5);
+      position: relative;
+    }
+
+    .process-label {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fafafa;
+      padding: 4px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      color: #616161;
+      white-space: nowrap;
+    }
+
+    .diagram {
+      position: relative;
+      width: 500px;
+      height: 220px;
+    }
+
+    /* Entity base styles */
+    .entity {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Client - starts grey, becomes blue */
+    .client { left: 0; top: 30px; }
+    .client .entity-box {
+      width: 130px;
+      min-height: 75px;
+      height: 80px;
+      border-radius: 16px;
+      background: #f5f5f5;
+      border: 3px solid #9e9e9e;
+      color: #9e9e9e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.5s ease;
+      text-align: center;
+      line-height: 1.3;
+      gap: 4px;
+    }
+
+    .client .entity-box.alive {
+      background: #e3f2fd;
+      border-color: #1976d2;
+      color: #1976d2;
+    }
+
+    .client .entity-box.active {
+      background: #bbdefb;
+      border-color: #1976d2;
+      color: #1976d2;
+      box-shadow: 0 4px 20px rgba(25, 118, 210, 0.3);
+    }
+
+    /* Server - starts grey, becomes orange */
+    .server { right: 0; top: 30px; }
+    .server .entity-box {
+      width: 130px;
+      min-height: 75px;
+      height: 80px;
+      border-radius: 16px;
+      background: #f5f5f5;
+      border: 3px solid #9e9e9e;
+      color: #9e9e9e;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.5s ease;
+      text-align: center;
+      line-height: 1.3;
+      gap: 4px;
+    }
+
+    .server .entity-box.alive {
+      background: #fff3e0;
+      border-color: #ef6c00;
+      color: #ef6c00;
+    }
+
+    .server .entity-box.active {
+      background: #ffe0b2;
+      border-color: #ef6c00;
+      color: #ef6c00;
+      box-shadow: 0 4px 20px rgba(239, 108, 0, 0.3);
+    }
+
+    .server .entity-box.waiting {
+      animation: waitingPulse 1s ease-in-out infinite;
+    }
+
+    @keyframes waitingPulse {
+      0%, 100% { 
+        background: #fff3e0;
+        border-color: #ef6c00;
+        box-shadow: 0 4px 20px rgba(239, 108, 0, 0.2);
+      }
+      50% { 
+        background: #ffe0b2;
+        border-color: #e65100;
+        box-shadow: 0 4px 30px rgba(239, 108, 0, 0.5);
+      }
+    }
+
+    .entity-status {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .entity-status.visible {
+      opacity: 1;
+    }
+
+    .entity-status.waiting {
+      background: #e65100;
+      color: white;
+      animation: statusBlink 0.8s ease-in-out infinite;
+    }
+
+    @keyframes statusBlink {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.05); }
+    }
+
+    /* State indicator badge - shows capabilities learned */
+    .state-badge {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+      transition: all 0.4s ease;
+      width: 130px;
+      min-height: 75px;
+      /* Default: gray/inactive state */
+      background: #f5f5f5;
+      border: 1px solid #e0e0e0;
+      color: #9e9e9e;
+    }
+
+    .state-badge.active {
+      background: #e8f5e9;
+      border: 1px solid #a5d6a7;
+      color: #2e7d32;
+    }
+
+    .state-badge .badge-title {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #999;
+      font-weight: 500;
+    }
+
+    .state-badge.active .badge-title {
+      color: #666;
+    }
+
+    .state-badge .caps-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      justify-content: center;
+    }
+
+    .state-badge .cap {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 9px;
+      background: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #e0e0e0;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .state-badge.active .cap {
+      border-color: #c8e6c9;
+      opacity: 1;
+    }
+
+    .state-badge .cap .check {
+      color: #4caf50;
+      font-weight: bold;
+    }
+
+    .state-badge .empty-state {
+      font-size: 9px;
+      color: #bdbdbd;
+      font-style: italic;
+    }
+
+    .state-badge.active .empty-state {
+      display: none;
+    }
+
+    /* Connection line */
+    .connection {
+      position: absolute;
+      left: 145px;
+      right: 145px;
+      top: 70px;
+      height: 2px;
+      background: #bdbdbd;
+    }
+
+    .connection-label {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px 12px;
+      font-size: 11px;
+      color: #757575;
+      font-weight: 500;
+      white-space: nowrap;
+      border-radius: 4px;
+    }
+
+    /* The moving message - centered around arrow */
+    .message {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      pointer-events: none;
+      z-index: 100;
+      transform: translateX(-50%);
+    }
+
+    .message.visible {
+      opacity: 1;
+    }
+
+    .message-header {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .message-arrow {
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .message-type {
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+    }
+
+    .message-detail {
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-family: 'SF Mono', Monaco, monospace;
+      background: rgba(255,255,255,0.95);
+      color: #666;
+      border: 1px solid #e0e0e0;
+    }
+
+    .message.request .message-arrow { color: #1976d2; }
+    .message.request .message-type {
+      background: #1976d2;
+      color: white;
+    }
+
+    .message.response .message-arrow { color: #ef6c00; }
+    .message.response .message-type {
+      background: #ef6c00;
+      color: white;
+    }
+
+    .message.notification .message-arrow { color: #7b1fa2; }
+    .message.notification .message-type {
+      background: #7b1fa2;
+      color: white;
+    }
+
+    .message.server-request .message-arrow { color: #ef6c00; }
+    .message.server-request .message-type {
+      background: #ef6c00;
+      color: white;
+    }
+
+    .message.client-response .message-arrow { color: #1976d2; }
+    .message.client-response .message-type {
+      background: #1976d2;
+      color: white;
+    }
+
+    /* Narration */
+    .narration {
+      margin-top: 30px;
+      padding: 16px 24px;
+      background: white;
+      border: 2px solid #e0e0e0;
+      border-radius: 12px;
+      font-size: 15px;
+      color: #333;
+      max-width: 650px;
+      text-align: center;
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .narration .step-num {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      background: #9e9e9e;
+      color: white;
+      border-radius: 50%;
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 28px;
+      text-align: center;
+      margin-right: 14px;
+      flex-shrink: 0;
+      transition: background 0.3s ease;
+    }
+
+    .narration.request-state .step-num { background: #1976d2; }
+    .narration.response-state .step-num { background: #ef6c00; }
+    .narration.notification-state .step-num { background: #7b1fa2; }
+    .narration.success-state .step-num { background: #4caf50; }
+    .narration.waiting-state .step-num { background: #e65100; }
+  </style>
+</head>
+<body>
+  <div class="canvas-root">
+    <div class="process-boundary">
+    <div class="process-label">STDIO (Same Process)</div>
+    
+    <div class="diagram">
+      <!-- Client -->
+      <div class="entity client">
+        <div class="entity-box" id="client-box">
+          <span>MCP Client</span>
+          <span class="entity-status" id="client-status"></span>
+        </div>
+        <div class="state-badge" id="client-state">
+          <div class="badge-title">Connection State</div>
+          <div class="empty-state">not connected</div>
+          <div class="caps-list">
+            <span class="cap"><span class="check">✓</span> tools</span>
+            <span class="cap"><span class="check">✓</span> prompts</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Connection line -->
+      <div class="connection">
+        <div class="connection-label">stdin / stdout</div>
+      </div>
+
+      <!-- Server -->
+      <div class="entity server">
+        <div class="entity-box" id="server-box">
+          <span>MCP Server</span>
+          <span class="entity-status" id="server-status"></span>
+        </div>
+        <div class="state-badge" id="server-state">
+          <div class="badge-title">Connection State</div>
+          <div class="empty-state">not connected</div>
+          <div class="caps-list">
+            <span class="cap"><span class="check">✓</span> sampling</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="message" id="message">
+        <div class="message-header">
+          <span class="message-type" id="message-type">initialize</span>
+          <span class="message-arrow" id="message-arrow">→</span>
+        </div>
+        <div class="message-detail" id="message-detail">request</div>
+      </div>
+    </div>
+  </div>
+
+    <div class="narration" id="narration">
+    <span class="step-num" id="step-num">○</span>
+    <span id="narration-text">Client spawns server as subprocess...</span>
+  </div>
+
+  </div>
+
+  <script src="shared/animation-config.js"></script>
+  <script src="shared/diagram-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
+  <script>
+    const message = document.getElementById('message');
+    const messageType = document.getElementById('message-type');
+    const messageArrow = document.getElementById('message-arrow');
+    const messageDetail = document.getElementById('message-detail');
+    const narration = document.getElementById('narration');
+    const narrationText = document.getElementById('narration-text');
+    const stepNum = document.getElementById('step-num');
+    const clientBox = document.getElementById('client-box');
+    const serverBox = document.getElementById('server-box');
+    const clientState = document.getElementById('client-state');
+    const serverState = document.getElementById('server-state');
+    const clientStatus = document.getElementById('client-status');
+    const serverStatus = document.getElementById('server-status');
+
+
+    const messageElements = {
+      container: message,
+      header: message.querySelector('.message-header'),
+      type: messageType,
+      arrow: messageArrow,
+      detail: messageDetail,
+    };
+
+    const clientCenter = 65;
+    const serverCenter = 435;
+    const msgY = 45;
+
+
+    function setMessagePos(x, y) {
+      setMessagePosition(message, x, y);
+    }
+
+    function animateMessage(fromX, fromY, toX, toY, duration, callback) {
+      animateMessageBetween(message, fromX, fromY, toX, toY, duration, callback);
+    }
+
+    function configMessage(type, arrow, method, detail, direction) {
+      configureMessage(messageElements, {
+        type,
+        arrow,
+        method,
+        detail,
+        direction,
+      });
+    }
+
+    function setStatus(element, text, className) {
+      element.textContent = text;
+      element.className = 'entity-status' + (text ? ' visible' : '') + (className ? ' ' + className : '');
+    }
+
+    const steps = [
+      // Step 0: Initial grey state
+      {
+        setup: () => {
+          message.className = 'message';
+          stepNum.textContent = '○';
+          narrationText.textContent = 'Client spawns server as subprocess...';
+          narration.className = 'narration';
+          clientBox.className = 'entity-box';
+          serverBox.className = 'entity-box';
+          clientState.classList.remove('active');
+          serverState.classList.remove('active');
+          setStatus(clientStatus, '', '');
+          setStatus(serverStatus, '', '');
+        },
+        animate: (done) => setTimeout(done, ANIMATION.INITIAL_PAUSE),
+        after: () => {}
+      },
+      // Step 1: Initialize request Client → Server
+      {
+        setup: () => {
+          configMessage('request', '→', 'initialize', 'InitializeRequest', 'right');
+          setMessagePos(clientCenter, msgY);
+          stepNum.textContent = '1';
+          narrationText.textContent = 'Client sends InitializeRequest with capabilities';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('alive', 'active');
+        },
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => { 
+          clientBox.classList.remove('active');
+          serverBox.classList.add('alive', 'active');
+        }
+      },
+      // Step 2: Initialize result Server → Client
+      {
+        setup: () => {
+          configMessage('response', '←', 'initialize', 'InitializeResult', 'left');
+          setMessagePos(serverCenter, msgY);
+          stepNum.textContent = '2';
+          narrationText.textContent = 'Server responds with InitializeResult';
+          narration.className = 'narration response-state';
+        },
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => { 
+          serverBox.classList.remove('active');
+          clientBox.classList.add('active');
+        }
+      },
+      // Step 3: notifications/initialized Client → Server
+      {
+        setup: () => {
+          clientBox.classList.remove('active');
+          configMessage('notification', '→', 'initialized', 'notification', 'right');
+          setMessagePos(clientCenter, msgY);
+          stepNum.textContent = '3';
+          narrationText.textContent = 'Client sends initialized notification';
+          narration.className = 'narration notification-state';
+          clientBox.classList.add('active');
+        },
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => { 
+          clientBox.classList.remove('active');
+          clientState.classList.add('active');
+          serverState.classList.add('active');
+        }
+      },
+      // Step 4: tools/list request
+      {
+        setup: () => {
+          configMessage('request', '→', 'tools/list', 'ListToolsRequest', 'right');
+          setMessagePos(clientCenter, msgY);
+          stepNum.textContent = '4';
+          narrationText.textContent = 'Client requests tool list';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('active');
+        },
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => { 
+          clientBox.classList.remove('active');
+          serverBox.classList.add('active'); 
+        }
+      },
+      // Step 5: tools/list response
+      {
+        setup: () => {
+          configMessage('response', '←', 'tools/list', 'ListToolsResult', 'left');
+          setMessagePos(serverCenter, msgY);
+          stepNum.textContent = '5';
+          narrationText.textContent = 'Server returns ListToolsResult';
+          narration.className = 'narration response-state';
+        },
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => { 
+          serverBox.classList.remove('active');
+        }
+      },
+      // Step 6: prompts/list request
+      {
+        setup: () => {
+          configMessage('request', '→', 'prompts/list', 'ListPromptsRequest', 'right');
+          setMessagePos(clientCenter, msgY);
+          stepNum.textContent = '6';
+          narrationText.textContent = 'Client requests prompt list';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('active');
+        },
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => { 
+          clientBox.classList.remove('active');
+          serverBox.classList.add('active'); 
+        }
+      },
+      // Step 7: prompts/list response
+      {
+        setup: () => {
+          configMessage('response', '←', 'prompts/list', 'ListPromptsResult', 'left');
+          setMessagePos(serverCenter, msgY);
+          stepNum.textContent = '7';
+          narrationText.textContent = 'Server returns ListPromptsResult';
+          narration.className = 'narration response-state';
+        },
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => { 
+          serverBox.classList.remove('active');
+        }
+      },
+      // Step 8: tools/call request
+      {
+        setup: () => {
+          configMessage('request', '→', 'tools/call', 'CallToolRequest', 'right');
+          setMessagePos(clientCenter, msgY);
+          stepNum.textContent = '8';
+          narrationText.textContent = 'Client calls a tool';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('active');
+        },
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => { 
+          clientBox.classList.remove('active');
+          serverBox.classList.add('active');
+          setStatus(serverStatus, 'processing', '');
+        }
+      },
+      // Step 9: Server sends sampling request BACK to client (server waits)
+      {
+        setup: () => {
+          configMessage('server-request', '←', 'sampling/createMessage', 'CreateMessageRequest', 'left');
+          setMessagePos(serverCenter, msgY);
+          stepNum.textContent = '9';
+          narrationText.textContent = 'Server needs LLM — sends sampling request to client';
+          narration.className = 'narration waiting-state';
+          serverBox.classList.remove('active');
+          serverBox.classList.add('waiting');
+          setStatus(serverStatus, 'WAITING', 'waiting');
+        },
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => {
+          clientBox.classList.add('active');
+        }
+      },
+      // Step 10: Client responds with sampling result
+      {
+        setup: () => {
+          configMessage('client-response', '→', 'sampling/createMessage', 'CreateMessageResult', 'right');
+          setMessagePos(clientCenter, msgY);
+          stepNum.textContent = '10';
+          narrationText.textContent = 'Client returns LLM response — server resumes';
+          narration.className = 'narration response-state';
+        },
+        animate: (done) => animateMessage(clientCenter, msgY, serverCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => {
+          clientBox.classList.remove('active');
+          serverBox.classList.remove('waiting');
+          serverBox.classList.add('active');
+          setStatus(serverStatus, 'processing', '');
+        }
+      },
+      // Step 11: tools/call response
+      {
+        setup: () => {
+          configMessage('response', '←', 'tools/call', 'CallToolResult', 'left');
+          setMessagePos(serverCenter, msgY);
+          stepNum.textContent = '11';
+          narrationText.textContent = 'Server completes tool call';
+          narration.className = 'narration response-state';
+        },
+        animate: (done) => animateMessage(serverCenter, msgY, clientCenter, msgY, ANIMATION.MSG_DURATION, done),
+        after: () => {
+          serverBox.classList.remove('active');
+          setStatus(serverStatus, '', '');
+        }
+      },
+      // Step 12: Pause before restart
+      {
+        setup: () => {
+          message.className = 'message';
+          stepNum.textContent = '✓';
+          narrationText.textContent = 'Connection complete — both sides know capabilities';
+          narration.className = 'narration success-state';
+        },
+        animate: (done) => setTimeout(done, ANIMATION.ERROR_PAUSE),
+        after: () => {}
+      }
+    ];
+
+    runStepSequence(steps);
+    scaleCanvas();
+  </script>
+</body>
+</html>

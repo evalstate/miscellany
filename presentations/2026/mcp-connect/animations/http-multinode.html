@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="shared/http-diagram.css">
+
+</head>
+<body>
+  <div class="canvas-root">
+    <div class="diagram">
+    <!-- Client -->
+    <div class="entity client">
+      <div class="entity-box" id="client-box">
+        <span>MCP Client</span>
+        <span class="entity-status" id="client-status"></span>
+      </div>
+      <div class="state-badge" id="client-state">
+        <div class="badge-title">Connection State</div>
+        <div class="empty-state">Mcp-Session-Id: —</div>
+        <div class="session-id" id="client-session"></div>
+        <div class="caps-row" id="client-caps"></div>
+      </div>
+    </div>
+
+    <!-- Load Balancer -->
+    <div class="entity lb">
+      <div class="entity-box">LB</div>
+    </div>
+
+    <!-- Connection lines -->
+    <div class="connection conn-client-lb"></div>
+    <div class="connection conn-lb-servers"></div>
+
+    <!-- Server Cluster -->
+    <div class="server-cluster">
+      <div class="cluster-label">Streamable HTTP (MCP Servers)</div>
+    </div>
+
+    <!-- Server Nodes with session badges to the right -->
+    <div class="entity server server-1">
+      <div class="entity-box" id="server-1-box">
+        <span>Node 1</span>
+        <span class="entity-status" id="server-1-status"></span>
+      </div>
+      <div class="state-badge" id="server-1-state">
+        <div class="badge-title">Connection State</div>
+        <div class="empty-state">Mcp-Session-Id: —</div>
+        <div class="session-id" id="server-1-session"></div>
+        <div class="caps-row" id="server-1-caps"></div>
+      </div>
+    </div>
+
+    <div class="entity server server-2">
+      <div class="entity-box" id="server-2-box">
+        <span>Node 2</span>
+        <span class="entity-status" id="server-2-status"></span>
+      </div>
+      <div class="state-badge" id="server-2-state">
+        <div class="badge-title">Connection State</div>
+        <div class="empty-state">Mcp-Session-Id: —</div>
+        <div class="session-id"></div>
+        <div class="caps-row"></div>
+      </div>
+    </div>
+
+    <div class="entity server server-3">
+      <div class="entity-box" id="server-3-box">
+        <span>Node 3</span>
+        <span class="entity-status" id="server-3-status"></span>
+      </div>
+      <div class="state-badge" id="server-3-state">
+        <div class="badge-title">Connection State</div>
+        <div class="empty-state">Mcp-Session-Id: —</div>
+        <div class="session-id" id="server-3-session"></div>
+        <div class="caps-row" id="server-3-caps"></div>
+      </div>
+    </div>
+
+    <!-- Message -->
+    <div class="message" id="message">
+      <div class="message-header">
+        <span class="message-type" id="message-type">initialize</span>
+        <span class="message-arrow" id="message-arrow">→</span>
+      </div>
+      <div class="message-detail" id="message-detail">InitializeRequest</div>
+      <div class="message-session" id="message-session">Mcp-Session-Id: sess_abc123</div>
+    </div>
+  </div>
+
+    <div class="narration" id="narration">
+    <span class="step-num" id="step-num">○</span>
+    <span id="narration-text">Client connects via HTTP...</span>
+  </div>
+
+  </div>
+
+  <script src="shared/animation-config.js"></script>
+  <script src="shared/diagram-helpers.js"></script>
+  <script src="shared/canvas-scale.js"></script>
+  <script>
+    const message = document.getElementById('message');
+    const messageType = document.getElementById('message-type');
+    const messageArrow = document.getElementById('message-arrow');
+    const messageDetail = document.getElementById('message-detail');
+    const messageSession = document.getElementById('message-session');
+    const narration = document.getElementById('narration');
+    const narrationText = document.getElementById('narration-text');
+    const stepNum = document.getElementById('step-num');
+    
+    const clientBox = document.getElementById('client-box');
+    const clientState = document.getElementById('client-state');
+    const clientSession = document.getElementById('client-session');
+    const clientCaps = document.getElementById('client-caps');
+    
+    const server1Box = document.getElementById('server-1-box');
+    const server2Box = document.getElementById('server-2-box');
+    const server3Box = document.getElementById('server-3-box');
+    const server1State = document.getElementById('server-1-state');
+    const server2State = document.getElementById('server-2-state');
+    const server3State = document.getElementById('server-3-state');
+    const server1Session = document.getElementById('server-1-session');
+    const server1Caps = document.getElementById('server-1-caps');
+    const server3Session = document.getElementById('server-3-session');
+    const server3Caps = document.getElementById('server-3-caps');
+
+
+    const messageElements = {
+      container: message,
+      header: message.querySelector('.message-header'),
+      type: messageType,
+      arrow: messageArrow,
+      detail: messageDetail,
+      session: messageSession,
+    };
+
+    // Positions (x centers)
+    const pos = {
+      client: 65,
+      lb: 240,
+      server1: 470,
+      server2: 470,
+      server3: 470
+    };
+    const yClient = 115;
+    const yServer1 = 38;
+    const yServer2 = 143;
+    const yServer3 = 248;
+
+
+    function setMessagePos(x, y) {
+      setMessagePosition(message, x, y);
+    }
+
+    function animateMessage(fromX, fromY, toX, toY, duration, callback) {
+      animateMessageBetween(message, fromX, fromY, toX, toY, duration, callback);
+    }
+
+    function animatePath(waypoints, totalDuration, callback) {
+      animatePathBetween(message, waypoints, totalDuration, callback);
+    }
+
+    function configMessage(type, arrow, method, detail, sessionText, sessionError, direction) {
+      configureMessage(messageElements, {
+        type,
+        arrow,
+        method,
+        detail,
+        sessionText,
+        sessionError,
+        direction,
+      });
+    }
+
+    function resetAll() {
+      clientBox.className = 'entity-box';
+      server1Box.className = 'entity-box';
+      server2Box.className = 'entity-box';
+      server3Box.className = 'entity-box';
+      clientState.className = 'state-badge';
+      server1State.className = 'state-badge';
+      server2State.className = 'state-badge';
+      server3State.className = 'state-badge';
+      // Clear dynamic content
+      clientSession.textContent = '';
+      clientCaps.innerHTML = '';
+      server1Session.textContent = '';
+      server1Caps.innerHTML = '';
+      server3Session.textContent = '';
+      server3Caps.innerHTML = '';
+      message.className = 'message';
+    }
+
+    const steps = [
+      // Step 0: Initial state
+      {
+        setup: () => {
+          resetAll();
+          stepNum.textContent = '○';
+          narrationText.textContent = 'Client connects to server cluster via load balancer...';
+          narration.className = 'narration';
+        },
+        animate: (done) => setTimeout(done, ANIMATION.INITIAL_PAUSE),
+        after: () => {}
+      },
+      // Step 1: Initialize request → LB → Node 1
+      {
+        setup: () => {
+          configMessage('request', '→', 'initialize', 'InitializeRequest', null, false, 'right');
+          setMessagePos(pos.client, yClient);
+          stepNum.textContent = '1';
+          narrationText.textContent = 'Client sends InitializeRequest with capabilities';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('alive', 'active');
+        },
+        animate: (done) => animatePath(
+          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server1, y: yServer1}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          clientBox.classList.remove('active');
+          server1Box.classList.add('alive', 'active');
+        }
+      },
+      // Step 2: Initialize result ← with session ID
+      {
+        setup: () => {
+          configMessage('response', '←', 'initialize', 'InitializeResult', 'Mcp-Session-Id: sess_abc123', false, 'left');
+          setMessagePos(pos.server1, yServer1);
+          stepNum.textContent = '2';
+          narrationText.textContent = 'Node 1 creates session, stores client capabilities';
+          narration.className = 'narration response-state';
+          // Populate server 1 state
+          server1Session.textContent = 'sess_abc123';
+          server1Caps.innerHTML = '<span class="cap">sampling ✓</span>';
+          server1State.classList.add('session');
+        },
+        animate: (done) => animatePath(
+          [{x: pos.server1, y: yServer1}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          server1Box.classList.remove('active');
+          clientSession.textContent = 'sess_abc123';
+          clientState.classList.add('session');
+        }
+      },
+      // Step 3: notifications/initialized → LB → Node 1
+      {
+        setup: () => {
+          configMessage('notification', '→', 'initialized', 'notification', 'Mcp-Session-Id: sess_abc123', false, 'right');
+          setMessagePos(pos.client, yClient);
+          stepNum.textContent = '3';
+          narrationText.textContent = 'Client sends initialized notification';
+          narration.className = 'narration notification-state';
+          clientBox.classList.add('active');
+        },
+        animate: (done) => animatePath(
+          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server1, y: yServer1}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          clientBox.classList.remove('active');
+          // Populate client state
+          clientSession.textContent = 'sess_abc123';
+          clientCaps.innerHTML = '<span class="cap">tools ✓</span><span class="cap">prompts ✓</span>';
+          clientState.classList.add('active');
+          server1State.classList.add('active');
+        }
+      },
+      // Step 4: tools/call → LB → Node 1 (correct)
+      {
+        setup: () => {
+          configMessage('request', '→', 'tools/call', 'CallToolRequest', 'Mcp-Session-Id: sess_abc123', false, 'right');
+          setMessagePos(pos.client, yClient);
+          stepNum.textContent = '4';
+          narrationText.textContent = 'Client calls tool with session ID';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('active');
+        },
+        animate: (done) => animatePath(
+          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server1, y: yServer1}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          clientBox.classList.remove('active');
+          server1Box.classList.add('active');
+        }
+      },
+      // Step 5: tools/call result ←
+      {
+        setup: () => {
+          configMessage('response', '←', 'tools/call', 'CallToolResult', 'Mcp-Session-Id: sess_abc123', false, 'left');
+          setMessagePos(pos.server1, yServer1);
+          stepNum.textContent = '5';
+          narrationText.textContent = 'Node 1 has session + capabilities — success ✓';
+          narration.className = 'narration response-state';
+        },
+        animate: (done) => animatePath(
+          [{x: pos.server1, y: yServer1}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          server1Box.classList.remove('active');
+        }
+      },
+      // Step 6: Another request → LB → Node 3 (WRONG!)
+      {
+        setup: () => {
+          configMessage('request', '→', 'tools/call', 'CallToolRequest', 'Mcp-Session-Id: sess_abc123', false, 'right');
+          setMessagePos(pos.client, yClient);
+          stepNum.textContent = '6';
+          narrationText.textContent = 'Next request... LB routes to Node 3!';
+          narration.className = 'narration request-state';
+          clientBox.classList.add('active');
+        },
+        animate: (done) => animatePath(
+          [{x: pos.client, y: yClient}, {x: pos.lb, y: yClient}, {x: pos.server3, y: yServer3}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          clientBox.classList.remove('active');
+          server3Box.classList.add('alive');
+        }
+      },
+      // Step 7: Error! Node 3 doesn't know this session
+      {
+        setup: () => {
+          configMessage('error-response', '←', '404 Not Found', 'Unknown session', 'Mcp-Session-Id: sess_abc123', true, 'left');
+          setMessagePos(pos.server3, yServer3);
+          stepNum.textContent = '✗';
+          narrationText.textContent = 'Node 3 has no session or capabilities — fails!';
+          narration.className = 'narration error-state';
+          server3Box.classList.add('error');
+          // Show error state with question marks
+          server3Session.textContent = 'sess_abc123 ?';
+          server3Caps.innerHTML = '<span class="cap">sampling ?</span>';
+          server3State.classList.add('error');
+        },
+        animate: (done) => animatePath(
+          [{x: pos.server3, y: yServer3}, {x: pos.lb, y: yClient}, {x: pos.client, y: yClient}],
+          ANIMATION.MSG_DURATION,
+          done
+        ),
+        after: () => {
+          clientBox.classList.add('error');
+        }
+      },
+      // Step 8: Pause on error
+      {
+        setup: () => {
+          message.className = 'message';
+        },
+        animate: (done) => setTimeout(done, ANIMATION.ERROR_PAUSE),
+        after: () => {}
+      }
+    ];
+
+    runStepSequence(steps);
+    scaleCanvas();
+  </script>
+</body>
+</html>

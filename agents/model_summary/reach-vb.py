@@ -1,5 +1,6 @@
 import asyncio
-from mcp_agent.core.fastagent import FastAgent
+
+from fast_agent import FastAgent
 
 fast = FastAgent("auto-vb", ignore_unknown_args=True)
 
