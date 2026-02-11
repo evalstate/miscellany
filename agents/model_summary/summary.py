@@ -3,9 +3,9 @@ from pathlib import Path
 import sys
 from typing import List
 from mcp import GetPromptResult
-from mcp_agent import PromptMessage, TextContent
-from mcp_agent.core.prompt import Prompt
-from mcp_agent.core.fastagent import FastAgent
+from mcp.types import PromptMessage,TextContent
+from fast_agent.core.prompt import Prompt
+from fast_agent import FastAgent
 from research_utils import (
     ExtraInformation,
     format_research_report,
@@ -71,9 +71,8 @@ async def main():
         )
         sources: List[tuple] = []
         if to_access:
-            await agent.research_fetch.apply_prompt(
-                "Model Card Template", {"model_id": model_id}, as_template=True
-            )
+            model.messages[-1].role="assistant"
+            await agent.research_fetch.apply_prompt(model, as_template=True)
             for URLWithReason in to_access.urls:
                 if URLWithReason.fetch:
                     fetch_prompt: GetPromptResult= await agent.research_fetch.get_prompt(
@@ -81,7 +80,7 @@ async def main():
                     )
                     messages = await agent.research_fetch.generate(fetch_prompt.messages)
                     content = messages.last_text()
-                    if "NO USEFUL CONTENT" not in content:
+                    if "NO USEFUL CONTENT" not in (content or ""):
                         sources.append((URLWithReason.url, content))
 
         research_report = format_research_report(sources)

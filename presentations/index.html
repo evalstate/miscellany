@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conference Presentations</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem 1.5rem 4rem;
+      background: #f8f9fb;
+      color: #1d1d1f;
+    }
+
+    main {
+      max-width: 52rem;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 1rem;
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.08);
+      padding: 2.5rem 2.75rem 3rem;
+    }
+
+    h1 {
+      margin-top: 0;
+      font-size: clamp(1.75rem, 2vw + 1.5rem, 2.6rem);
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      margin-bottom: 0.75rem;
+      color: #4b5563;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+    }
+
+    .conference-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .conference {
+      border-top: 1px solid rgba(148, 163, 184, 0.32);
+      padding: 1.5rem 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+    }
+
+    .conference:first-of-type {
+      border-top: none;
+    }
+
+    .conference-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      border-radius: 999px;
+      background: rgba(59, 130, 246, 0.12);
+      color: #2563eb;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 0.2rem 0.55rem;
+      text-transform: uppercase;
+    }
+
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.4rem 0.85rem;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.38);
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.2s ease;
+    }
+
+    .links a:hover,
+    .links a:focus-visible {
+      border-color: rgba(37, 99, 235, 0.6);
+      color: #1d4ed8;
+    }
+
+    .links a:focus-visible {
+      outline: 2px solid rgba(37, 99, 235, 0.45);
+      outline-offset: 2px;
+    }
+
+    .extras {
+      margin-top: 0.5rem;
+      padding-top: 0.65rem;
+      border-top: 1px dashed rgba(148, 163, 184, 0.38);
+      font-size: 0.9rem;
+      color: #475569;
+    }
+
+    .extras:empty {
+      display: none;
+    }
+
+    .extras a {
+      color: #1d4ed8;
+      text-decoration: none;
+    }
+
+    .extras a:hover,
+    .extras a:focus-visible {
+      text-decoration: underline;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-top: 0.25rem;
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 1.75rem 1.25rem;
+      }
+
+      main {
+        padding: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Conference Presentations</h1>
+
+    <section>
+      <h2>2025</h2>
+      <ul class="conference-list">
+        <li class="conference">
+          <p class="conference-title">MCP Dev Summit (May) <span class="tag">May 2025</span></p>
+          <div class="links">
+            <a href="https://luma.com/mcpdevsummit2025" aria-label="Conference Site: MCP Dev Summit May">MCP Dev Summit May</a>
+            <a href="2025/mcp-dev-summit-may/presentation.html">View presentation</a>
+          </div>
+          <div class="extras"></div>
+        </li>
+        <li class="conference">
+          <p class="conference-title">Secure SE Conference (September) <span class="tag">Sep 2025</span></p>
+          <div class="links">
+            <a href="https://secureai.se/" aria-label="Conference site: Secure AI SE">Secure AI SE</a>
+            <a href="2025/secure-se-sep/presentation.html">View presentation</a>
+          </div>
+          <div class="extras">
+            <p class="note">Presentation included demonstration of Token Prediction and Selection, and Sampling with https://fast-agent.ai and https://webcam.fast-agent.ai</p>
+
+          </div>
+        </li>
+        <li class="conference">
+          <p class="conference-title">MCP Dev Summit (October) <span class="tag">Oct 2025</span></p>
+          <div class="links">
+            <a href="https://mcpdevsummit.ai/" aria-label="Conference site for MCP Dev Summit October">MCP Dev Summit London</a>
+            <a href="2025/mcp-dev-summit-oct/presentation.html">View presentation</a>
+          </div>
+          <div class="extras">
+            <p class="note">Live Presentation included:
+              <ul>
+              <li>
+                Demonstration of <a href="https://github.com/evalstate/hf-mcp-server">Hugging Face MCP Server</a> deployed in a FreeCPU Space demonstrating pure Stateless mode returning JSON-RPC and SSE responses, with <a href="https://fast-agent.ai">fast-agent</a> used for Transport Channel tracking.
+              </li>
+               <li>MCP Everything Server with PR (<a href="https://github.com/modelcontextprotocol/servers/pull/2789">PR2789</a>) and <a href="https://webcam.fast-agent.ai">MCP-Webcam</a>
+               to demonstrate correct SSE Channel Selection for Elicitations, Sampling requests and Ping keep-alive. <a href="https://fast-agent.ai">fast-agent</a> used for Transport Channel tracking.
+               </li>
+               </ul>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,1 @@
+npx @marp-team/marp-cli@latest --themeSet ./theme/freud.css ./theme/structure.css ./theme/schema.css ./theme/evalstate-extensions.css -- --html ./presentation.md
