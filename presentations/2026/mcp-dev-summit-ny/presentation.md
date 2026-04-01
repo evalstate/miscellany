@@ -26,6 +26,221 @@ style: |
     font-size: 0.64em;
     color: #d8e4f5;
   }
+
+  .image-strip {
+    display: grid;
+    grid-template-columns: 1.45fr 1fr;
+    gap: 1rem;
+    align-items: start;
+    margin-top: 1rem;
+  }
+
+  .image-strip img {
+    width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+  }
+
+  .rl-layout {
+    display: grid;
+    grid-template-columns: 1.08fr 1.12fr;
+    gap: 0.85rem;
+    align-items: start;
+  }
+
+  .rl-layout > div:first-child {
+    min-width: 0;
+  }
+
+  .rl-layout > div:first-child ul {
+    margin-top: 0;
+  }
+
+  .rl-stack {
+    display: grid;
+    gap: 0.8rem;
+    align-content: start;
+  }
+
+  .rl-stack img {
+    width: 100%;
+    max-height: 285px;
+    object-fit: contain;
+  }
+
+  .flow-compare {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.8rem;
+    margin-top: 0.7rem;
+  }
+
+  .flow-card {
+    padding: 0.75rem 0.8rem 0.7rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .flow-card h3 {
+    margin: 0 0 0.35rem;
+    color: #ffc76b;
+    font-size: 0.76em;
+  }
+
+  .flow-subtitle {
+    margin-bottom: 0.5rem;
+    color: #c9d7ea;
+    font-size: 0.46em;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .swimlane {
+    display: grid;
+    gap: 0.24rem;
+  }
+
+  .step {
+    position: relative;
+    display: grid;
+    grid-template-columns: 5.1em 1fr;
+    gap: 0.2rem;
+    align-items: center;
+    padding: 0.38rem 0.5rem;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .step::after {
+    content: "↓";
+    position: absolute;
+    left: 50%;
+    bottom: -0.48rem;
+    transform: translateX(-50%);
+    color: rgba(255, 255, 255, 0.45);
+    font-size: 0.58em;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .step:last-child::after {
+    content: "";
+    display: none;
+  }
+
+  .lane {
+    color: #9bdcff;
+    font-size: 0.4em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-align: left;
+  }
+
+  .action {
+    color: #eef6ff;
+    font-size: 0.5em;
+    line-height: 1.18;
+  }
+
+  .step.owner-model {
+    border-color: rgba(255, 199, 107, 0.34);
+    background: rgba(255, 199, 107, 0.1);
+  }
+
+  .step.owner-tool {
+    border-color: rgba(115, 210, 255, 0.34);
+    background: rgba(115, 210, 255, 0.1);
+  }
+
+  .flow-note {
+    margin-top: 0.45rem;
+    color: #b8c8dc;
+    font-size: 0.44em;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .dynamic-tool-layout {
+    display: grid;
+    grid-template-columns: 0.66fr 1.34fr;
+    gap: 0.9rem;
+    align-items: stretch;
+    margin-top: 0;
+  }
+
+  .dynamic-tool-layout > div:first-child {
+    min-width: 0;
+  }
+
+  .dynamic-tool-layout h1,
+  .dynamic-tool-layout h2 {
+    margin: 0 0 0.6rem;
+    color: #fff7eb;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.28em;
+    line-height: 0.96;
+    border-bottom: none;
+  }
+
+  .dynamic-tool-layout > div:first-child p:first-child {
+    margin-top: 0;
+  }
+
+  .dynamic-tool-layout ul {
+    margin-top: 0.45rem;
+  }
+
+  .dynamic-tool-video {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dynamic-tool-video video {
+    width: 100%;
+    max-height: 620px;
+    object-fit: contain;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .launch-grid {
+    margin-top: 1rem;
+    gap: 1.15rem;
+  }
+
+  .launch-grid .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+    padding: 1rem 1rem 0.95rem;
+    border-radius: 28px;
+    text-align: center;
+  }
+
+  .launch-grid .card h3 {
+    margin: 0;
+    color: #fff9f1;
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.12em;
+    line-height: 0.98;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+  }
+
+  .launch-grid .card p,
+  .launch-grid .card ul {
+    display: none;
+    margin-top: 0.9rem;
+    font-size: 0.58em;
+    line-height: 1.32;
+    color: #c7d5e8;
+  }
 ---
 
 <!-- _class: titlepage -->
@@ -34,7 +249,7 @@ style: |
 <div class="title">MCP at 18 Months</div>
 <div class="subtitle">Protocols, patterns, and the things we did not see coming.</div>
 <div class="author">Shaun Smith · <code>@evalstate</code></div>
-<div class="date">March 2026 draft</div>
+<div class="date">April 2026</div>
 
 <table class="social-table">
   <tbody>
@@ -87,12 +302,10 @@ My angle here is practical: what actually changed in agent systems after MCP lau
 
 ---
 
-<div class="eyebrow">2 · Opening thesis</div>
-
 # The debate about MCP is more interesting than MCP itself
 
 <div class="lede">
-...and that is a good thing.
+...and that is a good thing!
 </div>
 
 <div class="signal-strip">
@@ -108,77 +321,83 @@ The world has changed around MCP
 
 <!-- _class: transition -->
 
-# 3 · What we did not have when MCP launched
+<!-- # 3 · What we did not have when MCP launched-->
 
 ---
 
-<div class="card-grid">
+# Things we didn't have at launch
+
+<div class="card-grid launch-grid">
   <div class="card">
-    <h3>Coding Agents</h3>
-    <p>Goose (Jan 2025)</p>
-    <p>Claude Code (Feb 2025)</p>
+    <img src="./images/claude-code.png" />
+  </div>
+
+  <div class="card">
+    <h3>Streamable HTTP Transport and OAuth</h3>
+  </div>
+  <div class="card">
+    <h3>AGENTS.MD and Agent Skills</h3>
+  </div>
+  <div class="card">
+    <h3>Internal Tools in Inference APIs</h3>
+  </div>
+  <div class="card">
+    <h3>Agent Client Protocol<br />
+    Open Responses</h3>
+  </div>
+  <div class="card">
+    <h3>Long Running Tool Loops (and reasoning models)</h3>
+  </div>
+
+</div>
+
+---
+
+
+# Reinforcement Learning 
+
+<div class="rl-layout">
+  <div>
+
+Models are placed in an environment, given a task and scored with a reward function :
+
+  - <strong>discover</strong>
+  - <strong>self-correct</strong>
+  - <strong>problem solve</strong>
+  - keep <strong>driving the loop</strong> without constant human steering
+
+> mini-SWE-Agent: A single 100 line python and single freeform (non JSON) tool can scoe 76.0% on SWE-Bench!
+
+It's hard to compete against that efficiency.
+
+![w:400 alt text](images/openenv.png)
 
   </div>
-  <div class="card">
-    <h3>MCP Streamable HTTP Transport</h3>
-    <p>No Auth mechanism</p>
-    <p></p>
-  </div>
-  <div class="card">
-    <h3>AGENTS.MD or AgentSkills</h3>
-  </div>
-  <div class="card">
-    <h3>Tools in Inference API's</h3>
-    <p>Remote tool execution, e.g. Code Interpreter, Shell Sandbox, Web Search, Bash</p>
+  <div class="rl-stack">
+    <img src="./images/image-1.png" alt="Reinforcement learning environment diagram" />
+    <img src="./images/swe-bash-tool.png" alt="SWE-Bench bash tool benchmark result" />
   </div>
 </div>
 
 
-![w:420](./images/claude-code.png)
-![w:420](./images/deepseek.png)
-
-
 ---
 
-
-<div class="eyebrow">4 · RL changed the loop</div>
-
-# Reinforcement learning made agentic behavior feel real
-
-- Models are increasingly trained to:
-  - <strong>discover</strong>
-  - <strong>self-correct</strong>
-  - <strong>problem solve</strong>
-  - keep driving the loop without constant human steering
-- That is the missing context for why <strong>self-propelling tool loops</strong> suddenly started working better.
-- And it explains why even very simple agent harnesses can now do surprisingly serious work.
-
-![w:980](./images/image-1.png)
-![alt text](swe-bash-tool.png)
-
----
-
-<div class="eyebrow">mini-SWE-agent</div>
-
-# Simplicity matters more than ceremony
+# Smarter Tool Loops
 
 <div class="comparison">
   <div class="panel">
-    <h3>Why mini-SWE-agent matters</h3>
-    <ul>
-      <li>Single tool</li>
-      <li>Minimal loop</li>
-      <li>Non-persistent bash between fenced commands</li>
-      <li>Still good enough to show the new model behavior is real</li>
+      <h3>Tooling Changes</h3>
+      <li>Models are able to reason and act on discovered content
+      <li>General Purpose Agent Harnesses are given direct Shell access</li>
+      <li>Progressive Disclosure has follow through</li>
     </ul>
   </div>
   <div class="panel">
-    <h3>Why this enabled skills</h3>
+    <h3>Why this enabled Skills</h3>
     <ul>
       <li>Skills no longer need mystical orchestration to be useful</li>
       <li>Reusable procedures become strong scaffolding for capable models</li>
-      <li>Simple environments can produce compound behavior</li>
-      <li>The loop quality moved closer to the model</li>
+      <li>Shell surface is perfect for hiearchical, token dense navigation</li>
     </ul>
   </div>
 </div>
@@ -189,73 +408,58 @@ The world has changed around MCP
 
 ---
 
-<div class="eyebrow">5 · Why STDIO servers mattered</div>
+<div class="dynamic-tool-layout">
+  <div>
 
-# Before shell execution in clients, STDIO filled a real gap
+<h1>Dynamic Tool Calling</h1>
 
-<div class="comparison">
-  <div class="panel">
-    <h3>What the gap was</h3>
-    <ul>
-      <li>Clients often could not execute arbitrary shell commands themselves</li>
-      <li>If you wanted access to the local machine, you had to expose it somehow</li>
-      <li>STDIO servers became the path to “do something here”</li>
-      <li>That was not accidental — it was a real capability gap</li>
-    </ul>
+
+Models can now discover and dynamically call Tools. 
+
+Dynamic Space Tool: **45 tokens**
+
+Selection and dynamic inference from thousands of models
+
+**MCP** provides Authentication  and Multi-Modal support.
+
+
+
   </div>
-  <div class="panel">
-    <h3>Why distribution was about ideas</h3>
-    <ul>
-      <li>Many servers could be one-shotted into existence</li>
-      <li>Sometimes the value was the interface idea, not the code artifact</li>
-      <li>The durable value-add was not wrapper code itself</li>
-      <li>It was access to <strong>data</strong>, <strong>resources</strong>, and <strong>compute</strong></li>
-    </ul>
+  <div class="dynamic-tool-video">
+    <video autoplay muted loop playsinline>
+      <source src="./images/dynamic_space_final.mp4.mp4" type="video/mp4" />
+    </video>
   </div>
 </div>
 
 ---
 
-<div class="eyebrow">Value-add</div>
-
-# The real value-add of MCP was never “just wrap an API”
-
-<div class="signal-strip">
-  <div class="signal"><strong>Data</strong><span>Access to information you do not already have locally.</span></div>
-  <div class="signal"><strong>Resources</strong><span>Structured access to remote state, files, and protected surfaces.</span></div>
-  <div class="signal"><strong>Compute</strong><span>Running work where it makes sense, not where the user happens to be.</span></div>
-  <div class="signal"><strong>Distribution</strong><span>A shareable interface idea that agents and clients can both understand.</span></div>
-</div>
-
-<div class="quote-wall">
-  <p>STDIO solved a local capability problem. MCP’s longer-term value was that it gave those capabilities a standard shape.</p>
-  <small>and let the useful parts survive transport changes</small>
-</div>
-
----
-
-<div class="eyebrow">6 · Shell is code too</div>
-
-# Arbitrary shell execution is basically code mode
+# Code Execution Tools 
 
 <div class="columns">
 
 <div>
 
-- Once a model can drive shell intelligently, it has crossed into a very real form of <strong>code mode</strong>.
-- Bash is not “lesser” than code here — it is a compact, high-leverage execution surface.
-- This is where skills get powerful:
-  - reusable shell loops
-  - environment setup
-  - remote execution wrappers
-  - task-specific tools generated on demand
-- This is also where the <strong>HF jobs skill</strong> pattern becomes interesting: a skill can launch work into a more suitable environment instead of doing everything on the main thread.
+Once a model can drive shell intelligently, it has crossed into a very real form of <strong>code mode</strong>.
+
+Bash provides a general purpose, token dense-execution language. 
+
+Agent Skills are powerful:
+- Model discoverable context loading
+- task-specific tools generated on demand
+- Between deterministic program and 
+- This is also where the <strong>HF Tool Builder skill</strong> pattern becomes interesting: a skill can launch work into a more suitable environment instead of doing everything on the main thread.
+
+Some models are trained to use code tools natively, and are bundled with interpreters.
 
 </div>
 
 <div class="center">
+<div class="rl-stack">
 
-![w:720](./images/image-2.png)
+<img src="./images/smolagents.png" />
+<img src="./images/image-3.png" />
+</div>
 
 </div>
 
@@ -263,32 +467,102 @@ The world has changed around MCP
 
 ---
 
-<div class="eyebrow">7 · Apps SDK pattern</div>
+# Model Generation and Execution Environments
 
-# Sometimes the model should stop and the UI should take over
+<div class="flow-compare">
+  <div class="flow-card">
+    <h3>Style 1 - Main Model owns Code Generation</h3>
+    <div class="swimlane">
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Generates Search Function</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution Tool</div>
+        <div class="action">Return API definitions</div>
+      </div>
+      <div class="step ">
+        <div class="lane">Main model</div>
+        <div class="action">Generates code from that tool surface</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution tool</div>
+        <div class="action">Runs the code and returns output</div>
+      </div>
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Reads result and writes final answer</div>
+      </div>
+    </div>
+    <div class="flow-note">Code Generation: Main Model</div>
+    <div class="flow-note">Code Execution: Tool Environment</div>
+    
+  </div>
+  <div class="flow-card">
+    <h3>Style 2 - Delegated Code Generation</h3>
+    <div class="swimlane">
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Sends a natural-language task to the tool</div>
+      </div>
+      <div class="step owner-tool">
+        <div class="lane">Execution tool</div>
+        <div class="action">System Prompt contains API definitions</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution tool</div>
+        <div class="action">Returns the result</div>
+      </div>
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Packages it as the final answer</div>
+      </div>
+    </div>
+    <div class="flow-note">Code Generation: Tool Model</div>
+    <div class="flow-note">Code Generation: Tool Environment</div>
+  </div>
+</div>
 
-- A common failure mode:
-  1. user asks for navigation or retrieval
-  2. tools fetch the answer
-  3. the model then spends expensive output tokens reprocessing a result that was already good enough
-- The Apps SDK pattern fixes this by letting the result become <strong>terminal for the user</strong>.
-- That is not just UX polish — it is an efficiency pattern.
+<br />
 
-![w:1100](./images/image.png)
+<center>
+
+## **MCP** makes it easy to transfer **generation** and **execution** between models and environments! 
+
+</center>
 
 ---
 
-<div class="eyebrow">8 · Boundaries are blurring</div>
+<div class="dynamic-tool-layout">
+  <div>
 
-# Now the execution environment starts to move
+<h1>LLMs for Navigating, GenUI and the Apps SDK</h1>
+
+A common pattern:
+1. user asks for navigation or retrieval
+1. tools fetch the answer
+1. the model then spends expensive output tokens reprocessing a result that was already good enough
+1. The **MCP Apps SDK** pattern fixes this by letting the result become <strong>final for the user</strong>.
+
+  </div>
+  <div class="dynamic-tool-video">
+    <video autoplay muted loop playsinline>
+      <source src="./images/gen_ui_one.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+
+---
+
+# Inference and Execution Boundaries are Blurring
 
 <div class="card-grid">
   <div class="card">
-    <h3>Client-side</h3>
+    <h3>Execution Environments</h3>
     <p>Useful when local context matters and the user already trusts the environment.</p>
   </div>
   <div class="card">
-    <h3>Remote MCP with auth</h3>
+    <h3>Model Selection</h3>
     <p>Lets us transport workload to a better environment while preserving a usable interface boundary.</p>
   </div>
   <div class="card">
@@ -305,8 +579,6 @@ The world has changed around MCP
 </div>
 
 ---
-
-<div class="eyebrow">9 · ACP</div>
 
 # Agent Client Protocol lets us bundle the experience
 
@@ -327,15 +599,13 @@ The world has changed around MCP
       <li>ACP helps distribute a fuller agent experience</li>
       <li>Useful when we care about continuity, controls, and UX quality</li>
       <li>Feels like the right wrapper for richer agent bundles</li>
+      <li>Can handle model and API quirks in one place</li>
     </ul>
   </div>
 </div>
 
 ---
 
-<div class="eyebrow">10 · Open Responses</div>
-
-# Open Responses wants to bundle again — from the other side
 
 <div class="comparison">
   <div class="panel">
@@ -365,14 +635,44 @@ The world has changed around MCP
 
 ---
 
+
+<div class="eyebrow">5 · Why STDIO servers mattered</div>
+
+# Before shell execution in clients, STDIO filled a real gap
+
+<div class="comparison">
+  <div class="panel">
+    <h3>What the gap was</h3>
+    <ul>
+      <li>Clients often could not execute arbitrary shell commands themselves</li>
+      <li>If you wanted access to the local machine, you had to expose it somehow</li>
+      <li>STDIO servers became the path to “do something here”</li>
+      <li>That was not accidental — it was a real capability gap</li>
+    </ul>
+  </div>
+  <div class="panel">
+    <h3>Why distribution was about ideas</h3>
+    <ul>
+      <li>Many servers could be one-shotted into existence</li>
+      <li>Sometimes the value was the interface idea, not the code artifact</li>
+      <li>The durable value-add was not wrapper code itself</li>
+      <li>It was access to <strong>data</strong>, <strong>resources</strong>, and <strong>compute</strong></li>
+    </ul>
+  </div>
+</div>
+
+
+---
+
 <div class="eyebrow">Closing</div>
 
-# So the story is not “MCP won” or “MCP lost”
+# MCP - Product Market Fit
 
 <div class="closing-grid">
   <div class="panel">
     <h3>The through-line</h3>
     <ul>
+      <li>MCP </li>
       <li>The ecosystem around MCP changed faster than almost anyone expected.</li>
       <li>RL made self-propelling tool loops more viable.</li>
       <li>Skills and shell execution turned into practical code mode.</li>
@@ -394,6 +694,4 @@ The world has changed around MCP
 
 <!-- _class: transition -->
 
-# Questions
-
-### and which layer should own the loop?
+# Thank You!

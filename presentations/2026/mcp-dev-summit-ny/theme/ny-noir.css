@@ -161,6 +161,9 @@ code {
 }
 
 section.titlepage {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   background:
     radial-gradient(circle at 14% 16%, rgba(255, 191, 92, 0.22), transparent 25%),
     radial-gradient(circle at 88% 18%, rgba(94, 196, 255, 0.18), transparent 22%),
@@ -204,23 +207,24 @@ section.titlepage .title {
 }
 
 section.titlepage .subtitle {
-  max-width: 26em;
-  margin-top: 0.8rem;
+  max-width: 24em;
+  margin-top: 0.65rem;
+  padding-bottom: 0;
   color: #d2dceb;
-  font-size: 0.72em;
-  line-height: 1.35;
+  font-size: 0.68em;
+  line-height: 1.28;
 }
 
 section.titlepage .author {
-  margin-top: 1.6rem;
+  margin-top: 1.2rem;
   color: #ffc76b;
-  font-size: 0.75em;
+  font-size: 0.72em;
   font-weight: 700;
 }
 
 section.titlepage .date {
   color: #b7c7da;
-  font-size: 0.62em;
+  font-size: 0.58em;
   letter-spacing: 0.12em;
   text-transform: uppercase;
 }
@@ -231,19 +235,29 @@ section.titlepage .organization a {
 }
 
 .social-table {
-  margin-top: 2rem;
+  display: table;
+  width: auto;
+  max-width: none;
+  overflow: visible;
+  margin: 1.35rem 0 0;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
-  padding: 0.9rem 1rem;
+  padding: 0.65rem 0.85rem;
   backdrop-filter: blur(8px);
+  font-size: 0.88em;
+  min-width: 0;
 }
 
 .social-table td {
   color: #eef5fd;
+  padding-top: 0.28rem;
+  padding-bottom: 0.28rem;
 }
 
 .social-table td:first-child img {
+  width: 28px;
+  height: 28px;
   filter: none;
 }
 
