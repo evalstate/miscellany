@@ -244,10 +244,10 @@ style: |
 
   .acp-combo {
     display: grid;
-    grid-template-columns: 1.18fr 0.82fr;
-    gap: 1rem;
+    grid-template-columns: 1.12fr 0.88fr;
+    gap: 0.9rem;
     align-items: start;
-    margin-top: 0.7rem;
+    margin-top: 0.5rem;
   }
 
   .acp-combo-main {
@@ -282,7 +282,7 @@ style: |
   }
 
   .acp-summary {
-    padding: 0.95rem 1rem;
+    padding: 0.85rem 0.95rem;
     border-radius: 22px;
     border: 1px solid rgba(255, 255, 255, 0.08);
     background: rgba(255, 255, 255, 0.045);
@@ -299,6 +299,14 @@ style: |
     font-size: 0.6em;
     line-height: 1.34;
     color: #d7e4f6;
+  }
+
+  .acp-kicker {
+    max-width: 22em;
+    margin: 0.35rem 0 0.8rem;
+    color: #d7e4f6;
+    font-size: 0.68em;
+    line-height: 1.32;
   }
 
   .open-responses-layout {
@@ -321,6 +329,12 @@ style: |
     font-size: 0.68em;
     line-height: 1.34;
     color: #dbe6f7;
+  }
+
+  .open-responses-intro p + p {
+    margin-top: 0.7rem;
+    color: #c6d6ea;
+    font-size: 0.6em;
   }
 
   .open-responses-panels {
@@ -645,16 +659,19 @@ A common pattern:
 
 ---
 
-# Inference and Execution Boundaries are Blurring
+# Inference and Environment Boundaries are Blurring
+
+## The new abstraction
 
 <div class="card-grid">
   <div class="card">
     <h3>Execution Environments</h3>
-    <p>Useful when local context matters and the user already trusts the environment.</p>
+    <p>Wide range of options from YOLO, Local/Remote containers or lightweight sandboxes (Monty, Just-Bash)</p>
+
   </div>
   <div class="card">
     <h3>Model Selection</h3>
-    <p>Lets us transport workload to a better environment while preserving a usable interface boundary.</p>
+    <p>Mixed Model workloads handle different modalitites, specializations and price points. </p>
   </div>
   <div class="card">
     <h3>Inference APIs</h3>
@@ -662,49 +679,21 @@ A common pattern:
   </div>
 </div>
 
-<div class="signal-strip">
-  <div class="signal"><strong>MCP + OAuth</strong><span>Moves execution somewhere safer or more capable.</span></div>
-  <div class="signal"><strong>Remote tools</strong><span>Make workload transport part of normal architecture.</span></div>
-  <div class="signal"><strong>Inference bundling</strong><span>Pulls some of that same logic into model APIs.</span></div>
-  <div class="signal"><strong>Result</strong><span>The old “where does the tool live?” question is no longer stable.</span></div>
-</div>
 
 ---
 
 # Agent Client Protocol
 
-<div class="acp-combo">
-  <div class="acp-combo-main">
-    <div class="comparison">
-      <div class="panel">
-        <h3>ACP bundles from the client side</h3>
-        <ul>
-          <li>Model + tools + skills + interaction shape</li>
-          <li>Streaming, sessions, and rehydration</li>
-          <li>Observability and control points</li>
-          <li>Useful when we care about continuity and UX quality</li>
-        </ul>
-      </div>
-      <div class="panel">
-        <h3>Why it matters here</h3>
-        <ul>
-          <li>MCP handles tool interaction well</li>
-          <li>ACP distributes a fuller agent experience</li>
-          <li>Good fit when model and API quirks need one wrapper</li>
-          <li>Lets us bundle interaction, state, and execution shape together</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <div class="acp-combo-visual">
-    <div class="acp-logo-panel">
-      <img src="./images/acp-docs-logo.avif" alt="Agent Client Protocol logo" />
-    </div>
-    <div class="acp-summary">
-      <h3>The important point</h3>
-      <p>MCP still matters because both patterns need a coherent way to talk to tools and remote capability surfaces.</p>
-    </div>
-  </div>
+ACP is the client-side bundling story: it packages model choice, tools, state, and interaction shape into one coherent agent experience.
+
+Multi-turn conversation Based, provides Streaming/Cancellation and observability
+
+
+<div class="signal-strip">
+  <div class="signal"><strong>Normative Spec</strong><span>Moves execution somewhere safer or more capable.</span></div>
+  <div class="signal"><strong>Session Based</strong><span>Make workload transport part of normal architecture.</span></div>
+  <div class="signal"><strong>Inference Bundling</strong><span>Pulls some of that same logic into model APIs.</span></div>
+
 </div>
 
 
@@ -714,17 +703,10 @@ A common pattern:
 
 # Open Responses
 
-
-
-> Open Responses is an open-source specification and ecosystem for building multi-provider, interoperable LLM interfaces based on the OpenAI Responses API. It defines a shared schema, and tooling layer that enable a unified experience for calling language models, streaming results, and composing agentic workflows—independent of provider.
-
-
 <div class="open-responses-layout">
   <div class="open-responses-intro">
     <p>Open Responses is the inference-side version of bundling: the model API can expose tool use, state, and execution surfaces as part of the response loop itself.</p>
-
-
-
+    <p>That makes it easier to ship agentic workflows directly from the inference layer, rather than only from the client or harness.</p>
   </div>
   <div class="open-responses-panels">
     <div class="panel">
@@ -744,13 +726,6 @@ A common pattern:
       </ul>
     </div>
   </div>
-</div>
-
-<div class="signal-strip">
-  <div class="signal"><strong>MCP + OAuth</strong><span>Moves execution somewhere safer or more capable.</span></div>
-  <div class="signal"><strong>Remote tools</strong><span>Make workload transport part of normal architecture.</span></div>
-  <div class="signal"><strong>Inference bundling</strong><span>Pulls some of that same logic into model APIs.</span></div>
-  <div class="signal"><strong>Result</strong><span>The old “where does the tool live?” question is no longer stable.</span></div>
 </div>
 
 
