@@ -722,10 +722,13 @@ A common pattern:
 <div class="open-responses-layout">
   <div class="open-responses-intro">
     <p>Open Responses is the inference-side version of bundling: the model API can expose tool use, state, and execution surfaces as part of the response loop itself.</p>
+
+
+
   </div>
   <div class="open-responses-panels">
     <div class="panel">
-      <h3>Internal tools</h3>
+      <h3>Internal tools - Model/Provider</h3>
       <ul>
         <li><code>code_interpreter</code></li>
         <li><code>apply_patch</code></li>
@@ -737,6 +740,7 @@ A common pattern:
       <ul>
         <li>MCP servers</li>
         <li>Standard JSON function calls</li>
+        <li>Grammar Constrained non-JSON tools</li>
       </ul>
     </div>
   </div>
