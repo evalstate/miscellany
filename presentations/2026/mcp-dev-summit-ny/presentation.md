@@ -241,6 +241,106 @@ style: |
     line-height: 1.32;
     color: #c7d5e8;
   }
+
+  .acp-combo {
+    display: grid;
+    grid-template-columns: 1.18fr 0.82fr;
+    gap: 1rem;
+    align-items: start;
+    margin-top: 0.7rem;
+  }
+
+  .acp-combo-main {
+    min-width: 0;
+  }
+
+  .acp-combo-visual {
+    display: grid;
+    gap: 0.85rem;
+    align-content: start;
+  }
+
+  .acp-logo-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 180px;
+    padding: 1rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .acp-logo-panel img {
+    width: 100%;
+    max-width: 300px;
+    max-height: 120px;
+    object-fit: contain;
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+  }
+
+  .acp-summary {
+    padding: 0.95rem 1rem;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .acp-summary h3 {
+    margin: 0 0 0.5rem;
+    color: #9bdcff;
+    font-size: 0.74em;
+  }
+
+  .acp-summary p {
+    margin: 0;
+    font-size: 0.6em;
+    line-height: 1.34;
+    color: #d7e4f6;
+  }
+
+  .open-responses-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 1rem;
+    align-items: start;
+    margin-top: 0.6rem;
+  }
+
+  .open-responses-intro {
+    padding: 1rem 1rem 0.95rem;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .open-responses-intro p {
+    margin: 0;
+    font-size: 0.68em;
+    line-height: 1.34;
+    color: #dbe6f7;
+  }
+
+  .open-responses-panels {
+    display: grid;
+    gap: 0.8rem;
+  }
+
+  .open-responses-panels .panel {
+    padding: 1rem 1rem 0.95rem;
+  }
+
+  .open-responses-panels .panel h3 {
+    margin-top: 0;
+    margin-bottom: 0.55rem;
+  }
+
+  .open-responses-panels .panel ul {
+    margin: 0;
+    padding-left: 1rem;
+  }
 ---
 
 <!-- _class: titlepage -->
@@ -302,6 +402,8 @@ My angle here is practical: what actually changed in agent systems after MCP lau
 
 ---
 
+<!-- _class: transition -->
+
 # The debate about MCP is more interesting than MCP itself
 
 <div class="lede">
@@ -312,16 +414,6 @@ My angle here is practical: what actually changed in agent systems after MCP lau
 </span></div>
 </div>
 
-<blockquote>
-The world has changed around MCP 
-</blockquote>
-
-
----
-
-<!-- _class: transition -->
-
-<!-- # 3 · What we did not have when MCP launched-->
 
 ---
 
@@ -386,19 +478,17 @@ It's hard to compete against that efficiency.
 
 <div class="comparison">
   <div class="panel">
-      <h3>Tooling Changes</h3>
-      <li>Models are able to reason and act on discovered content
+      <h3>Harness Changes</h3>
       <li>General Purpose Agent Harnesses are given direct Shell access</li>
-      <li>Progressive Disclosure has follow through</li>
+      <li>Models are able to reason and act on discovered content
+      <li>Progressive Disclosure has follow automatic follow-through</li>
     </ul>
   </div>
   <div class="panel">
     <h3>Why this enabled Skills</h3>
-    <ul>
-      <li>Skills no longer need mystical orchestration to be useful</li>
+      <li>Simple, shell Native hierarchy of content</li>
       <li>Reusable procedures become strong scaffolding for capable models</li>
-      <li>Shell surface is perfect for hiearchical, token dense navigation</li>
-    </ul>
+      <li>Shell surface is perfect for token dense discovery and navigation</li>
   </div>
 </div>
 
@@ -418,9 +508,10 @@ Models can now discover and dynamically call Tools.
 
 Dynamic Space Tool: **45 tokens**
 
-Selection and dynamic inference from thousands of models
 
-**MCP** provides Authentication  and Multi-Modal support.
+**MCP** provides Authentication and Multimodal support. 
+
+MCP provides an **inference gateway** to thousands of specialized and custom models covering Audio, Video, Text, 3D Models, Environments and more.
 
 
 
@@ -440,17 +531,16 @@ Selection and dynamic inference from thousands of models
 
 <div>
 
-Once a model can drive shell intelligently, it has crossed into a very real form of <strong>code mode</strong>.
+A model with access to general purposes tools has crossed into a very real form of <strong>code mode</strong>.
 
 Bash provides a general purpose, token dense-execution language. 
 
 Agent Skills are powerful:
+- Between deterministic program and documentation. 
 - Model discoverable context loading
-- task-specific tools generated on demand
-- Between deterministic program and 
-- This is also where the <strong>HF Tool Builder skill</strong> pattern becomes interesting: a skill can launch work into a more suitable environment instead of doing everything on the main thread.
+- task-specific tools generated on demand. Example: **HF Tool Builder** navigates OpenAPI spec to build composable CLI tools.
 
-Some models are trained to use code tools natively, and are bundled with interpreters.
+Some models are trained to use **code tools natively**, and are bundled with interpreters.
 
 </div>
 
@@ -529,6 +619,7 @@ Some models are trained to use code tools natively, and are bundled with interpr
 
 ## **MCP** makes it easy to transfer **generation** and **execution** between models and environments! 
 
+
 </center>
 
 ---
@@ -580,61 +671,86 @@ A common pattern:
 
 ---
 
-# Agent Client Protocol lets us bundle the experience
+# Agent Client Protocol
 
-<div class="comparison">
-  <div class="panel">
-    <h3>What ACP gives us</h3>
-    <ul>
-      <li>Bundle model + tools + skills + interaction shape</li>
-      <li>Streaming</li>
-      <li>Sessions and rehydration</li>
-      <li>Observability and control points</li>
-    </ul>
+<div class="acp-combo">
+  <div class="acp-combo-main">
+    <div class="comparison">
+      <div class="panel">
+        <h3>ACP bundles from the client side</h3>
+        <ul>
+          <li>Model + tools + skills + interaction shape</li>
+          <li>Streaming, sessions, and rehydration</li>
+          <li>Observability and control points</li>
+          <li>Useful when we care about continuity and UX quality</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Why it matters here</h3>
+        <ul>
+          <li>MCP handles tool interaction well</li>
+          <li>ACP distributes a fuller agent experience</li>
+          <li>Good fit when model and API quirks need one wrapper</li>
+          <li>Lets us bundle interaction, state, and execution shape together</li>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="panel">
-    <h3>Why it matters here</h3>
-    <ul>
-      <li>MCP handles tool interaction well</li>
-      <li>ACP helps distribute a fuller agent experience</li>
-      <li>Useful when we care about continuity, controls, and UX quality</li>
-      <li>Feels like the right wrapper for richer agent bundles</li>
-      <li>Can handle model and API quirks in one place</li>
-    </ul>
-  </div>
-</div>
-
----
-
-
-<div class="comparison">
-  <div class="panel">
-    <h3>What gets bundled</h3>
-    <ul>
-      <li>Inference</li>
-      <li>State</li>
-      <li>Tool calling</li>
-      <li>Code and search surfaces</li>
-      <li>Potentially remote MCP itself</li>
-    </ul>
-  </div>
-  <div class="panel">
-    <h3>Why that matters</h3>
-    <ul>
-      <li>It changes where orchestration can live</li>
-      <li>It pressures protocol boundaries from inside the model API</li>
-      <li>It competes with some agent harness responsibilities</li>
-      <li>It also makes some workflows dramatically easier to ship</li>
-    </ul>
+  <div class="acp-combo-visual">
+    <div class="acp-logo-panel">
+      <img src="./images/acp-docs-logo.avif" alt="Agent Client Protocol logo" />
+    </div>
+    <div class="acp-summary">
+      <h3>The important point</h3>
+      <p>MCP still matters because both patterns need a coherent way to talk to tools and remote capability surfaces.</p>
+    </div>
   </div>
 </div>
 
-<blockquote>
-<p>ACP bundles from the client side. Open Responses bundles from the inference side. MCP still matters because both need a coherent way to talk to tools and remote capability surfaces.</p>
-</blockquote>
+
+
 
 ---
 
+# Open Responses
+
+
+
+> Open Responses is an open-source specification and ecosystem for building multi-provider, interoperable LLM interfaces based on the OpenAI Responses API. It defines a shared schema, and tooling layer that enable a unified experience for calling language models, streaming results, and composing agentic workflows—independent of provider.
+
+
+<div class="open-responses-layout">
+  <div class="open-responses-intro">
+    <p>Open Responses is the inference-side version of bundling: the model API can expose tool use, state, and execution surfaces as part of the response loop itself.</p>
+  </div>
+  <div class="open-responses-panels">
+    <div class="panel">
+      <h3>Internal tools</h3>
+      <ul>
+        <li><code>code_interpreter</code></li>
+        <li><code>apply_patch</code></li>
+        <li><code>web_search</code></li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>External tools</h3>
+      <ul>
+        <li>MCP servers</li>
+        <li>Standard JSON function calls</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="signal-strip">
+  <div class="signal"><strong>MCP + OAuth</strong><span>Moves execution somewhere safer or more capable.</span></div>
+  <div class="signal"><strong>Remote tools</strong><span>Make workload transport part of normal architecture.</span></div>
+  <div class="signal"><strong>Inference bundling</strong><span>Pulls some of that same logic into model APIs.</span></div>
+  <div class="signal"><strong>Result</strong><span>The old “where does the tool live?” question is no longer stable.</span></div>
+</div>
+
+
+---
 
 <div class="eyebrow">5 · Why STDIO servers mattered</div>
 
