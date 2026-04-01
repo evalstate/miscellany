@@ -243,6 +243,7 @@ Include venn diagrams,
 - Remote MCP
 - A "proper" remote transport
 - Long Running Tool Loops
+- Achieving Product Market Fit
 ![w:200 alt text](goose.png)
 ![w:400alt text](claude-code.png)
 ![alt text](deepseek.png)
@@ -259,7 +260,7 @@ Include venn diagrams,
 - Often harnesses are very simple (mini-SWE-agent)
 - Skills are an effect of model training
 - Skills provide focussed education for the model
-
+- Models are trained to discover and problem solve 
 <!-- 
 needed to have "hacks" in tool loops to keep them running 
 
@@ -272,6 +273,7 @@ needed to have "hacks" in tool loops to keep them running
 
 - MCP had a "human factors" in optimising API design for LLM usage.
 - Discovery is token efficient (potentially no JSON envelopes)
+- Elicitation, Claude Code Channels (push). Special version of CLI tool, but JSON tool calling focussed.
 - mcp-cli, MCPporter offer MCP connectivity.
 
 ---
@@ -323,10 +325,6 @@ Diagram / Demo here of GenUI bouncing, stats, post-processing.
 
 ---
 
- # Blending
-
----
-
 # Open Responses
 
 - Replaces and normalizes Chat Completions API
@@ -342,12 +340,15 @@ Diagram / Demo here of GenUI bouncing, stats, post-processing.
 # Agent Client Protocol
 
 - Normalization and Bundling
-- 
+- Chat UI
 - Client supplies File and Shell tools
 - Streaming, Reasoning and Tool Calls
 - MCP Servers are first-class
 
 ---
+
+![alt text](image-3.png)
+![alt text](image-4.png)
 
 ---
 

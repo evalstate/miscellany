@@ -86,3 +86,23 @@ OPENRESPONSES
 
 
 
+
+
+
+
+Things we didn't Have + Perspectives 
+
+Reinforcement Learning
+
+STDIO, Value Proposition, Distribution
+
+-
+
+CLI Tools give MCP access to the model. Human Design Factors, Code Mode.
+Example 1: hf-tool-builder skill.
+Example 2: Where does the code execute? What is the right model for the job?
+
+-
+
+
+- 
