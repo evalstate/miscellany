@@ -309,6 +309,46 @@ style: |
     line-height: 1.32;
   }
 
+  .acp-video {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .acp-video video {
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 18px 36px rgba(0, 0, 0, 0.28);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .acp-points {
+    display: grid;
+    gap: 0.65rem;
+    margin-top: 0.8rem;
+  }
+
+  .acp-points .panel {
+    padding: 0.85rem 0.95rem;
+    border-radius: 22px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .acp-points .panel h3 {
+    margin-top: 0;
+    margin-bottom: 0.45rem;
+  }
+
+  .acp-points .panel p {
+    margin: 0;
+    font-size: 0.62em;
+    line-height: 1.3;
+  }
+
   .open-responses-layout {
     display: grid;
     grid-template-columns: 0.9fr 1.1fr;
@@ -528,6 +568,9 @@ Dynamic Space Tool: **45 tokens**
 MCP provides an **inference gateway** to thousands of specialized and custom models covering Audio, Video, Text, 3D Models, Environments and more.
 
 
+Flux/Krea.1 
+Qwen-Image/Qwen
+
 
   </div>
   <div class="dynamic-tool-video">
@@ -571,7 +614,7 @@ Some models are trained to use **code tools natively**, and are bundled with int
 
 ---
 
-# Model Generation and Execution Environments
+# Generation and Execution Environments
 
 <div class="flow-compare">
   <div class="flow-card">
@@ -583,11 +626,11 @@ Some models are trained to use **code tools natively**, and are bundled with int
       </div>
       <div class="step">
         <div class="lane">Execution Tool</div>
-        <div class="action">Return API definitions</div>
+        <div class="action">Uses Search Function to return API definitions</div>
       </div>
       <div class="step ">
         <div class="lane">Main model</div>
-        <div class="action">Generates code from that tool surface</div>
+        <div class="action">Generates code from that API surface</div>
       </div>
       <div class="step">
         <div class="lane">Execution tool</div>
@@ -624,6 +667,7 @@ Some models are trained to use **code tools natively**, and are bundled with int
     </div>
     <div class="flow-note">Code Generation: Tool Model</div>
     <div class="flow-note">Code Generation: Tool Environment</div>
+    <div class="flow-note">API Definitions Cacheable</div>
   </div>
 </div>
 
@@ -631,7 +675,7 @@ Some models are trained to use **code tools natively**, and are bundled with int
 
 <center>
 
-## **MCP** makes it easy to transfer **generation** and **execution** between models and environments! 
+## **MCP** makes it easy to transfer **generation** and **execution** between models and environments! <br> (and who pays for inference)
 
 
 </center>
@@ -641,13 +685,13 @@ Some models are trained to use **code tools natively**, and are bundled with int
 <div class="dynamic-tool-layout">
   <div>
 
-<h1>LLMs for Navigating, GenUI and the Apps SDK</h1>
+# LLMs for Navigating: GenUI, Apps SDK **(Prefect Prefab)**
 
 A common pattern:
 1. user asks for navigation or retrieval
 1. tools fetch the answer
 1. the model then spends expensive output tokens reprocessing a result that was already good enough
-1. The **MCP Apps SDK** pattern fixes this by letting the result become <strong>final for the user</strong>.
+2. The **MCP Apps** pattern fixes this by letting the result become <strong>final for the user</strong>.
 
   </div>
   <div class="dynamic-tool-video">
@@ -656,6 +700,7 @@ A common pattern:
     </video>
   </div>
 </div>
+
 
 ---
 
@@ -684,72 +729,90 @@ A common pattern:
 
 # Agent Client Protocol
 
-ACP is the client-side bundling story: it packages model choice, tools, state, and interaction shape into one coherent agent experience.
-
-Multi-turn conversation Based, provides Streaming/Cancellation and observability
-
-
-<div class="signal-strip">
-  <div class="signal"><strong>Normative Spec</strong><span>Moves execution somewhere safer or more capable.</span></div>
-  <div class="signal"><strong>Session Based</strong><span>Make workload transport part of normal architecture.</span></div>
-  <div class="signal"><strong>Inference Bundling</strong><span>Pulls some of that same logic into model APIs.</span></div>
-
+<div class="columns">
+  <div>
+    <p></p>
+    <div class="acp-points">
+      <div class="panel">
+        File and Shell Tools
+        <p>Client provided tools, enabling "follow along" in editors </p>
+      </div>
+      <div class="panel">
+        Session Based
+        <p>Listing, Resumption and Rehydration of Agent sessions</p>
+      </div>
+      <div class="panel">
+        Streaming and Observability
+        <p>Listing, Resumption and Rehydration of Agent sessions</p>
+      </div>
+      <div class="panel">
+        MCP Native Support
+        <p>Uses MCP Data Model. Client sends MCP Sever Configurations</p>
+      </div>
+    </div>
+  </div>
+  <div class="acp-video">
+    <br/ >
+    <video autoplay muted loop playsinline>
+      <source src="./images/toad-subagent.mp4" type="video/mp4" />
+    </video>
+  </div>
 </div>
-
-
-
 
 ---
 
 # Open Responses
 
+
 <div class="open-responses-layout">
   <div class="open-responses-intro">
-    <p>Open Responses is the inference-side version of bundling: the model API can expose tool use, state, and execution surfaces as part of the response loop itself.</p>
-    <p>That makes it easier to ship agentic workflows directly from the inference layer, rather than only from the client or harness.</p>
+
+
+<h2>Open standard extending OpenAI's Responses API. Provides a consistent, provider neutral way to interact with modern LLMs. Repairs Chat Completion API drift.</h2>
+
+> It defines a shared schema, and tooling layer that enable a unified experience for calling language models, streaming results, and composing agentic workflows—independent of provider.
+
+<br />
+
+<h2>Usage as a Provider / Router allows creation of rich Agent Environments</h2>
+
   </div>
   <div class="open-responses-panels">
     <div class="panel">
-      <h3>Internal tools - Model/Provider</h3>
+      Internal Tools - (Model or Provider)
       <ul>
+        <li><code>shell</code> and <code>local_shell</code></li>
         <li><code>code_interpreter</code></li>
         <li><code>apply_patch</code></li>
         <li><code>web_search</code></li>
+        <li><code>etc..</code></li>
       </ul>
-    </div>
-    <div class="panel">
-      <h3>External tools</h3>
+      External Tools (Client Supplied)
       <ul>
-        <li>MCP servers</li>
+        <li>MCP Servers</li>
         <li>Standard JSON function calls</li>
-        <li>Grammar Constrained non-JSON tools</li>
+        <li>Free-Form Tools</li>
+        <li>Grammar constrained Tools</li>
       </ul>
     </div>
   </div>
 </div>
 
-
 ---
-
-<div class="eyebrow">5 · Why STDIO servers mattered</div>
 
 # Before shell execution in clients, STDIO filled a real gap
 
 <div class="comparison">
   <div class="panel">
-    <h3>What the gap was</h3>
+  <h3>Impact of Shell on STDIO</h3>
     <ul>
-      <li>Clients often could not execute arbitrary shell commands themselves</li>
-      <li>If you wanted access to the local machine, you had to expose it somehow</li>
-      <li>STDIO servers became the path to “do something here”</li>
-      <li>That was not accidental — it was a real capability gap</li>
+      <li><strong>MCPorter</strong> and <strong>mcp-cli</strong></li>
     </ul>
   </div>
   <div class="panel">
     <h3>Why distribution was about ideas</h3>
     <ul>
       <li>Many servers could be one-shotted into existence</li>
-      <li>Sometimes the value was the interface idea, not the code artifact</li>
       <li>The durable value-add was not wrapper code itself</li>
       <li>It was access to <strong>data</strong>, <strong>resources</strong>, and <strong>compute</strong></li>
     </ul>
@@ -759,7 +822,6 @@ Multi-turn conversation Based, provides Streaming/Cancellation and observability
 
 ---
 
-<div class="eyebrow">Closing</div>
 
 # MCP - Product Market Fit
 
