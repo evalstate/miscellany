@@ -804,27 +804,29 @@ A common pattern:
 <div class="comparison">
   <div class="panel">
   MCP is a Commodity Standard    
-  
+
+Supports Consumer, Enterprise and Developer use-cases. 
+
 Single URL to install authenticated JSON tools across thousands of clients
 
-Sticky features *weren't present* at launch!
+MCP's "fit" features *weren't present* at launch!
 
-Resources based extension mechanism enabled rapid MCP Apps distribution on a solid support base
+URI/Resources based extensions deliver innovation and extensibility...
 
-Real Value is because you access Data or Resources 
-
-URI based extensions deliver innovation and extensibility.
+...Which  enabled rapid MCP Apps distribution on a solid support base.
 
 
   </div>
   <div class="panel">
-    Model Changes and STDIO
-    <ul
-      <li>Many servers could be one-shotted into existence</li>
-      <li><strong>MCPorter</strong> and <strong>mcp-cli</strong></li>
-      <li>The durable value-add was not wrapper code itself</li>
-      <li>It was access to <strong>data</strong>, <strong>resources</strong>, and <strong>compute</strong></li>
-    </ul>
+   Model/Host Changes and STDIO
+   
+   Host applications with Shell tool reduce the need for STDIO Servers.
+   
+   In many cases for local running tools such as Apify **mcp-cli** or Pete Steinberger's **MCPorter** offer a _better_ experience for MCP usage.
+
+   Distribution via MCPB is one potential advantage
+
+   Simple one-shot server design meant that distribution of ideas was more important than code.
   </div>
 </div>
 
