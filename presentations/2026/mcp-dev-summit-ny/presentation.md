@@ -428,8 +428,6 @@ style: |
 
 <div>
 
-<div class="eyebrow">1 · Introduction</div>
-
 # Shaun Smith `@evalstate`
 
 - Open Source @ Hugging Face
@@ -532,14 +530,14 @@ It's hard to compete against that efficiency.
 
 <div class="comparison">
   <div class="panel">
-      <h3>Harness Changes</h3>
+      Harness Changes
       <li>General Purpose Agent Harnesses are given direct Shell access</li>
       <li>Models are able to reason and act on discovered content
       <li>Progressive Disclosure has follow automatic follow-through</li>
     </ul>
   </div>
   <div class="panel">
-    <h3>Why this enabled Skills</h3>
+    Why this enabled Skills
       <li>Simple, shell Native hierarchy of content</li>
       <li>Reusable procedures become strong scaffolding for capable models</li>
       <li>Shell surface is perfect for token dense discovery and navigation</li>
@@ -568,8 +566,9 @@ Dynamic Space Tool: **45 tokens**
 MCP provides an **inference gateway** to thousands of specialized and custom models covering Audio, Video, Text, 3D Models, Environments and more.
 
 
-Flux/Krea.1 
-Qwen-Image/Qwen
+<code>Flux.1-Krea-Dev </code>
+<code>Qwen-Edit-2509-Multiple-angles-LoRA</code>
+<code>Wan2.2 First/Last Frame</code>
 
 
   </div>
@@ -800,52 +799,35 @@ A common pattern:
 
 ---
 
-# Before shell execution in clients, STDIO filled a real gap
+# It was close....! PMF for MCP
 
 <div class="comparison">
   <div class="panel">
-  <h3>Impact of Shell on STDIO</h3>
-    <ul>
-      <li><strong>MCPorter</strong> and <strong>mcp-cli</strong></li>
-    </ul>
+  MCP is a Commodity Standard    
+  
+Single URL to install authenticated JSON tools across thousands of clients
+
+Sticky features *weren't present* at launch!
+
+Resources based extension mechanism enabled rapid MCP Apps distribution on a solid support base
+
+Real Value is because you access Data or Resources 
+
+URI based extensions deliver innovation and extensibility.
+
+
   </div>
   <div class="panel">
-    <h3>Why distribution was about ideas</h3>
-    <ul>
+    Model Changes and STDIO
+    <ul
       <li>Many servers could be one-shotted into existence</li>
+      <li><strong>MCPorter</strong> and <strong>mcp-cli</strong></li>
       <li>The durable value-add was not wrapper code itself</li>
       <li>It was access to <strong>data</strong>, <strong>resources</strong>, and <strong>compute</strong></li>
     </ul>
   </div>
 </div>
 
-
----
-
-
-# MCP - Product Market Fit
-
-<div class="closing-grid">
-  <div class="panel">
-    <h3>The through-line</h3>
-    <ul>
-      <li>MCP </li>
-      <li>The ecosystem around MCP changed faster than almost anyone expected.</li>
-      <li>RL made self-propelling tool loops more viable.</li>
-      <li>Skills and shell execution turned into practical code mode.</li>
-      <li>Apps SDK patterns taught us when not to spend more tokens.</li>
-      <li>Remote execution, ACP, and Open Responses are all redrawing the boundary.</li>
-    </ul>
-  </div>
-  <div class="panel">
-    <h3>The good news</h3>
-    <ul>
-      <li>The debate is more interesting because the protocol is now real infrastructure.</li>
-      <li>The next phase is about placement: what belongs in MCP, what belongs in the client, and what belongs in inference.</li>
-      <li>That is a much better problem to have than irrelevance.</li>
-    </ul>
-  </div>
-</div>
 
 ---
 
