@@ -424,6 +424,7 @@ style: |
 
 ---
 
+
 <div class="columns">
 
 <div>
@@ -438,7 +439,6 @@ style: |
 - Maintainer of `fast-agent`
 
 <div class="hero-note">
-My angle here is practical: what actually changed in agent systems after MCP launched, what parts of the protocol clearly found product-market fit, and what the new execution patterns are doing to the boundary of the stack.
 </div>
 
 </div>
@@ -487,7 +487,7 @@ My angle here is practical: what actually changed in agent systems after MCP lau
   </div>
   <div class="card">
     <h3>Agent Client Protocol<br />
-    Open Responses</h3>
+    Responses API</h3>
   </div>
   <div class="card">
     <h3>Long Running Tool Loops (and reasoning models)</h3>
@@ -503,14 +503,14 @@ My angle here is practical: what actually changed in agent systems after MCP lau
 <div class="rl-layout">
   <div>
 
-Models are placed in an environment, given a task and scored with a reward function :
+Models are placed in an environment, given a task and scored with a reward function:
 
   - <strong>discover</strong>
   - <strong>self-correct</strong>
   - <strong>problem solve</strong>
   - keep <strong>driving the loop</strong> without constant human steering
 
-> mini-SWE-Agent: A single 100 line python and single freeform (non JSON) tool can scoe 76.0% on SWE-Bench!
+> mini-SWE-Agent: A single 100 line python and single freeform (non JSON) tool can score 76.0% on SWE-Bench!
 
 It's hard to compete against that efficiency.
 
@@ -531,16 +531,27 @@ It's hard to compete against that efficiency.
 <div class="comparison">
   <div class="panel">
       Harness Changes
-      <li>General Purpose Agent Harnesses are given direct Shell access</li>
-      <li>Models are able to reason and act on discovered content
-      <li>Progressive Disclosure has follow automatic follow-through</li>
-    </ul>
+
+General Purpose Agent Harnesses are given direct Shell access
+
+Fewer pre/post Tool/LLM Stop checks/hacks to keep model on-track.
+
+Snapshot/Checkpointing techniques (AgentFS, Execution Monitoring)
+
+Remote runtime environments (e.g. Codex Web, Claude Code)
+    
   </div>
   <div class="panel">
     Why this enabled Skills
-      <li>Simple, shell Native hierarchy of content</li>
-      <li>Reusable procedures become strong scaffolding for capable models</li>
-      <li>Shell surface is perfect for token dense discovery and navigation</li>
+
+Simple navigable, native hierarchy of content
+
+Reusable procedures become strong scaffolding for capable models
+
+Bash is token dense and unsurprising compared to custom JSON Tools / mid-context tool enablement
+
+Between deterministic program and documentation. 
+
   </div>
 </div>
 
@@ -555,21 +566,17 @@ It's hard to compete against that efficiency.
 
 <h1>Dynamic Tool Calling</h1>
 
-
-Models can now discover and dynamically call Tools. 
-
 Dynamic Space Tool: **45 tokens**
-
-
-**MCP** provides Authentication and Multimodal support. 
 
 MCP provides an **inference gateway** to thousands of specialized and custom models covering Audio, Video, Text, 3D Models, Environments and more.
 
+**MCP** provides Authentication and Multimodal support. 
 
+
+<code>Qwen 3.5-35B-A3B</code>
 <code>Flux.1-Krea-Dev </code>
 <code>Qwen-Edit-2509-Multiple-angles-LoRA</code>
 <code>Wan2.2 First/Last Frame</code>
-
 
   </div>
   <div class="dynamic-tool-video">
@@ -591,10 +598,7 @@ A model with access to general purposes tools has crossed into a very real form 
 
 Bash provides a general purpose, token dense-execution language. 
 
-Agent Skills are powerful:
-- Between deterministic program and documentation. 
-- Model discoverable context loading
-- task-specific tools generated on demand. Example: **HF Tool Builder** navigates OpenAPI spec to build composable CLI tools.
+Task-specific tools generated on demand. Example: **HF Tool Builder** navigates OpenAPI spec to build composable CLI tools.
 
 Some models are trained to use **code tools natively**, and are bundled with interpreters.
 
@@ -709,17 +713,20 @@ A common pattern:
 
 <div class="card-grid">
   <div class="card">
-    <h3>Execution Environments</h3>
-    <p>Wide range of options from YOLO, Local/Remote containers or lightweight sandboxes (Monty, Just-Bash)</p>
+Runtime Environments
+
+Options from YOLO, Local/Remote containers, exe.dev-style or lightweight sandboxes (Monty, Just-Bash). Simple persistent storage (e.g. HF Buckets)</p>
 
   </div>
   <div class="card">
-    <h3>Model Selection</h3>
-    <p>Mixed Model workloads handle different modalitites, specializations and price points. </p>
+Model Selection
+
+Mixed Model workloads handle different modalitites, specializations and price points. Token efficient task agent delegation.
   </div>
   <div class="card">
-    <h3>Inference APIs</h3>
-    <p>Increasingly absorb search, tools, code, and state into one bundled execution surface.</p>
+Inference APIs
+    
+Increasingly absorb search, tools, code, and state into one bundled execution surface.
   </div>
 </div>
 
@@ -734,15 +741,15 @@ A common pattern:
     <div class="acp-points">
       <div class="panel">
         File and Shell Tools
-        <p>Client provided tools, enabling "follow along" in editors </p>
+        <p>Client provided tools, enables "follow along" in editors </p>
       </div>
       <div class="panel">
         Session Based
         <p>Listing, Resumption and Rehydration of Agent sessions</p>
       </div>
       <div class="panel">
-        Streaming and Observability
-        <p>Listing, Resumption and Rehydration of Agent sessions</p>
+        Streaming Results and Observability
+        <p>Agent Results and Tool Status stream, are cancellable</p>
       </div>
       <div class="panel">
         MCP Native Support
