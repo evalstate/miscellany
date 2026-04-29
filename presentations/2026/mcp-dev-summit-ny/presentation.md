@@ -6,6 +6,39 @@ theme: ny-noir
 paginate: false
 header: '<span class="header-logos"><img src="./images/hf_logo.svg" alt="Hugging Face" /><img src="./images/github-mark.svg" alt="GitHub" />github.com/evalstate</span>'
 style: |
+  .header-logos {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: rgba(5, 10, 18, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #edf5ff;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: none;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+  }
+
+  .header-logos img {
+    width: auto;
+    height: 22px;
+    padding: 0.18rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: none !important;
+    border: none !important;
+    object-fit: contain;
+    filter: none !important;
+  }
+
+  .header-logos img[src*="hf_logo"] {
+    height: 24px;
+    padding: 0.22rem 0.28rem;
+  }
+
   video.full-slide {
     width: 100%;
     height: 100%;
@@ -25,6 +58,43 @@ style: |
     margin-top: 0.8rem;
     font-size: 0.64em;
     color: #d8e4f5;
+  }
+
+  .intro-logos {
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+    align-content: center;
+    margin-top: 0.8rem;
+  }
+
+  .intro-logos img {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  .intro-logos .hf-mark {
+    width: 240px;
+  }
+
+  .intro-logos .mcp-mark-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 220px;
+    height: 220px;
+    border-radius: 32px;
+    background:
+      radial-gradient(circle at 50% 40%, rgba(255, 255, 255, 0.18), transparent 58%),
+      rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .intro-logos .mcp-mark {
+    width: 160px;
+    filter: invert(1) brightness(1.2);
   }
 
   .image-strip {
@@ -445,8 +515,12 @@ style: |
 
 <div class="center">
 
-![w:240](./images/hf_logo.svg)
-![w:220](./images/mcp-icon.svg)
+<div class="intro-logos">
+  <img class="hf-mark" src="./images/hf_logo.svg" alt="Hugging Face" />
+  <div class="mcp-mark-wrap">
+    <img class="mcp-mark" src="./images/mcp-icon.svg" alt="MCP" />
+  </div>
+</div>
 
 </div>
 
