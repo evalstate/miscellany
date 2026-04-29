@@ -205,8 +205,56 @@ style: |
 
 ---
 
-
 <video class="full-slide" src="./images/intro-spaces.webm" autoplay loop muted playsinline></video>
+
+---
+
+# Dynamic Spaces and MCP for Inference
+
+<!-- _class: transition -->
+
+---
+
+# MCP Features
+
+<div class="columns">
+
+<div>
+
+- ## Inference Gateway
+
+- ## Dynamic Model Selection
+
+- ## Customisable Behaviour
+
+- ## JSON-RPC/SSE Responses
+
+- ## Tool Progress Notifications
+
+</div>
+
+<div class="no-shadow">
+
+<center>
+
+![w:500](./images/diag_notifications.png)
+
+</center>
+
+```typescript
+async (request, extra) => {
+  await server.notification({
+    method: "notifications/statusUpdate",
+    params: { /* your params */ }
+  }, { relatedRequestId: extra.requestId });
+};
+
+```
+
+</div>
+
+</div>
+
 
 ---
 
@@ -282,56 +330,6 @@ style: |
 
 </center>
 
-
----
-
-# Dynamic Spaces and MCP for Inference
-
-<!-- _class: transition -->
-
----
-
-# MCP Features
-
-
-<div class="columns">
-
-<div>
-
-- ## Inference Gateway
-
-- ## Dynamic Model Selection
-
-- ## Customisable Behaviour
-
-- ## JSON-RPC/SSE Responses
-
-- ## Tool Progress Notifications
-
-
-</div>
-
-<div class="no-shadow">
-
-<center>
-
-![w:500](./images/diag_notifications.png)
-
-</center>
-
-```typescript
-async (request, extra) => {
-  await server.notification({
-    method: "notifications/statusUpdate",
-    params: { /* your params */ }
-  }, { relatedRequestId: extra.requestId });
-};
-
-```
-
-</div>
-
-</div>
 
 ---
 

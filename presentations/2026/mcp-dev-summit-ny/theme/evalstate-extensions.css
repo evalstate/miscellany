@@ -1,0 +1,802 @@
+/* @theme evalstate-extensions
+   Custom slide utilities for Evalstate decks.
+*/
+
+/* Inline images should align with text baseline */
+li img {
+  vertical-align: middle;
+  margin: 0 0.2em;
+}
+
+section.mcp-features table {
+  width: 100%;
+  margin-top: 0.5rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+section:not(.titlepage) {
+  padding: 64px 72px !important;
+}
+
+/* Hide headers for icon-based tables, show for data tables */
+section.mcp-features table thead {
+  display: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+section.mcp-features table.show-headers thead {
+  display: table-header-group;
+}
+
+section.mcp-features table thead th {
+  padding: 0.35rem 0.55rem;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: #64748b;
+  background-color: transparent;
+}
+
+section.mcp-features table thead th:not(:first-child) {
+  text-align: right;
+}
+
+section.mcp-features tbody td {
+  padding: 0.32rem 0.55rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  vertical-align: top;
+}
+
+section.mcp-features tbody tr:last-child td {
+  border-bottom: none;
+}
+
+section.mcp-features table td:first-child,
+section.mcp-features table th:first-child {
+  text-align: left;
+  width: auto;
+}
+
+/* August column (2nd column) - normal weight */
+section.mcp-features table.show-headers td:nth-child(2) {
+  font-weight: 400;
+}
+
+/* September column (3rd column) - bold */
+section.mcp-features table.show-headers td:nth-child(3) {
+  font-weight: 700;
+}
+
+section.mcp-features table tr:nth-child(even),
+section.mcp-features table tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+section.mcp-features table tr:hover {
+  background-color: var(--table-hover-background-color) !important;
+  color: var(--table-hover-color) !important;
+  font-weight: 700;
+}
+
+/* Highlight row for important metrics - nice blue color */
+section.mcp-features tbody tr.highlight-row,
+section.mcp-features tbody tr.highlight-row:hover {
+  background-color: #dbeafe !important;
+}
+
+section.mcp-features tbody tr.highlight-row td,
+section.mcp-features tbody tr.highlight-row:hover td {
+  font-weight: 700 !important;
+  color: #1e40af !important;
+  padding-top: 0.45rem !important;
+  padding-bottom: 0.45rem !important;
+}
+
+/* Warning row for unsupported methods */
+section.mcp-features tbody tr.warning-row td {
+  color: #991b1b !important;
+  font-weight: 600 !important;
+}
+
+/* Fix horizontal scroll - ensure table doesn't overflow */
+section.mcp-features table {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+section.mcp-features .columns > div:last-child {
+  padding-left: 2rem;
+}
+
+section.mcp-features .cell-title {
+  display: inline-block;
+}
+
+section.mcp-features .feature-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 0 auto;
+  border-radius: 0.9rem;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+section.mcp-features .feature-icon img {
+  max-width: 62%;
+  max-height: 62%;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+section.mcp-features .examples {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+/* Registry collage layout for "Registries and Curation" slide */
+.registry-layout {
+  display: flex;
+  gap: 3rem;
+  align-items: center;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.registry-layout .collage-column {
+  flex: 1 1 65%;
+  min-width: 360px;
+}
+
+.registry-layout .text-column {
+  flex: 1 1 240px;
+  max-width: 320px;
+  line-height: 1.4;
+}
+
+.registry-layout .text-column h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.registry-layout .text-column ul {
+  padding-left: 1.1rem;
+  margin: 0;
+}
+
+.registry-collage {
+  position: relative;
+  height: 420px;
+  margin-top: 30px;
+}
+
+.registry-collage img {
+  position: absolute;
+  width: 55%;
+  max-width: 520px;
+  border-radius: 12px;
+  border: 6px solid #fff;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
+  transition: transform 160ms ease-in-out;
+}
+
+.registry-collage img:hover {
+  transform: scale(1.02) translateY(-4px);
+  z-index: 4;
+}
+
+.registry-collage .shot-azure {
+  top: 0;
+  left: -10px;
+  transform: rotate(-4deg);
+  z-index: 3;
+}
+
+.registry-collage .shot-claude {
+  top: 60px;
+  right: -60px;
+  transform: rotate(3deg);
+  z-index: 2;
+}
+
+.registry-collage .shot-github {
+  bottom: -30px;
+  left: 25%;
+  transform: rotate(-1deg);
+  z-index: 1;
+}
+
+/* Title slide social table */
+.social-table {
+  margin: 2.2rem 0 0 auto;
+  border-collapse: collapse;
+  font-size: 1.05em;
+  min-width: 360px;
+}
+
+.social-table td {
+  padding: 0.45rem 0.25rem;
+  border: none;
+  vertical-align: middle;
+  color: inherit;
+}
+
+.social-table td:first-child {
+  width: 54px;
+  text-align: right;
+}
+
+.social-table td:first-child img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  display: inline-block;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+}
+
+.social-table td:last-child {
+  padding-left: 0.9rem;
+}
+
+.social-table a {
+  color: inherit;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.social-table a:hover,
+.social-table a:focus {
+  text-decoration: underline;
+}
+
+.social-table tr {
+  background-color: transparent !important;
+}
+
+/* Magnifier hover effect: opt-in per image via wrapper */
+.mcp-magnify {
+  position: relative;
+  display: inline-block;
+  --magnify-image: none;
+  --magnify-scale: 2;
+  --magnify-size: 220px;
+  --magnify-focus-x: 50%;
+  --magnify-focus-y: 50%;
+  --magnify-position-x: 50%;
+  --magnify-position-y: 50%;
+  cursor: zoom-in;
+  isolation: isolate;
+}
+
+.mcp-magnify > img {
+  display: block;
+}
+
+.mcp-magnify::after {
+  content: "";
+  position: absolute;
+  width: var(--magnify-size);
+  height: var(--magnify-size);
+  left: var(--magnify-position-x);
+  top: var(--magnify-position-y);
+  transform: translate(-50%, -50%) scale(var(--magnify-scale));
+  transform-origin: 50% 50%;
+  background-image: var(--magnify-image);
+  background-repeat: no-repeat;
+  background-size: calc(100% * var(--magnify-scale)) calc(100% * var(--magnify-scale));
+  background-position: var(--magnify-focus-x) var(--magnify-focus-y);
+  border-radius: 50%;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  outline: 2px solid rgba(0, 0, 0, 0.25);
+  outline-offset: -1px;
+  opacity: 0;
+  transition: opacity 140ms ease-in-out;
+  pointer-events: none;
+  z-index: 1;
+  will-change: transform, opacity;
+}
+
+.mcp-magnify:hover::after,
+.mcp-magnify:focus-within::after {
+  opacity: 1;
+}
+
+/* Lens presets for specific slides */
+.mcp-magnify--completion-1 {
+  --magnify-image: url('./images/completion-1-lightbox.png');
+  --magnify-scale: 2;
+  --magnify-size: 280px;
+  --magnify-position-x: 50%;
+  --magnify-position-y: 50%;
+  --magnify-focus-x: 85%;
+  --magnify-focus-y: 88%;
+}
+
+.mcp-magnify--completion-2 {
+  --magnify-image: url('./images/completion-2-lightbox.png');
+  --magnify-scale: 2;
+  --magnify-size: 280px;
+  --magnify-position-x: 50%;
+  --magnify-position-y: 50%;
+  --magnify-focus-x: 105%;
+  --magnify-focus-y: 105%;
+}
+
+.mcp-magnify--privacy {
+  --magnify-image: url('./images/chatgpt-privacy.png');
+  --magnify-scale: 2.2;
+  --magnify-size: 240px;
+  --magnify-position-x: 78%;
+  --magnify-position-y: 58%;
+  --magnify-focus-x: 78%;
+  --magnify-focus-y: 58%;
+}
+
+/* Zoom-in animation effect for images */
+@keyframes zoomToPosition {
+  0% {
+    transform: scale(var(--zoom-start-scale, 3)) translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) translate(var(--zoom-end-x, 0), var(--zoom-end-y, 0));
+    opacity: 1;
+  }
+}
+
+.zoom-effect {
+  position: relative;
+  display: inline-block;
+  --zoom-start-scale: 3;
+  --zoom-end-x: 0;
+  --zoom-end-y: 0;
+  --zoom-duration: 10s;
+}
+
+.zoom-effect img {
+  display: block;
+  animation: zoomToPosition var(--zoom-duration) ease-out forwards;
+  transform-origin: center center;
+}
+
+/* Preset for claude_enhancements zoom */
+.zoom-effect--claude {
+  --zoom-start-scale: 4;
+  --zoom-end-x: 500px;
+  --zoom-end-y: -450px;
+  --zoom-duration: 3s;
+}
+
+/* Emphasis box for important quotes/callouts */
+.emphasis-box {
+  background-color: #fef3c7;
+  padding: 0.5rem;
+  border-left: 4px solid #f59e0b;
+  border-radius: 2px;
+  margin: 0.5rem 0;
+}
+
+.social-table tr:nth-child(odd),
+.social-table tr:nth-child(even) {
+  background-color: transparent !important;
+}
+
+.social-table tr:hover,
+.social-table tr:focus-within {
+  background-color: var(--table-hover-background-color) !important;
+  color: var(--table-hover-color) !important;
+  font-weight: 700;
+}
+
+/* Top 20 MCP Clients Table Styling - Clean, striking design like mcp-features */
+section.top-clients table {
+  width: 100%;
+  margin-top: 0.6rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+section.top-clients table thead {
+  display: none;
+}
+
+/* Perfect 50:50 split with room for all capability icons */
+section.top-clients table col:nth-child(1) { width: 2.2rem; }  /* Left ordinal */
+section.top-clients table col:nth-child(2) { width: calc(50% - 7.7rem); }  /* Left client name */
+section.top-clients table col:nth-child(3) { width: 5.5rem; }  /* Left icons (4 icons: Delete + R + S + E) */
+section.top-clients table col:nth-child(4) { width: 2.2rem; }  /* Right ordinal */
+section.top-clients table col:nth-child(5) { width: calc(50% - 7.7rem); }  /* Right client name */
+section.top-clients table col:nth-child(6) { width: 5.5rem; }  /* Right icons */
+
+section.top-clients tbody td {
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  vertical-align: middle;
+  line-height: 1.2;
+}
+
+section.top-clients tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Ordinal number columns */
+section.top-clients table td:nth-child(1),
+section.top-clients table td:nth-child(4) {
+  text-align: center;
+  font-weight: 600;
+  color: #64748b;
+  font-size: 0.7rem;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Client name columns */
+section.top-clients table td:nth-child(2),
+section.top-clients table td:nth-child(5) {
+  font-weight: 600;
+  color: #1f2937;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Icon columns - right-aligned so icons line up */
+section.top-clients table td:nth-child(3),
+section.top-clients table td:nth-child(6) {
+  text-align: right;
+}
+
+section.top-clients table td:nth-child(3) .client-icons,
+section.top-clients table td:nth-child(6) .client-icons {
+  justify-content: flex-end;
+}
+
+/* Remove background striping */
+section.top-clients table tr:nth-child(even),
+section.top-clients table tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+/* Per-client hover effect - LEFT side (ordinal, name, icons) */
+section.top-clients tbody td:nth-child(1),
+section.top-clients tbody td:nth-child(2),
+section.top-clients tbody td:nth-child(3) {
+  transition: background-color 0.15s ease;
+}
+
+section.top-clients tbody tr:hover td:nth-child(1),
+section.top-clients tbody tr:hover td:nth-child(2),
+section.top-clients tbody tr:hover td:nth-child(3) {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+}
+
+section.top-clients tbody tr:hover td:nth-child(2) {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+/* Per-client hover effect - RIGHT side (ordinal, name, icons) */
+section.top-clients tbody td:nth-child(4),
+section.top-clients tbody td:nth-child(5),
+section.top-clients tbody td:nth-child(6) {
+  transition: background-color 0.15s ease;
+}
+
+section.top-clients tbody tr:hover td:nth-child(4),
+section.top-clients tbody tr:hover td:nth-child(5),
+section.top-clients tbody tr:hover td:nth-child(6) {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+}
+
+section.top-clients tbody tr:hover td:nth-child(5) {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+/* Icon container styling */
+section.top-clients .client-icons {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon box for capability icons using SVG - ENABLED (bold color) */
+section.top-clients .capability-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background-color: rgba(59, 130, 246, 0.15);
+  transition: transform 0.15s ease;
+}
+
+section.top-clients .capability-icon img {
+  width: 17px;
+  height: 17px;
+  box-shadow: none;
+  border-radius: 0;
+  /* Bold blue color for enabled capabilities */
+  filter: invert(36%) sepia(85%) saturate(2270%) hue-rotate(208deg) brightness(96%) contrast(92%);
+}
+
+/* Icon box for DISABLED capability icons (subtle/grayed) */
+section.top-clients .capability-icon.disabled {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+section.top-clients .capability-icon.disabled img {
+  /* Subtle gray for disabled capabilities */
+  filter: invert(80%) sepia(5%) saturate(200%) hue-rotate(180deg) brightness(95%) contrast(85%);
+  opacity: 0.35;
+}
+
+/* Session deletion icon - uses trash-2.svg with red styling */
+section.top-clients .icon-delete {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background-color: rgba(239, 68, 68, 0.15);
+  transition: transform 0.15s ease;
+}
+
+section.top-clients .icon-delete img {
+  width: 17px;
+  height: 17px;
+  box-shadow: none;
+  border-radius: 0;
+  /* Red color for delete icon */
+  filter: invert(35%) sepia(89%) saturate(2270%) hue-rotate(343deg) brightness(96%) contrast(92%);
+}
+
+/* Alert/warning icon - uses circle-alert.svg with red/orange styling */
+section.top-clients .icon-alert {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 4px;
+  background-color: rgba(239, 68, 68, 0.12);
+  transition: transform 0.15s ease;
+}
+
+section.top-clients .icon-alert img {
+  width: 17px;
+  height: 17px;
+  box-shadow: none;
+  border-radius: 0;
+  /* Red/orange color for alert icon */
+  filter: invert(35%) sepia(89%) saturate(2270%) hue-rotate(343deg) brightness(96%) contrast(92%);
+}
+
+/* Legend styling */
+section.top-clients .legend {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 0.8rem;
+  padding: 0.5rem 0.6rem;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 6px;
+  font-size: 0.78rem;
+  justify-content: center;
+  align-items: center;
+}
+
+section.top-clients .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+section.top-clients .legend-item .legend-label {
+  color: #64748b;
+  font-weight: 500;
+}
+
+/* Legacy text-based icons (for backward compatibility) */
+section.top-clients .client-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 3px;
+  background-color: rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: bold;
+  line-height: 1;
+}
+
+section.top-clients .client-icon.icon-delete {
+  background-color: #ef4444;
+  color: white;
+}
+
+section.top-clients .client-icon.icon-capability {
+  background-color: #3b82f6;
+  color: white;
+}
+
+/* Header logos using Marp's header feature */
+section header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  height: 28px;
+  z-index: 1000;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Hide header on titlepage and transition slides */
+section.titlepage header,
+section.transition header {
+  display: none;
+}
+
+.header-logos {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-logos img {
+  height: 28px;
+  width: auto;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  object-fit: contain;
+}
+
+/* Make HF logo slightly larger to match GitHub visually */
+.header-logos img[src*="hf_logo"] {
+  height: 32px;
+}
+
+/* Global image shadow control */
+/* Turn off all shadows by default - uncomment the rule below */
+/* section img {
+  box-shadow: none !important;
+} */
+
+/* Or use classes for fine control */
+.no-shadow img,
+img.no-shadow {
+  box-shadow: none !important;
+}
+
+.shadow img,
+img.shadow {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Conversational state problem table - compact like top-20 clients */
+section.conversational-state .state-table {
+  width: 100%;
+  margin-top: 0.6rem;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.75rem;
+}
+
+section.conversational-state .state-table thead {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+section.conversational-state .state-table.show-headers thead {
+  display: table-header-group;
+}
+
+section.conversational-state .state-table thead th {
+  padding: 0.35rem 0.5rem;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.72rem;
+  color: #1f2937;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+section.conversational-state .state-table thead th:first-child {
+  text-align: center;
+  font-weight: 700;
+  background-color: rgba(59, 130, 246, 0.08);
+  color: #1e40af;
+}
+
+section.conversational-state .state-table tbody td {
+  padding: 0.35rem 0.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  vertical-align: middle;
+  text-align: center;
+  line-height: 1.3;
+}
+
+section.conversational-state .state-table tbody td:first-child {
+  font-weight: 700;
+  text-align: center;
+  background-color: rgba(0, 0, 0, 0.04);
+  color: #1f2937;
+  font-family: 'Fira Code', monospace;
+}
+
+section.conversational-state .state-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+section.conversational-state .state-table tr:nth-child(even),
+section.conversational-state .state-table tr:nth-child(odd) {
+  background-color: transparent !important;
+}
+
+section.conversational-state .state-table tr:hover td {
+  background-color: rgba(59, 130, 246, 0.08) !important;
+}
+
+section.conversational-state .state-table tr:hover td:first-child {
+  font-weight: 700;
+  color: #1e40af;
+}
+
+/* State change row - yellow/warning */
+section.conversational-state .state-table tr.state-change-row td:first-child {
+  background-color: rgba(251, 191, 36, 0.2);
+  color: #92400e;
+}
+
+section.conversational-state .state-table tr.state-change-row td {
+  background-color: rgba(251, 191, 36, 0.08);
+}
+
+/* Danger row - red */
+section.conversational-state .state-table tr.danger-row td:first-child {
+  background-color: rgba(239, 68, 68, 0.2);
+  color: #991b1b;
+}
+
+section.conversational-state .state-table tr.danger-row td {
+  background-color: rgba(239, 68, 68, 0.08);
+}
+
+/* Reusable corner logo divs for bottom corners (if needed) */
+.corner-logo {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #333;
+  z-index: 1000;
+}
+
+.corner-logo img {
+  height: 24px;
+  width: auto;
+}
+
+.corner-logo-bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+
+.corner-logo-bottom-right {
+  bottom: 20px;
+  right: 20px;
+}

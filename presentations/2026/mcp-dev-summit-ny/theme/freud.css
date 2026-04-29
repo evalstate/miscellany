@@ -1,0 +1,489 @@
+/* @theme freud */
+
+/*
+  ============================================
+    Created by Paulo Cunha
+    version: 1.0
+    last update: 02.jan.2022
+  ============================================       
+*/
+
+/* Importing COLOR SCHEMA */
+
+@import "default";
+@import "schema";
+@import "structure";
+@import "evalstate-extensions";
+
+/* Importing Font */
+/* Font Credit: htts://https://www.cdnfonts.com/ */
+@import url('https://fonts.cdnfonts.com/css/fira-sans?styles=20119');
+
+/***************** COMMON STRUCTURE **********************/
+
+:root {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: initial;
+  
+  color: #6c6c6c; 
+  color: #2b3446;
+  
+  background-color: #727d8b;
+  background-color: #f8b13d;
+  background-color: #435160; 
+  background-color: #f5eee6;
+  background-color: #d9dee6;
+  background-color: #f4f4ed;
+
+  --h1-color                  : #3d09ae;
+  --h1-color                  : #06858e;
+  
+  --border-color              : #a0660387;
+
+  --bold-color                : rgb(21, 105, 201);
+  --bold-color                : #0d2d58;
+
+  --italic-color              : rgb(38, 48, 71);
+  --italic-background-color   : rgba(172, 215, 255, 0.713);
+
+  /* --background-color          : #fdf6e3; */
+  --list-item-color           : rgb(255, 212, 95);
+  --after-color               : rgb(51, 48, 48);
+
+  --table-font-color          : black;
+  --table-header-color        : rgb(0, 132, 255);
+  
+  --main-color                : rgb(207, 77, 17);
+  --darker-color              : #246;
+  --lighter-color             : #080a0a;
+  --extra-back-color          : rgb(42, 45, 53);
+
+  --letter-spacing            : 0.125px;
+
+  --cool-list-color           : rgb(255, 68, 0);
+
+  --author-align              : right;
+
+}
+
+
+/* ------------------- TITLEPAGE -----------------------------*/
+
+section.titlepage .title {
+  border-bottom: 1px solid orangered;
+}
+
+section.titlepage .subtitle {
+  font-weight: 300;
+}
+
+
+section.titlepage .author,
+section.titlepage .date,
+section.titlepage .organization {
+  text-align: left;
+}
+section.titlepage h1 {
+  border-bottom: 1px solid orangered;
+}
+
+section.titlepage h2 {
+  font-weight: 300;
+}
+
+section.titlepage h3,
+section.titlepage h4,
+section.titlepage h5 {
+  text-align: right;
+}
+
+/* -------------------- TRANSITION ---------------------------------*/
+section.transition {
+  
+  --transitionpage-color: #247397;
+
+}
+
+section.transition h1 .mcp-model {
+  color: #FF9D00;
+}
+
+section.transition h1 .mcp-context {
+  color: #6b7280;
+}
+/* -------------------- TRANSITION ---------------------------------*/
+section.transition2 {
+  
+  background-color: #c53732;
+
+}
+
+/* ------------------- CITE -----------------------------*/
+section.cite {
+  --background-color: #49454f;
+  --strong-color: rgb(182, 112, 27);
+}
+
+section.cite p {
+  color: #fffbfe;
+}
+
+section.cite strong {
+  color: #f87ca1;
+}
+
+/* ------------------- IMAGE SHADOWS -----------------------------*/
+img {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+
+/* ---------- Custom diagrams for model vs context comparison ---------- */
+
+section .footprint-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+section .footprint-bars .row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+section .footprint-bars .label strong {
+  display: block;
+  font-size: 1.05em;
+  color: var(--bold-color);
+}
+
+section .footprint-bars .label .meta {
+  font-size: 0.8em;
+  color: #475569;
+  margin-top: 0.25rem;
+}
+
+section .footprint-bars .bar {
+  position: relative;
+  height: 42px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+}
+
+section .footprint-bars .bar[data-note]::after {
+  content: attr(data-note);
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  font-size: 0.62em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+section .footprint-bars .fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #f97316 0%, #facc15 100%);
+  transform-origin: left center;
+  transform: scaleX(var(--scale, 1));
+}
+
+section .footprint-bars .fill span {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-weight: 600;
+  color: #1f2937;
+  font-size: 0.85em;
+}
+
+section .footprint-bars .fill.is-tiny {
+  background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
+}
+
+section .footprint-bars .fill.is-tiny span {
+  color: #0f172a;
+}
+
+section .footprint-note {
+  margin-top: 1.25rem;
+  font-size: 0.72em;
+  color: #475569;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+section .footprint-grid {
+  margin-top: 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 1.2rem;
+  align-items: end;
+}
+
+section .footprint-grid .panel {
+  position: relative;
+  border-radius: 28px;
+  border: 3px solid rgba(15, 23, 42, 0.15);
+  background: linear-gradient(145deg, rgba(248, 196, 113, 0.3), rgba(249, 115, 22, 0.65));
+  box-shadow: 0 28px 48px rgba(15, 23, 42, 0.18);
+  padding: 2.2rem;
+  min-height: clamp(240px, 52vh, 520px);
+  color: #1f2937;
+  overflow: hidden;
+}
+
+section .footprint-grid .panel small {
+  display: block;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(15, 23, 42, 0.65);
+  margin-bottom: 0.4rem;
+}
+
+section .footprint-grid .panel strong {
+  display: block;
+  font-size: 1.75em;
+  color: var(--bold-color);
+}
+
+section .footprint-grid .panel p {
+  font-size: 0.95em;
+  margin-top: 1rem;
+  color: rgba(15, 23, 42, 0.82);
+}
+
+section .footprint-grid .panel::after {
+  content: attr(data-caption);
+  position: absolute;
+  right: 28px;
+  bottom: 26px;
+  font-size: 0.78em;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(15, 23, 42, 0.55);
+}
+
+section .footprint-grid .panel.context {
+  grid-column: span 3;
+  min-height: clamp(90px, 16vh, 220px);
+  background: linear-gradient(145deg, rgba(59, 130, 246, 0.35), rgba(14, 165, 233, 0.75));
+  box-shadow: 0 20px 32px rgba(14, 165, 233, 0.28);
+}
+
+section .footprint-grid .panel.context strong {
+  color: #0f172a;
+}
+
+section .footprint-grid .panel.context p {
+  color: rgba(15, 23, 42, 0.68);
+}
+
+section .footprint-grid .panel.weights {
+  grid-column: span 9;
+}
+
+section .window-grid {
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.2rem;
+}
+
+section .window-card {
+  background: white;
+  border-radius: 18px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.12);
+  padding: 1.6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+section .window-card::after {
+  content: attr(data-year);
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  font-size: 0.72em;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(15, 23, 42, 0.45);
+}
+
+section .window-card strong {
+  display: block;
+  font-size: 1.2em;
+  color: var(--bold-color);
+}
+
+section .window-card .tokens {
+  font-size: 1.05em;
+  margin-top: 0.7rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+section .window-card .tokens span {
+  display: block;
+  font-size: 0.7em;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+section .window-card p {
+  font-size: 0.82em;
+  line-height: 1.35;
+  color: #475569;
+  margin-top: 1rem;
+}
+
+section .window-card .badge {
+  margin-top: 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(14, 165, 233, 0.12);
+  color: #0369a1;
+  font-size: 0.7em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+section .analog-table {
+  margin-top: 1.8rem;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+  box-shadow: 0 18px 30px rgba(15, 23, 42, 0.1);
+}
+
+section .analog-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85em;
+}
+
+section .analog-table th,
+section .analog-table td {
+  padding: 0.85rem 1rem;
+  text-align: left;
+}
+
+section .analog-table tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+section .analog-table th {
+  background: rgba(15, 23, 42, 0.08);
+  text-transform: uppercase;
+  font-size: 0.72em;
+  letter-spacing: 0.08em;
+  color: #1f2937;
+}
+
+section .analog-notes {
+  margin-top: 1rem;
+  font-size: 0.72em;
+  color: #475569;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+section .footprint-nesting {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+section .footprint-nesting .box {
+  position: relative;
+  background: #fff7ed;
+  border: 2px solid #fb923c;
+  border-radius: 18px;
+  padding: 1.75rem;
+  min-height: 240px;
+  box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.05);
+}
+
+section .footprint-nesting .box strong {
+  font-size: 1.1em;
+  color: var(--bold-color);
+}
+
+section .footprint-nesting .box.emphasis {
+  background: #ecfeff;
+  border-color: #38bdf8;
+}
+
+section .footprint-nesting .chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #ffedd5;
+  border: 1px solid #f97316;
+  font-size: 0.7em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-top: 1.1rem;
+}
+
+section .footprint-nesting .box.emphasis .chip {
+  background: #e0f2fe;
+  border-color: #0ea5e9;
+  color: #0369a1;
+}
+
+section .footprint-nesting .box .inner {
+  position: absolute;
+  bottom: 18px;
+  right: 18px;
+  width: clamp(60px, 22%, 140px);
+  min-height: clamp(60px, 22%, 120px);
+  background: #0ea5e9;
+  color: white;
+  border-radius: 14px;
+  padding: 0.75rem;
+  font-size: 0.8em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  box-shadow: 0 10px 18px rgba(14, 165, 233, 0.35);
+}
+
+section .footprint-nesting .box .inner::after {
+  content: 'magnified';
+  position: absolute;
+  top: -22px;
+  font-size: 0.6em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(14, 165, 233, 0.9);
+}
+
+section .footprint-nesting ul {
+  margin-top: 1rem;
+  padding-left: 1.15rem;
+  font-size: 0.85em;
+  color: #1f2937;
+}
+
+section .footprint-nesting ul li {
+  margin-bottom: 0.35rem;
+}

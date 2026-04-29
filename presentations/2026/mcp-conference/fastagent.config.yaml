@@ -76,7 +76,7 @@ mcp:
       # "Authorization": "Bearer ${ENV_VAR}"
 
 # Skills configuration
-skills:
-  marketplace_urls:
-    - "https://github.com/huggingface/skills"
-    - "https://github.com/anthropics/skills"
+#skills:
+#  marketplace_urls:
+#    - "https://github.com/huggingface/skills"
+#    - "https://github.com/anthropics/skills"
