@@ -147,11 +147,12 @@ It's hard to compete against that efficiency.
 
 <div class="big-points">
 
-- General-purpose agent harnesses are given direct shell access
+- General-purpose agent harnesses are given direct(*) shell access
 - Fewer pre/post tool and LLM stop checks to keep models on track
+- API surface and Custom Workflows replaced by Model capabilities
 - Snapshot and checkpointing techniques
-- Remote runtime environments
-- Code mode as the default escape hatch
+- Movable runtime environments
+- Scripting (code generation) allows immediate specialization
 
 </div>
 
@@ -246,7 +247,10 @@ Handles:
 - Trackio Supervision
 - GGUF Conversion 
 
+_Recently added Vision Training!_
+
 </div>
+
 
 <div class="center">
 <div class="rl-stack">
@@ -267,7 +271,6 @@ Handles:
 <div class="columns">
 
 <div>
-CUDA Kernels Skill
 
 `Build a vectorized RMSNorm kernel for H100 targeting Qwen3-8B`
 
@@ -281,6 +284,8 @@ Handles:
 - Micro-benchmark scripts
 - End-to-end model/pipeline benchmarks
 - Kernel Hub publication
+
+_Kernels are first-class on the Hub!_
 
 </div>
 

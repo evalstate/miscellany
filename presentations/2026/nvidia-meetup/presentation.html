@@ -160,11 +160,11 @@
 <h1 id="smaller-and-simpler-harnesses">Smaller and Simpler Harnesses</h1>
 <div class="big-points">
 <ul>
-<li>General-purpose agent harnesses are given direct shell access</li>
+<li>General-purpose agent harnesses are given direct(*) shell access</li>
 <li>Fewer pre/post tool and LLM stop checks to keep models on track</li>
 <li>Snapshot and checkpointing techniques</li>
-<li>Remote runtime environments</li>
-<li>Code mode as the default escape hatch</li>
+<li>Movable runtime environments</li>
+<li>Scripting (code generation) allows immediate specialization</li>
 </ul>
 </div>
 </section>
@@ -241,6 +241,7 @@ LLM Trainer Skill
 <li>Trackio Supervision</li>
 <li>GGUF Conversion</li>
 </ul>
+<p><em>Recently added Vision Training!</em></p>
 </div>
 <div class="center">
 <div class="rl-stack">
@@ -255,7 +256,6 @@ LLM Trainer Skill
 <h1 id="building-kernels">Building Kernels</h1>
 <div class="columns">
 <div>
-CUDA Kernels Skill
 <p><code>Build a vectorized RMSNorm kernel for H100 targeting Qwen3-8B</code></p>
 <p>Skill Distribution via CLI</p>
 <p>Handles:</p>
@@ -268,6 +268,7 @@ CUDA Kernels Skill
 <li>End-to-end model/pipeline benchmarks</li>
 <li>Kernel Hub publication</li>
 </ul>
+<p><em>Kernels are first-class on the Hub!</em></p>
 </div>
 <div class="center">
 <div class="rl-stack">
