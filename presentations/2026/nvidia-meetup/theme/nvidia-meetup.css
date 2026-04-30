@@ -153,12 +153,14 @@ video.full-slide {
   line-height: 1.08;
 }
 
-.nia-flow-svg {
+.nia-flow-img {
   display: block;
   width: calc(100% + 1.2rem);
   max-width: none;
   margin: 1rem 0 0 -0.6rem;
-  overflow: visible;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .flow-compare {
