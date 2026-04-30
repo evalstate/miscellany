@@ -155,19 +155,20 @@ video.full-slide {
 
 .nia-flow {
   position: relative;
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
   min-height: 345px;
   margin-top: 1.2rem;
   padding: 1.35rem 0.35rem 1.9rem;
 }
 
 .nia-stage {
-  position: absolute;
-  top: 50%;
+  position: relative;
+  flex: 1 1 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 22.6%;
   min-height: 205px;
   padding: 1rem 0.95rem 0.95rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -176,7 +177,6 @@ video.full-slide {
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035)),
     rgba(6, 10, 16, 0.58);
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
-  transform: translateY(-50%);
 }
 
 .nia-stage::before {
@@ -199,23 +199,10 @@ video.full-slide {
 }
 
 .nia-task {
-  left: 0;
   border-color: rgba(155, 220, 255, 0.38);
   background:
     linear-gradient(180deg, rgba(155, 220, 255, 0.12), rgba(255, 255, 255, 0.035)),
     rgba(6, 10, 16, 0.58);
-}
-
-.nia-navigate {
-  left: 25.8%;
-}
-
-.nia-ingest {
-  left: 51.6%;
-}
-
-.nia-act {
-  left: 77.4%;
 }
 
 .nia-ingest::before {
@@ -227,13 +214,12 @@ video.full-slide {
 }
 
 .nia-arrow {
-  position: absolute;
+  position: relative;
+  flex: 0 0 3rem;
   box-sizing: border-box;
-  top: 50%;
   height: 7px;
   border-radius: 999px;
   background: transparent;
-  transform: translateY(-50%);
 }
 
 .nia-arrow::before {
@@ -262,23 +248,12 @@ video.full-slide {
 }
 
 .nia-arrow-in {
+  position: absolute;
+  flex: none;
+  top: 50%;
   left: -3.3rem;
   width: 3.1rem;
-}
-
-.nia-arrow-one {
-  left: 22.6%;
-  width: 3.2%;
-}
-
-.nia-arrow-two {
-  left: 48.4%;
-  width: 3.2%;
-}
-
-.nia-arrow-three {
-  left: 74.2%;
-  width: 3.2%;
+  transform: translateY(-50%);
 }
 
 .nia-recursive {

@@ -165,22 +165,32 @@ It's hard to compete against that efficiency.
     <h2>Task</h2>
   </div>
 
+  <div class="nia-arrow nia-arrow-one"></div>
+
   <div class="nia-stage nia-navigate">
     <h2>Navigate</h2>
   </div>
+
+  <div class="nia-arrow nia-arrow-two"></div>
 
   <div class="nia-stage nia-ingest">
     <h2>Ingest</h2>
   </div>
 
+  <div class="nia-arrow nia-arrow-three"></div>
+
   <div class="nia-stage nia-act">
     <h2>Act</h2>
   </div>
 
-  <div class="nia-arrow nia-arrow-in"></div>
-  <div class="nia-arrow nia-arrow-one"></div>
-  <div class="nia-arrow nia-arrow-two"></div>
-  <div class="nia-arrow nia-arrow-three"></div>
+  <svg class="nia-input-arrow" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <marker id="nia-blue-arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+        <path d="M0,0 L10,4 L0,8 Z" fill="#9bdcff" />
+      </marker>
+    </defs>
+    <line x1="0" y1="12" x2="76" y2="12" marker-end="url(#nia-blue-arrowhead)" />
+  </svg>
   <div class="nia-recursive"></div>
 </div>
 
