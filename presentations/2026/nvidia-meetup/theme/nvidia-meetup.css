@@ -1,3 +1,7 @@
+/* @theme nvidia-meetup */
+
+@import "ny-noir";
+
 .header-logos {
   display: inline-flex;
   align-items: center;
@@ -128,6 +132,25 @@ video.full-slide {
   width: 100%;
   max-height: 285px;
   object-fit: contain;
+}
+
+.big-points {
+  max-width: none;
+  margin-top: 1.05rem;
+  padding-right: 1.2rem;
+}
+
+.big-points ul {
+  display: grid;
+  gap: 0.78rem;
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+.big-points li {
+  color: #eef6ff;
+  font-size: 1.38em;
+  line-height: 1.08;
 }
 
 .nia-flow {

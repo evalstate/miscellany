@@ -2,11 +2,9 @@
 marp: true
 html: true
 size: 16:9
-theme: ny-noir
+theme: nvidia-meetup
 paginate: false
 header: '<span class="header-logos"><img src="./images/hf_logo.svg" alt="Hugging Face" /><img src="./images/github-mark.svg" alt="GitHub" />github.com/evalstate</span>'
-style: |
-  @import url('./theme/nvidia-meetup.css');
 
 ---
 
@@ -88,11 +86,9 @@ style: |
 </span></div>
 </div>
 
-
-
 ---
 
-# Things we didn't have at launch
+# Things we didn't have 18 Months ago...
 
 <div class="card-grid launch-grid">
   <div class="card">
@@ -100,7 +96,7 @@ style: |
   </div>
 
   <div class="card">
-    <h3>Streamable HTTP Transport and OAuth</h3>
+    <h3>MCP Streamable HTTP Transport and OAuth</h3>
   </div>
   <div class="card">
     <h3>AGENTS.MD and Agent Skills</h3>
@@ -115,11 +111,9 @@ style: |
   <div class="card">
     <h3>Long Running Tool Loops (and reasoning models)</h3>
   </div>
-
 </div>
 
 ---
-
 
 # Reinforcement Learning 
 
@@ -146,6 +140,20 @@ It's hard to compete against that efficiency.
   </div>
 </div>
 
+
+---
+
+# Smaller and Simpler Harnesses
+
+<div class="big-points">
+
+- General-purpose agent harnesses are given direct shell access
+- Fewer pre/post tool and LLM stop checks to keep models on track
+- Snapshot and checkpointing techniques
+- Remote runtime environments
+- Code mode as the default escape hatch
+
+</div>
 
 ---
 
@@ -177,36 +185,6 @@ It's hard to compete against that efficiency.
 
 ---
 
-# Smarter Tool Loops
-
-<div class="comparison">
-  <div class="panel">
-      Harness Changes
-
-General Purpose Agent Harnesses are given direct Shell access
-
-Fewer pre/post Tool/LLM Stop checks/hacks to keep model on-track.
-
-Snapshot/Checkpointing techniques (AgentFS, Execution Monitoring)
-
-Remote runtime environments (e.g. Codex Web, Claude Code)
-    
-  </div>
-  <div class="panel">
-    Why this enabled Skills
-
-Simple navigable, native hierarchy of content
-
-Reusable procedures become strong scaffolding for capable models
-
-Bash is token dense and unsurprising compared to custom JSON Tools / mid-context tool enablement
-
-Between deterministic program and documentation. 
-
-  </div>
-</div>
-
----
 
 <div class="dynamic-tool-layout">
   <div>
@@ -233,10 +211,87 @@ MCP provides an **inference gateway** to thousands of specialized and custom mod
   </div>
 </div>
 
+
+---
+
+# Why This Enabled Skills
+
+<div class="big-points">
+
+- Simple to navigate native content hierarchy
+- Unsurprising Token Dense format (`bash`!)
+- Reusable procedures become scaffolding for capable models
+- Script access requires fewer mid-context tool  tricks
+- Between deterministic program and documentation
+
+</div>
+
 ---
 
 # Training Models
 
+<div class="columns">
+
+<div>
+LLM Trainer Skill
+
+`Fine-tune Qwen3-0.6B on the dataset open-r1/codeforces-cots`
+
+Handles:
+- Dataset Construction
+- Dataset Selection and Validation
+- Hardware Selection
+- Training Scripts
+- Job Submission and Monitoring
+- Trackio Supervision
+- GGUF Conversion 
+
+</div>
+
+<div class="center">
+<div class="rl-stack">
+
+<img src="./images/2026-04-30-claude-blog.png" />
+<img height="300" src="./images/2026-04-30-trackio-training.png" />
+</div>
+
+</div>
+
+</div>
+
+---
+
+# Building Kernels
+
+
+<div class="columns">
+
+<div>
+LLM Trainer Skill
+
+`Fine-tune Qwen3-0.6B on the dataset open-r1/codeforces-cots`
+
+Handles:
+- Dataset Construction
+- Dataset Selection and Validation
+- Hardware Selection
+- Training Scripts
+- Job Submission and Monitoring
+- Trackio Supervision
+- GGUF Conversion 
+
+</div>
+
+<div class="center">
+<div class="rl-stack">
+
+<img src="./images/2026-04-30-kernels-compare.png" />
+<img height="300" src="./images/2026-04-30-kernels_qwen3.png" />
+</div>
+
+</div>
+
+</div>
 
 
 ---
@@ -317,7 +372,7 @@ Some models are trained to use **code tools natively**, and are bundled with int
 
 <div>
 
-![w:700](./images/2026-02-11-upskill-bench.png)
+![w:700](./images/2026-04-30-skill-chart.png)
 
 </div>
 
@@ -424,28 +479,41 @@ A common pattern:
 
 ---
 
-# Inference and Environment Boundaries are Blurring
+# Closing Thoughts
 
-## The new abstraction
+<div class="big-points">
 
-<div class="card-grid">
-  <div class="card">
-Runtime Environments
+- Owning and usefully customising and improving models becomes more widely accessible
+- Frontier Models are overused: Price/Performance 
+- Inference and Execution environments are blending
+- Self Improvement is here!
 
-Options from YOLO, Local/Remote containers, exe.dev-style or lightweight sandboxes (Monty, Just-Bash). Simple persistent storage (e.g. HF Buckets)</p>
+</div>
 
+---
+
+<!-- _class: transition -->
+
+# Thank You!
+
+<div class="thanks-links">
+  <div>
+    <img src="./images/github-mark.svg" alt="GitHub" />
+    <span>github.com/evalstate</span>
   </div>
-  <div class="card">
-Model Selection
-
-Mixed Model workloads handle different modalitites, specializations and price points. Token efficient task agent delegation.
-  </div>
-  <div class="card">
-Inference APIs
-    
-Increasingly absorb search, tools, code, and state into one bundled execution surface.
+  <div>
+    <img src="./images/xcom-logo-black.png" alt="X" />
+    <span>x.com/evalstate</span>
   </div>
 </div>
+
+<div class="bottom-image-flush no-shadow">
+
+![](./images/hugs.svg)
+
+</div>
+
+---
 
 
 ---
@@ -554,26 +622,4 @@ URI/Resources based extensions deliver innovation and extensibility...
   </div>
 </div>
 
-
 ---
-
-<!-- _class: transition -->
-
-# Thank You!
-
-<div class="thanks-links">
-  <div>
-    <img src="./images/github-mark.svg" alt="GitHub" />
-    <span>github.com/evalstate</span>
-  </div>
-  <div>
-    <img src="./images/xcom-logo-black.png" alt="X" />
-    <span>x.com/evalstate</span>
-  </div>
-</div>
-
-<div class="bottom-image-flush no-shadow">
-
-![](./images/hugs.svg)
-
-</div>
