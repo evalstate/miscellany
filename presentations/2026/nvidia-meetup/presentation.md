@@ -1,0 +1,579 @@
+---
+marp: true
+html: true
+size: 16:9
+theme: ny-noir
+paginate: false
+header: '<span class="header-logos"><img src="./images/hf_logo.svg" alt="Hugging Face" /><img src="./images/github-mark.svg" alt="GitHub" />github.com/evalstate</span>'
+style: |
+  @import url('./theme/nvidia-meetup.css');
+
+---
+
+<!-- _class: titlepage -->
+
+<div class="city-stamp">AINativeDev · London · 2026</div>
+<div class="title">Upskilling Models, Agents and the ML Pipeline</div>
+<div class="author">Shaun Smith · <code>@evalstate</code></div>
+<div class="date">April 2026</div>
+
+<table class="social-table">
+  <tbody>
+    <tr>
+      <td><img src="./images/huggingface-mark-logo.svg" alt="Hugging Face" /></td>
+      <td><a class="organization" href="https://huggingface.co/evalstate">huggingface.co/evalstate</a></td>
+    </tr>
+    <tr>
+      <td><img src="./images/github-mark.svg" alt="GitHub" /></td>
+      <td><a class="organization" href="https://github.com/evalstate">github.com/evalstate</a></td>
+    </tr>
+    <tr>
+      <td><img src="./images/xcom-logo-black.png" alt="X" /></td>
+      <td><a class="organization" href="https://x.com/evalstate">x.com/evalstate</a></td>
+    </tr>
+  </tbody>
+</table>
+
+---
+
+
+<div class="columns">
+
+<div>
+
+# Shaun Smith `@evalstate`
+
+- Open Source @ Hugging Face
+- MCP Maintainer [Transports] / Community Moderator
+- `huggingface/hf-mcp-server`
+- `huggingface/upskill`
+- `huggingface/skills`
+- Maintainer of `fast-agent`
+
+<div class="hero-note">
+</div>
+
+</div>
+
+<div class="center">
+
+<div class="intro-logos">
+  <img class="hf-mark" src="./images/hf_logo.svg" alt="Hugging Face" />
+  <div class="mcp-mark-wrap">
+    <img class="mcp-mark" src="./images/mcp-icon.svg" alt="MCP" />
+  </div>
+</div>
+
+</div>
+
+</div>
+
+
+---
+
+
+<video class="full-slide" src="./images/intro-spaces.webm" autoplay loop muted playsinline></video>
+
+
+---
+
+<!-- _class: transition -->
+
+# The evolution of Tool Calling....
+
+<div class="lede">
+</div>
+
+<div class="signal-strip">
+</span></div>
+</div>
+
+
+
+---
+
+# Things we didn't have at launch
+
+<div class="card-grid launch-grid">
+  <div class="card">
+    <img src="./images/claude-code.png" />
+  </div>
+
+  <div class="card">
+    <h3>Streamable HTTP Transport and OAuth</h3>
+  </div>
+  <div class="card">
+    <h3>AGENTS.MD and Agent Skills</h3>
+  </div>
+  <div class="card">
+    <h3>Internal Tools in Inference APIs</h3>
+  </div>
+  <div class="card">
+    <h3>Agent Client Protocol<br />
+    Responses API</h3>
+  </div>
+  <div class="card">
+    <h3>Long Running Tool Loops (and reasoning models)</h3>
+  </div>
+
+</div>
+
+---
+
+
+# Reinforcement Learning 
+
+<div class="rl-layout">
+  <div>
+
+Models are placed in an environment, given a task and scored with a reward function:
+
+  - <strong>discover</strong>
+  - <strong>self-correct</strong>
+  - <strong>problem solve</strong>
+  - keep <strong>driving the loop</strong> without constant human steering
+
+> mini-SWE-Agent: A single 100 line python and single freeform (non JSON) tool can score 76.0% on SWE-Bench!
+
+It's hard to compete against that efficiency.
+
+![w:400 alt text](images/openenv.png)
+
+  </div>
+  <div class="rl-stack">
+    <img src="./images/image-1.png" alt="Reinforcement learning environment diagram" />
+    <img src="./images/swe-bash-tool.png" alt="SWE-Bench bash tool benchmark result" />
+  </div>
+</div>
+
+
+---
+
+# Skill Driven Agents 
+
+<div class="nia-flow">
+  <div class="nia-stage nia-task">
+    <h2>Task</h2>
+  </div>
+
+  <div class="nia-stage nia-navigate">
+    <h2>Navigate</h2>
+  </div>
+
+  <div class="nia-stage nia-ingest">
+    <h2>Ingest</h2>
+  </div>
+
+  <div class="nia-stage nia-act">
+    <h2>Act</h2>
+  </div>
+
+  <div class="nia-arrow nia-arrow-in"></div>
+  <div class="nia-arrow nia-arrow-one"></div>
+  <div class="nia-arrow nia-arrow-two"></div>
+  <div class="nia-arrow nia-arrow-three"></div>
+  <div class="nia-recursive"></div>
+</div>
+
+---
+
+# Smarter Tool Loops
+
+<div class="comparison">
+  <div class="panel">
+      Harness Changes
+
+General Purpose Agent Harnesses are given direct Shell access
+
+Fewer pre/post Tool/LLM Stop checks/hacks to keep model on-track.
+
+Snapshot/Checkpointing techniques (AgentFS, Execution Monitoring)
+
+Remote runtime environments (e.g. Codex Web, Claude Code)
+    
+  </div>
+  <div class="panel">
+    Why this enabled Skills
+
+Simple navigable, native hierarchy of content
+
+Reusable procedures become strong scaffolding for capable models
+
+Bash is token dense and unsurprising compared to custom JSON Tools / mid-context tool enablement
+
+Between deterministic program and documentation. 
+
+  </div>
+</div>
+
+---
+
+<div class="dynamic-tool-layout">
+  <div>
+
+<h1>Dynamic Tool Calling</h1>
+
+Dynamic Space Tool: **45 tokens**
+
+MCP provides an **inference gateway** to thousands of specialized and custom models covering Audio, Video, Text, 3D Models, Environments and more.
+
+**MCP** provides Authentication and Multimodal support. 
+
+
+<code>Qwen 3.5-35B-A3B</code>
+<code>Flux.1-Krea-Dev </code>
+<code>Qwen-Edit-2509-Multiple-angles-LoRA</code>
+<code>Wan2.2 First/Last Frame</code>
+
+  </div>
+  <div class="dynamic-tool-video">
+    <video autoplay muted loop playsinline>
+      <source src="./images/dynamic_space_final.mp4.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+
+---
+
+# Training Models
+
+
+
+---
+
+
+
+# Code Execution Tools 
+
+<div class="columns">
+
+<div>
+
+A model with access to general purposes tools has crossed into a very real form of <strong>code mode</strong>.
+
+Bash provides a general purpose, token dense-execution language. 
+
+Task-specific tools generated on demand. Example: **HF Tool Builder** navigates OpenAPI spec to build composable CLI tools.
+
+Some models are trained to use **code tools natively**, and are bundled with interpreters.
+
+</div>
+
+<div class="center">
+<div class="rl-stack">
+
+<img src="./images/smolagents.png" />
+<img src="./images/image-3.png" />
+</div>
+
+</div>
+
+</div>
+
+---
+
+# Upskill
+
+## Tutoring Models
+
+---
+
+# Hugging Face Skills
+
+
+<div class="columns">
+
+<div>
+
+<center>
+
+![w:350](./images/2026-02-11-model-training.png)
+
+</center>
+
+
+- ## Model Training
+- ## Sandboxes & Datasets
+- ## *Tool Building*
+
+
+</div>
+
+<div>
+
+### `github.com/huggingface/skills`
+![](./images/2026-02-11-sweep_example.png)
+
+</div>
+
+</div>
+
+---
+
+# UPskill `github.com/huggingface/upskill`
+
+
+<div class="columns" style="grid-template-columns: 70% 30%;" >
+
+<div>
+
+![w:700](./images/2026-02-11-upskill-bench.png)
+
+</div>
+
+<div>
+
+### Generate and evaluate Skill peformance across different LLMs 
+
+![](./images/2026-02-11-upskill.png)
+
+
+</div>
+
+</div>
+
+---
+
+# Generation and Execution Environments
+
+<div class="flow-compare">
+  <div class="flow-card">
+    <h3>Style 1 - Main Model owns Code Generation</h3>
+    <div class="swimlane">
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Generates Search Function</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution Tool</div>
+        <div class="action">Uses Search Function to return API definitions</div>
+      </div>
+      <div class="step ">
+        <div class="lane">Main model</div>
+        <div class="action">Generates code from that API surface</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution tool</div>
+        <div class="action">Runs the code and returns output</div>
+      </div>
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Reads result and writes final answer</div>
+      </div>
+    </div>
+    <div class="flow-note">Code Generation: Main Model</div>
+    <div class="flow-note">Code Execution: Tool Environment</div>
+    
+  </div>
+  <div class="flow-card">
+    <h3>Style 2 - Delegated Code Generation</h3>
+    <div class="swimlane">
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Sends a natural-language task to the tool</div>
+      </div>
+      <div class="step owner-tool">
+        <div class="lane">Execution tool</div>
+        <div class="action">System Prompt contains API definitions</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution tool</div>
+        <div class="action">Returns the result</div>
+      </div>
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Packages it as the final answer</div>
+      </div>
+    </div>
+    <div class="flow-note">Code Generation: Tool Model</div>
+    <div class="flow-note">Code Generation: Tool Environment</div>
+    <div class="flow-note">API Definitions Cacheable</div>
+  </div>
+</div>
+
+<br />
+
+<center>
+
+## **MCP** makes it easy to transfer **generation** and **execution** between models and environments! <br> (and who pays for inference)
+
+
+</center>
+
+---
+
+<div class="dynamic-tool-layout">
+  <div>
+
+# LLMs for Navigating: GenUI, Apps SDK **(Prefect Prefab)**
+
+A common pattern:
+1. user asks for navigation or retrieval
+1. tools fetch the answer
+1. the model then spends expensive output tokens reprocessing a result that was already good enough
+2. The **MCP Apps** pattern fixes this by letting the result become <strong>final for the user</strong>.
+
+  </div>
+  <div class="dynamic-tool-video">
+    <video autoplay muted loop playsinline>
+      <source src="./images/gen_ui_one.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+
+
+---
+
+# Inference and Environment Boundaries are Blurring
+
+## The new abstraction
+
+<div class="card-grid">
+  <div class="card">
+Runtime Environments
+
+Options from YOLO, Local/Remote containers, exe.dev-style or lightweight sandboxes (Monty, Just-Bash). Simple persistent storage (e.g. HF Buckets)</p>
+
+  </div>
+  <div class="card">
+Model Selection
+
+Mixed Model workloads handle different modalitites, specializations and price points. Token efficient task agent delegation.
+  </div>
+  <div class="card">
+Inference APIs
+    
+Increasingly absorb search, tools, code, and state into one bundled execution surface.
+  </div>
+</div>
+
+
+---
+
+# Agent Client Protocol
+
+<div class="columns">
+  <div>
+    <p></p>
+    <div class="acp-points">
+      <div class="panel">
+        File and Shell Tools
+        <p>Client provided tools, enables "follow along" in editors </p>
+      </div>
+      <div class="panel">
+        Session Based
+        <p>Listing, Resumption and Rehydration of Agent sessions</p>
+      </div>
+      <div class="panel">
+        Streaming Results and Observability
+        <p>Agent Results and Tool Status stream, are cancellable</p>
+      </div>
+      <div class="panel">
+        MCP Native Support
+        <p>Uses MCP Data Model. Client sends MCP Sever Configurations</p>
+      </div>
+    </div>
+  </div>
+  <div class="acp-video">
+    <br/ >
+    <video autoplay muted loop playsinline>
+      <source src="./images/toad-subagent.mp4" type="video/mp4" />
+    </video>
+  </div>
+</div>
+
+---
+
+# Open Responses
+
+
+<div class="open-responses-layout">
+  <div class="open-responses-intro">
+
+
+<h2>Open standard extending OpenAI's Responses API. Provides a consistent, provider neutral way to interact with modern LLMs. Repairs Chat Completion API drift.</h2>
+
+> It defines a shared schema, and tooling layer that enable a unified experience for calling language models, streaming results, and composing agentic workflows—independent of provider.
+
+<br />
+
+<h2>Usage as a Provider / Router allows creation of rich Agent Environments</h2>
+
+  </div>
+  <div class="open-responses-panels">
+    <div class="panel">
+      Internal Tools - (Model or Provider)
+      <ul>
+        <li><code>shell</code> and <code>local_shell</code></li>
+        <li><code>code_interpreter</code></li>
+        <li><code>apply_patch</code></li>
+        <li><code>web_search</code></li>
+        <li><code>etc..</code></li>
+      </ul>
+      External Tools (Client Supplied)
+      <ul>
+        <li>MCP Servers</li>
+        <li>Standard JSON function calls</li>
+        <li>Free-Form Tools</li>
+        <li>Grammar constrained Tools</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+---
+
+# It was close....! PMF for MCP
+
+<div class="comparison">
+  <div class="panel">
+  MCP is a Commodity Standard    
+
+Supports Consumer, Enterprise and Developer use-cases. 
+
+Single URL to install authenticated JSON tools across thousands of clients
+
+MCP's "fit" features *weren't present* at launch!
+
+URI/Resources based extensions deliver innovation and extensibility...
+
+...Which  enabled rapid MCP Apps distribution on a solid support base.
+
+
+  </div>
+  <div class="panel">
+   Model/Host Changes and STDIO
+   
+   Host applications with Shell tool reduce the need for STDIO Servers.
+   
+   In many cases for local running tools such as Apify **mcp-cli** or Pete Steinberger's **MCPorter** offer a _better_ experience for MCP usage.
+
+   Distribution via MCPB is one potential advantage
+
+   Simple one-shot server design meant that distribution of ideas was more important than code.
+  </div>
+</div>
+
+
+---
+
+<!-- _class: transition -->
+
+# Thank You!
+
+<div class="thanks-links">
+  <div>
+    <img src="./images/github-mark.svg" alt="GitHub" />
+    <span>github.com/evalstate</span>
+  </div>
+  <div>
+    <img src="./images/xcom-logo-black.png" alt="X" />
+    <span>x.com/evalstate</span>
+  </div>
+</div>
+
+<div class="bottom-image-flush no-shadow">
+
+![](./images/hugs.svg)
+
+</div>
