@@ -161,60 +161,6 @@ video.full-slide {
   overflow: visible;
 }
 
-.nia-flow-svg .nia-box {
-  fill: url("#nia-card");
-  stroke: rgba(255, 255, 255, 0.1);
-  stroke-width: 1.5;
-  filter: url("#nia-card-shadow");
-}
-
-.nia-flow-svg .nia-box-task {
-  fill: url("#nia-task-card");
-  stroke: rgba(155, 220, 255, 0.42);
-}
-
-.nia-flow-svg .nia-shine {
-  fill: rgba(155, 220, 255, 0.12);
-  opacity: 0.95;
-}
-
-.nia-flow-svg .nia-shine-warm {
-  fill: rgba(255, 199, 107, 0.13);
-}
-
-.nia-flow-svg .nia-shine-blue {
-  fill: rgba(155, 220, 255, 0.15);
-}
-
-.nia-flow-svg .nia-shine-light {
-  fill: rgba(247, 242, 232, 0.13);
-}
-
-.nia-flow-svg text {
-  fill: #fff7eb;
-  font-family: 'Instrument Serif', serif;
-  font-size: 43px;
-  text-anchor: middle;
-  dominant-baseline: middle;
-}
-
-.nia-forward-arrows line {
-  stroke: url("#nia-blue-line");
-  stroke-width: 7;
-  stroke-linecap: round;
-  marker-end: url("#nia-arrow-blue");
-}
-
-.nia-loop {
-  fill: none;
-  stroke: rgba(255, 199, 107, 0.86);
-  stroke-width: 6;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-dasharray: 1 13;
-  marker-end: url("#nia-arrow-gold");
-}
-
 .flow-compare {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

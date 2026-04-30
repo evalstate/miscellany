@@ -161,65 +161,60 @@ It's hard to compete against that efficiency.
 # Skill Driven Agents 
 
 <svg class="nia-flow-svg" viewBox="0 0 1120 390" role="img" aria-label="Task flows to Navigate, Ingest, Act, then loops back to Task">
-  <defs>
-    <linearGradient id="nia-blue-line" x1="0%" x2="100%" y1="0%" y2="0%">
-      <stop offset="0%" stop-color="#9bdcff" stop-opacity="0.25" />
-      <stop offset="100%" stop-color="#9bdcff" stop-opacity="1" />
-    </linearGradient>
-    <linearGradient id="nia-card" x1="0%" x2="0%" y1="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.035" />
-    </linearGradient>
-    <linearGradient id="nia-task-card" x1="0%" x2="0%" y1="0%" y2="100%">
-      <stop offset="0%" stop-color="#9bdcff" stop-opacity="0.15" />
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.035" />
-    </linearGradient>
-    <filter id="nia-card-shadow" x="-20%" y="-20%" width="140%" height="150%">
-      <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#000000" flood-opacity="0.22" />
-    </filter>
-    <filter id="nia-line-glow" x="-20%" y="-120%" width="140%" height="340%">
-      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#9bdcff" flood-opacity="0.35" />
-    </filter>
-    <marker id="nia-arrow-blue" viewBox="0 0 24 18" markerWidth="24" markerHeight="18" refX="22" refY="9" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0 0 L24 9 L0 18 Z" fill="#9bdcff" />
-    </marker>
-    <marker id="nia-arrow-gold" viewBox="0 0 22 22" markerWidth="22" markerHeight="22" refX="20" refY="11" orient="auto" markerUnits="userSpaceOnUse">
-      <path d="M0 0 L22 11 L0 22 Z" fill="#ffc76b" />
-    </marker>
-  </defs>
-
-  <g class="nia-card-group">
-    <rect class="nia-box nia-box-task" x="42" y="76" width="205" height="180" rx="20" />
-    <rect class="nia-shine" x="55" y="89" width="179" height="76" rx="14" />
-    <text x="144.5" y="176">Task</text>
-  </g>
-
-  <g class="nia-card-group">
-    <rect class="nia-box" x="318" y="76" width="205" height="180" rx="20" />
-    <rect class="nia-shine nia-shine-warm" x="331" y="89" width="179" height="76" rx="14" />
-    <text x="420.5" y="176">Navigate</text>
-  </g>
-
-  <g class="nia-card-group">
-    <rect class="nia-box" x="594" y="76" width="205" height="180" rx="20" />
-    <rect class="nia-shine nia-shine-blue" x="607" y="89" width="179" height="76" rx="14" />
-    <text x="696.5" y="176">Ingest</text>
-  </g>
-
-  <g class="nia-card-group">
-    <rect class="nia-box" x="870" y="76" width="205" height="180" rx="20" />
-    <rect class="nia-shine nia-shine-light" x="883" y="89" width="179" height="76" rx="14" />
-    <text x="972.5" y="176">Act</text>
-  </g>
-
-  <g class="nia-forward-arrows" filter="url(#nia-line-glow)">
-    <line x1="0" y1="166" x2="42" y2="166" />
-    <line x1="247" y1="166" x2="318" y2="166" />
-    <line x1="523" y1="166" x2="594" y2="166" />
-    <line x1="799" y1="166" x2="870" y2="166" />
-  </g>
-
-  <path class="nia-loop" d="M 972.5 270 V 332 H 144.5 V 274" />
+<defs>
+<linearGradient id="nia-blue-line" x1="0%" x2="100%" y1="0%" y2="0%">
+<stop offset="0%" stop-color="#9bdcff" stop-opacity="0.25" />
+<stop offset="100%" stop-color="#9bdcff" stop-opacity="1" />
+</linearGradient>
+<linearGradient id="nia-card" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+<stop offset="100%" stop-color="#ffffff" stop-opacity="0.035" />
+</linearGradient>
+<linearGradient id="nia-task-card" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#9bdcff" stop-opacity="0.15" />
+<stop offset="100%" stop-color="#ffffff" stop-opacity="0.035" />
+</linearGradient>
+<filter id="nia-card-shadow" x="-20%" y="-20%" width="140%" height="150%">
+<feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#000000" flood-opacity="0.22" />
+</filter>
+<filter id="nia-line-glow" x="-20%" y="-120%" width="140%" height="340%">
+<feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#9bdcff" flood-opacity="0.35" />
+</filter>
+<marker id="nia-arrow-gold" viewBox="0 0 22 22" markerWidth="22" markerHeight="22" refX="20" refY="11" orient="auto" markerUnits="userSpaceOnUse">
+<path d="M0 0 L22 11 L0 22 Z" fill="#ffc76b" />
+</marker>
+</defs>
+<g>
+<rect x="42" y="76" width="205" height="180" rx="20" fill="url(#nia-task-card)" stroke="rgba(155, 220, 255, 0.42)" stroke-width="1.5" filter="url(#nia-card-shadow)" />
+<rect x="55" y="89" width="179" height="76" rx="14" fill="rgba(155, 220, 255, 0.12)" opacity="0.95" />
+<text x="144.5" y="176" fill="#fff7eb" font-family="Instrument Serif, serif" font-size="43" text-anchor="middle" dominant-baseline="middle">Task</text>
+</g>
+<g>
+<rect x="318" y="76" width="205" height="180" rx="20" fill="url(#nia-card)" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" filter="url(#nia-card-shadow)" />
+<rect x="331" y="89" width="179" height="76" rx="14" fill="rgba(255, 199, 107, 0.13)" opacity="0.95" />
+<text x="420.5" y="176" fill="#fff7eb" font-family="Instrument Serif, serif" font-size="43" text-anchor="middle" dominant-baseline="middle">Navigate</text>
+</g>
+<g>
+<rect x="594" y="76" width="205" height="180" rx="20" fill="url(#nia-card)" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" filter="url(#nia-card-shadow)" />
+<rect x="607" y="89" width="179" height="76" rx="14" fill="rgba(155, 220, 255, 0.15)" opacity="0.95" />
+<text x="696.5" y="176" fill="#fff7eb" font-family="Instrument Serif, serif" font-size="43" text-anchor="middle" dominant-baseline="middle">Ingest</text>
+</g>
+<g>
+<rect x="870" y="76" width="205" height="180" rx="20" fill="url(#nia-card)" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" filter="url(#nia-card-shadow)" />
+<rect x="883" y="89" width="179" height="76" rx="14" fill="rgba(247, 242, 232, 0.13)" opacity="0.95" />
+<text x="972.5" y="176" fill="#fff7eb" font-family="Instrument Serif, serif" font-size="43" text-anchor="middle" dominant-baseline="middle">Act</text>
+</g>
+<g filter="url(#nia-line-glow)" fill="#9bdcff" stroke="#9bdcff" stroke-width="7" stroke-linecap="round">
+<line x1="0" y1="166" x2="18" y2="166" opacity="0.72" />
+<path d="M18 153 L42 166 L18 179 Z" />
+<line x1="247" y1="166" x2="294" y2="166" opacity="0.82" />
+<path d="M294 153 L318 166 L294 179 Z" />
+<line x1="523" y1="166" x2="570" y2="166" opacity="0.82" />
+<path d="M570 153 L594 166 L570 179 Z" />
+<line x1="799" y1="166" x2="846" y2="166" opacity="0.82" />
+<path d="M846 153 L870 166 L846 179 Z" />
+</g>
+<path d="M 972.5 270 V 332 H 144.5 V 274" fill="none" stroke="rgba(255, 199, 107, 0.86)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 13" marker-end="url(#nia-arrow-gold)" />
 </svg>
 
 ---
@@ -372,7 +367,7 @@ _Kernels are first-class on the Hub!_
 
 <div>
 
-![h:350](./images/2026-04-30-skill-output2.png)
+![w:600](./images/2026-04-30-skill-output2.png)
 
 </div>
 
