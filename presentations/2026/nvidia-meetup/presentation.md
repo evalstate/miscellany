@@ -158,7 +158,7 @@ It's hard to compete against that efficiency.
 
 ---
 
-# Skill Driven Agents 
+# Self Directing Models
 
 <img class="nia-flow-img no-shadow" src="./images/skill-flow.svg" alt="Task flows to Navigate, Ingest, Act, then loops back to Task" />
 
@@ -302,17 +302,17 @@ _Kernels are first-class on the Hub!_
 </div>
 
 
-<div class="columns" style="grid-template-columns: 70% 30%;">
+<div class="upskill-image-pair">
 
 <div>
 
-![h:350](./images/2026-04-30-skill-chart.png)
+<img src="./images/2026-04-30-skill-chart.png" alt="Upskill trace chart" />
 
 </div>
 
 <div>
 
-![w:600](./images/2026-04-30-skill-output2.png)
+<img src="./images/2026-04-30-skill-output2.png" alt="Upskill benchmark output" />
 
 </div>
 
