@@ -160,39 +160,67 @@ It's hard to compete against that efficiency.
 
 # Skill Driven Agents 
 
-<div class="nia-flow">
-  <div class="nia-stage nia-task">
-    <h2>Task</h2>
-  </div>
+<svg class="nia-flow-svg" viewBox="0 0 1120 390" role="img" aria-label="Task flows to Navigate, Ingest, Act, then loops back to Task">
+  <defs>
+    <linearGradient id="nia-blue-line" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#9bdcff" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#9bdcff" stop-opacity="1" />
+    </linearGradient>
+    <linearGradient id="nia-card" x1="0%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.1" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.035" />
+    </linearGradient>
+    <linearGradient id="nia-task-card" x1="0%" x2="0%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#9bdcff" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.035" />
+    </linearGradient>
+    <filter id="nia-card-shadow" x="-20%" y="-20%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#000000" flood-opacity="0.22" />
+    </filter>
+    <filter id="nia-line-glow" x="-20%" y="-120%" width="140%" height="340%">
+      <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#9bdcff" flood-opacity="0.35" />
+    </filter>
+    <marker id="nia-arrow-blue" viewBox="0 0 24 18" markerWidth="24" markerHeight="18" refX="22" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L24 9 L0 18 Z" fill="#9bdcff" />
+    </marker>
+    <marker id="nia-arrow-gold" viewBox="0 0 22 22" markerWidth="22" markerHeight="22" refX="20" refY="11" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L22 11 L0 22 Z" fill="#ffc76b" />
+    </marker>
+  </defs>
 
-  <div class="nia-arrow nia-arrow-one"></div>
+  <g class="nia-card-group">
+    <rect class="nia-box nia-box-task" x="42" y="76" width="205" height="180" rx="20" />
+    <rect class="nia-shine" x="55" y="89" width="179" height="76" rx="14" />
+    <text x="144.5" y="176">Task</text>
+  </g>
 
-  <div class="nia-stage nia-navigate">
-    <h2>Navigate</h2>
-  </div>
+  <g class="nia-card-group">
+    <rect class="nia-box" x="318" y="76" width="205" height="180" rx="20" />
+    <rect class="nia-shine nia-shine-warm" x="331" y="89" width="179" height="76" rx="14" />
+    <text x="420.5" y="176">Navigate</text>
+  </g>
 
-  <div class="nia-arrow nia-arrow-two"></div>
+  <g class="nia-card-group">
+    <rect class="nia-box" x="594" y="76" width="205" height="180" rx="20" />
+    <rect class="nia-shine nia-shine-blue" x="607" y="89" width="179" height="76" rx="14" />
+    <text x="696.5" y="176">Ingest</text>
+  </g>
 
-  <div class="nia-stage nia-ingest">
-    <h2>Ingest</h2>
-  </div>
+  <g class="nia-card-group">
+    <rect class="nia-box" x="870" y="76" width="205" height="180" rx="20" />
+    <rect class="nia-shine nia-shine-light" x="883" y="89" width="179" height="76" rx="14" />
+    <text x="972.5" y="176">Act</text>
+  </g>
 
-  <div class="nia-arrow nia-arrow-three"></div>
+  <g class="nia-forward-arrows" filter="url(#nia-line-glow)">
+    <line x1="0" y1="166" x2="42" y2="166" />
+    <line x1="247" y1="166" x2="318" y2="166" />
+    <line x1="523" y1="166" x2="594" y2="166" />
+    <line x1="799" y1="166" x2="870" y2="166" />
+  </g>
 
-  <div class="nia-stage nia-act">
-    <h2>Act</h2>
-  </div>
-
-  <svg class="nia-input-arrow" viewBox="0 0 80 24" preserveAspectRatio="none" aria-hidden="true">
-    <defs>
-      <marker id="nia-blue-arrowhead" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-        <path d="M0,0 L10,4 L0,8 Z" fill="#9bdcff" />
-      </marker>
-    </defs>
-    <line x1="0" y1="12" x2="76" y2="12" marker-end="url(#nia-blue-arrowhead)" />
-  </svg>
-  <div class="nia-recursive"></div>
-</div>
+  <path class="nia-loop" d="M 972.5 270 V 332 H 144.5 V 274" />
+</svg>
 
 ---
 
