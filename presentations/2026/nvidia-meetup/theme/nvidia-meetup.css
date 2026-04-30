@@ -155,20 +155,19 @@ video.full-slide {
 
 .nia-flow {
   position: relative;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  align-items: center;
+  display: block;
   min-height: 345px;
   margin-top: 1.2rem;
   padding: 1.35rem 0.35rem 1.9rem;
 }
 
 .nia-stage {
-  position: relative;
+  position: absolute;
+  top: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 22.6%;
   min-height: 205px;
   padding: 1rem 0.95rem 0.95rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -177,6 +176,7 @@ video.full-slide {
     linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.035)),
     rgba(6, 10, 16, 0.58);
   box-shadow: 0 18px 34px rgba(0, 0, 0, 0.22);
+  transform: translateY(-50%);
 }
 
 .nia-stage::before {
@@ -199,10 +199,23 @@ video.full-slide {
 }
 
 .nia-task {
+  left: 0;
   border-color: rgba(155, 220, 255, 0.38);
   background:
     linear-gradient(180deg, rgba(155, 220, 255, 0.12), rgba(255, 255, 255, 0.035)),
     rgba(6, 10, 16, 0.58);
+}
+
+.nia-navigate {
+  left: 25.8%;
+}
+
+.nia-ingest {
+  left: 51.6%;
+}
+
+.nia-act {
+  left: 77.4%;
 }
 
 .nia-ingest::before {
@@ -215,16 +228,31 @@ video.full-slide {
 
 .nia-arrow {
   position: absolute;
+  box-sizing: border-box;
+  top: 50%;
+  height: 7px;
+  border-radius: 999px;
+  background: transparent;
+  transform: translateY(-50%);
+}
+
+.nia-arrow::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 0.64rem;
+  left: 0;
   height: 7px;
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(155, 220, 255, 0.2), rgba(155, 220, 255, 0.95));
+  transform: translateY(-50%);
 }
 
 .nia-arrow::after {
   content: "";
   position: absolute;
   top: 50%;
-  right: -1px;
+  right: 0;
   width: 0;
   height: 0;
   border-top: 0.48rem solid transparent;
@@ -234,35 +262,31 @@ video.full-slide {
 }
 
 .nia-arrow-in {
-  top: 49%;
-  left: -5.6%;
-  width: 6.9%;
+  left: -3.3rem;
+  width: 3.1rem;
 }
 
 .nia-arrow-one {
-  top: 49%;
-  left: 23.4%;
-  width: 5.5%;
+  left: 22.6%;
+  width: 3.2%;
 }
 
 .nia-arrow-two {
-  top: 49%;
-  left: 48.3%;
-  width: 5.5%;
+  left: 48.4%;
+  width: 3.2%;
 }
 
 .nia-arrow-three {
-  top: 49%;
-  left: 73.2%;
-  width: 5.5%;
+  left: 74.2%;
+  width: 3.2%;
 }
 
 .nia-recursive {
   position: absolute;
   right: 12.5%;
-  bottom: 0.08rem;
+  bottom: 0.35rem;
   left: 12.5%;
-  height: 4.4rem;
+  height: 4.8rem;
   border-right: 6px dotted rgba(255, 199, 107, 0.82);
   border-bottom: 6px dotted rgba(255, 199, 107, 0.82);
   border-left: 6px dotted rgba(255, 199, 107, 0.82);
@@ -272,8 +296,8 @@ video.full-slide {
 .nia-recursive::before {
   content: "";
   position: absolute;
-  top: -0.43rem;
-  left: -0.34rem;
+  top: -0.67rem;
+  left: calc(-0.46rem - 3px);
   width: 0;
   height: 0;
   border-right: 0.46rem solid transparent;

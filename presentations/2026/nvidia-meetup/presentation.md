@@ -267,18 +267,20 @@ Handles:
 <div class="columns">
 
 <div>
-LLM Trainer Skill
+CUDA Kernels Skill
 
-`Fine-tune Qwen3-0.6B on the dataset open-r1/codeforces-cots`
+`Build a vectorized RMSNorm kernel for H100 targeting Qwen3-8B`
+
+Skill Distribution via CLI
 
 Handles:
-- Dataset Construction
-- Dataset Selection and Validation
-- Hardware Selection
-- Training Scripts
-- Job Submission and Monitoring
-- Trackio Supervision
-- GGUF Conversion 
+- GPU architecture targeting
+- Kernel source generation
+- PyTorch C++ bindings
+- `build.toml` project setup
+- Micro-benchmark scripts
+- End-to-end model/pipeline benchmarks
+- Kernel Hub publication
 
 </div>
 
@@ -296,7 +298,51 @@ Handles:
 
 ---
 
+# `https://github.com/huggingface/upskill`
 
+
+
+<div class="center">
+
+<img width="900" src="./images/2026-02-11-upskill.png" />
+
+
+---
+
+
+# Upskill
+
+<div class="big-points">
+
+- Run in Sandboxes, View Traces, Optimise and Benchmark
+
+</div>
+
+
+<div class="columns" style="grid-template-columns: 70% 30%;">
+
+<div>
+
+![h:350](./images/2026-04-30-skill-chart.png)
+
+</div>
+
+<div>
+
+![h:350](./images/2026-04-30-skill-output2.png)
+
+</div>
+
+</div>
+
+<div class="big-points">
+
+- Tutor and Select best Price/Performance Models
+
+</div>
+
+
+---
 
 # Code Execution Tools 
 
@@ -325,135 +371,6 @@ Some models are trained to use **code tools natively**, and are bundled with int
 
 </div>
 
----
-
-# Upskill
-
-## Tutoring Models
-
----
-
-# Hugging Face Skills
-
-
-<div class="columns">
-
-<div>
-
-<center>
-
-![w:350](./images/2026-02-11-model-training.png)
-
-</center>
-
-
-- ## Model Training
-- ## Sandboxes & Datasets
-- ## *Tool Building*
-
-
-</div>
-
-<div>
-
-### `github.com/huggingface/skills`
-![](./images/2026-02-11-sweep_example.png)
-
-</div>
-
-</div>
-
----
-
-# UPskill `github.com/huggingface/upskill`
-
-
-<div class="columns" style="grid-template-columns: 70% 30%;" >
-
-<div>
-
-![w:700](./images/2026-04-30-skill-chart.png)
-
-</div>
-
-<div>
-
-### Generate and evaluate Skill peformance across different LLMs 
-
-![](./images/2026-02-11-upskill.png)
-
-
-</div>
-
-</div>
-
----
-
-# Generation and Execution Environments
-
-<div class="flow-compare">
-  <div class="flow-card">
-    <h3>Style 1 - Main Model owns Code Generation</h3>
-    <div class="swimlane">
-      <div class="step">
-        <div class="lane">Main model</div>
-        <div class="action">Generates Search Function</div>
-      </div>
-      <div class="step">
-        <div class="lane">Execution Tool</div>
-        <div class="action">Uses Search Function to return API definitions</div>
-      </div>
-      <div class="step ">
-        <div class="lane">Main model</div>
-        <div class="action">Generates code from that API surface</div>
-      </div>
-      <div class="step">
-        <div class="lane">Execution tool</div>
-        <div class="action">Runs the code and returns output</div>
-      </div>
-      <div class="step">
-        <div class="lane">Main model</div>
-        <div class="action">Reads result and writes final answer</div>
-      </div>
-    </div>
-    <div class="flow-note">Code Generation: Main Model</div>
-    <div class="flow-note">Code Execution: Tool Environment</div>
-    
-  </div>
-  <div class="flow-card">
-    <h3>Style 2 - Delegated Code Generation</h3>
-    <div class="swimlane">
-      <div class="step">
-        <div class="lane">Main model</div>
-        <div class="action">Sends a natural-language task to the tool</div>
-      </div>
-      <div class="step owner-tool">
-        <div class="lane">Execution tool</div>
-        <div class="action">System Prompt contains API definitions</div>
-      </div>
-      <div class="step">
-        <div class="lane">Execution tool</div>
-        <div class="action">Returns the result</div>
-      </div>
-      <div class="step">
-        <div class="lane">Main model</div>
-        <div class="action">Packages it as the final answer</div>
-      </div>
-    </div>
-    <div class="flow-note">Code Generation: Tool Model</div>
-    <div class="flow-note">Code Generation: Tool Environment</div>
-    <div class="flow-note">API Definitions Cacheable</div>
-  </div>
-</div>
-
-<br />
-
-<center>
-
-## **MCP** makes it easy to transfer **generation** and **execution** between models and environments! <br> (and who pays for inference)
-
-
-</center>
 
 ---
 
@@ -483,10 +400,10 @@ A common pattern:
 
 <div class="big-points">
 
-- Owning and usefully customising and improving models becomes more widely accessible
+- Owning and usefully customising and improving your own models is accessible
 - Frontier Models are overused: Price/Performance 
 - Inference and Execution environments are blending
-- Self Improvement is here!
+- Self Improvement is here if you want it
 
 </div>
 
@@ -621,5 +538,74 @@ URI/Resources based extensions deliver innovation and extensibility...
    Simple one-shot server design meant that distribution of ideas was more important than code.
   </div>
 </div>
+
+---
+
+
+# Generation and Execution Environments
+
+<div class="flow-compare">
+  <div class="flow-card">
+    <h3>Style 1 - Main Model owns Code Generation</h3>
+    <div class="swimlane">
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Generates Search Function</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution Tool</div>
+        <div class="action">Uses Search Function to return API definitions</div>
+      </div>
+      <div class="step ">
+        <div class="lane">Main model</div>
+        <div class="action">Generates code from that API surface</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution tool</div>
+        <div class="action">Runs the code and returns output</div>
+      </div>
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Reads result and writes final answer</div>
+      </div>
+    </div>
+    <div class="flow-note">Code Generation: Main Model</div>
+    <div class="flow-note">Code Execution: Tool Environment</div>
+    
+  </div>
+  <div class="flow-card">
+    <h3>Style 2 - Delegated Code Generation</h3>
+    <div class="swimlane">
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Sends a natural-language task to the tool</div>
+      </div>
+      <div class="step owner-tool">
+        <div class="lane">Execution tool</div>
+        <div class="action">System Prompt contains API definitions</div>
+      </div>
+      <div class="step">
+        <div class="lane">Execution tool</div>
+        <div class="action">Returns the result</div>
+      </div>
+      <div class="step">
+        <div class="lane">Main model</div>
+        <div class="action">Packages it as the final answer</div>
+      </div>
+    </div>
+    <div class="flow-note">Code Generation: Tool Model</div>
+    <div class="flow-note">Code Generation: Tool Environment</div>
+    <div class="flow-note">API Definitions Cacheable</div>
+  </div>
+</div>
+
+<br />
+
+<center>
+
+## **MCP** makes it easy to transfer **generation** and **execution** between models and environments! <br> (and who pays for inference)
+
+
+</center>
 
 ---
