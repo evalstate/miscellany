@@ -183,7 +183,7 @@ MCP provides an **inference gateway** to thousands of specialized and custom mod
 <code>Wan2.2 First/Last Frame</code>
 
   </div>
-  <div class="dynamic-tool-video">
+  <div class="dynamic-tool-video dynamic-tool-video-unframed dynamic-tool-video-tight">
     <video autoplay muted loop playsinline>
       <source src="./images/dynamic_space_final.mp4.mp4" type="video/mp4" />
     </video>
