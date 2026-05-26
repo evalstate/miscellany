@@ -1,0 +1,10 @@
+{
+  "markdown.marp.themes": [
+    "./theme/freud.css",
+    "./theme/structure.css",
+    "./theme/schema.css",
+    "./theme/evalstate-extensions.css",
+    "./theme/ny-noir.css",
+    "./theme/nvidia-meetup.css"
+  ]
+}
