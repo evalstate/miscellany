@@ -1,0 +1,29 @@
+You are reviewing rendered Slidev deck screenshots.
+
+Look for actionable visual defects only. Focus on:
+- clipped, cropped, or offscreen content;
+- broken custom Vue components;
+- unreadable contrast or type size;
+- inline code/badge/pill styling that has poor contrast or clashes with the theme;
+- awkward alignment, spacing, or visual hierarchy;
+- content that is too small, dense, or cramped for a conference presentation;
+- negative space that looks accidental rather than intentional;
+- reusable diagram components whose containers do not fit their content
+  proportionally: section labels that are too small, container padding that is
+  too tight, cards with large unused middles, or card height much larger than
+  icon/title content requires;
+- labeled containers where the section label lacks enough visual weight or
+  breathing room to read as structure, instead appearing like a tiny caption
+  squeezed into the border;
+- icon/title cards where the icon and label feel disconnected instead of
+  arranged as one coherent unit;
+- Mermaid/code block rendering problems;
+- slide content that feels too sparse/dense for presentation use;
+- anything that differs from likely author intent.
+
+Do not nitpick taste. Give concise, actionable feedback. Refer to each
+screenshot by file name.
+
+
+Attached screenshots:
+- slide-07.png

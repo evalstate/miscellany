@@ -1,0 +1,1 @@
+{"level":"ERROR","timestamp":"2026-05-29T18:32:45.237155","namespace":"fast_agent.agents.mcp_agent.agent","message":"Error applying patch: Failed to find expected lines in components/ProtocolStack.vue:\n.protocol-card__metric {"}
