@@ -58,6 +58,12 @@ This is a conference presentation: prefer generous sizing, strong hierarchy,
 and carefully intentional negative space. Do not optimize for document-like
 density.
 
+Assume some information will be delivered as voiceover. Before adding labels,
+captions, caveats, or explanatory prose to a slide, ask whether the text is
+needed for the audience to parse the visual, or whether it should instead be
+spoken by the presenter. Prefer bold structural labels and visual hierarchy over
+small explanatory copy.
+
 - clipped or offscreen content;
 - broken Mermaid diagrams;
 - unreadable contrast or type size;

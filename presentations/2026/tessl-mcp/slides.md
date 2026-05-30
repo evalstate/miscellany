@@ -168,6 +168,16 @@ kicker: streamable http
 </div>
 
 ---
+layout: default
+---
+
+# Transport Evolution
+
+<div class="spec-timeline-diagram">
+  <McpSpecTransportTimeline />
+</div>
+
+---
 
 # What's gone?
 
