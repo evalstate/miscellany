@@ -64,6 +64,12 @@ needed for the audience to parse the visual, or whether it should instead be
 spoken by the presenter. Prefer bold structural labels and visual hierarchy over
 small explanatory copy.
 
+Preserve visual rhythm. Repeated semantic elements such as bars, cards, labels,
+icons, timeline markers, and diagram nodes should use shared size tokens and
+align to the same grid/baseline system. Differences in size, spacing, stroke
+weight, or border radius should be intentional and communicate hierarchy or
+emphasis, not accidental variation.
+
 - clipped or offscreen content;
 - broken Mermaid diagrams;
 - unreadable contrast or type size;
