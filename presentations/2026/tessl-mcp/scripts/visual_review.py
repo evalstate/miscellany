@@ -15,7 +15,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import shutil
+import signal
 import socket
 import subprocess
 import sys
@@ -73,7 +75,7 @@ def main() -> int:
         default=True,
         help="If Slidev export is unavailable, start a dev server and screenshot with Chrome",
     )
-    parser.add_argument("--port", type=int, default=3030, help="Port for --fallback-live screenshots")
+    parser.add_argument("--port", type=int, default=0, help="Port for --fallback-live screenshots; 0 selects a free port")
     parser.add_argument("--viewport", default="1280,720", help="Chrome screenshot viewport WIDTH,HEIGHT")
     parser.add_argument("--review", action="store_true", help="Run fast-agent vision review over exported PNGs")
     parser.add_argument("--model", default=DEFAULT_MODEL, help="fast-agent model for --review")
@@ -152,7 +154,7 @@ def live_chrome_screenshots(args: argparse.Namespace, out_dir: Path) -> list[Pat
     if not pages:
         raise SystemExit("Live screenshot fallback needs --range, e.g. --range 3 or --range 1-5.")
 
-    port = args.port
+    port = args.port or find_free_port()
     proc = subprocess.Popen(
         [
             "npx",
@@ -160,14 +162,19 @@ def live_chrome_screenshots(args: argparse.Namespace, out_dir: Path) -> list[Pat
             args.entry,
             "--port",
             str(port),
+            "--log",
+            "silent",
         ],
         cwd=ROOT,
-        stdout=subprocess.PIPE,
-        stderr=subprocess.STDOUT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
         text=True,
+        start_new_session=True,
     )
     try:
         wait_for_port("127.0.0.1", port, timeout=30)
+        if proc.poll() is not None:
+            raise SystemExit(f"Slidev server exited early with {proc.returncode}")
         time.sleep(max(0, args.wait) / 1000)
         exported: list[Path] = []
         for page in pages:
@@ -187,11 +194,18 @@ def live_chrome_screenshots(args: argparse.Namespace, out_dir: Path) -> list[Pat
             exported.append(output)
         return exported
     finally:
-        proc.terminate()
+        try:
+            os.killpg(proc.pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
         try:
             proc.wait(timeout=5)
         except subprocess.TimeoutExpired:
-            proc.kill()
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            proc.wait(timeout=5)
 
 
 def parse_page_range(value: str | None) -> list[int]:
@@ -220,6 +234,12 @@ def wait_for_port(host: str, port: int, timeout: float) -> None:
                 return
         time.sleep(0.25)
     raise SystemExit(f"Timed out waiting for {host}:{port}")
+
+
+def find_free_port() -> int:
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(("127.0.0.1", 0))
+        return int(sock.getsockname()[1])
 
 
 def review_with_fast_agent(images: list[Path], model: str, name: str) -> None:

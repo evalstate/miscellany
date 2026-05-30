@@ -9,7 +9,7 @@ highlighter: shiki
 lineNumbers: false
 drawings:
   persist: false
-transition: fade-out
+# transition: fade-out
 mdc: true
 fonts:
   sans: Inter
@@ -122,7 +122,9 @@ Duplicate this slide, swap in a real demo screenshot or an interactive component
 
 # Protocol Features
 
-<ProtocolStack size="md" />
+<div class="protocol-diagram">
+  <ProtocolStack />
+</div>
 
 ---
 layout: default
@@ -131,7 +133,9 @@ kicker: protocol features
 
 # Most usage clusters on the server side
 
-<ProtocolStack emphasis="usage" size="md" />
+<div class="protocol-diagram">
+  <ProtocolStack emphasis="usage" />
+</div>
 
 ---
 layout: default
@@ -140,7 +144,9 @@ kicker: protocol features
 
 # Complexity lives in the long tail
 
-<ProtocolStack emphasis="complexity" size="md" />
+<div class="protocol-diagram">
+  <ProtocolStack emphasis="complexity" />
+</div>
 
 
 --- 
@@ -149,6 +155,17 @@ kicker: protocol features
 
 ## Stateless
 
+
+---
+layout: default
+kicker: streamable http
+---
+
+# Remote MCP through a load balancer
+
+<div class="remote-mcp-diagram">
+  <RemoteMcpLoadBalancer />
+</div>
 
 ---
 

@@ -70,6 +70,10 @@ density.
   size: the outer container controls scale, internal padding is proportional,
   section labels are legible, and cards should not be much taller than their
   icon/title content requires;
+- avoid reusable diagram APIs such as `size="sm|md|lg"` when the component can
+  instead fill a parent-defined region. Prefer a slide/layout wrapper that sets
+  available width/height, then use proportional CSS variables, `clamp()`, and
+  container query units inside the component;
 - labeled containers should give their section labels enough size and breathing
   room to read as structural labels, not tiny captions squeezed into the border;
 - icon/title cards should read as a coherent unit, not as an icon stranded at

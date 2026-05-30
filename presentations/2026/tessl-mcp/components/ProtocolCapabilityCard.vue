@@ -65,8 +65,8 @@ const Icon = computed(() => icons[props.icon])
 .protocol-card {
   position: relative;
   min-height: 0;
-  height: auto;
-  min-height: var(--protocol-card-height, 76px);
+  height: 100%;
+  box-sizing: border-box;
   padding: var(--protocol-card-pad, 1rem);
   display: grid;
   align-items: center;
