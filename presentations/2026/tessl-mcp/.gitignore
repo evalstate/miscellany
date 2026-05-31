@@ -3,3 +3,9 @@ dist/
 .slidev/
 *.pdf
 .DS_Store
+
+# Track project-local agent cards, but keep fast-agent runtime state out.
+!.fast-agent/
+.fast-agent/*
+!.fast-agent/agent-cards/
+!.fast-agent/agent-cards/**

@@ -43,7 +43,7 @@ role: "Open source, agents, MCP"
 
 ::links::
 - github.com/evalstate
-- huggingface.co/evalstate
+- huggingface.co/evalstate  
 - x.com/evalstate
 
 ::
@@ -175,6 +175,30 @@ layout: default
 
 <div class="spec-timeline-diagram">
   <McpSpecTransportTimeline />
+</div>
+
+---
+layout: default
+---
+
+<div class="traffic-chart-slide">
+  <McpRemoteTrafficChart client="Claude Code" title="Claude Code" />
+</div>
+
+---
+layout: default
+---
+
+<div class="traffic-chart-slide">
+  <McpRemoteTrafficChart client="Codex" title="Codex" />
+</div>
+
+---
+layout: default
+---
+
+<div class="traffic-chart-slide">
+  <McpRemoteTrafficChart client="Codex" range-mode="claude" title="Codex" subtitle="same date range as Claude Code" />
 </div>
 
 ---

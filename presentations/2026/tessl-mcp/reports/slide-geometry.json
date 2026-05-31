@@ -1,0 +1,37 @@
+{
+  "slides": [
+    {
+      "url": "http://127.0.0.1:48535/13",
+      "viewport": {
+        "width": 1280,
+        "height": 633,
+        "devicePixelRatio": 1
+      },
+      "finding_count": 0,
+      "findings": [],
+      "page": 13
+    },
+    {
+      "url": "http://127.0.0.1:48535/14",
+      "viewport": {
+        "width": 1280,
+        "height": 633,
+        "devicePixelRatio": 1
+      },
+      "finding_count": 0,
+      "findings": [],
+      "page": 14
+    },
+    {
+      "url": "http://127.0.0.1:48535/15",
+      "viewport": {
+        "width": 1280,
+        "height": 633,
+        "devicePixelRatio": 1
+      },
+      "finding_count": 0,
+      "findings": [],
+      "page": 15
+    }
+  ]
+}

@@ -11,7 +11,8 @@
     "build:single": "SLIDEV_SINGLEFILE=1 slidev build slides.md --base ./ --router-mode hash --out dist-single",
     "open:single": "npm run build:single && xdg-open dist-single/index.html",
     "visual:export": "python3 scripts/visual_review.py",
-    "visual:review": "python3 scripts/visual_review.py --review"
+    "visual:review": "python3 scripts/visual_review.py --review",
+    "visual:geometry": "python3 scripts/check_slide_geometry.py"
   },
   "devDependencies": {
     "@lucide/vue": "^1.17.0",

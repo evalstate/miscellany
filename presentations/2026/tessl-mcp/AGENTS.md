@@ -48,9 +48,71 @@ For model-assisted visual QA:
 python3 scripts/visual_review.py --range 1-5 --review
 ```
 
+For deterministic geometry/layout QA before relying on screenshots or VLM
+review:
+
+```bash
+python3 scripts/check_slide_geometry.py --range 1-5
+python3 scripts/check_slide_geometry.py --range 13-15 --fail-on findings
+```
+
+Use this for clipped/offscreen content, SVG/text labels outside their viewport,
+overflow-hidden ancestor clipping, and chart/diagram containers whose rendered
+content exceeds their allotted box. Prefer fixing deterministic geometry
+findings before asking a VLM to judge visual quality.
+
+For ad hoc model-assisted review, use the project-local visual-review subagent:
+
+```text
+.fast-agent/agent-cards/visual-review.md
+```
+
+The preferred review order is:
+
+1. run deterministic geometry checks;
+2. fix all geometry findings;
+3. render screenshots;
+4. use VLM/visual-review only for qualitative defects such as hierarchy,
+   density, malformed charts, poor contrast, ambiguous flow, or visual rhythm.
+
 The helper uses Slidev PNG export with Chrome. If an issue only appears in live
 dev mode, run `npm run dev` and use direct Chrome screenshots against
 `http://127.0.0.1:3030/` or `http://127.0.0.1:3030/print`.
+
+## Data-viz workflow
+
+Authoritative MCP stats source data lives outside this deck:
+
+```text
+/home/shaun/source/hf-mcp-stats
+```
+
+Treat that repository as read-only unless explicitly instructed otherwise. Keep
+large raw data there. This deck's `data-viz/` directory is for repeatable Python
+transforms and small slide-ready CSV/JSON artifacts.
+
+Use the project-local data-viz subagent for data questions and data-script
+maintenance:
+
+```text
+.fast-agent/agent-cards/data-viz.md
+```
+
+Data-viz conventions:
+
+- prefer Python for analysis and transforms;
+- exploratory analysis can be transient, but reusable transforms should become
+  scripts under `data-viz/`;
+- chart components should consume small generated CSV/JSON outputs rather than
+  parse or aggregate large raw source files;
+- when adding, renaming, deleting, or materially changing a script or generated
+  dataset under `data-viz/`, update `data-viz/SCRIPTS.md` in the same change;
+- document filters, bucket definitions, opaque indices, and source paths in the
+  script or catalog;
+- for simple chart datasets, prefer `data-viz/emit_chart_data.py` to emit a
+  consistent `deck.chart-data.v1` JSON shape;
+- keep slide labels concise and voiceover-friendly; do not move every caveat
+  from the analysis into the visual.
 
 ## What to look for visually
 

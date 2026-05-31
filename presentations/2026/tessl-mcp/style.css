@@ -170,6 +170,18 @@
   margin: 0.45rem auto 0;
 }
 
+.traffic-chart-slide {
+  position: absolute !important;
+  inset: 28px 42px;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.slidev-layout:has(.traffic-chart-slide) {
+  padding: 0;
+}
+
 /* Mermaid diagrams */
 .mermaid {
   display: flex;
