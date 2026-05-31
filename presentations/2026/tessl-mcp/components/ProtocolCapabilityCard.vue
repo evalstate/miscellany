@@ -14,16 +14,9 @@ const props = withDefaults(
     title: string
     icon: 'wrench' | 'file' | 'message' | 'roots' | 'sparkles' | 'question'
     description?: string
-    emphasis?: 'none' | 'usage' | 'complexity'
-    active?: boolean
-    muted?: boolean
-    metric?: string
     showDescription?: boolean
   }>(),
   {
-    emphasis: 'none',
-    active: false,
-    muted: false,
     showDescription: true,
   },
 )
@@ -41,13 +34,7 @@ const Icon = computed(() => icons[props.icon])
 </script>
 
 <template>
-  <article
-    class="protocol-card"
-    :class="[
-      props.active && `protocol-card--active-${props.emphasis}`,
-      props.muted && 'protocol-card--muted',
-    ]"
-  >
+  <article class="protocol-card">
     <div class="protocol-card__content">
       <div class="protocol-card__icon">
         <component :is="Icon" :stroke-width="2.25" />
@@ -57,7 +44,6 @@ const Icon = computed(() => icons[props.icon])
         <p v-if="description && showDescription">{{ description }}</p>
       </div>
     </div>
-    <div v-if="metric" class="protocol-card__metric">{{ metric }}</div>
   </article>
 </template>
 
@@ -125,51 +111,4 @@ const Icon = computed(() => icons[props.icon])
   line-height: 1.35;
 }
 
-.protocol-card__metric {
-  position: absolute;
-  top: 0.8rem;
-  right: 0.85rem;
-  padding: 0.16rem 0.45rem;
-  border: 1px solid var(--deck-accent-line);
-  border-radius: var(--deck-radius-sm);
-  background: var(--deck-accent-bg);
-  color: var(--deck-accent-hi);
-  font-size: var(--protocol-metric-size, 0.54rem);
-  font-weight: 750;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.protocol-card--muted {
-  opacity: 0.36;
-  filter: saturate(0.75);
-}
-
-.protocol-card--active-usage {
-  transform: translateY(-3px);
-  border-color: var(--deck-accent-line);
-  background:
-    radial-gradient(circle at 82% 12%, rgba(245, 164, 0, 0.20), transparent 38%),
-    linear-gradient(180deg, rgba(245, 164, 0, 0.10), rgba(20, 22, 27, 0.88));
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32), 0 0 32px rgba(245, 164, 0, 0.12);
-}
-
-.protocol-card--active-usage .protocol-card__icon,
-.protocol-card--active-usage h3 {
-  color: var(--deck-accent-hi);
-}
-
-.protocol-card--active-complexity {
-  transform: translateY(-3px);
-  border-color: var(--deck-info-line);
-  background:
-    radial-gradient(circle at 82% 12%, rgba(106, 163, 247, 0.18), transparent 38%),
-    linear-gradient(180deg, rgba(106, 163, 247, 0.09), rgba(20, 22, 27, 0.88));
-  box-shadow: 0 18px 42px rgba(0, 0, 0, 0.32), 0 0 32px rgba(106, 163, 247, 0.10);
-}
-
-.protocol-card--active-complexity .protocol-card__icon,
-.protocol-card--active-complexity h3 {
-  color: var(--deck-info);
-}
 </style>

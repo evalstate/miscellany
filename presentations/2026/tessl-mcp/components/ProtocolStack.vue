@@ -1,13 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
 const props = withDefaults(
   defineProps<{
-    emphasis?: 'none' | 'usage' | 'complexity'
     showDescriptions?: boolean
   }>(),
   {
-    emphasis: 'none',
     showDescriptions: false,
   },
 )
@@ -57,43 +53,12 @@ const capabilities = [
   },
 ] as const
 
-const usageIds = new Set(['tools', 'resources', 'prompts'])
-const complexityIds = new Set(['roots', 'sampling', 'elicitation'])
-
-const annotation = computed(() => {
-  if (props.emphasis === 'usage') {
-    return {
-      label: '~80% usage',
-      text: 'Most real MCP integrations concentrate on server-side primitives.',
-      tone: 'usage',
-    }
-  }
-  if (props.emphasis === 'complexity') {
-    return {
-      label: '~80% complexity',
-      text: 'The lower-traffic features carry much of the coordination burden.',
-      tone: 'complexity',
-    }
-  }
-  return null
-})
-
-function isActive(id: string) {
-  if (props.emphasis === 'usage') return usageIds.has(id)
-  if (props.emphasis === 'complexity') return complexityIds.has(id)
-  return false
-}
-
-function isMuted(id: string) {
-  return props.emphasis !== 'none' && !isActive(id)
-}
 </script>
 
 <template>
-  <div class="protocol-stack" :class="`protocol-stack--${props.emphasis}`">
+  <div class="protocol-stack">
     <div class="protocol-label protocol-label--server">
       <span>MCP Server</span>
-      <strong v-if="props.emphasis === 'usage'">~80% usage</strong>
     </div>
 
     <div class="protocol-grid protocol-grid--server">
@@ -103,10 +68,6 @@ function isMuted(id: string) {
         :title="item.title"
         :icon="item.icon"
         :description="item.description"
-        :emphasis="props.emphasis"
-        :active="isActive(item.id)"
-        :muted="isMuted(item.id)"
-        :metric="props.emphasis === 'usage' && isActive(item.id) ? 'high use' : undefined"
         :show-description="props.showDescriptions"
       />
     </div>
@@ -116,11 +77,6 @@ function isMuted(id: string) {
       <div class="protocol-transport__label">Transports</div>
     </div>
 
-    <aside v-if="annotation" class="protocol-annotation" :class="`protocol-annotation--${annotation.tone}`">
-      <div class="protocol-annotation__label">{{ annotation.label }}</div>
-      <p>{{ annotation.text }}</p>
-    </aside>
-
     <div class="protocol-grid protocol-grid--client">
       <ProtocolCapabilityCard
         v-for="item in capabilities.filter((capability) => capability.zone === 'client')"
@@ -128,17 +84,12 @@ function isMuted(id: string) {
         :title="item.title"
         :icon="item.icon"
         :description="item.description"
-        :emphasis="props.emphasis"
-        :active="isActive(item.id)"
-        :muted="isMuted(item.id)"
-        :metric="props.emphasis === 'complexity' && isActive(item.id) ? 'hard part' : undefined"
         :show-description="props.showDescriptions"
       />
     </div>
 
     <div class="protocol-label protocol-label--client">
       <span>MCP Client</span>
-      <strong v-if="props.emphasis === 'complexity'">~80% complexity</strong>
     </div>
   </div>
 </template>
@@ -203,18 +154,6 @@ function isMuted(id: string) {
   text-transform: uppercase;
 }
 
-.protocol-label strong {
-  color: var(--deck-accent-hi);
-  font-size: clamp(0.52rem, 2cqh, 0.7rem);
-  font-weight: 850;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.protocol-stack--complexity .protocol-label--client strong {
-  color: var(--deck-info);
-}
-
 .protocol-grid {
   min-height: 0;
   padding: 0;
@@ -255,45 +194,6 @@ function isMuted(id: string) {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
-}
-
-.protocol-annotation {
-  position: absolute;
-  z-index: 3;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  justify-self: center;
-  width: min(560px, 100%);
-  padding: 0.38rem 0.75rem;
-  border: 1px solid var(--deck-accent-line);
-  border-radius: var(--deck-radius);
-  background: color-mix(in srgb, var(--deck-bg) 82%, transparent);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.24);
-  text-align: center;
-}
-
-.protocol-annotation__label {
-  color: var(--deck-accent-hi);
-  font-size: clamp(0.52rem, 2cqh, 0.68rem);
-  font-weight: 800;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.protocol-annotation p {
-  margin: 0.18rem 0 0;
-  color: var(--deck-muted);
-  font-size: clamp(0.5rem, 1.9cqh, 0.64rem);
-  line-height: 1.35;
-}
-
-.protocol-annotation--complexity {
-  border-color: var(--deck-info-line);
-}
-
-.protocol-annotation--complexity .protocol-annotation__label {
-  color: var(--deck-info);
 }
 
 </style>

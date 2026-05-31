@@ -111,30 +111,6 @@ layout: default
 </div>
 
 ---
-layout: default
-kicker: protocol features
----
-
-# Most usage clusters on the server side
-
-<div class="protocol-diagram">
-  <ProtocolStack emphasis="usage" />
-</div>
-
----
-layout: default
-kicker: protocol features
----
-
-# Complexity lives in the long tail
-
-<div class="protocol-diagram">
-  <ProtocolStack emphasis="complexity" />
-</div>
-
-
---- 
-
 # What's new
 
 ## Stateless
