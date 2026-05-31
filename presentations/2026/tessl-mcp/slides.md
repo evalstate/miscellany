@@ -16,105 +16,89 @@ fonts:
   mono: JetBrains Mono
 ---
 
-# layout intro
+<div class="title-intro">
+<div class="title-intro-mark">MCP</div>
+<main>
+<h1>Connecting<br />Context</h1>
+<h2>The Future of MCP Transports</h2>
+<p>Shaun Smith · Hugging Face · 2026</p>
+</main>
+</div>
+
 
 ---
-
-# Connecting Context
-
-## The Future of MCP Transports
-
-::meta::
-Shaun Smith · 2026
-::
-
----
-layout: profile
-handle: "@evalstate"
-role: "Open source, agents, MCP"
+layout: default
 ---
 
-# Shaun Smith
+<div class="about-intro">
+<section>
+<div class="kicker">about me</div>
 
-- Open Source MCP / Agents @ Hugging Face
-- MCP Maintainer and Moderator
-- Open Responses Maintainer
-- Maintainer of `fast-agent` 
+<h1>Shaun Smith <code>@evalstate</code></h1>
 
-::links::
-- github.com/evalstate
-- huggingface.co/evalstate  
-- x.com/evalstate
+<ul class="about-points">
+<li>Open Source @ Hugging Face</li>
+<li>MCP Maintainer and Moderator</li>
+<li>Open Responses Maintainer</li>
+<li>Maintainer of <code>fast-agent</code></li>
+</ul>
 
-::
+<table class="about-social-table">
+<tbody>
+<tr>
+<td class="social-icon-cell"><img class="social-icon social-icon-hf" :src="'intro/huggingface-mark-logo.svg'" alt="Hugging Face" /></td>
+<td>huggingface.co/evalstate</td>
+</tr>
+<tr>
+<td class="social-icon-cell"><img class="social-icon social-icon-github" :src="'intro/github-mark.svg'" alt="GitHub" /></td>
+<td>github.com/evalstate</td>
+</tr>
+<tr>
+<td class="social-icon-cell"><img class="social-icon social-icon-x" :src="'intro/xcom-logo-black.png'" alt="X" /></td>
+<td>x.com/evalstate</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<aside class="about-logo-panel deck-panel">
+<img class="about-hf-logo" :src="'intro/hf_logo.svg'" alt="Hugging Face" />
+<div class="about-logo-divider"></div>
+<img class="about-mcp-logo" :src="'intro/mcp-icon.svg'" alt="Model Context Protocol" />
+</aside>
+</div>
 
 ---
-layout: two-column
-kicker: sample content slide 01
+layout: default
+---
+
+<IntroVideo />
+
+
+---
+layout: default
 ---
 
 # MCP At Hugging Face
 
-::left::
+<div class="hf-mcp-slide">
+<section class="hf-mcp-copy">
+<div class="kicker">hugging face mcp server</div>
+<h2>One protocol surface for the Hub</h2>
 
-Use this slide to try out:
+<ul>
+<li>Search models, datasets, papers, Spaces, and docs</li>
+<li>Inspect repos and metadata from the agent loop</li>
+<li>Call hosted tools and demos through MCP</li>
+</ul>
 
-- Mermaid diagrams
-- two-column content
-- progressive edits
-- callouts and code blocks
+<p>Discovery · context · execution</p>
+</section>
 
-<Callout title="Edit me" tone="accent">
-Replace this with your actual Tessl/MCP positioning, problem statement, or architecture story.
-</Callout>
-
-::right::
-
-```mermaid
-flowchart LR
-  Dev[Developer] --> IDE[IDE / Agent]
-  IDE --> Client[MCP Client]
-  Client --> Server[MCP Server]
-  Server --> Tools[Tools + Context]
-  Tools --> Repo[Codebase]
-  Tools --> Docs[Docs]
-  Tools --> CI[CI / Runtime]
-```
-
-::
-
----
-layout: default
-kicker: sample content slide 02
----
-
-# Cards, terminal snippets, and emphasis
-
-<div class="card-grid">
-  <MetricCard label="Context" value="Richer" note="Expose useful project knowledge" />
-  <MetricCard label="Workflow" value="Faster" note="Keep the developer in the loop" />
-  <MetricCard label="Protocol" value="MCP" note="Composable, inspectable integrations" />
+<aside class="hf-mcp-video-frame deck-panel">
+<HfMcpServerVideo />
+</aside>
 </div>
-
-<TerminalWindow title="example">
-
-```bash
-# Replace with your real demo commands
-npm install
-npm run dev
-```
-
-</TerminalWindow>
-
-<Callout title="Try this next" tone="info">
-Duplicate this slide, swap in a real demo screenshot or an interactive component, and keep the styling consistent.
-</Callout>
-
----
-
-# Streamable HTTP
-
-## ssfsfd
 
 
 ---
@@ -202,6 +186,16 @@ layout: default
 </div>
 
 ---
+layout: default
+---
+
+<div class="weekly-activity-slide">
+  <McpWeeklyActivityChart />
+</div>
+
+---
+
+
 
 # What's gone?
 

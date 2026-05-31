@@ -71,6 +71,26 @@ family.
     before aggregating into weekly buckets.
   - `usage_index_0_100` is intentionally opaque and presentation-oriented.
 
+### `generate_mcp_weekly_activity.py`
+
+Generates weekly MCP initialization-request counts and summed tool-call counts.
+
+- Preferred language: Python
+- Inputs: Hugging Face MCP transport metric snapshots under the source stats
+  repository's dated `data/YYYY-MM/DD/*.json` tree.
+- Output:
+  - `mcp_weekly_init_tool_calls.json`
+- Notes:
+  - Method counters are cumulative within a server startup session.
+  - The script computes positive per-snapshot deltas keyed by `startupTime` and
+    method name before aggregating into Monday-aligned weekly buckets.
+  - `init_requests` is the delta of `methods[].count` where
+    `method == "initialize"`.
+  - `tool_calls` is the sum of deltas for methods whose name starts with
+    `tools/call`.
+  - First and latest weeks are marked `partial_week`; the first week can include
+    pre-series counter activity from a server that started before collection.
+
 ## Generated datasets
 
 ### `mcp_remote_share_weekly.json`
@@ -106,6 +126,23 @@ Weekly CSV variant including OpenCode.
 ### `mcp_remote_share_weekly_chart.csv`
 
 Compact weekly CSV with chart-facing columns.
+
+### `mcp_weekly_init_tool_calls.json`
+
+Small JSON dataset for `McpWeeklyActivityChart.vue`.
+
+Contains one row per Monday-aligned week from the first available transport
+metrics snapshot through the latest available snapshot.
+
+Fields:
+
+- `week_start`
+- `week_end`
+- `iso_week`
+- `init_requests`
+- `tool_calls`
+- `snapshot_count`
+- `partial_week`
 
 ## Subagent
 
