@@ -1,0 +1,419 @@
+{
+  "schema": "deck.mcp-remote-clients-excluding-fallback-weekly.v1",
+  "source": "/home/shaun/source/hf-mcp-stats/data",
+  "window": {
+    "start": "2025-06-09",
+    "end": "2026-05-31"
+  },
+  "filter": "exclude clients whose name or version contains 'fallback'",
+  "rows": [
+    {
+      "week_start": "2025-06-09",
+      "week_end": "2025-06-15",
+      "mcp_remote_client_share_pct": 44.5205,
+      "mcp_remote_clients": 65,
+      "total_clients": 146,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-06-16",
+      "week_end": "2025-06-22",
+      "mcp_remote_client_share_pct": 45.0549,
+      "mcp_remote_clients": 82,
+      "total_clients": 182,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-06-23",
+      "week_end": "2025-06-29",
+      "mcp_remote_client_share_pct": 43.295,
+      "mcp_remote_clients": 113,
+      "total_clients": 261,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-06-30",
+      "week_end": "2025-07-06",
+      "mcp_remote_client_share_pct": 43.8053,
+      "mcp_remote_clients": 99,
+      "total_clients": 226,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-07-07",
+      "week_end": "2025-07-13",
+      "mcp_remote_client_share_pct": 49.5413,
+      "mcp_remote_clients": 162,
+      "total_clients": 327,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-07-14",
+      "week_end": "2025-07-20",
+      "mcp_remote_client_share_pct": 43.6997,
+      "mcp_remote_clients": 163,
+      "total_clients": 373,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-07-21",
+      "week_end": "2025-07-27",
+      "mcp_remote_client_share_pct": 45.4545,
+      "mcp_remote_clients": 150,
+      "total_clients": 330,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-07-28",
+      "week_end": "2025-08-03",
+      "mcp_remote_client_share_pct": 42.3611,
+      "mcp_remote_clients": 122,
+      "total_clients": 288,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-08-04",
+      "week_end": "2025-08-10",
+      "mcp_remote_client_share_pct": 41.6938,
+      "mcp_remote_clients": 128,
+      "total_clients": 307,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-08-11",
+      "week_end": "2025-08-17",
+      "mcp_remote_client_share_pct": 40.5405,
+      "mcp_remote_clients": 120,
+      "total_clients": 296,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-08-18",
+      "week_end": "2025-08-24",
+      "mcp_remote_client_share_pct": 32.9966,
+      "mcp_remote_clients": 98,
+      "total_clients": 297,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-08-25",
+      "week_end": "2025-08-31",
+      "mcp_remote_client_share_pct": 49.2784,
+      "mcp_remote_clients": 239,
+      "total_clients": 485,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-09-01",
+      "week_end": "2025-09-07",
+      "mcp_remote_client_share_pct": 40.0,
+      "mcp_remote_clients": 188,
+      "total_clients": 470,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-09-08",
+      "week_end": "2025-09-14",
+      "mcp_remote_client_share_pct": 34.2105,
+      "mcp_remote_clients": 143,
+      "total_clients": 418,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-09-15",
+      "week_end": "2025-09-21",
+      "mcp_remote_client_share_pct": 29.2181,
+      "mcp_remote_clients": 142,
+      "total_clients": 486,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-09-22",
+      "week_end": "2025-09-28",
+      "mcp_remote_client_share_pct": 27.2553,
+      "mcp_remote_clients": 142,
+      "total_clients": 521,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-09-29",
+      "week_end": "2025-10-05",
+      "mcp_remote_client_share_pct": 27.2069,
+      "mcp_remote_clients": 188,
+      "total_clients": 691,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-10-06",
+      "week_end": "2025-10-12",
+      "mcp_remote_client_share_pct": 31.3466,
+      "mcp_remote_clients": 142,
+      "total_clients": 453,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-10-13",
+      "week_end": "2025-10-19",
+      "mcp_remote_client_share_pct": 29.8097,
+      "mcp_remote_clients": 141,
+      "total_clients": 473,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-10-20",
+      "week_end": "2025-10-26",
+      "mcp_remote_client_share_pct": 26.3969,
+      "mcp_remote_clients": 137,
+      "total_clients": 519,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-10-27",
+      "week_end": "2025-11-02",
+      "mcp_remote_client_share_pct": 28.0303,
+      "mcp_remote_clients": 148,
+      "total_clients": 528,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-11-03",
+      "week_end": "2025-11-09",
+      "mcp_remote_client_share_pct": 33.8374,
+      "mcp_remote_clients": 179,
+      "total_clients": 529,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-11-10",
+      "week_end": "2025-11-16",
+      "mcp_remote_client_share_pct": 27.3423,
+      "mcp_remote_clients": 143,
+      "total_clients": 523,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-11-17",
+      "week_end": "2025-11-23",
+      "mcp_remote_client_share_pct": 29.1339,
+      "mcp_remote_clients": 148,
+      "total_clients": 508,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-11-24",
+      "week_end": "2025-11-30",
+      "mcp_remote_client_share_pct": 24.8889,
+      "mcp_remote_clients": 112,
+      "total_clients": 450,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-12-01",
+      "week_end": "2025-12-07",
+      "mcp_remote_client_share_pct": 23.8208,
+      "mcp_remote_clients": 101,
+      "total_clients": 424,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-12-08",
+      "week_end": "2025-12-14",
+      "mcp_remote_client_share_pct": 22.2836,
+      "mcp_remote_clients": 121,
+      "total_clients": 543,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-12-15",
+      "week_end": "2025-12-21",
+      "mcp_remote_client_share_pct": 28.982,
+      "mcp_remote_clients": 242,
+      "total_clients": 835,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-12-22",
+      "week_end": "2025-12-28",
+      "mcp_remote_client_share_pct": 24.6988,
+      "mcp_remote_clients": 123,
+      "total_clients": 498,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2025-12-29",
+      "week_end": "2026-01-04",
+      "mcp_remote_client_share_pct": 22.8528,
+      "mcp_remote_clients": 149,
+      "total_clients": 652,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-01-05",
+      "week_end": "2026-01-11",
+      "mcp_remote_client_share_pct": 22.4797,
+      "mcp_remote_clients": 194,
+      "total_clients": 863,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-01-12",
+      "week_end": "2026-01-18",
+      "mcp_remote_client_share_pct": 22.1439,
+      "mcp_remote_clients": 157,
+      "total_clients": 709,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-01-19",
+      "week_end": "2026-01-25",
+      "mcp_remote_client_share_pct": 22.5305,
+      "mcp_remote_clients": 203,
+      "total_clients": 901,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-01-26",
+      "week_end": "2026-02-01",
+      "mcp_remote_client_share_pct": 22.6714,
+      "mcp_remote_clients": 258,
+      "total_clients": 1138,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-02-02",
+      "week_end": "2026-02-08",
+      "mcp_remote_client_share_pct": 24.0053,
+      "mcp_remote_clients": 181,
+      "total_clients": 754,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-02-09",
+      "week_end": "2026-02-15",
+      "mcp_remote_client_share_pct": 18.6178,
+      "mcp_remote_clients": 132,
+      "total_clients": 709,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-02-16",
+      "week_end": "2026-02-22",
+      "mcp_remote_client_share_pct": 19.0355,
+      "mcp_remote_clients": 150,
+      "total_clients": 788,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-02-23",
+      "week_end": "2026-03-01",
+      "mcp_remote_client_share_pct": 19.5471,
+      "mcp_remote_clients": 164,
+      "total_clients": 839,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-03-02",
+      "week_end": "2026-03-08",
+      "mcp_remote_client_share_pct": 18.5682,
+      "mcp_remote_clients": 166,
+      "total_clients": 894,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-03-09",
+      "week_end": "2026-03-15",
+      "mcp_remote_client_share_pct": 18.1971,
+      "mcp_remote_clients": 216,
+      "total_clients": 1187,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-03-16",
+      "week_end": "2026-03-22",
+      "mcp_remote_client_share_pct": 16.6667,
+      "mcp_remote_clients": 152,
+      "total_clients": 912,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-03-23",
+      "week_end": "2026-03-29",
+      "mcp_remote_client_share_pct": 16.6525,
+      "mcp_remote_clients": 196,
+      "total_clients": 1177,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-03-30",
+      "week_end": "2026-04-05",
+      "mcp_remote_client_share_pct": 15.5819,
+      "mcp_remote_clients": 237,
+      "total_clients": 1521,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-04-06",
+      "week_end": "2026-04-12",
+      "mcp_remote_client_share_pct": 15.7895,
+      "mcp_remote_clients": 156,
+      "total_clients": 988,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-04-13",
+      "week_end": "2026-04-19",
+      "mcp_remote_client_share_pct": 15.9176,
+      "mcp_remote_clients": 170,
+      "total_clients": 1068,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-04-20",
+      "week_end": "2026-04-26",
+      "mcp_remote_client_share_pct": 17.1706,
+      "mcp_remote_clients": 159,
+      "total_clients": 926,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-04-27",
+      "week_end": "2026-05-03",
+      "mcp_remote_client_share_pct": 17.4267,
+      "mcp_remote_clients": 214,
+      "total_clients": 1228,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-05-04",
+      "week_end": "2026-05-10",
+      "mcp_remote_client_share_pct": 16.5085,
+      "mcp_remote_clients": 174,
+      "total_clients": 1054,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-05-11",
+      "week_end": "2026-05-17",
+      "mcp_remote_client_share_pct": 14.5941,
+      "mcp_remote_clients": 169,
+      "total_clients": 1158,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-05-18",
+      "week_end": "2026-05-24",
+      "mcp_remote_client_share_pct": 13.7236,
+      "mcp_remote_clients": 143,
+      "total_clients": 1042,
+      "fallback_clients_excluded": 1
+    },
+    {
+      "week_start": "2026-05-25",
+      "week_end": "2026-05-31",
+      "mcp_remote_client_share_pct": 12.2203,
+      "mcp_remote_clients": 142,
+      "total_clients": 1162,
+      "fallback_clients_excluded": 2
+    }
+  ]
+}

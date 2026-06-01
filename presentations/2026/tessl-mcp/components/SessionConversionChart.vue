@@ -315,83 +315,15 @@ const overallRate =
 
 <style scoped>
 .conversion-chart {
-  height: 100%;
-  padding: 1.75rem 2rem 1.35rem;
-  background:
-    radial-gradient(
-      circle at 76% 14%,
-      rgba(106, 163, 247, 0.14),
-      transparent 28%
-    ),
-    rgba(20, 22, 27, 0.74);
-  border: 1px solid var(--deck-border);
-  border-radius: var(--deck-radius);
-  box-shadow: var(--deck-shadow);
-}
-
-.conversion-chart__header {
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 1.4rem;
-  margin-bottom: 0.25rem;
-}
-
-.conversion-chart h1 {
-  margin: 0;
-  font-size: 2.55rem;
-}
-
-.conversion-chart p {
-  margin: 0.45rem 0 0;
-  color: var(--deck-muted);
-  font-size: 0.9rem;
-}
-
-.conversion-chart__stats {
-  display: flex;
-  gap: 0.65rem;
+  --deck-chart-glow-x: 76%;
+  --deck-chart-glow-y: 14%;
+  --deck-chart-header-gap: 1.4rem;
+  --deck-chart-subtitle-size: 0.9rem;
+  --deck-chart-stat-size: 1.5rem;
 }
 
 .conversion-chart__stats div {
-  min-width: 126px;
   padding: 0.68rem 0.8rem;
-  text-align: right;
-  background: var(--deck-accent-bg);
-  border: 1px solid var(--deck-accent-line);
-  border-radius: var(--deck-radius-sm);
-}
-
-.conversion-chart__stats span {
-  display: block;
-  color: var(--deck-dim);
-  font-size: 0.58rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.conversion-chart__stats strong {
-  display: block;
-  color: var(--deck-accent-hi);
-  font-size: 1.5rem;
-  line-height: 1.1;
-}
-
-.conversion-chart__svg {
-  width: 100%;
-  height: calc(100% - 82px);
-  overflow: visible;
-}
-
-.conversion-chart__plot-bg {
-  fill: rgba(11, 12, 15, 0.34);
-  stroke: var(--deck-border);
-}
-
-.conversion-chart__grid line {
-  stroke: rgba(240, 236, 226, 0.08);
-  stroke-width: 1;
 }
 
 .conversion-chart__rate-line,
@@ -418,29 +350,6 @@ const overallRate =
   stroke-width: 1.5;
 }
 
-.conversion-chart__axis text,
-.conversion-chart__x-axis text,
-.conversion-chart__legend text,
-.conversion-chart__peak text {
-  fill: var(--deck-dim);
-  font-family: var(--deck-font-mono);
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-}
-
-.conversion-chart__axis--left text:first-child {
-  fill: var(--deck-accent-hi);
-}
-
-.conversion-chart__axis--right text:first-child {
-  fill: var(--deck-info);
-}
-
-.conversion-chart__x-axis text {
-  font-size: 13px;
-}
-
 .conversion-chart__legend line {
   stroke-width: 4;
   stroke-linecap: round;
@@ -464,3 +373,4 @@ const overallRate =
   fill: var(--deck-accent-hi);
 }
 </style>
+

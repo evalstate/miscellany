@@ -65,7 +65,7 @@ def main() -> int:
     parser.add_argument("--range", dest="page_range", help='Slide range, e.g. "3" or "2-5"')
     parser.add_argument("--out", type=Path, default=DEFAULT_OUT, help="Screenshot output directory")
     parser.add_argument("--wait", type=int, default=800, help="Extra wait in ms before export")
-    parser.add_argument("--wait-until", default="networkidle", choices=["networkidle", "load", "domcontentloaded", "none"])
+    parser.add_argument("--wait-until", default="load", choices=["networkidle", "load", "domcontentloaded", "none"])
     parser.add_argument("--scale", type=float, default=None, help="Slidev PNG export scale")
     parser.add_argument("--executable-path", default=detect_chrome(), help="Browser executable for Slidev export")
     parser.add_argument("--clean", action="store_true", help="Remove old PNGs in --out before exporting")

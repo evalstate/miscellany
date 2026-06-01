@@ -14,6 +14,10 @@ evidence over source-only guesses when discussing layout anomalies.
 - Static assets: `public/`
 - Chrome is available at `/usr/bin/google-chrome`.
 
+The user may edit `slides.md` concurrently. Always reload/read the current
+`slides.md` before planning slide changes, citing slide numbers, or applying
+edits that depend on slide order/content.
+
 ## Common commands
 
 ```bash
@@ -26,6 +30,45 @@ npm run export
 Build output in `dist/` is an ES-module SPA; serve it over HTTP. Use
 `npm run build:single` only when a filesystem-openable single HTML file is
 needed.
+
+## Slidev-first authoring
+
+Prefer Slidev markdown, layouts, frontmatter, and shared CSS primitives before
+creating new Vue components or component-local style systems.
+
+Use `slides.md` for slide narrative: titles, subtitles, labels, explanatory
+copy, ordering, and high-level composition. Vue components should usually own
+only data-driven rendering, reusable diagrams, interaction, or small reusable
+presentational primitives.
+
+Chart/diagram internals may own data-encoding labels such as axis titles,
+legend labels, and data-derived stat labels. In the general case, prefer making
+those labels props when the component is reused across different narratives or
+datasets; keep rhetorical framing and audience-facing slide copy in
+`slides.md`.
+
+Before adding a new component, ask:
+
+- Can this be expressed clearly in `slides.md` with an existing layout/class?
+- Is this behavior/data rendering reused or complex enough to justify Vue?
+- Will future wording/layout edits require opening a Vue file unnecessarily?
+
+Before adding component-local CSS, ask:
+
+- Is this a shared deck pattern that belongs in `style.css`?
+- Can existing tokens/classes such as chart slide wrappers, card styles, labels,
+  or diagram containers be reused?
+- Is the parent slide controlling size while the component fills the available
+  region?
+
+Prefer parent-defined dimensions and shared wrappers over component props such
+as `size="sm|md|lg"` unless the variant is semantic. Keep components narrow:
+render the chart/diagram/widget; let Slidev compose the slide.
+
+Avoid components that own an entire slide unless there is a strong reason. If
+changing slide wording requires opening a Vue file, move that wording back into
+`slides.md`. If the same CSS pattern appears twice, promote it to a shared
+primitive in `style.css` rather than copying local styles.
 
 ## Visual inspection workflow
 

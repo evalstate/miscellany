@@ -71,6 +71,43 @@ family.
     before aggregating into weekly buckets.
   - `usage_index_0_100` is intentionally opaque and presentation-oriented.
 
+
+### `generate_mcp_remote_clients_excluding_fallback.py`
+
+Generates weekly distinct-client `mcp-remote` share excluding fallback-check
+clients.
+
+- Preferred language: Python
+- Inputs: Hugging Face MCP transport metric snapshots under:
+  - `/home/shaun/source/hf-mcp-stats/data`
+- Output:
+  - `mcp_remote_clients_excluding_fallback_weekly.json`
+- Notes:
+  - Defaults to the same 2025-06-09 through 2026-05-31 range as `mcp_weekly_init_tool_calls.json`.
+  - Counts distinct `(client.name, client.version)` identities seen per week.
+  - Excludes clients whose name or version contains `fallback`.
+
+### `generate_mcp_remote_share_excluding_fallback.py`
+
+Generates weekly `mcp-remote` request-share metrics across all client traffic,
+excluding fallback-check clients.
+
+- Preferred language: Python
+- Inputs: Hugging Face MCP transport metric snapshots under:
+  - `/home/shaun/source/hf-mcp-stats/data`
+- Outputs:
+  - `mcp_remote_share_excluding_fallback_weekly.csv`
+  - `mcp_remote_share_excluding_fallback_weekly.json`
+- Notes:
+  - Defaults to the latest local six-week window used for protocol-efficiency
+    analysis: 2026-04-19 through 2026-05-31.
+  - Counters are cumulative within a server startup session.
+  - The script computes positive per-snapshot deltas keyed by `startupTime`.
+  - Excludes clients whose name or version contains `fallback`, including
+    `mcp-remote-fallback-test`.
+  - `mcp_remote_share_pct` is request share, not distinct-user or
+    distinct-install share.
+
 ### `generate_mcp_weekly_activity.py`
 
 Generates weekly MCP initialization-request counts and summed tool-call counts.
@@ -143,6 +180,25 @@ Weekly CSV variant including OpenCode.
 ### `mcp_remote_share_weekly_chart.csv`
 
 Compact weekly CSV with chart-facing columns.
+
+### `mcp_remote_share_excluding_fallback_weekly.csv`
+
+Weekly CSV for all-client `mcp-remote` request share after excluding fallback
+checks.
+
+### `mcp_remote_share_excluding_fallback_weekly.json`
+
+Small JSON dataset for `McpRemoteNoFallbackChart.vue`.
+
+Fields:
+
+- `week_start`
+- `week_end`
+- `mcp_remote_share_pct`
+- `usage_index_0_100`
+- `mcp_remote_requests`
+- `total_requests`
+- `fallback_excluded_requests`
 
 ### `mcp_weekly_init_tool_calls.json`
 

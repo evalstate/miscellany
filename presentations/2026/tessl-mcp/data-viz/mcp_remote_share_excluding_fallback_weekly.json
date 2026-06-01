@@ -1,0 +1,470 @@
+{
+  "schema": "deck.mcp-remote-share-excluding-fallback.v1",
+  "source": "/home/shaun/source/hf-mcp-stats/data",
+  "window": {
+    "start": "2025-06-09",
+    "end": "2026-05-31"
+  },
+  "filter": "exclude clients whose name or version contains 'fallback'",
+  "rows": [
+    {
+      "week_start": "2025-06-09",
+      "week_end": "2025-06-15",
+      "mcp_remote_share_pct": 16.6702,
+      "usage_index_0_100": 0.4447,
+      "mcp_remote_requests": 3103,
+      "total_requests": 18614,
+      "fallback_excluded_requests": 3274
+    },
+    {
+      "week_start": "2025-06-16",
+      "week_end": "2025-06-22",
+      "mcp_remote_share_pct": 8.0352,
+      "usage_index_0_100": 0.7745,
+      "mcp_remote_requests": 2605,
+      "total_requests": 32420,
+      "fallback_excluded_requests": 2711
+    },
+    {
+      "week_start": "2025-06-23",
+      "week_end": "2025-06-29",
+      "mcp_remote_share_pct": 7.1146,
+      "usage_index_0_100": 1.3764,
+      "mcp_remote_requests": 4099,
+      "total_requests": 57614,
+      "fallback_excluded_requests": 4236
+    },
+    {
+      "week_start": "2025-06-30",
+      "week_end": "2025-07-06",
+      "mcp_remote_share_pct": 10.1201,
+      "usage_index_0_100": 1.1556,
+      "mcp_remote_requests": 4895,
+      "total_requests": 48369,
+      "fallback_excluded_requests": 5125
+    },
+    {
+      "week_start": "2025-07-07",
+      "week_end": "2025-07-13",
+      "mcp_remote_share_pct": 5.6525,
+      "usage_index_0_100": 1.8436,
+      "mcp_remote_requests": 4362,
+      "total_requests": 77169,
+      "fallback_excluded_requests": 4561
+    },
+    {
+      "week_start": "2025-07-14",
+      "week_end": "2025-07-20",
+      "mcp_remote_share_pct": 6.0428,
+      "usage_index_0_100": 2.1515,
+      "mcp_remote_requests": 5442,
+      "total_requests": 90057,
+      "fallback_excluded_requests": 6072
+    },
+    {
+      "week_start": "2025-07-21",
+      "week_end": "2025-07-27",
+      "mcp_remote_share_pct": 6.1912,
+      "usage_index_0_100": 1.8731,
+      "mcp_remote_requests": 4854,
+      "total_requests": 78401,
+      "fallback_excluded_requests": 5917
+    },
+    {
+      "week_start": "2025-07-28",
+      "week_end": "2025-08-03",
+      "mcp_remote_share_pct": 8.4519,
+      "usage_index_0_100": 1.3701,
+      "mcp_remote_requests": 4847,
+      "total_requests": 57348,
+      "fallback_excluded_requests": 5763
+    },
+    {
+      "week_start": "2025-08-04",
+      "week_end": "2025-08-10",
+      "mcp_remote_share_pct": 3.7597,
+      "usage_index_0_100": 3.2713,
+      "mcp_remote_requests": 5148,
+      "total_requests": 136926,
+      "fallback_excluded_requests": 5986
+    },
+    {
+      "week_start": "2025-08-11",
+      "week_end": "2025-08-17",
+      "mcp_remote_share_pct": 0.5624,
+      "usage_index_0_100": 22.8233,
+      "mcp_remote_requests": 5373,
+      "total_requests": 955319,
+      "fallback_excluded_requests": 6212
+    },
+    {
+      "week_start": "2025-08-18",
+      "week_end": "2025-08-24",
+      "mcp_remote_share_pct": 0.4236,
+      "usage_index_0_100": 36.2975,
+      "mcp_remote_requests": 6436,
+      "total_requests": 1519312,
+      "fallback_excluded_requests": 7308
+    },
+    {
+      "week_start": "2025-08-25",
+      "week_end": "2025-08-31",
+      "mcp_remote_share_pct": 0.7141,
+      "usage_index_0_100": 21.6785,
+      "mcp_remote_requests": 6480,
+      "total_requests": 907402,
+      "fallback_excluded_requests": 7003
+    },
+    {
+      "week_start": "2025-09-01",
+      "week_end": "2025-09-07",
+      "mcp_remote_share_pct": 1.7441,
+      "usage_index_0_100": 11.3872,
+      "mcp_remote_requests": 8313,
+      "total_requests": 476636,
+      "fallback_excluded_requests": 8841
+    },
+    {
+      "week_start": "2025-09-08",
+      "week_end": "2025-09-14",
+      "mcp_remote_share_pct": 1.7814,
+      "usage_index_0_100": 11.8583,
+      "mcp_remote_requests": 8842,
+      "total_requests": 496356,
+      "fallback_excluded_requests": 9594
+    },
+    {
+      "week_start": "2025-09-15",
+      "week_end": "2025-09-21",
+      "mcp_remote_share_pct": 1.6504,
+      "usage_index_0_100": 12.0799,
+      "mcp_remote_requests": 8345,
+      "total_requests": 505631,
+      "fallback_excluded_requests": 8885
+    },
+    {
+      "week_start": "2025-09-22",
+      "week_end": "2025-09-28",
+      "mcp_remote_share_pct": 1.3216,
+      "usage_index_0_100": 13.3537,
+      "mcp_remote_requests": 7387,
+      "total_requests": 558949,
+      "fallback_excluded_requests": 8185
+    },
+    {
+      "week_start": "2025-09-29",
+      "week_end": "2025-10-05",
+      "mcp_remote_share_pct": 1.3594,
+      "usage_index_0_100": 17.4953,
+      "mcp_remote_requests": 9955,
+      "total_requests": 732305,
+      "fallback_excluded_requests": 10579
+    },
+    {
+      "week_start": "2025-10-06",
+      "week_end": "2025-10-12",
+      "mcp_remote_share_pct": 1.3592,
+      "usage_index_0_100": 16.8598,
+      "mcp_remote_requests": 9592,
+      "total_requests": 705705,
+      "fallback_excluded_requests": 10017
+    },
+    {
+      "week_start": "2025-10-13",
+      "week_end": "2025-10-19",
+      "mcp_remote_share_pct": 1.0415,
+      "usage_index_0_100": 19.3652,
+      "mcp_remote_requests": 8442,
+      "total_requests": 810573,
+      "fallback_excluded_requests": 8822
+    },
+    {
+      "week_start": "2025-10-20",
+      "week_end": "2025-10-26",
+      "mcp_remote_share_pct": 0.6909,
+      "usage_index_0_100": 22.1937,
+      "mcp_remote_requests": 6418,
+      "total_requests": 928966,
+      "fallback_excluded_requests": 6657
+    },
+    {
+      "week_start": "2025-10-27",
+      "week_end": "2025-11-02",
+      "mcp_remote_share_pct": 0.5264,
+      "usage_index_0_100": 24.9452,
+      "mcp_remote_requests": 5496,
+      "total_requests": 1044139,
+      "fallback_excluded_requests": 6015
+    },
+    {
+      "week_start": "2025-11-03",
+      "week_end": "2025-11-09",
+      "mcp_remote_share_pct": 0.4194,
+      "usage_index_0_100": 25.3815,
+      "mcp_remote_requests": 4456,
+      "total_requests": 1062400,
+      "fallback_excluded_requests": 4787
+    },
+    {
+      "week_start": "2025-11-10",
+      "week_end": "2025-11-16",
+      "mcp_remote_share_pct": 0.4395,
+      "usage_index_0_100": 19.3233,
+      "mcp_remote_requests": 3555,
+      "total_requests": 808821,
+      "fallback_excluded_requests": 4008
+    },
+    {
+      "week_start": "2025-11-17",
+      "week_end": "2025-11-23",
+      "mcp_remote_share_pct": 0.3562,
+      "usage_index_0_100": 20.2534,
+      "mcp_remote_requests": 3020,
+      "total_requests": 847753,
+      "fallback_excluded_requests": 3335
+    },
+    {
+      "week_start": "2025-11-24",
+      "week_end": "2025-11-30",
+      "mcp_remote_share_pct": 0.3372,
+      "usage_index_0_100": 21.3487,
+      "mcp_remote_requests": 3013,
+      "total_requests": 893597,
+      "fallback_excluded_requests": 3389
+    },
+    {
+      "week_start": "2025-12-01",
+      "week_end": "2025-12-07",
+      "mcp_remote_share_pct": 0.5084,
+      "usage_index_0_100": 23.7881,
+      "mcp_remote_requests": 5062,
+      "total_requests": 995705,
+      "fallback_excluded_requests": 6564
+    },
+    {
+      "week_start": "2025-12-08",
+      "week_end": "2025-12-14",
+      "mcp_remote_share_pct": 0.2746,
+      "usage_index_0_100": 25.4638,
+      "mcp_remote_requests": 2927,
+      "total_requests": 1065846,
+      "fallback_excluded_requests": 4133
+    },
+    {
+      "week_start": "2025-12-15",
+      "week_end": "2025-12-21",
+      "mcp_remote_share_pct": 0.5325,
+      "usage_index_0_100": 26.4422,
+      "mcp_remote_requests": 5894,
+      "total_requests": 1106800,
+      "fallback_excluded_requests": 6211
+    },
+    {
+      "week_start": "2025-12-22",
+      "week_end": "2025-12-28",
+      "mcp_remote_share_pct": 0.324,
+      "usage_index_0_100": 25.1551,
+      "mcp_remote_requests": 3411,
+      "total_requests": 1052925,
+      "fallback_excluded_requests": 3584
+    },
+    {
+      "week_start": "2025-12-29",
+      "week_end": "2026-01-04",
+      "mcp_remote_share_pct": 0.259,
+      "usage_index_0_100": 26.071,
+      "mcp_remote_requests": 2826,
+      "total_requests": 1091261,
+      "fallback_excluded_requests": 2961
+    },
+    {
+      "week_start": "2026-01-05",
+      "week_end": "2026-01-11",
+      "mcp_remote_share_pct": 0.32,
+      "usage_index_0_100": 28.9726,
+      "mcp_remote_requests": 3881,
+      "total_requests": 1212714,
+      "fallback_excluded_requests": 4027
+    },
+    {
+      "week_start": "2026-01-12",
+      "week_end": "2026-01-18",
+      "mcp_remote_share_pct": 0.3937,
+      "usage_index_0_100": 30.9878,
+      "mcp_remote_requests": 5106,
+      "total_requests": 1297065,
+      "fallback_excluded_requests": 5323
+    },
+    {
+      "week_start": "2026-01-19",
+      "week_end": "2026-01-25",
+      "mcp_remote_share_pct": 0.6513,
+      "usage_index_0_100": 38.6516,
+      "mcp_remote_requests": 10537,
+      "total_requests": 1617852,
+      "fallback_excluded_requests": 10711
+    },
+    {
+      "week_start": "2026-01-26",
+      "week_end": "2026-02-01",
+      "mcp_remote_share_pct": 0.7202,
+      "usage_index_0_100": 43.5598,
+      "mcp_remote_requests": 13131,
+      "total_requests": 1823295,
+      "fallback_excluded_requests": 13324
+    },
+    {
+      "week_start": "2026-02-02",
+      "week_end": "2026-02-08",
+      "mcp_remote_share_pct": 0.6455,
+      "usage_index_0_100": 47.2443,
+      "mcp_remote_requests": 12764,
+      "total_requests": 1977517,
+      "fallback_excluded_requests": 13169
+    },
+    {
+      "week_start": "2026-02-09",
+      "week_end": "2026-02-15",
+      "mcp_remote_share_pct": 0.5878,
+      "usage_index_0_100": 55.4553,
+      "mcp_remote_requests": 13643,
+      "total_requests": 2321205,
+      "fallback_excluded_requests": 13886
+    },
+    {
+      "week_start": "2026-02-16",
+      "week_end": "2026-02-22",
+      "mcp_remote_share_pct": 0.6639,
+      "usage_index_0_100": 58.0267,
+      "mcp_remote_requests": 16125,
+      "total_requests": 2428837,
+      "fallback_excluded_requests": 16410
+    },
+    {
+      "week_start": "2026-02-23",
+      "week_end": "2026-03-01",
+      "mcp_remote_share_pct": 0.888,
+      "usage_index_0_100": 54.546,
+      "mcp_remote_requests": 20275,
+      "total_requests": 2283145,
+      "fallback_excluded_requests": 20653
+    },
+    {
+      "week_start": "2026-03-02",
+      "week_end": "2026-03-08",
+      "mcp_remote_share_pct": 0.8696,
+      "usage_index_0_100": 58.4263,
+      "mcp_remote_requests": 21266,
+      "total_requests": 2445565,
+      "fallback_excluded_requests": 21776
+    },
+    {
+      "week_start": "2026-03-09",
+      "week_end": "2026-03-15",
+      "mcp_remote_share_pct": 1.2465,
+      "usage_index_0_100": 46.4605,
+      "mcp_remote_requests": 24240,
+      "total_requests": 1944709,
+      "fallback_excluded_requests": 24761
+    },
+    {
+      "week_start": "2026-03-16",
+      "week_end": "2026-03-22",
+      "mcp_remote_share_pct": 1.0554,
+      "usage_index_0_100": 47.424,
+      "mcp_remote_requests": 20951,
+      "total_requests": 1985038,
+      "fallback_excluded_requests": 21411
+    },
+    {
+      "week_start": "2026-03-23",
+      "week_end": "2026-03-29",
+      "mcp_remote_share_pct": 1.0029,
+      "usage_index_0_100": 69.9312,
+      "mcp_remote_requests": 29355,
+      "total_requests": 2927128,
+      "fallback_excluded_requests": 30138
+    },
+    {
+      "week_start": "2026-03-30",
+      "week_end": "2026-04-05",
+      "mcp_remote_share_pct": 0.4224,
+      "usage_index_0_100": 84.1147,
+      "mcp_remote_requests": 14873,
+      "total_requests": 3520809,
+      "fallback_excluded_requests": 15572
+    },
+    {
+      "week_start": "2026-04-06",
+      "week_end": "2026-04-12",
+      "mcp_remote_share_pct": 0.3144,
+      "usage_index_0_100": 98.7667,
+      "mcp_remote_requests": 12999,
+      "total_requests": 4134105,
+      "fallback_excluded_requests": 13518
+    },
+    {
+      "week_start": "2026-04-13",
+      "week_end": "2026-04-19",
+      "mcp_remote_share_pct": 0.4437,
+      "usage_index_0_100": 99.8649,
+      "mcp_remote_requests": 18545,
+      "total_requests": 4180073,
+      "fallback_excluded_requests": 18965
+    },
+    {
+      "week_start": "2026-04-20",
+      "week_end": "2026-04-26",
+      "mcp_remote_share_pct": 0.6103,
+      "usage_index_0_100": 95.9172,
+      "mcp_remote_requests": 24503,
+      "total_requests": 4014831,
+      "fallback_excluded_requests": 25057
+    },
+    {
+      "week_start": "2026-04-27",
+      "week_end": "2026-05-03",
+      "mcp_remote_share_pct": 1.279,
+      "usage_index_0_100": 97.0647,
+      "mcp_remote_requests": 51963,
+      "total_requests": 4062864,
+      "fallback_excluded_requests": 52369
+    },
+    {
+      "week_start": "2026-05-04",
+      "week_end": "2026-05-10",
+      "mcp_remote_share_pct": 1.2394,
+      "usage_index_0_100": 100.0,
+      "mcp_remote_requests": 51877,
+      "total_requests": 4185726,
+      "fallback_excluded_requests": 52187
+    },
+    {
+      "week_start": "2026-05-11",
+      "week_end": "2026-05-17",
+      "mcp_remote_share_pct": 0.6255,
+      "usage_index_0_100": 99.1806,
+      "mcp_remote_requests": 25968,
+      "total_requests": 4151430,
+      "fallback_excluded_requests": 26690
+    },
+    {
+      "week_start": "2026-05-18",
+      "week_end": "2026-05-24",
+      "mcp_remote_share_pct": 0.6288,
+      "usage_index_0_100": 89.0583,
+      "mcp_remote_requests": 23439,
+      "total_requests": 3727736,
+      "fallback_excluded_requests": 24076
+    },
+    {
+      "week_start": "2026-05-25",
+      "week_end": "2026-05-31",
+      "mcp_remote_share_pct": 0.5653,
+      "usage_index_0_100": 84.8464,
+      "mcp_remote_requests": 20077,
+      "total_requests": 3551439,
+      "fallback_excluded_requests": 20497
+    }
+  ]
+}

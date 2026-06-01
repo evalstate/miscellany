@@ -1,6 +1,20 @@
+<script setup lang="ts">
+const props = withDefaults(
+  defineProps<{
+    variant?: "full" | "before";
+  }>(),
+  {
+    variant: "full",
+  },
+);
+
+const isBefore = props.variant === "before";
+</script>
+
 <template>
   <section
     class="spec-timeline"
+    :class="{ 'spec-timeline--before': isBefore }"
     aria-label="MCP specification transport and authorization evolution"
   >
     <div class="spec-timeline__axis">
@@ -23,12 +37,12 @@
         <div
           class="spec-timeline__tick spec-timeline__tick--now spec-timeline__tick--col-5"
         >
-          <strong>2026-07</strong>
+          <strong v-if="!isBefore">2026-07</strong>
         </div>
         <div
           class="spec-timeline__tick spec-timeline__tick--future spec-timeline__tick--col-6"
         >
-          <strong>...</strong>
+          <strong v-if="!isBefore">...</strong>
         </div>
       </div>
     </div>
@@ -37,7 +51,7 @@
       <div
         class="spec-timeline__lane-label spec-timeline__lane-label--transport"
       >
-        <span>Transports</span>
+        <span>Local</span>
       </div>
 
       <div class="spec-timeline__lane spec-timeline__lane--transport">
@@ -50,13 +64,16 @@
           />
         </div>
 
-        <div class="spec-timeline__bar spec-timeline__bar--stdio">
+        <div
+          class="spec-timeline__bar spec-timeline__bar--stdio"
+          :class="{ 'spec-timeline__bar--stdio-before': isBefore }"
+        >
           <strong>STDIO</strong>
         </div>
       </div>
 
       <div class="spec-timeline__lane-label spec-timeline__lane-label--remote">
-        <span>Remote<br />Transports</span>
+        <span>Remote</span>
       </div>
 
       <div class="spec-timeline__lane spec-timeline__lane--remote">
@@ -77,7 +94,10 @@
           <strong>Streamable HTTP</strong>
         </div>
 
-        <div class="spec-timeline__bar spec-timeline__bar--stateless">
+        <div
+          v-if="!isBefore"
+          class="spec-timeline__bar spec-timeline__bar--stateless"
+        >
           <strong>Stateless HTTP</strong>
         </div>
       </div>
@@ -100,7 +120,10 @@
           <strong>OAuth AS</strong>
         </div>
 
-        <div class="spec-timeline__bar spec-timeline__bar--auth-rs">
+        <div
+          class="spec-timeline__bar spec-timeline__bar--auth-rs"
+          :class="{ 'spec-timeline__bar--auth-rs-before': isBefore }"
+        >
           <strong>OAuth Resource Server</strong>
         </div>
       </div>
@@ -423,6 +446,99 @@
   transform: translateY(-1px);
 }
 
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--2, .spec-timeline__tick--col-2):hover
+  )
+  :is(.spec-timeline__hotspot--1),
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--3, .spec-timeline__tick--col-3):hover
+  )
+  :is(.spec-timeline__hotspot--1, .spec-timeline__hotspot--2),
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--4, .spec-timeline__tick--col-4):hover
+  )
+  :is(
+    .spec-timeline__hotspot--1,
+    .spec-timeline__hotspot--2,
+    .spec-timeline__hotspot--3
+  ),
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--5, .spec-timeline__tick--col-5):hover
+  )
+  :is(
+    .spec-timeline__hotspot--1,
+    .spec-timeline__hotspot--2,
+    .spec-timeline__hotspot--3,
+    .spec-timeline__hotspot--4
+  ),
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--6, .spec-timeline__tick--col-6):hover
+  )
+  :is(
+    .spec-timeline__hotspot--1,
+    .spec-timeline__hotspot--2,
+    .spec-timeline__hotspot--3,
+    .spec-timeline__hotspot--4,
+    .spec-timeline__hotspot--5
+  ) {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 198, 73, 0.09),
+    rgba(106, 163, 247, 0.052)
+  );
+  border-color: rgba(255, 198, 73, 0.22);
+  box-shadow: inset 0 0 24px rgba(255, 198, 73, 0.06);
+}
+
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--2, .spec-timeline__tick--col-2):hover
+  )
+  :is(.spec-timeline__tick--col-1),
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--3, .spec-timeline__tick--col-3):hover
+  )
+  :is(.spec-timeline__tick--col-1, .spec-timeline__tick--col-2),
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--4, .spec-timeline__tick--col-4):hover
+  )
+  :is(
+    .spec-timeline__tick--col-1,
+    .spec-timeline__tick--col-2,
+    .spec-timeline__tick--col-3
+  ),
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--5, .spec-timeline__tick--col-5):hover
+  )
+  :is(
+    .spec-timeline__tick--col-1,
+    .spec-timeline__tick--col-2,
+    .spec-timeline__tick--col-3,
+    .spec-timeline__tick--col-4
+  ),
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--6, .spec-timeline__tick--col-6):hover
+  )
+  :is(
+    .spec-timeline__tick--col-1,
+    .spec-timeline__tick--col-2,
+    .spec-timeline__tick--col-3,
+    .spec-timeline__tick--col-4,
+    .spec-timeline__tick--col-5
+  ) {
+  border-color: rgba(255, 198, 73, 0.44);
+  background:
+    linear-gradient(180deg, rgba(245, 164, 0, 0.12), rgba(106, 163, 247, 0.04)),
+    rgba(11, 12, 15, 0.56);
+  box-shadow:
+    0 14px 28px rgba(0, 0, 0, 0.2),
+    0 0 22px rgba(245, 164, 0, 0.11);
+}
+
+.spec-timeline--before .spec-timeline__tick--col-5,
+.spec-timeline--before .spec-timeline__tick--col-6 {
+  opacity: 0.32;
+}
+
 .spec-timeline__bar {
   position: relative;
   z-index: 2;
@@ -456,6 +572,10 @@
     linear-gradient(90deg, rgba(245, 164, 0, 0.28), rgba(245, 164, 0, 0.13)),
     rgba(20, 22, 27, 0.9);
   border-color: rgba(255, 198, 73, 0.42);
+}
+
+.spec-timeline__bar--stdio-before {
+  grid-column-end: 5;
 }
 
 .spec-timeline__bar--sse {
@@ -509,5 +629,9 @@
     linear-gradient(90deg, rgba(106, 163, 247, 0.3), rgba(106, 163, 247, 0.13)),
     rgba(20, 22, 27, 0.92);
   border-color: rgba(106, 163, 247, 0.46);
+}
+
+.spec-timeline__bar--auth-rs-before {
+  grid-column-end: 5;
 }
 </style>

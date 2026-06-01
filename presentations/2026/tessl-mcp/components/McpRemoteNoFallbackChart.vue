@@ -1,20 +1,46 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import activityData from "../data-viz/mcp_weekly_init_tool_calls.json";
+import remoteTrafficData from "../data-viz/mcp_remote_share_excluding_fallback_weekly.json";
 
-type Row = {
+type ActivityRow = {
   week_start: string;
   week_end: string;
   iso_week: string;
   init_requests: number;
-  tool_calls: number;
-  snapshot_count: number;
   partial_week: boolean;
 };
 
-const rows = (activityData.rows as Row[]).toSorted((a, b) =>
-  a.week_start.localeCompare(b.week_start),
+type RemoteTrafficRow = {
+  week_start: string;
+  week_end: string;
+  mcp_remote_share_pct: number;
+  mcp_remote_requests: number;
+  total_requests: number;
+  fallback_excluded_requests: number;
+};
+
+type Row = ActivityRow & RemoteClientRow;
+
+const remoteByWeek = new Map(
+  (remoteTrafficData.rows as RemoteTrafficRow[]).map((row) => [
+    row.week_start,
+    row,
+  ]),
 );
+
+const rows = (activityData.rows as ActivityRow[])
+  .map((row) => ({
+    ...row,
+    ...(remoteByWeek.get(row.week_start) ?? {
+      week_end: row.week_end,
+      mcp_remote_share_pct: 0,
+      mcp_remote_requests: 0,
+      total_requests: 0,
+      fallback_excluded_requests: 0,
+    }),
+  }))
+  .toSorted((a, b) => a.week_start.localeCompare(b.week_start));
 
 const width = 1000;
 const height = 520;
@@ -44,7 +70,9 @@ const endDate = toDate(rows.at(-1)!.week_start);
 const startMs = startDate.getTime();
 const spanMs = Math.max(1, endDate.getTime() - startMs);
 const initMax = niceMax(Math.max(...rows.map((row) => row.init_requests)));
-const toolMax = niceMax(Math.max(...rows.map((row) => row.tool_calls)));
+const shareMax = niceMax(
+  Math.max(...rows.map((row) => row.mcp_remote_share_pct)),
+);
 
 function xForDate(value: string) {
   return plot.left + ((toDate(value).getTime() - startMs) / spanMs) * plotWidth;
@@ -54,8 +82,8 @@ function yForInit(value: number) {
   return plot.top + (1 - value / initMax) * plotHeight;
 }
 
-function yForTool(value: number) {
-  return plot.top + (1 - value / toolMax) * plotHeight;
+function yForShare(value: number) {
+  return plot.top + (1 - value / shareMax) * plotHeight;
 }
 
 function formatCount(value: number) {
@@ -73,13 +101,13 @@ const initTicks = computed(() => [
   initMax * 0.75,
   initMax,
 ]);
-const toolTicks = computed(() => [0, toolMax * 0.5, toolMax]);
+const shareTicks = computed(() => [0, shareMax * 0.5, shareMax]);
 
-const toolLine = computed(() =>
+const shareLine = computed(() =>
   rows
     .map(
       (row) =>
-        `${xForDate(row.week_start).toFixed(1)},${yForTool(row.tool_calls).toFixed(1)}`,
+        `${xForDate(row.week_start).toFixed(1)},${yForShare(row.mcp_remote_share_pct).toFixed(1)}`,
     )
     .join(" "),
 );
@@ -109,9 +137,9 @@ const first = rows[0];
 <template>
   <section class="activity-chart">
     <div class="activity-chart__stat">
-      <span>latest week</span>
-      <strong>{{ formatCount(latest.init_requests) }}</strong>
-      <em>initializations</em>
+      <span>latest share</span>
+      <strong>{{ latest.mcp_remote_share_pct.toFixed(1) }}%</strong>
+      <em>fallback checks excluded</em>
     </div>
 
     <svg
@@ -120,16 +148,22 @@ const first = rows[0];
       role="img"
     >
       <defs>
-        <linearGradient id="activity-bar-fill" x1="0" x2="0" y1="0" y2="1">
+        <linearGradient
+          id="remote-clients-bar-fill"
+          x1="0"
+          x2="0"
+          y1="0"
+          y2="1"
+        >
           <stop offset="0%" stop-color="#ffc649" />
           <stop offset="100%" stop-color="rgba(245, 164, 0, 0.38)" />
         </linearGradient>
-        <linearGradient id="activity-tool-line" x1="0" x2="1" y1="0" y2="0">
+        <linearGradient id="remote-clients-line" x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stop-color="#8bb8ff" />
           <stop offset="100%" stop-color="#6aa3f7" />
         </linearGradient>
         <filter
-          id="activity-line-glow"
+          id="remote-clients-line-glow"
           x="-40%"
           y="-40%"
           width="180%"
@@ -185,8 +219,8 @@ const first = rows[0];
 
       <polyline
         class="activity-chart__line"
-        :points="toolLine"
-        filter="url(#activity-line-glow)"
+        :points="shareLine"
+        filter="url(#remote-clients-line-glow)"
       />
 
       <g class="activity-chart__axis activity-chart__axis--left">
@@ -204,15 +238,15 @@ const first = rows[0];
 
       <g class="activity-chart__axis activity-chart__axis--right">
         <text :x="plot.left + plotWidth" :y="plot.top - 20" text-anchor="end">
-          Tool calls
+          mcp-remote traffic
         </text>
         <text
-          v-for="tick in toolTicks"
-          :key="`tool-label-${tick}`"
+          v-for="tick in shareTicks"
+          :key="`share-label-${tick}`"
           :x="plot.left + plotWidth + 14"
-          :y="yForTool(tick) + 4"
+          :y="yForShare(tick) + 4"
         >
-          {{ formatCount(tick) }}
+          {{ tick }}%
         </text>
       </g>
 
@@ -244,23 +278,23 @@ const first = rows[0];
 
       <g class="activity-chart__legend">
         <rect
-          :x="plot.left + plotWidth - 292"
+          :x="plot.left + plotWidth - 346"
           :y="plot.top + 14"
           width="12"
           height="38"
           rx="2"
         />
-        <text :x="plot.left + plotWidth - 270" :y="plot.top + 38">
+        <text :x="plot.left + plotWidth - 324" :y="plot.top + 38">
           initializations
         </text>
         <line
-          :x1="plot.left + plotWidth - 132"
-          :x2="plot.left + plotWidth - 96"
+          :x1="plot.left + plotWidth - 162"
+          :x2="plot.left + plotWidth - 126"
           :y1="plot.top + 33"
           :y2="plot.top + 33"
         />
-        <text :x="plot.left + plotWidth - 86" :y="plot.top + 38">
-          tool calls
+        <text :x="plot.left + plotWidth - 116" :y="plot.top + 38">
+          mcp-remote traffic
         </text>
       </g>
     </svg>
@@ -269,7 +303,7 @@ const first = rows[0];
 
 <style scoped>
 .activity-chart {
-  --activity-chart-bar-fill: url(#activity-bar-fill);
-  --activity-chart-line-stroke: url(#activity-tool-line);
+  --activity-chart-bar-fill: url(#remote-clients-bar-fill);
+  --activity-chart-line-stroke: url(#remote-clients-line);
 }
 </style>

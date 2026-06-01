@@ -27,7 +27,6 @@ fonts:
 
 ---
 
-
 <div class="about-intro">
 <section>
 <div class="kicker">about me</div>
@@ -68,11 +67,9 @@ fonts:
 
 ---
 
-
 <IntroVideo />
 
 ---
-
 
 # MCP At Hugging Face
 
@@ -100,24 +97,40 @@ fonts:
 
 ---
 
-# MCP Protocol - Transports
+# MCP Protocol is bidirectional
 
 <div class="protocol-diagram">
   <ProtocolStack />
 </div>
 
-MCP is bidirectional.
+Click the diagram to play a message round trip.
+
+
 
 ---
 
-# Remote MCP through a load balancer
+# Transport Evolution
 
-<div class="remote-mcp-diagram">
-  <RemoteMcpLoadBalancer />
+<div class="spec-timeline-diagram">
+  <McpSpecTransportTimeline variant="before" />
 </div>
 
 ---
 
+
+
+<div class="weekly-activity-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Using mcp-remote to track adoption</h1>
+      <p>Initialization requests as bars · remote traffic share as line</p>
+    </div>
+  </header>
+  <McpRemoteNoFallbackChart />
+</div>
+
+
+---
 
 # Transport Evolution
 
@@ -127,34 +140,24 @@ MCP is bidirectional.
 
 ---
 
-
-<div class="traffic-chart-slide">
-  <McpRemoteTrafficChart client="Claude Code" title="Claude Code" />
-</div>
-
----
-
-
-<div class="traffic-chart-slide">
-  <McpRemoteTrafficChart client="Codex" title="Codex" />
-</div>
-
----
-
-
-<div class="traffic-chart-slide">
-  <McpRemoteTrafficChart client="Codex" range-mode="claude" title="Codex" subtitle="same date range as Claude Code" />
-</div>
-
----
-
-
-<div class="weekly-activity-slide">
+<div class="weekly-activity-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Weekly MCP activity</h1>
+      <p>Initialization requests as bars · tool calls as line</p>
+    </div>
+  </header>
   <McpWeeklyActivityChart />
 </div>
 
+
 ---
 
+<div class="protocol-efficiency-slide">
+  <McpProtocolEfficiency />
+</div>
+
+---
 
 <div class="conversion-chart-slide">
   <SessionConversionChart />
@@ -180,11 +183,23 @@ MCP is bidirectional.
 
 ---
 
+# MCP Clients Dataset
+
+## Open Source
+
+- Clients, Versions and Capabilities
+- Track availability of Features and Extensions
+- 
+
+---
+
 # Some Issues
 
 MCP is noisy.
 MCP is complicated.
 
+---
+layout: section
 ---
 
 # 2026-07-28 Specification: `The Stateless Core`
@@ -193,8 +208,18 @@ MCP is complicated.
 
 # Simplifications
 
-- No longer allow Server to Client initiated requests (MCP WebCam)
-- Remove Sampling, Roots (and Logging)
+---
+
+
+# Diagram Here showing Stateful Protocol and Initialization Sequence
+
+fff
+
+---
+
+
+- No longer allow Server to Client initiated requests (MCP WebCam) - SEP2260
+- Deprecate Sampling, Roots (and Logging) - 
 
 ---
 
@@ -202,15 +227,64 @@ MCP is complicated.
 
 ## Remove Initialize and Mcp-Session-Id
 
-## Add /discover endpoint
+## Add `/discover` endpoint
+
+---
+
+# Remote MCP through a load balancer
+
+<div class="remote-mcp-diagram">
+  <RemoteMcpLoadBalancer />
+</div>
+
+
+---
+
+# Multi Round-Trip Request
+
+## Problem / Solution
+
+Moving to a stateless protocol means that state-based turn taking doesn't apply
+
+Return `inputRequired` rather than SSE Stream.
+
 
 ---
 
 # Cache Control
 
-## Tool List Changed 
+## Tool List Changed
 
 ---
 
 # HTTP Headers
 
+---
+
+# Migration Path
+
+
+
+---
+
+
+# Related SEPs
+
+
+---
+
+<div class="traffic-chart-slide">
+  <McpRemoteTrafficChart client="Claude Code" title="Claude Code" />
+</div>
+
+---
+
+<div class="traffic-chart-slide">
+  <McpRemoteTrafficChart client="Codex" title="Codex" />
+</div>
+
+---
+
+<div class="traffic-chart-slide">
+  <McpRemoteTrafficChart client="Codex" range-mode="claude" title="Codex" subtitle="same date range as Claude Code" />
+</div>
