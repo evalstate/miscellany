@@ -36,7 +36,8 @@ fonts:
 <ul class="about-points">
 <li>Open Source @ Hugging Face</li>
 <li>MCP Maintainer and Moderator</li>
-<li>Open Responses Maintainer</li>
+<li>huggingface/mcp</li>
+<li>huggingface/skills</li>
 <li>Maintainer of <code>fast-agent</code></li>
 </ul>
 
@@ -74,13 +75,13 @@ fonts:
 <div class="agenda-slide">
 <p class="kicker">today</p>
 
-# What we are talking about
+# Topics
 
 <div class="agenda-list">
-<div>MCP at Hugging Face and current transports</div>
-<div>Client behaviour and analytics</div>
+<div>MCP at Hugging Face</div>
+<div>Client Behaviour and Analytics</div>
 <div>Issues related to MCP implementation</div>
-<div>New MCP specification changes</div>
+<div>New! MCP specification changes</div>
 </div>
 </div>
 
@@ -116,7 +117,7 @@ fonts:
 
 ---
 
-# Current MCP is bi-directional 
+# Today,  MCP design is bi-directional 
 
 <div class="protocol-diagram">
   <ProtocolStack />
@@ -149,7 +150,7 @@ fonts:
   <header class="chart-slide__header">
     <div>
       <h1>Claude Code</h1>
-      <h2>Weekly <code>mcp-remote</code> share · usage index remains opaque</h2>
+      <h2>Weekly <code>mcp-remote</code> share · usage index </h2>
     </div>
   </header>
   <McpRemoteTrafficChart client="Claude Code" :showHeader="false" />
@@ -161,7 +162,6 @@ fonts:
   <header class="chart-slide__header">
     <div>
       <h1>Weekly MCP activity</h1>
-      <p>Initialization requests as bars · tool-call trend as line</p>
     </div>
   </header>
   <McpWeeklyActivityChart />
@@ -173,8 +173,6 @@ fonts:
 
 <div class="understanding-activity-slide">
 <section class="understanding-activity-copy">
-
-## Interactive vs Agentic Workloads
 
 <div class="compact-point-list">
 <div>
@@ -279,22 +277,34 @@ fonts:
 # Main Issues with Statefulness
 
 <div class="statefulness-slide">
-<div class="statefulness-card statefulness-card--accent">
-<strong>Sticky sessions</strong>
-<span>Load balancers inherit scalability, fault-tolerance, and in-place change problems.</span>
-</div>
-<div class="statefulness-card">
-<strong>Speculative open channels</strong>
-<span>Holding SSE connections “just in case” is expensive and fragile on common hosts.</span>
-</div>
-<div class="statefulness-card">
-<strong>Server → client requirements</strong>
-<span>Elicitation and sampling currently need a callback channel to remain open.</span>
-</div>
-<div class="statefulness-card">
-<strong>Ambiguous session state</strong>
-<span>Tool lists, stdio expectations, and analytics all become session-coupled.</span>
-</div>
+<section class="statefulness-list statefulness-list--accent">
+<h2>Operational coupling</h2>
+<ul>
+<li><strong>“Sticky” sessions in the load balancer</strong>
+  <ul>
+  <li>scalability</li>
+  <li>fault tolerance</li>
+  <li>in-place changes</li>
+  </ul>
+</li>
+<li><strong>Speculative open connections are expensive</strong></li>
+<li><strong>SSE cut-off times</strong> on popular hosting platforms</li>
+</ul>
+</section>
+
+<section class="statefulness-list">
+<h2>Protocol ambiguity</h2>
+<ul>
+<li><strong>Elicitation and Sampling</strong> require a Server → Client channel to stay open</li>
+<li><strong>Session state is not well defined</strong>
+  <ul>
+  <li>STDIO lifecycle</li>
+  <li>tool list and capability changes</li>
+  </ul>
+</li>
+<li><strong>Basic analytics</strong> requires handling sessions</li>
+</ul>
+</section>
 </div>
 
 ---
@@ -532,7 +542,7 @@ layout: section
 
 ---
 
-# SEP-2243: The problem
+# SEP-2243: HTTP Standardization
 
 <div class="http-standardization-problem">
   <HttpRouteMap mode="problem" />
@@ -541,7 +551,7 @@ layout: section
 
 ---
 
-# SEP-2243: Tool metadata
+# SEP-2243: Tool Data in HTTP Headers 
 
 <div class="http-standardization-schema">
   <HttpHeaderExample variant="tool" />
@@ -549,7 +559,7 @@ layout: section
 
 ---
 
-# SEP-2243: HTTP headers make it routable
+# SEP-2243: Routable MCP Traffic 
 
 <div class="http-standardization-problem">
   <HttpRouteMap mode="solution" />
@@ -564,16 +574,15 @@ layout: section
 # Migration Path
 
 <div class="migration-path-list">
-<div><span>Now</span><strong>Draft specification release</strong></div>
-<div><span>Soon</span><strong>Beta SDKs</strong></div>
-<div><span>TBD</span><strong>Planned release date</strong></div>
+<div><span>Now</span><strong>Release Candidate Specification</strong></div>
+<div><span>30 Jun 2026</span><strong>Beta SDKs</strong></div>
+<div><span>28 Jul 2026</span><strong>Planned release date</strong></div>
 </div>
 </div>
 
 ---
 
 <div class="related-seps-slide">
-<p class="kicker">references</p>
 
 # Related SEPs
 

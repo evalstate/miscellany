@@ -32,13 +32,13 @@ type WeeklyRow = {
 };
 
 const rows = weeklyRows as WeeklyRow[];
-const width = 1000;
-const height = 520;
+const width = 1200;
+const height = 560;
 const plot = {
-  left: 74,
-  right: 40,
-  top: 54,
-  bottom: 82,
+  left: 82,
+  right: 42,
+  top: 42,
+  bottom: 62,
 };
 const plotWidth = width - plot.left - plot.right;
 const plotHeight = height - plot.top - plot.bottom;
@@ -340,7 +340,7 @@ const latestLabelY = computed(() => {
           v-for="tick in monthTicks"
           :key="`month-${tick.label}-${tick.x}`"
           :x="tick.x"
-          :y="plot.top + plotHeight + 42"
+          :y="plot.top + plotHeight + 38"
           text-anchor="middle"
         >
           {{ tick.label }}
@@ -364,7 +364,7 @@ const latestLabelY = computed(() => {
         </text>
       </g>
 
-      <text class="traffic-chart__axis-title" :x="plot.left" :y="plot.top - 24">
+      <text class="traffic-chart__axis-title" :x="plot.left" :y="plot.top - 20">
         share of traffic using mcp-remote
       </text>
       <text
@@ -390,7 +390,7 @@ const latestLabelY = computed(() => {
   grid-template-rows: auto minmax(0, 1fr);
   gap: 0.55rem;
   overflow: hidden;
-  padding: 1rem 1.1rem 0.9rem;
+  padding: 0.72rem 0.86rem 0.62rem;
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 10px);
   background:

@@ -241,9 +241,9 @@
   align-content: center;
 }
 
-.statefulness-card {
+.statefulness-list {
   min-height: 0;
-  padding: 1.15rem 1.2rem;
+  padding: 1.08rem 1.16rem 1.15rem;
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 7px);
   background:
@@ -251,30 +251,54 @@
     rgba(20, 22, 27, 0.64);
 }
 
-.statefulness-card--accent {
+.statefulness-list--accent {
   border-color: rgba(255, 198, 73, 0.45);
   background:
     radial-gradient(circle at 88% 18%, rgba(255, 198, 73, 0.16), transparent 34%),
     rgba(20, 22, 27, 0.68);
 }
 
-.statefulness-card strong,
-.statefulness-card span {
-  display: block;
-}
-
-.statefulness-card strong {
-  color: var(--deck-text);
-  font-size: clamp(1.48rem, 3.1vw, 2.08rem);
+.statefulness-list h2 {
+  margin: 0 0 0.72rem !important;
+  color: var(--deck-accent-hi);
+  font-size: clamp(1.42rem, 3vw, 1.95rem);
   line-height: 1;
   letter-spacing: -0.06em;
 }
 
-.statefulness-card span {
-  margin-top: 0.55rem;
+.statefulness-list ul {
+  margin: 0;
+  padding-left: 1.18rem;
+}
+
+.statefulness-list > ul {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.statefulness-list li {
   color: var(--deck-muted);
-  font-size: clamp(1rem, 1.74vw, 1.22rem);
-  line-height: 1.26;
+  font-size: clamp(1.05rem, 1.95vw, 1.32rem);
+  line-height: 1.24;
+}
+
+.statefulness-list li::marker {
+  color: var(--deck-accent);
+}
+
+.statefulness-list li li {
+  margin-top: 0.16rem;
+  color: var(--deck-dim);
+  font-size: 0.86em;
+  line-height: 1.18;
+}
+
+.statefulness-list li li::marker {
+  color: var(--deck-info);
+}
+
+.statefulness-list strong {
+  color: var(--deck-text);
 }
 
 .migration-path-slide {
@@ -364,8 +388,8 @@
 
 .remote-mcp-diagram {
   width: min(920px, 100%);
-  height: 430px;
-  margin: 0.65rem auto 0;
+  height: 400px;
+  margin: 0.35rem auto 0;
 }
 
 .spec-timeline-diagram {
@@ -431,7 +455,7 @@
 .conversion-chart-slide,
 .protocol-efficiency-slide {
   position: absolute !important;
-  inset: 28px 42px calc(28px + var(--deck-footer-safe));
+  inset: 18px 26px calc(14px + var(--deck-footer-safe));
   width: auto;
   height: auto;
   margin: 0;
@@ -445,10 +469,10 @@
 }
 
 .chart-slide {
-  --chart-slide-header-height: 5.35rem;
+  --chart-slide-header-height: 4.15rem;
   display: grid;
   grid-template-rows: auto minmax(0, 1fr);
-  gap: 0.7rem;
+  gap: 0.42rem;
 }
 
 .chart-slide__header {
@@ -463,7 +487,7 @@
 .chart-slide__header h1 {
   margin: 0;
   color: var(--deck-text);
-  font-size: clamp(2rem, 4.2vw, 2.25rem);
+  font-size: clamp(1.86rem, 3.85vw, 2.14rem);
   line-height: 1;
   letter-spacing: -0.055em;
 }
@@ -507,7 +531,7 @@
 :where(.activity-chart, .conversion-chart) {
   box-sizing: border-box;
   height: 100%;
-  padding: var(--deck-chart-padding, 1.75rem 2rem 1.35rem);
+  padding: var(--deck-chart-padding, 0.9rem 1rem 0.75rem);
   background:
     radial-gradient(
       circle at var(--deck-chart-glow-x, 78%) var(--deck-chart-glow-y, 12%),
@@ -559,7 +583,7 @@
 
 .activity-chart__stat {
   position: absolute;
-  top: calc(-1 * (var(--chart-slide-header-height) + 0.7rem));
+  top: calc(-1 * (var(--chart-slide-header-height) + 0.42rem));
   right: 1.1rem;
   z-index: 2;
   min-width: 170px;
@@ -567,7 +591,7 @@
 
 .conversion-chart__stats {
   position: absolute;
-  top: calc(-1 * (var(--chart-slide-header-height) + 0.7rem));
+  top: calc(-1 * (var(--chart-slide-header-height) + 0.42rem));
   right: 1.1rem;
   z-index: 2;
   display: flex;
@@ -622,6 +646,7 @@
   .activity-chart__axis text,
   .activity-chart__x-axis text,
   .activity-chart__legend text,
+  .activity-chart__line-label,
   .conversion-chart__axis text,
   .conversion-chart__x-axis text,
   .conversion-chart__legend text,
@@ -671,6 +696,11 @@
   stroke: var(--deck-info);
   stroke-width: 4;
   stroke-linecap: round;
+}
+
+.activity-chart__line-label {
+  fill: var(--deck-info);
+  font-weight: 850;
 }
 
 .hf-mcp-slide {

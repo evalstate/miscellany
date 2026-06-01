@@ -82,7 +82,7 @@ const nodes: NodeSpec[] = [
     title: "Server 03",
     detail: "",
     x: 748,
-    y: 308,
+    y: 296,
     w: 206,
     h: 92,
   },
@@ -613,11 +613,11 @@ onBeforeUnmount(clearTimers);
         <text class="remote-mcp-story__state-extra" x="18" y="64">MCP-Session-Id</text>
       </g>
 
-      <g class="remote-mcp-story__state remote-mcp-story__state--server" transform="translate(678 400)">
-        <rect width="276" height="68" rx="16" />
-        <text class="remote-mcp-story__state-label" x="18" y="24">server state</text>
-        <text class="remote-mcp-story__state-value" x="18" y="49">client capabilities</text>
-        <text class="remote-mcp-story__state-extra" x="18" y="64">MCP-Session-Id</text>
+      <g class="remote-mcp-story__state remote-mcp-story__state--server" transform="translate(678 392)">
+        <rect width="276" height="62" rx="16" />
+        <text class="remote-mcp-story__state-label" x="18" y="23">server state</text>
+        <text class="remote-mcp-story__state-value" x="18" y="46">client capabilities</text>
+        <text class="remote-mcp-story__state-extra" x="18" y="59">MCP-Session-Id</text>
       </g>
     </svg>
   </section>

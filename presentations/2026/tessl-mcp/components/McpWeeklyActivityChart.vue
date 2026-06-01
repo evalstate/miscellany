@@ -16,14 +16,14 @@ const rows = (activityData.rows as Row[]).toSorted((a, b) =>
   a.week_start.localeCompare(b.week_start),
 );
 
-const width = 1000;
-const height = 520;
-const plot = { left: 94, right: 66, top: 66, bottom: 94 };
+const width = 1200;
+const height = 560;
+const plot = { left: 92, right: 74, top: 42, bottom: 62 };
 const plotWidth = width - plot.left - plot.right;
 const plotHeight = height - plot.top - plot.bottom;
 const barWidth = Math.max(
-  3,
-  Math.min(9, (plotWidth / Math.max(1, rows.length)) * 0.34),
+  4,
+  Math.min(11, (plotWidth / Math.max(1, rows.length)) * 0.34),
 );
 
 function toDate(value: string) {
@@ -187,7 +187,7 @@ const latest = rows.at(-1)!;
       />
 
       <g class="activity-chart__axis activity-chart__axis--left">
-        <text :x="plot.left" :y="plot.top - 20">Initializations</text>
+        <text :x="plot.left" :y="plot.top - 18">Initializations</text>
         <text
           v-for="tick in initTicks"
           :key="`init-label-${tick}`"
@@ -199,12 +199,21 @@ const latest = rows.at(-1)!;
         </text>
       </g>
 
+      <text
+        class="activity-chart__line-label"
+        :x="plot.left + plotWidth"
+        :y="plot.top - 18"
+        text-anchor="end"
+      >
+        Tool Calls
+      </text>
+
       <g class="activity-chart__x-axis">
         <text
           v-for="tick in monthTicks"
           :key="`month-label-${tick.label}-${tick.x}`"
           :x="tick.x"
-          :y="plot.top + plotHeight + 42"
+          :y="plot.top + plotHeight + 38"
           text-anchor="middle"
         >
           {{ tick.label }}
