@@ -89,19 +89,22 @@ fonts:
 
 <div class="hf-mcp-slide">
 <section class="hf-mcp-copy">
+<p class="kicker">MCP server</p>
+<h2>One protocol surface for the Hugging Face ecosystem</h2>
 
-<ul>
-<li>Gateway to multi-modal inference</li>
-<li>Conduct Research, Inspect Datasets, Find Models</li>
-<li>Run and manage sandboxes</li>
-<li>Allow Authenticated and Unauthenticated access</li>
-</ul>
+<div class="hf-mcp-capabilities">
+<div><strong>Inference gateway</strong><span>Route agents to multimodal models and hosted endpoints.</span></div>
+<div><strong>Research workspace</strong><span>Inspect datasets, find models, and run experiments.</span></div>
+<div><strong>Sandboxes</strong><span>Create and manage isolated execution environments.</span></div>
+<div><strong>Access modes</strong><span>Support authenticated and unauthenticated workflows.</span></div>
+</div>
 
-<code>Qwen 3.5-35B-A3B</code> <br/>
-<code>Flux.1-Krea-Dev </code> <br/>
-<code>Qwen-Edit-2509-Multiple-angles-LoRA</code> <br/>
-<code>Wan2.2 First/Last Frame</code>
-
+<div class="hf-mcp-models" aria-label="Example models">
+<span>Qwen 3.5-35B-A3B</span>
+<span>Flux.1-Krea-Dev</span>
+<span>Qwen-Edit LoRA</span>
+<span>Wan2.2 First/Last Frame</span>
+</div>
 </section>
 
 <aside class="hf-mcp-video-frame deck-panel">

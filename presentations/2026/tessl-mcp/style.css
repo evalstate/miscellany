@@ -413,51 +413,88 @@
 .hf-mcp-slide {
   min-height: calc(100% - 4.4rem);
   display: grid;
-  grid-template-columns: minmax(360px, 0.95fr) minmax(0, 1.05fr);
-  gap: 1.3rem;
+  grid-template-columns: minmax(390px, 0.92fr) minmax(0, 1.08fr);
+  gap: 1.55rem;
   align-items: center;
 }
 
+.hf-mcp-copy {
+  min-width: 0;
+}
+
 .hf-mcp-copy h2 {
-  max-width: 440px;
-  margin: 0 0 1.25rem;
+  max-width: 540px;
+  margin: 0 0 1rem;
   color: var(--deck-text);
-  font-size: 2.12rem;
-  line-height: 1.08;
+  font-size: clamp(1.82rem, 3.2vw, 2.18rem);
+  line-height: 1.04;
   font-weight: 650;
   letter-spacing: -0.055em;
 }
 
-.hf-mcp-copy ul {
-  margin: 0;
-  padding-left: 1.1rem;
+.hf-mcp-capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.72rem;
 }
 
-.hf-mcp-copy li {
-  color: var(--deck-muted);
-  font-size: 1.02rem;
-  line-height: 1.36;
+.hf-mcp-capabilities > div {
+  min-width: 0;
+  padding: 0.72rem 0.82rem;
+  border: 1px solid var(--deck-border);
+  border-radius: var(--deck-radius);
+  background:
+    linear-gradient(135deg, rgba(245, 164, 0, 0.055), transparent 58%),
+    rgba(20, 22, 27, 0.58);
 }
 
-.hf-mcp-copy li::marker {
-  color: var(--deck-accent);
+.hf-mcp-capabilities strong,
+.hf-mcp-capabilities span {
+  display: block;
 }
 
-.hf-mcp-copy p {
-  margin: 1.18rem 0 0;
-  max-width: 430px;
-  color: var(--deck-accent-hi);
+.hf-mcp-capabilities strong {
+  color: var(--deck-text);
   font-size: 0.92rem;
-  font-weight: 700;
-  line-height: 1.2;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+}
+
+.hf-mcp-capabilities span {
+  margin-top: 0.22rem;
+  color: var(--deck-muted);
+  font-size: 0.62rem;
+  line-height: 1.32;
+}
+
+.hf-mcp-models {
+  margin-top: 0.88rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.44rem;
+}
+
+.hf-mcp-models span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.58rem;
+  padding: 0.22rem 0.52rem;
+  color: var(--deck-accent-hi);
+  border: 1px solid var(--deck-accent-line);
+  border-radius: 999px;
+  background: rgba(245, 164, 0, 0.07);
+  font-size: 0.58rem;
+  font-weight: 800;
   letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .hf-mcp-video-frame {
   position: relative;
   justify-self: end;
-  width: min(690px, 100%);
-  height: 430px;
+  width: min(720px, 100%);
+  height: min(430px, calc(100vh - 250px));
+  min-height: 350px;
   padding: 0.55rem;
   overflow: hidden;
   background:
