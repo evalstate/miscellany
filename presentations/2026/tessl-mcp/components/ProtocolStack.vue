@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, onBeforeUnmount, ref } from "vue";
+import { computed, onBeforeUnmount, ref } from "vue";
 
 const props = withDefaults(
   defineProps<{
@@ -65,86 +65,177 @@ const clientCapabilities = capabilities.filter(
   (capability) => capability.zone === "client",
 );
 
-const paths = {
-  requestToServer: "M 500 260 C 470 226, 470 184, 500 148",
-  responseToClient: "M 552 148 C 582 184, 582 226, 552 260",
-  serverToClient: "M 624 148 C 672 190, 650 230, 552 260",
-} as const;
+type Direction = "client" | "server";
+type Tone = "request" | "response";
+type Point = { x: number; y: number };
+type PathSpec = { a: Point; c1: Point; c2: Point; b: Point };
+type Step = {
+  label: string;
+  path: keyof typeof paths;
+  flash?: CapabilityId;
+  tone: Tone;
+};
 
-const steps = [
-  { label: "tools/call", path: paths.requestToServer, flash: undefined },
-  { label: "Tools", path: paths.requestToServer, flash: "tools" },
-  { label: "result", path: paths.responseToClient, flash: undefined },
-  { label: "prompts/get", path: paths.requestToServer, flash: undefined },
-  { label: "Prompts", path: paths.requestToServer, flash: "prompts" },
-  { label: "prompt", path: paths.responseToClient, flash: undefined },
+const paths = {
+  clientToServer: {
+    a: { x: 500, y: 252 },
+    c1: { x: 452, y: 220 },
+    c2: { x: 452, y: 168 },
+    b: { x: 500, y: 126 },
+  },
+  serverToClient: {
+    a: { x: 552, y: 126 },
+    c1: { x: 606, y: 168 },
+    c2: { x: 606, y: 220 },
+    b: { x: 552, y: 252 },
+  },
+} as const satisfies Record<string, PathSpec>;
+
+const clientSteps: Step[] = [
+  {
+    label: "tools/call",
+    path: "clientToServer",
+    tone: "request",
+  },
+  {
+    label: "Tools",
+    path: "clientToServer",
+    flash: "tools",
+    tone: "request",
+  },
+  {
+    label: "result",
+    path: "serverToClient",
+    tone: "response",
+  },
+];
+
+const serverSteps: Step[] = [
   {
     label: "sampling/createMessage",
-    path: paths.serverToClient,
-    flash: undefined,
+    path: "serverToClient",
+    tone: "request",
   },
-  { label: "Sampling", path: paths.serverToClient, flash: "sampling" },
-] as const;
+  {
+    label: "Sampling",
+    path: "serverToClient",
+    flash: "sampling",
+    tone: "request",
+  },
+  {
+    label: "result",
+    path: "clientToServer",
+    tone: "response",
+  },
+];
 
 const activeStep = ref(-1);
 const animationKey = ref(0);
-const isAnimating = ref(false);
+const packetProgress = ref(0);
+const activeDirection = ref<Direction | undefined>();
 const timers: number[] = [];
+let animationFrame = 0;
 
-const active = computed(() => steps[activeStep.value]);
-const activeLabel = computed(() => active.value?.label ?? "click to send");
-const activePath = computed(() => active.value?.path ?? paths.requestToServer);
+const activeSteps = computed(() =>
+  activeDirection.value === "server" ? serverSteps : clientSteps,
+);
+const active = computed(() => activeSteps.value[activeStep.value]);
 const activeFlash = computed<CapabilityId | undefined>(
   () => active.value?.flash,
+);
+const activePath = computed(() =>
+  active.value ? paths[active.value.path] : paths.clientToServer,
+);
+const activePathData = computed(() => pathData(activePath.value));
+const packetPoint = computed(() =>
+  pointOnPath(activePath.value, packetProgress.value),
 );
 
 function clearTimers() {
   while (timers.length) window.clearTimeout(timers.pop());
+  window.cancelAnimationFrame(animationFrame);
+  animationFrame = 0;
+  packetProgress.value = 0;
 }
 
-async function pulseStep(index: number) {
+function animatePacket(start = performance.now()) {
+  const elapsed = performance.now() - start;
+  packetProgress.value = Math.min(elapsed / 660, 1);
+
+  if (packetProgress.value < 1) {
+    animationFrame = window.requestAnimationFrame(() => animatePacket(start));
+  }
+}
+
+function pulseStep(index: number) {
   activeStep.value = index;
-  isAnimating.value = false;
+  packetProgress.value = 0;
   animationKey.value += 1;
-  await nextTick();
-  isAnimating.value = activeFlash.value === undefined;
+  window.cancelAnimationFrame(animationFrame);
+  animationFrame = window.requestAnimationFrame(() => animatePacket());
 }
 
-function play() {
+function play(direction: Direction) {
   clearTimers();
+  activeDirection.value = direction;
   activeStep.value = -1;
-  isAnimating.value = false;
 
-  steps.forEach((_, index) => {
-    timers.push(window.setTimeout(() => void pulseStep(index), index * 760));
+  activeSteps.value.forEach((_, index) => {
+    timers.push(window.setTimeout(() => pulseStep(index), index * 780));
   });
 
   timers.push(
     window.setTimeout(
       () => {
         activeStep.value = -1;
-        isAnimating.value = false;
+        activeDirection.value = undefined;
+        packetProgress.value = 0;
       },
-      steps.length * 760 + 260,
+      activeSteps.value.length * 780 + 260,
     ),
   );
+}
+
+function pathData(path: PathSpec) {
+  return `M ${path.a.x} ${path.a.y} C ${path.c1.x} ${path.c1.y}, ${path.c2.x} ${path.c2.y}, ${path.b.x} ${path.b.y}`;
+}
+
+function pointOnPath(path: PathSpec, t: number) {
+  const u = 1 - t;
+
+  return {
+    x:
+      u ** 3 * path.a.x +
+      3 * u ** 2 * t * path.c1.x +
+      3 * u * t ** 2 * path.c2.x +
+      t ** 3 * path.b.x,
+    y:
+      u ** 3 * path.a.y +
+      3 * u ** 2 * t * path.c1.y +
+      3 * u * t ** 2 * path.c2.y +
+      t ** 3 * path.b.y,
+  };
 }
 
 onBeforeUnmount(clearTimers);
 </script>
 
 <template>
-  <button
+  <section
     class="protocol-stack"
-    type="button"
-    :class="{ 'protocol-stack--running': isAnimating }"
-    @click="play"
+    :class="{
+      'protocol-stack--running': active,
+      'protocol-stack--client-active': activeDirection === 'client',
+      'protocol-stack--server-active': activeDirection === 'server',
+    }"
+    aria-label="MCP protocol bidirectional message flow"
   >
     <svg
       class="protocol-flow"
       viewBox="0 0 1000 360"
       preserveAspectRatio="none"
-      aria-hidden="true"
+      role="img"
+      aria-label="Messages can flow from MCP client to server and from server to client"
     >
       <defs>
         <linearGradient id="protocol-link-glow" x1="0" x2="1" y1="0" y2="1">
@@ -169,26 +260,31 @@ onBeforeUnmount(clearTimers);
 
       <path
         class="protocol-flow__link protocol-flow__link--base"
-        :d="paths.requestToServer"
+        :d="pathData(paths.clientToServer)"
       />
       <path
+        class="protocol-flow__link protocol-flow__link--base"
+        :d="pathData(paths.serverToClient)"
+      />
+      <path
+        v-if="active"
         :key="`travel-${animationKey}`"
         class="protocol-flow__link protocol-flow__link--travel"
-        :d="activePath"
+        :class="`protocol-flow__link--${active.tone}`"
+        pathLength="1"
+        :style="{ '--protocol-pulse-offset': 1 - packetProgress }"
+        :d="activePathData"
       />
       <circle
+        v-if="active"
         :key="`packet-${animationKey}`"
         class="protocol-flow__packet"
+        :class="`protocol-flow__packet--${active.tone}`"
         r="8"
+        :cx="packetPoint.x"
+        :cy="packetPoint.y"
         filter="url(#protocol-packet-glow)"
-      >
-        <animateMotion
-          dur="0.64s"
-          begin="0s"
-          fill="freeze"
-          :path="activePath"
-        />
-      </circle>
+      />
     </svg>
 
     <div class="protocol-grid protocol-grid--server">
@@ -204,18 +300,15 @@ onBeforeUnmount(clearTimers);
       />
     </div>
 
-    <div class="protocol-label protocol-label--server">
+    <button class="protocol-label protocol-label--server" type="button" @click="play('server')">
       <span>MCP Server</span>
-    </div>
+      <small>click to call client</small>
+    </button>
 
-    <div class="protocol-exchange">
-      <div class="protocol-exchange__line" />
-      <div class="protocol-exchange__label">{{ activeLabel }}</div>
-    </div>
-
-    <div class="protocol-label protocol-label--client">
+    <button class="protocol-label protocol-label--client" type="button" @click="play('client')">
       <span>MCP Client</span>
-    </div>
+      <small>click to call server</small>
+    </button>
 
     <div class="protocol-grid protocol-grid--client">
       <ProtocolCapabilityCard
@@ -229,7 +322,17 @@ onBeforeUnmount(clearTimers);
         :show-description="props.showDescriptions"
       />
     </div>
-  </button>
+    <div
+      v-if="active"
+      :key="`message-${animationKey}`"
+      class="protocol-message"
+      :class="`protocol-message--${active.tone}`"
+      aria-live="polite"
+    >
+      <span>in flight</span>
+      <strong>{{ active.label }}</strong>
+    </div>
+  </section>
 </template>
 
 <style scoped>
@@ -245,7 +348,6 @@ onBeforeUnmount(clearTimers);
   --protocol-description-size: clamp(0.48rem, 1.8cqh, 0.62rem);
   --protocol-label-height: clamp(44px, 14cqh, 64px);
   --protocol-zone-pad: 0;
-  --protocol-exchange-height: clamp(42px, 15cqh, 66px);
   width: 100%;
   height: 100%;
   min-height: 0;
@@ -255,7 +357,6 @@ onBeforeUnmount(clearTimers);
   grid-template-rows:
     minmax(0, 1fr)
     var(--protocol-label-height)
-    var(--protocol-exchange-height)
     var(--protocol-label-height)
     minmax(0, 1fr);
   gap: var(--stack-gap);
@@ -265,7 +366,6 @@ onBeforeUnmount(clearTimers);
   text-align: left;
   background: transparent;
   border: 0;
-  cursor: pointer;
 }
 
 .protocol-flow {
@@ -289,29 +389,30 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-flow__link--travel {
-  opacity: 0;
+  opacity: 1;
   stroke: url(#protocol-link-glow);
   stroke-width: 6;
-  stroke-dasharray: 0 900;
+  stroke-dasharray: 0.24 1;
+  stroke-dashoffset: var(--protocol-pulse-offset);
   filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.62));
 }
 
-.protocol-stack--running .protocol-flow__link--travel {
-  animation: protocol-link-travel 0.64s ease-out both;
+.protocol-flow__link--response {
+  stroke: var(--deck-info);
+  filter: drop-shadow(0 0 10px rgba(106, 163, 247, 0.62));
 }
 
 .protocol-flow__packet {
-  opacity: 0;
+  opacity: 1;
   fill: var(--deck-accent-hi);
 }
 
-.protocol-stack--running .protocol-flow__packet {
-  animation: protocol-packet-visible 0.64s ease-out both;
+.protocol-flow__packet--response {
+  fill: var(--deck-info);
 }
 
 .protocol-label,
-.protocol-grid,
-.protocol-exchange {
+.protocol-grid {
   position: relative;
 }
 
@@ -329,20 +430,21 @@ onBeforeUnmount(clearTimers);
   z-index: 2;
 }
 
-.protocol-exchange {
-  z-index: 1;
-}
-
 .protocol-label {
+  border: 1px solid var(--deck-border-2);
+  border-radius: calc(var(--deck-radius) + 5px);
   min-width: 0;
   padding: 0 1.1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  color: inherit;
+  font: inherit;
   background:
     linear-gradient(90deg, rgba(245, 164, 0, 0.08), transparent 46%),
     rgba(20, 22, 27, 0.46);
   box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+  cursor: pointer;
 }
 
 .protocol-label--client {
@@ -351,11 +453,36 @@ onBeforeUnmount(clearTimers);
     rgba(20, 22, 27, 0.42);
 }
 
+.protocol-label:hover,
+.protocol-stack--server-active .protocol-label--server,
+.protocol-stack--client-active .protocol-label--client {
+  border-color: rgba(255, 198, 73, 0.62);
+  background:
+    radial-gradient(circle at 10% 50%, rgba(255, 198, 73, 0.12), transparent 34%),
+    rgba(20, 22, 27, 0.62);
+}
+
+.protocol-label--client:hover,
+.protocol-stack--client-active .protocol-label--client {
+  border-color: rgba(106, 163, 247, 0.7);
+  background:
+    radial-gradient(circle at 10% 50%, rgba(106, 163, 247, 0.14), transparent 34%),
+    rgba(20, 22, 27, 0.62);
+}
+
 .protocol-label span {
   color: var(--deck-text);
   font-size: clamp(1rem, 4.2cqh, 1.42rem);
   font-weight: 850;
   letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.protocol-label small {
+  color: var(--deck-dim);
+  font-size: clamp(0.48rem, 1.7cqh, 0.62rem);
+  font-weight: 850;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
@@ -406,66 +533,52 @@ onBeforeUnmount(clearTimers);
   color: var(--deck-accent-hi);
 }
 
-.protocol-exchange {
-  min-height: 0;
+.protocol-message {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 5;
+  min-width: 16rem;
+  padding: 0.52rem 0.72rem;
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  gap: 0.8rem;
+  gap: 0.18rem;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 198, 73, 0.46);
+  border-radius: calc(var(--deck-radius) + 4px);
+  background: rgba(11, 12, 15, 0.86);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.32);
+  animation: protocol-message 760ms ease both;
 }
 
-.protocol-exchange__line {
-  grid-column: 1 / -1;
-  grid-row: 1;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--deck-border-2) 22%,
-    var(--deck-accent-line) 50%,
-    var(--deck-border-2) 78%,
-    transparent
-  );
+.protocol-message--response {
+  border-color: rgba(106, 163, 247, 0.54);
 }
 
-.protocol-exchange__label {
-  grid-column: 2;
-  grid-row: 1;
-  min-width: 9.5rem;
-  padding: clamp(0.24rem, 1cqh, 0.38rem) clamp(0.62rem, 2cqw, 0.9rem);
-  text-align: center;
-  border: 1px solid var(--deck-border-2);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--deck-bg) 86%, transparent);
-  color: var(--deck-muted);
-  font-size: clamp(0.52rem, 2cqh, 0.68rem);
+.protocol-message span {
+  color: var(--deck-dim);
+  font-size: clamp(0.46rem, 1.6cqh, 0.58rem);
   font-weight: 850;
-  letter-spacing: 0.08em;
-  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
-@keyframes protocol-link-travel {
-  0% {
-    opacity: 0;
-    stroke-dasharray: 0 900;
-  }
-  12% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    stroke-dasharray: 420 900;
-  }
+.protocol-message strong {
+  color: var(--deck-text);
+  font-size: clamp(0.76rem, 2.6cqh, 0.96rem);
+  font-weight: 850;
+  letter-spacing: -0.03em;
 }
 
-@keyframes protocol-packet-visible {
+@keyframes protocol-message {
   0%,
   100% {
     opacity: 0;
+    transform: translate(-50%, calc(-50% + 6px)) scale(0.98);
   }
-  14%,
+  16%,
   82% {
     opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
   }
 }
 </style>

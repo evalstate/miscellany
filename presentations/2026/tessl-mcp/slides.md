@@ -117,7 +117,7 @@ fonts:
   <ProtocolStack />
 </div>
 
-Click the diagram to play a message round trip.
+Click either endpoint to send a protocol message in that direction.
 
 
 ---
