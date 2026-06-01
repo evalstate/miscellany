@@ -159,7 +159,7 @@
 .protocol-diagram {
   width: min(600px, 100%);
   height: 360px;
-  margin: 0.9rem auto 0;
+  margin: 0.25rem auto 0;
 }
 
 .remote-mcp-diagram {

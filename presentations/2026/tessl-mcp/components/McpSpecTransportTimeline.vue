@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    variant?: "full" | "before";
+    variant?: "full" | "before" | "after";
   }>(),
   {
     variant: "full",
@@ -66,9 +66,16 @@ const isBefore = props.variant === "before";
 
         <div
           class="spec-timeline__bar spec-timeline__bar--stdio"
-          :class="{ 'spec-timeline__bar--stdio-before': isBefore }"
+          :class="{ 'spec-timeline__bar--stdio-before': isBefore, 'spec-timeline__bar--stdio-after': !isBefore }"
         >
           <strong>STDIO</strong>
+        </div>
+
+        <div
+          v-if="!isBefore"
+          class="spec-timeline__bar spec-timeline__bar--stateless-stdio"
+        >
+          <strong>Stateless STDIO</strong>
         </div>
       </div>
 
@@ -147,19 +154,7 @@ const isBefore = props.variant === "before";
   padding: clamp(1rem, 3.2cqh, 1.45rem);
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 8px);
-  background:
-    radial-gradient(
-      circle at 11% 24%,
-      rgba(245, 164, 0, 0.12),
-      transparent 26%
-    ),
-    radial-gradient(
-      circle at 82% 72%,
-      rgba(106, 163, 247, 0.11),
-      transparent 32%
-    ),
-    linear-gradient(135deg, rgba(245, 164, 0, 0.055), transparent 44%),
-    rgba(20, 22, 27, 0.84);
+  background: rgba(20, 22, 27, 0.86);
   box-shadow: var(--deck-shadow);
 }
 
@@ -169,8 +164,8 @@ const isBefore = props.variant === "before";
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(245, 164, 0, 0.034) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(245, 164, 0, 0.028) 1px, transparent 1px);
+    linear-gradient(rgba(185, 179, 165, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(185, 179, 165, 0.014) 1px, transparent 1px);
   background-size: 40px 40px;
   mask-image: radial-gradient(circle at 52% 48%, black, transparent 82%);
 }
@@ -208,9 +203,7 @@ const isBefore = props.variant === "before";
   padding: clamp(0.42rem, 1.55cqh, 0.62rem) clamp(0.38rem, 1cqw, 0.62rem);
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 5px);
-  background:
-    linear-gradient(180deg, rgba(245, 164, 0, 0.07), transparent 72%),
-    rgba(11, 12, 15, 0.52);
+  background: rgba(11, 12, 15, 0.54);
   box-shadow: 0 14px 30px rgba(0, 0, 0, 0.18);
   transition:
     border-color 180ms ease,
@@ -236,9 +229,7 @@ const isBefore = props.variant === "before";
 
 .spec-timeline__tick--future {
   border-color: rgba(106, 163, 247, 0.42);
-  background:
-    linear-gradient(180deg, rgba(106, 163, 247, 0.09), transparent 72%),
-    rgba(11, 12, 15, 0.52);
+  background: rgba(11, 12, 15, 0.54);
 }
 
 .spec-timeline__body {
@@ -437,9 +428,7 @@ const isBefore = props.variant === "before";
 .spec-timeline:has(.spec-timeline__tick--col-6:hover)
   .spec-timeline__tick--col-6 {
   border-color: rgba(255, 198, 73, 0.64);
-  background:
-    linear-gradient(180deg, rgba(245, 164, 0, 0.16), rgba(106, 163, 247, 0.06)),
-    rgba(11, 12, 15, 0.64);
+  background: rgba(20, 22, 27, 0.74);
   box-shadow:
     0 16px 32px rgba(0, 0, 0, 0.22),
     0 0 26px rgba(245, 164, 0, 0.18);
@@ -526,9 +515,7 @@ const isBefore = props.variant === "before";
     .spec-timeline__tick--col-5
   ) {
   border-color: rgba(255, 198, 73, 0.44);
-  background:
-    linear-gradient(180deg, rgba(245, 164, 0, 0.12), rgba(106, 163, 247, 0.04)),
-    rgba(11, 12, 15, 0.56);
+  background: rgba(20, 22, 27, 0.64);
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.2),
     0 0 22px rgba(245, 164, 0, 0.11);
@@ -568,14 +555,30 @@ const isBefore = props.variant === "before";
 .spec-timeline__bar--stdio {
   grid-column: 1 / 7;
   grid-row: 1;
-  background:
-    linear-gradient(90deg, rgba(245, 164, 0, 0.28), rgba(245, 164, 0, 0.13)),
-    rgba(20, 22, 27, 0.9);
+  background: rgba(245, 164, 0, 0.18);
   border-color: rgba(255, 198, 73, 0.42);
 }
 
 .spec-timeline__bar--stdio-before {
   grid-column-end: 5;
+}
+
+.spec-timeline__bar--stdio-after {
+  grid-column-end: 5;
+}
+
+.spec-timeline__bar--stateless-stdio {
+  grid-column: 5 / 7;
+  grid-row: 1;
+  background: rgba(245, 164, 0, 0.22);
+  border-color: rgba(255, 198, 73, 0.54);
+  box-shadow:
+    0 15px 28px rgba(0, 0, 0, 0.24),
+    0 0 32px rgba(245, 164, 0, 0.1);
+}
+
+.spec-timeline__bar--stateless-stdio strong {
+  font-size: clamp(0.72rem, 2.75cqh, 1.04rem);
 }
 
 .spec-timeline__bar--sse {
@@ -588,22 +591,14 @@ const isBefore = props.variant === "before";
 .spec-timeline__bar--streamable {
   grid-column: 2 / 5;
   grid-row: 2;
-  background:
-    linear-gradient(
-      90deg,
-      rgba(106, 163, 247, 0.28),
-      rgba(106, 163, 247, 0.13)
-    ),
-    rgba(20, 22, 27, 0.9);
+  background: rgba(106, 163, 247, 0.2);
   border-color: rgba(106, 163, 247, 0.46);
 }
 
 .spec-timeline__bar--stateless {
   grid-column: 5 / 7;
   grid-row: 3;
-  background:
-    linear-gradient(90deg, rgba(106, 163, 247, 0.34), rgba(245, 164, 0, 0.2)),
-    rgba(20, 22, 27, 0.94);
+  background: rgba(106, 163, 247, 0.24);
   border-color: rgba(255, 198, 73, 0.52);
   box-shadow:
     0 15px 28px rgba(0, 0, 0, 0.24),
@@ -625,9 +620,7 @@ const isBefore = props.variant === "before";
 .spec-timeline__bar--auth-rs {
   grid-column: 3 / 7;
   grid-row: 2;
-  background:
-    linear-gradient(90deg, rgba(106, 163, 247, 0.3), rgba(106, 163, 247, 0.13)),
-    rgba(20, 22, 27, 0.92);
+  background: rgba(106, 163, 247, 0.21);
   border-color: rgba(106, 163, 247, 0.46);
 }
 

@@ -65,146 +65,94 @@ const clientCapabilities = capabilities.filter(
   (capability) => capability.zone === "client",
 );
 
-type Direction = "client" | "server";
-type Tone = "request" | "response";
-type Point = { x: number; y: number };
-type PathSpec = { a: Point; c1: Point; c2: Point; b: Point };
+type Channel = "up" | "down";
 type Step = {
   label: string;
-  path: keyof typeof paths;
+  channel: Channel;
   flash?: CapabilityId;
-  tone: Tone;
 };
 
-const paths = {
-  clientToServer: {
-    a: { x: 500, y: 252 },
-    c1: { x: 452, y: 220 },
-    c2: { x: 452, y: 168 },
-    b: { x: 500, y: 126 },
+const scriptSteps: Step[] = [
+  {
+    label: "prompts/list",
+    channel: "up",
+    flash: "prompts",
   },
-  serverToClient: {
-    a: { x: 552, y: 126 },
-    c1: { x: 606, y: 168 },
-    c2: { x: 606, y: 220 },
-    b: { x: 552, y: 252 },
+  {
+    label: "prompts/GetListResult",
+    channel: "down",
   },
-} as const satisfies Record<string, PathSpec>;
-
-const clientSteps: Step[] = [
   {
     label: "tools/call",
-    path: "clientToServer",
+    channel: "up",
     flash: "tools",
-    tone: "request",
   },
   {
-    label: "result",
-    path: "serverToClient",
-    tone: "response",
+    label: "progress/notification",
+    channel: "down",
   },
-];
-
-const serverSteps: Step[] = [
+  {
+    label: "progress/notification",
+    channel: "down",
+  },
+  {
+    label: "progress/notification",
+    channel: "down",
+  },
+  {
+    label: "tools/CallToolResult",
+    channel: "down",
+  },
   {
     label: "sampling/createMessage",
-    path: "serverToClient",
+    channel: "down",
     flash: "sampling",
-    tone: "request",
   },
   {
     label: "result",
-    path: "clientToServer",
-    tone: "response",
+    channel: "up",
   },
 ];
 
 const activeStep = ref(-1);
 const animationKey = ref(0);
-const packetProgress = ref(0);
-const activeDirection = ref<Direction | undefined>();
+const isRunning = ref(false);
 const timers: number[] = [];
-let animationFrame = 0;
 
-const activeSteps = computed(() =>
-  activeDirection.value === "server" ? serverSteps : clientSteps,
-);
-const active = computed(() => activeSteps.value[activeStep.value]);
+const active = computed(() => scriptSteps[activeStep.value]);
 const activeFlash = computed<CapabilityId | undefined>(
   () => active.value?.flash,
 );
-const activePath = computed(() =>
-  active.value ? paths[active.value.path] : paths.clientToServer,
-);
-const activePathData = computed(() => pathData(activePath.value));
-const packetPoint = computed(() =>
-  pointOnPath(activePath.value, packetProgress.value),
-);
+const operationLabel = computed(() => active.value?.label ?? "tools/call");
+const activeChannel = computed<Channel | undefined>(() => active.value?.channel);
 
 function clearTimers() {
   while (timers.length) window.clearTimeout(timers.pop());
-  window.cancelAnimationFrame(animationFrame);
-  animationFrame = 0;
-  packetProgress.value = 0;
-}
-
-function animatePacket(start = performance.now()) {
-  const elapsed = performance.now() - start;
-  packetProgress.value = Math.min(elapsed / 660, 1);
-
-  if (packetProgress.value < 1) {
-    animationFrame = window.requestAnimationFrame(() => animatePacket(start));
-  }
 }
 
 function pulseStep(index: number) {
   activeStep.value = index;
-  packetProgress.value = 0;
   animationKey.value += 1;
-  window.cancelAnimationFrame(animationFrame);
-  animationFrame = window.requestAnimationFrame(() => animatePacket());
 }
 
-function play(direction: Direction) {
+function play() {
   clearTimers();
-  activeDirection.value = direction;
+  isRunning.value = true;
   activeStep.value = -1;
 
-  activeSteps.value.forEach((_, index) => {
-    timers.push(window.setTimeout(() => pulseStep(index), index * 780));
+  scriptSteps.forEach((_, index) => {
+    timers.push(window.setTimeout(() => pulseStep(index), index * 1120));
   });
 
   timers.push(
     window.setTimeout(
       () => {
         activeStep.value = -1;
-        activeDirection.value = undefined;
-        packetProgress.value = 0;
+        isRunning.value = false;
       },
-      activeSteps.value.length * 780 + 260,
+      scriptSteps.length * 1120 + 160,
     ),
   );
-}
-
-function pathData(path: PathSpec) {
-  return `M ${path.a.x} ${path.a.y} C ${path.c1.x} ${path.c1.y}, ${path.c2.x} ${path.c2.y}, ${path.b.x} ${path.b.y}`;
-}
-
-function pointOnPath(path: PathSpec, t: number) {
-  const u = 1 - t;
-
-  return {
-    x:
-      u ** 3 * path.a.x +
-      3 * u ** 2 * t * path.c1.x +
-      3 * u * t ** 2 * path.c2.x +
-      t ** 3 * path.b.x,
-    y:
-      u ** 3 * path.a.y +
-      3 * u ** 2 * t * path.c1.y +
-      3 * u * t ** 2 * path.c2.y +
-      t ** 3 * path.b.y,
-  };
 }
 
 onBeforeUnmount(clearTimers);
@@ -214,69 +162,13 @@ onBeforeUnmount(clearTimers);
   <section
     class="protocol-stack"
     :class="{
-      'protocol-stack--running': active,
-      'protocol-stack--client-active': activeDirection === 'client',
-      'protocol-stack--server-active': activeDirection === 'server',
+      'protocol-stack--running': isRunning,
+      'protocol-stack--channel-up': activeChannel === 'up',
+      'protocol-stack--channel-down': activeChannel === 'down',
     }"
     aria-label="MCP protocol bidirectional message flow"
+    @click="play"
   >
-    <svg
-      class="protocol-flow"
-      viewBox="0 0 1000 360"
-      preserveAspectRatio="none"
-      role="img"
-      aria-label="Messages can flow from MCP client to server and from server to client"
-    >
-      <defs>
-        <linearGradient id="protocol-link-glow" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stop-color="rgba(106, 163, 247, 0.74)" />
-          <stop offset="50%" stop-color="rgba(255, 198, 73, 0.92)" />
-          <stop offset="100%" stop-color="rgba(106, 163, 247, 0.74)" />
-        </linearGradient>
-        <filter
-          id="protocol-packet-glow"
-          x="-120%"
-          y="-120%"
-          width="340%"
-          height="340%"
-        >
-          <feGaussianBlur stdDeviation="5" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
-      </defs>
-
-      <path
-        class="protocol-flow__link protocol-flow__link--base"
-        :d="pathData(paths.clientToServer)"
-      />
-      <path
-        class="protocol-flow__link protocol-flow__link--base"
-        :d="pathData(paths.serverToClient)"
-      />
-      <path
-        v-if="active"
-        :key="`travel-${animationKey}`"
-        class="protocol-flow__link protocol-flow__link--travel"
-        :class="`protocol-flow__link--${active.tone}`"
-        pathLength="1"
-        :style="{ '--protocol-pulse-length': Math.max(packetProgress, 0.01) }"
-        :d="activePathData"
-      />
-      <circle
-        v-if="active"
-        :key="`packet-${animationKey}`"
-        class="protocol-flow__packet"
-        :class="`protocol-flow__packet--${active.tone}`"
-        r="8"
-        :cx="packetPoint.x"
-        :cy="packetPoint.y"
-        filter="url(#protocol-packet-glow)"
-      />
-    </svg>
-
     <div class="protocol-grid protocol-grid--server">
       <ProtocolCapabilityCard
         v-for="item in serverCapabilities"
@@ -290,13 +182,32 @@ onBeforeUnmount(clearTimers);
       />
     </div>
 
-    <button class="protocol-label protocol-label--server" type="button" @click="play('server')">
+    <button class="protocol-label protocol-label--server" type="button" @click.stop="play">
       <span>MCP Server</span>
     </button>
 
-    <div class="protocol-process-gap" aria-hidden="true" />
+    <div class="protocol-process-gap">
+      <div class="protocol-arrow-pair" aria-hidden="true">
+        <div
+          :key="`up-${animationKey}`"
+          class="protocol-block-arrow protocol-block-arrow--up protocol-block-arrow--connected"
+        >
+          <span class="protocol-message-dot" />
+        </div>
+        <div
+          :key="`down-${animationKey}`"
+          class="protocol-block-arrow protocol-block-arrow--down protocol-block-arrow--connected"
+        >
+          <span class="protocol-message-dot" />
+        </div>
+      </div>
+      <div class="protocol-operation" aria-live="polite">
+        <span>operation</span>
+        <strong>{{ operationLabel }}</strong>
+      </div>
+    </div>
 
-    <button class="protocol-label protocol-label--client" type="button" @click="play('client')">
+    <button class="protocol-label protocol-label--client" type="button" @click.stop="play">
       <span>MCP Client</span>
     </button>
 
@@ -312,16 +223,6 @@ onBeforeUnmount(clearTimers);
         :show-description="props.showDescriptions"
       />
     </div>
-    <div
-      v-if="active"
-      :key="`message-${animationKey}`"
-      class="protocol-message"
-      :class="`protocol-message--${active.tone}`"
-      aria-live="polite"
-    >
-      <span>in flight</span>
-      <strong>{{ active.label }}</strong>
-    </div>
   </section>
 </template>
 
@@ -329,12 +230,12 @@ onBeforeUnmount(clearTimers);
 .protocol-stack {
   container-type: size;
   --stack-gap: clamp(0.5rem, 2.1cqh, 0.85rem);
-  --protocol-card-pad: clamp(0.58rem, 2.2cqh, 0.88rem)
-    clamp(0.72rem, 2.6cqw, 1.1rem);
-  --protocol-card-content-gap: clamp(0.58rem, 2.4cqw, 0.98rem);
-  --protocol-card-height: clamp(58px, 22cqh, 86px);
-  --protocol-icon-size: clamp(2rem, 11cqh, 3rem);
-  --protocol-title-size: clamp(1.08rem, 4.4cqh, 1.62rem);
+  --protocol-card-pad: clamp(0.62rem, 2.2cqh, 0.9rem)
+    clamp(0.76rem, 2.65cqw, 1.12rem);
+  --protocol-card-content-gap: clamp(0.62rem, 2.45cqw, 1rem);
+  --protocol-card-height: clamp(60px, 22cqh, 84px);
+  --protocol-icon-size: clamp(2.08rem, 10.8cqh, 3rem);
+  --protocol-title-size: clamp(1.1rem, 4.3cqh, 1.56rem);
   --protocol-description-size: clamp(0.48rem, 1.8cqh, 0.62rem);
   --protocol-label-height: clamp(44px, 14cqh, 64px);
   --protocol-zone-pad: 0;
@@ -345,11 +246,11 @@ onBeforeUnmount(clearTimers);
   padding: 0;
   display: grid;
   grid-template-rows:
-    minmax(0, 1fr)
+    minmax(var(--protocol-card-height), 1fr)
     var(--protocol-label-height)
-    clamp(48px, 18cqh, 78px)
+    clamp(62px, 20cqh, 88px)
     var(--protocol-label-height)
-    minmax(0, 1fr);
+    minmax(var(--protocol-card-height), 1fr);
   gap: var(--stack-gap);
   position: relative;
   color: inherit;
@@ -357,50 +258,6 @@ onBeforeUnmount(clearTimers);
   text-align: left;
   background: transparent;
   border: 0;
-}
-
-.protocol-flow {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.protocol-flow__link {
-  fill: none;
-  stroke-linecap: round;
-  stroke-width: 3.5;
-}
-
-.protocol-flow__link--base {
-  stroke: rgba(185, 179, 165, 0.08);
-  stroke-dasharray: 3 18;
-}
-
-.protocol-flow__link--travel {
-  opacity: 1;
-  stroke: url(#protocol-link-glow);
-  stroke-width: 7;
-  stroke-dasharray: var(--protocol-pulse-length) 1;
-  stroke-dashoffset: 0;
-  filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.62));
-}
-
-.protocol-flow__link--response {
-  stroke: var(--deck-info);
-  filter: drop-shadow(0 0 10px rgba(106, 163, 247, 0.62));
-}
-
-.protocol-flow__packet {
-  opacity: 1;
-  fill: var(--deck-accent-hi);
-  filter: drop-shadow(0 0 14px rgba(255, 198, 73, 0.82));
-}
-
-.protocol-flow__packet--response {
-  fill: var(--deck-info);
 }
 
 .protocol-label,
@@ -480,12 +337,164 @@ onBeforeUnmount(clearTimers);
 
 .protocol-process-gap {
   position: relative;
-  z-index: 1;
+  z-index: 4;
   min-height: 0;
+  overflow: visible;
   border-inline: 1px solid rgba(185, 179, 165, 0.08);
   background:
-    linear-gradient(90deg, transparent, rgba(185, 179, 165, 0.1), transparent) 50% 50% /
-      46% 1px no-repeat;
+    linear-gradient(90deg, transparent, rgba(185, 179, 165, 0.1), transparent)
+      50% 50% / 46% 1px no-repeat;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 0.46fr);
+  align-items: center;
+  gap: clamp(1rem, 3.2cqw, 2rem);
+}
+
+.protocol-arrow-pair {
+  position: absolute;
+  top: calc(var(--stack-gap) * -1);
+  left: 47%;
+  z-index: 5;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(0.9rem, 2.2cqw, 1.28rem);
+  height: calc(100% + var(--stack-gap) * 2);
+  transform: translateX(-50%);
+  pointer-events: none;
+}
+
+.protocol-block-arrow {
+  --arrow-color: rgba(106, 163, 247, 0.82);
+  --arrow-glow: rgba(106, 163, 247, 0.34);
+  --arrow-outline: rgba(225, 234, 255, 0.76);
+  --arrow-head-extend: clamp(12px, 2.4cqh, 20px);
+  position: relative;
+  width: clamp(74px, 8.8cqw, 102px);
+  height: 100%;
+  background: var(--arrow-color);
+  clip-path: polygon(
+    33% 0,
+    67% 0,
+    67% 80%,
+    96% 80%,
+    50% 100%,
+    4% 80%,
+    33% 80%
+  );
+  filter:
+    drop-shadow(2px 0 0 var(--arrow-outline))
+    drop-shadow(-2px 0 0 var(--arrow-outline))
+    drop-shadow(0 2px 0 var(--arrow-outline))
+    drop-shadow(0 -2px 0 var(--arrow-outline))
+    drop-shadow(0 0 16px var(--arrow-glow));
+  opacity: 0.68;
+  overflow: hidden;
+  transition:
+    filter 160ms ease,
+    opacity 160ms ease;
+}
+
+.protocol-block-arrow--connected {
+  --arrow-outline: rgba(235, 241, 255, 0.9);
+  opacity: 0.72;
+}
+
+.protocol-block-arrow--disconnected {
+  --arrow-outline: rgba(185, 179, 165, 0.32);
+  opacity: 0.34;
+  filter:
+    drop-shadow(2px 0 0 var(--arrow-outline))
+    drop-shadow(-2px 0 0 var(--arrow-outline))
+    drop-shadow(0 2px 0 var(--arrow-outline))
+    drop-shadow(0 -2px 0 var(--arrow-outline));
+}
+
+.protocol-message-dot {
+  position: absolute;
+  left: 50%;
+  top: 8%;
+  width: clamp(12px, 2.1cqw, 18px);
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--arrow-color) 35%, transparent),
+    0 0 24px color-mix(in srgb, var(--arrow-color) 74%, white 12%);
+  opacity: 0;
+  transform: translate(-50%, 0);
+}
+
+.protocol-block-arrow--up {
+  --arrow-color: rgba(255, 198, 73, 0.82);
+  --arrow-glow: rgba(255, 198, 73, 0.34);
+  --arrow-outline: rgba(255, 232, 166, 0.92);
+  height: calc(100% + var(--arrow-head-extend));
+  margin-top: calc(var(--arrow-head-extend) * -1);
+  transform: rotate(180deg);
+}
+
+.protocol-block-arrow--down {
+  height: calc(100% + var(--arrow-head-extend));
+}
+
+.protocol-stack--channel-down .protocol-block-arrow--down {
+  animation: protocol-arrow-down 760ms ease both;
+}
+
+.protocol-stack--channel-down .protocol-block-arrow--down .protocol-message-dot {
+  animation: protocol-dot-down 720ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+}
+
+.protocol-stack--channel-up .protocol-block-arrow--up {
+  animation: protocol-arrow-up 760ms ease both;
+}
+
+.protocol-stack--channel-up .protocol-block-arrow--up .protocol-message-dot {
+  animation: protocol-dot-down 720ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+}
+
+.protocol-operation {
+  grid-column: 2;
+  justify-self: end;
+  z-index: 3;
+  width: min(100%, 310px);
+  padding: clamp(0.72rem, 2.4cqh, 0.98rem) clamp(0.9rem, 2.1cqw, 1.2rem);
+  display: grid;
+  gap: 0.28rem;
+  border: 1px solid rgba(255, 198, 73, 0.4);
+  border-radius: calc(var(--deck-radius) + 5px);
+  background: rgba(11, 12, 15, 0.84);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+}
+
+.protocol-operation span {
+  color: var(--deck-dim);
+  font-size: clamp(0.5rem, 1.8cqh, 0.66rem);
+  font-weight: 850;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.protocol-operation strong {
+  color: var(--deck-text);
+  font-size: clamp(1.02rem, 4.1cqh, 1.42rem);
+  font-weight: 950;
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  white-space: nowrap;
+}
+
+.protocol-stack--running .protocol-operation {
+  border-color: rgba(255, 198, 73, 0.58);
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, 0.3),
+    0 0 24px rgba(255, 198, 73, 0.12);
+}
+
+.protocol-stack--response .protocol-operation {
+  border-color: rgba(106, 163, 247, 0.58);
 }
 
 .protocol-grid {
@@ -516,71 +525,120 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-card-shell.is-flashing {
-  filter: drop-shadow(0 0 18px rgba(255, 198, 73, 0.46));
-  transform: translateY(-1px) scale(1.018);
+  animation: protocol-card-pulse 520ms ease 620ms both;
 }
 
 .protocol-card-shell.is-flashing :deep(.protocol-card) {
-  border-color: rgba(255, 198, 73, 0.78);
-  background:
-    radial-gradient(
-      circle at 50% 45%,
-      rgba(255, 198, 73, 0.2),
-      transparent 58%
-    ),
-    rgba(20, 22, 27, 0.94);
+  animation: protocol-card-surface-pulse 520ms ease 620ms both;
 }
 
 .protocol-card-shell.is-flashing :deep(.protocol-card__icon) {
-  color: var(--deck-accent-hi);
+  animation: protocol-card-icon-pulse 520ms ease 620ms both;
 }
 
-.protocol-message {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  z-index: 5;
-  min-width: 16rem;
-  padding: 0.52rem 0.72rem;
-  display: grid;
-  gap: 0.18rem;
-  transform: translate(-50%, -50%);
-  border: 1px solid rgba(255, 198, 73, 0.46);
-  border-radius: calc(var(--deck-radius) + 4px);
-  background: rgba(11, 12, 15, 0.86);
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.32);
-  animation: protocol-message 760ms ease both;
-}
-
-.protocol-message--response {
-  border-color: rgba(106, 163, 247, 0.54);
-}
-
-.protocol-message span {
-  color: var(--deck-dim);
-  font-size: clamp(0.46rem, 1.6cqh, 0.58rem);
-  font-weight: 850;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.protocol-message strong {
-  color: var(--deck-text);
-  font-size: clamp(0.76rem, 2.6cqh, 0.96rem);
-  font-weight: 850;
-  letter-spacing: -0.03em;
-}
-
-@keyframes protocol-message {
+@keyframes protocol-arrow-down {
   0%,
   100% {
-    opacity: 0;
-    transform: translate(-50%, calc(-50% + 6px)) scale(0.98);
+    opacity: 0.72;
+    filter:
+      drop-shadow(2px 0 0 rgba(235, 241, 255, 0.9))
+      drop-shadow(-2px 0 0 rgba(235, 241, 255, 0.9))
+      drop-shadow(0 2px 0 rgba(235, 241, 255, 0.9))
+      drop-shadow(0 -2px 0 rgba(235, 241, 255, 0.9))
+      drop-shadow(0 0 16px rgba(106, 163, 247, 0.3));
+    transform: translateY(-1%) scaleY(0.98);
   }
-  16%,
-  82% {
+  18%,
+  78% {
     opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
+    filter:
+      drop-shadow(2px 0 0 rgba(245, 248, 255, 0.96))
+      drop-shadow(-2px 0 0 rgba(245, 248, 255, 0.96))
+      drop-shadow(0 2px 0 rgba(245, 248, 255, 0.96))
+      drop-shadow(0 -2px 0 rgba(245, 248, 255, 0.96))
+      drop-shadow(0 0 24px rgba(106, 163, 247, 0.68));
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+@keyframes protocol-arrow-up {
+  0%,
+  100% {
+    opacity: 0.72;
+    filter:
+      drop-shadow(2px 0 0 rgba(255, 232, 166, 0.92))
+      drop-shadow(-2px 0 0 rgba(255, 232, 166, 0.92))
+      drop-shadow(0 2px 0 rgba(255, 232, 166, 0.92))
+      drop-shadow(0 -2px 0 rgba(255, 232, 166, 0.92))
+      drop-shadow(0 0 16px rgba(255, 198, 73, 0.3));
+    transform: rotate(180deg) translateY(-1%) scaleY(0.98);
+  }
+  18%,
+  78% {
+    opacity: 1;
+    filter:
+      drop-shadow(2px 0 0 rgba(255, 239, 191, 0.98))
+      drop-shadow(-2px 0 0 rgba(255, 239, 191, 0.98))
+      drop-shadow(0 2px 0 rgba(255, 239, 191, 0.98))
+      drop-shadow(0 -2px 0 rgba(255, 239, 191, 0.98))
+      drop-shadow(0 0 24px rgba(255, 198, 73, 0.68));
+    transform: rotate(180deg) translateY(0) scaleY(1);
+  }
+}
+
+@keyframes protocol-dot-down {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -30%) scale(0.72);
+  }
+  18%,
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 620%) scale(1.08);
+  }
+}
+
+@keyframes protocol-card-pulse {
+  0%,
+  100% {
+    filter: none;
+    transform: none;
+  }
+  45% {
+    filter: drop-shadow(0 0 20px rgba(255, 198, 73, 0.52));
+    transform: translateY(-1px) scale(1.02);
+  }
+}
+
+@keyframes protocol-card-surface-pulse {
+  0%,
+  100% {
+    border-color: var(--deck-border);
+  }
+  45% {
+    border-color: rgba(255, 198, 73, 0.82);
+    background:
+      radial-gradient(
+        circle at 50% 45%,
+        rgba(255, 198, 73, 0.22),
+        transparent 58%
+      ),
+      rgba(20, 22, 27, 0.94);
+  }
+}
+
+@keyframes protocol-card-icon-pulse {
+  0%,
+  100% {
+    color: var(--deck-muted);
+    transform: none;
+  }
+  45% {
+    color: var(--deck-accent-hi);
+    transform: scale(1.06);
   }
 }
 </style>
