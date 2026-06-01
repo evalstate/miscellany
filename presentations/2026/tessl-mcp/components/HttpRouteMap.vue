@@ -12,7 +12,7 @@ type DiagramNode = {
   h: number;
   rx: number;
   tone?: Tone;
-  kind?: "region" | "endpoint" | "client";
+  kind?: "service" | "endpoint" | "client";
 };
 
 type Edge = {
@@ -30,29 +30,29 @@ type Edge = {
 const nodes: Record<NodeId, DiagramNode> = {
   regionA: {
     id: "regionA",
-    label: "Region A",
+    label: "Hub Query",
     x: 48,
     y: 44,
     w: 180,
     h: 64,
     rx: 18,
     tone: "blue",
-    kind: "region",
+    kind: "service",
   },
   regionB: {
     id: "regionB",
-    label: "Region B",
+    label: "Image Gen",
     x: 412,
     y: 44,
     w: 180,
     h: 64,
     rx: 18,
     tone: "red",
-    kind: "region",
+    kind: "service",
   },
   endpoint: {
     id: "endpoint",
-    label: "Global Endpoint",
+    label: "HF MCP Edge",
     x: 48,
     y: 160,
     w: 544,
@@ -247,7 +247,7 @@ function edgePath(edge: Edge) {
 
       <foreignObject x="28" y="242" width="250" height="136">
         <div xmlns="http://www.w3.org/1999/xhtml" class="http-route-note">
-          Every hop that needs to route must parse request
+          Edge routes by <strong>Mcp-Name</strong>, not request body
         </div>
       </foreignObject>
     </svg>

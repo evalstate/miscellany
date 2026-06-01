@@ -325,28 +325,11 @@ Return `inputRequired` rather than SSE Stream.
 
 ---
 
-# HTTP Standardization: Problem
+# SEP-2243: HTTP Header Standardization
 
 <div class="http-standardization-problem">
   <HttpRouteMap />
-
-  <section class="http-request-panel deck-panel">
-    <h2>MCP over HTTP</h2>
-    <div class="http-request-line"><strong>POST /mcp/ HTTP/1.1</strong><span>Host: mcp-server.example</span></div>
-    <pre class="http-json"><code>{
-  "jsonrpc": "2.0",
-  "method": <mark>"tools/call"</mark>,
-  "params": {
-    "name": <mark>"spanner.execute_sql"</mark>,
-    "arguments": {
-      "project": <mark>"senseai-prod"</mark>,
-      "region": <mark>"us-west1"</mark>,
-      "instance": <mark>"finance-db-01"</mark>,
-      "query": "SELECT ..."
-    }
-  }
-}</code></pre>
-  </section>
+  <HttpHeaderExample />
 </div>
 
 ---
