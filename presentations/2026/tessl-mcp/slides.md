@@ -246,7 +246,7 @@ fff
 # Remote MCP through a load balancer
 
 <div class="remote-mcp-diagram">
-  <RemoteMcpLoadBalancer />
+  <RemoteMcpLoadBalancerStoryboard />
 </div>
 
 
