@@ -170,7 +170,9 @@ const event = ref<"idle" | "initialize" | "request">("idle");
 const initialized = ref(false);
 const animationKey = ref(0);
 const activeStepIndex = ref(-1);
+const packetProgress = ref(0);
 const timers: number[] = [];
+let animationFrame = 0;
 
 const activeSteps = computed(() => {
   if (event.value === "initialize") return initializeSteps;
@@ -179,6 +181,9 @@ const activeSteps = computed(() => {
 });
 
 const activeStep = computed(() => activeSteps.value[activeStepIndex.value]);
+const activeEdge = computed(() =>
+  activeStep.value ? edgeById.get(activeStep.value.edgeId) : undefined,
+);
 const isPlaying = computed(() => event.value !== "idle");
 const serverKnowsClient = computed(
   () =>
@@ -204,6 +209,16 @@ const status = computed(() => {
   return "Not initialized: no endpoint capability state has been established.";
 });
 
+const activeNodeIds = computed(() => {
+  if (!activeEdge.value) return new Set<string>();
+  return new Set([activeEdge.value.from, activeEdge.value.to]);
+});
+
+const packetPoint = computed(() => {
+  if (!activeEdge.value) return { x: 0, y: 0 };
+  return pointOnEdge(activeEdge.value, activeStep.value?.reverse, packetProgress.value);
+});
+
 function anchorPoint(node: NodeSpec, anchor: Anchor) {
   return {
     x: anchor === "left" ? node.x : node.x + node.w,
@@ -212,13 +227,34 @@ function anchorPoint(node: NodeSpec, anchor: Anchor) {
 }
 
 function edgePath(edge: EdgeSpec, reverse = false) {
+  const { a, c1, c2, b } = edgePoints(edge, reverse);
+
+  return `M ${a.x} ${a.y} C ${c1.x} ${c1.y}, ${c2.x} ${c2.y}, ${b.x} ${b.y}`;
+}
+
+function edgePoints(edge: EdgeSpec, reverse = false) {
   const from = nodeById.get(reverse ? edge.to : edge.from)!;
   const to = nodeById.get(reverse ? edge.from : edge.to)!;
   const a = anchorPoint(from, reverse ? edge.toAnchor : edge.fromAnchor);
   const b = anchorPoint(to, reverse ? edge.fromAnchor : edge.toAnchor);
   const dx = Math.abs(b.x - a.x);
 
-  return `M ${a.x} ${a.y} C ${a.x + dx * 0.45} ${a.y}, ${b.x - dx * 0.45} ${b.y}, ${b.x} ${b.y}`;
+  return {
+    a,
+    c1: { x: a.x + dx * 0.45, y: a.y },
+    c2: { x: b.x - dx * 0.45, y: b.y },
+    b,
+  };
+}
+
+function pointOnEdge(edge: EdgeSpec, reverse = false, t: number) {
+  const { a, c1, c2, b } = edgePoints(edge, reverse);
+  const u = 1 - t;
+
+  return {
+    x: u ** 3 * a.x + 3 * u ** 2 * t * c1.x + 3 * u * t ** 2 * c2.x + t ** 3 * b.x,
+    y: u ** 3 * a.y + 3 * u ** 2 * t * c1.y + 3 * u * t ** 2 * c2.y + t ** 3 * b.y,
+  };
 }
 
 function pathFor(edgeId: string, reverse = false) {
@@ -229,6 +265,18 @@ function pathFor(edgeId: string, reverse = false) {
 function clearTimers() {
   while (timers.length) {
     window.clearTimeout(timers.pop());
+  }
+  window.cancelAnimationFrame(animationFrame);
+  animationFrame = 0;
+  packetProgress.value = 0;
+}
+
+function animatePacket(start = performance.now()) {
+  const elapsed = performance.now() - start;
+  packetProgress.value = Math.min(elapsed / 980, 1);
+
+  if (packetProgress.value < 1) {
+    animationFrame = window.requestAnimationFrame(() => animatePacket(start));
   }
 }
 
@@ -244,7 +292,10 @@ function play(nextEvent: "initialize" | "request") {
     timers.push(
       window.setTimeout(() => {
         activeStepIndex.value = index;
+        packetProgress.value = 0;
         animationKey.value += 1;
+        window.cancelAnimationFrame(animationFrame);
+        animationFrame = window.requestAnimationFrame(() => animatePacket());
       }, index * 1250),
     );
   }
@@ -254,6 +305,7 @@ function play(nextEvent: "initialize" | "request") {
       () => {
         if (nextEvent === "initialize") initialized.value = true;
         activeStepIndex.value = -1;
+        packetProgress.value = 0;
         event.value = "idle";
       },
       steps.length * 1250 + 650,
@@ -266,6 +318,7 @@ function reset() {
   event.value = "idle";
   initialized.value = false;
   activeStepIndex.value = -1;
+  packetProgress.value = 0;
   animationKey.value += 1;
 }
 
@@ -298,7 +351,7 @@ onBeforeUnmount(clearTimers);
       <button type="button" @click="reset">Reset state</button>
     </div>
 
-    <p class="remote-mcp-story__status" aria-live="polite">{{ status }}</p>
+    <p v-if="!activeStep" class="remote-mcp-story__status" aria-live="polite">{{ status }}</p>
 
     <svg
       class="remote-mcp-story__canvas"
@@ -338,6 +391,8 @@ onBeforeUnmount(clearTimers);
         :key="`pulse-${animationKey}-${activeStep.id}`"
         class="remote-mcp-story__pulse"
         :class="`remote-mcp-story__pulse--${activeStep.tone ?? 'request'}`"
+        pathLength="1"
+        :style="{ '--pulse-offset': 1 - packetProgress }"
         :d="pathFor(activeStep.edgeId, activeStep.reverse)"
       />
 
@@ -347,9 +402,9 @@ onBeforeUnmount(clearTimers);
         class="remote-mcp-story__packet"
         :class="`remote-mcp-story__packet--${activeStep.tone ?? 'request'}`"
         r="7.5"
-      >
-        <animateMotion dur="0.98s" begin="0s" fill="freeze" :path="pathFor(activeStep.edgeId, activeStep.reverse)" />
-      </circle>
+        :cx="packetPoint.x"
+        :cy="packetPoint.y"
+      />
 
       <g
         v-if="activeStep"
@@ -372,6 +427,8 @@ onBeforeUnmount(clearTimers);
           {
             'remote-mcp-story__node--active-server': node.id === 'server-b',
             'remote-mcp-story__node--endpoint': node.id === 'client' || node.id === 'server-b',
+            'remote-mcp-story__node--active-hop': activeNodeIds.has(node.id),
+            'remote-mcp-story__node--locked-endpoint': isLocked && (node.id === 'client' || node.id === 'server-b'),
           },
         ]"
         :transform="`translate(${node.x} ${node.y})`"
@@ -394,11 +451,6 @@ onBeforeUnmount(clearTimers);
         <rect width="220" height="54" rx="14" />
         <text class="remote-mcp-story__state-label" x="16" y="20">server state</text>
         <text class="remote-mcp-story__state-value" x="16" y="43">client capabilities</text>
-      </g>
-
-      <g class="remote-mcp-story__lock" transform="translate(407 314)" aria-hidden="true">
-        <rect width="186" height="42" rx="21" />
-        <text x="93" y="27">LOCKED IN</text>
       </g>
     </svg>
   </section>
@@ -496,13 +548,13 @@ onBeforeUnmount(clearTimers);
 
 .remote-mcp-story__pulse {
   fill: none;
-  opacity: 0;
+  opacity: 1;
   stroke: url("#remote-mcp-story-pulse");
-  stroke-dasharray: 0 900;
+  stroke-dasharray: 0.22 1;
+  stroke-dashoffset: var(--pulse-offset);
   stroke-linecap: round;
   stroke-width: 7;
   filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.6));
-  animation: remote-mcp-story-travel 0.98s ease-out both;
 }
 
 .remote-mcp-story__pulse--result {
@@ -516,10 +568,9 @@ onBeforeUnmount(clearTimers);
 }
 
 .remote-mcp-story__packet {
-  opacity: 0;
+  opacity: 1;
   fill: var(--deck-accent-hi);
   filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.8));
-  animation: remote-mcp-story-packet 0.98s ease-out both;
 }
 
 .remote-mcp-story__packet--result {
@@ -589,10 +640,14 @@ onBeforeUnmount(clearTimers);
   filter: drop-shadow(0 0 18px rgba(255, 198, 73, 0.68));
 }
 
-.remote-mcp-story--playing .remote-mcp-story__node--client .remote-mcp-story__node-glow,
-.remote-mcp-story--playing .remote-mcp-story__node--lb .remote-mcp-story__node-glow,
-.remote-mcp-story--playing .remote-mcp-story__node--server-b .remote-mcp-story__node-glow {
+.remote-mcp-story__node--active-hop .remote-mcp-story__node-glow {
   animation: remote-mcp-story-node 1.18s ease-out both;
+}
+
+.remote-mcp-story__node--locked-endpoint .remote-mcp-story__node-box {
+  stroke: var(--deck-ok);
+  stroke-width: 3.4;
+  filter: drop-shadow(0 0 18px rgba(106, 209, 156, 0.42));
 }
 
 .remote-mcp-story__role,
@@ -646,57 +701,6 @@ onBeforeUnmount(clearTimers);
   letter-spacing: -0.02em;
 }
 
-.remote-mcp-story__lock {
-  opacity: 0;
-  transform-box: fill-box;
-  transform-origin: center;
-  transition: opacity 260ms ease;
-}
-
-.remote-mcp-story__lock rect {
-  fill: rgba(106, 209, 156, 0.1);
-  stroke: rgba(106, 209, 156, 0.52);
-  stroke-width: 1.2;
-}
-
-.remote-mcp-story__lock text {
-  fill: var(--deck-ok);
-  font: 900 15px / 1 var(--deck-font-mono);
-  letter-spacing: 0.14em;
-  text-anchor: middle;
-}
-
-.remote-mcp-story--locked .remote-mcp-story__lock {
-  opacity: 1;
-  animation: remote-mcp-story-lock 780ms ease both;
-}
-
-@keyframes remote-mcp-story-travel {
-  0% {
-    opacity: 0;
-    stroke-dasharray: 0 900;
-  }
-  15%,
-  74% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    stroke-dasharray: 340 900;
-  }
-}
-
-@keyframes remote-mcp-story-packet {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  12%,
-  82% {
-    opacity: 1;
-  }
-}
-
 @keyframes remote-mcp-story-message {
   0% {
     opacity: 0;
@@ -728,15 +732,4 @@ onBeforeUnmount(clearTimers);
   }
 }
 
-@keyframes remote-mcp-story-lock {
-  0% {
-    transform: scale(0.86);
-  }
-  52% {
-    transform: scale(1.08);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
 </style>
