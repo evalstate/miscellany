@@ -26,4 +26,4 @@ screenshot by file name.
 
 
 Attached screenshots:
-- slide-07.png
+- 7.png

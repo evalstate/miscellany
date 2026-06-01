@@ -16,6 +16,9 @@ cannot fully judge.
 
 - clipped, cropped, or offscreen content;
 - broken or malformed charts, SVGs, Mermaid diagrams, or custom Vue components;
+- connectors/arrows in diagrams whose endpoints do not visibly attach to the
+  intended nodes, whose arrowheads point the wrong way, or whose directionality
+  is ambiguous;
 - axis labels, chart labels, legends, annotations, or badges that overlap or
   become misleading;
 - unreadable contrast or type size;
@@ -27,6 +30,16 @@ cannot fully judge.
   alignment;
 - chart/diagram content where the spoken narrative would be hard to follow
   because the visual structure is ambiguous.
+
+When reviewing diagrams with arrows or connectors, explicitly check:
+
+- endpoints touch or intentionally dock to the boundary/port of the referenced
+  node rather than floating nearby or penetrating awkwardly into the shape;
+- arrowheads face the actual flow direction; bidirectional links should have one
+  head at each end, pointing outward from the line toward each connected node;
+- paired solid/dashed arrows remain parallel, aligned, and semantically clear;
+- connector color, dash pattern, and placement do not imply a different route or
+  target than the labels/nodes suggest.
 
 ## Ignore
 

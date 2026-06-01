@@ -89,8 +89,7 @@ fonts:
 
 <div class="hf-mcp-slide">
 <section class="hf-mcp-copy">
-<p class="kicker">MCP server</p>
-<h2>One protocol surface for the Hugging Face ecosystem</h2>
+<h2>The Hub for Agents and Assistants</h2>
 
 <div class="hf-mcp-capabilities">
 <div><strong>Inference gateway</strong><span>Route agents to multimodal models and hosted endpoints.</span></div>
@@ -151,25 +150,38 @@ fonts:
 
 # Understanding Activity
 
+<div class="understanding-activity-slide">
+<section class="understanding-activity-copy">
+
 ## Interactive vs Agentic Workloads
 
-- Session Length
-- Burstiness
+<div class="compact-point-list">
+<div>
+<strong>Initializations are a bad proxy</strong>
+<span>Can’t measure ambient installation or caching; doesn’t correlate to tool calls.</span>
+</div>
 
-## Initializations are a bad proxy for use
+<div>
+<strong>Tool calls: more ≠ better</strong>
+<span>High volume may indicate poor tool design, discovery problems, or erratic clients.</span>
+</div>
 
-- Can't measure ambient installation (caching, tool search)
-- Doesn't correlate to Tool Calls
+<div>
+<strong>Session conversion is preferred</strong>
+<span>Clients that connect and make at least one tool call reduce skew from testing and idle installs.</span>
+</div>
 
-## Tool Calls: More != Better
+<div>
+<strong>Workload shape still matters</strong>
+<span>Session length and burstiness distinguish interactive use from agentic loops.</span>
+</div>
+</div>
+</section>
 
-- High Tool Call volume may indicate poor tool design or discovery
-- Client behaviour can be unpredictable
-
-## Session Conversion is preferred
-
-- Clients that connect and make at least one tool call.
-- Reduces skew of erratic clients or excessive testing
+<aside class="understanding-activity-table">
+  <ClientConversionEfficiencyTable />
+</aside>
+</div>
 
 
 ---
@@ -277,7 +289,7 @@ layout: section
 
 ---
 
-# New Specification
+# 2026-07-28 Release Candidate
 
 <div class="spec-timeline-diagram">
   <McpSpecTransportTimeline variant="after" />
@@ -286,19 +298,39 @@ layout: section
 
 ---
 
-# Simplifications
+# SEP-2260, SEP-2257: "Simplifications"
 
-## 80% of the complexity is in 20% of the Protocol...
+<div class="simplifications-slide">
+<section class="simplifications-copy">
 
-## No longer allow Server to Client initiated requests (mcp-webcam) - SEP2260
+  ## Simplify and Deprecate
 
-- Server cannot make an unsolicited call to the Client.
-  Server Requests must be contained within a Client initiated request.
-- Removes need for unreliable "GET" SSE Handler on the Server
+  <div class="compact-point-list">
+    <div>
+      <strong>No unsolicited Server → Client calls</strong>
+      <span>Server requests must be contained inside a client-initiated request.</span>
+    </div>
+    <div>
+      <strong>Drop the fragile GET/SSE handler</strong>
+      <span>No speculative open channel just in case the server wants to call back.</span>
+    </div>
+    <div>
+      <strong>Deprecate Sampling + Roots</strong>
+      <span>Retire underused protocol surface instead of standardizing around it.</span>
+    </div>
+  </div>
+</section>
 
-## Deprecate Sampling, Roots (and Logging)
+<section class="simplifications-visual">
+  <figure class="simplifications-webcam deck-panel">
+    <img :src="'/images/mcp-webcam.png'" alt="mcp-webcam demo screenshot" />
+  </figure>
 
-- Simplify protocol surface for underutilized features.
+  <aside class="simplifications-protocol deck-panel">
+    <SimplificationsProtocolRails />
+  </aside>
+</section>
+</div>
 
 
 ---
@@ -338,7 +370,7 @@ layout: section
 <div class="http-json-line http-json-line--indent"><em>"method"</em>: <mark>"server/discover"</mark>,</div>
 <div class="http-json-line http-json-line--indent"><em>"params"</em>: {</div>
 <div class="http-json-line http-json-line--indent-2"><mark>"_meta"</mark>: {</div>
-<div class="http-json-line http-json-line--indent-3"><em>"protocolVersion"</em>: <strong>"2026-07-30"</strong>,</div>
+<div class="http-json-line http-json-line--indent-3"><em>"protocolVersion"</em>: <strong>"2026-07-28"</strong>,</div>
 <div class="http-json-line http-json-line--indent-3"><em>"clientInfo"</em>: { <em>"name"</em>: <strong>"ExampleClient"</strong> }</div>
 <div class="http-json-line http-json-line--indent-2">}</div>
 <div class="http-json-line http-json-line--indent">}</div>
@@ -346,7 +378,7 @@ layout: section
 <div class="http-json-line stateless-discovery-json__gap">← response</div>
 <div class="http-json-line">{</div>
 <div class="http-json-line http-json-line--indent"><em>"result"</em>: {</div>
-<div class="http-json-line http-json-line--indent-2"><em>"supportedVersions"</em>: [<strong>"2026-07-30"</strong>],</div>
+<div class="http-json-line http-json-line--indent-2"><em>"supportedVersions"</em>: [<strong>"2026-07-28"</strong>],</div>
 <div class="http-json-line http-json-line--indent-2"><mark>"capabilities"</mark>: {</div>
 <div class="http-json-line http-json-line--indent-3"><em>"tools"</em>: {},</div>
 <div class="http-json-line http-json-line--indent-3"><em>"resources"</em>: {},</div>
@@ -361,7 +393,7 @@ layout: section
 
 ---
 
-# Cache Control
+# SEP-2459: Cache Control
 
 ## Tool List Changed
 
@@ -420,15 +452,3 @@ Planned Release Date  :
 # Related SEPs
 
 
-
----
-
-<div class="traffic-chart-slide">
-  <McpRemoteTrafficChart client="Codex" title="Codex" />
-</div>
-
----
-
-<div class="traffic-chart-slide">
-  <McpRemoteTrafficChart client="Codex" range-mode="claude" title="Codex" subtitle="same date range as Claude Code" />
-</div>

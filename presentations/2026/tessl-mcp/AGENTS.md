@@ -70,6 +70,29 @@ changing slide wording requires opening a Vue file, move that wording back into
 `slides.md`. If the same CSS pattern appears twice, promote it to a shared
 primitive in `style.css` rather than copying local styles.
 
+## Connector-heavy diagrams
+
+For diagrams with arrows/connectors between nodes, avoid hand-authoring raw SVG
+coordinates in `slides.md` when the nodes are positioned separately with CSS.
+That creates two geometry systems that are brittle to maintain.
+
+Prefer one of these approaches:
+
+- simple flow: use Mermaid;
+- custom static/interactive visual: use a dedicated Vue/SVG component;
+- decorative divider/line only: use CSS.
+
+Connector-heavy components should use a single coordinate system. Define nodes
+as data with `x`, `y`, `w`, and `h`; define edges by `from`/`to` node IDs and
+anchor sides; compute SVG paths from that data. Use SVG `<marker>` arrowheads
+instead of manually positioned arrowhead polygons.
+
+Keep slide narrative in `slides.md`, but let the component own diagram geometry.
+When editing such diagrams, adjust node positions, edge anchors, or edge
+semantics rather than tuning individual `x1`/`y1`/`points` values. Parent slide
+wrappers should still control the available width/height, and the diagram
+component should fill that region.
+
 ## Visual inspection workflow
 
 Use the helper first:

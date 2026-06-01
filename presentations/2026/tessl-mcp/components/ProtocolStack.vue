@@ -4,9 +4,11 @@ import { computed, onBeforeUnmount, ref } from "vue";
 const props = withDefaults(
   defineProps<{
     showDescriptions?: boolean;
+    variant?: "current" | "simplified";
   }>(),
   {
     showDescriptions: false,
+    variant: "current",
   },
 );
 
@@ -61,8 +63,12 @@ type CapabilityId = Capability["id"];
 const serverCapabilities = capabilities.filter(
   (capability) => capability.zone === "server",
 );
-const clientCapabilities = capabilities.filter(
-  (capability) => capability.zone === "client",
+const removedCapabilityIds: CapabilityId[] = ["roots", "sampling"];
+const isRemovedCapability = (id: CapabilityId) =>
+  isSimplified.value && removedCapabilityIds.includes(id);
+
+const clientCapabilities = computed(() =>
+  capabilities.filter((capability) => capability.zone === "client"),
 );
 
 type Channel = "up" | "down";
@@ -201,7 +207,15 @@ const animationKey = ref(0);
 const isRunning = ref(false);
 const timers: number[] = [];
 
-const active = computed(() => scriptFrames[activeStep.value]);
+const isSimplified = computed(() => props.variant === "simplified");
+const frames = computed(() =>
+  isSimplified.value
+    ? scriptFrames.filter(
+        (frame) => frame.flash !== "sampling" && frame.hold !== "sampling",
+      )
+    : scriptFrames,
+);
+const active = computed(() => frames.value[activeStep.value]);
 const activeFlash = computed<CapabilityId | undefined>(
   () => active.value?.flash,
 );
@@ -232,7 +246,7 @@ function play() {
   activeStep.value = -1;
 
   let delay = 0;
-  scriptFrames.forEach((frame, index) => {
+  frames.value.forEach((frame, index) => {
     timers.push(window.setTimeout(() => pulseStep(index), delay));
     delay += frame.duration ?? 1120;
   });
@@ -262,6 +276,7 @@ onBeforeUnmount(clearTimers);
       'protocol-stack--channel-down': activeChannel === 'down',
       'protocol-stack--hold-up': heldChannel === 'up',
       'protocol-stack--hold-down': heldChannel === 'down',
+      'protocol-stack--simplified': isSimplified,
     }"
     aria-label="MCP protocol bidirectional message flow"
     @click="play"
@@ -301,7 +316,8 @@ onBeforeUnmount(clearTimers);
         </div>
         <div
           :key="`down-${animationKey}`"
-          class="protocol-block-arrow protocol-block-arrow--down protocol-block-arrow--connected"
+          class="protocol-block-arrow protocol-block-arrow--down"
+          :class="'protocol-block-arrow--connected'"
         >
           <span class="protocol-message-dot" />
         </div>
@@ -329,6 +345,7 @@ onBeforeUnmount(clearTimers);
         :class="{
           'is-flashing': activeFlash === item.id,
           'is-on': activeCapability === item.id,
+          'is-removed': isRemovedCapability(item.id),
         }"
         :title="item.title"
         :icon="item.icon"
@@ -578,6 +595,56 @@ onBeforeUnmount(clearTimers);
   --arrow-glow: rgba(106, 163, 247, 0.28);
   --arrow-outline: rgba(235, 241, 255, 0.82);
   opacity: 0.74;
+}
+
+.protocol-stack--simplified .protocol-label {
+  padding: 0 0.74rem;
+}
+
+.protocol-stack--simplified .protocol-operation {
+  display: none;
+}
+
+.protocol-stack--simplified .protocol-process-gap {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+}
+
+.protocol-stack--simplified .protocol-block-arrow--down {
+  --arrow-color: rgba(185, 179, 165, 0.18);
+  --arrow-outline: rgba(215, 209, 194, 0.62);
+  --arrow-glow: rgba(185, 179, 165, 0.08);
+  opacity: 0.5;
+}
+
+.protocol-stack--simplified .protocol-card-shell.is-removed {
+  opacity: 0.72;
+  filter: grayscale(0.4);
+}
+
+.protocol-stack--simplified .protocol-card-shell.is-removed :deep(.protocol-card) {
+  border-color: rgba(240, 107, 90, 0.58);
+  background:
+    linear-gradient(135deg, rgba(240, 107, 90, 0.1), rgba(20, 22, 27, 0.48)),
+    rgba(20, 22, 27, 0.42);
+}
+
+.protocol-stack--simplified .protocol-card-shell.is-removed :deep(.protocol-card__icon),
+.protocol-stack--simplified .protocol-card-shell.is-removed :deep(.protocol-card h3) {
+  color: color-mix(in srgb, var(--deck-no) 72%, var(--deck-muted));
+}
+
+.protocol-stack--simplified .protocol-card-shell.is-removed :deep(.protocol-card)::after {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 50%;
+  height: clamp(2px, 0.7cqh, 4px);
+  border-radius: 999px;
+  background: rgba(240, 107, 90, 0.78);
+  box-shadow: 0 0 12px rgba(240, 107, 90, 0.2);
+  transform: rotate(-9deg);
 }
 
 .protocol-stack--wake.protocol-stack--channel-up .protocol-block-arrow--up {

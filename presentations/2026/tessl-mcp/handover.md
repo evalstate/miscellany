@@ -1,401 +1,285 @@
 # Tessl MCP deck handover
 
-This document summarizes the current working state of the Slidev deck and the
-supporting data/QA workflow.
-
-## Project
-
-Workspace:
+Current workspace:
 
 ```text
 /home/shaun/source/miscellany/presentations/2026/tessl-mcp
 ```
 
-Primary files:
+This is a Slidev conference deck. The source of truth for slide flow and
+narrative is `slides.md`; global design primitives live in `style.css`; reusable
+charts/diagrams live under `components/`.
 
-- `slides.md` — deck content
-- `style.css` — global visual system and slide-level sizing
-- `components/*.vue` — custom diagrams/charts
-- `data-viz/` — deck-local data transforms and small chart artifacts
-- `scripts/` — visual review, deterministic geometry QA, and helper scripts
-- `AGENTS.md` — project instructions for agents
+## Current working state
 
-## Recent deck additions
-
-### Remote MCP load balancer slide
-
-Component:
+Recent checkpoint commits:
 
 ```text
-components/RemoteMcpLoadBalancer.vue
+220d70d Checkpoint Tessl MCP deck refactor
+9a20db1 Apply Slidev-first chart composition
 ```
 
-Slide title:
+Since those commits, additional uncommitted work has been done on the HTTP
+standardization problem slide and visual-review guidance:
+
+- added `components/HttpRouteMap.vue`;
+- replaced raw route-map SVG/HTML in `slides.md` with `<HttpRouteMap />`;
+- added/adjusted HTTP request-panel styling in `style.css`;
+- updated `.fast-agent/agent-cards/visual-review.md` to catch connector/arrow
+  anchoring and directionality problems.
+
+Do **not** assume `slides.md` has stayed stable across turns. The user may edit
+it directly; reread it before planning slide-number-specific work.
+
+## Authoring principles now in force
+
+See `AGENTS.md`, especially **Slidev-first authoring**.
+
+Practical rules:
+
+- Slide narrative belongs in `slides.md`:
+  - titles;
+  - subtitles;
+  - rhetorical framing;
+  - explanatory audience-facing copy;
+  - ordering and high-level composition.
+- Components own data-driven rendering, charts, diagrams, interactions, and
+  chart-internal labels.
+- Chart/diagram internals may own axis titles, legend labels, row labels,
+  stat labels, and data-derived badges.
+- If those chart-internal labels need to vary by narrative/dataset, prefer props
+  over hard-coded text.
+- Parent slide/wrapper controls available space; components fill that space.
+- Avoid raw connector coordinates in `slides.md`. Connector-heavy diagrams
+  justify Vue/SVG components because geometry is actual diagram logic.
+
+Decision tree:
+
+- Simple flowchart: consider Mermaid.
+- Custom nodes/connectors: use a dedicated Vue/SVG component.
+- Decorative line/divider: use CSS.
+- Slide title/subtitle/copy: keep in `slides.md`.
+
+## Important current slide patterns
+
+### Shared chart slide wrapper
+
+Several data slides use slide-owned headers plus data/rendering components:
+
+```html
+<div class="weekly-activity-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Weekly MCP activity</h1>
+      <p>Initialization requests as bars · tool calls as line</p>
+    </div>
+  </header>
+  <McpWeeklyActivityChart />
+</div>
+```
+
+Shared classes in `style.css`:
+
+- `.chart-slide`
+- `.chart-slide__header`
+- `.chart-slide__kicker`
+- `.weekly-activity-slide`
+- `.conversion-chart-slide`
+- `.protocol-efficiency-slide`
+- `.traffic-chart-slide`
+
+The chart components keep data-coupled stats/labels but no longer own the slide
+headline/subhead.
+
+### HTTP Standardization: Problem
+
+Slide location currently around `slides.md` line ~272. Current structure:
+
+```md
+# HTTP Standardization: Problem
+
+<div class="http-standardization-problem">
+  <HttpRouteMap />
+
+  <section class="http-request-panel deck-panel">
+    ...
+  </section>
+</div>
+```
+
+The route map was deliberately moved out of raw markdown because the previous
+implementation mixed CSS-positioned nodes with hard-coded SVG line/polygon
+coordinates. That was brittle and produced floating/misdirected arrows.
+
+New component:
 
 ```text
-Remote MCP through a load balancer
+components/HttpRouteMap.vue
 ```
 
-Purpose:
+Architecture:
 
-- Shows MCP Client → Load Balancer → three remote MCP Servers.
-- Clicking the MCP Client triggers an animated light pulse.
-- Each click cycles the routed target server.
+- all nodes are defined in a single SVG coordinate system;
+- edges reference node IDs and anchor sides;
+- connector endpoints are computed from node geometry;
+- SVG markers render arrowheads;
+- future edits should adjust node positions, edge anchors, or offsets in the
+  component data, not hand-tune SVG coordinates in `slides.md`.
 
-Style notes:
+Current `HttpRouteMap` still may benefit from visual polish, but it is now
+maintainable. The latest rendered version shows correctly vertical region ↔
+endpoint and endpoint ↔ client connectors. If improving further, prefer data
+changes in the component:
 
-- Uses the deck’s dark/amber/blue design tokens.
-- Animation is implemented with Vue state, SVG paths, CSS keyframes, and SVG
-  `animateMotion`.
+- move `regionA`, `regionB`, `endpoint`, or `client` node coordinates;
+- adjust `fromOffsetX` / `toOffsetX` for individual edges;
+- tune SVG marker size/ref points.
 
-### Transport Evolution slide
+Do not reintroduce raw `<line>` / `<polygon>` connector markup into `slides.md`.
 
-Component:
+## Components of note
 
-```text
-components/McpSpecTransportTimeline.vue
-```
+### `components/McpWeeklyActivityChart.vue`
 
-Slide title:
+- Renders weekly initializations as bars and tool calls as a line.
+- No slide title/subtitle; those live in `slides.md`.
+- Keeps latest-week stat badge as data-coupled chart content.
 
-```text
-Transport Evolution
-```
+### `components/McpRemoteNoFallbackChart.vue`
 
-Purpose:
+- Renders initializations and mcp-remote share excluding fallback checks.
+- No slide title/subtitle; those live in `slides.md`.
+- Keeps latest-share stat badge as data-coupled chart content.
 
-- Shows MCP Specification transport evolution as an oversized Gantt/timeline.
-- Spec versions are equally spaced, not wall-clock accurate.
-- Dates are month-level for visual compactness:
-  - `2024-11`
-  - `2025-03`
-  - `2025-06`
-  - `2025-11`
-  - `2026-07`
-  - `...`
-- Lanes:
-  - `TRANSPORTS` — `STDIO`
-  - `REMOTE TRANSPORTS` — `SSE`, `Streamable HTTP`, `Stateless HTTP`
-  - `AUTH` — `OAuth AS`, `OAuth Resource Server`
+### `components/SessionConversionChart.vue`
 
-Interaction:
+- Renders session conversion rate and 3-day converted-session average.
+- Slide title/subtitle moved to `slides.md`.
+- Keeps `overall` / `latest` stats as data-derived chart internals.
 
-- Hovering over a spec column lights up the corresponding column across the
-  timeline.
-- Hovering a date lozenge also highlights its column.
+### `components/McpProtocolEfficiency.vue`
 
-Important implementation note:
+- Renders message-mix bars and tool-call callout.
+- Slide kicker/title moved to `slides.md`.
+- Date window remains chart/data context and is positioned into the shared header
+  region.
 
-- Header/date lozenges and Gantt lanes share a common six-column grid.
-- Bar heights are normalized for visual rhythm.
+### `components/McpRemoteTrafficChart.vue`
 
-### MCP remote traffic data-viz slides
+- Still has `title` / `subtitle` props and renders its own header.
+- This is a remaining Slidev-first mismatch if those slides become actively
+  edited. Consider refactoring later to use the shared `chart-slide` header
+  pattern and leave only chart-internal labels/stats in the component.
 
-Component:
+### `components/McpSpecTransportTimeline.vue`, `ProtocolStack.vue`, `RemoteMcpLoadBalancer.vue`
 
-```text
-components/McpRemoteTrafficChart.vue
-```
-
-Slides:
-
-1. `Claude Code`
-2. `Codex`
-3. `Codex` with the same date range as Claude Code
-
-Purpose:
-
-- Blue filled background area: opaque usage index.
-- Bold amber line: share of traffic using `mcp-remote`.
-- Top-right badge: latest `mcp-remote` share.
-
-Current layout approach:
-
-- Chart slides use an absolute safe area:
-
-  ```css
-  .traffic-chart-slide {
-    position: absolute !important;
-    inset: 28px 42px;
-  }
-  ```
-
-- Chart component uses `box-sizing: border-box`.
-- X-axis labels are outside the plot but within reserved SVG bottom space.
-- The deterministic geometry audit currently reports zero findings for these
-  slides.
+- Custom diagram components are appropriate because they own interaction or
+  diagram geometry.
+- Continue parent-defined sizing via wrappers such as `.spec-timeline-diagram`,
+  `.protocol-diagram`, and `.remote-mcp-diagram`.
 
 ## Data-viz workflow
 
-Authoritative source data:
+Authoritative MCP stats source data is outside this deck:
 
 ```text
 /home/shaun/source/hf-mcp-stats
 ```
 
-Treat that repository as read-only unless explicitly instructed otherwise.
-Large raw datasets should stay there. This deck’s `data-viz/` directory should
-contain only repeatable transforms and small slide-ready artifacts.
+Treat that repo as read-only unless explicitly told otherwise. Deck-local
+`data-viz/` contains repeatable transforms and small slide-ready CSV/JSON
+artifacts.
 
-Deck-local data-viz files:
-
-- `data-viz/generate_mcp_remote_weekly.py`
-- `data-viz/emit_chart_data.py`
-- `data-viz/SCRIPTS.md`
-- `data-viz/mcp_remote_share_weekly.json`
-- `data-viz/mcp_remote_share_weekly_chart.csv`
-- `data-viz/mcp_remote_share_weekly_codex_claude_code.csv`
-- `data-viz/mcp_remote_share_weekly_codex_claude_code_opencode.csv`
-
-### `data-viz/SCRIPTS.md`
-
-This is the catalog for data scripts and generated artifacts.
-
-Maintenance rule:
+Important convention from `AGENTS.md`:
 
 > When adding, renaming, deleting, or materially changing a script or generated
-> dataset in `data-viz/`, update `data-viz/SCRIPTS.md` in the same change.
+> dataset under `data-viz/`, update `data-viz/SCRIPTS.md` in the same change.
 
-### Generic chart data emitter
+Recent data-viz additions committed in `220d70d` include generated mcp-remote
+excluding-fallback datasets and scripts.
 
-Script:
+## Visual QA workflow
 
-```text
-data-viz/emit_chart_data.py
-```
+Preferred order:
 
-Purpose:
+1. Run deterministic geometry checks.
+2. Fix geometry findings.
+3. Render screenshots.
+4. Use VLM/visual-review for qualitative issues.
 
-- Converts CSV into deck-friendly JSON using schema `deck.chart-data.v1`.
-- Keeps CSV parsing/filtering out of Vue components.
-- Supports repeated `--where`, `--series`, and `--include` flags.
-
-Example:
-
-```bash
-python3 data-viz/emit_chart_data.py \
-  --input data-viz/mcp_remote_share_weekly_codex_claude_code.csv \
-  --output data-viz/codex_mcp_remote_chart.json \
-  --where client_family=Codex \
-  --x week_start \
-  --x-bucket week \
-  --series field=usage_index_0_100,kind=area,label="Opaque usage index",axis=usage \
-  --series field=mcp_remote_share_pct,kind=line,label="mcp-remote share",axis=share \
-  --include week_end \
-  --include total_requests \
-  --include mcp_remote_requests \
-  --title Codex \
-  --pretty
-```
-
-## Subagents
-
-Project-local agent cards are now intended to be tracked in the repo:
-
-```text
-.fast-agent/agent-cards/
-```
-
-`.gitignore` is configured so:
-
-- `.fast-agent/agent-cards/**` is trackable;
-- `.fast-agent` runtime state, sessions, config, etc. remain ignored.
-
-### Data-viz subagent
-
-Card:
-
-```text
-.fast-agent/agent-cards/data-viz.md
-```
-
-Use for:
-
-- querying `/home/shaun/source/hf-mcp-stats`;
-- answering data questions;
-- creating/maintaining Python transforms under `data-viz/`;
-- keeping `data-viz/SCRIPTS.md` current.
-
-Validated successfully.
-
-### Visual-review subagent
-
-Card:
-
-```text
-.fast-agent/agent-cards/visual-review.md
-```
-
-Use for qualitative visual QA after deterministic geometry checks pass.
-
-Focus:
-
-- malformed charts/SVGs/components;
-- overlap;
-- poor contrast;
-- awkward hierarchy/density;
-- ambiguous diagrams;
-- visual rhythm issues.
-
-Validated successfully.
-
-## QA workflow
-
-### Build
+Commands:
 
 ```bash
 npm run build
+python3 scripts/check_slide_geometry.py --range 23 --fail-on findings
+python3 scripts/visual_review.py --range 23 --clean
 ```
 
-Known build warnings:
-
-- Rolldown/VueUse `INVALID_ANNOTATION` warnings.
-- These are upstream warnings and not caused by the deck changes.
-
-### Deterministic geometry audit
-
-Script:
-
-```text
-scripts/check_slide_geometry.py
-```
-
-NPM alias:
+For broader review:
 
 ```bash
-npm run visual:geometry -- --range 13-15
+python3 scripts/check_slide_geometry.py --range 1-24 --fail-on findings
+python3 scripts/visual_review.py --range 1-24 --clean
 ```
 
-Fail-on-findings mode:
-
-```bash
-npm run visual:geometry -- --range 13-15 --fail-on findings
-```
-
-What it catches:
-
-- viewport overflow;
-- clipping by overflow-hidden/clip/auto/scroll ancestors;
-- chart/SVG text outside visible bounds;
-- container scroll overflow;
-- page-level scroll overflow.
-
-Implementation:
-
-- Starts Slidev dev server.
-- Starts headless Chrome.
-- Uses Chrome DevTools Protocol via Python `websockets`.
-- Evaluates DOM geometry with `getBoundingClientRect()`, `scrollWidth`,
-  `clientWidth`, `scrollHeight`, and `clientHeight`.
-
-Dependency:
-
-```bash
-python3 -m pip install websockets
-```
-
-Current status:
-
-- `npm run visual:geometry -- --range 13-15 --fail-on findings` passes.
-- `python3 scripts/check_slide_geometry.py --range 11-15` reports zero findings.
-
-### Screenshot rendering
-
-```bash
-python3 scripts/visual_review.py --range 13-15 --clean
-```
-
-Screenshots are written to:
+Screenshots go to:
 
 ```text
 reports/screenshots/
 ```
 
-The helper tries Slidev export first. If Playwright is not installed, it falls
-back to live Chrome screenshots.
+These are runtime artifacts; do not commit screenshots unless explicitly asked.
 
-### VLM visual review
+## Known build warnings
 
-```bash
-python3 scripts/visual_review.py --range 13-15 --review
+`npm run build` succeeds but emits upstream warnings:
+
+```text
+[INVALID_ANNOTATION] A comment "/* #__PURE__ */" in node_modules/@vueuse/core/dist/index.js ...
 ```
 
-Preferred order:
+A dependency-refresh attempt did not clear this. Treat it as upstream
+Rolldown/VueUse noise unless CI starts failing.
 
-1. Run deterministic geometry audit.
-2. Fix all deterministic findings.
-3. Render screenshots.
-4. Use VLM/visual-review for qualitative issues only.
+There is also a warning about `--localstorage-file` without a valid path during
+Slidev export/build helpers; it is currently non-fatal.
 
-Rationale:
+## Current uncommitted / intentionally unstaged files
 
-- VLM/manual inspection can miss low-salience clipping, especially tiny axis
-  labels near the slide edge.
-- Geometry audit catches measurable clipping/overflow reliably.
+As of this handover, expect some non-deck or runtime files to remain dirty:
 
-## Design guidance captured during work
+- sibling presentation changes under `../agentic-ai-aws/` — unrelated;
+- `fastagent.jsonl` — runtime log;
+- `reports/slide-geometry.json` — generated QA output;
+- `reports/screenshots/*` — generated screenshots;
+- `data-viz/__pycache__/` — generated Python cache;
+- root-level notes such as `../../../acp.md`, `../../../core-transports.md`, etc.
 
-### Voiceover vs written text
+The HTTP route-map work itself is currently uncommitted at the time of this
+handover unless a later agent commits it. Relevant files to stage if committing:
 
-Not every caveat belongs on the slide.
+```text
+components/HttpRouteMap.vue
+slides.md
+style.css
+.fast-agent/agent-cards/visual-review.md
+handover.md
+```
 
-Before adding labels, captions, or explanatory prose, ask whether the audience
-needs it to parse the visual or whether the presenter will say it aloud.
-
-Prefer:
-
-- bold structural labels;
-- visual hierarchy;
-- clean diagrams;
-- voiceover for caveats and detail.
-
-### Visual rhythm
-
-Repeated semantic elements should share a clear sizing/alignment system:
-
-- bars;
-- cards;
-- labels;
-- icons;
-- timeline markers;
-- diagram nodes.
-
-Differences in size, spacing, stroke weight, or radius should communicate
-hierarchy/emphasis, not accidental variation.
-
-This came up specifically with the Gantt bars on the Transport Evolution slide.
-
-## Current useful commands
+Before committing, rerun:
 
 ```bash
 npm run build
-npm run visual:geometry -- --range 13-15 --fail-on findings
-python3 scripts/visual_review.py --range 13-15 --clean
-python3 scripts/visual_review.py --range 13-15 --review
+python3 scripts/check_slide_geometry.py --range 23 --fail-on findings
 ```
 
-For local editing:
+## Suggested next actions
 
-```bash
-npm run dev
-```
-
-For static preview:
-
-```bash
-npm run preview
-```
-
-## Notes / possible next improvements
-
-- Consider adapting `McpRemoteTrafficChart.vue` to consume `deck.chart-data.v1`
-  JSON from `emit_chart_data.py` rather than the current bespoke weekly JSON
-  shape.
-- Consider adding a CI-style command that runs:
-  1. `npm run build`
-  2. `npm run visual:geometry -- --range <important slides> --fail-on findings`
-- The current data-viz slides are probably still candidates for narrative
-  simplification. The top-right badge is strong; inline latest labels may be
-  optional depending on taste.
-- If screenshots/VLM miss something suspicious, add a deterministic geometry
-  rule before relying on prompt changes alone.
+1. Visually review slide 23 one more time after any route-map tweaks.
+2. If satisfied, commit the HTTP standardization problem slide work.
+3. Consider refactoring `McpRemoteTrafficChart` away from owning title/subtitle
+   if those slides need further authoring.
+4. Consider turning repeated chart-slide wrapper markup into a formal
+   `layouts/chart.vue` if the pattern grows.
+5. Keep watching connector-heavy diagrams: use components with node/edge data,
+   not raw markdown SVG coordinates.
