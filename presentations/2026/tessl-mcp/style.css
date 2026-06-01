@@ -852,9 +852,9 @@
 .stateless-discovery-slide {
   height: calc(100% - 5.25rem);
   display: grid;
-  grid-template-columns: minmax(0, 0.74fr) minmax(0, 1.26fr);
-  gap: 1.25rem;
-  align-items: stretch;
+  grid-template-columns: minmax(0, 1.16fr) minmax(0, 0.84fr);
+  gap: 1.15rem;
+  align-items: start;
 }
 
 .stateless-discovery-copy {
@@ -862,21 +862,45 @@
   min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
+}
+
+.stateless-discovery-copy .kicker {
+  margin: 0 0 0.48rem;
 }
 
 .stateless-discovery-copy h2 {
-  margin: 0 0 1rem;
+  margin: 0 0 0.82rem !important;
   color: var(--deck-text);
-  font-size: clamp(1.5rem, 3.5vw, 2.18rem);
+  font-size: clamp(1.58rem, 3.45vw, 2.22rem);
   line-height: 0.96;
   letter-spacing: -0.075em;
+}
+
+.stateless-discovery-copy .compact-point-list {
+  gap: 0.58rem;
+}
+
+.stateless-discovery-copy .compact-point-list > div {
+  padding: 0.68rem 0.82rem;
+}
+
+.stateless-discovery-copy .compact-point-list strong {
+  font-size: 1.08rem;
+}
+
+.stateless-discovery-copy .compact-point-list span {
+  margin-top: 0.16rem;
+  font-size: 0.76rem;
+  line-height: 1.28;
 }
 
 .stateless-discovery-json {
   min-width: 0;
   min-height: 0;
-  padding: 0.72rem;
+  width: min(100%, 480px);
+  justify-self: end;
+  padding: 0.64rem;
   overflow: hidden;
   background: rgba(11, 12, 15, 0.54);
 }
@@ -885,13 +909,26 @@
   height: 100%;
   border-color: rgba(255, 198, 73, 0.24);
   background: rgba(11, 12, 15, 0.38);
-  font-size: 0.68rem;
+  padding: 0.7rem 0.78rem;
+  font-size: 0.72rem;
   line-height: 1.16;
 }
 
 .stateless-discovery-json .http-json-line {
-  font-size: clamp(0.52rem, 1.18vw, 0.68rem);
-  line-height: 1.27;
+  font-size: clamp(0.56rem, 0.95vw, 0.72rem);
+  line-height: 1.29;
+}
+
+.stateless-discovery-json .http-json-line--indent {
+  padding-left: 0.86rem;
+}
+
+.stateless-discovery-json .http-json-line--indent-2 {
+  padding-left: 1.72rem;
+}
+
+.stateless-discovery-json .http-json-line--indent-3 {
+  padding-left: 2.58rem;
 }
 
 .stateless-discovery-json .http-json mark {

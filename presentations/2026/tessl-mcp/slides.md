@@ -315,8 +315,8 @@ layout: section
 
 <div class="compact-point-list">
 <div>
-<strong>From Transport to Data Layer</strong>
-<span>Version, Capability and Client identity move into the JSON-RPC <code>_meta</code> envelope.</span>
+<strong>Handshake Info to Data Layer</strong>
+<span>Version, Capability and Client identity move into the JSON-RPC <code>_meta</code> envelope on each request/response.</span>
 </div>
 <div>
 <strong><code>server/discover</code></strong>
@@ -337,8 +337,8 @@ layout: section
 <div class="http-json-line http-json-line--indent"><em>"method"</em>: <mark>"server/discover"</mark>,</div>
 <div class="http-json-line http-json-line--indent"><em>"params"</em>: {</div>
 <div class="http-json-line http-json-line--indent-2"><mark>"_meta"</mark>: {</div>
-<div class="http-json-line http-json-line--indent-3"><em>"io.modelcontextprotocol/protocolVersion"</em>: <strong>"2026-07-30"</strong>,</div>
-<div class="http-json-line http-json-line--indent-3"><em>"io.modelcontextprotocol/clientInfo"</em>: { <em>"name"</em>: <strong>"ExampleClient"</strong> }</div>
+<div class="http-json-line http-json-line--indent-3"><em>"protocolVersion"</em>: <strong>"2026-07-30"</strong>,</div>
+<div class="http-json-line http-json-line--indent-3"><em>"clientInfo"</em>: { <em>"name"</em>: <strong>"ExampleClient"</strong> }</div>
 <div class="http-json-line http-json-line--indent-2">}</div>
 <div class="http-json-line http-json-line--indent">}</div>
 <div class="http-json-line">}</div>
