@@ -153,13 +153,25 @@ Click the diagram to play a message round trip.
 
 ---
 
-<div class="protocol-efficiency-slide">
+<div class="protocol-efficiency-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <p class="chart-slide__kicker">MCP Protocol Efficiency</p>
+      <h1>Overhead in 10M Protocol Messages</h1>
+    </div>
+  </header>
   <McpProtocolEfficiency />
 </div>
 
 ---
 
-<div class="conversion-chart-slide">
+<div class="conversion-chart-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Daily session conversion</h1>
+      <p>Session → query conversion rate · 3-day converted-session average</p>
+    </div>
+  </header>
   <SessionConversionChart />
 </div>
 

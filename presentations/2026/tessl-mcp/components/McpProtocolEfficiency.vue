@@ -38,16 +38,10 @@ function barWidth(pct: number) {
 
 <template>
   <section class="protocol-efficiency">
-    <header class="protocol-efficiency__header">
-      <div>
-        <p class="protocol-efficiency__kicker">MCP Protocol Efficiency</p>
-        <h1>Overhead in 10M Protocol Messages</h1>
-      </div>
-      <div class="protocol-efficiency__window">
-        <span>latest 6 weeks</span>
-        <strong>2026-04-19 → 2026-05-31</strong>
-      </div>
-    </header>
+    <div class="protocol-efficiency__window">
+      <span>latest 6 weeks</span>
+      <strong>2026-04-19 → 2026-05-31</strong>
+    </div>
 
     <div class="protocol-efficiency__body">
       <div
@@ -98,11 +92,10 @@ function barWidth(pct: number) {
 <style scoped>
 .protocol-efficiency {
   box-sizing: border-box;
+  position: relative;
   height: 100%;
-  padding: 1.6rem 2rem 1.2rem;
+  padding: 1.05rem 1.8rem 1rem;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: 0.9rem;
   background:
     radial-gradient(
       circle at 78% 18%,
@@ -118,37 +111,15 @@ function barWidth(pct: number) {
   border: 1px solid var(--deck-border);
   border-radius: var(--deck-radius);
   box-shadow: var(--deck-shadow);
-  overflow: hidden;
-}
-
-.protocol-efficiency__header {
-  min-width: 0;
-  display: flex;
-  align-items: start;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-
-.protocol-efficiency__kicker {
-  margin: 0 0 0.32rem;
-  color: var(--deck-accent-hi);
-  font-size: 0.72rem;
-  font-weight: 900;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-}
-
-.protocol-efficiency h1 {
-  margin: 0;
-  color: var(--deck-text);
-  font-size: clamp(1.85rem, 3.25cqw, 2.35rem);
-  line-height: 1;
-  letter-spacing: -0.065em;
+  overflow: visible;
 }
 
 .protocol-efficiency__window {
-  flex: 0 0 auto;
-  min-width: 190px;
+  position: absolute;
+  top: calc(-1 * (var(--chart-slide-header-height) + 0.7rem));
+  right: 1.1rem;
+  z-index: 2;
+  min-width: 250px;
   padding: 0.72rem 0.86rem;
   text-align: right;
   border: 1px solid var(--deck-info-line);
@@ -187,16 +158,16 @@ function barWidth(pct: number) {
   min-width: 0;
   min-height: 0;
   display: grid;
-  grid-template-rows: repeat(3, minmax(108px, 1fr));
-  gap: 0.6rem;
+  grid-template-rows: repeat(3, minmax(92px, 1fr));
+  gap: 0.5rem;
 }
 
 .protocol-efficiency__row {
   min-height: 0;
-  padding: 0.66rem 0.9rem;
+  padding: 0.56rem 0.8rem;
   display: grid;
-  grid-template-rows: minmax(38px, auto) 34px 20px;
-  gap: 0.42rem;
+  grid-template-rows: minmax(32px, auto) 28px 18px;
+  gap: 0.34rem;
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 5px);
   background: rgba(11, 12, 15, 0.35);
@@ -236,7 +207,7 @@ function barWidth(pct: number) {
 
 .protocol-efficiency__track {
   position: relative;
-  height: 34px;
+  height: 28px;
   border: 1px solid rgba(185, 179, 165, 0.13);
   border-radius: 999px;
   background: rgba(240, 236, 226, 0.055);
@@ -276,7 +247,7 @@ function barWidth(pct: number) {
 
 .protocol-efficiency__meta span {
   color: var(--deck-accent-hi);
-  font-size: 0.98rem;
+  font-size: 0.9rem;
   font-weight: 950;
 }
 
@@ -294,7 +265,7 @@ function barWidth(pct: number) {
 
 .protocol-efficiency__meta em {
   color: var(--deck-dim);
-  font-size: 0.56rem;
+  font-size: 0.52rem;
   font-style: normal;
   font-weight: 800;
   letter-spacing: 0.1em;

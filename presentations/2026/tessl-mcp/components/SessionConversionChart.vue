@@ -117,25 +117,16 @@ const overallRate =
 
 <template>
   <section class="conversion-chart">
-    <header class="conversion-chart__header">
+    <div class="conversion-chart__stats">
       <div>
-        <h1>Daily session conversion</h1>
-        <p>
-          Session → at least one query · daily conversion rate with 3-day
-          converted-session average
-        </p>
+        <span>overall</span>
+        <strong>{{ overallRate.toFixed(2) }}%</strong>
       </div>
-      <div class="conversion-chart__stats">
-        <div>
-          <span>overall</span>
-          <strong>{{ overallRate.toFixed(2) }}%</strong>
-        </div>
-        <div>
-          <span>latest</span>
-          <strong>{{ latest.conversion_rate_pct.toFixed(2) }}%</strong>
-        </div>
+      <div>
+        <span>latest</span>
+        <strong>{{ latest.conversion_rate_pct.toFixed(2) }}%</strong>
       </div>
-    </header>
+    </div>
 
     <svg
       class="conversion-chart__svg"
@@ -373,4 +364,3 @@ const overallRate =
   fill: var(--deck-accent-hi);
 }
 </style>
-

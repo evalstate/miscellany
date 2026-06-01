@@ -222,7 +222,21 @@
   font-size: 0.92rem;
 }
 
-.chart-slide > :where(.activity-chart, .conversion-chart) {
+.chart-slide__kicker {
+  margin: 0 0 0.32rem;
+  color: var(--deck-accent-hi);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.conversion-chart-slide .chart-slide__header,
+.protocol-efficiency-slide .chart-slide__header {
+  padding-right: 22rem;
+}
+
+.chart-slide > :where(.activity-chart, .conversion-chart, .protocol-efficiency) {
   min-height: 0;
 }
 
@@ -244,6 +258,11 @@
 }
 
 .activity-chart {
+  position: relative;
+  overflow: visible;
+}
+
+.conversion-chart {
   position: relative;
   overflow: visible;
 }
@@ -284,6 +303,10 @@
 }
 
 .conversion-chart__stats {
+  position: absolute;
+  top: calc(-1 * (var(--chart-slide-header-height) + 0.7rem));
+  right: 1.1rem;
+  z-index: 2;
   display: flex;
   gap: 0.65rem;
 }
@@ -319,7 +342,7 @@
 }
 
 .conversion-chart__svg {
-  height: calc(100% - 82px);
+  height: 100%;
 }
 
 :where(.activity-chart__plot-bg, .conversion-chart__plot-bg) {
