@@ -117,8 +117,6 @@ fonts:
   <ProtocolStack />
 </div>
 
-Click either endpoint to send a protocol message in that direction.
-
 
 ---
 

@@ -95,11 +95,6 @@ const clientSteps: Step[] = [
   {
     label: "tools/call",
     path: "clientToServer",
-    tone: "request",
-  },
-  {
-    label: "Tools",
-    path: "clientToServer",
     flash: "tools",
     tone: "request",
   },
@@ -113,11 +108,6 @@ const clientSteps: Step[] = [
 const serverSteps: Step[] = [
   {
     label: "sampling/createMessage",
-    path: "serverToClient",
-    tone: "request",
-  },
-  {
-    label: "Sampling",
     path: "serverToClient",
     flash: "sampling",
     tone: "request",
@@ -272,7 +262,7 @@ onBeforeUnmount(clearTimers);
         class="protocol-flow__link protocol-flow__link--travel"
         :class="`protocol-flow__link--${active.tone}`"
         pathLength="1"
-        :style="{ '--protocol-pulse-offset': 1 - packetProgress }"
+        :style="{ '--protocol-pulse-length': Math.max(packetProgress, 0.01) }"
         :d="activePathData"
       />
       <circle
@@ -302,12 +292,12 @@ onBeforeUnmount(clearTimers);
 
     <button class="protocol-label protocol-label--server" type="button" @click="play('server')">
       <span>MCP Server</span>
-      <small>click to call client</small>
     </button>
+
+    <div class="protocol-process-gap" aria-hidden="true" />
 
     <button class="protocol-label protocol-label--client" type="button" @click="play('client')">
       <span>MCP Client</span>
-      <small>click to call server</small>
     </button>
 
     <div class="protocol-grid protocol-grid--client">
@@ -357,6 +347,7 @@ onBeforeUnmount(clearTimers);
   grid-template-rows:
     minmax(0, 1fr)
     var(--protocol-label-height)
+    clamp(48px, 18cqh, 78px)
     var(--protocol-label-height)
     minmax(0, 1fr);
   gap: var(--stack-gap);
@@ -384,16 +375,16 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-flow__link--base {
-  stroke: rgba(185, 179, 165, 0.17);
-  stroke-dasharray: 6 12;
+  stroke: rgba(185, 179, 165, 0.08);
+  stroke-dasharray: 3 18;
 }
 
 .protocol-flow__link--travel {
   opacity: 1;
   stroke: url(#protocol-link-glow);
-  stroke-width: 6;
-  stroke-dasharray: 0.24 1;
-  stroke-dashoffset: var(--protocol-pulse-offset);
+  stroke-width: 7;
+  stroke-dasharray: var(--protocol-pulse-length) 1;
+  stroke-dashoffset: 0;
   filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.62));
 }
 
@@ -405,6 +396,7 @@ onBeforeUnmount(clearTimers);
 .protocol-flow__packet {
   opacity: 1;
   fill: var(--deck-accent-hi);
+  filter: drop-shadow(0 0 14px rgba(255, 198, 73, 0.82));
 }
 
 .protocol-flow__packet--response {
@@ -484,6 +476,16 @@ onBeforeUnmount(clearTimers);
   font-weight: 850;
   letter-spacing: 0.14em;
   text-transform: uppercase;
+}
+
+.protocol-process-gap {
+  position: relative;
+  z-index: 1;
+  min-height: 0;
+  border-inline: 1px solid rgba(185, 179, 165, 0.08);
+  background:
+    linear-gradient(90deg, transparent, rgba(185, 179, 165, 0.1), transparent) 50% 50% /
+      46% 1px no-repeat;
 }
 
 .protocol-grid {
