@@ -304,34 +304,35 @@ layout: section
 ---
 
 
-# Stateless Protocol
+
+# SEP-2575: Make MCP Stateless
 
 <div class="stateless-discovery-slide">
 <section class="stateless-discovery-copy">
 
-<p class="kicker">Discovery</p>
 
 ## Remove Initialization Handshake
 
-<div class="compact-point-list">
+<dl class="compact-point-list">
 <div>
-<strong>Handshake Info to Data Layer</strong>
-<span>Version, Capability and Client identity move into the JSON-RPC <code>_meta</code> envelope on each request/response.</span>
-</div>
-<div>
-<strong><code>server/discover</code></strong>
-<span>Optional Client Probe to share Capability information for compatibility/User Experience reasons.</span>
+<dt>Handshake Info to Data Layer</dt>
+<dd>Version, Capability and Client identity move into the JSON-RPC <code>_meta</code> envelope on each request/response.</dd>
 </div>
 <div>
-<strong><code>subscriptions/listen</code></strong>
-<span>Endpoint to allow Client to initiate a notification stream for Resource Subscriptions or List Changed events </span>
+<dt>New <code>server/discover</code> endpoint</dt>
+<dd>Optional Client Probe to share Capability information for compatibility/User Experience reasons.</dd>
 </div>
+<div>
+<dt>New <code>subscriptions/listen</code> endpoint</dt>
+<dd>Endpoint to allow Client to initiate a notification stream for Resource Subscriptions or List Changed events</dd>
 </div>
+</dl>
 
 </section>
 
 <section class="stateless-discovery-json deck-panel">
 <div class="http-json http-json--packet">
+<div class="http-json-line stateless-discovery-json__gap">→ request</div>
 <div class="http-json-line">{</div>
 <div class="http-json-line http-json-line--indent"><em>"jsonrpc"</em>: <strong>"2.0"</strong>,</div>
 <div class="http-json-line http-json-line--indent"><em>"method"</em>: <mark>"server/discover"</mark>,</div>
@@ -342,7 +343,7 @@ layout: section
 <div class="http-json-line http-json-line--indent-2">}</div>
 <div class="http-json-line http-json-line--indent">}</div>
 <div class="http-json-line">}</div>
-<div class="http-json-line stateless-discovery-json__gap">→ response</div>
+<div class="http-json-line stateless-discovery-json__gap">← response</div>
 <div class="http-json-line">{</div>
 <div class="http-json-line http-json-line--indent"><em>"result"</em>: {</div>
 <div class="http-json-line http-json-line--indent-2"><em>"supportedVersions"</em>: [<strong>"2026-07-30"</strong>],</div>

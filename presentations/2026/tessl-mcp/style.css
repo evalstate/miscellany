@@ -850,11 +850,18 @@
 }
 
 .stateless-discovery-slide {
-  height: calc(100% - 5.25rem);
+  height: calc(100% - 4.9rem);
   display: grid;
-  grid-template-columns: minmax(0, 1.16fr) minmax(0, 0.84fr);
-  gap: 1.15rem;
+  grid-template-columns: minmax(0, 1.18fr) minmax(0, 0.82fr);
+  gap: 1rem;
   align-items: start;
+}
+
+.slidev-layout:has(.stateless-discovery-slide) > h1 {
+  color: var(--deck-text);
+  text-shadow:
+    0 0 24px rgba(255, 198, 73, 0.08),
+    0 0 42px rgba(106, 163, 247, 0.06);
 }
 
 .stateless-discovery-copy {
@@ -870,35 +877,43 @@
 }
 
 .stateless-discovery-copy h2 {
-  margin: 0 0 0.82rem !important;
-  color: var(--deck-text);
-  font-size: clamp(1.58rem, 3.45vw, 2.22rem);
+  margin: 0 0 0.72rem !important;
+  color: var(--deck-accent-hi);
+  font-size: clamp(1.68rem, 3.62vw, 2.38rem);
   line-height: 0.96;
   letter-spacing: -0.075em;
+  text-shadow: 0 0 24px rgba(255, 198, 73, 0.08);
 }
 
 .stateless-discovery-copy .compact-point-list {
-  gap: 0.58rem;
+  gap: 0.52rem;
+  margin: 0;
 }
 
 .stateless-discovery-copy .compact-point-list > div {
-  padding: 0.68rem 0.82rem;
+  padding: 0.72rem 0.86rem;
 }
 
-.stateless-discovery-copy .compact-point-list strong {
-  font-size: 1.08rem;
+.stateless-discovery-copy .compact-point-list dt {
+  margin: 0;
+  color: var(--deck-text);
+  font-size: 1.28rem;
+  font-weight: 750;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
 }
 
-.stateless-discovery-copy .compact-point-list span {
-  margin-top: 0.16rem;
-  font-size: 0.76rem;
-  line-height: 1.28;
+.stateless-discovery-copy .compact-point-list dd {
+  margin: 0.34rem 0 0;
+  color: var(--deck-muted);
+  font-size: 0.94rem;
+  line-height: 1.24;
 }
 
 .stateless-discovery-json {
   min-width: 0;
   min-height: 0;
-  width: min(100%, 480px);
+  width: min(100%, 468px);
   justify-self: end;
   padding: 0.64rem;
   overflow: hidden;
@@ -910,13 +925,13 @@
   border-color: rgba(255, 198, 73, 0.24);
   background: rgba(11, 12, 15, 0.38);
   padding: 0.7rem 0.78rem;
-  font-size: 0.72rem;
+  font-size: 0.76rem;
   line-height: 1.16;
 }
 
 .stateless-discovery-json .http-json-line {
-  font-size: clamp(0.56rem, 0.95vw, 0.72rem);
-  line-height: 1.29;
+  font-size: clamp(0.58rem, 0.98vw, 0.76rem);
+  line-height: 1.27;
 }
 
 .stateless-discovery-json .http-json-line--indent {
@@ -936,7 +951,7 @@
 }
 
 .stateless-discovery-json__gap {
-  margin: 0.28rem 0 0.2rem;
+  margin: 0.2rem 0 0.18rem;
   color: var(--deck-accent-hi);
   font-weight: 850;
   letter-spacing: 0.12em;
