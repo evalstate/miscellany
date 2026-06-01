@@ -1,4 +1,11 @@
 <script setup lang="ts">
+const props = withDefaults(
+  defineProps<{
+    mode?: "problem" | "solution";
+  }>(),
+  { mode: "solution" },
+);
+
 type NodeId = "regionA" | "regionB" | "endpoint" | "client";
 type Side = "top" | "right" | "bottom" | "left";
 type Tone = "blue" | "red";
@@ -183,7 +190,10 @@ function edgePath(edge: Edge) {
 </script>
 
 <template>
-  <section class="http-route-map deck-panel">
+  <section
+    class="http-route-map deck-panel"
+    :class="`http-route-map--${props.mode}`"
+  >
     <svg
       class="http-route-map__svg"
       viewBox="0 0 640 420"
@@ -247,7 +257,12 @@ function edgePath(edge: Edge) {
 
       <foreignObject x="28" y="242" width="250" height="136">
         <div xmlns="http://www.w3.org/1999/xhtml" class="http-route-note">
-          Edge routes by <strong>Mcp-Name</strong>, not request body
+          <template v-if="props.mode === 'problem'">
+            Edge only sees <strong>POST /mcp</strong>; routing fields are buried in JSON
+          </template>
+          <template v-else>
+            Edge sees <strong>Mcp-Name</strong> and <strong>Mcp-Param-Workload</strong>
+          </template>
         </div>
       </foreignObject>
     </svg>
@@ -324,6 +339,15 @@ function edgePath(edge: Edge) {
   fill: none;
   stroke-width: 4;
   stroke-linecap: round;
+}
+
+.http-route-map--problem .http-route-edge {
+  opacity: 0.28;
+  stroke: var(--deck-dim);
+}
+
+.http-route-map--problem .http-route-edge--dashed {
+  opacity: 0.18;
 }
 
 .http-route-edge--blue {

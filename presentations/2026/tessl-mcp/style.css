@@ -877,6 +877,16 @@
   align-items: stretch;
 }
 
+.http-standardization-schema {
+  height: calc(100% - 5.1rem);
+  display: grid;
+  place-items: stretch center;
+}
+
+.http-standardization-schema > .http-request-panel {
+  width: min(900px, 100%);
+}
+
 .http-request-panel {
   min-width: 0;
   min-height: 0;
@@ -889,6 +899,16 @@
     rgba(20, 22, 27, 0.78);
 }
 
+.http-request-panel--tool {
+  grid-template-rows: auto minmax(0, 1fr);
+  padding: 1.25rem;
+}
+
+.http-request-panel--solution {
+  gap: 0.48rem;
+  padding: 0.8rem;
+}
+
 .http-request-panel h2 {
   margin: 0;
   color: var(--deck-muted);
@@ -899,6 +919,10 @@
   letter-spacing: -0.04em;
 }
 
+.http-request-panel--solution h2 {
+  font-size: 1.05rem;
+}
+
 .http-tool-panel {
   min-width: 0;
   padding: 0.62rem 0.78rem;
@@ -907,6 +931,22 @@
   background:
     linear-gradient(135deg, rgba(245, 164, 0, 0.105), transparent 56%),
     rgba(11, 12, 15, 0.28);
+}
+
+.http-tool-panel--schema {
+  display: grid;
+  align-content: center;
+  min-height: 0;
+  padding: 1.15rem 1.25rem;
+}
+
+.http-request-panel--solution .http-tool-panel {
+  padding: 0.48rem 0.62rem;
+}
+
+.http-request-panel--solution .http-tool-panel span {
+  margin-bottom: 0.18rem;
+  font-size: 0.52rem;
 }
 
 .http-tool-panel span {
@@ -948,6 +988,43 @@
   text-overflow: ellipsis;
 }
 
+.http-json-line {
+  color: var(--deck-text);
+  font-size: 0.74rem;
+  line-height: 1.34;
+  white-space: nowrap;
+}
+
+.http-request-panel--tool .http-json-line {
+  font-size: 1rem;
+  line-height: 1.42;
+}
+
+.http-json-line--indent {
+  padding-left: 1.2rem;
+}
+
+.http-json-line--indent-2 {
+  padding-left: 2.4rem;
+}
+
+.http-json-line--indent-3 {
+  padding-left: 3.6rem;
+}
+
+.http-json-line--indent-4 {
+  padding-left: 4.8rem;
+}
+
+.http-json-line em {
+  color: var(--deck-muted);
+  font-style: normal;
+}
+
+.http-json-line strong {
+  color: var(--deck-text);
+}
+
 .http-request-line {
   padding: 0.68rem 0.84rem;
   color: var(--deck-info);
@@ -956,6 +1033,30 @@
   background: rgba(106, 163, 247, 0.1);
   font-size: 0.94rem;
   line-height: 1.28;
+}
+
+.http-request-panel--problem .http-request-line {
+  border-color: rgba(185, 179, 165, 0.22);
+  background: rgba(20, 22, 27, 0.44);
+  color: var(--deck-muted);
+}
+
+.http-request-line--solution {
+  border-color: rgba(255, 198, 73, 0.48);
+  background:
+    linear-gradient(135deg, rgba(245, 164, 0, 0.12), transparent 64%),
+    rgba(106, 163, 247, 0.1);
+}
+
+.http-request-panel--solution .http-request-line {
+  padding: 0.48rem 0.62rem;
+  font-size: 0.78rem;
+  line-height: 1.18;
+}
+
+.http-request-panel--solution .http-json-line {
+  font-size: 0.65rem;
+  line-height: 1.18;
 }
 
 .http-request-line strong,
@@ -979,6 +1080,11 @@
   box-shadow: none;
   font-size: 0.78rem;
   line-height: 1.18;
+}
+
+.http-json--packet {
+  display: grid;
+  align-content: start;
 }
 
 .http-json mark {

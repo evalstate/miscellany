@@ -325,11 +325,28 @@ Return `inputRequired` rather than SSE Stream.
 
 ---
 
-# SEP-2243: HTTP Header Standardization
+# SEP-2243: The problem
 
 <div class="http-standardization-problem">
-  <HttpRouteMap />
-  <HttpHeaderExample />
+  <HttpRouteMap mode="problem" />
+  <HttpHeaderExample variant="problem" />
+</div>
+
+---
+
+# SEP-2243: Tool metadata
+
+<div class="http-standardization-schema">
+  <HttpHeaderExample variant="tool" />
+</div>
+
+---
+
+# SEP-2243: HTTP headers make it routable
+
+<div class="http-standardization-problem">
+  <HttpRouteMap mode="solution" />
+  <HttpHeaderExample variant="solution" />
 </div>
 
 ---
