@@ -94,12 +94,12 @@ function barWidth(pct: number) {
   background:
     radial-gradient(
       circle at 78% 18%,
-      rgba(106, 163, 247, 0.15),
+      rgba(106, 163, 247, 0.075),
       transparent 28%
     ),
     radial-gradient(
       circle at 16% 68%,
-      rgba(245, 164, 0, 0.12),
+      rgba(245, 164, 0, 0.065),
       transparent 28%
     ),
     rgba(20, 22, 27, 0.76);
@@ -182,7 +182,7 @@ function barWidth(pct: number) {
 .protocol-efficiency__bar {
   height: 100%;
   border-radius: inherit;
-  box-shadow: 0 0 28px rgba(255, 198, 73, 0.12);
+  box-shadow: 0 0 14px rgba(255, 198, 73, 0.055);
 }
 
 .protocol-efficiency__row--neutral .protocol-efficiency__bar {
@@ -250,7 +250,7 @@ function barWidth(pct: number) {
   background:
     radial-gradient(
       circle at 50% 18%,
-      rgba(106, 163, 247, 0.18),
+      rgba(106, 163, 247, 0.09),
       transparent 42%
     ),
     rgba(11, 12, 15, 0.42);

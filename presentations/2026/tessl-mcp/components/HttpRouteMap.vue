@@ -280,7 +280,7 @@ function edgePath(edge: Edge) {
   background:
     radial-gradient(
       circle at 20% 18%,
-      rgba(106, 163, 247, 0.12),
+      rgba(106, 163, 247, 0.06),
       transparent 28%
     ),
     radial-gradient(
@@ -340,17 +340,17 @@ function edgePath(edge: Edge) {
 
 .http-route-edge {
   fill: none;
-  stroke-width: 4;
+  stroke-width: 5;
   stroke-linecap: round;
 }
 
 .http-route-map--problem .http-route-edge {
-  opacity: 0.28;
+  opacity: 0.36;
   stroke: var(--deck-dim);
 }
 
 .http-route-map--problem .http-route-edge--dashed {
-  opacity: 0.18;
+  opacity: 0.24;
 }
 
 .http-route-edge--blue {

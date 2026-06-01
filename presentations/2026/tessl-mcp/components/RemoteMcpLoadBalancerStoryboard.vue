@@ -633,8 +633,8 @@ onBeforeUnmount(clearTimers);
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 8px);
   background:
-    radial-gradient(circle at 15% 50%, rgba(245, 164, 0, 0.14), transparent 25%),
-    radial-gradient(circle at 83% 50%, rgba(106, 163, 247, 0.11), transparent 28%),
+    radial-gradient(circle at 15% 50%, rgba(245, 164, 0, 0.07), transparent 25%),
+    radial-gradient(circle at 83% 50%, rgba(106, 163, 247, 0.06), transparent 28%),
     rgba(20, 22, 27, 0.86);
   box-shadow: var(--deck-shadow);
 }
@@ -767,8 +767,8 @@ onBeforeUnmount(clearTimers);
 }
 
 .remote-mcp-story__pulse--glow {
-  stroke: rgba(255, 198, 73, 0.28);
-  stroke-width: 20;
+  stroke: rgba(255, 198, 73, 0.14);
+  stroke-width: 14;
 }
 
 .remote-mcp-story__pulse--core {
@@ -777,7 +777,7 @@ onBeforeUnmount(clearTimers);
 }
 
 .remote-mcp-story__pulse--result.remote-mcp-story__pulse--glow {
-  stroke: rgba(106, 163, 247, 0.28);
+  stroke: rgba(106, 163, 247, 0.14);
 }
 
 .remote-mcp-story__pulse--result.remote-mcp-story__pulse--core {
@@ -785,7 +785,7 @@ onBeforeUnmount(clearTimers);
 }
 
 .remote-mcp-story__pulse--notify.remote-mcp-story__pulse--glow {
-  stroke: rgba(106, 209, 156, 0.28);
+  stroke: rgba(106, 209, 156, 0.14);
 }
 
 .remote-mcp-story__pulse--notify.remote-mcp-story__pulse--core {
@@ -794,7 +794,7 @@ onBeforeUnmount(clearTimers);
 
 .remote-mcp-story__message {
   opacity: 1;
-  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.34));
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.28));
   animation: remote-mcp-story-message 220ms ease-out both;
 }
 
@@ -846,7 +846,7 @@ onBeforeUnmount(clearTimers);
   fill: transparent;
   stroke: rgba(255, 198, 73, 0.62);
   stroke-width: 2;
-  filter: drop-shadow(0 0 18px rgba(255, 198, 73, 0.68));
+  filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.34));
   transform-box: fill-box;
   transform-origin: center;
 }
@@ -858,7 +858,7 @@ onBeforeUnmount(clearTimers);
 .remote-mcp-story__node--locked-endpoint .remote-mcp-story__node-box {
   stroke: var(--deck-ok);
   stroke-width: 3.4;
-  filter: drop-shadow(0 0 18px rgba(106, 209, 156, 0.42));
+  filter: drop-shadow(0 0 10px rgba(106, 209, 156, 0.22));
 }
 
 .remote-mcp-story__role,
@@ -882,7 +882,7 @@ onBeforeUnmount(clearTimers);
 }
 
 .remote-mcp-story__state {
-  opacity: 0.18;
+  opacity: 0.32;
   transition:
     opacity 320ms ease,
     filter 320ms ease,
@@ -891,13 +891,13 @@ onBeforeUnmount(clearTimers);
 
 .remote-mcp-story__state rect {
   fill: rgba(11, 12, 15, 0.72);
-  stroke: rgba(245, 164, 0, 0.34);
+  stroke: rgba(245, 164, 0, 0.42);
 }
 
 .remote-mcp-story--client-knows-server .remote-mcp-story__state--client,
 .remote-mcp-story--server-knows-client .remote-mcp-story__state--server {
   opacity: 1;
-  filter: drop-shadow(0 0 18px rgba(255, 198, 73, 0.18));
+  filter: drop-shadow(0 0 8px rgba(255, 198, 73, 0.1));
 }
 
 .remote-mcp-story__state-value {

@@ -90,7 +90,7 @@ function formatRate(value: number) {
   grid-template-rows: auto minmax(0, 1fr);
   gap: 0.58rem;
   background:
-    radial-gradient(circle at 86% 8%, rgba(106, 163, 247, 0.12), transparent 30%),
+    radial-gradient(circle at 86% 8%, rgba(106, 163, 247, 0.06), transparent 30%),
     rgba(11, 12, 15, 0.72);
 }
 

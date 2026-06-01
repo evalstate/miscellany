@@ -224,7 +224,7 @@ const isBefore = props.variant === "before";
   border-color: rgba(255, 198, 73, 0.54);
   box-shadow:
     0 14px 30px rgba(0, 0, 0, 0.2),
-    0 0 28px rgba(245, 164, 0, 0.12);
+    0 0 12px rgba(245, 164, 0, 0.055);
 }
 
 .spec-timeline__tick--future {
@@ -371,7 +371,7 @@ const isBefore = props.variant === "before";
     rgba(106, 163, 247, 0.075)
   );
   border-color: rgba(255, 198, 73, 0.28);
-  box-shadow: inset 0 0 28px rgba(255, 198, 73, 0.08);
+  box-shadow: inset 0 0 14px rgba(255, 198, 73, 0.04);
 }
 
 .spec-timeline:has(.spec-timeline__hotspot--1:hover) .spec-timeline__hotspot--1,
@@ -399,8 +399,8 @@ const isBefore = props.variant === "before";
   );
   border-color: rgba(255, 198, 73, 0.32);
   box-shadow:
-    inset 0 0 30px rgba(255, 198, 73, 0.09),
-    0 0 28px rgba(245, 164, 0, 0.055);
+    inset 0 0 14px rgba(255, 198, 73, 0.045),
+    0 0 10px rgba(245, 164, 0, 0.035);
 }
 
 .spec-timeline:has(.spec-timeline__hotspot--1:hover)
@@ -431,7 +431,7 @@ const isBefore = props.variant === "before";
   background: rgba(20, 22, 27, 0.74);
   box-shadow:
     0 16px 32px rgba(0, 0, 0, 0.22),
-    0 0 26px rgba(245, 164, 0, 0.18);
+    0 0 12px rgba(245, 164, 0, 0.08);
   transform: translateY(-1px);
 }
 
@@ -476,7 +476,7 @@ const isBefore = props.variant === "before";
     rgba(106, 163, 247, 0.052)
   );
   border-color: rgba(255, 198, 73, 0.22);
-  box-shadow: inset 0 0 24px rgba(255, 198, 73, 0.06);
+  box-shadow: inset 0 0 12px rgba(255, 198, 73, 0.035);
 }
 
 .spec-timeline:has(
@@ -518,7 +518,7 @@ const isBefore = props.variant === "before";
   background: rgba(20, 22, 27, 0.64);
   box-shadow:
     0 14px 28px rgba(0, 0, 0, 0.2),
-    0 0 22px rgba(245, 164, 0, 0.11);
+    0 0 10px rgba(245, 164, 0, 0.05);
 }
 
 .spec-timeline--before .spec-timeline__tick--col-5,
@@ -574,7 +574,7 @@ const isBefore = props.variant === "before";
   border-color: rgba(255, 198, 73, 0.54);
   box-shadow:
     0 15px 28px rgba(0, 0, 0, 0.24),
-    0 0 32px rgba(245, 164, 0, 0.1);
+    0 0 12px rgba(245, 164, 0, 0.05);
 }
 
 .spec-timeline__bar--stateless-stdio strong {
@@ -602,7 +602,7 @@ const isBefore = props.variant === "before";
   border-color: rgba(255, 198, 73, 0.52);
   box-shadow:
     0 15px 28px rgba(0, 0, 0, 0.24),
-    0 0 32px rgba(106, 163, 247, 0.11);
+    0 0 12px rgba(106, 163, 247, 0.055);
 }
 
 .spec-timeline__bar--auth-as {

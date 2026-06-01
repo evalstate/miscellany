@@ -147,7 +147,7 @@ const overallRate =
           width="180%"
           height="180%"
         >
-          <feGaussianBlur stdDeviation="3.2" result="blur" />
+          <feGaussianBlur stdDeviation="1.8" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />

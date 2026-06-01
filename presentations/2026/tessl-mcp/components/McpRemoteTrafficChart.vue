@@ -266,7 +266,7 @@ const latestLabelY = computed(() => {
           width="180%"
           height="180%"
         >
-          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feGaussianBlur stdDeviation="2" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
             <feMergeNode in="SourceGraphic" />
@@ -373,7 +373,7 @@ const latestLabelY = computed(() => {
         :y="plot.top + 24"
         text-anchor="end"
       >
-        opaque usage index
+        usage index
       </text>
     </svg>
   </section>
@@ -396,12 +396,12 @@ const latestLabelY = computed(() => {
   background:
     radial-gradient(
       circle at 12% 12%,
-      rgba(245, 164, 0, 0.12),
+      rgba(245, 164, 0, 0.065),
       transparent 28%
     ),
     radial-gradient(
       circle at 78% 30%,
-      rgba(106, 163, 247, 0.11),
+      rgba(106, 163, 247, 0.06),
       transparent 30%
     ),
     rgba(20, 22, 27, 0.82);

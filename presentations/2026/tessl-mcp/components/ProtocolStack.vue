@@ -438,7 +438,7 @@ onBeforeUnmount(clearTimers);
 .protocol-label.is-actor-active {
   border-color: rgba(255, 198, 73, 0.62);
   background:
-    radial-gradient(circle at 10% 50%, rgba(255, 198, 73, 0.12), transparent 34%),
+    radial-gradient(circle at 10% 50%, rgba(255, 198, 73, 0.06), transparent 34%),
     rgba(20, 22, 27, 0.62);
 }
 
@@ -447,7 +447,7 @@ onBeforeUnmount(clearTimers);
 .protocol-label--client.is-actor-active {
   border-color: rgba(106, 163, 247, 0.7);
   background:
-    radial-gradient(circle at 10% 50%, rgba(106, 163, 247, 0.14), transparent 34%),
+    radial-gradient(circle at 10% 50%, rgba(106, 163, 247, 0.07), transparent 34%),
     rgba(20, 22, 27, 0.62);
 }
 
@@ -502,7 +502,7 @@ onBeforeUnmount(clearTimers);
 
 .protocol-block-arrow {
   --arrow-color: rgba(185, 179, 165, 0.18);
-  --arrow-glow: rgba(185, 179, 165, 0.08);
+  --arrow-glow: rgba(185, 179, 165, 0.04);
   --arrow-outline: rgba(215, 209, 194, 0.62);
   --arrow-head-extend: clamp(12px, 2.4cqh, 20px);
   position: relative;
@@ -523,7 +523,7 @@ onBeforeUnmount(clearTimers);
     drop-shadow(-2px 0 0 var(--arrow-outline))
     drop-shadow(0 2px 0 var(--arrow-outline))
     drop-shadow(0 -2px 0 var(--arrow-outline))
-    drop-shadow(0 0 16px var(--arrow-glow));
+    drop-shadow(0 0 8px var(--arrow-glow));
   opacity: 0.5;
   overflow: hidden;
   transition:
@@ -556,7 +556,7 @@ onBeforeUnmount(clearTimers);
   background: rgba(255, 255, 255, 0.94);
   box-shadow:
     0 0 0 5px color-mix(in srgb, var(--arrow-color) 35%, transparent),
-    0 0 24px color-mix(in srgb, var(--arrow-color) 74%, white 12%);
+    0 0 12px color-mix(in srgb, var(--arrow-color) 52%, white 8%);
   opacity: 0;
   transform: translate(-50%, 0);
 }
@@ -573,26 +573,26 @@ onBeforeUnmount(clearTimers);
 
 .protocol-stack--channel-up .protocol-block-arrow--up {
   --arrow-color: rgba(255, 198, 73, 0.82);
-  --arrow-glow: rgba(255, 198, 73, 0.34);
+  --arrow-glow: rgba(255, 198, 73, 0.16);
   --arrow-outline: rgba(255, 232, 166, 0.92);
 }
 
 .protocol-stack--channel-down .protocol-block-arrow--down {
   --arrow-color: rgba(106, 163, 247, 0.82);
-  --arrow-glow: rgba(106, 163, 247, 0.34);
+  --arrow-glow: rgba(106, 163, 247, 0.16);
   --arrow-outline: rgba(235, 241, 255, 0.9);
 }
 
 .protocol-stack--hold-up .protocol-block-arrow--up {
   --arrow-color: rgba(255, 198, 73, 0.72);
-  --arrow-glow: rgba(255, 198, 73, 0.28);
+  --arrow-glow: rgba(255, 198, 73, 0.14);
   --arrow-outline: rgba(255, 232, 166, 0.84);
   opacity: 0.74;
 }
 
 .protocol-stack--hold-down .protocol-block-arrow--down {
   --arrow-color: rgba(106, 163, 247, 0.72);
-  --arrow-glow: rgba(106, 163, 247, 0.28);
+  --arrow-glow: rgba(106, 163, 247, 0.14);
   --arrow-outline: rgba(235, 241, 255, 0.82);
   opacity: 0.74;
 }
@@ -707,7 +707,7 @@ onBeforeUnmount(clearTimers);
   border-color: rgba(255, 198, 73, 0.58);
   box-shadow:
     0 18px 38px rgba(0, 0, 0, 0.3),
-    0 0 24px rgba(255, 198, 73, 0.12);
+    0 0 12px rgba(255, 198, 73, 0.06);
 }
 
 .protocol-stack--response .protocol-operation {
@@ -742,7 +742,7 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-card-shell.is-on {
-  filter: drop-shadow(0 0 16px rgba(255, 198, 73, 0.22));
+  filter: drop-shadow(0 0 8px rgba(255, 198, 73, 0.11));
 }
 
 .protocol-card-shell.is-on :deep(.protocol-card) {
@@ -750,7 +750,7 @@ onBeforeUnmount(clearTimers);
   background:
     radial-gradient(
       circle at 50% 45%,
-      rgba(255, 198, 73, 0.13),
+      rgba(255, 198, 73, 0.07),
       transparent 58%
     ),
     rgba(20, 22, 27, 0.94);
@@ -782,7 +782,7 @@ onBeforeUnmount(clearTimers);
     transform: translateY(-1px) scale(1.008);
     box-shadow:
       0 18px 42px rgba(0, 0, 0, 0.26),
-      0 0 26px rgba(255, 198, 73, 0.18);
+      0 0 12px rgba(255, 198, 73, 0.08);
   }
 }
 
@@ -795,7 +795,7 @@ onBeforeUnmount(clearTimers);
       drop-shadow(-2px 0 0 rgba(235, 241, 255, 0.9))
       drop-shadow(0 2px 0 rgba(235, 241, 255, 0.9))
       drop-shadow(0 -2px 0 rgba(235, 241, 255, 0.9))
-      drop-shadow(0 0 16px rgba(106, 163, 247, 0.3));
+      drop-shadow(0 0 8px rgba(106, 163, 247, 0.14));
     transform: none;
   }
   48% {
@@ -805,7 +805,7 @@ onBeforeUnmount(clearTimers);
       drop-shadow(-2px 0 0 rgba(245, 248, 255, 0.96))
       drop-shadow(0 2px 0 rgba(245, 248, 255, 0.96))
       drop-shadow(0 -2px 0 rgba(245, 248, 255, 0.96))
-      drop-shadow(0 0 26px rgba(106, 163, 247, 0.72));
+      drop-shadow(0 0 12px rgba(106, 163, 247, 0.28));
   }
 }
 
@@ -818,7 +818,7 @@ onBeforeUnmount(clearTimers);
       drop-shadow(-2px 0 0 rgba(255, 232, 166, 0.92))
       drop-shadow(0 2px 0 rgba(255, 232, 166, 0.92))
       drop-shadow(0 -2px 0 rgba(255, 232, 166, 0.92))
-      drop-shadow(0 0 16px rgba(255, 198, 73, 0.3));
+      drop-shadow(0 0 8px rgba(255, 198, 73, 0.14));
     transform: rotate(180deg);
   }
   48% {
@@ -828,7 +828,7 @@ onBeforeUnmount(clearTimers);
       drop-shadow(-2px 0 0 rgba(255, 239, 191, 0.98))
       drop-shadow(0 2px 0 rgba(255, 239, 191, 0.98))
       drop-shadow(0 -2px 0 rgba(255, 239, 191, 0.98))
-      drop-shadow(0 0 26px rgba(255, 198, 73, 0.72));
+      drop-shadow(0 0 12px rgba(255, 198, 73, 0.28));
   }
 }
 
@@ -841,7 +841,7 @@ onBeforeUnmount(clearTimers);
       drop-shadow(-2px 0 0 rgba(235, 241, 255, 0.9))
       drop-shadow(0 2px 0 rgba(235, 241, 255, 0.9))
       drop-shadow(0 -2px 0 rgba(235, 241, 255, 0.9))
-      drop-shadow(0 0 16px rgba(106, 163, 247, 0.3));
+      drop-shadow(0 0 8px rgba(106, 163, 247, 0.14));
     transform: translateY(-1%) scaleY(0.98);
   }
   18%,
@@ -852,7 +852,7 @@ onBeforeUnmount(clearTimers);
       drop-shadow(-2px 0 0 rgba(245, 248, 255, 0.96))
       drop-shadow(0 2px 0 rgba(245, 248, 255, 0.96))
       drop-shadow(0 -2px 0 rgba(245, 248, 255, 0.96))
-      drop-shadow(0 0 24px rgba(106, 163, 247, 0.68));
+      drop-shadow(0 0 12px rgba(106, 163, 247, 0.26));
     transform: translateY(0) scaleY(1);
   }
 }
@@ -866,7 +866,7 @@ onBeforeUnmount(clearTimers);
       drop-shadow(-2px 0 0 rgba(255, 232, 166, 0.92))
       drop-shadow(0 2px 0 rgba(255, 232, 166, 0.92))
       drop-shadow(0 -2px 0 rgba(255, 232, 166, 0.92))
-      drop-shadow(0 0 16px rgba(255, 198, 73, 0.3));
+      drop-shadow(0 0 8px rgba(255, 198, 73, 0.14));
     transform: rotate(180deg) translateY(-1%) scaleY(0.98);
   }
   18%,
@@ -877,7 +877,7 @@ onBeforeUnmount(clearTimers);
       drop-shadow(-2px 0 0 rgba(255, 239, 191, 0.98))
       drop-shadow(0 2px 0 rgba(255, 239, 191, 0.98))
       drop-shadow(0 -2px 0 rgba(255, 239, 191, 0.98))
-      drop-shadow(0 0 24px rgba(255, 198, 73, 0.68));
+      drop-shadow(0 0 12px rgba(255, 198, 73, 0.26));
     transform: rotate(180deg) translateY(0) scaleY(1);
   }
 }
@@ -904,7 +904,7 @@ onBeforeUnmount(clearTimers);
     transform: none;
   }
   45% {
-    filter: drop-shadow(0 0 20px rgba(255, 198, 73, 0.52));
+    filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.24));
     transform: translateY(-1px) scale(1.02);
   }
 }
