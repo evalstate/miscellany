@@ -255,17 +255,16 @@ function edgePath(edge: Edge) {
         />
       </g>
 
-      <foreignObject x="28" y="242" width="250" height="136">
-        <div xmlns="http://www.w3.org/1999/xhtml" class="http-route-note">
-          <template v-if="props.mode === 'problem'">
-            Edge only sees <strong>POST /mcp</strong>; routing fields are buried in JSON
-          </template>
-          <template v-else>
-            Edge sees <strong>Mcp-Name</strong> and <strong>Mcp-Param-Workload</strong>
-          </template>
-        </div>
-      </foreignObject>
     </svg>
+
+    <div class="http-route-note">
+      <template v-if="props.mode === 'problem'">
+        Edge only sees <strong>POST /mcp</strong>; routing fields are buried in JSON.
+      </template>
+      <template v-else>
+        Edge sees <strong>Mcp-Name</strong> and <strong>Mcp-Param-Pipeline</strong>.
+      </template>
+    </div>
   </section>
 </template>
 
@@ -273,6 +272,10 @@ function edgePath(edge: Edge) {
 .http-route-map {
   min-width: 0;
   min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 0.72rem;
+  padding: 0.95rem;
   overflow: hidden;
   background:
     radial-gradient(
@@ -373,13 +376,17 @@ function edgePath(edge: Edge) {
 .http-route-note {
   box-sizing: border-box;
   width: 100%;
-  height: 100%;
-  padding: 0.78rem 0.88rem;
+  padding: 0.74rem 0.86rem;
   color: var(--deck-muted);
   border: 1px solid rgba(240, 236, 226, 0.28);
+  border-radius: var(--deck-radius);
   background: rgba(11, 12, 15, 0.36);
   font-family: var(--deck-font-mono);
-  font-size: 23px;
+  font-size: 0.88rem;
   line-height: 1.3;
+}
+
+.http-route-note strong {
+  color: var(--deck-text);
 }
 </style>

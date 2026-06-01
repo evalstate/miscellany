@@ -870,7 +870,7 @@
 
 /* HTTP standardization problem slide */
 .http-standardization-problem {
-  height: calc(100% - 5.1rem);
+  height: calc(100% - 4.35rem);
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(430px, 1.08fr);
   gap: 1.35rem;
@@ -878,13 +878,13 @@
 }
 
 .http-standardization-schema {
-  height: calc(100% - 5.1rem);
+  height: calc(100% - 4.35rem);
   display: grid;
   place-items: stretch center;
 }
 
 .http-standardization-schema > .http-request-panel {
-  width: min(900px, 100%);
+  width: min(1120px, 100%);
 }
 
 .http-request-panel {
@@ -900,7 +900,7 @@
 }
 
 .http-request-panel--tool {
-  grid-template-rows: auto minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
   padding: 1.25rem;
 }
 
@@ -934,10 +934,51 @@
 }
 
 .http-tool-panel--schema {
-  display: grid;
-  align-content: center;
   min-height: 0;
   padding: 1.15rem 1.25rem;
+}
+
+.http-schema-layout {
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.22fr) minmax(300px, 0.78fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.http-schema-notes {
+  display: grid;
+  gap: 0.72rem;
+  align-content: center;
+}
+
+.http-schema-notes > div {
+  padding: 0.85rem 0.95rem;
+  border: 1px solid var(--deck-border);
+  border-radius: var(--deck-radius);
+  background: rgba(20, 22, 27, 0.58);
+}
+
+.http-schema-notes strong,
+.http-schema-notes span {
+  display: block;
+}
+
+.http-schema-notes strong {
+  color: var(--deck-text);
+  font-size: 1rem;
+  letter-spacing: -0.04em;
+}
+
+.http-schema-notes span {
+  margin-top: 0.24rem;
+  color: var(--deck-muted);
+  font-size: 0.72rem;
+  line-height: 1.35;
+}
+
+.http-schema-notes code {
+  color: var(--deck-accent-hi);
 }
 
 .http-request-panel--solution .http-tool-panel {
