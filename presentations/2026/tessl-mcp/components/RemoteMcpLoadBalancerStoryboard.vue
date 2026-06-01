@@ -22,64 +22,68 @@ type EdgeSpec = {
   toAnchor: Anchor;
 };
 
+type RouteLeg = {
+  edgeId: string;
+  reverse?: boolean;
+};
+
 type StoryStep = {
   id: string;
-  edgeId: string;
+  route: RouteLeg[];
   label: string;
   caption: string;
-  reverse?: boolean;
   tone?: "request" | "result" | "notify";
 };
 
 const nodes: NodeSpec[] = [
   {
     id: "client",
-    role: "MCP client",
+    role: "endpoint",
     title: "Client",
-    detail: "initiates JSON-RPC",
+    detail: "",
     x: 56,
     y: 180,
-    w: 188,
+    w: 198,
     h: 112,
   },
   {
     id: "lb",
     role: "remote edge",
     title: "Load balancer",
-    detail: "routes each HTTP request",
-    x: 406,
+    detail: "",
+    x: 386,
     y: 185,
-    w: 188,
+    w: 238,
     h: 102,
   },
   {
     id: "server-a",
-    role: "worker 1",
+    role: "server",
     title: "Server 01",
-    detail: "healthy",
-    x: 766,
+    detail: "",
+    x: 748,
     y: 72,
-    w: 184,
+    w: 206,
     h: 92,
   },
   {
     id: "server-b",
-    role: "worker 2",
+    role: "server",
     title: "Server 02",
-    detail: "selected",
-    x: 766,
+    detail: "",
+    x: 748,
     y: 190,
-    w: 184,
+    w: 206,
     h: 92,
   },
   {
     id: "server-c",
-    role: "worker 3",
+    role: "server",
     title: "Server 03",
-    detail: "healthy",
-    x: 766,
+    detail: "",
+    x: 748,
     y: 308,
-    w: 184,
+    w: 206,
     h: 92,
   },
 ];
@@ -93,80 +97,112 @@ const edges: EdgeSpec[] = [
 
 const initializeSteps: StoryStep[] = [
   {
-    id: "initialize-client-lb",
-    edgeId: "client-lb",
+    id: "initialize-request",
+    route: [{ edgeId: "client-lb" }, { edgeId: "lb-b" }],
     label: "InitializeRequest",
-    caption: "Client sends InitializeRequest",
+    caption: "Client initializes through the load balancer",
     tone: "request",
   },
   {
-    id: "initialize-lb-server",
-    edgeId: "lb-b",
-    label: "InitializeRequest",
-    caption: "Load balancer routes it to Server 02",
-    tone: "request",
-  },
-  {
-    id: "server-remembers-client",
-    edgeId: "lb-b",
-    label: "client capabilities + identity",
-    caption: "Server now knows the client capabilities and identity",
-    reverse: true,
-    tone: "request",
-  },
-  {
-    id: "result-server-lb",
-    edgeId: "lb-b",
-    label: "InitializeResult",
-    caption: "Server returns capabilities, identity, and MCP-Session-Id",
-    reverse: true,
-    tone: "result",
-  },
-  {
-    id: "result-lb-client",
-    edgeId: "client-lb",
+    id: "initialize-result",
+    route: [
+      { edgeId: "lb-b", reverse: true },
+      { edgeId: "client-lb", reverse: true },
+    ],
     label: "InitializeResult + Session ID",
-    caption: "Client records server capabilities, identity, and session id",
-    reverse: true,
+    caption: "Server responds through the load balancer",
     tone: "result",
   },
   {
-    id: "initialized-client-lb",
-    edgeId: "client-lb",
+    id: "initialized-notification",
+    route: [{ edgeId: "client-lb" }, { edgeId: "lb-b" }],
     label: "notifications/initialized",
     caption: "Client acknowledges initialization",
-    tone: "notify",
-  },
-  {
-    id: "initialized-lb-server",
-    edgeId: "lb-b",
-    label: "notifications/initialized",
-    caption: "Both endpoints are now locked to this session",
     tone: "notify",
   },
 ];
 
 const requestSteps: StoryStep[] = [
   {
-    id: "later-client-lb",
-    edgeId: "client-lb",
-    label: "tools/call",
-    caption: "Later request carries the session context",
+    id: "tools-list-request",
+    route: [{ edgeId: "client-lb" }, { edgeId: "lb-b" }],
+    label: "tools/list",
+    caption: "Client asks for available tools",
     tone: "request",
   },
   {
-    id: "later-lb-server",
-    edgeId: "lb-b",
-    label: "MCP-Session-Id",
-    caption: "The load balancer must land on compatible session state",
+    id: "tools-list-result",
+    route: [
+      { edgeId: "lb-b", reverse: true },
+      { edgeId: "client-lb", reverse: true },
+    ],
+    label: "ListToolsResultResponse",
+    caption: "Server returns the tool list",
+    tone: "result",
+  },
+  {
+    id: "prompts-list-request",
+    route: [{ edgeId: "client-lb" }, { edgeId: "lb-b" }],
+    label: "prompts/list",
+    caption: "Client asks for available prompts",
     tone: "request",
+  },
+  {
+    id: "prompts-list-result",
+    route: [
+      { edgeId: "lb-b", reverse: true },
+      { edgeId: "client-lb", reverse: true },
+    ],
+    label: "ListPromptsResultResponse",
+    caption: "Server returns the prompt list",
+    tone: "result",
+  },
+];
+
+const toolCallSteps: StoryStep[] = [
+  {
+    id: "tool-call-request",
+    route: [{ edgeId: "client-lb" }, { edgeId: "lb-b" }],
+    label: "tools/call",
+    caption: "Client invokes a tool",
+    tone: "request",
+  },
+  {
+    id: "tool-call-progress-one",
+    route: [
+      { edgeId: "lb-b", reverse: true },
+      { edgeId: "client-lb", reverse: true },
+    ],
+    label: "notifications/progress 33%",
+    caption: "Server reports progress",
+    tone: "notify",
+  },
+  {
+    id: "tool-call-progress-two",
+    route: [
+      { edgeId: "lb-b", reverse: true },
+      { edgeId: "client-lb", reverse: true },
+    ],
+    label: "notifications/progress 80%",
+    caption: "Server reports more progress",
+    tone: "notify",
+  },
+  {
+    id: "tool-call-result",
+    route: [
+      { edgeId: "lb-b", reverse: true },
+      { edgeId: "client-lb", reverse: true },
+    ],
+    label: "CallToolResult",
+    caption: "Server completes the tool call",
+    tone: "result",
   },
 ];
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const edgeById = new Map(edges.map((edge) => [edge.id, edge]));
 
-const event = ref<"idle" | "initialize" | "request">("idle");
+const event = ref<"idle" | "initialize" | "request" | "tool">("idle");
 const initialized = ref(false);
 const animationKey = ref(0);
 const activeStepIndex = ref(-1);
@@ -174,51 +210,91 @@ const packetProgress = ref(0);
 const diagnostics = ref(false);
 const timers: number[] = [];
 let animationFrame = 0;
+const PULSE_DURATION_MS = 1500;
+const STEP_INTERVAL_MS = 1800;
 
 const activeSteps = computed(() => {
   if (event.value === "initialize") return initializeSteps;
   if (event.value === "request") return requestSteps;
+  if (event.value === "tool") return toolCallSteps;
   return [];
 });
 
 const activeStep = computed(() => activeSteps.value[activeStepIndex.value]);
-const activeEdge = computed(() =>
-  activeStep.value ? edgeById.get(activeStep.value.edgeId) : undefined,
-);
 const isPlaying = computed(() => event.value !== "idle");
 const serverKnowsClient = computed(
   () =>
     initialized.value ||
-    (event.value === "initialize" && activeStepIndex.value >= 2),
+    (event.value === "initialize" &&
+      (activeStepIndex.value > 0 ||
+        (activeStepIndex.value === 0 && packetProgress.value >= 0.92))),
 );
 const clientKnowsServer = computed(
   () =>
     initialized.value ||
-    (event.value === "initialize" && activeStepIndex.value >= 4),
+    (event.value === "initialize" &&
+      (activeStepIndex.value > 1 ||
+        (activeStepIndex.value === 1 && packetProgress.value >= 0.92))),
 );
 const isLocked = computed(
   () =>
     initialized.value ||
-    (event.value === "initialize" && activeStepIndex.value >= 6),
+    (event.value === "initialize" &&
+      (activeStepIndex.value > 2 ||
+        (activeStepIndex.value === 2 && packetProgress.value >= 0.92))),
 );
 
 const status = computed(() => {
   if (activeStep.value) return activeStep.value.caption;
   if (event.value === "initialize") return "Initializing session…";
-  if (event.value === "request") return "Sending a later request with established session state…";
+  if (event.value === "request") return "Listing tools and prompts with established session state…";
+  if (event.value === "tool") return "Calling a tool with progress notifications…";
   if (initialized.value) return "Initialized: each endpoint now has capability state from the other side.";
   return "Not initialized: no endpoint capability state has been established.";
 });
 
 const activeNodeIds = computed(() => {
-  if (!activeEdge.value) return new Set<string>();
-  return new Set([activeEdge.value.from, activeEdge.value.to]);
+  if (!activeLeg.value) return new Set<string>();
+
+  const { edge, reverse, progress } = activeLeg.value;
+  const source = reverse ? edge.to : edge.from;
+  const target = reverse ? edge.from : edge.to;
+
+  if (progress < 0.18) return new Set([source]);
+  if (progress > 0.82) return new Set([target]);
+  return new Set<string>();
 });
 
-const packetPoint = computed(() => {
-  if (!activeEdge.value) return { x: 0, y: 0 };
-  return pointOnEdge(activeEdge.value, activeStep.value?.reverse, packetProgress.value);
+const activeLeg = computed(() => {
+  const route = activeStep.value?.route;
+  if (!route?.length) return undefined;
+
+  const scaled = packetProgress.value * route.length;
+  const index =
+    packetProgress.value >= 1
+      ? route.length - 1
+      : Math.min(route.length - 1, Math.floor(scaled));
+  const leg = route[index];
+  const edge = edgeById.get(leg.edgeId);
+
+  if (!edge) return undefined;
+
+  return {
+    edge,
+    reverse: leg.reverse ?? false,
+    progress: packetProgress.value >= 1 ? 1 : scaled - index,
+  };
 });
+
+const pulsePath = computed(() => {
+  if (!activeLeg.value) return "";
+
+  const tail = Math.max(0, activeLeg.value.progress - 0.28);
+  const head = Math.min(1, activeLeg.value.progress);
+
+  return cubicSegmentPath(activeLeg.value.edge, activeLeg.value.reverse, tail, head);
+});
+
 const diagnosticFrame = computed(() => Math.round(packetProgress.value * 60));
 const diagnosticStep = computed(() =>
   activeStep.value ? `${activeStepIndex.value + 1}/${activeSteps.value.length}` : "idle",
@@ -243,17 +319,23 @@ function edgePoints(edge: EdgeSpec, reverse = false) {
   const a = anchorPoint(from, reverse ? edge.toAnchor : edge.fromAnchor);
   const b = anchorPoint(to, reverse ? edge.fromAnchor : edge.toAnchor);
   const dx = Math.abs(b.x - a.x);
+  const direction = b.x >= a.x ? 1 : -1;
 
   return {
     a,
-    c1: { x: a.x + dx * 0.45, y: a.y },
-    c2: { x: b.x - dx * 0.45, y: b.y },
+    c1: { x: a.x + direction * dx * 0.45, y: a.y },
+    c2: { x: b.x - direction * dx * 0.45, y: b.y },
     b,
   };
 }
 
-function pointOnEdge(edge: EdgeSpec, reverse = false, t: number) {
-  const { a, c1, c2, b } = edgePoints(edge, reverse);
+function cubicPoint(
+  a: { x: number; y: number },
+  c1: { x: number; y: number },
+  c2: { x: number; y: number },
+  b: { x: number; y: number },
+  t: number,
+) {
   const u = 1 - t;
 
   return {
@@ -262,9 +344,40 @@ function pointOnEdge(edge: EdgeSpec, reverse = false, t: number) {
   };
 }
 
-function pathFor(edgeId: string, reverse = false) {
-  const edge = edgeById.get(edgeId)!;
-  return edgePath(edge, reverse);
+function cubicDerivative(
+  a: { x: number; y: number },
+  c1: { x: number; y: number },
+  c2: { x: number; y: number },
+  b: { x: number; y: number },
+  t: number,
+) {
+  const u = 1 - t;
+
+  return {
+    x:
+      3 * u ** 2 * (c1.x - a.x) +
+      6 * u * t * (c2.x - c1.x) +
+      3 * t ** 2 * (b.x - c2.x),
+    y:
+      3 * u ** 2 * (c1.y - a.y) +
+      6 * u * t * (c2.y - c1.y) +
+      3 * t ** 2 * (b.y - c2.y),
+  };
+}
+
+function cubicSegmentPath(edge: EdgeSpec, reverse = false, start: number, end: number) {
+  const { a, c1, c2, b } = edgePoints(edge, reverse);
+  const t0 = Math.max(0, Math.min(1, start));
+  const t1 = Math.max(t0 + 0.001, Math.min(1, end));
+  const p0 = cubicPoint(a, c1, c2, b, t0);
+  const p1 = cubicPoint(a, c1, c2, b, t1);
+  const d0 = cubicDerivative(a, c1, c2, b, t0);
+  const d1 = cubicDerivative(a, c1, c2, b, t1);
+  const dt = t1 - t0;
+  const s1 = { x: p0.x + (d0.x * dt) / 3, y: p0.y + (d0.y * dt) / 3 };
+  const s2 = { x: p1.x - (d1.x * dt) / 3, y: p1.y - (d1.y * dt) / 3 };
+
+  return `M ${p0.x} ${p0.y} C ${s1.x} ${s1.y}, ${s2.x} ${s2.y}, ${p1.x} ${p1.y}`;
 }
 
 function clearTimers() {
@@ -286,20 +399,25 @@ function freeze() {
 
 function animatePacket(start = performance.now()) {
   const elapsed = performance.now() - start;
-  packetProgress.value = Math.min(elapsed / 980, 1);
+  packetProgress.value = Math.min(elapsed / PULSE_DURATION_MS, 1);
 
   if (packetProgress.value < 1) {
     animationFrame = window.requestAnimationFrame(() => animatePacket(start));
   }
 }
 
-function play(nextEvent: "initialize" | "request") {
+function play(nextEvent: "initialize" | "request" | "tool") {
   clearTimers();
   event.value = nextEvent;
   activeStepIndex.value = -1;
   animationKey.value += 1;
 
-  const steps = nextEvent === "initialize" ? initializeSteps : requestSteps;
+  const steps =
+    nextEvent === "initialize"
+      ? initializeSteps
+      : nextEvent === "request"
+        ? requestSteps
+        : toolCallSteps;
 
   for (const index of steps.keys()) {
     timers.push(
@@ -309,7 +427,7 @@ function play(nextEvent: "initialize" | "request") {
         animationKey.value += 1;
         window.cancelAnimationFrame(animationFrame);
         animationFrame = window.requestAnimationFrame(() => animatePacket());
-      }, index * 1250),
+      }, index * STEP_INTERVAL_MS),
     );
   }
 
@@ -321,14 +439,14 @@ function play(nextEvent: "initialize" | "request") {
         packetProgress.value = 0;
         event.value = "idle";
       },
-      steps.length * 1250 + 650,
+      steps.length * STEP_INTERVAL_MS + 650,
     ),
   );
 }
 
 function seekStep(delta: number) {
   freeze();
-  const steps = event.value === "request" ? requestSteps : initializeSteps;
+  const steps = activeSteps.value.length ? activeSteps.value : initializeSteps;
   event.value = event.value === "idle" ? "initialize" : event.value;
   activeStepIndex.value = Math.max(
     0,
@@ -383,6 +501,9 @@ onBeforeUnmount(clearTimers);
       <button type="button" :aria-pressed="event === 'request'" @click="play('request')">
         Later request
       </button>
+      <button type="button" :aria-pressed="event === 'tool'" @click="play('tool')">
+        Tool call
+      </button>
       <button type="button" @click="reset">Reset state</button>
       <button type="button" :aria-pressed="diagnostics" @click="diagnostics = !diagnostics">
         Diag
@@ -421,11 +542,6 @@ onBeforeUnmount(clearTimers);
       </desc>
 
       <defs>
-        <linearGradient id="remote-mcp-story-pulse" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0%" stop-color="rgba(255, 198, 73, 0)" />
-          <stop offset="48%" stop-color="rgba(255, 198, 73, 0.96)" />
-          <stop offset="100%" stop-color="rgba(106, 163, 247, 0.72)" />
-        </linearGradient>
         <marker id="remote-mcp-story-arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
           <path d="M 0 0 L 10 5 L 0 10 z" fill="rgba(185, 179, 165, 0.42)" />
         </marker>
@@ -442,22 +558,18 @@ onBeforeUnmount(clearTimers);
 
       <path
         v-if="activeStep"
-        :key="`pulse-${animationKey}-${activeStep.id}`"
-        class="remote-mcp-story__pulse"
+        :key="`pulse-glow-${animationKey}-${activeStep.id}`"
+        class="remote-mcp-story__pulse remote-mcp-story__pulse--glow"
         :class="`remote-mcp-story__pulse--${activeStep.tone ?? 'request'}`"
-        pathLength="1"
-        :style="{ '--pulse-offset': 1 - packetProgress }"
-        :d="pathFor(activeStep.edgeId, activeStep.reverse)"
+        :d="pulsePath"
       />
 
-      <circle
+      <path
         v-if="activeStep"
-        :key="`packet-${animationKey}-${activeStep.id}`"
-        class="remote-mcp-story__packet"
-        :class="`remote-mcp-story__packet--${activeStep.tone ?? 'request'}`"
-        r="7.5"
-        :cx="packetPoint.x"
-        :cy="packetPoint.y"
+        :key="`pulse-core-${animationKey}-${activeStep.id}`"
+        class="remote-mcp-story__pulse remote-mcp-story__pulse--core"
+        :class="`remote-mcp-story__pulse--${activeStep.tone ?? 'request'}`"
+        :d="pulsePath"
       />
 
       <g
@@ -465,7 +577,7 @@ onBeforeUnmount(clearTimers);
         :key="`label-${animationKey}-${activeStep.id}`"
         class="remote-mcp-story__message"
         :class="`remote-mcp-story__message--${activeStep.tone ?? 'request'}`"
-        transform="translate(328 116)"
+        transform="translate(300 132)"
       >
         <rect width="344" height="52" rx="14" />
         <text class="remote-mcp-story__message-label" x="18" y="22">in flight</text>
@@ -491,20 +603,21 @@ onBeforeUnmount(clearTimers);
         <rect class="remote-mcp-story__node-box" :width="node.w" :height="node.h" rx="16" />
         <text class="remote-mcp-story__role" x="18" y="28">{{ node.role }}</text>
         <text class="remote-mcp-story__title" x="18" y="61">{{ node.title }}</text>
-        <text class="remote-mcp-story__detail" x="18" y="88">{{ node.detail }}</text>
+        <text v-if="node.detail" class="remote-mcp-story__detail" x="18" y="88">{{ node.detail }}</text>
       </g>
 
-      <g class="remote-mcp-story__state remote-mcp-story__state--client" transform="translate(48 326)">
-        <rect width="204" height="82" rx="14" />
-        <text class="remote-mcp-story__state-label" x="16" y="27">client state</text>
-        <text class="remote-mcp-story__state-value" x="16" y="57">server capabilities</text>
-        <text class="remote-mcp-story__state-extra" x="16" y="75">identity · MCP-Session-Id</text>
+      <g class="remote-mcp-story__state remote-mcp-story__state--client" transform="translate(48 322)">
+        <rect width="276" height="68" rx="16" />
+        <text class="remote-mcp-story__state-label" x="18" y="24">client state</text>
+        <text class="remote-mcp-story__state-value" x="18" y="49">server capabilities</text>
+        <text class="remote-mcp-story__state-extra" x="18" y="64">MCP-Session-Id</text>
       </g>
 
-      <g class="remote-mcp-story__state remote-mcp-story__state--server" transform="translate(748 404)">
-        <rect width="220" height="54" rx="14" />
-        <text class="remote-mcp-story__state-label" x="16" y="20">server state</text>
-        <text class="remote-mcp-story__state-value" x="16" y="43">client capabilities</text>
+      <g class="remote-mcp-story__state remote-mcp-story__state--server" transform="translate(678 400)">
+        <rect width="276" height="68" rx="16" />
+        <text class="remote-mcp-story__state-label" x="18" y="24">server state</text>
+        <text class="remote-mcp-story__state-value" x="18" y="49">client capabilities</text>
+        <text class="remote-mcp-story__state-extra" x="18" y="64">MCP-Session-Id</text>
       </g>
     </svg>
   </section>
@@ -650,44 +763,39 @@ onBeforeUnmount(clearTimers);
 .remote-mcp-story__pulse {
   fill: none;
   opacity: 1;
-  stroke: url("#remote-mcp-story-pulse");
-  stroke-dasharray: 0.22 1;
-  stroke-dashoffset: var(--pulse-offset);
   stroke-linecap: round;
-  stroke-width: 7;
-  filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.6));
 }
 
-.remote-mcp-story__pulse--result {
+.remote-mcp-story__pulse--glow {
+  stroke: rgba(255, 198, 73, 0.28);
+  stroke-width: 20;
+}
+
+.remote-mcp-story__pulse--core {
+  stroke: var(--deck-accent-hi);
+  stroke-width: 9.5;
+}
+
+.remote-mcp-story__pulse--result.remote-mcp-story__pulse--glow {
+  stroke: rgba(106, 163, 247, 0.28);
+}
+
+.remote-mcp-story__pulse--result.remote-mcp-story__pulse--core {
   stroke: var(--deck-info);
-  filter: drop-shadow(0 0 12px rgba(106, 163, 247, 0.72));
 }
 
-.remote-mcp-story__pulse--notify {
+.remote-mcp-story__pulse--notify.remote-mcp-story__pulse--glow {
+  stroke: rgba(106, 209, 156, 0.28);
+}
+
+.remote-mcp-story__pulse--notify.remote-mcp-story__pulse--core {
   stroke: var(--deck-ok);
-  filter: drop-shadow(0 0 12px rgba(106, 209, 156, 0.66));
-}
-
-.remote-mcp-story__packet {
-  opacity: 1;
-  fill: var(--deck-accent-hi);
-  filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.8));
-}
-
-.remote-mcp-story__packet--result {
-  fill: var(--deck-info);
-  filter: drop-shadow(0 0 10px rgba(106, 163, 247, 0.86));
-}
-
-.remote-mcp-story__packet--notify {
-  fill: var(--deck-ok);
-  filter: drop-shadow(0 0 10px rgba(106, 209, 156, 0.78));
 }
 
 .remote-mcp-story__message {
-  opacity: 0;
+  opacity: 1;
   filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.34));
-  animation: remote-mcp-story-message 1.12s ease both;
+  animation: remote-mcp-story-message 220ms ease-out both;
 }
 
 .remote-mcp-story__message rect {
@@ -739,6 +847,8 @@ onBeforeUnmount(clearTimers);
   stroke: rgba(255, 198, 73, 0.62);
   stroke-width: 2;
   filter: drop-shadow(0 0 18px rgba(255, 198, 73, 0.68));
+  transform-box: fill-box;
+  transform-origin: center;
 }
 
 .remote-mcp-story__node--active-hop .remote-mcp-story__node-glow {
@@ -780,8 +890,8 @@ onBeforeUnmount(clearTimers);
 }
 
 .remote-mcp-story__state rect {
-  fill: rgba(11, 12, 15, 0.62);
-  stroke: rgba(245, 164, 0, 0.24);
+  fill: rgba(11, 12, 15, 0.72);
+  stroke: rgba(245, 164, 0, 0.34);
 }
 
 .remote-mcp-story--client-knows-server .remote-mcp-story__state--client,
@@ -792,14 +902,14 @@ onBeforeUnmount(clearTimers);
 
 .remote-mcp-story__state-value {
   fill: var(--deck-accent-hi);
-  font: 800 18px / 1 var(--deck-font-mono);
+  font: 820 18px / 1 var(--deck-font-mono);
   letter-spacing: -0.04em;
 }
 
 .remote-mcp-story__state-extra {
   fill: var(--deck-muted);
-  font: 700 10px / 1 var(--deck-font-mono);
-  letter-spacing: -0.02em;
+  font: 760 13px / 1 var(--deck-font-mono);
+  letter-spacing: -0.035em;
 }
 
 @keyframes remote-mcp-story-message {
@@ -807,14 +917,9 @@ onBeforeUnmount(clearTimers);
     opacity: 0;
     transform: translateY(7px) scale(0.98);
   }
-  14%,
-  78% {
+  100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-5px) scale(0.995);
   }
 }
 

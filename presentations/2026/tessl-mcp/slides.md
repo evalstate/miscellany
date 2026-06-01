@@ -148,6 +148,18 @@ fonts:
 
 ---
 
+<div class="weekly-activity-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Weekly MCP activity</h1>
+      <p>Initialization requests as bars · tool calls as line</p>
+    </div>
+  </header>
+  <McpWeeklyActivityChart />
+</div>
+
+---
+
 # Understanding Activity
 
 <div class="understanding-activity-slide">
@@ -184,17 +196,6 @@ fonts:
 </div>
 
 
----
-
-<div class="weekly-activity-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Weekly MCP activity</h1>
-      <p>Initialization requests as bars · tool calls as line</p>
-    </div>
-  </header>
-  <McpWeeklyActivityChart />
-</div>
 
 
 ---
@@ -202,8 +203,7 @@ fonts:
 <div class="protocol-efficiency-slide chart-slide">
   <header class="chart-slide__header">
     <div>
-      <p class="chart-slide__kicker">MCP Protocol Efficiency</p>
-      <h1>Overhead in 10M Protocol Messages</h1>
+      <h1>Examining 10M Protocol Messages</h1>
     </div>
   </header>
   <McpProtocolEfficiency />
@@ -215,7 +215,7 @@ fonts:
   <header class="chart-slide__header">
     <div>
       <h1>Daily session conversion</h1>
-      <p>Session → query conversion rate · 3-day converted-session average</p>
+      <h2>Session → query conversion rate <br/> 3 day average converted </h2>
     </div>
   </header>
   <SessionConversionChart />
@@ -259,7 +259,7 @@ fonts:
 
 ---
 
-# Remote MCP through a load balancer
+# Scaling MCP in Production...
 
 <div class="remote-mcp-diagram">
   <RemoteMcpLoadBalancerStoryboard />
@@ -395,23 +395,124 @@ layout: section
 
 # SEP-2459: Cache Control
 
-## Tool List Changed
+<div class="cache-control-slide">
+<section class="cache-control-copy">
 
-- Tool Metadata can be acquired infrequently and shared
-- Supports "per user" MCP Server configurations too
-- Also allows configuration through `mcp-server.json` files 
+## Cacheable Results
+
+<div class="compact-point-list">
+<div>
+<strong>Applies to discovery and reads</strong>
+<span><code>tools/list</code>, <code>prompts/list</code>, <code>resources/list</code>, <code>resources/templates/list</code>, and <code>resources/read</code>.</span>
+</div>
+<div>
+<strong><code>ttlMs</code> is freshness</strong>
+<span>Clients may consider the result fresh until <code>received + ttlMs</code>; <code>0</code> means immediately stale.</span>
+</div>
+<div>
+<strong>Notifications invalidate</strong>
+<span>TTL avoids unnecessary refetches between changes; list-changed notifications make cached results stale immediately.</span>
+</div>
+</div>
+
+</section>
+
+<aside class="cache-scope-table deck-panel">
+<div class="kicker">cacheScope</div>
+
+| Value | Meaning |
+| --- | --- |
+| `"public"` | Does not contain user-specific data. Any client, gateway, or caching proxy may store and serve it to any user. |
+| `"private"` | May contain caller-specific data. Reuse only within the same authorization context; never share across access tokens. |
+
+</aside>
+</div>
 
 ---
 
-# Multi Round-Trip Request
+# SEP-2322: Stateful Elicitations
 
-## Problem / Solution
+<div class="mrtr-contrast-slide">
+<section class="mrtr-contrast-copy">
 
-Moving to a stateless protocol means that state-based turn taking doesn't apply
+## Before: wait for the answer
 
-Return `inputRequired` rather than SSE Stream.
+<div class="compact-point-list">
+<div>
+<strong>SSE POST response stream stays open</strong>
+<span>The server asks for more input on the original stream.</span>
+</div>
+<div>
+<strong>Client POSTs the answer</strong>
+<span>The elicitation response is a new JSON-RPC HTTP request.</span>
+</div>
+<div>
+<strong>Load balancer parses JSON</strong>
+<span>It must route by JSON-RPC request id, or use shared storage.</span>
+</div>
+</div>
 
+</section>
 
+<aside class="mrtr-stateful-flow deck-panel">
+<div class="kicker">stateful turn-taking</div>
+<div class="mrtr-flow-row">
+  <div class="mrtr-node mrtr-node--client">Client</div>
+  <div class="mrtr-arrow">POST tools/call</div>
+  <div class="mrtr-node mrtr-node--lb">LB</div>
+  <div class="mrtr-arrow">route</div>
+  <div class="mrtr-node">A</div>
+</div>
+<div class="mrtr-sse">elicitation over SSE · Server A waits…</div>
+<div class="mrtr-flow-row">
+  <div class="mrtr-node mrtr-node--client">Client</div>
+  <div class="mrtr-arrow">POST answer</div>
+  <div class="mrtr-node mrtr-node--warn">LB</div>
+  <div class="mrtr-arrow">inspect id</div>
+  <div class="mrtr-node">A</div>
+</div>
+<div class="mrtr-problem">Routing depends on the JSON-RPC request id</div>
+</aside>
+</div>
+
+---
+
+# SEP-2322: Stateless Elicitations
+
+<div class="mrtr-cumulative-slide">
+<section class="mrtr-cumulative-copy">
+
+## After: retry with context
+
+<p class="mrtr-lede">The server returns <code>input_required</code>. The client retries with everything learned so far.</p>
+
+<div class="mrtr-field-strip">
+<span>original arguments</span>
+<span>inputResponses</span>
+<span>requestState?</span>
+</div>
+
+</section>
+
+<aside class="mrtr-cumulative-flow deck-panel">
+<div class="mrtr-step">
+  <strong>1</strong>
+  <span>Client sends <code>tools/call</code></span>
+</div>
+<div class="mrtr-step mrtr-step--accent">
+  <strong>2</strong>
+  <span>Server returns <code>resultType: "input_required"</code></span>
+</div>
+<div class="mrtr-step">
+  <strong>3</strong>
+  <span>Client collects elicitation / sampling / roots responses</span>
+</div>
+<div class="mrtr-step mrtr-step--final">
+  <strong>4</strong>
+  <span>Client replays <code>tools/call</code> with cumulative input</span>
+</div>
+</aside>
+</div>
 
 ---
 
@@ -443,12 +544,12 @@ Return `inputRequired` rather than SSE Stream.
 
 # Migration Path
 
-Draft Specification Release : Now
-Beta SDKs : Soon
-Planned Release Date  : 
+## Draft Specification Release : Now
+
+## Beta SDKs : Soon
+
+## Planned Release Date  : 
 
 ---
 
 # Related SEPs
-
-
