@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, ref } from "vue";
+import { computed, onBeforeUnmount, ref } from "vue";
 
 type Anchor = "left" | "right";
 
@@ -20,6 +20,15 @@ type EdgeSpec = {
   to: string;
   fromAnchor: Anchor;
   toAnchor: Anchor;
+};
+
+type StoryStep = {
+  id: string;
+  edgeId: string;
+  label: string;
+  caption: string;
+  reverse?: boolean;
+  tone?: "request" | "result" | "notify";
 };
 
 const nodes: NodeSpec[] = [
@@ -82,17 +91,77 @@ const edges: EdgeSpec[] = [
   { id: "lb-c", from: "lb", to: "server-c", fromAnchor: "right", toAnchor: "left" },
 ];
 
-const initializeSteps = [
-  ["client-lb", "initialize"],
-  ["lb-b", "route"],
-  ["lb-b", "result"],
-  ["client-lb", "initialized"],
-] as const;
+const initializeSteps: StoryStep[] = [
+  {
+    id: "initialize-client-lb",
+    edgeId: "client-lb",
+    label: "InitializeRequest",
+    caption: "Client sends InitializeRequest",
+    tone: "request",
+  },
+  {
+    id: "initialize-lb-server",
+    edgeId: "lb-b",
+    label: "InitializeRequest",
+    caption: "Load balancer routes it to Server 02",
+    tone: "request",
+  },
+  {
+    id: "server-remembers-client",
+    edgeId: "lb-b",
+    label: "client capabilities + identity",
+    caption: "Server now knows the client capabilities and identity",
+    reverse: true,
+    tone: "request",
+  },
+  {
+    id: "result-server-lb",
+    edgeId: "lb-b",
+    label: "InitializeResult",
+    caption: "Server returns capabilities, identity, and MCP-Session-Id",
+    reverse: true,
+    tone: "result",
+  },
+  {
+    id: "result-lb-client",
+    edgeId: "client-lb",
+    label: "InitializeResult + Session ID",
+    caption: "Client records server capabilities, identity, and session id",
+    reverse: true,
+    tone: "result",
+  },
+  {
+    id: "initialized-client-lb",
+    edgeId: "client-lb",
+    label: "notifications/initialized",
+    caption: "Client acknowledges initialization",
+    tone: "notify",
+  },
+  {
+    id: "initialized-lb-server",
+    edgeId: "lb-b",
+    label: "notifications/initialized",
+    caption: "Both endpoints are now locked to this session",
+    tone: "notify",
+  },
+];
 
-const requestSteps = [
-  ["client-lb", "tools/call"],
-  ["lb-b", "route"],
-] as const;
+const requestSteps: StoryStep[] = [
+  {
+    id: "later-client-lb",
+    edgeId: "client-lb",
+    label: "tools/call",
+    caption: "Later request carries the session context",
+    tone: "request",
+  },
+  {
+    id: "later-lb-server",
+    edgeId: "lb-b",
+    label: "MCP-Session-Id",
+    caption: "The load balancer must land on compatible session state",
+    tone: "request",
+  },
+];
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
 const edgeById = new Map(edges.map((edge) => [edge.id, edge]));
@@ -100,6 +169,8 @@ const edgeById = new Map(edges.map((edge) => [edge.id, edge]));
 const event = ref<"idle" | "initialize" | "request">("idle");
 const initialized = ref(false);
 const animationKey = ref(0);
+const activeStepIndex = ref(-1);
+const timers: number[] = [];
 
 const activeSteps = computed(() => {
   if (event.value === "initialize") return initializeSteps;
@@ -107,9 +178,28 @@ const activeSteps = computed(() => {
   return [];
 });
 
+const activeStep = computed(() => activeSteps.value[activeStepIndex.value]);
+const isPlaying = computed(() => event.value !== "idle");
+const serverKnowsClient = computed(
+  () =>
+    initialized.value ||
+    (event.value === "initialize" && activeStepIndex.value >= 2),
+);
+const clientKnowsServer = computed(
+  () =>
+    initialized.value ||
+    (event.value === "initialize" && activeStepIndex.value >= 4),
+);
+const isLocked = computed(
+  () =>
+    initialized.value ||
+    (event.value === "initialize" && activeStepIndex.value >= 6),
+);
+
 const status = computed(() => {
-  if (event.value === "initialize") return "Initializing session: capabilities are exchanged and retained as endpoint state.";
-  if (event.value === "request") return "A later request can be routed to a different worker unless that state is shared or removed.";
+  if (activeStep.value) return activeStep.value.caption;
+  if (event.value === "initialize") return "Initializing session…";
+  if (event.value === "request") return "Sending a later request with established session state…";
   if (initialized.value) return "Initialized: each endpoint now has capability state from the other side.";
   return "Not initialized: no endpoint capability state has been established.";
 });
@@ -131,34 +221,70 @@ function edgePath(edge: EdgeSpec, reverse = false) {
   return `M ${a.x} ${a.y} C ${a.x + dx * 0.45} ${a.y}, ${b.x - dx * 0.45} ${b.y}, ${b.x} ${b.y}`;
 }
 
-function pathFor(edgeId: string, label = "") {
+function pathFor(edgeId: string, reverse = false) {
   const edge = edgeById.get(edgeId)!;
-  return edgePath(edge, label === "result" || label === "initialized");
+  return edgePath(edge, reverse);
 }
 
-async function play(nextEvent: "initialize" | "request") {
-  event.value = "idle";
-  animationKey.value += 1;
-  await nextTick();
-  event.value = nextEvent;
+function clearTimers() {
+  while (timers.length) {
+    window.clearTimeout(timers.pop());
+  }
+}
 
-  window.setTimeout(() => {
-    if (nextEvent === "initialize") initialized.value = true;
-    event.value = "idle";
-  }, nextEvent === "initialize" ? 5200 : 2600);
+function play(nextEvent: "initialize" | "request") {
+  clearTimers();
+  event.value = nextEvent;
+  activeStepIndex.value = -1;
+  animationKey.value += 1;
+
+  const steps = nextEvent === "initialize" ? initializeSteps : requestSteps;
+
+  for (const index of steps.keys()) {
+    timers.push(
+      window.setTimeout(() => {
+        activeStepIndex.value = index;
+        animationKey.value += 1;
+      }, index * 1250),
+    );
+  }
+
+  timers.push(
+    window.setTimeout(
+      () => {
+        if (nextEvent === "initialize") initialized.value = true;
+        activeStepIndex.value = -1;
+        event.value = "idle";
+      },
+      steps.length * 1250 + 650,
+    ),
+  );
 }
 
 function reset() {
+  clearTimers();
   event.value = "idle";
   initialized.value = false;
+  activeStepIndex.value = -1;
   animationKey.value += 1;
 }
+
+onBeforeUnmount(clearTimers);
 </script>
 
 <template>
   <section
     class="remote-mcp-story"
-    :class="[`remote-mcp-story--${event}`, { 'remote-mcp-story--initialized': initialized }]"
+    :class="[
+      `remote-mcp-story--${event}`,
+      {
+        'remote-mcp-story--playing': isPlaying,
+        'remote-mcp-story--server-knows-client': serverKnowsClient,
+        'remote-mcp-story--client-knows-server': clientKnowsServer,
+        'remote-mcp-story--locked': isLocked,
+        'remote-mcp-story--initialized': initialized,
+      },
+    ]"
     aria-labelledby="remote-mcp-story-title"
     aria-describedby="remote-mcp-story-desc"
   >
@@ -208,22 +334,34 @@ function reset() {
       />
 
       <path
-        v-for="(step, index) in activeSteps"
-        :key="`${animationKey}-${step[0]}-${step[1]}-${index}`"
+        v-if="activeStep"
+        :key="`pulse-${animationKey}-${activeStep.id}`"
         class="remote-mcp-story__pulse"
-        :style="{ '--step-delay': `${index * 1.12}s` }"
-        :d="pathFor(step[0], step[1])"
+        :class="`remote-mcp-story__pulse--${activeStep.tone ?? 'request'}`"
+        :d="pathFor(activeStep.edgeId, activeStep.reverse)"
       />
 
       <circle
-        v-for="(step, index) in activeSteps"
-        :key="`${animationKey}-packet-${step[0]}-${step[1]}-${index}`"
+        v-if="activeStep"
+        :key="`packet-${animationKey}-${activeStep.id}`"
         class="remote-mcp-story__packet"
+        :class="`remote-mcp-story__packet--${activeStep.tone ?? 'request'}`"
         r="7.5"
-        :style="{ '--step-delay': `${index * 1.12}s` }"
       >
-        <animateMotion dur="0.86s" :begin="`${index * 1.12}s`" fill="freeze" :path="pathFor(step[0], step[1])" />
+        <animateMotion dur="0.98s" begin="0s" fill="freeze" :path="pathFor(activeStep.edgeId, activeStep.reverse)" />
       </circle>
+
+      <g
+        v-if="activeStep"
+        :key="`label-${animationKey}-${activeStep.id}`"
+        class="remote-mcp-story__message"
+        :class="`remote-mcp-story__message--${activeStep.tone ?? 'request'}`"
+        transform="translate(328 116)"
+      >
+        <rect width="344" height="52" rx="14" />
+        <text class="remote-mcp-story__message-label" x="18" y="22">in flight</text>
+        <text class="remote-mcp-story__message-value" x="18" y="42">{{ activeStep.label }}</text>
+      </g>
 
       <g
         v-for="node in nodes"
@@ -249,6 +387,7 @@ function reset() {
         <rect width="204" height="82" rx="14" />
         <text class="remote-mcp-story__state-label" x="16" y="27">client state</text>
         <text class="remote-mcp-story__state-value" x="16" y="57">server capabilities</text>
+        <text class="remote-mcp-story__state-extra" x="16" y="75">identity · MCP-Session-Id</text>
       </g>
 
       <g class="remote-mcp-story__state remote-mcp-story__state--server" transform="translate(748 404)">
@@ -257,10 +396,9 @@ function reset() {
         <text class="remote-mcp-story__state-value" x="16" y="43">client capabilities</text>
       </g>
 
-      <g class="remote-mcp-story__step-labels" aria-hidden="true">
-        <text x="314" y="166">initialize</text>
-        <text x="630" y="154">server capabilities</text>
-        <text x="301" y="323">initialized</text>
+      <g class="remote-mcp-story__lock" transform="translate(407 314)" aria-hidden="true">
+        <rect width="186" height="42" rx="21" />
+        <text x="93" y="27">LOCKED IN</text>
       </g>
     </svg>
   </section>
@@ -364,14 +502,67 @@ function reset() {
   stroke-linecap: round;
   stroke-width: 7;
   filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.6));
-  animation: remote-mcp-story-travel 0.86s ease-out var(--step-delay) both;
+  animation: remote-mcp-story-travel 0.98s ease-out both;
+}
+
+.remote-mcp-story__pulse--result {
+  stroke: var(--deck-info);
+  filter: drop-shadow(0 0 12px rgba(106, 163, 247, 0.72));
+}
+
+.remote-mcp-story__pulse--notify {
+  stroke: var(--deck-ok);
+  filter: drop-shadow(0 0 12px rgba(106, 209, 156, 0.66));
 }
 
 .remote-mcp-story__packet {
   opacity: 0;
   fill: var(--deck-accent-hi);
   filter: drop-shadow(0 0 10px rgba(255, 198, 73, 0.8));
-  animation: remote-mcp-story-packet 0.86s ease-out var(--step-delay) both;
+  animation: remote-mcp-story-packet 0.98s ease-out both;
+}
+
+.remote-mcp-story__packet--result {
+  fill: var(--deck-info);
+  filter: drop-shadow(0 0 10px rgba(106, 163, 247, 0.86));
+}
+
+.remote-mcp-story__packet--notify {
+  fill: var(--deck-ok);
+  filter: drop-shadow(0 0 10px rgba(106, 209, 156, 0.78));
+}
+
+.remote-mcp-story__message {
+  opacity: 0;
+  filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.34));
+  animation: remote-mcp-story-message 1.12s ease both;
+}
+
+.remote-mcp-story__message rect {
+  fill: rgba(11, 12, 15, 0.86);
+  stroke: rgba(255, 198, 73, 0.42);
+  stroke-width: 1.2;
+}
+
+.remote-mcp-story__message--result rect {
+  stroke: rgba(106, 163, 247, 0.55);
+}
+
+.remote-mcp-story__message--notify rect {
+  stroke: rgba(106, 209, 156, 0.52);
+}
+
+.remote-mcp-story__message-label {
+  fill: var(--deck-dim);
+  font: 850 10px / 1 var(--deck-font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.remote-mcp-story__message-value {
+  fill: var(--deck-text);
+  font: 850 16px / 1 var(--deck-font-mono);
+  letter-spacing: -0.035em;
 }
 
 .remote-mcp-story__node-box,
@@ -398,13 +589,10 @@ function reset() {
   filter: drop-shadow(0 0 18px rgba(255, 198, 73, 0.68));
 }
 
-.remote-mcp-story--initialize .remote-mcp-story__node--client .remote-mcp-story__node-glow,
-.remote-mcp-story--initialize .remote-mcp-story__node--lb .remote-mcp-story__node-glow,
-.remote-mcp-story--initialize .remote-mcp-story__node--server-b .remote-mcp-story__node-glow,
-.remote-mcp-story--request .remote-mcp-story__node--client .remote-mcp-story__node-glow,
-.remote-mcp-story--request .remote-mcp-story__node--lb .remote-mcp-story__node-glow,
-.remote-mcp-story--request .remote-mcp-story__node--server-b .remote-mcp-story__node-glow {
-  animation: remote-mcp-story-node 0.9s ease-out both;
+.remote-mcp-story--playing .remote-mcp-story__node--client .remote-mcp-story__node-glow,
+.remote-mcp-story--playing .remote-mcp-story__node--lb .remote-mcp-story__node-glow,
+.remote-mcp-story--playing .remote-mcp-story__node--server-b .remote-mcp-story__node-glow {
+  animation: remote-mcp-story-node 1.18s ease-out both;
 }
 
 .remote-mcp-story__role,
@@ -428,8 +616,11 @@ function reset() {
 }
 
 .remote-mcp-story__state {
-  opacity: 0.34;
-  transition: opacity 260ms ease;
+  opacity: 0.18;
+  transition:
+    opacity 320ms ease,
+    filter 320ms ease,
+    transform 320ms ease;
 }
 
 .remote-mcp-story__state rect {
@@ -437,9 +628,10 @@ function reset() {
   stroke: rgba(245, 164, 0, 0.24);
 }
 
-.remote-mcp-story--initialized .remote-mcp-story__state,
-.remote-mcp-story--initialize .remote-mcp-story__state {
+.remote-mcp-story--client-knows-server .remote-mcp-story__state--client,
+.remote-mcp-story--server-knows-client .remote-mcp-story__state--server {
   opacity: 1;
+  filter: drop-shadow(0 0 18px rgba(255, 198, 73, 0.18));
 }
 
 .remote-mcp-story__state-value {
@@ -448,13 +640,35 @@ function reset() {
   letter-spacing: -0.04em;
 }
 
-.remote-mcp-story__step-labels {
-  opacity: 0;
-  fill: var(--deck-accent-hi);
+.remote-mcp-story__state-extra {
+  fill: var(--deck-muted);
+  font: 700 10px / 1 var(--deck-font-mono);
+  letter-spacing: -0.02em;
 }
 
-.remote-mcp-story--initialize .remote-mcp-story__step-labels {
-  animation: remote-mcp-story-labels 5.2s ease both;
+.remote-mcp-story__lock {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: opacity 260ms ease;
+}
+
+.remote-mcp-story__lock rect {
+  fill: rgba(106, 209, 156, 0.1);
+  stroke: rgba(106, 209, 156, 0.52);
+  stroke-width: 1.2;
+}
+
+.remote-mcp-story__lock text {
+  fill: var(--deck-ok);
+  font: 900 15px / 1 var(--deck-font-mono);
+  letter-spacing: 0.14em;
+  text-anchor: middle;
+}
+
+.remote-mcp-story--locked .remote-mcp-story__lock {
+  opacity: 1;
+  animation: remote-mcp-story-lock 780ms ease both;
 }
 
 @keyframes remote-mcp-story-travel {
@@ -483,6 +697,22 @@ function reset() {
   }
 }
 
+@keyframes remote-mcp-story-message {
+  0% {
+    opacity: 0;
+    transform: translateY(7px) scale(0.98);
+  }
+  14%,
+  78% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-5px) scale(0.995);
+  }
+}
+
 @keyframes remote-mcp-story-node {
   0% {
     opacity: 0;
@@ -498,16 +728,15 @@ function reset() {
   }
 }
 
-@keyframes remote-mcp-story-labels {
-  0%,
-  8%,
-  92%,
-  100% {
-    opacity: 0;
+@keyframes remote-mcp-story-lock {
+  0% {
+    transform: scale(0.86);
   }
-  16%,
-  84% {
-    opacity: 1;
+  52% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 </style>
