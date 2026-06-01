@@ -38,11 +38,6 @@ function barWidth(pct: number) {
 
 <template>
   <section class="protocol-efficiency">
-    <div class="protocol-efficiency__window">
-      <span>latest 6 weeks</span>
-      <strong>2026-04-19 → 2026-05-31</strong>
-    </div>
-
     <div class="protocol-efficiency__body">
       <div
         class="protocol-efficiency__bars"
@@ -112,36 +107,6 @@ function barWidth(pct: number) {
   border-radius: var(--deck-radius);
   box-shadow: var(--deck-shadow);
   overflow: visible;
-}
-
-.protocol-efficiency__window {
-  position: absolute;
-  top: calc(-1 * (var(--chart-slide-header-height) + 0.7rem));
-  right: 1.1rem;
-  z-index: 2;
-  min-width: 250px;
-  padding: 0.72rem 0.86rem;
-  text-align: right;
-  border: 1px solid var(--deck-info-line);
-  border-radius: var(--deck-radius-sm);
-  background: var(--deck-info-bg);
-}
-
-.protocol-efficiency__window span {
-  display: block;
-  color: var(--deck-dim);
-  font-size: 0.56rem;
-  font-weight: 900;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-
-.protocol-efficiency__window strong {
-  display: block;
-  margin-top: 0.2rem;
-  color: var(--deck-info);
-  font-size: 0.78rem;
-  white-space: nowrap;
 }
 
 .protocol-efficiency__body {

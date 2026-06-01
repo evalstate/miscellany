@@ -16,7 +16,7 @@ const rows = (conversionData.rows as Row[]).toSorted((a, b) =>
 
 const width = 1000;
 const height = 520;
-const plot = { left: 82, right: 104, top: 62, bottom: 84 };
+const plot = { left: 94, right: 66, top: 62, bottom: 94 };
 const plotWidth = width - plot.left - plot.right;
 const plotHeight = height - plot.top - plot.bottom;
 
@@ -57,17 +57,9 @@ function yForConverted(value: number) {
   return plot.top + (1 - value / convertedMax) * plotHeight;
 }
 
-function formatCount(value: number) {
-  if (value >= 1_000_000) return `${(value / 1_000_000).toFixed(1)}M`;
-  if (value >= 1_000)
-    return `${(value / 1_000).toFixed(value >= 10_000 ? 0 : 1)}k`;
-  return `${Math.round(value)}`;
-}
-
 const rateTicks = computed(() =>
   Array.from({ length: rateMax + 1 }, (_, index) => index),
 );
-const convertedTicks = computed(() => [0, convertedMax * 0.5, convertedMax]);
 
 const rateLine = computed(() =>
   rows
@@ -223,20 +215,6 @@ const overallRate =
         </text>
       </g>
 
-      <g class="conversion-chart__axis conversion-chart__axis--right">
-        <text :x="plot.left + plotWidth" :y="plot.top - 20" text-anchor="end">
-          3-day converted avg
-        </text>
-        <text
-          v-for="tick in convertedTicks"
-          :key="`converted-label-${tick}`"
-          :x="plot.left + plotWidth + 14"
-          :y="yForConverted(tick) + 4"
-        >
-          {{ formatCount(tick) }}
-        </text>
-      </g>
-
       <g class="conversion-chart__x-axis">
         <text
           v-for="tick in monthTicks"
@@ -247,45 +225,7 @@ const overallRate =
         >
           {{ tick.label }}
         </text>
-        <text
-          :x="plot.left"
-          :y="plot.top + plotHeight + 68"
-          text-anchor="start"
-        >
-          {{ first.day }}
-        </text>
-        <text
-          :x="plot.left + plotWidth"
-          :y="plot.top + plotHeight + 68"
-          text-anchor="end"
-        >
-          {{ latest.day }}
-        </text>
       </g>
-
-      <g class="conversion-chart__legend">
-        <line
-          :x1="plot.left + plotWidth - 352"
-          :x2="plot.left + plotWidth - 316"
-          :y1="plot.top + 32"
-          :y2="plot.top + 32"
-          class="is-rate"
-        />
-        <text :x="plot.left + plotWidth - 306" :y="plot.top + 37">
-          conversion rate
-        </text>
-        <line
-          :x1="plot.left + plotWidth - 152"
-          :x2="plot.left + plotWidth - 116"
-          :y1="plot.top + 32"
-          :y2="plot.top + 32"
-          class="is-volume"
-        />
-        <text :x="plot.left + plotWidth - 106" :y="plot.top + 37">
-          3-day avg
-        </text>
-      </g>
-
       <g class="conversion-chart__peak">
         <circle
           :cx="xForDay(peak.day)"

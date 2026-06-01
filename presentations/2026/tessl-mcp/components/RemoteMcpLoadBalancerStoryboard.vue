@@ -577,7 +577,7 @@ onBeforeUnmount(clearTimers);
         :key="`label-${animationKey}-${activeStep.id}`"
         class="remote-mcp-story__message"
         :class="`remote-mcp-story__message--${activeStep.tone ?? 'request'}`"
-        transform="translate(300 132)"
+        transform="translate(220 110)"
       >
         <rect width="344" height="52" rx="14" />
         <text class="remote-mcp-story__message-label" x="18" y="22">in flight</text>
@@ -915,11 +915,9 @@ onBeforeUnmount(clearTimers);
 @keyframes remote-mcp-story-message {
   0% {
     opacity: 0;
-    transform: translateY(7px) scale(0.98);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
   }
 }
 

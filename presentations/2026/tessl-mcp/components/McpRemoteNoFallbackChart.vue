@@ -44,7 +44,7 @@ const rows = (activityData.rows as ActivityRow[])
 
 const width = 1000;
 const height = 520;
-const plot = { left: 86, right: 96, top: 66, bottom: 84 };
+const plot = { left: 94, right: 110, top: 66, bottom: 94 };
 const plotWidth = width - plot.left - plot.right;
 const plotHeight = height - plot.top - plot.bottom;
 const barWidth = Math.max(
@@ -131,7 +131,6 @@ const monthTicks = computed(() => {
 });
 
 const latest = rows.at(-1)!;
-const first = rows[0];
 </script>
 
 <template>
@@ -259,42 +258,6 @@ const first = rows[0];
           text-anchor="middle"
         >
           {{ tick.label }}
-        </text>
-        <text
-          :x="plot.left"
-          :y="plot.top + plotHeight + 68"
-          text-anchor="start"
-        >
-          {{ first.week_start }}
-        </text>
-        <text
-          :x="plot.left + plotWidth"
-          :y="plot.top + plotHeight + 68"
-          text-anchor="end"
-        >
-          {{ latest.week_end }}
-        </text>
-      </g>
-
-      <g class="activity-chart__legend">
-        <rect
-          :x="plot.left + plotWidth - 346"
-          :y="plot.top + 14"
-          width="12"
-          height="38"
-          rx="2"
-        />
-        <text :x="plot.left + plotWidth - 324" :y="plot.top + 38">
-          initializations
-        </text>
-        <line
-          :x1="plot.left + plotWidth - 162"
-          :x2="plot.left + plotWidth - 126"
-          :y1="plot.top + 33"
-          :y2="plot.top + 33"
-        />
-        <text :x="plot.left + plotWidth - 116" :y="plot.top + 38">
-          mcp-remote traffic
         </text>
       </g>
     </svg>

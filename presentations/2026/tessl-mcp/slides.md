@@ -71,15 +71,18 @@ fonts:
 
 ---
 
-# What we are talking about today
+<div class="agenda-slide">
+<p class="kicker">today</p>
 
-## MCP at Hugging Face and Current Transports
+# What we are talking about
 
-## Client Behaviour and Analytics
-
-## Issues Related to MCP Implementation
-
-## New MCP Specification Changes
+<div class="agenda-list">
+<div>MCP at Hugging Face and current transports</div>
+<div>Client behaviour and analytics</div>
+<div>Issues related to MCP implementation</div>
+<div>New MCP specification changes</div>
+</div>
+</div>
 
 
 
@@ -142,8 +145,14 @@ fonts:
 
 ---
 
-<div class="traffic-chart-slide">
-  <McpRemoteTrafficChart client="Claude Code" title="Claude Code" />
+<div class="traffic-chart-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Claude Code</h1>
+      <h2>Weekly <code>mcp-remote</code> share · usage index remains opaque</h2>
+    </div>
+  </header>
+  <McpRemoteTrafficChart client="Claude Code" :showHeader="false" />
 </div>
 
 ---
@@ -152,7 +161,7 @@ fonts:
   <header class="chart-slide__header">
     <div>
       <h1>Weekly MCP activity</h1>
-      <p>Initialization requests as bars · tool calls as line</p>
+      <p>Initialization requests as bars · tool-call trend as line</p>
     </div>
   </header>
   <McpWeeklyActivityChart />
@@ -215,7 +224,7 @@ fonts:
   <header class="chart-slide__header">
     <div>
       <h1>Daily session conversion</h1>
-      <h2>Session → query conversion rate <br/> 3 day average converted </h2>
+      <h2>Session → query conversion rate</h2>
     </div>
   </header>
   <SessionConversionChart />
@@ -267,19 +276,26 @@ fonts:
 
 ---
 
-# Main Issues with Statefulness and Server-to-Client Comms
+# Main Issues with Statefulness
 
-- "Sticky" sessions in the load balancer
-  - Scalability
-  - Fault Tolerance
-  - In-Place Changes
-  - 
-- Maintaining open connections speculatively is expensive
-- SSE "cut-off" times in popular hosting platforms
-- Fault Tolerance and Scalability Concerns
-- Elicitation and Sampling require Server->Client channel open
-- Session State not well defined (e.g STDIO, Tool List)
-- Basic analytics requires handling Sessions
+<div class="statefulness-slide">
+<div class="statefulness-card statefulness-card--accent">
+<strong>Sticky sessions</strong>
+<span>Load balancers inherit scalability, fault-tolerance, and in-place change problems.</span>
+</div>
+<div class="statefulness-card">
+<strong>Speculative open channels</strong>
+<span>Holding SSE connections “just in case” is expensive and fragile on common hosts.</span>
+</div>
+<div class="statefulness-card">
+<strong>Server → client requirements</strong>
+<span>Elicitation and sampling currently need a callback channel to remain open.</span>
+</div>
+<div class="statefulness-card">
+<strong>Ambiguous session state</strong>
+<span>Tool lists, stdio expectations, and analytics all become session-coupled.</span>
+</div>
+</div>
 
 ---
 layout: section
@@ -542,14 +558,29 @@ layout: section
 
 ---
 
+<div class="migration-path-slide">
+<p class="kicker">migration path</p>
+
 # Migration Path
 
-## Draft Specification Release : Now
-
-## Beta SDKs : Soon
-
-## Planned Release Date  : 
+<div class="migration-path-list">
+<div><span>Now</span><strong>Draft specification release</strong></div>
+<div><span>Soon</span><strong>Beta SDKs</strong></div>
+<div><span>TBD</span><strong>Planned release date</strong></div>
+</div>
+</div>
 
 ---
 
+<div class="related-seps-slide">
+<p class="kicker">references</p>
+
 # Related SEPs
+
+<div class="related-seps-list">
+<div><strong>SEP-2260 / SEP-2257</strong><span>Simplifications</span></div>
+<div><strong>SEP-2575</strong><span>Stateless MCP</span></div>
+<div><strong>SEP-2459</strong><span>Cache control</span></div>
+<div><strong>SEP-2322 / SEP-2243</strong><span>Elicitations and routable HTTP</span></div>
+</div>
+</div>

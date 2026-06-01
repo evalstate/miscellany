@@ -101,7 +101,6 @@ const props = withDefaults(
         <div class="http-json-line http-json-line--indent-2"><em>"name"</em>: <mark>"hf.generate_image"</mark>,</div>
         <div class="http-json-line http-json-line--indent-2"><em>"arguments"</em>: {</div>
         <div class="http-json-line http-json-line--indent-3"><em>"prompt"</em>: <strong>"robot on a skateboard"</strong>,</div>
-        <div class="http-json-line http-json-line--indent-3"><em>"size"</em>: <strong>"1024x1024"</strong>,</div>
         <div class="http-json-line http-json-line--indent-3"><em>"pipeline"</em>: <mark>"image-generation"</mark></div>
         <div class="http-json-line http-json-line--indent-2">}</div>
         <div class="http-json-line http-json-line--indent">}</div>

@@ -11,11 +11,13 @@ const props = withDefaults(
     rangeMode?: RangeMode;
     title?: string;
     subtitle?: string;
+    showHeader?: boolean;
   }>(),
   {
     rangeMode: "client",
     title: undefined,
     subtitle: undefined,
+    showHeader: true,
   },
 );
 
@@ -220,7 +222,7 @@ const latestLabelY = computed(() => {
     class="traffic-chart"
     :class="`traffic-chart--${props.client === 'Codex' ? 'codex' : 'claude'}`"
   >
-    <header class="traffic-chart__header">
+    <header v-if="props.showHeader" class="traffic-chart__header">
       <div>
         <h1>{{ titleText }}</h1>
         <p>{{ subtitleText }}</p>
@@ -406,6 +408,14 @@ const latestLabelY = computed(() => {
   box-shadow: var(--deck-shadow);
 }
 
+.traffic-chart:has(> .traffic-chart__header) {
+  grid-template-rows: auto minmax(0, 1fr);
+}
+
+.traffic-chart:not(:has(> .traffic-chart__header)) {
+  grid-template-rows: minmax(0, 1fr);
+}
+
 .traffic-chart::before {
   content: "";
   position: absolute;
@@ -514,7 +524,7 @@ const latestLabelY = computed(() => {
 .traffic-chart__x-axis text {
   fill: var(--deck-muted);
   font-family: var(--deck-font-mono);
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 800;
 }
 
@@ -522,7 +532,7 @@ const latestLabelY = computed(() => {
 .traffic-chart__usage-label {
   fill: var(--deck-dim);
   font-family: var(--deck-font-mono);
-  font-size: 13px;
+  font-size: 17px;
   font-weight: 900;
   letter-spacing: 0.15em;
   text-transform: uppercase;

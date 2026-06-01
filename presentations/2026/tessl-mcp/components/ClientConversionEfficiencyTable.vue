@@ -26,7 +26,7 @@ function parseCsv(text: string): Row[] {
     .filter((row) => row.client_name && row.sessions >= MIN_SESSIONS);
 }
 
-const rows = parseCsv(csv);
+const rows = parseCsv(csv).filter((row) => row.client_name !== "(unknown)");
 const top = rows
   .toSorted(
     (a, b) =>
