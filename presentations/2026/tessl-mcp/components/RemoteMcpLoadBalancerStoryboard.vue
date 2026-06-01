@@ -171,6 +171,7 @@ const initialized = ref(false);
 const animationKey = ref(0);
 const activeStepIndex = ref(-1);
 const packetProgress = ref(0);
+const diagnostics = ref(false);
 const timers: number[] = [];
 let animationFrame = 0;
 
@@ -218,6 +219,10 @@ const packetPoint = computed(() => {
   if (!activeEdge.value) return { x: 0, y: 0 };
   return pointOnEdge(activeEdge.value, activeStep.value?.reverse, packetProgress.value);
 });
+const diagnosticFrame = computed(() => Math.round(packetProgress.value * 60));
+const diagnosticStep = computed(() =>
+  activeStep.value ? `${activeStepIndex.value + 1}/${activeSteps.value.length}` : "idle",
+);
 
 function anchorPoint(node: NodeSpec, anchor: Anchor) {
   return {
@@ -271,6 +276,14 @@ function clearTimers() {
   packetProgress.value = 0;
 }
 
+function freeze() {
+  while (timers.length) {
+    window.clearTimeout(timers.pop());
+  }
+  window.cancelAnimationFrame(animationFrame);
+  animationFrame = 0;
+}
+
 function animatePacket(start = performance.now()) {
   const elapsed = performance.now() - start;
   packetProgress.value = Math.min(elapsed / 980, 1);
@@ -313,6 +326,28 @@ function play(nextEvent: "initialize" | "request") {
   );
 }
 
+function seekStep(delta: number) {
+  freeze();
+  const steps = event.value === "request" ? requestSteps : initializeSteps;
+  event.value = event.value === "idle" ? "initialize" : event.value;
+  activeStepIndex.value = Math.max(
+    0,
+    Math.min(steps.length - 1, activeStepIndex.value + delta),
+  );
+  packetProgress.value = 0.5;
+  animationKey.value += 1;
+}
+
+function seekFrame(delta: number) {
+  freeze();
+  if (event.value === "idle") {
+    event.value = "initialize";
+    activeStepIndex.value = 0;
+  }
+  packetProgress.value = Math.max(0, Math.min(1, packetProgress.value + delta / 60));
+  animationKey.value += 1;
+}
+
 function reset() {
   clearTimers();
   event.value = "idle";
@@ -349,6 +384,25 @@ onBeforeUnmount(clearTimers);
         Later request
       </button>
       <button type="button" @click="reset">Reset state</button>
+      <button type="button" :aria-pressed="diagnostics" @click="diagnostics = !diagnostics">
+        Diag
+      </button>
+    </div>
+
+    <div v-if="diagnostics" class="remote-mcp-story__diagnostics">
+      <div>
+        <strong>{{ event }}</strong>
+        <span>step {{ diagnosticStep }}</span>
+        <span>frame {{ diagnosticFrame }}/60</span>
+        <span>{{ Math.round(packetProgress * 100) }}%</span>
+      </div>
+      <div>
+        <button type="button" @click="freeze">freeze</button>
+        <button type="button" @click="seekStep(-1)">step −</button>
+        <button type="button" @click="seekStep(1)">step +</button>
+        <button type="button" @click="seekFrame(-5)">frame −</button>
+        <button type="button" @click="seekFrame(5)">frame +</button>
+      </div>
     </div>
 
     <p v-if="!activeStep" class="remote-mcp-story__status" aria-live="polite">{{ status }}</p>
@@ -509,6 +563,53 @@ onBeforeUnmount(clearTimers);
   color: var(--deck-text);
   border-color: rgba(255, 198, 73, 0.62);
   background: rgba(245, 164, 0, 0.14);
+}
+
+.remote-mcp-story__diagnostics {
+  position: absolute;
+  top: clamp(3.45rem, 10cqh, 4.15rem);
+  right: clamp(0.7rem, 2.8cqw, 1.1rem);
+  z-index: 5;
+  min-width: 18.5rem;
+  padding: 0.52rem 0.6rem;
+  border: 1px solid rgba(106, 163, 247, 0.38);
+  border-radius: var(--deck-radius);
+  background: rgba(11, 12, 15, 0.84);
+  color: var(--deck-muted);
+  font: 750 0.62rem / 1.35 var(--deck-font-mono);
+  letter-spacing: 0.04em;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.32);
+}
+
+.remote-mcp-story__diagnostics > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.38rem 0.52rem;
+  align-items: center;
+}
+
+.remote-mcp-story__diagnostics > div + div {
+  margin-top: 0.42rem;
+}
+
+.remote-mcp-story__diagnostics strong {
+  color: var(--deck-info);
+  text-transform: uppercase;
+}
+
+.remote-mcp-story__diagnostics button {
+  padding: 0.22rem 0.38rem;
+  color: var(--deck-muted);
+  border: 1px solid var(--deck-border-2);
+  border-radius: 999px;
+  background: rgba(20, 22, 27, 0.84);
+  font: inherit;
+  cursor: pointer;
+}
+
+.remote-mcp-story__diagnostics button:hover {
+  color: var(--deck-text);
+  border-color: rgba(106, 163, 247, 0.62);
 }
 
 .remote-mcp-story__status {
