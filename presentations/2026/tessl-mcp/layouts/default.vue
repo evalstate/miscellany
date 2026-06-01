@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  kicker?: string
-}>()
+  kicker?: string;
+}>();
 </script>
 
 <template>

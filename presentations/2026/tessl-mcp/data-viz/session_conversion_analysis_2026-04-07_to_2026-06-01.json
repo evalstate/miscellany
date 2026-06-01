@@ -1,0 +1,198 @@
+{
+  "window": {
+    "start": "2026-04-07",
+    "end": "2026-06-01",
+    "days": 56
+  },
+  "inputs": {
+    "sessions": "/home/shaun/temp/hf-mcp-logs/outputs/last8w_2026-06-01/sessions_2026-04-07_to_2026-06-01.parquet",
+    "queries": "/home/shaun/temp/hf-mcp-logs/outputs/last8w_2026-06-01/queries_2026-04-07_to_2026-06-01.parquet"
+  },
+  "definition": {
+    "session": "first sessions.methodName='initialize' event per clientSessionId with init_day inside window",
+    "conversion": "at least one queries row/tool call with the same clientSessionId and query day inside window",
+    "client_grouping": "client_name from the initialize row; client_name+client_version also exported separately",
+    "eligibility_for_efficiency_rankings": ">= 1000 sessions"
+  },
+  "summary": {
+    "sessions": 31761089,
+    "converted_sessions": 725317,
+    "unconverted_sessions": 31035772,
+    "conversion_rate_pct": 2.284,
+    "distinct_client_names": 1153,
+    "distinct_client_name_versions": 3045,
+    "matched_tool_calls": 1451476
+  },
+  "eligible_client_count": 95,
+  "eligible_client_version_count": 294,
+  "most_efficient_clients_top3": [
+    {
+      "client_name": "openai-mcp (Agent Builder)",
+      "sessions": 2471,
+      "converted_sessions": 2376,
+      "unconverted_sessions": 95,
+      "conversion_rate_pct": 96.155,
+      "matched_tool_calls": 2380,
+      "distinct_versions": 1
+    },
+    {
+      "client_name": "tfy-llm-gateway-client",
+      "sessions": 16310,
+      "converted_sessions": 15225,
+      "unconverted_sessions": 1085,
+      "conversion_rate_pct": 93.348,
+      "matched_tool_calls": 54103,
+      "distinct_versions": 1
+    },
+    {
+      "client_name": "openai-mcp",
+      "sessions": 503180,
+      "converted_sessions": 466296,
+      "unconverted_sessions": 36884,
+      "conversion_rate_pct": 92.67,
+      "matched_tool_calls": 470845,
+      "distinct_versions": 1
+    }
+  ],
+  "least_efficient_clients_by_rate_top3": [
+    {
+      "client_name": "Anthropic",
+      "sessions": 472788,
+      "converted_sessions": 0,
+      "unconverted_sessions": 472788,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0,
+      "distinct_versions": 1
+    },
+    {
+      "client_name": "mcp-remote-fallback-test",
+      "sessions": 232933,
+      "converted_sessions": 0,
+      "unconverted_sessions": 232933,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0,
+      "distinct_versions": 1
+    },
+    {
+      "client_name": "Cursor MCP Availability",
+      "sessions": 32698,
+      "converted_sessions": 0,
+      "unconverted_sessions": 32698,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0,
+      "distinct_versions": 1
+    }
+  ],
+  "least_efficient_zero_converter_clients_top3": [
+    {
+      "client_name": "Anthropic",
+      "sessions": 472788,
+      "converted_sessions": 0,
+      "unconverted_sessions": 472788,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0,
+      "distinct_versions": 1
+    },
+    {
+      "client_name": "mcp-remote-fallback-test",
+      "sessions": 232933,
+      "converted_sessions": 0,
+      "unconverted_sessions": 232933,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0,
+      "distinct_versions": 1
+    },
+    {
+      "client_name": "Cursor MCP Availability",
+      "sessions": 32698,
+      "converted_sessions": 0,
+      "unconverted_sessions": 32698,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0,
+      "distinct_versions": 1
+    }
+  ],
+  "most_efficient_client_versions_top3": [
+    {
+      "client_name": "openai-mcp (Agent Builder)",
+      "client_version": "1.0.0",
+      "sessions": 2471,
+      "converted_sessions": 2376,
+      "unconverted_sessions": 95,
+      "conversion_rate_pct": 96.155,
+      "matched_tool_calls": 2380
+    },
+    {
+      "client_name": "tfy-llm-gateway-client",
+      "client_version": "1.0.0",
+      "sessions": 16310,
+      "converted_sessions": 15225,
+      "unconverted_sessions": 1085,
+      "conversion_rate_pct": 93.348,
+      "matched_tool_calls": 54103
+    },
+    {
+      "client_name": "openai-mcp",
+      "client_version": "1.0.0",
+      "sessions": 503180,
+      "converted_sessions": 466296,
+      "unconverted_sessions": 36884,
+      "conversion_rate_pct": 92.67,
+      "matched_tool_calls": 470845
+    }
+  ],
+  "least_efficient_client_versions_by_rate_top3": [
+    {
+      "client_name": "Anthropic",
+      "client_version": "1.0.0",
+      "sessions": 472788,
+      "converted_sessions": 0,
+      "unconverted_sessions": 472788,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0
+    },
+    {
+      "client_name": "mcp-remote-fallback-test",
+      "client_version": "0.0.0",
+      "sessions": 232933,
+      "converted_sessions": 0,
+      "unconverted_sessions": 232933,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0
+    },
+    {
+      "client_name": "gemini-cli-mcp-client (via mcp-remote 0.1.37)",
+      "client_version": "unknown",
+      "sessions": 68995,
+      "converted_sessions": 0,
+      "unconverted_sessions": 68995,
+      "conversion_rate_pct": 0.0,
+      "matched_tool_calls": 0
+    }
+  ],
+  "tool_call_distribution": [
+    {
+      "tool_call_bucket": "0",
+      "sessions": 31035772
+    },
+    {
+      "tool_call_bucket": "1",
+      "sessions": 604967
+    },
+    {
+      "tool_call_bucket": "2-5",
+      "sessions": 83118
+    },
+    {
+      "tool_call_bucket": "6-20",
+      "sessions": 32052
+    },
+    {
+      "tool_call_bucket": "21+",
+      "sessions": 5180
+    }
+  ],
+  "daily_csv": "/home/shaun/temp/hf-mcp-logs/outputs/last8w_2026-06-01/session_conversion_daily_2026-04-07_to_2026-06-01.csv",
+  "client_csv": "/home/shaun/temp/hf-mcp-logs/outputs/last8w_2026-06-01/client_session_conversion_2026-04-07_to_2026-06-01.csv",
+  "client_version_csv": "/home/shaun/temp/hf-mcp-logs/outputs/last8w_2026-06-01/client_version_session_conversion_2026-04-07_to_2026-06-01.csv"
+}

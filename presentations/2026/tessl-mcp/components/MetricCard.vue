@@ -1,9 +1,9 @@
 <script setup lang="ts">
 defineProps<{
-  label: string
-  value: string
-  note?: string
-}>()
+  label: string;
+  value: string;
+  note?: string;
+}>();
 </script>
 
 <template>

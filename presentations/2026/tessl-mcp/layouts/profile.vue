@@ -1,8 +1,8 @@
 <script setup lang="ts">
 defineProps<{
-  handle?: string
-  role?: string
-}>()
+  handle?: string;
+  role?: string;
+}>();
 </script>
 
 <template>

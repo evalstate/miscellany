@@ -91,6 +91,23 @@ Generates weekly MCP initialization-request counts and summed tool-call counts.
   - First and latest weeks are marked `partial_week`; the first week can include
     pre-series counter activity from a server that started before collection.
 
+### `generate_session_conversion_daily.py`
+
+Generates slide-ready daily session-conversion JSON from the refreshed
+last-8-weeks conversion-analysis CSV.
+
+- Preferred language: Python
+- Input:
+  - `session_conversion_daily_2026-04-07_to_2026-06-01.csv`
+- Output:
+  - `session_conversion_daily.json`
+- Notes:
+  - Session creation is the first `initialize` row per `clientSessionId` in the
+    upstream analysis.
+  - Conversion means at least one joined query row for the same
+    `clientSessionId`; query success is not required.
+  - `converted_sessions_3d_avg` is a trailing 3-day rolling average.
+
 ## Generated datasets
 
 ### `mcp_remote_share_weekly.json`
@@ -143,6 +160,39 @@ Fields:
 - `tool_calls`
 - `snapshot_count`
 - `partial_week`
+
+### Session conversion analysis files
+
+Compact copies of the refreshed conversion-analysis outputs from:
+
+```text
+/home/shaun/temp/hf-mcp-logs/outputs/last8w_2026-06-01
+```
+
+Copied files:
+
+- `session_conversion_daily_2026-04-07_to_2026-06-01.csv`
+- `client_session_conversion_2026-04-07_to_2026-06-01.csv`
+- `client_version_session_conversion_2026-04-07_to_2026-06-01.csv`
+- `session_conversion_analysis_2026-04-07_to_2026-06-01.json`
+
+Large parquet extracts are intentionally kept outside the deck.
+
+### `session_conversion_daily.json`
+
+Small JSON dataset for `SessionConversionChart.vue`.
+
+Contains one row per actual event date from 2026-04-07 through 2026-05-31.
+
+Fields:
+
+- `day`
+- `sessions`
+- `converted_sessions`
+- `unconverted_sessions`
+- `conversion_rate_pct`
+- `converted_sessions_3d_avg`
+- `matched_tool_calls`
 
 ## Subagent
 

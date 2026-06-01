@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { onMounted, ref } from "vue";
 
-const video = ref<HTMLVideoElement>()
+const video = ref<HTMLVideoElement>();
 
 onMounted(() => {
-  if (!video.value) return
-  video.value.muted = true
-  video.value.defaultMuted = true
-  video.value.play().catch(() => {})
-})
+  if (!video.value) return;
+  video.value.muted = true;
+  video.value.defaultMuted = true;
+  video.value.play().catch(() => {});
+});
 </script>
 
 <template>

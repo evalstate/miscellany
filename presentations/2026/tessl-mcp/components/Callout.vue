@@ -1,11 +1,11 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    title?: string
-    tone?: 'accent' | 'info' | 'ok' | 'warn'
+    title?: string;
+    tone?: "accent" | "info" | "ok" | "warn";
   }>(),
-  { tone: 'accent' },
-)
+  { tone: "accent" },
+);
 </script>
 
 <template>

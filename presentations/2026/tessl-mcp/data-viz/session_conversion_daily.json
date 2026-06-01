@@ -1,0 +1,506 @@
+{
+  "schema": "deck.session-conversion-daily.v1",
+  "source": "data-viz/session_conversion_daily_2026-04-07_to_2026-06-01.csv",
+  "window": {
+    "start": "2026-04-07",
+    "end": "2026-05-31"
+  },
+  "rolling_window_days": 3,
+  "rows": [
+    {
+      "day": "2026-04-07",
+      "sessions": 314821,
+      "converted_sessions": 4169,
+      "unconverted_sessions": 310652,
+      "conversion_rate_pct": 1.324,
+      "converted_sessions_3d_avg": 4169.0,
+      "matched_tool_calls": 10256
+    },
+    {
+      "day": "2026-04-08",
+      "sessions": 589737,
+      "converted_sessions": 8662,
+      "unconverted_sessions": 581075,
+      "conversion_rate_pct": 1.469,
+      "converted_sessions_3d_avg": 6415.5,
+      "matched_tool_calls": 23345
+    },
+    {
+      "day": "2026-04-09",
+      "sessions": 644458,
+      "converted_sessions": 8511,
+      "unconverted_sessions": 635947,
+      "conversion_rate_pct": 1.321,
+      "converted_sessions_3d_avg": 7114.0,
+      "matched_tool_calls": 22026
+    },
+    {
+      "day": "2026-04-10",
+      "sessions": 608635,
+      "converted_sessions": 7393,
+      "unconverted_sessions": 601242,
+      "conversion_rate_pct": 1.215,
+      "converted_sessions_3d_avg": 8188.7,
+      "matched_tool_calls": 19561
+    },
+    {
+      "day": "2026-04-11",
+      "sessions": 470483,
+      "converted_sessions": 6647,
+      "unconverted_sessions": 463836,
+      "conversion_rate_pct": 1.413,
+      "converted_sessions_3d_avg": 7517.0,
+      "matched_tool_calls": 21228
+    },
+    {
+      "day": "2026-04-12",
+      "sessions": 643160,
+      "converted_sessions": 7443,
+      "unconverted_sessions": 635717,
+      "conversion_rate_pct": 1.157,
+      "converted_sessions_3d_avg": 7161.0,
+      "matched_tool_calls": 19840
+    },
+    {
+      "day": "2026-04-13",
+      "sessions": 687886,
+      "converted_sessions": 7750,
+      "unconverted_sessions": 680136,
+      "conversion_rate_pct": 1.127,
+      "converted_sessions_3d_avg": 7280.0,
+      "matched_tool_calls": 30836
+    },
+    {
+      "day": "2026-04-14",
+      "sessions": 634645,
+      "converted_sessions": 7722,
+      "unconverted_sessions": 626923,
+      "conversion_rate_pct": 1.217,
+      "converted_sessions_3d_avg": 7638.3,
+      "matched_tool_calls": 23297
+    },
+    {
+      "day": "2026-04-15",
+      "sessions": 614895,
+      "converted_sessions": 7394,
+      "unconverted_sessions": 607501,
+      "conversion_rate_pct": 1.202,
+      "converted_sessions_3d_avg": 7622.0,
+      "matched_tool_calls": 24600
+    },
+    {
+      "day": "2026-04-16",
+      "sessions": 582299,
+      "converted_sessions": 9351,
+      "unconverted_sessions": 572948,
+      "conversion_rate_pct": 1.606,
+      "converted_sessions_3d_avg": 8155.7,
+      "matched_tool_calls": 22717
+    },
+    {
+      "day": "2026-04-17",
+      "sessions": 577521,
+      "converted_sessions": 9564,
+      "unconverted_sessions": 567957,
+      "conversion_rate_pct": 1.656,
+      "converted_sessions_3d_avg": 8769.7,
+      "matched_tool_calls": 19140
+    },
+    {
+      "day": "2026-04-18",
+      "sessions": 568282,
+      "converted_sessions": 7848,
+      "unconverted_sessions": 560434,
+      "conversion_rate_pct": 1.381,
+      "converted_sessions_3d_avg": 8921.0,
+      "matched_tool_calls": 15900
+    },
+    {
+      "day": "2026-04-19",
+      "sessions": 522448,
+      "converted_sessions": 7922,
+      "unconverted_sessions": 514526,
+      "conversion_rate_pct": 1.516,
+      "converted_sessions_3d_avg": 8444.7,
+      "matched_tool_calls": 28382
+    },
+    {
+      "day": "2026-04-20",
+      "sessions": 614289,
+      "converted_sessions": 10367,
+      "unconverted_sessions": 603922,
+      "conversion_rate_pct": 1.688,
+      "converted_sessions_3d_avg": 8712.3,
+      "matched_tool_calls": 21414
+    },
+    {
+      "day": "2026-04-21",
+      "sessions": 554452,
+      "converted_sessions": 11376,
+      "unconverted_sessions": 543076,
+      "conversion_rate_pct": 2.052,
+      "converted_sessions_3d_avg": 9888.3,
+      "matched_tool_calls": 22870
+    },
+    {
+      "day": "2026-04-22",
+      "sessions": 575411,
+      "converted_sessions": 12025,
+      "unconverted_sessions": 563386,
+      "conversion_rate_pct": 2.09,
+      "converted_sessions_3d_avg": 11256.0,
+      "matched_tool_calls": 27095
+    },
+    {
+      "day": "2026-04-23",
+      "sessions": 595175,
+      "converted_sessions": 11647,
+      "unconverted_sessions": 583528,
+      "conversion_rate_pct": 1.957,
+      "converted_sessions_3d_avg": 11682.7,
+      "matched_tool_calls": 27748
+    },
+    {
+      "day": "2026-04-24",
+      "sessions": 639929,
+      "converted_sessions": 11860,
+      "unconverted_sessions": 628069,
+      "conversion_rate_pct": 1.853,
+      "converted_sessions_3d_avg": 11844.0,
+      "matched_tool_calls": 24121
+    },
+    {
+      "day": "2026-04-25",
+      "sessions": 509405,
+      "converted_sessions": 11264,
+      "unconverted_sessions": 498141,
+      "conversion_rate_pct": 2.211,
+      "converted_sessions_3d_avg": 11590.3,
+      "matched_tool_calls": 23264
+    },
+    {
+      "day": "2026-04-26",
+      "sessions": 536579,
+      "converted_sessions": 10788,
+      "unconverted_sessions": 525791,
+      "conversion_rate_pct": 2.011,
+      "converted_sessions_3d_avg": 11304.0,
+      "matched_tool_calls": 26232
+    },
+    {
+      "day": "2026-04-27",
+      "sessions": 584984,
+      "converted_sessions": 12452,
+      "unconverted_sessions": 572532,
+      "conversion_rate_pct": 2.129,
+      "converted_sessions_3d_avg": 11501.3,
+      "matched_tool_calls": 23867
+    },
+    {
+      "day": "2026-04-28",
+      "sessions": 594252,
+      "converted_sessions": 12927,
+      "unconverted_sessions": 581325,
+      "conversion_rate_pct": 2.175,
+      "converted_sessions_3d_avg": 12055.7,
+      "matched_tool_calls": 25993
+    },
+    {
+      "day": "2026-04-29",
+      "sessions": 605237,
+      "converted_sessions": 11511,
+      "unconverted_sessions": 593726,
+      "conversion_rate_pct": 1.902,
+      "converted_sessions_3d_avg": 12296.7,
+      "matched_tool_calls": 24643
+    },
+    {
+      "day": "2026-04-30",
+      "sessions": 613113,
+      "converted_sessions": 12106,
+      "unconverted_sessions": 601007,
+      "conversion_rate_pct": 1.975,
+      "converted_sessions_3d_avg": 12181.3,
+      "matched_tool_calls": 25980
+    },
+    {
+      "day": "2026-05-01",
+      "sessions": 606484,
+      "converted_sessions": 11852,
+      "unconverted_sessions": 594632,
+      "conversion_rate_pct": 1.954,
+      "converted_sessions_3d_avg": 11823.0,
+      "matched_tool_calls": 29054
+    },
+    {
+      "day": "2026-05-02",
+      "sessions": 573817,
+      "converted_sessions": 10609,
+      "unconverted_sessions": 563208,
+      "conversion_rate_pct": 1.849,
+      "converted_sessions_3d_avg": 11522.3,
+      "matched_tool_calls": 22708
+    },
+    {
+      "day": "2026-05-03",
+      "sessions": 581394,
+      "converted_sessions": 11781,
+      "unconverted_sessions": 569613,
+      "conversion_rate_pct": 2.026,
+      "converted_sessions_3d_avg": 11414.0,
+      "matched_tool_calls": 23264
+    },
+    {
+      "day": "2026-05-04",
+      "sessions": 684317,
+      "converted_sessions": 10822,
+      "unconverted_sessions": 673495,
+      "conversion_rate_pct": 1.581,
+      "converted_sessions_3d_avg": 11070.7,
+      "matched_tool_calls": 23295
+    },
+    {
+      "day": "2026-05-05",
+      "sessions": 662731,
+      "converted_sessions": 13357,
+      "unconverted_sessions": 649374,
+      "conversion_rate_pct": 2.015,
+      "converted_sessions_3d_avg": 11986.7,
+      "matched_tool_calls": 26652
+    },
+    {
+      "day": "2026-05-06",
+      "sessions": 673312,
+      "converted_sessions": 14255,
+      "unconverted_sessions": 659057,
+      "conversion_rate_pct": 2.117,
+      "converted_sessions_3d_avg": 12811.3,
+      "matched_tool_calls": 27379
+    },
+    {
+      "day": "2026-05-07",
+      "sessions": 613965,
+      "converted_sessions": 16547,
+      "unconverted_sessions": 597418,
+      "conversion_rate_pct": 2.695,
+      "converted_sessions_3d_avg": 14719.7,
+      "matched_tool_calls": 30446
+    },
+    {
+      "day": "2026-05-08",
+      "sessions": 582230,
+      "converted_sessions": 15758,
+      "unconverted_sessions": 566472,
+      "conversion_rate_pct": 2.706,
+      "converted_sessions_3d_avg": 15520.0,
+      "matched_tool_calls": 29663
+    },
+    {
+      "day": "2026-05-09",
+      "sessions": 522930,
+      "converted_sessions": 14782,
+      "unconverted_sessions": 508148,
+      "conversion_rate_pct": 2.827,
+      "converted_sessions_3d_avg": 15695.7,
+      "matched_tool_calls": 26636
+    },
+    {
+      "day": "2026-05-10",
+      "sessions": 548396,
+      "converted_sessions": 13059,
+      "unconverted_sessions": 535337,
+      "conversion_rate_pct": 2.381,
+      "converted_sessions_3d_avg": 14533.0,
+      "matched_tool_calls": 24091
+    },
+    {
+      "day": "2026-05-11",
+      "sessions": 644907,
+      "converted_sessions": 18384,
+      "unconverted_sessions": 626523,
+      "conversion_rate_pct": 2.851,
+      "converted_sessions_3d_avg": 15408.3,
+      "matched_tool_calls": 32007
+    },
+    {
+      "day": "2026-05-12",
+      "sessions": 627195,
+      "converted_sessions": 17519,
+      "unconverted_sessions": 609676,
+      "conversion_rate_pct": 2.793,
+      "converted_sessions_3d_avg": 16320.7,
+      "matched_tool_calls": 34368
+    },
+    {
+      "day": "2026-05-13",
+      "sessions": 625660,
+      "converted_sessions": 16677,
+      "unconverted_sessions": 608983,
+      "conversion_rate_pct": 2.666,
+      "converted_sessions_3d_avg": 17526.7,
+      "matched_tool_calls": 41821
+    },
+    {
+      "day": "2026-05-14",
+      "sessions": 710411,
+      "converted_sessions": 15160,
+      "unconverted_sessions": 695251,
+      "conversion_rate_pct": 2.134,
+      "converted_sessions_3d_avg": 16452.0,
+      "matched_tool_calls": 24151
+    },
+    {
+      "day": "2026-05-15",
+      "sessions": 544141,
+      "converted_sessions": 15998,
+      "unconverted_sessions": 528143,
+      "conversion_rate_pct": 2.94,
+      "converted_sessions_3d_avg": 15945.0,
+      "matched_tool_calls": 26936
+    },
+    {
+      "day": "2026-05-16",
+      "sessions": 522134,
+      "converted_sessions": 14374,
+      "unconverted_sessions": 507760,
+      "conversion_rate_pct": 2.753,
+      "converted_sessions_3d_avg": 15177.3,
+      "matched_tool_calls": 24372
+    },
+    {
+      "day": "2026-05-17",
+      "sessions": 494417,
+      "converted_sessions": 15267,
+      "unconverted_sessions": 479150,
+      "conversion_rate_pct": 3.088,
+      "converted_sessions_3d_avg": 15213.0,
+      "matched_tool_calls": 27416
+    },
+    {
+      "day": "2026-05-18",
+      "sessions": 580385,
+      "converted_sessions": 20414,
+      "unconverted_sessions": 559971,
+      "conversion_rate_pct": 3.517,
+      "converted_sessions_3d_avg": 16685.0,
+      "matched_tool_calls": 30895
+    },
+    {
+      "day": "2026-05-19",
+      "sessions": 561519,
+      "converted_sessions": 17215,
+      "unconverted_sessions": 544304,
+      "conversion_rate_pct": 3.066,
+      "converted_sessions_3d_avg": 17632.0,
+      "matched_tool_calls": 27792
+    },
+    {
+      "day": "2026-05-20",
+      "sessions": 589792,
+      "converted_sessions": 16876,
+      "unconverted_sessions": 572916,
+      "conversion_rate_pct": 2.861,
+      "converted_sessions_3d_avg": 18168.3,
+      "matched_tool_calls": 27200
+    },
+    {
+      "day": "2026-05-21",
+      "sessions": 571400,
+      "converted_sessions": 17542,
+      "unconverted_sessions": 553858,
+      "conversion_rate_pct": 3.07,
+      "converted_sessions_3d_avg": 17211.0,
+      "matched_tool_calls": 30042
+    },
+    {
+      "day": "2026-05-22",
+      "sessions": 586165,
+      "converted_sessions": 17111,
+      "unconverted_sessions": 569054,
+      "conversion_rate_pct": 2.919,
+      "converted_sessions_3d_avg": 17176.3,
+      "matched_tool_calls": 26543
+    },
+    {
+      "day": "2026-05-23",
+      "sessions": 448294,
+      "converted_sessions": 13720,
+      "unconverted_sessions": 434574,
+      "conversion_rate_pct": 3.06,
+      "converted_sessions_3d_avg": 16124.3,
+      "matched_tool_calls": 32241
+    },
+    {
+      "day": "2026-05-24",
+      "sessions": 461020,
+      "converted_sessions": 16302,
+      "unconverted_sessions": 444718,
+      "conversion_rate_pct": 3.536,
+      "converted_sessions_3d_avg": 15711.0,
+      "matched_tool_calls": 25248
+    },
+    {
+      "day": "2026-05-25",
+      "sessions": 516295,
+      "converted_sessions": 19297,
+      "unconverted_sessions": 496998,
+      "conversion_rate_pct": 3.738,
+      "converted_sessions_3d_avg": 16439.7,
+      "matched_tool_calls": 30237
+    },
+    {
+      "day": "2026-05-26",
+      "sessions": 560540,
+      "converted_sessions": 19705,
+      "unconverted_sessions": 540835,
+      "conversion_rate_pct": 3.515,
+      "converted_sessions_3d_avg": 18434.7,
+      "matched_tool_calls": 32202
+    },
+    {
+      "day": "2026-05-27",
+      "sessions": 576188,
+      "converted_sessions": 20301,
+      "unconverted_sessions": 555887,
+      "conversion_rate_pct": 3.523,
+      "converted_sessions_3d_avg": 19767.7,
+      "matched_tool_calls": 32359
+    },
+    {
+      "day": "2026-05-28",
+      "sessions": 615798,
+      "converted_sessions": 19602,
+      "unconverted_sessions": 596196,
+      "conversion_rate_pct": 3.183,
+      "converted_sessions_3d_avg": 19869.3,
+      "matched_tool_calls": 34692
+    },
+    {
+      "day": "2026-05-29",
+      "sessions": 614087,
+      "converted_sessions": 17690,
+      "unconverted_sessions": 596397,
+      "conversion_rate_pct": 2.881,
+      "converted_sessions_3d_avg": 19197.7,
+      "matched_tool_calls": 33363
+    },
+    {
+      "day": "2026-05-30",
+      "sessions": 513543,
+      "converted_sessions": 17036,
+      "unconverted_sessions": 496507,
+      "conversion_rate_pct": 3.317,
+      "converted_sessions_3d_avg": 18109.3,
+      "matched_tool_calls": 30514
+    },
+    {
+      "day": "2026-05-31",
+      "sessions": 465526,
+      "converted_sessions": 17606,
+      "unconverted_sessions": 447920,
+      "conversion_rate_pct": 3.782,
+      "converted_sessions_3d_avg": 17444.0,
+      "matched_tool_calls": 29534
+    }
+  ]
+}

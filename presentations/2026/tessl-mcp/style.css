@@ -25,18 +25,22 @@
   --deck-accent-line: rgba(245, 164, 0, 0.28);
 
   --deck-info: #6aa3f7;
-  --deck-info-bg: rgba(106, 163, 247, 0.10);
+  --deck-info-bg: rgba(106, 163, 247, 0.1);
   --deck-info-line: rgba(106, 163, 247, 0.32);
 
   --deck-ok: #6ad19c;
   --deck-no: #f06b5a;
 
-  --deck-font-mono: "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --deck-font-sans: Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --deck-font-mono:
+    "JetBrains Mono", "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo,
+    Consolas, monospace;
+  --deck-font-sans:
+    Inter, -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
   --deck-radius: 8px;
   --deck-radius-sm: 3px;
-  --deck-shadow: 0 18px 44px rgba(0, 0, 0, 0.34), 0 0 36px rgba(245, 164, 0, 0.08);
+  --deck-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.34), 0 0 36px rgba(245, 164, 0, 0.08);
 }
 
 .slidev-layout {
@@ -59,7 +63,7 @@
     linear-gradient(rgba(245, 164, 0, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(245, 164, 0, 0.035) 1px, transparent 1px);
   background-size: 48px 48px;
-  mask-image: linear-gradient(180deg, rgba(0,0,0,0.42), transparent 70%);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.42), transparent 70%);
 }
 
 .slidev-layout > * {
@@ -194,6 +198,18 @@
   padding: 0;
 }
 
+.conversion-chart-slide {
+  position: absolute !important;
+  inset: 28px 42px;
+  width: auto;
+  height: auto;
+  margin: 0;
+}
+
+.slidev-layout:has(.conversion-chart-slide) {
+  padding: 0;
+}
+
 .hf-mcp-slide {
   min-height: calc(100% - 4.4rem);
   display: grid;
@@ -245,8 +261,16 @@
   padding: 0.55rem;
   overflow: hidden;
   background:
-    radial-gradient(circle at 16% 20%, rgba(245, 164, 0, 0.16), transparent 32%),
-    radial-gradient(circle at 88% 82%, rgba(106, 163, 247, 0.13), transparent 34%),
+    radial-gradient(
+      circle at 16% 20%,
+      rgba(245, 164, 0, 0.16),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 88% 82%,
+      rgba(106, 163, 247, 0.13),
+      transparent 34%
+    ),
     rgba(11, 12, 15, 0.72);
 }
 
@@ -458,8 +482,16 @@
   grid-template-rows: 1.05fr auto 0.95fr;
   place-items: center;
   background:
-    radial-gradient(circle at 50% 4%, rgba(255, 198, 73, 0.14), transparent 34%),
-    radial-gradient(circle at 50% 92%, rgba(106, 163, 247, 0.16), transparent 34%),
+    radial-gradient(
+      circle at 50% 4%,
+      rgba(255, 198, 73, 0.14),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 50% 92%,
+      rgba(106, 163, 247, 0.16),
+      transparent 34%
+    ),
     rgba(20, 22, 27, 0.86);
 }
 
@@ -476,18 +508,29 @@
   object-fit: contain;
   padding: 1.08rem;
   background:
-    linear-gradient(180deg, rgba(240, 236, 226, 0.08), rgba(240, 236, 226, 0.02)),
+    linear-gradient(
+      180deg,
+      rgba(240, 236, 226, 0.08),
+      rgba(240, 236, 226, 0.02)
+    ),
     rgba(11, 12, 15, 0.34);
   border: 1px solid var(--deck-border-2);
   border-radius: 32px;
-  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(255, 255, 255, 0.025);
+  box-shadow:
+    0 18px 44px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.025);
   filter: invert(1) drop-shadow(0 0 18px rgba(245, 164, 0, 0.12));
 }
 
 .about-logo-divider {
   width: 74%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--deck-border-2), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--deck-border-2),
+    transparent
+  );
 }
 
 .slidev-layout:has(.intro-video),

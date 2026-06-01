@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed } from "vue";
 import {
   FileText,
   FolderTree,
@@ -7,19 +7,19 @@ import {
   MessageSquare,
   Sparkles,
   Wrench,
-} from '@lucide/vue'
+} from "@lucide/vue";
 
 const props = withDefaults(
   defineProps<{
-    title: string
-    icon: 'wrench' | 'file' | 'message' | 'roots' | 'sparkles' | 'question'
-    description?: string
-    showDescription?: boolean
+    title: string;
+    icon: "wrench" | "file" | "message" | "roots" | "sparkles" | "question";
+    description?: string;
+    showDescription?: boolean;
   }>(),
   {
     showDescription: true,
   },
-)
+);
 
 const icons = {
   wrench: Wrench,
@@ -28,9 +28,9 @@ const icons = {
   roots: FolderTree,
   sparkles: Sparkles,
   question: MessageCircleQuestion,
-}
+};
 
-const Icon = computed(() => icons[props.icon])
+const Icon = computed(() => icons[props.icon]);
 </script>
 
 <template>
@@ -59,7 +59,11 @@ const Icon = computed(() => icons[props.icon])
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 4px);
   background:
-    radial-gradient(circle at 82% 12%, rgba(245, 164, 0, 0.055), transparent 34%),
+    radial-gradient(
+      circle at 82% 12%,
+      rgba(245, 164, 0, 0.055),
+      transparent 34%
+    ),
     rgba(20, 22, 27, 0.84);
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
   overflow: hidden;
@@ -74,7 +78,9 @@ const Icon = computed(() => icons[props.icon])
 .protocol-card__icon {
   color: var(--deck-muted);
   flex: none;
-  transition: color 220ms ease, transform 220ms ease;
+  transition:
+    color 220ms ease,
+    transform 220ms ease;
 }
 
 .protocol-card__content {
@@ -110,5 +116,4 @@ const Icon = computed(() => icons[props.icon])
   font-size: var(--protocol-description-size, 0.58rem);
   line-height: 1.35;
 }
-
 </style>

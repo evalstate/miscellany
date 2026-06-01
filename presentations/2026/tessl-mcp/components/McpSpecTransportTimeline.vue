@@ -1,9 +1,14 @@
 <template>
-  <section class="spec-timeline" aria-label="MCP specification transport and authorization evolution">
+  <section
+    class="spec-timeline"
+    aria-label="MCP specification transport and authorization evolution"
+  >
     <div class="spec-timeline__axis">
       <div class="spec-timeline__axis-spacer" aria-hidden="true" />
       <div class="spec-timeline__axis-track">
-        <div class="spec-timeline__tick spec-timeline__tick--past spec-timeline__tick--col-1">
+        <div
+          class="spec-timeline__tick spec-timeline__tick--past spec-timeline__tick--col-1"
+        >
           <strong>2024-11</strong>
         </div>
         <div class="spec-timeline__tick spec-timeline__tick--col-2">
@@ -15,24 +20,34 @@
         <div class="spec-timeline__tick spec-timeline__tick--col-4">
           <strong>2025-11</strong>
         </div>
-        <div class="spec-timeline__tick spec-timeline__tick--now spec-timeline__tick--col-5">
+        <div
+          class="spec-timeline__tick spec-timeline__tick--now spec-timeline__tick--col-5"
+        >
           <strong>2026-07</strong>
         </div>
-        <div class="spec-timeline__tick spec-timeline__tick--future spec-timeline__tick--col-6">
+        <div
+          class="spec-timeline__tick spec-timeline__tick--future spec-timeline__tick--col-6"
+        >
           <strong>...</strong>
         </div>
       </div>
     </div>
 
     <div class="spec-timeline__body">
-      <div class="spec-timeline__lane-label spec-timeline__lane-label--transport">
+      <div
+        class="spec-timeline__lane-label spec-timeline__lane-label--transport"
+      >
         <span>Transports</span>
       </div>
 
       <div class="spec-timeline__lane spec-timeline__lane--transport">
         <div class="spec-timeline__grid-lines" aria-hidden="true" />
         <div class="spec-timeline__hotspots" aria-hidden="true">
-          <div v-for="index in 6" :key="`transport-${index}`" :class="`spec-timeline__hotspot spec-timeline__hotspot--${index}`" />
+          <div
+            v-for="index in 6"
+            :key="`transport-${index}`"
+            :class="`spec-timeline__hotspot spec-timeline__hotspot--${index}`"
+          />
         </div>
 
         <div class="spec-timeline__bar spec-timeline__bar--stdio">
@@ -47,7 +62,11 @@
       <div class="spec-timeline__lane spec-timeline__lane--remote">
         <div class="spec-timeline__grid-lines" aria-hidden="true" />
         <div class="spec-timeline__hotspots" aria-hidden="true">
-          <div v-for="index in 6" :key="`remote-${index}`" :class="`spec-timeline__hotspot spec-timeline__hotspot--${index}`" />
+          <div
+            v-for="index in 6"
+            :key="`remote-${index}`"
+            :class="`spec-timeline__hotspot spec-timeline__hotspot--${index}`"
+          />
         </div>
 
         <div class="spec-timeline__bar spec-timeline__bar--sse">
@@ -70,7 +89,11 @@
       <div class="spec-timeline__lane spec-timeline__lane--auth">
         <div class="spec-timeline__grid-lines" aria-hidden="true" />
         <div class="spec-timeline__hotspots" aria-hidden="true">
-          <div v-for="index in 6" :key="`auth-${index}`" :class="`spec-timeline__hotspot spec-timeline__hotspot--${index}`" />
+          <div
+            v-for="index in 6"
+            :key="`auth-${index}`"
+            :class="`spec-timeline__hotspot spec-timeline__hotspot--${index}`"
+          />
         </div>
 
         <div class="spec-timeline__bar spec-timeline__bar--auth-as">
@@ -102,8 +125,16 @@
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 8px);
   background:
-    radial-gradient(circle at 11% 24%, rgba(245, 164, 0, 0.12), transparent 26%),
-    radial-gradient(circle at 82% 72%, rgba(106, 163, 247, 0.11), transparent 32%),
+    radial-gradient(
+      circle at 11% 24%,
+      rgba(245, 164, 0, 0.12),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 82% 72%,
+      rgba(106, 163, 247, 0.11),
+      transparent 32%
+    ),
     linear-gradient(135deg, rgba(245, 164, 0, 0.055), transparent 44%),
     rgba(20, 22, 27, 0.84);
   box-shadow: var(--deck-shadow);
@@ -265,11 +296,41 @@
 
 .spec-timeline__grid-lines {
   background:
-    linear-gradient(90deg, transparent calc(16.666% - 1px), rgba(185, 179, 165, 0.12) calc(16.666% - 1px), rgba(185, 179, 165, 0.12) calc(16.666% + 1px), transparent calc(16.666% + 1px)),
-    linear-gradient(90deg, transparent calc(33.333% - 1px), rgba(185, 179, 165, 0.12) calc(33.333% - 1px), rgba(185, 179, 165, 0.12) calc(33.333% + 1px), transparent calc(33.333% + 1px)),
-    linear-gradient(90deg, transparent calc(50% - 1px), rgba(185, 179, 165, 0.12) calc(50% - 1px), rgba(185, 179, 165, 0.12) calc(50% + 1px), transparent calc(50% + 1px)),
-    linear-gradient(90deg, transparent calc(66.666% - 1px), rgba(185, 179, 165, 0.12) calc(66.666% - 1px), rgba(185, 179, 165, 0.12) calc(66.666% + 1px), transparent calc(66.666% + 1px)),
-    linear-gradient(90deg, transparent calc(83.333% - 1px), rgba(106, 163, 247, 0.18) calc(83.333% - 1px), rgba(106, 163, 247, 0.18) calc(83.333% + 1px), transparent calc(83.333% + 1px));
+    linear-gradient(
+      90deg,
+      transparent calc(16.666% - 1px),
+      rgba(185, 179, 165, 0.12) calc(16.666% - 1px),
+      rgba(185, 179, 165, 0.12) calc(16.666% + 1px),
+      transparent calc(16.666% + 1px)
+    ),
+    linear-gradient(
+      90deg,
+      transparent calc(33.333% - 1px),
+      rgba(185, 179, 165, 0.12) calc(33.333% - 1px),
+      rgba(185, 179, 165, 0.12) calc(33.333% + 1px),
+      transparent calc(33.333% + 1px)
+    ),
+    linear-gradient(
+      90deg,
+      transparent calc(50% - 1px),
+      rgba(185, 179, 165, 0.12) calc(50% - 1px),
+      rgba(185, 179, 165, 0.12) calc(50% + 1px),
+      transparent calc(50% + 1px)
+    ),
+    linear-gradient(
+      90deg,
+      transparent calc(66.666% - 1px),
+      rgba(185, 179, 165, 0.12) calc(66.666% - 1px),
+      rgba(185, 179, 165, 0.12) calc(66.666% + 1px),
+      transparent calc(66.666% + 1px)
+    ),
+    linear-gradient(
+      90deg,
+      transparent calc(83.333% - 1px),
+      rgba(106, 163, 247, 0.18) calc(83.333% - 1px),
+      rgba(106, 163, 247, 0.18) calc(83.333% + 1px),
+      transparent calc(83.333% + 1px)
+    );
 }
 
 .spec-timeline__hotspots {
@@ -290,44 +351,68 @@
 }
 
 .spec-timeline__hotspot:hover {
-  background:
-    linear-gradient(180deg, rgba(255, 198, 73, 0.11), rgba(106, 163, 247, 0.075));
+  background: linear-gradient(
+    180deg,
+    rgba(255, 198, 73, 0.11),
+    rgba(106, 163, 247, 0.075)
+  );
   border-color: rgba(255, 198, 73, 0.28);
   box-shadow: inset 0 0 28px rgba(255, 198, 73, 0.08);
 }
 
 .spec-timeline:has(.spec-timeline__hotspot--1:hover) .spec-timeline__hotspot--1,
-.spec-timeline:has(.spec-timeline__tick--col-1:hover) .spec-timeline__hotspot--1,
+.spec-timeline:has(.spec-timeline__tick--col-1:hover)
+  .spec-timeline__hotspot--1,
 .spec-timeline:has(.spec-timeline__hotspot--2:hover) .spec-timeline__hotspot--2,
-.spec-timeline:has(.spec-timeline__tick--col-2:hover) .spec-timeline__hotspot--2,
+.spec-timeline:has(.spec-timeline__tick--col-2:hover)
+  .spec-timeline__hotspot--2,
 .spec-timeline:has(.spec-timeline__hotspot--3:hover) .spec-timeline__hotspot--3,
-.spec-timeline:has(.spec-timeline__tick--col-3:hover) .spec-timeline__hotspot--3,
+.spec-timeline:has(.spec-timeline__tick--col-3:hover)
+  .spec-timeline__hotspot--3,
 .spec-timeline:has(.spec-timeline__hotspot--4:hover) .spec-timeline__hotspot--4,
-.spec-timeline:has(.spec-timeline__tick--col-4:hover) .spec-timeline__hotspot--4,
+.spec-timeline:has(.spec-timeline__tick--col-4:hover)
+  .spec-timeline__hotspot--4,
 .spec-timeline:has(.spec-timeline__hotspot--5:hover) .spec-timeline__hotspot--5,
-.spec-timeline:has(.spec-timeline__tick--col-5:hover) .spec-timeline__hotspot--5,
+.spec-timeline:has(.spec-timeline__tick--col-5:hover)
+  .spec-timeline__hotspot--5,
 .spec-timeline:has(.spec-timeline__hotspot--6:hover) .spec-timeline__hotspot--6,
-.spec-timeline:has(.spec-timeline__tick--col-6:hover) .spec-timeline__hotspot--6 {
-  background:
-    linear-gradient(180deg, rgba(255, 198, 73, 0.13), rgba(106, 163, 247, 0.08));
+.spec-timeline:has(.spec-timeline__tick--col-6:hover)
+  .spec-timeline__hotspot--6 {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 198, 73, 0.13),
+    rgba(106, 163, 247, 0.08)
+  );
   border-color: rgba(255, 198, 73, 0.32);
   box-shadow:
     inset 0 0 30px rgba(255, 198, 73, 0.09),
     0 0 28px rgba(245, 164, 0, 0.055);
 }
 
-.spec-timeline:has(.spec-timeline__hotspot--1:hover) .spec-timeline__tick--col-1,
-.spec-timeline:has(.spec-timeline__tick--col-1:hover) .spec-timeline__tick--col-1,
-.spec-timeline:has(.spec-timeline__hotspot--2:hover) .spec-timeline__tick--col-2,
-.spec-timeline:has(.spec-timeline__tick--col-2:hover) .spec-timeline__tick--col-2,
-.spec-timeline:has(.spec-timeline__hotspot--3:hover) .spec-timeline__tick--col-3,
-.spec-timeline:has(.spec-timeline__tick--col-3:hover) .spec-timeline__tick--col-3,
-.spec-timeline:has(.spec-timeline__hotspot--4:hover) .spec-timeline__tick--col-4,
-.spec-timeline:has(.spec-timeline__tick--col-4:hover) .spec-timeline__tick--col-4,
-.spec-timeline:has(.spec-timeline__hotspot--5:hover) .spec-timeline__tick--col-5,
-.spec-timeline:has(.spec-timeline__tick--col-5:hover) .spec-timeline__tick--col-5,
-.spec-timeline:has(.spec-timeline__hotspot--6:hover) .spec-timeline__tick--col-6,
-.spec-timeline:has(.spec-timeline__tick--col-6:hover) .spec-timeline__tick--col-6 {
+.spec-timeline:has(.spec-timeline__hotspot--1:hover)
+  .spec-timeline__tick--col-1,
+.spec-timeline:has(.spec-timeline__tick--col-1:hover)
+  .spec-timeline__tick--col-1,
+.spec-timeline:has(.spec-timeline__hotspot--2:hover)
+  .spec-timeline__tick--col-2,
+.spec-timeline:has(.spec-timeline__tick--col-2:hover)
+  .spec-timeline__tick--col-2,
+.spec-timeline:has(.spec-timeline__hotspot--3:hover)
+  .spec-timeline__tick--col-3,
+.spec-timeline:has(.spec-timeline__tick--col-3:hover)
+  .spec-timeline__tick--col-3,
+.spec-timeline:has(.spec-timeline__hotspot--4:hover)
+  .spec-timeline__tick--col-4,
+.spec-timeline:has(.spec-timeline__tick--col-4:hover)
+  .spec-timeline__tick--col-4,
+.spec-timeline:has(.spec-timeline__hotspot--5:hover)
+  .spec-timeline__tick--col-5,
+.spec-timeline:has(.spec-timeline__tick--col-5:hover)
+  .spec-timeline__tick--col-5,
+.spec-timeline:has(.spec-timeline__hotspot--6:hover)
+  .spec-timeline__tick--col-6,
+.spec-timeline:has(.spec-timeline__tick--col-6:hover)
+  .spec-timeline__tick--col-6 {
   border-color: rgba(255, 198, 73, 0.64);
   background:
     linear-gradient(180deg, rgba(245, 164, 0, 0.16), rgba(106, 163, 247, 0.06)),
@@ -384,7 +469,11 @@
   grid-column: 2 / 5;
   grid-row: 2;
   background:
-    linear-gradient(90deg, rgba(106, 163, 247, 0.28), rgba(106, 163, 247, 0.13)),
+    linear-gradient(
+      90deg,
+      rgba(106, 163, 247, 0.28),
+      rgba(106, 163, 247, 0.13)
+    ),
     rgba(20, 22, 27, 0.9);
   border-color: rgba(106, 163, 247, 0.46);
 }

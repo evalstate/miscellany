@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps<{
-  title?: string
-}>()
+  title?: string;
+}>();
 </script>
 
 <template>
@@ -10,7 +10,7 @@ defineProps<{
       <span class="dot dot-red" />
       <span class="dot dot-amber" />
       <span class="dot dot-green" />
-      <span class="terminal-title">{{ title || 'terminal' }}</span>
+      <span class="terminal-title">{{ title || "terminal" }}</span>
     </header>
     <div class="terminal-body">
       <slot />
@@ -40,9 +40,15 @@ defineProps<{
   opacity: 0.85;
 }
 
-.dot-red { background: var(--deck-no); }
-.dot-amber { background: var(--deck-accent); }
-.dot-green { background: var(--deck-ok); }
+.dot-red {
+  background: var(--deck-no);
+}
+.dot-amber {
+  background: var(--deck-accent);
+}
+.dot-green {
+  background: var(--deck-ok);
+}
 
 .terminal-title {
   margin-left: 0.5rem;

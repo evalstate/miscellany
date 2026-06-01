@@ -1,0 +1,3046 @@
+client_name,client_version,sessions,converted_sessions,unconverted_sessions,conversion_rate_pct,matched_tool_calls
+Anthropic/ClaudeAI,1.0.0,7621549,32042,7589507,0.42,156957
+mcp,0.1.0,1320269,33256,1287013,2.519,100132
+claude-code,2.1.119,1156582,1879,1154703,0.162,12933
+claude-code,2.1.126,943740,1709,942031,0.181,12044
+claude-code,2.1.114,756336,1409,754927,0.186,8954
+claude-code,2.1.104,650938,888,650050,0.136,6710
+claude-code,2.1.143,637509,1499,636010,0.235,12612
+claude-code,2.1.138,630675,1216,629459,0.193,8468
+claude-code,2.1.150,594623,1800,592823,0.303,12590
+chat-ui-mcp,0.1.0,519874,51571,468303,9.92,124352
+claude-code,2.1.92,509578,845,508733,0.166,6290
+openai-mcp,1.0.0,503180,466296,36884,92.67,470845
+claude-ai,0.1.0,501957,18431,483526,3.672,18643
+claude-code,2.1.123,491144,991,490153,0.202,6313
+claude-code,2.1.112,487818,952,486866,0.195,6481
+Anthropic,1.0.0,472788,0,472788,0.0,0
+claude-code,2.1.101,419847,796,419051,0.19,6013
+claude-code,2.1.118,405439,517,404922,0.128,3583
+claude-code,2.1.122,402594,140,402454,0.035,991
+claude-code,2.1.116,393828,600,393228,0.152,4027
+claude-code,2.1.132,377488,499,376989,0.132,3694
+claude-code,2.1.128,376261,582,375679,0.155,3764
+claude-code,2.1.81,364535,157,364378,0.043,1296
+claude-code,2.1.145,357443,959,356484,0.268,6286
+claude-code,2.1.139,357326,586,356740,0.164,3838
+claude-code,2.1.121,345039,498,344541,0.144,4196
+claude-code,2.1.142,331308,611,330697,0.184,4576
+docker-mcp-gateway,1.0.0,323269,7462,315807,2.308,42345
+claude-code,2.1.141,321949,466,321483,0.145,2728
+claude-code,2.1.117,316255,583,315672,0.184,3893
+claude-code,2.1.109,270103,515,269588,0.191,3521
+codex-mcp-client,0.118.0-alpha.2,269266,470,268796,0.175,2578
+claude-code,2.1.140,268968,634,268334,0.236,4147
+codex-mcp-client,0.119.0-alpha.11,255598,368,255230,0.144,1994
+cursor-vscode,1.0.0,233012,994,232018,0.427,6446
+mcp-remote-fallback-test,0.0.0,232933,0,232933,0.0,0
+claude-code,2.1.97,226225,444,225781,0.196,3298
+claude-code,2.1.133,224790,385,224405,0.171,2814
+claude-code,2.1.107,220649,315,220334,0.143,2355
+claude-code,2.1.96,219129,456,218673,0.208,4274
+claude-code,2.1.137,218318,80,218238,0.037,661
+claude-code,2.1.144,204663,548,204115,0.268,3809
+claude-code,2.1.152,202861,496,202365,0.245,3662
+claude-code,2.1.111,202376,234,202142,0.116,1760
+claude-code,2.1.158,197210,789,196421,0.4,6260
+claude-code,2.1.100,189552,287,189265,0.151,2300
+claude-code,2.1.156,180157,633,179524,0.351,4392
+claude-code,2.1.105,174327,168,174159,0.096,1151
+claude-code,2.1.110,173139,304,172835,0.176,2173
+claude-code,2.1.98,172471,296,172175,0.172,2444
+claude-code,2.1.131,171034,498,170536,0.291,2388
+claude-code,2.1.148,161540,366,161174,0.227,3461
+claude-code,2.1.146,159797,328,159469,0.205,2667
+codex-mcp-client,0.119.0-alpha.28,156063,883,155180,0.566,5578
+claude-code,2.1.89,145669,151,145518,0.104,1463
+claude-code,2.1.153,133756,338,133418,0.253,2616
+claude-code,2.1.120,119942,332,119610,0.277,2473
+claude-code,2.1.90,118023,79,117944,0.067,693
+claude-code,2.1.113,113529,239,113290,0.211,1889
+claude-code,2.1.108,109987,170,109817,0.155,1171
+sheet-add-in,1.0.0,101713,11,101702,0.011,47
+claude-code,2.1.87,93848,299,93549,0.319,1044
+ms-mcp-catalog-client,1.0.0,87610,4,87606,0.005,9
+claude-code,2.1.75,85954,77,85877,0.09,131
+claude-code,2.1.129,83326,152,83174,0.182,1054
+claude-code,2.1.136,81438,140,81298,0.172,907
+claude-code,2.1.94,78619,148,78471,0.188,1139
+claude-code,2.1.154,77301,228,77073,0.295,2299
+claude-code,2.1.149,71644,164,71480,0.229,1502
+codex-mcp-client,0.118.0,70533,183,70350,0.259,1170
+gemini-cli-mcp-client (via mcp-remote 0.1.37),unknown,68995,0,68995,0.0,0
+claude-code,2.1.91,64258,139,64119,0.216,1083
+claude-code,2.1.85,63852,67,63785,0.105,567
+claude-code,2.1.76,59229,81,59148,0.137,362
+claude-code,2.1.84,56778,80,56698,0.141,930
+claude-code,2.1.157,53218,177,53041,0.333,1386
+lmstudio-mcp-server-session,1.0.0,53117,2056,51061,3.871,10402
+claude-code,2.1.147,50946,135,50811,0.265,1067
+mcp (via mcp-remote 0.1.16),0.1.0,47576,14842,32734,31.196,74083
+codex-mcp-client,0.120.0,45793,202,45591,0.441,1049
+codex-mcp-client,0.133.0-alpha.1,45261,95,45166,0.21,468
+claude-code,2.1.71,44206,104,44102,0.235,622
+Anthropic/Toolbox,1.0.0,41856,31,41825,0.074,102
+codex-mcp-client,0.131.0-alpha.9,41737,57,41680,0.137,330
+claude-code,2.1.86,40925,57,40868,0.139,358
+codex-mcp-client,0.130.0-alpha.5,39080,86,38994,0.22,489
+codex-mcp-client,0.128.0-alpha.1,38659,64,38595,0.166,326
+Cursor MCP Availability,1.0.0,32698,0,32698,0.0,0
+mcpdd,0.1.0,30988,0,30988,0.0,0
+claude-code,2.1.80,29950,23,29927,0.077,169
+claude-code,2.1.78,29797,35,29762,0.117,295
+mcp-health-checker,1.0.0,27993,0,27993,0.0,0
+claude-code,2.1.88,26888,46,26842,0.171,292
+claude-code,2.1.83,26572,47,26525,0.177,326
+codex-mcp-client,0.133.0,23469,78,23391,0.332,585
+gemini-cli-mcp-client,unknown,22710,0,22710,0.0,0
+mcporter,0.8.1,22016,97,21919,0.441,98
+Cursor,1.0.0,21870,103,21767,0.471,257
+SearchWebRole.AspNetCore,1.0.0.0,19884,9448,10436,47.516,9639
+claude-code,2.1.63,19449,27,19422,0.139,268
+hydra-codex-mcp-preflight,0.1.0,19236,0,19236,0.0,0
+claude-code,2.1.72,17939,23,17916,0.128,161
+antigravity-client,v1.0.0,17338,138,17200,0.796,708
+claude-code,2.1.59,17337,13,17324,0.075,27
+codex-mcp-client,0.0.0,17117,6,17111,0.035,18
+claude-code,2.1.74,16370,16,16354,0.098,109
+tfy-llm-gateway-client,1.0.0,16310,15225,1085,93.348,54103
+ConversationalAI,2026.5.0.21381,15233,0,15233,0.0,0
+claude-code,2.1.77,15215,22,15193,0.145,90
+claude-code,2.1.159,14618,29,14589,0.198,112
+claude-code,2.1.37,14538,6,14532,0.041,39
+ConversationalAI,2026.3.1.16857,14514,11,14503,0.076,13
+claude-code,2.1.25,14436,0,14436,0.0,0
+codex-mcp-client,0.130.0,14303,96,14207,0.671,1147
+claude-code,2.1.79,13529,33,13496,0.244,202
+roder-backend,0.1.0,13429,0,13429,0.0,0
+codex-mcp-client,0.125.0,12495,60,12435,0.48,452
+mcp (via mcp-remote 0.1.37),0.1.0,12464,1404,11060,11.264,8277
+codex-mcp-client,0.114.0,12108,6,12102,0.05,11
+codex-mcp-client,0.135.0-alpha.1,11819,14,11805,0.118,103
+claude-code,2.1.31,11346,3,11343,0.026,28
+ConversationalAI,2026.4.1.20288,11331,0,11331,0.0,0
+claude-code,2.1.56,11258,2,11256,0.018,3
+codex-mcp-client,0.128.0,11114,88,11026,0.792,745
+workglow-mcp-client,1.0.0,10932,0,10932,0.0,0
+mcpproxy-go,1.0.0,10451,5,10446,0.048,31
+claude-code,2.1.19,10104,8,10096,0.079,28
+claude-code,2.1.38,10065,8,10057,0.079,45
+openclaw-bundle-mcp,0.0.0,10020,109,9911,1.088,421
+claude-code,2.1.50,9909,9,9900,0.091,155
+claude-code,2.1.69,9809,11,9798,0.112,45
+claude-code,2.1.29,9099,7,9092,0.077,29
+ConversationalAI,2026.3.1.18910,8432,0,8432,0.0,0
+chat-ui-health-check,1.0.0,8391,0,8391,0.0,0
+claude-code,2.1.42,8311,2,8309,0.024,50
+codex-mcp-client,0.129.0-alpha.15,8222,31,8191,0.377,101
+codex-mcp-client,0.121.0,8150,41,8109,0.503,182
+codex-mcp-client,0.122.0-alpha.1,8095,23,8072,0.284,73
+ToolServer,1.0.0.0,7916,719,7197,9.083,720
+codex-mcp-client,0.125.0-alpha.3,7837,35,7802,0.447,149
+codex-mcp-client (via mcp-remote 0.1.37),0.128.0-alpha.1,7816,7,7809,0.09,113
+ConversationalAI,2026.5.0.21353,7680,3,7677,0.039,4
+codex-mcp-client (via mcp-remote 0.1.37),0.131.0-alpha.9,7665,14,7651,0.183,367
+codex-mcp-client (via mcp-remote 0.1.37),0.130.0-alpha.5,7593,16,7577,0.211,99
+claude-code,2.1.32,7479,3,7476,0.04,16
+ai-sdk-mcp-client,1.0.0,7445,35,7410,0.47,78
+ConversationalAI,2026.4.1.20681,7304,3,7301,0.041,3
+claude-code,2.1.30,7171,0,7171,0.0,0
+ConversationalAI,2026.3.1.19590,7106,0,7106,0.0,0
+claude-code,2.1.39,7071,17,7054,0.24,72
+claude-code,2.1.45,6792,7,6785,0.103,15
+Mistral,1.0.0,6693,0,6693,0.0,0
+claude-code,2.1.62,6568,22,6546,0.335,135
+ConversationalAI,2026.3.1.20018,6473,0,6473,0.0,0
+codex-mcp-client,0.126.0-alpha.8,6342,13,6329,0.205,29
+claude-code,2.1.34,6333,4,6329,0.063,19
+Smithery Connect,1.0.0,6284,9,6275,0.143,122
+ConversationalAI,2026.5.0.22865,6093,0,6093,0.0,0
+codex-mcp-client,0.122.0-alpha.13,6010,12,5998,0.2,119
+claude-ai (via mcp-remote 0.1.37),0.1.0,5774,21,5753,0.364,123
+Windsurf,1.0.0,5609,110,5499,1.961,563
+llama-webui-mcp,1.0.0,5531,110,5421,1.989,408
+ConversationalAI,2026.3.1.18446,5518,0,5518,0.0,0
+mcp-gateway-registry,1.0.0,5414,0,5414,0.0,0
+ConversationalAI,2026.5.1.24501,5258,0,5258,0.0,0
+ConversationalAI,2026.5.1.23633,5227,1,5226,0.019,1
+platform-catalog,1.0.0,5202,0,5202,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.133.0-alpha.1,5184,17,5167,0.328,121
+antigravity-client (via mcp-remote 0.1.37),v1.0.0,5082,33,5049,0.649,194
+codex-mcp-client,0.131.0,5069,14,5055,0.276,103
+ConversationalAI,2026.4.2.20966,5039,0,5039,0.0,0
+claude-code,2.1.70,4897,19,4878,0.388,237
+codex-mcp-client,0.117.0,4700,4,4696,0.085,57
+claude-code,2.1.66,4696,1,4695,0.021,2
+claude-code,2.1.124,4539,5,4534,0.11,34
+assistant-cortex-api,1.0.0,4417,1,4416,0.023,2
+ConversationalAI,2026.4.2.20861,4185,0,4185,0.0,0
+openclaw-bundle-mcp (via mcp-remote 0.1.37),0.0.0,4105,2,4103,0.049,3
+claude-code,2.1.58,4084,1,4083,0.024,16
+glama,1.0.0,4027,0,4027,0.0,0
+Visual Studio Code,1.120.0,3970,177,3793,4.458,957
+codex-mcp-client,0.124.0-alpha.2,3939,14,3925,0.355,75
+GleanClient,1.0,3676,3,3673,0.082,3
+opencode,local,3501,3006,495,85.861,6806
+ConversationalAI,2026.3.1.19188,3478,0,3478,0.0,0
+claude-code,2.1.49,3456,7,3449,0.203,15
+ConversationalAI,2026.5.1.24141,3456,0,3456,0.0,0
+amp-mcp-client,0.0.0-dev,3400,17,3383,0.5,75
+Java SDK MCP Client,0.15.0,3387,429,2958,12.666,471
+solo-router,1.0,3353,0,3353,0.0,0
+rush-probe,1.0,3282,0,3282,0.0,0
+claude-code,2.1.14,3252,3,3249,0.092,12
+mocop-gateway-go,0.13.0,3190,8,3182,0.251,8
+gemini-cli-mcp-client,0.27.3,3097,17,3080,0.549,46
+codex-mcp-client (via mcp-remote 0.1.37),0.125.0-alpha.3,3034,4,3030,0.132,23
+claude-code,2.1.52,3010,8,3002,0.266,38
+claude-code,2.1.47,2973,2,2971,0.067,9
+(unknown),(unknown),2947,1568,1379,53.207,1582
+mcp-client,1.1.0,2914,0,2914,0.0,0
+ConversationalAI,2026.5.0.23647,2898,0,2898,0.0,0
+codex-mcp-client,0.134.0,2773,10,2763,0.361,93
+codex-mcp-client,0.124.0,2750,10,2740,0.364,66
+codex-mcp-client (via mcp-remote 0.1.37),0.118.0-alpha.2,2734,2,2732,0.073,13
+codex-mcp-client (via mcp-remote 0.1.37),0.133.0,2714,16,2698,0.59,150
+mcp-proxy (via mcp-remote 0.1.37),1.0.0,2702,0,2702,0.0,0
+ConversationalAI,2026.3.1.19035,2649,0,2649,0.0,0
+isee-probe,1.0.0,2595,0,2595,0.0,0
+BB8-MCP-Broker-conn-64cabf7f,1.0.0,2537,0,2537,0.0,0
+ConversationalAI,2026.5.0.22668,2520,0,2520,0.0,0
+gemini-cli-mcp-client,0.42.0,2505,70,2435,2.794,292
+openai-mcp (Agent Builder),1.0.0,2471,2376,95,96.155,2380
+BB8-MCP-Broker-conn-60b55b4c,1.0.0,2462,0,2462,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.126.0-alpha.8,2458,4,2454,0.163,74
+codex-mcp-client (via mcp-remote 0.1.37),0.122.0-alpha.1,2422,4,2418,0.165,30
+ConversationalAI,2026.3.1.19411,2420,0,2420,0.0,0
+codex-mcp-client,0.122.0,2418,13,2405,0.538,58
+codex-mcp-client (via mcp-remote 0.1.37),0.119.0-alpha.11,2387,8,2379,0.335,47
+codex-mcp-client,0.132.0,2376,8,2368,0.337,38
+ConversationalAI,2026.4.0.19946,2315,0,2315,0.0,0
+ConversationalAI,2026.3.1.18688,2298,0,2298,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.128.0,2288,15,2273,0.656,37
+PlayMCP,2025.0.0,2212,0,2212,0.0,0
+Replit-Agent-MCP-Client,1.0,2196,5,2191,0.228,5
+llama-ui-mcp,1.0.0,2191,24,2167,1.095,169
+codex-mcp-client,0.135.0,2190,20,2170,0.913,134
+claude-code,2.1.73,2178,10,2168,0.459,42
+BB8-MCP-Broker-conn-dbe45ee2,1.0.0,2007,0,2007,0.0,0
+codex-mcp-client,0.117.0-alpha.24,1964,2,1962,0.102,5
+codex-mcp-client (via mcp-remote 0.1.37),0.135.0-alpha.1,1958,5,1953,0.255,124
+metamcp-client,2.0.0,1915,11,1904,0.574,13
+ConversationalAI,2026.3.1.19732,1912,0,1912,0.0,0
+ConversationalAI,2026.3.1.19843,1911,0,1911,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.125.0,1896,8,1888,0.422,41
+factory-cli,0.101.0,1870,2,1868,0.107,22
+Agent iOS,1.0,1862,0,1862,0.0,0
+claude-code,2.1.68,1814,3,1811,0.165,55
+groq-mcp-client,1.0.0,1802,1297,505,71.976,2851
+codex-mcp-client,0.129.0,1782,23,1759,1.291,184
+ConversationalAI,2026.4.0.20144,1759,0,1759,0.0,0
+Grafana Assistant,0.1.0,1746,1,1745,0.057,1
+claude-code,2.1.23,1741,1,1740,0.057,1
+codex-mcp-client (via mcp-remote 0.1.37),0.122.0-alpha.13,1715,1,1714,0.058,2
+lke-mcp-client,1.0.0,1687,0,1687,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.130.0,1660,17,1643,1.024,75
+ConversationalAI,2026.4.2.21125,1638,0,1638,0.0,0
+gemini-cli-mcp-client,0.40.1,1635,35,1600,2.141,137
+ConversationalAI,2026.4.2.21250,1624,0,1624,0.0,0
+MCP Gateway AMI,1.0.0,1620,505,1115,31.173,560
+codex-mcp-client (via mcp-remote 0.1.37),0.129.0-alpha.15,1619,4,1615,0.247,30
+factory-cli,0.122.0,1602,2,1600,0.125,7
+codex-mcp-client (via mcp-remote 0.1.37),0.119.0-alpha.28,1592,19,1573,1.193,66
+Manus,1.1.0,1573,545,1028,34.647,3462
+codex-mcp-client,0.119.0,1535,2,1533,0.13,5
+claude-code,99.0.0,1535,8,1527,0.521,58
+ConversationalAI,2026.3.1.19703,1523,0,1523,0.0,0
+Workato MCP Connector,1.0.0,1496,0,1496,0.0,0
+kiro,0.0.0,1495,56,1439,3.746,668
+factory-cli,0.117.0,1485,1,1484,0.067,3
+gemini-cli-mcp-client,0.41.2,1477,20,1457,1.354,93
+gemini-cli-mcp-client,0.38.2,1432,33,1399,2.304,125
+opencode,1.3.17,1377,1066,311,77.415,2744
+curl-client,0.1,1371,0,1371,0.0,0
+ConversationalAI,2026.4.1.20366,1369,0,1369,0.0,0
+claude-code,2.1.44,1369,3,1366,0.219,13
+codex-mcp-client,0.123.0-alpha.5,1351,3,1348,0.222,9
+factory-cli,0.99.0,1349,9,1340,0.667,102
+aibuildai-preflight,1,1347,0,1347,0.0,0
+ConversationalAI,2026.3.1.19386,1323,0,1323,0.0,0
+factory-cli,0.132.1,1321,2,1319,0.151,2
+opencode,1.14.33,1321,1035,286,78.35,1894
+toolhive-vmcp,v0.28.3,1263,0,1263,0.0,0
+mcp-gateway,1.0.0,1250,14,1236,1.12,20
+claude-code,2.1.61,1221,0,1221,0.0,0
+factory-cli,0.125.0,1220,0,1220,0.0,0
+continue-client,1.0.0,1195,5,1190,0.418,9
+Visual Studio Code,1.115.0,1187,234,953,19.714,1369
+AI Gateway,1.0,1185,0,1185,0.0,0
+github-copilot-developer,1.0.56,1181,0,1181,0.0,0
+opencode,1.4.3,1179,1057,122,89.652,1700
+gemini-cli-mcp-client,0.39.1,1158,23,1135,1.986,53
+BB8-MCP-Broker-conn-c371ad82,1.0.0,1155,0,1155,0.0,0
+opencode,1.14.48,1153,906,247,78.578,1889
+@n8n/n8n-nodes-langchain.mcpClientTool,1.2,1140,252,888,22.105,252
+codex-mcp-client (via mcp-remote 0.1.37),0.107.0-alpha.5,1124,1,1123,0.089,2
+mcporter,0.7.3,1093,40,1053,3.66,40
+ConversationalAI,2026.4.1.21011,1085,0,1085,0.0,0
+Visual Studio Code,1.116.0,1065,234,831,21.972,1420
+gemini-cli-mcp-client,0.37.1,1062,12,1050,1.13,41
+gemini-cli-mcp-client,0.43.0,1058,22,1036,2.079,94
+ConversationalAI,2026.3.1.19615,1054,0,1054,0.0,0
+Kelivo MCP,1.0.0,1052,2,1050,0.19,4
+Java SDK MCP Client,1.0.0,1043,97,946,9.3,186
+Visual Studio Code,1.121.0,1042,108,934,10.365,565
+factory-cli,0.134.0,1025,0,1025,0.0,0
+bolt-api,0.1.0,987,3,984,0.304,7
+mocop-gateway-go,0.14.0,976,6,970,0.615,6
+codex-mcp-client (via mcp-remote 0.1.37),0.120.0,976,17,959,1.742,44
+gitmc-org-mcp-scanner,1.0.0,972,0,972,0.0,0
+codex-mcp-client,0.1.12,961,10,951,1.041,41
+claude-code,0.1.0,961,0,961,0.0,0
+ConversationalAI,2026.3.1.19941,958,0,958,0.0,0
+smithery-probe,0,955,0,955,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.124.0-alpha.2,945,2,943,0.212,6
+claude-code,2.1.20,908,0,908,0.0,0
+ConversationalAI,2026.4.2.21094,905,0,905,0.0,0
+ConversationalAI,2026.5.0.21763,886,0,886,0.0,0
+Visual Studio Code,1.117.0,883,153,730,17.327,823
+opencode,1.15.10,860,747,113,86.86,1080
+nexus-worker,1.0.0,852,2,850,0.235,51
+cosine-cli,v0,834,2,832,0.24,3
+amelia-mcp-client,8.1-SNAPSHOT,832,5,827,0.601,7
+claude-code,2.1.21,831,0,831,0.0,0
+claude-code,2.0.1,821,0,821,0.0,0
+Q DEV CLI (via mcp-remote 0.1.37),1.0.0,820,0,820,0.0,0
+ConversationalAI,2026.3.1.19699,820,0,820,0.0,0
+ConversationalAI,2026.5.0.23093,815,0,815,0.0,0
+github-copilot-developer,1.0.0,814,15,799,1.843,55
+factory-cli,0.121.0,809,2,807,0.247,3
+Cherry Studio,1.9.6,795,3,792,0.377,29
+factory-cli,0.131.0,788,0,788,0.0,0
+ConversationalAI,2026.4.1.20632,785,0,785,0.0,0
+claude-code,2.1.51,782,2,780,0.256,3
+factory-cli,0.137.1,772,0,772,0.0,0
+tfy-transport-probe,1.0.0,771,0,771,0.0,0
+Zed,0.1.0,768,11,757,1.432,39
+opencode,1.4.0,761,671,90,88.173,3748
+ConversationalAI,2026.4.2.21217,759,0,759,0.0,0
+ConversationalAI,2026.3.1.18929,759,0,759,0.0,0
+factory-cli,0.104.0,753,4,749,0.531,13
+factory-cli,0.97.0,748,0,748,0.0,0
+Anthropic/Cowork,1.0.0,734,610,124,83.106,3764
+codex-mcp-client (via mcp-remote 0.1.37),0.121.0,732,8,724,1.093,49
+opencode,1.14.31,728,672,56,92.308,1289
+connectors-manager,0.1.0,726,172,554,23.691,172
+opencode,1.15.7,724,366,358,50.552,436
+claude-code (via mcp-remote 0.1.30),2.1.126,720,1,719,0.139,1
+opencode,1.14.30,719,637,82,88.595,1569
+opencode,1.15.5,718,514,204,71.588,1101
+opencode,1.14.28,718,659,59,91.783,942
+gemini-cli-mcp-client,0.36.0,712,10,702,1.404,74
+qwen-cli-mcp-client-huggingface,0.0.1,704,14,690,1.989,51
+Windsurf (via mcp-remote 0.1.37),1.0.0,703,13,690,1.849,55
+claude-code,2.1.17,702,6,696,0.855,16
+Google ASM-Core,1.0.0,694,0,694,0.0,0
+opencode,1.14.19,694,551,143,79.395,1205
+ConversationalAI,2026.5.0.24567,680,0,680,0.0,0
+mcproxy-remote,1.0.0,673,1,672,0.149,1
+omp-coding-agent,1.0.0,673,17,656,2.526,112
+ConversationalAI,2026.3.1.19471,670,0,670,0.0,0
+Visual Studio Code,1.118.1,668,123,545,18.413,747
+factory-cli,0.112.0,668,0,668,0.0,0
+opencode,1.14.41,668,492,176,73.653,677
+Cherry Studio,1.9.4,666,15,651,2.252,136
+Visual Studio Code,1.119.0,662,123,539,18.58,751
+Poke,1.0.0,657,535,122,81.431,560
+factory-cli,0.108.0,614,2,612,0.326,5
+gemini-cli-mcp-client,0.40.0,611,8,603,1.309,30
+github-copilot-developer,1.0.40,608,3,605,0.493,6
+Q DEV CLI,1.0.0,606,17,589,2.805,113
+ConversationalAI,2026.3.1.18767,605,0,605,0.0,0
+factory-cli,0.113.0,602,2,600,0.332,3
+sproutos,1.0.0,597,0,597,0.0,0
+github-copilot-developer,1.0.54,589,5,584,0.849,11
+mcp-test-client,0.0.1,589,0,589,0.0,0
+dovkie-monitor,0.0,587,0,587,0.0,0
+factory-cli,0.136.0,586,2,584,0.341,4
+codex-mcp-client,0.123.0,582,3,579,0.515,15
+Anthropic/ClaudeCodeDesktop,1.0.0,581,537,44,92.427,4245
+factory-cli,0.119.0,579,0,579,0.0,0
+Cherry Studio,1.9.3,568,7,561,1.232,18
+claude-code,2.1.888,568,11,557,1.937,21
+local-agent-mode-huggingface (via mcp-remote 0.1.37),1.0.0,562,33,529,5.872,315
+claude-code (via mcp-remote 0.1.37),2.1.119,560,11,549,1.964,45
+amelia-mcp-client,8.0-SNAPSHOT,553,0,553,0.0,0
+local-agent-mode-hf-mcp-server (via mcp-remote 0.1.37),1.0.0,552,8,544,1.449,22
+opencode,1.4.6,547,487,60,89.031,878
+opencode,1.14.29,543,469,74,86.372,759
+factory-cli,0.136.1,538,0,538,0.0,0
+augment-mcp-client,1.0.0,536,1,535,0.187,3
+gemini-cli-mcp-client,0.38.1,533,0,533,0.0,0
+HuggingFace,1.0,526,0,526,0.0,0
+claude-code,2.1.55,525,1,524,0.19,1
+Roo Code,3.53.0,520,36,484,6.923,168
+github-copilot-developer,1.0.34,517,13,504,2.515,103
+gemini-cli-mcp-client,0.0.1,516,2,514,0.388,8
+codex-mcp-client,0.129.0-alpha.7,515,0,515,0.0,0
+factory-cli,0.109.1,512,1,511,0.195,3
+gemini-cli-mcp-client,0.37.2,508,8,500,1.575,11
+ConversationalAI,2026.3.1.19299,504,0,504,0.0,0
+opencode,1.14.20,500,444,56,88.8,542
+hais-mcp-wallet,0.1.0,494,1,493,0.202,1
+ConversationalAI,2026.3.1.18838,482,0,482,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.131.0-alpha.9,482,0,482,0.0,0
+cursor-vscode (via mcp-remote 0.1.37),1.0.0,480,4,476,0.833,27
+factory-cli,0.123.1,478,0,478,0.0,0
+Anthropic/API,1.0.0,477,31,446,6.499,143
+factory-cli,0.129.0,474,3,471,0.633,6
+VTENEXT/MCP-Client,1.0,466,0,466,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.118.0,459,7,452,1.525,216
+Trae,1.107.1,451,13,438,2.882,127
+codex-mcp-client (via mcp-remote 0.1.37),0.131.0,448,1,447,0.223,1
+claude-code,2.1.27,446,0,446,0.0,0
+opencode,1.14.25,444,358,86,80.631,1089
+ConversationalAI,2026.4.2.21233,444,0,444,0.0,0
+ConversationalAI,2026.3.1.18876,438,0,438,0.0,0
+factory-cli,0.98.0,435,0,435,0.0,0
+factory-cli,0.128.0,431,0,431,0.0,0
+opencode,1.15.11,431,394,37,91.415,1033
+Kai 9000,1.0,429,18,411,4.196,110
+Cline,3.82.0,429,9,420,2.098,21
+opencode,1.14.39,428,388,40,90.654,425
+lmstudio-mcp-server-session (via mcp-remote 0.1.37),1.0.0,426,15,411,3.521,43
+opencode,1.14.50,424,349,75,82.311,565
+codex-mcp-client,0.115.0-alpha.27,422,0,422,0.0,0
+factory-cli,0.135.0,416,0,416,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.156,414,6,408,1.449,18
+claude-code,2.0.77,414,3,411,0.725,3
+Airia MCP Gateway,1.0.0,413,0,413,0.0,0
+factory-cli,0.109.3,412,1,411,0.243,3
+claude-code (via mcp-remote 0.1.30),2.1.117,410,7,403,1.707,43
+Visual Studio Code,1.109.5,402,6,396,1.493,27
+gemini-cli-mcp-client,0.37.0,401,12,389,2.993,21
+factory-cli,0.130.0,398,0,398,0.0,0
+openai-mcp (Responses API),1.0.0,397,97,300,24.433,234
+q-chat-plugin,1.0.0,397,0,397,0.0,0
+github-copilot-developer,1.0.36,393,10,383,2.545,89
+mcp-client-huggingface,1.0.0,385,6,379,1.558,15
+metricly-mcp-hub,0.1.0,382,1,381,0.262,1
+claude-code,1.0.0-codin,382,0,382,0.0,0
+ConversationalAI,2026.4.2.21331,381,0,381,0.0,0
+factory-cli,0.118.0,380,1,379,0.263,9
+Cherry Studio,1.8.4,376,1,375,0.266,1
+opencode,1.2.24,376,38,338,10.106,63
+Cherry Studio,1.9.1,373,7,366,1.877,50
+Visual Studio Code,1.114.0,372,77,295,20.699,443
+opencode,1.15.12,368,320,48,86.957,441
+openacme-huggingface,0.0.1,362,0,362,0.0,0
+opencode,1.4.1,362,328,34,90.608,423
+codex-mcp-client (via mcp-remote 0.1.29),0.130.0-alpha.5,360,0,360,0.0,0
+codex-mcp-client,0.116.0,358,6,352,1.676,21
+h2ogpte_introspect,1.0.0,358,0,358,0.0,0
+factory-cli,0.124.0,357,0,357,0.0,0
+hf,1.0.0,356,0,356,0.0,0
+test,1.0,354,42,312,11.864,113
+opencode,1.14.24,350,283,67,80.857,630
+opencode,1.14.46,348,293,55,84.195,402
+ConversationalAI,2026.3.1.18856,343,0,343,0.0,0
+claude-code,2.1.41,341,10,331,2.933,79
+codex-mcp-client (via mcp-remote 0.1.37),0.124.0,339,2,337,0.59,4
+codex-mcp-client (via mcp-remote 0.1.37),0.101.0,338,0,338,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.132.0,338,4,334,1.183,8
+ConversationalAI,2026.4.0.20244,334,0,334,0.0,0
+gemini-cli-mcp-client,0.38.0,334,17,317,5.09,18
+tfy-gateway-virtual,1.0.0,331,0,331,0.0,0
+1DD919D0-D810-4D10-B291-5B0141A1EF5F,1.0.0,331,0,331,0.0,0
+koi-remote-mcp-scanner,1.0.0,328,0,328,0.0,0
+ConversationalAI,2026.4.2.21195,327,0,327,0.0,0
+claude-code,2.1.33,325,0,325,0.0,0
+github-copilot-developer,1.0.48,322,6,316,1.863,44
+codex-mcp-client (via mcp-remote 0.1.29),0.128.0-alpha.1,319,0,319,0.0,0
+AgentBrowser,0.1.0,319,14,305,4.389,31
+mad-dashboard,2.0,318,0,318,0.0,0
+factory-cli,0.100.0,317,1,316,0.315,13
+ConversationalAI,2026.3.1.19040,317,0,317,0.0,0
+Cherry Studio,1.9.5,314,7,307,2.229,21
+claude-code,2.1.88-source.0,310,2,308,0.645,42
+claude-code (via mcp-remote 0.1.37),2.1.145,307,12,295,3.909,71
+opencode,1.15.3,306,241,65,78.758,449
+github-copilot-developer,1.0.31,304,4,300,1.316,22
+github-copilot-developer,1.0.39,303,5,298,1.65,9
+mcp-client-hf-mcp,1.0.0,301,18,283,5.98,328
+factory-cli,0.115.0,299,0,299,0.0,0
+factory-cli,0.95.0,299,0,299,0.0,0
+github-copilot-developer,1.0.32,299,5,294,1.672,36
+flowise-client,1.0.0,299,18,281,6.02,18
+opencode,1.15.4,298,218,80,73.154,290
+hf-mcp-server,1.0,298,0,298,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.126,297,7,290,2.357,36
+claude-code (via mcp-remote 0.1.37),2.1.149,296,2,294,0.676,6
+ConversationalAI,2026.5.0.22323,295,0,295,0.0,0
+factory-cli,0.120.1,293,1,292,0.341,19
+claude-code,2.1.15,292,1,291,0.342,4
+opencode,1.15.0,288,246,42,85.417,413
+opencode,1.4.7,285,259,26,90.877,327
+Roo Code,3.52.1,281,4,277,1.423,16
+Cherry Studio,1.9.2,273,2,271,0.733,10
+factory-cli,0.135.1,273,0,273,0.0,0
+routermcp,0.1.0,272,17,255,6.25,18
+archestra-platform,dev,271,0,271,0.0,0
+ConversationalAI,2026.3.1.19156,271,0,271,0.0,0
+hermes-agent,1.0.0,270,3,267,1.111,16
+codex-mcp-client (via mcp-remote 0.1.29),0.133.0-alpha.1,267,0,267,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.138,267,2,265,0.749,2
+egnyte-mcp-client-configurations,1.0.0,264,0,264,0.0,0
+WyvernChat,1.0.0,263,0,263,0.0,0
+ps-mcp-tools-probe,1.0,263,0,263,0.0,0
+codex-mcp-client,0.115.0-alpha.4,259,1,258,0.386,1
+opencode,1.14.22,258,203,55,78.682,722
+ConversationalAI,2026.4.2.21168,258,0,258,0.0,0
+litellm-ui,1,258,1,257,0.388,1
+github-copilot-developer,1.0.51,257,2,255,0.778,23
+manifest-generator,1.0.0,253,0,253,0.0,0
+thisilabs,1.0,253,153,100,60.474,272
+coco-mcp-client,0.1.0,250,5,245,2.0,6
+kiro (via mcp-remote 0.1.37),0.0.0,249,6,243,2.41,47
+claude-code (via mcp-remote 0.1.37),2.1.150,249,10,239,4.016,76
+Cherry Studio,1.9.7,247,2,245,0.81,4
+@n8n/mcp-registry.huggingFace,1,247,4,243,1.619,4
+Zia Agent MCP Client,1.0.0,246,4,242,1.626,18
+codex-mcp-client (via mcp-remote 0.1.37),0.122.0,243,3,240,1.235,33
+Copilot,1.0.0,239,2,237,0.837,4
+factory-cli,0.114.1,237,1,236,0.422,15
+ConversationalAI,2026.3.1.19517,236,0,236,0.0,0
+nai-mcp-client,1.0.0,234,0,234,0.0,0
+factory-cli,0.102.0,232,0,232,0.0,0
+Super MCP Integration,1.0.0,231,0,231,0.0,0
+gemini-cli-mcp-client,0.35.3,231,10,221,4.329,54
+gemini-cli-mcp-client,0.39.0,229,5,224,2.183,23
+factory-cli,0.123.0,229,0,229,0.0,0
+openai-mcp (ChatGPT),1.0.0,228,0,228,0.0,0
+ConversationalAI,2026.4.2.21547,228,0,228,0.0,0
+qwen-cli-mcp-client-huggingface-skills,0.0.1,228,7,221,3.07,16
+ConversationalAI,2026.3.1.19787,228,0,228,0.0,0
+TraeCN,1.107.1,224,4,220,1.786,8
+mcpgw-upstream,0.0.0,223,0,223,0.0,0
+factory-cli,0.120.0,222,0,222,0.0,0
+opencode,1.3.13,222,199,23,89.64,535
+ConversationalAI,2026.5.0.22692,221,0,221,0.0,0
+mcporter,0.9.0,221,5,216,2.262,5
+figma-synapse-client,1.0.0,219,0,219,0.0,0
+opencode,1.2.27,218,137,81,62.844,323
+factory-cli,0.133.1,218,0,218,0.0,0
+actionist,1.0.0,215,2,213,0.93,5
+ConversationalAI,2026.4.1.20894,215,0,215,0.0,0
+@cline/core,0.0.0,214,4,210,1.869,11
+claude-code (via mcp-remote 0.1.37),2.1.128,213,5,208,2.347,10
+nexus-gateway,1.0,208,3,205,1.442,13
+gemini-cli-mcp-client,0.41.1,208,3,205,1.442,7
+Rush,1.0.0,206,0,206,0.0,0
+AgentPulse,0.1.0,206,0,206,0.0,0
+ConversationalAI,2026.5.0.22917,206,0,206,0.0,0
+xai-backend,1.0.0,205,32,173,15.61,40
+factory-cli,0.103.0,202,1,201,0.495,15
+ConversationalAI,2026.3.1.19085,202,0,202,0.0,0
+ConversationalAI,2026.5.0.24373,201,0,201,0.0,0
+opencode,1.15.6,200,175,25,87.5,261
+ConversationalAI,2026.3.1.19239,200,0,200,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.123,199,9,190,4.523,60
+inspector-client,0.21.2,199,17,182,8.543,43
+Roo Code (via mcp-remote 0.1.37),3.52.1,197,2,195,1.015,8
+BB8-MCP-Broker-conn-6d3f9d9b,1.0.0,195,0,195,0.0,0
+ConversationalAI,2026.3.1.19905,195,0,195,0.0,0
+ConversationalAI,2026.4.1.20794,194,0,194,0.0,0
+ConversationalAI,2026.5.0.21387,192,0,192,0.0,0
+claude-code,2.0.61,192,0,192,0.0,0
+factory-cli,0.105.0,190,1,189,0.526,18
+tracelet-probe,1.0.0,190,0,190,0.0,0
+mcp-use,1.4.0,189,139,50,73.545,139
+ConversationalAI,2026.4.0.20146,189,0,189,0.0,0
+gemini-cli-mcp-client,0.33.1,186,0,186,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.143,185,8,177,4.324,122
+registry-health-checker,1.0.0,185,0,185,0.0,0
+codex-mcp-client,0.98.0,182,0,182,0.0,0
+ConversationalAI,2026.5.0.22535,181,0,181,0.0,0
+Roo Code (via mcp-remote 0.1.37),3.53.0,180,0,180,0.0,0
+claude-code,2.1.22,176,0,176,0.0,0
+mcporter (via mcp-remote 0.1.37),0.9.0,175,6,169,3.429,6
+factory-cli,0.105.1,175,0,175,0.0,0
+ConversationalAI,2026.4.1.20638,175,0,175,0.0,0
+conduit,0.1.0,175,0,175,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.134.0,175,1,174,0.571,2
+opencode,1.4.11,175,148,27,84.571,244
+ConversationalAI,2026.3.0.18715,173,0,173,0.0,0
+github-copilot-developer,1.0.37,172,0,172,0.0,0
+mocop-gateway-go,0.14.1,171,3,168,1.754,3
+claude-code (via mcp-remote 0.1.37),2.1.114,170,3,167,1.765,10
+@librechat/api-client,1.2.3,169,17,152,10.059,55
+claude-code,2.1.87-dev.20260407.t025512.shaunknown,169,0,169,0.0,0
+codex-mcp-client,0.121.0-alpha.4,168,0,168,0.0,0
+Kai,1.0,168,2,166,1.19,7
+craft-agent,1.0.0,167,10,157,5.988,74
+opencode,1.14.21,167,147,20,88.024,167
+ConversationalAI,2026.4.2.21325,165,0,165,0.0,0
+mission-mcp-doctor,1.0.0,164,0,164,0.0,0
+qwen-cli-mcp-client-hugging-face,0.0.1,163,1,162,0.613,10
+claude-code (via mcp-remote 0.1.37),2.1.158,162,10,152,6.173,39
+aigc-client,1.0.0,160,0,160,0.0,0
+factory-cli,0.106.0,159,2,157,1.258,3
+40mcp-connector,0.1.1-beta.0,159,0,159,0.0,0
+opencode (via mcp-remote 0.1.37),1.1.39,158,149,9,94.304,214
+Visual Studio Code,1.122.1,157,10,147,6.369,29
+ConversationalAI,2026.4.2.21147,156,0,156,0.0,0
+multi-agent-platform,1.0.0,155,6,149,3.871,6
+mcp-studio-scanner,1.0.0,155,0,155,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.142,155,0,155,0.0,0
+github-copilot-developer,1.0.55,154,0,154,0.0,0
+opencode,1.14.18,154,131,23,85.065,198
+chatgpt2api,1.0,153,0,153,0.0,0
+custom3p-desktop,1.7196.0,152,5,147,3.289,10
+factory-cli,0.132.0,152,0,152,0.0,0
+factory-cli,0.103.1,151,0,151,0.0,0
+kyoto,1.0,151,0,151,0.0,0
+opencode,1.14.40,150,128,22,85.333,483
+ConversationalAI,2026.3.1.18820,150,0,150,0.0,0
+codex-mcp-client,0.118.0-alpha.3,150,0,150,0.0,0
+ConversationalAI,2026.5.0.23960,149,0,149,0.0,0
+mcp-inspector-ui,1.0.0,149,29,120,19.463,53
+claude-code (via mcp-remote 0.1.37),2.1.146,149,0,149,0.0,0
+claude-code,999.0.0-local,148,8,140,5.405,62
+ConversationalAI,2026.3.1.18754,147,0,147,0.0,0
+factory-cli,0.116.1,147,0,147,0.0,0
+Cline,3.81.0,146,1,145,0.685,8
+claude-code (via mcp-remote 0.1.37),2.1.118,146,2,144,1.37,3
+gemini-cli-mcp-client,0.34.0,146,2,144,1.37,3
+dova,1.1.0,145,114,31,78.621,253
+opencode,1.4.10,143,132,11,92.308,176
+Bifrost-huggingface,1.0.0,142,2,140,1.408,4
+codex-mcp-client (via mcp-remote 0.1.29),0.133.0,142,0,142,0.0,0
+claude-rs,0.1.0,142,0,142,0.0,0
+codex-mcp-client (via mcp-remote 0.1.30),0.125.0,142,0,142,0.0,0
+codex-mcp-client,0.121.0-alpha.2,141,0,141,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.116,141,7,134,4.965,87
+factory-cli,0.133.0,138,0,138,0.0,0
+SynthAI.Api,1.0.0.0,138,0,138,0.0,0
+codex-mcp-client (via mcp-remote 0.1.30),0.128.0-alpha.1,138,0,138,0.0,0
+McpGateway,1.0,138,5,133,3.623,10
+Glue AI,1.0.0,137,0,137,0.0,0
+Azure API Management,1.0.0,137,6,131,4.38,7
+factory-cli,0.114.0,136,0,136,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.129.0-alpha.15,136,0,136,0.0,0
+mcpjungle mcp client for https://huggingface.co/mcp,0.1,135,73,62,54.074,74
+opencode,1.4.9,135,92,43,68.148,116
+lmstudio-mcp-bridge,1.0.0,135,1,134,0.741,4
+opencode,1.14.26,134,108,26,80.597,196
+factory-cli,0.126.0,134,0,134,0.0,0
+Roo Code,3.54.0,133,1,132,0.752,1
+claude-code (via mcp-remote 0.1.37),2.1.101,132,0,132,0.0,0
+agent-store-client,1.0.0,132,33,99,25.0,117
+opencode,1.4.2,131,107,24,81.679,113
+Roo Code (via mcp-remote 0.1.37),3.54.0,130,1,129,0.769,8
+claude-ai (via mcp-remote 0.1.36),0.1.0,130,0,130,0.0,0
+goose-desktop,1.34.1,129,12,117,9.302,111
+Kwaipilot-client,1.0.0,127,7,120,5.512,21
+Cline,3.84.0,125,5,120,4.0,17
+proxy-hf-mcp-server,4.0.0,124,0,124,0.0,0
+gemini-cli-mcp-client,0.38.0-preview.0,124,0,124,0.0,0
+openint-healthcheck,1.0.0,123,0,123,0.0,0
+Cline,3.83.0,123,1,122,0.813,25
+Cline (via mcp-remote 0.1.37),3.82.0,122,2,120,1.639,2
+claude-code,2.1.12,122,0,122,0.0,0
+jetbrains-ai-assistant-client,1.0.0,121,3,118,2.479,25
+github-copilot-developer,1.0.35,120,3,117,2.5,10
+Visual Studio Code,1.113.0,119,21,98,17.647,107
+hf-mcp-server,1.0.0,118,4,114,3.39,12
+continuum-sync,1.0.0,118,0,118,0.0,0
+Visual Studio Code - Insiders,1.122.0-insider,117,14,103,11.966,122
+github-copilot-developer,1.0.27,116,4,112,3.448,12
+claude-code (via mcp-remote 0.1.37),2.1.92,116,1,115,0.862,4
+claude-code (via mcp-remote 0.1.37),2.1.140,114,0,114,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.132,114,0,114,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.125.0-alpha.3,114,0,114,0.0,0
+custom3p-desktop,1.6608.2,112,1,111,0.893,6
+factory-cli,0.89.0,112,2,110,1.786,3
+Visual Studio Code,1.122.0,111,15,96,13.514,93
+custom3p-desktop,1.8555.2,110,0,110,0.0,0
+esan-agent,1.0.0,110,2,108,1.818,2
+opencode,1.15.13,109,106,3,97.248,132
+github-copilot-developer,1.0.43,109,2,107,1.835,22
+codex-mcp-client (via mcp-remote 0.1.18),0.130.0-alpha.5,108,0,108,0.0,0
+raiwork,1.0.0,108,2,106,1.852,3
+codex-mcp-client (via mcp-remote 0.1.29),0.118.0-alpha.2,108,2,106,1.852,2
+Visual Studio Code - Insiders,1.120.0-insider,108,20,88,18.519,231
+factory-cli,0.96.2,107,1,106,0.935,1
+codex-mcp-client,0.117.0-alpha.10,106,1,105,0.943,2
+claude-code (via mcp-remote 0.1.37),2.1.141,106,2,104,1.887,12
+mcp-streamable-proxy-client,0.1.18,105,1,104,0.952,10
+github-copilot-developer,1.0.25,105,6,99,5.714,22
+fast-agent-mcp,0.7.8,104,52,52,50.0,74
+mcp-proxy-detector,0.1.0,104,0,104,0.0,0
+ConversationalAI,2026.3.1.18617,104,0,104,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.111,101,2,99,1.98,33
+Cline,3.77.0,101,2,99,1.98,2
+BB8-MCP-Broker-conn-e0b63b9b,1.0.0,101,0,101,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.33,101,73,28,72.277,85
+Visual Studio Code - Insiders,1.117.0-insider,100,15,85,15.0,53
+registry-tool-scraper,1.0.0,100,0,100,0.0,0
+github-copilot-developer,1.0.49,100,1,99,1.0,4
+bolt-api,0.1.46,99,0,99,0.0,0
+claude-code,0.0.46,99,0,99,0.0,0
+notion-mcp-client,1.0.0,97,35,62,36.082,37
+opencode,1.14.32,96,87,9,90.625,128
+opencode,1.3.0,96,70,26,72.917,87
+bridge-inspector,0.1.0,95,6,89,6.316,6
+gemini-cli-mcp-client,0.44.1,95,6,89,6.316,18
+opencode,1.14.51,94,85,9,90.426,137
+Cline,3.79.0,94,1,93,1.064,8
+codex-mcp-client (via mcp-remote 0.1.37),0.123.0,93,1,92,1.075,5
+claude-code,1.0.126-dev,93,0,93,0.0,0
+MintMCP Client,0.0.1,92,0,92,0.0,0
+github-copilot-developer,1.0.45,92,1,91,1.087,3
+chatbox-mcp-client,1.0.0,92,23,69,25.0,180
+mcp-ktor,0.11.0,92,0,92,0.0,0
+gemini-cli-mcp-client,0.35.0,91,2,89,2.198,3
+openclaw-mcp-huggingface,1.0.0,91,0,91,0.0,0
+ViPEW,0.1.0,91,0,91,0.0,0
+59145A67-7CBF-437B-922A-3EED9C141646,1.0.0,90,1,89,1.111,3
+Visual Studio Code - Insiders,1.116.0-insider,90,17,73,18.889,146
+Roo Code,3.52.0,89,3,86,3.371,8
+tedix-mcp-scanner,1.0.0,88,14,74,15.909,14
+docker,1.0.0,88,0,88,0.0,0
+github-copilot-developer,1.0.44,87,2,85,2.299,10
+opencode,1.14.17,87,83,4,95.402,150
+claude-code (via mcp-remote 0.1.37),2.1.121,87,0,87,0.0,0
+codex-mcp-client,0.107.0,86,0,86,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.152,86,3,83,3.488,15
+codex-mcp-client (via mcp-remote 0.1.37),0.135.0,86,1,85,1.163,2
+claude-code (via mcp-remote 0.1.37),2.1.131,84,2,82,2.381,18
+MintlifyAgentRank,1.0,84,0,84,0.0,0
+unichat-client-mcp,0.5.0,84,0,84,0.0,0
+codex-mcp-client,0.101.0,84,0,84,0.0,0
+my-go-client,1.0.0,83,0,83,0.0,0
+Cherry Studio,1.7.25,82,0,82,0.0,0
+codex-mcp-client,0.106.0,82,0,82,0.0,0
+goose-desktop,1.32.0,81,0,81,0.0,0
+q-chat-plugin (via mcp-remote 0.1.37),1.0.0,80,0,80,0.0,0
+Cherry Studio,1.7.19,80,0,80,0.0,0
+Roo Code,3.54.1,80,2,78,2.5,4
+ai-voice-call-core,1.0.0,80,0,80,0.0,0
+ConversationalAI,2026.4.0.20274,80,0,80,0.0,0
+Cline,3.85.0,80,1,79,1.25,1
+claude-code,1.0.89,80,0,80,0.0,0
+github-copilot-developer,1.0.52,79,0,79,0.0,0
+junie-client,1.0.0,79,0,79,0.0,0
+Roo Code (via mcp-remote 0.1.37),3.52.0,79,6,73,7.595,49
+enforce-gateway-go,0.0.0,79,0,79,0.0,0
+hugging face,1.0,79,0,79,0.0,0
+codex-mcp-client,0.91.0,78,0,78,0.0,0
+github-copilot-developer,1.0.46,78,1,77,1.282,2
+python-client,1.0.0,78,54,24,69.231,1576
+codex-mcp-client (via mcp-remote 0.1.30),0.135.0-alpha.1,77,0,77,0.0,0
+Visual Studio Code - Insiders,1.121.0-insider,77,11,66,14.286,51
+claude-code (via mcp-remote 0.1.37),2.1.153,77,0,77,0.0,0
+MCP Gateway,1.0.0,76,67,9,88.158,67
+codex-mcp-client (via mcp-remote 0.1.18),0.133.0-alpha.1,75,0,75,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.129.0,75,0,75,0.0,0
+opencode,1.15.1,75,69,6,92.0,83
+picoclaw,1.0.0,75,0,75,0.0,0
+claude-code,2.0.55,74,0,74,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.98,74,0,74,0.0,0
+solver,1.0,74,72,2,97.297,7688
+MCP Security Scanner,1.0.0,74,0,74,0.0,0
+Visual Studio Code - Insiders,1.119.0-insider,74,17,57,22.973,89
+Visual Studio Code - Insiders,1.118.0-insider,73,12,61,16.438,120
+claude-code (via mcp-remote 0.1.37),2.1.139,73,1,72,1.37,1
+mcp-robot,0.5.0,73,0,73,0.0,0
+pi-mcp-probe,2.1.2,73,0,73,0.0,0
+claude-code,1.0.138-dev,73,0,73,0.0,0
+Cherry Studio,1.8.1,72,1,71,1.389,29
+tap-platform-mcp-client,v1.0.0,72,0,72,0.0,0
+@n8n/n8n-nodes-langchain.mcpClient,1,71,3,68,4.225,3
+ConversationalAI,2026.3.1.19044,71,0,71,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.87,71,46,25,64.789,182
+claude-code,2.1.53,71,0,71,0.0,0
+factory-cli,0.96.1,71,0,71,0.0,0
+factory-cli,0.127.0,70,0,70,0.0,0
+bolt-api,0.1.9,70,0,70,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.136,70,1,69,1.429,6
+Cherry Studio,1.9.0-rc.0,69,0,69,0.0,0
+gemini-cli-mcp-client,0.43.0-preview.0,69,0,69,0.0,0
+opencode,1.3.15,69,64,5,92.754,202
+github-copilot-developer,1.0.28,69,0,69,0.0,0
+mcp-sec-ratelimit-scanner,1.0,69,0,69,0.0,0
+py-client,0.1,69,0,69,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.104,68,2,66,2.941,6
+opencode,1.14.35,68,61,7,89.706,63
+claude-ai (via mcp-remote 0.1.17),0.1.0,68,0,68,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.119,68,5,63,7.353,28
+LocalAIAgent,1.0,67,4,63,5.97,10
+hugging_face_mcp_b75cfb,1.0.0,67,11,56,16.418,40
+huggingface,1.0,67,0,67,0.0,0
+qwen-cli-mcp-client-hf-mcp-server,0.0.1,67,0,67,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.144,67,4,63,5.97,19
+local-agent-mode-homelab-huggingface (via mcp-remote 0.1.37),1.0.0,66,1,65,1.515,3
+BeldenIQ,1.0.0,66,0,66,0.0,0
+claude-code,1.0.119a-dev,66,0,66,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.109,66,3,63,4.545,8
+Manus,8.0.18,65,27,38,41.538,196
+custom3p-desktop,1.8089.1,65,0,65,0.0,0
+continue-client (via mcp-remote 0.1.37),1.0.0,65,0,65,0.0,0
+codex-mcp-client (via mcp-remote 0.1.30),0.130.0-alpha.5,65,0,65,0.0,0
+pipeline_mcp,1.0.0,65,52,13,80.0,284
+Cline (via mcp-remote 0.1.37),3.81.0,65,1,64,1.538,2
+Hugging Face,1.0.0,64,0,64,0.0,0
+Roo Code,3.55.0,64,0,64,0.0,0
+github-copilot-developer,1.0.26,64,0,64,0.0,0
+custom3p-desktop,1.5354.0,64,0,64,0.0,0
+bluenexus-mcp-client,1.1.2,63,20,43,31.746,20
+gemini-cli-mcp-client,0.44.0,63,0,63,0.0,0
+opencode,1.14.23,63,62,1,98.413,102
+mcptotal-client,1.1.0,63,0,63,0.0,0
+dartantic_ai,0.7.0,63,0,63,0.0,0
+dev.warp.Warp-Stable,v0.2026.04.15.08.45.stable_02,62,0,62,0.0,0
+iris-self-discover,1.0,62,0,62,0.0,0
+AERA-MCP-Audit,3.0,62,38,24,61.29,25297
+dev.warp.Warp-Stable,v0.2026.04.08.08.36.stable_02,62,0,62,0.0,0
+Cline,3.78.0,62,0,62,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.115.0-alpha.11,60,0,60,0.0,0
+hf,1.0,60,1,59,1.667,3
+Hugging Face MCP,1.0,59,0,59,0.0,0
+Visual Studio Code,1.119.1,58,10,48,17.241,34
+factory-cli,0.93.0,58,0,58,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.119.0-alpha.11,58,0,58,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.117.0-alpha.10,58,0,58,0.0,0
+opencode,1.14.49,58,51,7,87.931,79
+claude-code (via mcp-remote 0.1.37),2.1.120,58,0,58,0.0,0
+ConversationalAI,2026.4.0.20190,57,0,57,0.0,0
+ConversationalAI,2026.4.2.21502,57,0,57,0.0,0
+claude-code,2.1.3,57,5,52,8.772,72
+DeepChat,1.0.3,57,4,53,7.018,15
+claude-code,0.0.4,57,0,57,0.0,0
+amp-mcp-client (via mcp-remote 0.1.37),0.0.0-dev,57,7,50,12.281,27
+local-agent-mode-huggingface-flux (via mcp-remote 0.1.37),1.0.0,57,0,57,0.0,0
+tfy-agent-mcp-client,1.0.0,56,1,55,1.786,1
+codex-mcp-client (via mcp-remote 0.1.37),0.117.0,56,0,56,0.0,0
+dev.warp.Warp-Stable,v0.2026.04.27.15.32.stable_03,56,0,56,0.0,0
+mcp-live-test,1.0.0,55,0,55,0.0,0
+tanka-output-v4,0.1,55,43,12,78.182,43
+mcphost,0.1.0,55,1,54,1.818,1
+claude-code (via mcp-remote 0.1.37),2.1.112,55,2,53,3.636,13
+kilo,7.2.0,54,49,5,90.741,191
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.42.0,54,0,54,0.0,0
+Cline,3.86.0,54,0,54,0.0,0
+ConversationalAI,2026.5.0.22867,53,0,53,0.0,0
+junie-client (via mcp-remote 0.1.37),1.0.0,53,1,52,1.887,25
+bio-agents-platform,1.0.0,53,0,53,0.0,0
+ConversationalAI,2026.4.2.21130,53,0,53,0.0,0
+platform-client,v1.0.0,53,0,53,0.0,0
+verify-mcp,1.0,52,0,52,0.0,0
+daily-huggingface,1.0,52,52,0,100.0,156
+opencode,1.3.3,52,46,6,88.462,52
+codex-mcp-client,0.131.0-alpha.4,52,0,52,0.0,0
+opencode (via mcp-remote 0.1.37),local,52,49,3,94.231,101
+ConversationalAI,2026.5.0.22828,52,0,52,0.0,0
+llama-stack-bff-client,v1.0.0,51,0,51,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.37.1,51,8,43,15.686,22
+claude-code,1.0.132-dev,51,0,51,0.0,0
+opencode,1.4.4,51,34,17,66.667,34
+crabeye-mcp-bridge/huggingface,1.2.1,51,2,49,3.922,4
+mcp-hub,1.0.0,51,2,49,3.922,5
+gemini-cli-mcp-client,0.42.0-nightly.20260507.ga809bc7c5,50,0,50,0.0,0
+Manus,8.0.4,50,24,26,48.0,248
+opencode (via mcp-remote 0.1.37),1.14.20,49,48,1,97.959,56
+ConversationalAI,2026.4.2.21354,49,0,49,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.97,49,0,49,0.0,0
+toolhive,1.0,49,0,49,0.0,0
+mcporter (via mcp-remote 0.1.37),0.8.1,49,1,48,2.041,1
+pi-mcp-huggingface,1.0.0,49,32,17,65.306,188
+factory-cli,0.111.0,49,0,49,0.0,0
+span-pipeline,1.0.0,49,0,49,0.0,0
+dev.warp.Warp-Stable,v0.2026.04.22.08.46.stable_02,48,0,48,0.0,0
+github-copilot-developer,1.0.47,48,2,46,4.167,2
+opencode,7.2.31,48,40,8,83.333,63
+openclaw-mcp-adapter (via mcp-remote 0.1.37),0.2.0,48,0,48,0.0,0
+custom3p-desktop,1.7196.3,48,0,48,0.0,0
+factory-cli,0.90.0,48,0,48,0.0,0
+dev.warp.Warp-Stable,v0.2026.05.27.15.44.stable_01,48,0,48,0.0,0
+AbacusAI TUI,1.0.0,48,0,48,0.0,0
+factory-cli,0.96.0,48,0,48,0.0,0
+Intility.Gpt.Backend,1.0.0.0,48,0,48,0.0,0
+ConversationalAI,2026.5.0.23069,48,0,48,0.0,0
+gemini-cli-mcp-client,0.44.0-preview.0,47,0,47,0.0,0
+claude-code,1.0.146-dev,47,0,47,0.0,0
+factory-cli,0.94.2,47,0,47,0.0,0
+opencode (via mcp-remote 0.1.37),1.3.13,47,47,0,100.0,180
+github-copilot-developer,1.0.42,47,1,46,2.128,4
+codex-mcp-client,0.105.0,47,1,46,2.128,1
+opencode,1.14.44,47,30,17,63.83,36
+ConversationalAI,2026.4.1.20311,47,0,47,0.0,0
+grok-shell-grok_com_hugging_face,0.1.0,47,1,46,2.128,1
+ConversationalAI,2026.4.2.21295,46,0,46,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.38.1,46,0,46,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.122.0-alpha.13,46,0,46,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.28,46,46,0,100.0,109
+opencode,1.4.8,46,34,12,73.913,78
+inspector-client,0.21.1,46,6,40,13.043,14
+Visual Studio Code,1.112.0,46,10,36,21.739,46
+opencode (via mcp-remote 0.1.37),1.3.17,46,42,4,91.304,359
+omelette-go,1.0.0,45,26,19,57.778,82
+ConversationalAI,2026.4.0.20219,45,0,45,0.0,0
+claude-code,1.0.119-dev,45,1,44,2.222,1
+openstatus-health-check,1.0.0,45,0,45,0.0,0
+github-copilot-developer,1.0.41,45,1,44,2.222,8
+tracelet-virtual-mcp,0.1.0,45,2,43,4.444,3
+vllm-dashboard,1.0,45,0,45,0.0,0
+Cline,3.74.0,45,4,41,8.889,10
+Cline (via mcp-remote 0.1.37),3.79.0,44,1,43,2.273,8
+SynthAI.Tests,1.0.0.0,44,0,44,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.96,44,0,44,0.0,0
+claude-ai (via mcp-remote 0.1.18),0.1.0,44,0,44,0.0,0
+monamis-runtime,1.0.0,44,0,44,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.126.0-alpha.8,44,0,44,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.129,44,1,43,2.273,1
+DeepChat,1.0.4,44,4,40,9.091,35
+ConversationalAI,2026.5.0.24055,44,0,44,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.133,44,0,44,0.0,0
+yua-backend,1.0.0,44,10,34,22.727,41
+huggingface (via mcp-remote 0.1.37),1.0.0,44,4,40,9.091,10
+claude-code (via mcp-remote 0.1.37),2.1.148,44,2,42,4.545,7
+gemini-cli-mcp-client,0.40.0-preview.4,44,0,44,0.0,0
+0xKobold,0.1.0,43,0,43,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.100,43,0,43,0.0,0
+Cline (via mcp-remote 0.1.37),3.78.0,43,0,43,0.0,0
+hf-mcp,1.0,43,0,43,0.0,0
+gemini-cli-mcp-client,0.44.0-nightly.20260521.g57c42a5c4,43,0,43,0.0,0
+Manus,8.0.20,43,17,26,39.535,73
+mcpwn,1.0,43,5,38,11.628,886
+claude-code (via mcp-remote 0.1.37),2.1.73,42,0,42,0.0,0
+codex-mcp-client,0.116.0-alpha.10,42,0,42,0.0,0
+Roo Code,3.51.1,42,3,39,7.143,11
+gemini-cli-mcp-client,0.44.0-nightly.20260518.g5611ff40e,42,0,42,0.0,0
+gemini-cli-mcp-client,0.36.0-preview.6,42,0,42,0.0,0
+Cline (via mcp-remote 0.1.37),3.84.0,42,0,42,0.0,0
+Visual Studio Code,1.118.0,41,7,34,17.073,17
+huggingface,1.0.0,41,1,40,2.439,1
+docker agent,1.0.0,41,2,39,4.878,5
+tanka-assistant,1.0.0,41,27,14,65.854,27
+crabeye-mcp-bridge/hf-mcp-server,0.1.0,41,0,41,0.0,0
+probe,0.1,41,2,39,4.878,12
+mcpjungle mcp client for https://huggingface.co/mcp?login,0.1,40,13,27,32.5,13
+dev.warp.Warp-Stable,v0.2026.05.20.09.21.stable_03,40,0,40,0.0,0
+mcp-remote-test-client (via mcp-remote 0.1.31),1.0.0,40,0,40,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.135.0-alpha.1,40,0,40,0.0,0
+local-agent-mode-HuggingFace (via mcp-remote 0.1.37),1.0.0,40,0,40,0.0,0
+Visual Studio Code,1.111.0,40,9,31,22.5,76
+gemini-cli-mcp-client,0.44.0-nightly.20260515.g928a311fb,40,0,40,0.0,0
+openclaw-huggingface (via mcp-remote 0.1.37),0.1.0,39,0,39,0.0,0
+rush-agent,1.0.0,39,4,35,10.256,7
+zigent,0.0.0,39,1,38,2.564,22
+codex-mcp-client (via mcp-remote 0.1.37),0.117.0-alpha.24,39,0,39,0.0,0
+ConversationalAI,2026.3.1.19291,38,0,38,0.0,0
+hf-mcp-server-client,0.1.0,38,0,38,0.0,0
+ConversationalAI,2026.5.0.24324,38,0,38,0.0,0
+mission-mcp-gateway,1.0.0,38,0,38,0.0,0
+BB8-MCP-Broker-conn-0b508b54,1.0.0,38,0,38,0.0,0
+factory-cli,0.68.1,38,0,38,0.0,0
+ConversationalAI,2026.3.1.18769,38,0,38,0.0,0
+claude-code,0.4.9-mumucc,38,0,38,0.0,0
+Cline (via mcp-remote 0.1.37),3.83.0,37,0,37,0.0,0
+workato-genie-mcp-client,v1.0.0,37,37,0,100.0,37
+factory-cli,0.104.1,37,0,37,0.0,0
+mocop-gateway-go,0.13.0-pr.351.e9a497af,37,6,31,16.216,6
+opencode,1.4.5,37,25,12,67.568,31
+archestra-platform,1.2.31,37,0,37,0.0,0
+mcp-router (via mcp-remote 0.1.37),1.0.0,37,1,36,2.703,2
+clawcentral,1.0,37,0,37,0.0,0
+ConversationalAI,2026.3.1.18782,36,0,36,0.0,0
+ConversationalAI,2026.4.1.20287,36,0,36,0.0,0
+gemini-cli-mcp-client,0.27.2,36,0,36,0.0,0
+proctor-mcp-client,0.0.1,36,0,36,0.0,0
+talk2me-voice-agent,1.0.0,36,0,36,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.123.0-alpha.5,36,0,36,0.0,0
+test,0.1,36,7,29,19.444,22
+claude-code (via mcp-remote 0.1.37),2.1.154,36,1,35,2.778,18
+claude-code (via mcp-remote 0.1.30),2.1.97,35,0,35,0.0,0
+mcporter,0.10.2.4,35,0,35,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.117,35,2,33,5.714,3
+mcp-gateway-fetcher,1.0.0,35,0,35,0.0,0
+probe,1.0,35,2,33,5.714,20
+local-agent-mode-hf-gradio (via mcp-remote 0.1.37),1.0.0,35,0,35,0.0,0
+Cline,3.80.0,35,0,35,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.124.0-alpha.2,34,0,34,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.89,34,0,34,0.0,0
+Roo Code (via mcp-remote 0.1.37),3.51.1,34,0,34,0.0,0
+Postman Client,1.0.0,34,1,33,2.941,1
+mcp-drift,0.1.0,34,0,34,0.0,0
+aurocx-client,1.0.0,34,4,30,11.765,9
+augment-mcp-client (via mcp-remote 0.1.37),1.0.0,34,1,33,2.941,2
+ConversationalAI,2026.3.1.19563,34,0,34,0.0,0
+custom3p-desktop,1.8555.0,34,0,34,0.0,0
+cursor-vscode (via mcp-remote 0.1.30),1.0.0,34,0,34,0.0,0
+CopilotChatWebApi,1.0.0.0,34,1,33,2.941,2
+claude-code (via mcp-remote 0.1.30),2.1.96,34,0,34,0.0,0
+dev.warp.Warp,v0.2026.04.29.08.57.stable_01,34,0,34,0.0,0
+mcp-remote-test-client (via mcp-remote 0.1.29),1.0.0,34,0,34,0.0,0
+factory-cli,0.83.0,34,0,34,0.0,0
+agent,1.0,33,31,2,93.939,109
+ConversationalAI,2026.4.2.21215,33,0,33,0.0,0
+mcp-helper,1.0,33,33,0,100.0,33
+jarvis,1.0,33,24,9,72.727,208
+smoke,1,33,0,33,0.0,0
+archestra-platform,1.2.24,33,0,33,0.0,0
+opencode,1.3.10,33,29,4,87.879,29
+toolathlon-live (via mcp-remote 0.1.37),0.1.0,33,11,22,33.333,70
+claude-code (via mcp-remote 0.1.37),2.1.91,33,0,33,0.0,0
+zh,1.0,33,0,33,0.0,0
+@huggingface/responses.js,0.1.0,33,0,33,0.0,0
+CopilotFlow,1.0.0,33,0,33,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.129.0-alpha.15,33,0,33,0.0,0
+ConversationalAI,2026.4.2.21208,33,0,33,0.0,0
+opencode (via mcp-remote 0.1.37),1.15.7,33,33,0,100.0,83
+ModelContextProtocol.Core,1.2.0.0,33,0,33,0.0,0
+opencode,1.3.7,32,27,5,84.375,27
+LocalAI-WebUI,1.0.0,32,4,28,12.5,37
+dev.warp.Warp-Stable,v0.2026.04.29.08.57.stable_01,32,0,32,0.0,0
+rmcp (via mcp-remote 0.1.37),0.8.5,32,0,32,0.0,0
+portal,1.0.0,32,0,32,0.0,0
+flowmap-operator,1.0.0,32,0,32,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.119.0,32,0,32,0.0,0
+ConversationalAI,2026.3.1.18665,32,0,32,0.0,0
+securemcp-gateway,0.1.0,32,0,32,0.0,0
+local-agent-mode-huggingface-custom (via mcp-remote 0.1.37),1.0.0,31,2,29,6.452,2
+opencode,0.0.0-fix-gpt55-v2-202605091716,31,29,2,93.548,29
+codex-mcp-client (via mcp-remote 0.1.29),0.119.0-alpha.28,31,0,31,0.0,0
+claude-code,1.0.142-dev,31,2,29,6.452,33
+opencode,1.14.38,31,17,14,54.839,23
+BB8-MCP-Broker-conn-28df9687,1.0.0,31,3,28,9.677,4
+Studio,3.3.0.0,31,19,12,61.29,86
+factory-cli,0.94.1,31,0,31,0.0,0
+ConversationalAI,2026.3.1.19783,31,0,31,0.0,0
+Visual Studio Code - Insiders,1.115.0-insider,31,9,22,29.032,34
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.36.0,30,0,30,0.0,0
+dev.warp.Warp-Stable,v0.2026.04.08.08.36.stable_05,30,0,30,0.0,0
+github-copilot-developer,1.0.29,30,0,30,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.81,30,0,30,0.0,0
+claude-ai (via mcp-remote 0.1.41),0.1.0,30,0,30,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.108,30,0,30,0.0,0
+nawah,2.0,30,0,30,0.0,0
+Dify,1.14.2,30,28,2,93.333,28
+concierge-forwarder-probe,0,29,0,29,0.0,0
+probe,0,29,1,28,3.448,1
+rmcp,1.6.0,29,1,28,3.448,1
+hub-agent,1.0.0,29,0,29,0.0,0
+ConversationalAI,2026.5.0.24527,29,0,29,0.0,0
+mcp-test-client (via mcp-remote 0.1.37),0.0.1,29,0,29,0.0,0
+chatwise,26.4.2,29,0,29,0.0,0
+mcp-tool-sync,1.0,29,0,29,0.0,0
+Cline (via mcp-remote 0.1.37),3.77.0,29,0,29,0.0,0
+codex-mcp-client (via mcp-remote 0.1.30),0.128.0,29,0,29,0.0,0
+claude-code,2.0.76,29,2,27,6.897,4
+ConversationalAI,2026.5.0.22649,29,0,29,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.135.0-alpha.1,28,0,28,0.0,0
+grok-validator,0.1,28,0,28,0.0,0
+dev.warp.Warp-Stable,v0.2026.04.01.08.39.stable_02,28,1,27,3.571,40
+mcp-health-client,1.0.0,28,0,28,0.0,0
+mcp-test-client,1.0.0-dev,28,9,19,32.143,216
+t,1,28,1,27,3.571,2
+qwen-cli-mcp-client-hf,0.0.1,28,0,28,0.0,0
+AgentPlatform,1.0.0,28,22,6,78.571,22
+Jan Streamable Client,0.0.1,28,2,26,7.143,20
+Cherry Studio,1.7.15,28,0,28,0.0,0
+mcpchecker,v0.1.0,28,0,28,0.0,0
+github-copilot-developer,1.0.33,28,0,28,0.0,0
+nvcf-responses-mcp-client,1.0.0,27,12,15,44.444,20
+claude-code,1.0.118-dev,27,0,27,0.0,0
+claude-code,0.0.50,27,0,27,0.0,0
+BB8-MCP-Broker-conn-0196e527,1.0.0,27,0,27,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.38.2,27,3,24,11.111,5
+claude-code,1.0.123-dev,27,1,26,3.704,14
+Noruxa,1.0,27,2,25,7.407,2
+1mcp,0.29.2,27,2,25,7.407,6
+BB8-MCP-Broker-conn-a8e6970d,1.0.0,27,0,27,0.0,0
+keycard-probe,0.1,26,0,26,0.0,0
+github-copilot-developer,1.0.49-1,26,0,26,0.0,0
+databricks-langchain-client,1.0,26,8,18,30.769,8
+ai-tool-executor,1.0.0,26,3,23,11.538,4
+claude-code (via mcp-remote 0.1.37),2.1.94,26,1,25,3.846,11
+genesis-gateway,1.0.0,26,10,16,38.462,12
+mcporter,0.10.1,26,0,26,0.0,0
+dev.warp.Warp,v0.2026.04.15.08.45.stable_02,26,0,26,0.0,0
+ConversationalAI,2026.3.1.18892,26,0,26,0.0,0
+codex-mcp-client (via mcp-remote 0.1.30),0.125.0-alpha.3,26,0,26,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.123,26,0,26,0.0,0
+dev.warp.Warp-Stable,v0.2026.05.13.09.15.stable_03,26,0,26,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.122.0-alpha.1,26,0,26,0.0,0
+ConversationalAI,2026.5.0.21689,26,0,26,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.129.0-alpha.7,25,0,25,0.0,0
+opencode,1.14.45,25,24,1,96.0,25
+ConversationalAI,2026.3.1.19478,25,0,25,0.0,0
+hv-status-probe,1.0,25,0,25,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.41,25,19,6,76.0,83
+ConversationalAI,2026.3.1.19585,25,0,25,0.0,0
+Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/),1.0,25,0,25,0.0,0
+opencode,1.1.53,25,20,5,80.0,21
+codex-mcp-client (via mcp-remote 0.1.30),0.121.0,25,2,23,8.0,2
+langsmith-mcp-proxy,1.0.0,25,0,25,0.0,0
+ConversationalAI,2026.3.1.19457,25,0,25,0.0,0
+test,1.0.0,25,5,20,20.0,15
+archestra-platform,1.2.50,25,0,25,0.0,0
+Windsurf (via mcp-remote 0.1.15),1.0.0,24,0,24,0.0,0
+huggingface-agent-mcp-client,1.0.0,24,23,1,95.833,69
+HF-MCP,1.0,24,0,24,0.0,0
+bolt,1.0.0,24,0,24,0.0,0
+ConversationalAI,2026.3.1.19498,24,0,24,0.0,0
+egocodex-mcp-smoke,1.0,24,0,24,0.0,0
+claude-code,1.0.34,24,0,24,0.0,0
+opencode,7.2.40,24,20,4,83.333,29
+ConversationalAI,2026.3.1.18677,24,0,24,0.0,0
+fast-agent-mcp,0.7.0,24,14,10,58.333,39
+claude-code,2.0.74,24,0,24,0.0,0
+linxclaw,1.0.0,24,0,24,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.107,23,3,20,13.043,6
+Cherry Studio,1.8.0,23,0,23,0.0,0
+grok-shell-huggingface,0.1.0,23,0,23,0.0,0
+ConversationalAI,2026.5.0.23098,23,0,23,0.0,0
+claude-code,0.5.14-beta.2,23,1,22,4.348,2
+test,1,23,0,23,0.0,0
+claude-code,2.1.16,23,0,23,0.0,0
+probe,1,23,2,21,8.696,3
+claude-code,1.0.128-dev,23,0,23,0.0,0
+MstyStudio (via mcp-remote 0.1.37),2.7.6,23,0,23,0.0,0
+ConversationalAI,2026.4.2.21093,23,0,23,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.38.0,23,0,23,0.0,0
+mcp-remote-test-client (via mcp-remote 0.1.38),1.0.0,23,0,23,0.0,0
+qoder-cli-mcp-client,0.2.4,23,0,23,0.0,0
+ConversationalAI,2026.5.0.22517,23,0,23,0.0,0
+ConversationalAI,2026.3.1.18515,23,0,23,0.0,0
+goose-desktop,1.31.0,23,0,23,0.0,0
+ConversationalAI,2026.4.2.21110,22,0,22,0.0,0
+opencode,1.3.4,22,16,6,72.727,163
+google-ai-edge-gallery,1.0.15,22,1,21,4.545,1
+factory-cli,0.84.0,22,0,22,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.37.2,22,2,20,9.091,6
+ai-debugger-web,0.1.0,22,4,18,18.182,16
+opencode,0.0.0-beta-202605270633,22,20,2,90.909,20
+rex (via mcp-remote 0.1.37),0.1.0,22,0,22,0.0,0
+github-copilot-developer,1.0.40-0,22,1,21,4.545,1
+opencode,1.14.37,22,21,1,95.455,24
+dev.warp.Warp,v0.2026.04.08.08.36.stable_05,22,0,22,0.0,0
+claude-console,1.0,22,0,22,0.0,0
+mavis-mcp,1.0.0,21,1,20,4.762,2
+kilo,7.1.21,21,21,0,100.0,28
+Manus,8.0.19,21,6,15,28.571,37
+Hugging Face,1.0,21,0,21,0.0,0
+opencode,1.14.34,21,18,3,85.714,32
+Cherry Studio (via mcp-remote 0.1.37),1.7.19,21,0,21,0.0,0
+ConversationalAI,2026.5.1.24356,21,0,21,0.0,0
+ConversationalAI,2026.4.2.21535,21,0,21,0.0,0
+bolt-api,0.1.32,21,0,21,0.0,0
+factory-cli,0.125.1,21,0,21,0.0,0
+ConversationalAI,2026.4.1.20310,21,0,21,0.0,0
+codex-mcp-client,0.128.3,21,0,21,0.0,0
+claude-code,1.0.121-dev,20,0,20,0.0,0
+claude-code,1.0.158-dev,20,0,20,0.0,0
+claude-code,2.1.36,20,0,20,0.0,0
+goose-desktop,1.30.0,20,1,19,5.0,1
+celeste-agent,1.0,20,1,19,5.0,2
+codex-mcp-client,0.119.0-alpha.1,20,0,20,0.0,0
+ConversationalAI,2026.5.1.24553,20,0,20,0.0,0
+ConversationalAI,2026.4.1.20301,20,0,20,0.0,0
+ConversationalAI,2026.4.1.21115,20,0,20,0.0,0
+executor-probe,0,20,0,20,0.0,0
+archestra-inspector,1.2.31,20,1,19,5.0,1
+ConversationalAI,2026.3.1.19330,20,0,20,0.0,0
+zerotwo-mcp-client-8ba77feb-eed6-4358-845e-4cf5f05b0eb9,1.0.0,20,0,20,0.0,0
+dev.warp.Warp-Stable,v0.2026.05.06.15.42.stable_03,20,0,20,0.0,0
+gemini-cli-mcp-client,0.42.0-nightly.20260504.g37edd1d4d,20,0,20,0.0,0
+clawbuddy,1.0,20,6,14,30.0,11
+ConversationalAI,2026.3.1.18755,19,0,19,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.114,19,0,19,0.0,0
+Cline (via mcp-remote 0.1.37),3.86.0,19,1,18,5.263,2
+test-client,1.0.0,19,9,10,47.368,54
+pinkfish,1.0.0,19,1,18,5.263,1
+DeepChat,1.0.2,19,0,19,0.0,0
+chatwise,26.5.0,19,0,19,0.0,0
+ConversationalAI,2026.3.1.19444,19,0,19,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.116,19,0,19,0.0,0
+gemini-cli-mcp-client,0.32.1,19,0,19,0.0,0
+bolt-api,0.1.11,19,0,19,0.0,0
+ConversationalAI,2026.3.1.19436,19,0,19,0.0,0
+concierge-bootstrap,1,19,0,19,0.0,0
+mcp-ktor,0.7.0,19,0,19,0.0,0
+jackfruit-research-mcp-handshake,0.24,19,0,19,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.47,19,2,17,10.526,8
+Air (via mcp-remote 0.1.37),0,19,0,19,0.0,0
+ConversationalAI,2026.4.0.20181,19,0,19,0.0,0
+antigravity-client (via mcp-remote 0.1.30),v1.0.0,19,0,19,0.0,0
+Programs,1.0.0.0,19,0,19,0.0,0
+opencode,1.15.9,19,19,0,100.0,34
+opencode,1.14.27,18,15,3,83.333,15
+Visual Studio Code,1.106.3,18,3,15,16.667,10
+kilo,7.3.0,18,12,6,66.667,15
+chatbot,1.0,18,0,18,0.0,0
+aiaw,v1.8.7,18,12,6,66.667,54
+claude-code (via mcp-remote 0.1.30),2.1.104,18,0,18,0.0,0
+ConversationalAI,2026.4.1.20671,18,0,18,0.0,0
+ConversationalAI,2026.3.1.18550,18,0,18,0.0,0
+github-copilot-developer,1.0.55-0,18,0,18,0.0,0
+codex-mcp-client,0.115.0,18,0,18,0.0,0
+local-agent-mode-HuggingFace-Images (via mcp-remote 0.1.37),1.0.0,18,0,18,0.0,0
+github-copilot-developer,1.0.55-7,17,0,17,0.0,0
+Visual Studio Code Agents - Insiders,1.118.0-insider,17,0,17,0.0,0
+bluenexus-mcp-client,0.13.0,17,4,13,23.529,4
+ConversationalAI,2026.5.0.24090,17,0,17,0.0,0
+gemini-cli-mcp-client,0.44.0-nightly.20260517.g77e65c0db,17,0,17,0.0,0
+Neurons,1.0.0,17,4,13,23.529,27
+archestra-platform,1.2.15,17,0,17,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.157,17,0,17,0.0,0
+claude-code,1.0.131-dev,17,1,16,5.882,1
+codex-mcp-client,0.99.0-alpha.23,17,0,17,0.0,0
+bolt-api,0.1.18,17,0,17,0.0,0
+claude-code,0.0.22,17,0,17,0.0,0
+AppIdea,1.0.0,17,0,17,0.0,0
+p,1,17,6,11,35.294,6
+chatwise,26.4.17,17,0,17,0.0,0
+dev.warp.Warp-Stable,v0.2026.05.18.05.32.stable_02,17,0,17,0.0,0
+TreatGPT-Web,1.0.0,17,0,17,0.0,0
+ConversationalAI,2026.5.0.23615,17,0,17,0.0,0
+Cline (via mcp-remote 0.1.29),3.81.0,17,0,17,0.0,0
+dev.warp.Warp,v0.2026.05.06.15.42.stable_03,16,0,16,0.0,0
+fast-agent-mcp,0.7.12,16,8,8,50.0,23
+Cherry Studio,1.7.24,16,0,16,0.0,0
+mcp-shield-scanner,1.0.0,16,0,16,0.0,0
+factory-cli,0.118.1,16,0,16,0.0,0
+archestra-platform,1.2.18,16,0,16,0.0,0
+exchange-experience-api,2.0.0,16,0,16,0.0,0
+mcp-introspector,1.0.0,16,0,16,0.0,0
+Manus,8.0.10,16,9,7,56.25,47
+dev.warp.Warp-Stable,v0.2026.04.22.08.46.stable_03,16,0,16,0.0,0
+claude-code,2.1.98-patched,16,0,16,0.0,0
+ConversationalAI,2026.4.1.20955,16,0,16,0.0,0
+dev.warp.Warp-Preview,v0.2026.05.27.15.44.preview_01,16,0,16,0.0,0
+opencode (via mcp-remote 0.1.37),1.4.3,16,16,0,100.0,23
+Tooler.API,1.0.0.0,16,3,13,18.75,5
+claude-code (via mcp-remote 0.1.37),2.1.110,16,0,16,0.0,0
+local-agent-mode-hf-mcp-server (via mcp-remote 0.1.17),1.0.0,16,1,15,6.25,3
+bolt-api,0.1.34,16,0,16,0.0,0
+c,1,16,11,5,68.75,14
+Msty Claw,0.1.9,16,1,15,6.25,2
+codex-mcp-client (via mcp-remote 0.1.30),0.123.0-alpha.5,16,1,15,6.25,6
+Cherry Studio (via mcp-remote 0.1.37),1.8.4,16,4,12,25.0,36
+cherry-studio-app,0.1.5,16,1,15,6.25,1
+opencode (via mcp-remote 0.1.37),1.15.10,16,11,5,68.75,388
+layla,6.8.2-direct,16,1,15,6.25,5
+claude-code,2.1.2,16,0,16,0.0,0
+grok-shell-grok_com_hugging_face,0.2.11,16,0,16,0.0,0
+Visual Studio Code,1.107.1,16,4,12,25.0,28
+@smolagents/mcp-client-sandbox,1.0.0,16,2,14,12.5,2
+ConversationalAI,2026.4.2.22855,15,0,15,0.0,0
+ui5flow-mcp-client,1.0.0,15,0,15,0.0,0
+codex-mcp-client (via mcp-remote 0.1.30),0.124.0-alpha.2,15,0,15,0.0,0
+opencode,1.3.2,15,7,8,46.667,7
+bolt-api,0.1.23,15,0,15,0.0,0
+dust-mcp-client,1.0.0,15,0,15,0.0,0
+mcp-test-client,1.2.4,15,0,15,0.0,0
+universal-mcp-bridge,0.1.0,15,1,14,6.667,1
+codex-mcp-client,0.115.0-alpha.11,15,0,15,0.0,0
+Cline (via mcp-remote 0.1.37),3.85.0,15,0,15,0.0,0
+step2_test,1.0.0,15,9,6,60.0,12
+claude-ai (via mcp-remote 0.1.29),0.1.0,15,1,14,6.667,3
+mcs,1.0.0,15,0,15,0.0,0
+github-copilot-developer,1.0.35-6,15,0,15,0.0,0
+ConversationalAI,2026.5.0.22314,15,0,15,0.0,0
+codex-mcp-client,0.46.0,15,1,14,6.667,1
+ChatMcpiOSClient,1.0.0,15,4,11,26.667,7
+ConversationalAI,2026.3.1.19338,15,0,15,0.0,0
+@librechat/api-client (via mcp-remote 0.1.37),1.2.3,15,0,15,0.0,0
+github-copilot-developer,1.0.55-1,15,0,15,0.0,0
+codex-mcp-client,0.126.0-alpha.1,15,0,15,0.0,0
+conformance-test-client,1.0.0,15,0,15,0.0,0
+Visual Studio Code,1.108.2,15,2,13,13.333,2
+mosaic-companion,1.0.0,15,1,14,6.667,8
+opencode,7.0.46,15,11,4,73.333,77
+GenVR Workflow,1.0,15,3,12,20.0,3
+pi-mcp-hf-mcp-server,1.0.0,15,6,9,40.0,21
+factory-cli,0.137.0,14,0,14,0.0,0
+opencode,7.2.14,14,12,2,85.714,18
+abacusai-agent,1.0.0,14,0,14,0.0,0
+github-copilot-developer,0.0.1,14,0,14,0.0,0
+dev.warp.Warp,v0.2026.04.27.15.32.stable_02,14,0,14,0.0,0
+CC4ALL Admin,1.0,14,0,14,0.0,0
+ConversationalAI,2026.3.1.18546,14,0,14,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.85,14,1,13,7.143,2
+curl-client,1.0.0,14,0,14,0.0,0
+opencode,0.0.0-beta-202605260556,14,1,13,7.143,1
+agentgateway-dashboard,0.1.0,14,0,14,0.0,0
+nuvin,0.0.0,14,0,14,0.0,0
+dev.warp.Warp,v0.2026.04.29.08.57.stable_02,14,0,14,0.0,0
+DeepChat,1.0.4-beta.4,14,0,14,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.117.0-alpha.12,14,0,14,0.0,0
+Visual Studio Code,1.110.1,14,2,12,14.286,28
+mcp-extractor,1.0,14,0,14,0.0,0
+mcp-cli,0.3.0,14,1,13,7.143,6
+opencode,1.4.12,14,12,2,85.714,12
+compose-connectors,0.1.0,14,0,14,0.0,0
+Air,0,14,1,13,7.143,5
+github-copilot-developer,1.0.43-0,14,0,14,0.0,0
+wekala,1.0,14,0,14,0.0,0
+mcptools,1.0.0,14,12,2,85.714,12
+evaos-smoke,1,14,0,14,0.0,0
+mcp-ollama-chatbot,1.0.0,14,1,13,7.143,6
+rmcp,0.8.5,14,11,3,78.571,27
+ConversationalAI,2026.4.1.20841,14,0,14,0.0,0
+rmcp,1.5.0,14,2,12,14.286,6
+fast-agent-mcp,0.6.25,13,2,11,15.385,3
+goose-desktop,1.36.0,13,0,13,0.0,0
+1mcp,0.32.0,13,0,13,0.0,0
+rmcp,0.9.1,13,0,13,0.0,0
+mcporter,0.10.2-khalak.1,13,0,13,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.69,13,6,7,46.154,25
+Privacy AI,2.0.1313,13,1,12,7.692,7
+mcp-queryset-gen,0.1,13,11,2,84.615,49
+codex-mcp-client,0.104.0,13,0,13,0.0,0
+nuclei,1.0,13,0,13,0.0,0
+bolt-api,0.1.45,13,0,13,0.0,0
+dmhai-itgr-test,0.0.0,13,0,13,0.0,0
+nyx,1.0,13,7,6,53.846,7
+opencode,1.14.43,13,12,1,92.308,13
+claude-code,2.0.22,13,0,13,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.24,13,12,1,92.308,21
+ConversationalAI,2026.4.1.20305,13,0,13,0.0,0
+p,0,13,3,10,23.077,16
+lava-federation-http,1.0.0,13,10,3,76.923,10
+hermes,3.0,13,0,13,0.0,0
+solarwinds_mcp_verifier,v0.0.1,13,0,13,0.0,0
+streamable-http-client,1.0.0,13,1,12,7.692,1
+custom3p-desktop,1.4758.0,13,0,13,0.0,0
+custom3p-desktop,1.6259.1,13,1,12,7.692,4
+Manus,8.0.3,13,4,9,30.769,9
+gemini-cli-mcp-client,0.41.0,13,0,13,0.0,0
+VisualStudio,18.6.11819.183,13,0,13,0.0,0
+Huggingface,1.0,13,0,13,0.0,0
+factory-cli,0.99.1-build0005184,12,0,12,0.0,0
+ConversationalAI,2026.3.1.18741,12,0,12,0.0,0
+Manus,8.0.12,12,4,8,33.333,15
+mcpregistry,0.1.0,12,0,12,0.0,0
+agent-flow,0.1.0,12,9,3,75.0,57
+github-copilot-developer (via mcp-remote 0.1.37),1.0.34,12,0,12,0.0,0
+mcporter,0.11.3,12,0,12,0.0,0
+chatwise,26.3.36,12,0,12,0.0,0
+alma,1.0.0,12,0,12,0.0,0
+grok-shell-grok_com_hugging_face,0.1.181,12,0,12,0.0,0
+openacme-__test__,0.0.1,12,0,12,0.0,0
+Visual Studio Code,1.107.0,12,5,7,41.667,7
+factory-cli,0.101.1-build0005263,12,0,12,0.0,0
+claude-code,0.5.17,12,0,12,0.0,0
+claude-code,2.1.87-dev.20260403.t174316.shae5b13b34,12,0,12,0.0,0
+kilo,7.2.49,12,11,1,91.667,53
+claude-ai (via mcp-remote 0.1.30),0.1.0,12,0,12,0.0,0
+claude-code,2.1.11,12,1,11,8.333,2
+codex-mcp-client (via mcp-remote 0.1.30),0.126.0-alpha.8,12,0,12,0.0,0
+fast-agent-mcp,0.7.9,12,5,7,41.667,11
+Visual Studio Code,1.108.1,12,2,10,16.667,9
+claude-code (via mcp-remote 0.1.37),2.1.147,12,0,12,0.0,0
+claude-code,0.0.51,12,0,12,0.0,0
+gemini-cli-mcp-client,0.37.1-termux,12,0,12,0.0,0
+mcp-prompt-list,1.0.0,12,0,12,0.0,0
+ConversationalAI,2026.3.1.19357,12,0,12,0.0,0
+ConversationalAI,2026.3.1.18919,12,0,12,0.0,0
+pillar-agent,1.0.0,12,0,12,0.0,0
+claude-code,1.0.136-dev,12,0,12,0.0,0
+codex-mcp-client,0.117.0-alpha.12,12,0,12,0.0,0
+grok-shell-huggingface,0.2.3,12,0,12,0.0,0
+ConversationalAI,2026.5.0.22817,11,0,11,0.0,0
+21st-desktop,1.0.0,11,0,11,0.0,0
+gemini-cli-mcp-client,0.42.0-nightly.20260512.gc987b9939,11,0,11,0.0,0
+aui-workflow-client,1.0.0,11,0,11,0.0,0
+claude-code,0.0.0-local,11,3,8,27.273,3
+claude-ai (via mcp-remote 0.1.12),0.1.0,11,0,11,0.0,0
+bolt-api,0.1.13,11,0,11,0.0,0
+rmcp,0.3.2,11,0,11,0.0,0
+Playground,0.0.1,11,0,11,0.0,0
+ConversationalAI,2026.5.0.24364,11,0,11,0.0,0
+mcp-remote-test-client (via mcp-remote 0.1.35),1.0.0,11,0,11,0.0,0
+claude-code,2.2.1,11,0,11,0.0,0
+insomnia-test,1.0.0,11,0,11,0.0,0
+Privacy AI,2.0.1717,11,0,11,0.0,0
+ConversationalAI,2026.3.1.19227,11,0,11,0.0,0
+WebMCP,0.1.0,11,0,11,0.0,0
+databricks-webapp,1.0.0,11,0,11,0.0,0
+artific,1.0.0,11,0,11,0.0,0
+gemini-cli-mcp-client,0.38.3-termux,11,0,11,0.0,0
+openclaw-bundle-mcp (via mcp-remote 0.1.36),0.0.0,11,0,11,0.0,0
+codex-mcp-client,0.108.0-alpha.12,11,0,11,0.0,0
+goose-desktop,1.35.0,11,0,11,0.0,0
+MCP Playground,0.1.0,11,1,10,9.091,10
+local-agent-mode-hf-mcp-server (via mcp-remote 0.1.12),1.0.0,11,0,11,0.0,0
+claude-code,1.0.52,11,3,8,27.273,9
+fast-agent-mcp,0.7.11,11,8,3,72.727,20
+github-copilot-developer,1.0.51-2,11,1,10,9.091,9
+gemma.hf_mcp,0.1.0,11,7,4,63.636,7
+claude-code (via mcp-remote 0.1.30),2.1.118,11,0,11,0.0,0
+codemoss-ide,1.0.0,11,0,11,0.0,0
+fast-agent-mcp,0.6.17,11,5,6,45.455,40
+ramparts,2.0.0,11,0,11,0.0,0
+ConversationalAI,2026.5.0.22670,11,0,11,0.0,0
+mcp-web-client,1.0.0,11,3,8,27.273,3
+custom3p-desktop,1.9255.2,11,0,11,0.0,0
+chatwise,26.5.1,11,0,11,0.0,0
+codex-mcp-client,0.119.0-alpha.29,10,0,10,0.0,0
+ConversationalAI,2026.5.0.21683,10,0,10,0.0,0
+Privacy AI,2.0.1515,10,0,10,0.0,0
+TypingMind,26-03-30/4a51b7e69968c2335a9498097fba72a25589957b,10,0,10,0.0,0
+grok-shell-hf-mcp-server,0.1.210,10,0,10,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.109,10,0,10,0.0,0
+mcp-tool-explorer,1.8.0,10,2,8,20.0,6
+Manus,8.0.13,10,5,5,50.0,45
+gemini-cli-mcp-client,0.39.0-nightly.20260414.gdaf500623,10,0,10,0.0,0
+Cherry Studio,1.8.2,10,0,10,0.0,0
+Visual Studio Code Agents - Insiders,1.117.0-insider,10,1,9,10.0,8
+grok-shell-grok_com_hugging_face,0.2.3,10,0,10,0.0,0
+claude-ai (via mcp-remote 0.1.31),0.1.0,10,0,10,0.0,0
+grok-shell-grok_com_hugging_face,0.1.220-alpha.2,10,0,10,0.0,0
+Cline (via mcp-remote 0.1.29),3.82.0,10,0,10,0.0,0
+dev.warp.Warp-Stable,v0.2026.05.06.15.42.stable_04,10,1,9,10.0,3
+dev.warp.Warp-Preview,v0.2026.05.18.05.32.preview_03,10,0,10,0.0,0
+claude-code,2.6.5,10,0,10,0.0,0
+local-agent-mode-huggingface (via mcp-remote 0.1.36),1.0.0,10,0,10,0.0,0
+seekrflow,1.0,10,0,10,0.0,0
+cloud-ai-tools-validator,1.0.0,10,0,10,0.0,0
+goose-cli,1.33.1,10,0,10,0.0,0
+ConversationalAI,2026.5.1.23929,10,0,10,0.0,0
+ai-agents-mcp-client,1.186.0,10,0,10,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.40,10,10,0,100.0,334
+Roo Code (via mcp-remote 0.1.37),3.16.3,10,0,10,0.0,0
+mcporter (via mcp-remote 0.1.37),0.10.2,10,0,10,0.0,0
+DMH-AI,1.0,10,2,8,20.0,2
+page-assist,1,10,5,5,50.0,10
+github-copilot-developer,1.0.30,10,0,10,0.0,0
+mcp-playground,1.0.0,10,0,10,0.0,0
+claude-code,2.0.13,10,0,10,0.0,0
+dev.warp.Warp-Stable,v0.2026.05.06.15.42.stable_05,10,0,10,0.0,0
+custom3p-desktop,1.8089.0,10,0,10,0.0,0
+claude-code,2.1.87-dev.20260405.t145523.shaunknown,10,0,10,0.0,0
+Firebase Studio,0.0.0,10,0,10,0.0,0
+MCP-Security-Scanner,1.0,10,0,10,0.0,0
+BB8-MCP-Broker-conn-f484d2e9,1.0.0,10,0,10,0.0,0
+ConversationalAI,2026.3.1.19363,10,0,10,0.0,0
+github-copilot-developer,1.0.48-1,10,0,10,0.0,0
+Cherry Studio,1.7.17,10,0,10,0.0,0
+ConversationalAI,2026.4.1.20355,10,0,10,0.0,0
+opencode,1.3.16,10,10,0,100.0,10
+archestra-platform,1.2.23,10,0,10,0.0,0
+ai-agents-mcp-client,1.183.0,10,0,10,0.0,0
+hf-vision-mcp,1.0,10,0,10,0.0,0
+opencode (via mcp-remote 0.1.37),1.4.7,10,10,0,100.0,10
+local-agent-mode-hf-mcp-server (via mcp-remote 0.1.18),1.0.0,10,1,9,10.0,8
+claude-code,0.5.18-beta.7,10,0,10,0.0,0
+devrel-index-probe,1.0,10,0,10,0.0,0
+seance,0.1.0,9,0,9,0.0,0
+goose-cli,1.34.1,9,2,7,22.222,21
+claude-code (via mcp-remote 0.1.37),99.0.0,9,1,8,11.111,8
+pi-mcp-hugging-face,1.0.0,9,3,6,33.333,28
+hrbr,0.1.0,9,0,9,0.0,0
+codex-mcp-client,0.111.0,9,0,9,0.0,0
+Cherry Studio (via mcp-remote 0.1.37),1.9.4,9,0,9,0.0,0
+DeepChat,1.0.4-beta.5,9,0,9,0.0,0
+custom3p-desktop,1.2.0,9,0,9,0.0,0
+osbot,1.0.0,9,1,8,11.111,4
+local-agent-mode-mcp-remote (via mcp-remote 0.1.37),1.0.0,9,0,9,0.0,0
+Cline (via mcp-remote 0.1.37),3.80.0,9,0,9,0.0,0
+claude-code,2.1.87-dev,9,0,9,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.159,9,2,7,22.222,29
+hrbr-probe,0.1.0,9,0,9,0.0,0
+claude-code,1.0.123,9,0,9,0.0,0
+mcp-hub,0.1.0,9,0,9,0.0,0
+custom3p-desktop,1.3883.0,9,0,9,0.0,0
+MCP-02-HuggingFace-Ollama,1.0.0.0,9,0,9,0.0,0
+archestra-platform,1.2.35,9,0,9,0.0,0
+agentgrade,1.0,9,0,9,0.0,0
+github-copilot-developer,1.0.35-2,9,2,7,22.222,29
+slim-tools,0.0.0,9,3,6,33.333,4
+Cherry Studio (via mcp-remote 0.1.37),1.9.3,9,0,9,0.0,0
+Visual Studio Code,1.105.1,9,1,8,11.111,3
+codex-mcp-client (via mcp-remote 0.1.37),0.108.0-alpha.12,9,0,9,0.0,0
+grok-shell-grok_com_hugging_face,0.1.211,9,0,9,0.0,0
+grok-shell-huggingface,0.2.11,9,0,9,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.48,9,0,9,0.0,0
+opencode,0.0.0-beta-202605240736,9,0,9,0.0,0
+ConversationalAI,2026.3.1.19489,9,0,9,0.0,0
+ConversationalAI,2026.3.1.18751,9,0,9,0.0,0
+mcporter,0.10.2-khalak.2,9,0,9,0.0,0
+Cline,3.84.1779714773,9,0,9,0.0,0
+Daneel,1.0,9,8,1,88.889,8
+Playground MCP Client,1.0.0,9,0,9,0.0,0
+ConversationalAI,2026.3.1.19203,9,0,9,0.0,0
+opencode,0.0.0-beta-202605261930,9,0,9,0.0,0
+knot,1.0,9,9,0,100.0,36
+Osaurus,0.18.13,9,0,9,0.0,0
+interpreter-client,1.0.0,9,0,9,0.0,0
+gemini-cli-mcp-client,0.42.0-nightly.20260511.g1a894c18e,9,0,9,0.0,0
+local-agent-mode-huggingface-hub (via mcp-remote 0.1.37),1.0.0,9,0,9,0.0,0
+ConversationalAI,2026.5.0.21728,9,0,9,0.0,0
+mcp-client-cli,1.0.0,9,0,9,0.0,0
+claude-code,2.1.87-dev.20260402.t075215.sha4ad7dfd2,9,0,9,0.0,0
+drio-upstream-discovery,1.0.0,9,0,9,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.84,9,0,9,0.0,0
+local-agent-mode-Hugging Face (via mcp-remote 0.1.37),1.0.0,9,0,9,0.0,0
+agent-seo,0.2.0,9,0,9,0.0,0
+github-copilot-developer,1.0.44-2,9,0,9,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.39,8,8,0,100.0,8
+gemini-cli-mcp-client,0.31.0,8,0,8,0.0,0
+codex-mcp-client,0.119.0-alpha.14,8,1,7,12.5,1
+claude-code,2.0.17,8,0,8,0.0,0
+claude-code,2.1.87-dev.20260401.t142235.shaf66f3ab7,8,0,8,0.0,0
+ConversationalAI,2026.5.0.22679,8,0,8,0.0,0
+vsc-aitoolkit-HuggingFaceMCPServer,1.2.1,8,0,8,0.0,0
+audit-tool,1.0,8,0,8,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.49-0,8,0,8,0.0,0
+fast-agent-mcp,0.6.12,8,2,6,25.0,8
+claude-code,1.0.69,8,0,8,0.0,0
+mcp-rugpull-research,0.1.0,8,0,8,0.0,0
+omnibot-android,1.0,8,1,7,12.5,1
+dev.warp.Warp,v0.2026.04.08.08.36.stable_02,8,0,8,0.0,0
+grok-shell-grok_com_허깅페이스,0.2.14,8,0,8,0.0,0
+openclaw-direct (via mcp-remote 0.1.37),1.0.0,8,5,3,62.5,5
+ConversationalAI,2026.3.1.19395,8,0,8,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.116.0-alpha.1,8,0,8,0.0,0
+claude-code (via mcp-remote 0.1.37),2.0.41,8,0,8,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.0.0,8,0,8,0.0,0
+nin-connect,1.0.0,8,3,5,37.5,3
+grok-shell-hf-mcp-server,0.1.0,8,0,8,0.0,0
+github-copilot-developer,1.0.49-0,8,0,8,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.0.0,8,0,8,0.0,0
+factory-cli,0.94.0,8,0,8,0.0,0
+fast-agent-mcp,0.6.14,8,1,7,12.5,1
+external-mcp-client,1.0.0,8,0,8,0.0,0
+ConversationalAI,2026.3.1.19316,8,0,8,0.0,0
+nutest-mcp-handshake-client,1.0.0,8,0,8,0.0,0
+codex-mcp-client (via mcp-remote 0.1.30),0.129.0-alpha.15,8,0,8,0.0,0
+dev.warp.Warp,v0.2026.04.22.08.46.stable_03,8,0,8,0.0,0
+claude-code,2.0.37,8,0,8,0.0,0
+opencode,7.2.10,8,7,1,87.5,8
+mcphero,2.0.0,8,0,8,0.0,0
+dev.warp.Warp-Stable,v0.2026.05.13.09.15.stable_01,8,0,8,0.0,0
+probe,0.0,8,0,8,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.100,8,0,8,0.0,0
+ConversationalAI,2026.5.1.24107,8,0,8,0.0,0
+chatwise,26.4.5,8,0,8,0.0,0
+dev.warp.Warp-Stable,v0.2026.05.20.09.21.stable_02,8,0,8,0.0,0
+archestra-platform,1.2.22,8,0,8,0.0,0
+custom3p-desktop,1.9659.2,8,0,8,0.0,0
+wiseai-mcp-bridge,1.0,8,0,8,0.0,0
+codex-check,1.0,8,1,7,12.5,1
+jetbrains-ai-assistant-client (via mcp-remote 0.1.37),1.0.0,8,0,8,0.0,0
+my-mcp-orchestrator,1.0,8,0,8,0.0,0
+opencode,1.14.47,8,7,1,87.5,7
+github-copilot-developer,1.0.35-1,8,1,7,12.5,5
+Spring AI MCP Client,0.3.1,8,0,8,0.0,0
+ConversationalAI,2026.5.0.24544,8,0,8,0.0,0
+Zed (via mcp-remote 0.1.37),0.1.0,8,0,8,0.0,0
+hf-mcp-server (via mcp-remote 0.1.37),1.0.0,8,0,8,0.0,0
+mcp-store-discovery,1.0.0,8,0,8,0.0,0
+ironclaw,0.25.0,8,0,8,0.0,0
+ConversationalAI,2026.3.1.19220,8,0,8,0.0,0
+factory-cli,0.116.0,8,0,8,0.0,0
+ConversationalAI,2026.5.0.22644,8,0,8,0.0,0
+github-copilot-developer,1.0.33-0,8,0,8,0.0,0
+Context,1.0.0,8,3,5,37.5,16
+coda-agent-runtime,1.0.0,8,2,6,25.0,2
+opencode,1.14.42,8,8,0,100.0,9
+ConversationalAI,2026.5.0.21717,8,0,8,0.0,0
+claude-code,99.9.9,8,0,8,0.0,0
+Cherry Studio,1.9.0,8,0,8,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.40,7,0,7,0.0,0
+opencode,0.0.0-dev-202605280617,7,6,1,85.714,7
+npayload-primus,1.0.0,7,2,5,28.571,2
+proxyward-dashboard,1.0.0,7,0,7,0.0,0
+opencode,0.0.0-beta-202605240607,7,0,7,0.0,0
+infersec-api,1.0.0,7,4,3,57.143,4
+fast-agent-mcp,0.6.11,7,0,7,0.0,0
+claude-code,0.0.0-dev,7,0,7,0.0,0
+grok-shell-huggingface,0.2.14,7,0,7,0.0,0
+gemini-cli-mcp-client,0.40.0-nightly.20260415.g06e7621b2,7,0,7,0.0,0
+Cherry Studio (via mcp-remote 0.1.37),1.8.1,7,0,7,0.0,0
+claude-code,2.1.111-dev.20260415.t073451.shab688fe0,7,0,7,0.0,0
+opencode,0.0.0-dev-202605281212,7,7,0,100.0,7
+chatwise,26.4.3,7,0,7,0.0,0
+vsc-aitoolkit-HuggingFaceMCPServer,0.34.0,7,2,5,28.571,6
+github-copilot-developer,1.0.35-4,7,1,6,14.286,3
+ConversationalAI,2026.3.1.19404,7,0,7,0.0,0
+opencode,0.0.0-beta-202605271018,7,7,0,100.0,7
+ael,1.0,7,0,7,0.0,0
+omp-coding-agent (via mcp-remote 0.1.37),1.0.0,7,0,7,0.0,0
+aisec-registry-probe,0.4,7,0,7,0.0,0
+Privacy AI,2.0.99,7,3,4,42.857,4
+probe,0.0.1,7,0,7,0.0,0
+ConversationalAI,2026.3.1.19195,7,0,7,0.0,0
+factory-cli,0.110.0,7,0,7,0.0,0
+milo-mcp-rugpull-watch,1.0,7,0,7,0.0,0
+aiaw,v1.0.6,7,7,0,100.0,37
+spiderfoot,1.0.0,7,0,7,0.0,0
+x,1,7,0,7,0.0,0
+chatwise,0.10.8,7,0,7,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.40.1,7,1,6,14.286,1
+claude-code (via mcp-remote 0.1.29),2.1.92,7,0,7,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.48,7,5,2,71.429,23
+Visual Studio Code,1.106.2,7,2,5,28.571,10
+claude-code (via mcp-remote 0.1.37),2.1.137,7,0,7,0.0,0
+connectivity-probe (via mcp-remote 0.1.16),1.0,7,0,7,0.0,0
+koda-client,1.0.0,7,0,7,0.0,0
+Privacy AI,2.0.33,7,0,7,0.0,0
+bolt-api,0.1.27,7,0,7,0.0,0
+test,0.1.0,7,3,4,42.857,8
+chatwise,26.5.2,7,0,7,0.0,0
+huggingface_hub.MCPClient,1.11.0,7,2,5,28.571,7
+opencode (via mcp-remote 0.1.37),1.4.11,7,7,0,100.0,18
+ConversationalAI,2026.3.1.19347,7,0,7,0.0,0
+External MCP: huggingface_mcp,1.0,7,0,7,0.0,0
+mcprouter-client,0.1.0,7,0,7,0.0,0
+HFMCP.GenImage.Web,1.0.0.0,7,0,7,0.0,0
+wmcp-probe,1.0,7,0,7,0.0,0
+Osaurus,0.18.22,7,0,7,0.0,0
+mr-claw,0.1.0,7,1,6,14.286,1
+v3-bench,0.1,7,3,4,42.857,3
+layla,6.9.0,7,2,5,28.571,3
+github-copilot-developer,1.0.41-1,7,0,7,0.0,0
+opencode (via mcp-remote 0.1.37),1.15.5,7,6,1,85.714,6
+crush,v0.64.0,7,0,7,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.122,7,0,7,0.0,0
+pochi,1.0.0,7,0,7,0.0,0
+claude-code,2.1.9,7,1,6,14.286,5
+mcp-ts-oauth-client,2.0,7,0,7,0.0,0
+ConversationalAI,2026.3.1.19473,7,0,7,0.0,0
+Visual Studio Code,1.110.0,7,0,7,0.0,0
+mcp (via mcp-remote 0.1.26),0.1.0,7,4,3,57.143,16
+Jabberwocky,1.0.0,7,4,3,57.143,55
+Visual Studio Code Agents - Insiders,1.119.0-insider,7,1,6,14.286,15
+VisualStudio,18.6.11806.211,7,0,7,0.0,0
+copilot-cli,1.0.0,7,0,7,0.0,0
+mcporter,0.10.2,7,0,7,0.0,0
+local-agent-mode-hf-mcp-server (via mcp-remote 0.1.41),1.0.0,7,0,7,0.0,0
+ai-agents-mcp-client,1.201.0,7,0,7,0.0,0
+umai-mcp-prober,1.0.0,7,0,7,0.0,0
+mcp (via mcp-remote 0.1.30),0.1.0,7,0,7,0.0,0
+github-copilot-developer,1.0.50,7,0,7,0.0,0
+pi-mcp-huggingface (via mcp-remote 0.1.37),1.0.0,7,6,1,85.714,14
+Visual Studio Code,1.104.3,7,0,7,0.0,0
+qwen-cli-mcp-client-huggingface (via mcp-remote 0.1.37),0.0.1,7,0,7,0.0,0
+opencode,0.0.0-dev-202605300916,7,6,1,85.714,10
+bolt-api,0.1.30,7,0,7,0.0,0
+lovable-agent,1.0.0,7,0,7,0.0,0
+archestra-platform,1.2.48,7,0,7,0.0,0
+Osaurus,0.17.6,7,0,7,0.0,0
+helper-for-huggingface,1.0.0,7,0,7,0.0,0
+fast-agent-mcp,0.6.10,7,0,7,0.0,0
+claude-code,2.4.4,6,0,6,0.0,0
+Manus,8.0.11,6,2,4,33.333,10
+dev.warp.Warp,v0.2026.05.18.05.32.stable_02,6,0,6,0.0,0
+codex-mcp-client,0.77.0,6,0,6,0.0,0
+SeekerClaw,1.2.0,6,0,6,0.0,0
+dev.warp.Warp-Preview,v0.2026.04.29.08.57.preview_01,6,0,6,0.0,0
+databricks-onechat,1.0,6,0,6,0.0,0
+com.dillon.chat,4.6.6,6,2,4,33.333,9
+ConversationalAI,2026.3.1.19939,6,0,6,0.0,0
+dev.warp.Warp-Preview,v0.2026.05.20.09.21.preview_03,6,0,6,0.0,0
+Insomnia,12.5.0,6,0,6,0.0,0
+bolt-api,0.1.31,6,0,6,0.0,0
+archestra-inspector,1.2.24,6,0,6,0.0,0
+claude-code,2.0.73,6,0,6,0.0,0
+Cherry Studio (via mcp-remote 0.1.37),1.9.6,6,0,6,0.0,0
+hv-agent-cmcp_huggingface_co,1.0.0,6,1,5,16.667,1
+xyne-claw-auth,0.1.0,6,1,5,16.667,3
+gemini-cli-mcp-client,0.33.2,6,0,6,0.0,0
+github-copilot-developer,1.0.44-0,6,0,6,0.0,0
+VisualStudio,18.5.11723.231,6,0,6,0.0,0
+chatwise,26.4.12,6,0,6,0.0,0
+mcp-remote-test-client (via mcp-remote 1.12.0),1.0.0,6,0,6,0.0,0
+opencode,7.2.22,6,6,0,100.0,7
+antigravity-tester (via mcp-remote 0.1.37),1.0,6,0,6,0.0,0
+Visual Studio Code (via mcp-remote 0.1.37),1.116.0,6,0,6,0.0,0
+ConversationalAI,2026.3.1.19388,6,0,6,0.0,0
+executor-mcp,0.1.0,6,0,6,0.0,0
+mcpdebugger.dev,0.1.0,6,0,6,0.0,0
+ConversationalAI,2026.5.0.24087,6,0,6,0.0,0
+goose-desktop,1.33.1,6,0,6,0.0,0
+kilo,7.3.1,6,6,0,100.0,12
+claude-code (via mcp-remote 0.1.30),2.1.112,6,0,6,0.0,0
+claude-code,2.3.0,6,0,6,0.0,0
+ConversationalAI,2026.5.1.24493,6,0,6,0.0,0
+Visual Studio Code,1.109.2,6,4,2,66.667,23
+claude-code,1.0.128,6,0,6,0.0,0
+com.raycast.macos (via mcp-remote 0.1.37),1.104.15,6,5,1,83.333,41
+Visual Studio Code (via mcp-remote 0.1.37),1.115.0,6,0,6,0.0,0
+Cline,3.84.1779539069,6,0,6,0.0,0
+Visual Studio Code,1.103.2,6,0,6,0.0,0
+Visual Studio Code,1.109.3,6,0,6,0.0,0
+local-client,1.0,6,4,2,66.667,4
+ConversationalAI,2026.3.1.19374,6,0,6,0.0,0
+kilo,7.1.22,6,5,1,83.333,8
+claude-code (via mcp-remote 0.1.30),2.1.92,6,0,6,0.0,0
+aozora,0.1.0,6,0,6,0.0,0
+dev.warp.Warp,v0.2026.04.27.15.32.stable_03,6,0,6,0.0,0
+ConversationalAI,2026.5.1.24117,6,0,6,0.0,0
+opencode,1.4.17,6,6,0,100.0,6
+opencode,7.2.20,6,5,1,83.333,27
+claude-code,2.1.108-20260413.1,6,0,6,0.0,0
+make-app-mcp-client,1,6,0,6,0.0,0
+Osaurus,0.16.16,6,0,6,0.0,0
+grok-shell-hf-mcp-server,0.2.3,6,0,6,0.0,0
+VisualStudio,18.7.11811.120,6,1,5,16.667,3
+mcp-inspector,0.15.0,6,2,4,33.333,3
+ConversationalAI,2026.4.1.20362,6,0,6,0.0,0
+desktop-commander,1.6.6,6,0,6,0.0,0
+claude-code,2.1.87-dev.20260430.t010015.sha7dc15d6c,6,0,6,0.0,0
+gemini-cli-mcp-client,0.42.0-nightly.20260505.g8f0edcd64,6,0,6,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.107,6,0,6,0.0,0
+dev.warp.Warp,v0.2026.04.15.08.45.stable_03,6,0,6,0.0,0
+operant-gateway-preflight,1.0,6,0,6,0.0,0
+lyra-mcp-health-audit,0.1.0,6,0,6,0.0,0
+hermes,1.0,6,0,6,0.0,0
+Osaurus,0.16.9,6,0,6,0.0,0
+huggingface_hub.MCPClient,0.35.3,6,0,6,0.0,0
+bolt-api,0.1.12,6,0,6,0.0,0
+mcp-remote-test-client (via mcp-remote 0.1.33),1.0.0,6,0,6,0.0,0
+rmcp,1.2.0,6,0,6,0.0,0
+custom3p-desktop,1.3561.0,6,0,6,0.0,0
+Osaurus,0.18.38,6,0,6,0.0,0
+VisualStudio,18.5.11709.299,6,3,3,50.0,4
+ConversationalAI,2026.3.1.19434,6,0,6,0.0,0
+github-copilot-developer,1.0.48-0,6,0,6,0.0,0
+chatwise,26.4.8,6,0,6,0.0,0
+layla,6.8.2,6,1,5,16.667,1
+dev.warp.Warp,v0.2026.04.01.08.39.stable_02,6,0,6,0.0,0
+gemini-cli-mcp-client,0.42.0-nightly.20260429.g6d9911393,6,0,6,0.0,0
+connector:custom-mcp:hf-mcp-server,1.0.0,6,0,6,0.0,0
+ConversationalAI,2026.4.2.21711,6,0,6,0.0,0
+claude-code,2.1.88.5,6,0,6,0.0,0
+grok-shell-huggingface,0.1.211,6,0,6,0.0,0
+openclaw-check,0.0.1,6,0,6,0.0,0
+claude-code,2.1.87-dev.20260415.t034616.sha7dc15d6c,6,0,6,0.0,0
+wrapper-client-huggingface,1.0.0,6,0,6,0.0,0
+codex-mcp-client,0.128.5,6,0,6,0.0,0
+MemoryGraph,1.0.0,6,0,6,0.0,0
+MstyStudio (via mcp-remote 0.1.37),2.7.4,6,0,6,0.0,0
+my-test-client (via mcp-remote 0.1.37),1.0.0,6,3,3,50.0,3
+fast-agent-mcp,0.7.7,6,2,4,33.333,12
+opencode,1.15.2,6,6,0,100.0,6
+github-copilot-developer,1.0.56-1,6,0,6,0.0,0
+claude-code,2.1.87-dev.20260416.t171335.sha7dc15d6c,5,0,5,0.0,0
+claude-code,0.0.33,5,0,5,0.0,0
+chatwise,26.4.16,5,0,5,0.0,0
+grok-shell-grok_com_huggingface_remote,0.1.0,5,3,2,60.0,68
+Visual Studio Code,1.103.1,5,2,3,40.0,4
+opencode,0.0.0-dev-202605300510,5,5,0,100.0,18
+ConversationalAI,2026.5.1.24549,5,0,5,0.0,0
+claude-code,2.1.7,5,0,5,0.0,0
+mcpstone-probe,1.0,5,0,5,0.0,0
+github-copilot-developer,1.0.55-3,5,0,5,0.0,0
+mcp-ktor,0.9.0,5,0,5,0.0,0
+grok-shell-hugging-face,0.2.3,5,0,5,0.0,0
+ConversationalAI,2026.3.1.18883,5,0,5,0.0,0
+ai-agents-mcp-client,1.202.2,5,0,5,0.0,0
+github-copilot-developer,1.0.41-0,5,0,5,0.0,0
+sami-client,1.0.0,5,1,4,20.0,1
+ConversationalAI,2026.5.1.23950,5,0,5,0.0,0
+opencode (via mcp-remote 0.1.37),1.4.0,5,5,0,100.0,5
+ConversationalAI,2026.3.1.18914,5,0,5,0.0,0
+smart-pc-builder,1.0.0,5,0,5,0.0,0
+tool-proxy,1.0.0,5,4,1,80.0,4
+claude-code,2.1.87-dev.20260408.t050322.sha7dc15d6c,5,0,5,0.0,0
+opencode (via mcp-remote 0.1.37),1.15.4,5,5,0,100.0,5
+verify-client,1.0.0,5,0,5,0.0,0
+codex-mcp-client,0.89.0,5,0,5,0.0,0
+claude-code,2.1.108-dev.20260414.t153302.sha5a0cf5b,5,0,5,0.0,0
+chatwise,26.4.13,5,0,5,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.25,5,5,0,100.0,73
+com.raycast.macos,1.104.16,5,1,4,20.0,1
+mcp-bridge,3.0.0,5,5,0,100.0,11
+VisualStudio,18.6.11723.189,5,0,5,0.0,0
+bolt-api,0.1.33,5,0,5,0.0,0
+claude-code,2.1.105-20260413.1,5,0,5,0.0,0
+codex-mcp-client,0.119.0-alpha.19,5,0,5,0.0,0
+test-client,1.0,5,0,5,0.0,0
+ConversationalAI,2026.5.0.23944,5,0,5,0.0,0
+Osaurus,0.18.35,5,0,5,0.0,0
+codex-mcp-client,0.129.0-alpha.5,5,0,5,0.0,0
+ConversationalAI,2026.5.0.21740,5,0,5,0.0,0
+000a0009-0b68-413f-990a-241d01207cb5,1.0.0,5,0,5,0.0,0
+LogicGrid,1.0,5,0,5,0.0,0
+bolt-api,0.1.15,5,0,5,0.0,0
+multiAgent-backend,1.0.0,5,0,5,0.0,0
+workr-seed,1.0.0,5,0,5,0.0,0
+claude-code,1.0,5,0,5,0.0,0
+gemini-cli-mcp-client,0.26.0,5,0,5,0.0,0
+gemini-cli-mcp-client,0.45.0-nightly.20260528.g5cac7c10f,5,0,5,0.0,0
+gemini-cli-mcp-client,0.42.0-preview.2,5,0,5,0.0,0
+mcp-review-bot-preauth,0.1,5,0,5,0.0,0
+mcp-streamable-http-bridge-huggingface,1.0.0,5,0,5,0.0,0
+note-gen,1.0.0,5,0,5,0.0,0
+ai-agents-mcp-client,1.188.2,5,0,5,0.0,0
+claude-code,2.0.14,5,0,5,0.0,0
+codex-mcp-client,0.110.0,5,0,5,0.0,0
+check,1.0,5,0,5,0.0,0
+claude-code,1.0.96,5,0,5,0.0,0
+opencode,0.0.0-beta-202605261558,5,0,5,0.0,0
+test,0.0,5,0,5,0.0,0
+gemini-cli-mcp-client,0.35.1,5,0,5,0.0,0
+claude-code,0.0.47,5,0,5,0.0,0
+ConversationalAI,2026.4.2.21145,5,0,5,0.0,0
+grok-shell-hugging-face,0.1.0,5,0,5,0.0,0
+opencode,0.0.0-beta-202605251010,5,0,5,0.0,0
+chatwise,26.5.3,5,0,5,0.0,0
+Roo Code,3.56.0,5,0,5,0.0,0
+DeepChat,1.0.1,5,0,5,0.0,0
+ConversationalAI,2026.5.0.21755,5,0,5,0.0,0
+opencode,0.0.0-dev-202605271810,5,5,0,100.0,5
+toolhive-vmcp,v0.27.2,5,0,5,0.0,0
+AHS-Tester,1.0.0,5,0,5,0.0,0
+bolt-api,0.1.16,5,0,5,0.0,0
+Huggingface MCP,1.0,5,0,5,0.0,0
+ironclaw,0.28.0,5,0,5,0.0,0
+opencode,0.0.0-dev-202605291432,5,5,0,100.0,5
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.37.0,5,0,5,0.0,0
+ConversationalAI,2026.3.1.18888,5,0,5,0.0,0
+fast-agent-mcp,0.6.16,5,1,4,20.0,6
+opencode,0.0.0-beta-202605251712,5,1,4,20.0,4
+gemini-cli-mcp-client-huggingface-skills,0.0.1,5,0,5,0.0,0
+fast-agent-mcp,0.6.15,5,2,3,40.0,10
+Hugging,1.0.0,5,0,5,0.0,0
+codex-cli,0.1,5,3,2,60.0,9
+inspector-client,0.17.2,5,1,4,20.0,1
+layla,6.11.2,5,3,2,60.0,4
+github-copilot-developer-test,1.0.0,5,0,5,0.0,0
+DeepChat,1.0.4-beta.8,5,0,5,0.0,0
+VisualStudio,18.4.11626.88,5,1,4,20.0,2
+bolt-api,0.1.24,5,0,5,0.0,0
+VisualStudio,18.5.11801.241,5,0,5,0.0,0
+archestra-platform,9536b5eec5ed9a0df35f5af399d115797c2c0ea6,5,0,5,0.0,0
+Visual Studio Code (via mcp-remote 0.1.37),1.121.0,5,0,5,0.0,0
+github-copilot-developer,1.0.42-0,5,1,4,20.0,1
+chatwise,26.4.18,5,0,5,0.0,0
+DeepChat,1.0.4-beta.6,5,0,5,0.0,0
+mcporter (via mcp-remote 0.1.37),0.7.3,5,0,5,0.0,0
+archestra-platform,1.2.37,5,0,5,0.0,0
+claude-code,1.0.56,5,0,5,0.0,0
+bolt-api,0.1.22,5,0,5,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.31,5,1,4,20.0,1
+BB8-MCP-Broker-conn-c09b2772,1.0.0,4,0,4,0.0,0
+codex-mcp-client,0.113.0,4,0,4,0.0,0
+factory-cli,0.97.1-build0005108,4,0,4,0.0,0
+ConversationalAI,2026.5.1.23955,4,0,4,0.0,0
+dev.warp.Warp-Preview,v0.2026.04.27.15.33.preview_02,4,0,4,0.0,0
+claude-code,1.0.0,4,0,4,0.0,0
+gemini-cli-mcp-client,0.35.2,4,0,4,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.144,4,0,4,0.0,0
+chatwise,26.4.0,4,0,4,0.0,0
+MCPRegistry-Crawler,1.0,4,0,4,0.0,0
+mcp-remote-test-client (via mcp-remote 1.23.0),1.0.0,4,0,4,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.110,4,0,4,0.0,0
+checkmcp,0.1.0,4,0,4,0.0,0
+capframe-mcp-recon-http,0.0.13,4,0,4,0.0,0
+mcp-proxy-discovery,1.0.0,4,0,4,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.55-7,4,0,4,0.0,0
+Cline,3.85.1779831944,4,0,4,0.0,0
+test,0,4,1,3,25.0,1
+ConversationalAI,2026.5.1.23923,4,0,4,0.0,0
+BB8-MCP-Broker-conn-0463355b,1.0.0,4,0,4,0.0,0
+smoke,0,4,0,4,0.0,0
+Cline,3.86.1780117780,4,0,4,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.141,4,0,4,0.0,0
+mcp-tools-client,1.0.0,4,0,4,0.0,0
+opencode,0.0.0-beta-202605271555,4,4,0,100.0,4
+chatwise,26.4.6,4,0,4,0.0,0
+archestra-platform,2c99d49316fc91c91bafa8de481ac87dbd28826c,4,0,4,0.0,0
+agenttool,0.1.0,4,0,4,0.0,0
+concierge-tool-bridge,1,4,4,0,100.0,15
+HiDestina,1.0.0,4,0,4,0.0,0
+mcp-remote-test-client (via mcp-remote 1.29.0),1.0.0,4,0,4,0.0,0
+claude-code,2.1.6,4,0,4,0.0,0
+kilo,7.3.16,4,4,0,100.0,10
+hermes-test,1.0,4,0,4,0.0,0
+example-client,1.0.0,4,1,3,25.0,1
+github-copilot-developer-test,1.0.51,4,0,4,0.0,0
+mcpx::huggingface,1.0.0,4,0,4,0.0,0
+yua,1.0,4,0,4,0.0,0
+claude-code,2.1.87-dev.20260509.t153312.sha7dc15d6c,4,0,4,0.0,0
+ConversationalAI,2026.5.0.22669,4,0,4,0.0,0
+ConversationalAI,2026.3.1.19193,4,0,4,0.0,0
+opencode,0.0.0-beta-202605240545,4,0,4,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.19,4,4,0,100.0,8
+CodeFuse,3.1.2,4,0,4,0.0,0
+asm-test,0.1,4,0,4,0.0,0
+AiTop Club Ambassador aitop.cz,1.0,4,0,4,0.0,0
+mcp-bridge-probe,0,4,0,4,0.0,0
+ONIT MCP Sync,1.0,4,0,4,0.0,0
+hoot-backend,0.2.0,4,0,4,0.0,0
+fast-agent-mcp,0.7.6,4,0,4,0.0,0
+mcp-use Inspector,3.0.1,4,2,2,50.0,4
+codex-smoke,0.1,4,0,4,0.0,0
+dev.warp.Warp,v0.2026.05.06.15.42.stable_05,4,0,4,0.0,0
+claude-code,1.0.58,4,0,4,0.0,0
+remio-mcp-runtime,1.0.0,4,0,4,0.0,0
+opencode,0.0.0-beta-202605250348,4,0,4,0.0,0
+unichat-client,1.0.0,4,0,4,0.0,0
+opencode,0.0.0-dev-202605291130,4,4,0,100.0,4
+codex-check,0.0.1,4,0,4,0.0,0
+bolt-api,0.1.21,4,0,4,0.0,0
+Visual Studio Code,1.109.0,4,0,4,0.0,0
+Copilot MCP Gateway,0.1.0,4,0,4,0.0,0
+claude-code,2.1.87-dev.20260430.t004237.sha7dc15d6c,4,0,4,0.0,0
+opencode,0.0.0-beta-202605232144,4,0,4,0.0,0
+inspector-client,0.20.0,4,0,4,0.0,0
+bluenexus-probe,1.0.0,4,0,4,0.0,0
+ConversationalAI,2026.5.0.23912,4,0,4,0.0,0
+ConversationalAI,2026.4.2.21287,4,0,4,0.0,0
+diag,1,4,0,4,0.0,0
+MultiAgentClient,1.0,4,0,4,0.0,0
+zerotwo-mcp-client-huggingface_1771511074884,1.0.0,4,0,4,0.0,0
+ConversationalAI,2026.5.1.24106,4,0,4,0.0,0
+ConversationalAI,2026.3.1.19326,4,0,4,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.18,4,4,0,100.0,4
+Visual Studio Code (via mcp-remote 0.1.37),1.117.0,4,0,4,0.0,0
+curl,1.0,4,1,3,25.0,3
+github-copilot-developer,1.0.52-0,4,0,4,0.0,0
+mcp-check (via mcp-remote 0.1.37),1.0.0,4,0,4,0.0,0
+mcp-remote-rs-test-client,1.0.0,4,0,4,0.0,0
+mcp-http-bridge-homelab-huggingface (via mcp-remote 0.1.37),1.0.0,4,0,4,0.0,0
+ConversationalAI,2026.5.0.24131,4,0,4,0.0,0
+MCPInspector-iOS,1.0.0,4,3,1,75.0,3
+Cherry Studio,1.7.22,4,0,4,0.0,0
+claude-code,2.0.19,4,0,4,0.0,0
+ConversationalAI,2026.5.0.22686,4,0,4,0.0,0
+opencode,1.2.26,4,3,1,75.0,23
+opencode (via mcp-remote 0.1.37),1.14.51,4,4,0,100.0,4
+Visual Studio Code,1.102.0,4,0,4,0.0,0
+custom3p-desktop,1.6608.0,4,0,4,0.0,0
+opencode,1.15.8,4,3,1,75.0,3
+github-copilot-developer,1.0.35-5,4,0,4,0.0,0
+MCP OAuth Debug Client,1.0.0,4,0,4,0.0,0
+Postman Client - 576f2e2a-af7c-4505-8b69-411f474f5be6,1.0.0,4,0,4,0.0,0
+Bifrost-hf_hosted,1.0.0,4,0,4,0.0,0
+fast-agent-mcp,0.7.3,4,2,2,50.0,26
+layla,6.9.0-alpha2,4,3,1,75.0,3
+gemini-cli-mcp-client,0.37.0-preview.2,4,0,4,0.0,0
+frank,1.0,4,1,3,25.0,16
+grok-shell-huggingface-skills,0.1.210,4,0,4,0.0,0
+JetBrains-IU/copilot-intellij,253.32098.37/1.8.0-243,4,1,3,25.0,1
+bolt-api,0.1.41,4,0,4,0.0,0
+aiaw,v1.8.10,4,2,2,50.0,2
+kilo,7.2.52,4,3,1,75.0,38
+com.raycast.macos,1.104.18,4,0,4,0.0,0
+higo,1.0.0,4,2,2,50.0,4
+codex-probe,0,4,0,4,0.0,0
+openclaw-kaggle-test,0.1.0,4,1,3,25.0,1
+Privacy AI,2.0.1010,4,0,4,0.0,0
+VisualStudio,18.6.11716.218,4,0,4,0.0,0
+ConversationalAI,2026.4.1.20953,4,0,4,0.0,0
+ConversationalAI,2026.5.0.21724,4,0,4,0.0,0
+agent-native-cloud-poc,0.1.0,4,0,4,0.0,0
+ConversationalAI,2026.3.1.19475,4,0,4,0.0,0
+ConversationalAI,2026.5.0.21386,4,0,4,0.0,0
+factory-cli (via mcp-remote 0.1.37),0.121.0,4,0,4,0.0,0
+trace-gen,1.0,4,0,4,0.0,0
+archestra-platform,1.2.26,4,0,4,0.0,0
+codex,1.0.0,4,2,2,50.0,2
+github-copilot-developer,1.0.47-0,4,0,4,0.0,0
+ONIT Connector,1.0,4,0,4,0.0,0
+ConversationalAI,2026.3.1.18739,4,0,4,0.0,0
+claude-code,2.0.0,4,0,4,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.48-1,4,1,3,25.0,1
+Cline,3.84.1779625642,4,0,4,0.0,0
+ConversationalAI,2026.5.0.23611,4,0,4,0.0,0
+custom3p-desktop,1.5220.0,4,0,4,0.0,0
+ai-agents-mcp-client,1.199.1,4,0,4,0.0,0
+ConversationalAI,2026.5.1.23954,4,0,4,0.0,0
+Osaurus,0.18.26,4,0,4,0.0,0
+claude-code,1.0.24,4,0,4,0.0,0
+BB8-MCP-Broker-conn-87d87afb,1.0.0,4,0,4,0.0,0
+Cherry Studio,1.9.8,4,0,4,0.0,0
+grok-shell-grok_com_hugging_face,0.1.181-alpha.1,4,0,4,0.0,0
+dev.warp.Warp-Stable,v0.2026.04.27.15.32.stable_02,4,0,4,0.0,0
+goose-cli,1.30.0,4,2,2,50.0,10
+chatwise,26.4.4,4,0,4,0.0,0
+Visual Studio Code Agents - Insiders,1.115.0-insider,4,1,3,25.0,3
+meshclaw-probe (via mcp-remote 0.1.37),1.0.0,4,0,4,0.0,0
+grok-shell-grok_com_huggingface,0.1.0,4,0,4,0.0,0
+mcp-emacs (via mcp-remote 0.1.37),0.1.0,4,2,2,50.0,6
+onit-wiki-refresh,1.0,4,0,4,0.0,0
+claude-code,2.1.87-dev.20260406.t193225.shaunknown,4,0,4,0.0,0
+proxyward-debug,1.0.0,4,0,4,0.0,0
+@smolagents/mcp-client,1.0.0,4,2,2,50.0,4
+ConversationalAI,2026.5.0.21750,4,0,4,0.0,0
+hf-official-client,1.0.0,3,0,3,0.0,0
+codex-mcp-client (via mcp-remote 0.1.36),0.121.0,3,0,3,0.0,0
+lungani,0.4,3,1,2,33.333,1
+custom3p-desktop,1.8555.1,3,0,3,0.0,0
+Visual Studio Code,1.108.0,3,1,2,33.333,10
+strand-mcp-probe,1.0,3,0,3,0.0,0
+github-copilot-developer,1.0.44-1,3,0,3,0.0,0
+codex-mcp-client,0.128.4,3,0,3,0.0,0
+nextchat-mcp-client-Hugging-Face,1.0.0,3,0,3,0.0,0
+opencode,7.2.34,3,3,0,100.0,11
+factory-cli,0.101.1-build0005251,3,0,3,0.0,0
+claude-code,2.4.3,3,0,3,0.0,0
+Visual Studio Code,1.105.0,3,2,1,66.667,3
+crush,v0.15.1,3,0,3,0.0,0
+mcporter,0.0.0-dev,3,0,3,0.0,0
+OfficeAI,0.2.1-airgap,3,1,2,33.333,18
+opencode (via mcp-remote 0.1.37),1.15.12,3,3,0,100.0,3
+数据巡查,1.0,3,1,2,33.333,1
+grok-shell-grok_com_huggingface_full,0.1.0,3,0,3,0.0,0
+Bifrost-HuggingFace,1.0.0,3,0,3,0.0,0
+claude-code,2.1.87-dev.20260406.t145615.shae5b13b34,3,0,3,0.0,0
+opencode,0.0.0-beta-202605241221,3,0,3,0.0,0
+agent-builder-control-plane,1.0,3,0,3,0.0,0
+claude-code,2.1.87-dev.20260416.t194147.shae5b13b34,3,0,3,0.0,0
+ConversationalAI,2026.3.1.18915,3,0,3,0.0,0
+Visual Studio Code Agents - Insiders,1.116.0-insider,3,2,1,66.667,7
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.39.1,3,1,2,33.333,2
+claude-code (via mcp-remote 0.1.30),2.1.145,3,0,3,0.0,0
+ConversationalAI,2026.5.0.22685,3,0,3,0.0,0
+archestra-platform,1.2.20,3,0,3,0.0,0
+opencode,0.0.0-beta-202605251422,3,0,3,0.0,0
+Elosia,1.0.0,3,0,3,0.0,0
+Visual Studio Code - Insiders,1.113.0-insider,3,2,1,66.667,48
+loach,0.1.0,3,0,3,0.0,0
+Osaurus,0.17.4,3,0,3,0.0,0
+p,0.1,3,2,1,66.667,8
+DeepChat,1.0.4-beta.1,3,0,3,0.0,0
+ConversationalAI,2026.3.1.19351,3,0,3,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.49-1,3,0,3,0.0,0
+Osaurus,0.16.12,3,0,3,0.0,0
+mcp-tool-explorer,1.7.0,3,0,3,0.0,0
+ConversationalAI,2026.5.1.23921,3,0,3,0.0,0
+botrix-probe,0.0.1,3,1,2,33.333,1
+github-copilot-developer,1.0.52-1,3,0,3,0.0,0
+conformance-origin-test,1.0.0,3,0,3,0.0,0
+claude-code,2.0.69,3,0,3,0.0,0
+origon-core,1.0.0,3,2,1,66.667,2
+layla,6.10.0-direct,3,1,2,33.333,1
+bolt-api,0.1.38,3,0,3,0.0,0
+codex-hf-mcp,0.1.0,3,0,3,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.105,3,0,3,0.0,0
+codex-setup-probe,1.0.0,3,0,3,0.0,0
+opencode,0.0.0-dev-202605281406,3,3,0,100.0,3
+aiaw,v1.8.11,3,2,1,66.667,2
+agent-os-backend,1.0,3,0,3,0.0,0
+ConversationalAI,2026.5.1.24115,3,0,3,0.0,0
+grok-shell-grok_com_hugging_face,0.2.8,3,0,3,0.0,0
+gemini-cli-mcp-client,0.41.0-preview.1,3,1,2,33.333,4
+argentica,1.0.0,3,0,3,0.0,0
+chrome-devtools,2.0.0,3,0,3,0.0,0
+Roo Code,0.0.8154,3,0,3,0.0,0
+cli,1.0,3,2,1,66.667,2
+ConversationalAI,2026.5.0.22860,3,0,3,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.120,3,0,3,0.0,0
+mcp-guard,0.1.0,3,0,3,0.0,0
+Visual Studio Code - Insiders (via mcp-remote 0.1.37),1.119.0-insider,3,0,3,0.0,0
+conformance-session-id-test,1.0.0,3,0,3,0.0,0
+mcp-use,1.7.0,3,0,3,0.0,0
+opencode,1.2.20,3,3,0,100.0,3
+curl,1,3,0,3,0.0,0
+claude-code,unknown,3,0,3,0.0,0
+mcpdiff,0.1.0,3,0,3,0.0,0
+Osaurus,0.18.21,3,0,3,0.0,0
+OpenAgentic,1.0.0,3,0,3,0.0,0
+scan-my-mcp,0.1.0,3,0,3,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.35,3,0,3,0.0,0
+grok-shell-hf-mcp-server,0.2.13,3,0,3,0.0,0
+Osaurus,0.18.30,3,0,3,0.0,0
+r,1,3,1,2,33.333,20
+Dify,1.14.1,3,0,3,0.0,0
+BB8-MCP-Broker-conn-5cbcb405,1.0.0,3,0,3,0.0,0
+Manus,8.0.7,3,2,1,66.667,7
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.03.04.08.20.stable_03,3,0,3,0.0,0
+vsc-aitoolkit-hugging face,0.20.0,3,0,3,0.0,0
+test,0.0.1,3,0,3,0.0,0
+codex-hf-mcp-install-check,1.0.0,3,0,3,0.0,0
+chatwise,26.4.10,3,0,3,0.0,0
+opencode,1.0.0,3,1,2,33.333,2
+opencode,1.1.44,3,3,0,100.0,3
+seance-debug,0,3,0,3,0.0,0
+custom3p-desktop,1.3109.0,3,0,3,0.0,0
+agentflow-v3,0.1.0,3,0,3,0.0,0
+gemini-cli-mcp-client,0.29.7,3,0,3,0.0,0
+ConversationalAI,2026.4.2.21205,3,0,3,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.32,3,0,3,0.0,0
+Postman Client - dd74bd5c-d99f-4b0c-b822-9ca475df0d17,1.0.0,3,0,3,0.0,0
+threat-intelligence,0.1.0,3,0,3,0.0,0
+mcp-router,1.0.0,3,0,3,0.0,0
+claude-code-test,1.0,3,0,3,0.0,0
+grok-shell-grok_com_허깅페이스,0.1.0,3,0,3,0.0,0
+blockbrain-connection-tester,1.0.0,3,0,3,0.0,0
+Cherry Studio,1.7.5,3,0,3,0.0,0
+omni-test,0.1.0,3,0,3,0.0,0
+my-mcp,1.0.0,3,1,2,33.333,1
+example-client (via mcp-remote 0.1.37),1.0.0,3,0,3,0.0,0
+Dev ChatBot-HuggingFace,1.0.0,3,0,3,0.0,0
+rmcp (via mcp-remote 0.1.37),1.7.0,3,0,3,0.0,0
+claude-code,2.0.31,3,0,3,0.0,0
+opencode-test,1.0,3,0,3,0.0,0
+codex-mcp-client,0.108.0-alpha.16,3,0,3,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.45,3,3,0,100.0,3
+fast-agent-mcp,0.6.19,3,2,1,66.667,13
+Osaurus,0.18.2,3,0,3,0.0,0
+bolt-api,0.1.17,3,0,3,0.0,0
+claude-code (via mcp-remote 0.1.37),1.0.57,3,0,3,0.0,0
+ConversationalAI,2026.5.0.21746,3,0,3,0.0,0
+diag,1.0,3,0,3,0.0,0
+nuclei-origin-test,1.0,3,0,3,0.0,0
+mcp-scraper,1.0.0,3,0,3,0.0,0
+JetBrains.IntelliJ IDEA,2026.1.2,3,0,3,0.0,0
+ConversationalAI,2026.5.1.23949,3,0,3,0.0,0
+claude-code,1.0.60,3,0,3,0.0,0
+Visual Studio Code (via mcp-remote 0.1.37),1.118.1,3,0,3,0.0,0
+opencode,1.2.10,3,3,0,100.0,24
+curl-test,1.0,3,1,2,33.333,1
+codex-mcp-client (via mcp-remote 0.1.18),0.131.0-alpha.9,3,0,3,0.0,0
+agentlytics,1.0.0,3,0,3,0.0,0
+ConversationalAI,2026.3.1.18885,3,0,3,0.0,0
+claude-code,0.0.45,3,0,3,0.0,0
+claude-code,1.0.90,3,0,3,0.0,0
+pipelines-tool-worker,1.0.0,3,0,3,0.0,0
+Cherry Studio,1.7.0-magic.9,3,0,3,0.0,0
+fast-agent-mcp,0.7.2,3,3,0,100.0,4
+ConversationalAI,2026.3.1.18916,3,0,3,0.0,0
+K Intelligence Studio,1.10.1,3,3,0,100.0,3
+grok-shell-grok_com_hugging_face,0.2.13,3,0,3,0.0,0
+ConversationalAI,2026.5.0.23904,3,0,3,0.0,0
+github-copilot-developer,1.0.38,3,0,3,0.0,0
+Positron,1.111.0,3,0,3,0.0,0
+llama-ui,1.0,3,0,3,0.0,0
+DeepChat,1.0.4-beta.3,3,0,3,0.0,0
+glama-mcp-inspector,1.0.0,3,0,3,0.0,0
+copilot-mcp-probe,0.1.0,3,0,3,0.0,0
+KoboldAI Lite MCP,1.0.0,3,0,3,0.0,0
+universal-chatbot,1.0.0,3,0,3,0.0,0
+s,1,3,0,3,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.125.0-alpha.3,3,0,3,0.0,0
+mcp-gateway,0.1.0,3,0,3,0.0,0
+ConversationalAI,2026.5.0.22863,3,0,3,0.0,0
+com.raycast.macos,1.104.19,3,2,1,66.667,13
+LocalAI,v1.0.0,3,1,2,33.333,1
+CustomMcpClient,1.0.0,3,0,3,0.0,0
+grok-shell-grok_com_hugging_face,0.1.209,3,0,3,0.0,0
+VisualStudio,18.5.11626.173,3,1,2,33.333,1
+codex-mcp-client (via mcp-remote 0.1.30),0.131.0-alpha.9,3,0,3,0.0,0
+OCI-Chat-Test,1.0.0,3,0,3,0.0,0
+Osaurus,0.18.1,3,0,3,0.0,0
+curl-test,1.0.0,3,0,3,0.0,0
+factory-cli,0.102.1-build0005276,3,0,3,0.0,0
+ssrf-test,1.0,3,0,3,0.0,0
+VSCodium,1.116.02821,3,0,3,0.0,0
+manifest-tool-runner,1.0.0,3,2,1,66.667,12
+Cherry Studio,1.7.13,3,0,3,0.0,0
+github-copilot-developer,1.0.26-0,3,0,3,0.0,0
+Toolbase,1.0.0,3,0,3,0.0,0
+toolsense,1.0,3,0,3,0.0,0
+gemini-cli-mcp-client,0.40.0-nightly.20260414.g5b1f7375a,3,0,3,0.0,0
+goose,1.22.1,3,0,3,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.39.0,3,0,3,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.116.0-alpha.10,3,0,3,0.0,0
+opencode,0.0.0-dev-202605281151,3,3,0,100.0,3
+opencode,0.0.0-dev-202605310130,3,3,0,100.0,3
+mcp-url-validator,0.1.0,3,0,3,0.0,0
+huggingface_hub.MCPClient,0.34.3,3,0,3,0.0,0
+com.raycast.macos,1.104.12,3,0,3,0.0,0
+gateway-mcp-proxy,1.0.0,3,0,3,0.0,0
+ConversationalAI,2026.5.1.23925,3,0,3,0.0,0
+mcp-client-hf,1.0.0,3,0,3,0.0,0
+bolt-api,0.1.14,3,0,3,0.0,0
+codex-cli-test,1.0,3,0,3,0.0,0
+grok-shell-huggingface,0.2.8,3,0,3,0.0,0
+Alice,0.0.0,3,0,3,0.0,0
+claude-cli,1.0,3,0,3,0.0,0
+codex-config-check,0.1.0,3,0,3,0.0,0
+MstyStudio (via mcp-remote 0.1.37),2.7.3,3,0,3,0.0,0
+codex-mcp-client (via mcp-remote 0.1.31),0.130.0,3,0,3,0.0,0
+Visual Studio Code,1.104.0,3,0,3,0.0,0
+aiaw,v2.0.8.3.verified,3,3,0,100.0,4
+claude-code,2.1.87-dev.20260425.t220059.sha7dc15d6c,3,0,3,0.0,0
+protos-probe,0.1,3,0,3,0.0,0
+ConversationalAI,2026.5.1.24116,3,0,3,0.0,0
+mcp-protolab,1.0.0,3,0,3,0.0,0
+opencode,1.3.9,3,3,0,100.0,3
+mcp-evaluator,1.0.0,3,0,3,0.0,0
+proxy-test,1.0,3,0,3,0.0,0
+Cherry Studio,1.8.3,3,0,3,0.0,0
+Cherry Studio (via mcp-remote 0.1.37),1.8.2,3,0,3,0.0,0
+ConversationalAI,2026.3.1.19371,3,0,3,0.0,0
+smoke,0.1,3,0,3,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.05.06.15.42.stable_03,3,0,3,0.0,0
+roo-code,1.0,3,0,3,0.0,0
+Roo Code,3.50.5,2,1,1,50.0,1
+sprout,1.0,2,0,2,0.0,0
+fast-agent-mcp,0.6.26,2,0,2,0.0,0
+structure-generator (via mcp-remote 0.1.37),1.0.0,2,0,2,0.0,0
+mcp-remote-test-client (via mcp-remote 0.1.38-enterit-1),1.0.0,2,0,2,0.0,0
+opencode,0.0.0-beta-202605232104,2,0,2,0.0,0
+audit,0.1,2,0,2,0.0,0
+mcpping,1.0.0,2,1,1,50.0,2
+dev.warp.Warp-Preview,v0.2026.05.06.15.42.preview_04,2,1,1,50.0,6
+local-agent-mode-huggingface-fix (via mcp-remote 0.1.37),1.0.0,2,0,2,0.0,0
+diag,0,2,0,2,0.0,0
+ConversationalAI,2026.5.1.23915,2,0,2,0.0,0
+github-copilot-developer,1.0.32-1,2,0,2,0.0,0
+codex-mcp-audit,0.0.1,2,0,2,0.0,0
+ConversationalAI,2026.5.1.24525,2,0,2,0.0,0
+claude-code,0.5.5,2,0,2,0.0,0
+ConversationalAI,2026.4.2.21323,2,0,2,0.0,0
+Manus,8.0.6,2,1,1,50.0,10
+ConversationalAI,2026.3.1.19038,2,0,2,0.0,0
+probe (via mcp-remote 0.1.37),0.1,2,0,2,0.0,0
+Osaurus,0.19.2,2,0,2,0.0,0
+huggingface-client,0.1.0,2,0,2,0.0,0
+mcp-playground,0.1.0,2,2,0,100.0,2
+huggingface_hub.MCPClient,0.36.2,2,0,2,0.0,0
+comcom-verifier,0.1.0,2,0,2,0.0,0
+claude-code,2.0.33,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.115.0,2,0,2,0.0,0
+Visual Studio Code - Insiders,1.111.0-insider,2,1,1,50.0,2
+dataset-pipeline,1.0.0,2,0,2,0.0,0
+claude-code,0.6.5,2,0,2,0.0,0
+bolt-api,0.1.35,2,0,2,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.05.20.09.21.stable_03,2,0,2,0.0,0
+Visual Studio Code,1.100.3,2,0,2,0.0,0
+concierge-probe,0.1,2,0,2,0.0,0
+t,0,2,0,2,0.0,0
+symphony-snapshotter,0.2,2,0,2,0.0,0
+opencode (via mcp-remote 0.1.37),1.15.3,2,2,0,100.0,2
+github-copilot-developer-test,1.0.43,2,0,2,0.0,0
+mcpwn_client_1,1.0,2,0,2,0.0,0
+kiro-check,0.1,2,0,2,0.0,0
+chatwise,26.4.7,2,0,2,0.0,0
+fl-mcp-research,0.0.1,2,0,2,0.0,0
+tool_116,1.0.0,2,1,1,50.0,5
+h2ogpte_introspect (via mcp-remote 0.1.37),1.0.0,2,0,2,0.0,0
+ConversationalAI,2026.3.1.18909,2,0,2,0.0,0
+curl,0,2,0,2,0.0,0
+opencode,7.2.24,2,2,0,100.0,2
+super-mcp-router,0.1.0,2,0,2,0.0,0
+codex-mcp-client,0.58.0,2,0,2,0.0,0
+avap-external-gateway-streamable,1.0.0,2,0,2,0.0,0
+opencode,1.2.8,2,2,0,100.0,2
+unilib-mcp-poc-tester,1.0.0,2,0,2,0.0,0
+github-copilot-developer,1.0.40-2,2,0,2,0.0,0
+mcp-remote-test-client (via mcp-remote 1.24.0),1.0.0,2,0,2,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.04.08.08.36.stable_05,2,0,2,0.0,0
+codex-mcp-client,0.99.0,2,0,2,0.0,0
+codex-mcp-client,0.104.3,2,0,2,0.0,0
+DeepChat,1.0.3-beta.2,2,0,2,0.0,0
+factory-cli,0.73.0,2,0,2,0.0,0
+curltest,0.0.1,2,0,2,0.0,0
+Visual Studio Code,1.109.4,2,0,2,0.0,0
+chatwise,26.4.15,2,0,2,0.0,0
+bolt-api,0.1.42,2,0,2,0.0,0
+Crowe Logic Code,1.117.0,2,0,2,0.0,0
+opencode,1.2.15,2,2,0,100.0,2
+missionward,1.0.0,2,0,2,0.0,0
+neworange-mcp-remote-fallback-test,0.0.0,2,0,2,0.0,0
+highflame-admin,- (2026-05-14T04:32:43+0000),2,0,2,0.0,0
+codex-probe,0.1,2,0,2,0.0,0
+mcp-test-harness,1.0,2,1,1,50.0,1
+Osaurus,0.18.7,2,0,2,0.0,0
+grok-shell-grok_com_hugging_face,0.2.7,2,0,2,0.0,0
+dev.warp.Warp-Preview,v0.2026.05.20.09.21.preview_04,2,0,2,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.63,2,0,2,0.0,0
+Osaurus,0.16.15,2,0,2,0.0,0
+gateway-client,2.0,2,0,2,0.0,0
+claude-code,1.9.0,2,0,2,0.0,0
+layla,6.10.0-alpha6.1,2,0,2,0.0,0
+opencode,0.0.0-dev-202605291010,2,2,0,100.0,2
+systemprompt,1.0.0,2,0,2,0.0,0
+lisa-mcp-client,0.1.0,2,1,1,50.0,1
+mcp-remote-test-client (via mcp-remote 0.1.32),1.0.0,2,0,2,0.0,0
+grok-shell-hf-mcp-server,0.2.11,2,0,2,0.0,0
+Visual Studio Code,1.102.3,2,0,2,0.0,0
+neworange-mcp-remote-test-client (via neworange-mcp-remote 0.1.39),1.0.0,2,0,2,0.0,0
+claude-code,2.1.111-dev.20260415.t075640.shabb7cd9c,2,0,2,0.0,0
+claude-code,2.0.72,2,0,2,0.0,0
+factory-cli (via mcp-remote 0.1.37),0.122.0,2,0,2,0.0,0
+com.raycast.macos,1.104.15,2,1,1,50.0,1
+BB8-MCP-Broker-conn-75ec7d63,1.0.0,2,0,2,0.0,0
+Cline,3.85.1779926456,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.94.0-alpha.10,2,0,2,0.0,0
+grader,0.0,2,0,2,0.0,0
+cequence-internal-crawler,1.0.0,2,0,2,0.0,0
+Visual Studio Code,1.103.0,2,0,2,0.0,0
+github-copilot-developer,1.0.52-2,2,0,2,0.0,0
+opencode (via mcp-remote 0.1.37),1.15.0,2,2,0,100.0,9
+agent-client,1.0.0,2,0,2,0.0,0
+github-copilot-developer-test,1.0.56,2,0,2,0.0,0
+claude-code,2.0.2,2,0,2,0.0,0
+VisualStudio,18.4.11605.240,2,0,2,0.0,0
+Manus,8.0.2,2,1,1,50.0,10
+grok,1.0,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.39.0,2,0,2,0.0,0
+github-copilot-developer,1.0.44-3,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.27.0,2,0,2,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.04.22.08.46.stable_03,2,0,2,0.0,0
+469c6544-42c9-4ac0-9648-fd56a417ac66,1.0,2,1,1,50.0,1
+claude-code,1.0.2-dev,2,0,2,0.0,0
+ConversationalAI,2026.3.1.19034,2,0,2,0.0,0
+claude-code,2.1.87-dev.20260525.t142327.sha7dc15d6c,2,0,2,0.0,0
+gemini-cli-mcp-client,0.39.0-preview.0,2,0,2,0.0,0
+Antigravity-Demo (via mcp-remote 0.1.37),1.0,2,2,0,100.0,2
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.0.1,2,0,2,0.0,0
+github-copilot-developer-test,1.0.44,2,0,2,0.0,0
+langdock-client,1.0.0,2,0,2,0.0,0
+ZeroShield Gateway,1.0.0,2,0,2,0.0,0
+llmp-scanner,1.0,2,0,2,0.0,0
+fast-agent-mcp,0.7.13,2,1,1,50.0,12
+3782591c-aaf3-4461-b98c-e74a518d3d40,1.0,2,1,1,50.0,1
+mcp-tester,1.0.0,2,0,2,0.0,0
+AionUi,1.9.25,2,0,2,0.0,0
+mcp-test-client,1.2.3,2,0,2,0.0,0
+AAH-discover,1.0,2,0,2,0.0,0
+claude-code,999.0.0-leak,2,0,2,0.0,0
+Superagent,1.0.0,2,0,2,0.0,0
+Manus,8.0.16,2,1,1,50.0,25
+codex-mcp-client (via mcp-remote 0.1.18),0.114.0,2,0,2,0.0,0
+claude-code,2.0.50,2,0,2,0.0,0
+gateway-mcp-multi-target-proxy,1.0.0,2,0,2,0.0,0
+codex-auth-test,1.0,2,0,2,0.0,0
+agentgateway,True,2,0,2,0.0,0
+mcp-rest-proxy,1.0.0,2,0,2,0.0,0
+claude-code,2.1.5,2,0,2,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.148,2,0,2,0.0,0
+opencode,0.0.0-beta-202605270857,2,2,0,100.0,27
+dev.warp.Warp,v0.2026.05.20.09.21.stable_02,2,0,2,0.0,0
+claude-code,0.0.2,2,0,2,0.0,0
+opencode,0.0.0-dev-202605291904,2,2,0,100.0,2
+Antigravity,1.107.0,2,0,2,0.0,0
+Visual Studio Code (via mcp-remote 0.1.37),1.119.0,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.105.0,2,0,2,0.0,0
+github-copilot-developer-test,1.0.54,2,0,2,0.0,0
+mcp-contract-test,0.1.0,2,0,2,0.0,0
+dappier-api,1.0,2,0,2,0.0,0
+ConversationalAI,2026.3.1.19353,2,0,2,0.0,0
+capframe-probe,0.1,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.118.0,2,0,2,0.0,0
+kat-probe,1.0,2,0,2,0.0,0
+claude-code,1.0.88,2,0,2,0.0,0
+codex-manual-mcp-audit,2026-05-24,2,0,2,0.0,0
+fast-agent-mcp,0.7.5,2,0,2,0.0,0
+agent,1.0.0,2,0,2,0.0,0
+claude-code,1.0.103,2,0,2,0.0,0
+goose-cli,1.32.0,2,0,2,0.0,0
+ConversationalAI,2026.5.0.21747,2,0,2,0.0,0
+Privacy AI,2.0.88,2,0,2,0.0,0
+umai-v2,2.0.0,2,0,2,0.0,0
+claude-code,2.0.53,2,0,2,0.0,0
+bolt-api,0.1.8,2,0,2,0.0,0
+JetBrains.PyCharm,2026.1.2,2,0,2,0.0,0
+grok-shell-grok_com_hugging_face,0.2.4,2,0,2,0.0,0
+mcp,0.0.0,2,0,2,0.0,0
+mcp-researcher,1.0.0,2,0,2,0.0,0
+onyx-dcr-audit,0.1,2,0,2,0.0,0
+mcporter,1.0,2,0,2,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.121,2,0,2,0.0,0
+opencode,1.2.21,2,2,0,100.0,2
+dev.warp.Warp-Stable,v0.2026.04.08.08.36.stable_01,2,0,2,0.0,0
+gemini-cli-mcp-client,0.30.0,2,0,2,0.0,0
+claude-code,2.1.87-dev.20260404.t201249.shaunknown,2,1,1,50.0,6
+ClaudeAndroid,1.260514.0,2,0,2,0.0,0
+goose-cli,1.35.0,2,0,2,0.0,0
+claude-code,2.1.0,2,0,2,0.0,0
+mcp-test-client,1.2.0,2,0,2,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.146,2,0,2,0.0,0
+mcpwn_client_0,1.0,2,0,2,0.0,0
+fast-agent-mcp,0.6.18,2,0,2,0.0,0
+security-audit,1.0,2,0,2,0.0,0
+factory-cli,0.97.1-build0005107,2,0,2,0.0,0
+dev.warp.Warp-Preview,v0.2026.05.06.15.42.preview_05,2,0,2,0.0,0
+roo,1.0,2,0,2,0.0,0
+mcprism-live-runner,0.1,2,0,2,0.0,0
+mcp-test-harness (via mcp-remote 0.1.37),0.1,2,0,2,0.0,0
+gateway-auto-discovery,1.0.0,2,0,2,0.0,0
+grok-shell-grok_com_huggingface,0.1.220,2,0,2,0.0,0
+ConversationalAI,2026.4.1.20857,2,0,2,0.0,0
+Trae,1.98.2,2,0,2,0.0,0
+Cline,3.84.1779492007,2,0,2,0.0,0
+AionUi,1.9.24,2,0,2,0.0,0
+Antigravity-Tester (via mcp-remote 0.1.37),1.0,2,0,2,0.0,0
+grok-shell-grok_com_hugging_face,0.1.220-alpha.3,2,0,2,0.0,0
+ConversationalAI,2026.3.1.19381,2,0,2,0.0,0
+local-agent-mode-Hugging Face (Gradio) (via mcp-remote 0.1.37),1.0.0,2,0,2,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.43.0,2,0,2,0.0,0
+mcp-client,1.0,2,0,2,0.0,0
+Raccoon,1.0.0,2,0,2,0.0,0
+opencode,0.0.0-beta-202605241257,2,0,2,0.0,0
+codex-mcp-tool-test,1.0,2,0,2,0.0,0
+orbit-active-probe,1.0.0,2,0,2,0.0,0
+hermes-check,0,2,0,2,0.0,0
+BB8-MCP-Broker-conn-ae19925b,1.0.0,2,0,2,0.0,0
+chatwise,26.4.11,2,0,2,0.0,0
+final-hf-mcp-validation,1.0.0,2,0,2,0.0,0
+JetBrains-PY/copilot-intellij,242.23726.56/1.7.1-242,2,1,1,50.0,7
+sim-platform,1.0.0,2,0,2,0.0,0
+aionui-mcp-test,1.0.0,2,0,2,0.0,0
+Cline,3.76.0,2,0,2,0.0,0
+connector:custom-mcp:hugging-face,1.0.0,2,0,2,0.0,0
+codex-config-check,0,2,0,2,0.0,0
+Enchanté,0.1.0,2,2,0,100.0,19
+layla,6.10.0,2,0,2,0.0,0
+manus,1.0,2,0,2,0.0,0
+claude-code,0.5.18-beta.25,2,0,2,0.0,0
+zerotwo-mcp-client-huggingface_1777695951427,1.0.0,2,1,1,50.0,2
+codex-debug,0.1.0,2,0,2,0.0,0
+mcp-remote-test-client (via mcp-remote 0.1.38-enterit-2),1.0.0,2,0,2,0.0,0
+ConversationalAI,2026.3.1.19217,2,0,2,0.0,0
+gemini-cli-mcp-client,0.34.0-nightly.20260307.6c3a90645,2,0,2,0.0,0
+opencode (via mcp-remote 0.1.37),1.4.14,2,2,0,100.0,2
+JetBrains-PY/copilot-intellij,241.17890.14/1.5.63-241,2,1,1,50.0,10
+genvoice-sync,1.0,2,0,2,0.0,0
+VisualStudio,18.6.11709.129,2,0,2,0.0,0
+mcp-noauth-probe,0.1.0,2,0,2,0.0,0
+claude-code,2.1.87-dev.20260403.t130520.shaunknown,2,0,2,0.0,0
+mcp-cli (via mcp-remote 0.1.37),0.3.0,2,0,2,0.0,0
+zapier-mcp-client,4.0.1,2,0,2,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.49,2,0,2,0.0,0
+cli,1,2,1,1,50.0,4
+72F312AF-5969-44F6-8F4C-8DBCE4134FB1,1.0.0,2,0,2,0.0,0
+bolt-api,0.1.40,2,0,2,0.0,0
+mcp-gateway,1.0.59,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.128.0,2,0,2,0.0,0
+claude-code,2.1.90-dev.20260401.t141507.sha01362dc,2,0,2,0.0,0
+Osaurus,0.18.4,2,0,2,0.0,0
+opencode,1.1.49,2,2,0,100.0,2
+github-copilot-developer-test,1.0.25,2,0,2,0.0,0
+inspector,0.21.2,2,0,2,0.0,0
+codex-local-probe (via mcp-remote 0.1.37),0.1.0,2,1,1,50.0,1
+Osaurus,0.19.4,2,0,2,0.0,0
+codex-mcp-client,0.131.0-alpha.8,2,0,2,0.0,0
+hf-mcp-golden-eval,0.1.0,2,2,0,100.0,70
+mcp-dataset-probe,1.0,2,0,2,0.0,0
+grok-shell-hf-mcp-server,0.1.220,2,0,2,0.0,0
+mavis,1.0,2,1,1,50.0,4
+Lovable MCP Client,1.0.0,2,0,2,0.0,0
+factory-cli,0.109.2,2,0,2,0.0,0
+github-copilot-developer,1.0.32-0,2,0,2,0.0,0
+dev.warp.Warp-Preview,v0.2026.05.14.19.38.preview_03,2,0,2,0.0,0
+ConversationalAI,2026.3.1.19383,2,0,2,0.0,0
+claude-code,2.6.6,2,0,2,0.0,0
+bilt-agent-registry-mcp-gateway,0.1.0,2,1,1,50.0,1
+mcp-lens,0.1.0,2,0,2,0.0,0
+layla,6.11.2-direct,2,1,1,50.0,1
+dev.warp.Warp,v0.2026.05.06.15.42.stable_04,2,0,2,0.0,0
+trovata-admin-app-console,0.1.0,2,0,2,0.0,0
+catalog-extractor (via mcp-remote 0.1.16),1.0,2,0,2,0.0,0
+esan,1,2,0,2,0.0,0
+cakewalk-discovery,0.1,2,0,2,0.0,0
+mcpjungle mcp client for https://hf.co/mcp,0.1,2,0,2,0.0,0
+hf-mcp-eval,0.1.0,2,0,2,0.0,0
+grok-shell-grok_com_hugging_face,0.1.179,2,0,2,0.0,0
+mcp-remote-test-client (via mcp-remote 1.11.0),1.0.0,2,0,2,0.0,0
+Osaurus,0.17.5,2,0,2,0.0,0
+nuwacom-mcp-test,1.0.0,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.104.0,2,0,2,0.0,0
+bulk-mcp-check,1.0,2,0,2,0.0,0
+ToolGateway-MCP-Explorer,0.1.0,2,0,2,0.0,0
+Osaurus,0.18.27,2,0,2,0.0,0
+mcp-ecosystem-scanner,1.0.0,2,0,2,0.0,0
+tester,0.0,2,0,2,0.0,0
+claude-code,0.0.24,2,0,2,0.0,0
+platform-mcp-gateway,0.1.0,2,0,2,0.0,0
+Manus,8.0.0,2,1,1,50.0,1
+archestra-platform,e92adcfe5707b61c1ed0bb0e3eab7dfb41fa8464,2,0,2,0.0,0
+celeste-probe,1.0,2,0,2,0.0,0
+better-clawd,0.1.6,2,0,2,0.0,0
+opencode,0.0.0-beta-202605261405,2,0,2,0.0,0
+codex-mcp-test,1.0.0,2,1,1,50.0,1
+Aether Android,0.1.0,2,0,2,0.0,0
+make-app-mcp-client,1.33.0,2,0,2,0.0,0
+dev.warp.Warp-Stable,v0.2026.03.25.08.24.stable_05,2,0,2,0.0,0
+opencode,0.0.0-dev-202605291320,2,2,0,100.0,2
+ai-agents-mcp-client,1.198.1,2,0,2,0.0,0
+mcpc,0.3.0,2,0,2,0.0,0
+BoltAI,1.0.0,2,0,2,0.0,0
+opencode,0.0.0-beta-202605241002,2,0,2,0.0,0
+dev.warp.Warp-Preview,v0.2026.05.06.15.42.preview_03,2,1,1,50.0,1
+Osaurus,0.18.3,2,0,2,0.0,0
+mcp-remote,0.1.31,2,0,2,0.0,0
+TreatGPT,1.0.0,2,0,2,0.0,0
+mcp-s client,1.0.0,2,0,2,0.0,0
+mcp-codeexec,0.1,2,0,2,0.0,0
+ConversationalAI,2026.3.0.18765,2,0,2,0.0,0
+claude-code,2.1.32-ds,2,0,2,0.0,0
+factory-cli,0.58.0,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.129.0,2,0,2,0.0,0
+aimap-scanner,1.0.0,2,0,2,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.80,2,0,2,0.0,0
+custom3p-desktop,1.9255.0,2,0,2,0.0,0
+Visual Studio Code,1.102.2,2,0,2,0.0,0
+claude-code (via mcp-remote 0.1.29),2.1.114,2,0,2,0.0,0
+mcp-gateway-discovery,1.0,2,0,2,0.0,0
+claude-code,2.4.2,2,0,2,0.0,0
+halvo-mcp-proxy-client (via mcp-remote 0.1.37),1.0.0,2,0,2,0.0,0
+make-app-mcp-client,1.30.2,2,0,2,0.0,0
+mcp-remote-test-client (via mcp-remote 1.25.0),1.0.0,2,0,2,0.0,0
+codex-hfco-probe,0,2,0,2,0.0,0
+grok-shell-grok_com_hugging_face,0.1.176,2,0,2,0.0,0
+curltest,0.0.0,2,0,2,0.0,0
+ConversationalAI,2026.5.0.21753,2,0,2,0.0,0
+Visual Studio Code - Insiders,1.114.0-insider,2,0,2,0.0,0
+mcp-review-probe,0.1,2,0,2,0.0,0
+mobeus-mcp-tester,1.0.0,2,0,2,0.0,0
+claude-code,1.0.115,2,0,2,0.0,0
+Visual Studio Code Agents - Insiders,1.120.0-insider,2,0,2,0.0,0
+ConversationalAI,2026.3.1.19324,2,0,2,0.0,0
+diag,0.1,2,0,2,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.113,2,0,2,0.0,0
+archestra-platform,26b26fd5b09261fb3e64a04a921f3fb2e21e4454,2,0,2,0.0,0
+grok-shell-grok_com_hugging_face,0.1.164,2,0,2,0.0,0
+Postman Client - 4ad0c2b5-7721-4949-80f5-475545a43758,1.0.0,2,0,2,0.0,0
+intercom-mcp-streamable-http-client,1.0,2,0,2,0.0,0
+agentic-kernel,1.0,2,0,2,0.0,0
+probe,1.0.0,2,0,2,0.0,0
+tool-list-capture (via mcp-remote 0.1.16),0,2,0,2,0.0,0
+Visual Studio Code,1.102.1,2,0,2,0.0,0
+blinko-mcp-client,1.0.0,2,0,2,0.0,0
+mcp-probe,1.0.0,2,0,2,0.0,0
+nexus-test,1.0,2,0,2,0.0,0
+grader,0.0.1,2,0,2,0.0,0
+cursor-curl,1.0.0,2,1,1,50.0,4
+jaimes-test,1.0,2,0,2,0.0,0
+codex-mcp-client,0.94.0-alpha.10,2,0,2,0.0,0
+claude-code,2.1.87-dev.20260509.t171701.shaa06d357f,2,0,2,0.0,0
+vsc-aitoolkit-hugging face,1.2.0,2,0,2,0.0,0
+github-copilot-developer-test,1.0.51-2,2,0,2,0.0,0
+caspian-agent,1.0.0,2,2,0,100.0,582
+Osaurus,0.19.0,2,0,2,0.0,0
+Osaurus,0.18.20,2,0,2,0.0,0
+Osaurus,0.18.8,2,0,2,0.0,0
+bolt-api,0.1.28,2,0,2,0.0,0
+ConversationalAI,2026.4.2.20965,2,0,2,0.0,0
+ozwell-chat-smoke,0.0.1,2,0,2,0.0,0
+r,0.1,2,0,2,0.0,0
+codex-mcp-client (via mcp-remote 0.1.29),0.128.0,2,0,2,0.0,0
+claude-code,2.1.87-dev.20260521.t215336.sha7dc15d6c,2,0,2,0.0,0
+claude-code,2.0.36,2,0,2,0.0,0
+claude-code,0.0.15,2,0,2,0.0,0
+reno-design-spec,1.0.0,2,0,2,0.0,0
+aigw-mcp-client,master.796.07-05-2026_12:45:39,2,0,2,0.0,0
+Visual Studio Code,1.106.0,2,0,2,0.0,0
+codex-local-config-check,1.0.0,2,0,2,0.0,0
+rmcp (via mcp-remote 0.1.37),1.6.0,2,0,2,0.0,0
+opencode,1.2.25,2,2,0,100.0,3
+Manus,7.2.17-323-gc729328d2,2,1,1,50.0,3
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.41.2,2,0,2,0.0,0
+curl,1.0.0,2,1,1,50.0,25
+poc,1.0,2,1,1,50.0,5
+fast-agent-mcp,0.7.4,2,1,1,50.0,3
+Cherry Studio,1.7.21,1,0,1,0.0,0
+claude-code,2.1.54,1,0,1,0.0,0
+hub-byo-test,1.0,1,0,1,0.0,0
+claude-code,0.5.18,1,0,1,0.0,0
+symphony-harness,0.1,1,0,1,0.0,0
+fast-agent-mcp,0.6.13,1,0,1,0.0,0
+kilo,7.1.20,1,1,0,100.0,30
+bolt-api,0.1.10,1,0,1,0.0,0
+agentforge-mcp-client,1.0.0,1,0,1,0.0,0
+VisualStudio,18.5.11612.153,1,0,1,0.0,0
+evaos-probe,0.1,1,0,1,0.0,0
+freeze-tools,0.1,1,0,1,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.52-1,1,0,1,0.0,0
+nexus,1.0,1,0,1,0.0,0
+Postman Client - b6725af2-479b-4ed2-8c2e-9a89f1295d88,1.0.0,1,0,1,0.0,0
+mcp-test-client,1.3.3,1,0,1,0.0,0
+Insomnia,12.6.0,1,1,0,100.0,4
+codex-final-mcp-audit,0.0.1,1,0,1,0.0,0
+chatwise,0.9.52,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.30),0.133.0,1,0,1,0.0,0
+lumi-probe,0.0.1,1,0,1,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.44.0,1,0,1,0.0,0
+opencode-debug,1.14.48,1,0,1,0.0,0
+claude-code,0.0.44,1,0,1,0.0,0
+claude-code,2.1.87-dev.20260417.t203642.sha7dc15d6c,1,0,1,0.0,0
+opencode,0.0.0-dev-202604091059,1,1,0,100.0,1
+Cortex Code,1.110.1,1,0,1,0.0,0
+morphed-external-mcp-client,1.0.0,1,0,1,0.0,0
+bilt-gateway-probe,0.1.0,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.134.0-alpha.3,1,0,1,0.0,0
+mcp-auth-probe,0.1.0,1,0,1,0.0,0
+claude-code,2.6.0,1,0,1,0.0,0
+circuitry-smoke,0.1,1,0,1,0.0,0
+Postman Client - 45b550a7-d3b5-4b3e-a4e3-846415d484ef,1.0.0,1,0,1,0.0,0
+d,0,1,0,1,0.0,0
+factory-cli,0.85.0,1,0,1,0.0,0
+curl-test-client,1.0.0,1,0,1,0.0,0
+openclaw,0.1,1,1,0,100.0,3
+JetBrains-RD/copilot-intellij,261.23567.144/1.8.2-243,1,0,1,0.0,0
+smoke (via mcp-remote 0.1.37),0,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.114.0,1,0,1,0.0,0
+ConversationalAI,2026.5.1.23948,1,0,1,0.0,0
+rmcp (via mcp-remote 0.1.37),1.5.0,1,0,1,0.0,0
+Dev ChatBot-huggingface-ba36f8e6,1.0.0,1,0,1,0.0,0
+OCI Enterprise AI Chat MCP preset test,1.0.0,1,1,0,100.0,1
+zstrike-manual-test,1.0,1,1,0,100.0,1
+Positron,1.109.2,1,0,1,0.0,0
+codebuddy-test,1.0,1,0,1,0.0,0
+Cline (via mcp-remote 0.1.37),3.74.0,1,0,1,0.0,0
+apps-radar-detector,1.0.0,1,0,1,0.0,0
+mcp (via mcp-remote 0.1.36),0.1.0,1,1,0,100.0,4
+quest-mcp-adaptor,1.0.0,1,0,1,0.0,0
+dova,0.1.0,1,0,1,0.0,0
+pi-hf-query,1.0.0,1,1,0,100.0,1
+qwen-cli-mcp-client-claude.ai Hugging Face,0.0.1,1,0,1,0.0,0
+mcp-test-client,1.0.0,1,1,0,100.0,1
+Roo Code (via mcp-remote 0.1.37),3.27.0,1,0,1,0.0,0
+github-copilot-developer,1.0.56-0,1,0,1,0.0,0
+ConversationalAI,2026.5.0.22690,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.122,1,0,1,0.0,0
+vsc-aitoolkit-HuggingFaceMCPServer,1.2.0,1,0,1,0.0,0
+JetBrains-IU/copilot-intellij,261.22158.277/1.8.0-243,1,0,1,0.0,0
+Postman Client - 22be138c-6bc1-4920-9b72-e416cbea8a7a,1.0.0,1,0,1,0.0,0
+gemini-cli-mcp-client,0.36.0-nightly.20260406.15298b28c,1,0,1,0.0,0
+opencode (via mcp-remote 0.1.37),1.4.6,1,1,0,100.0,1
+nimbalyst-test (via mcp-remote 0.1.30),1.0.0,1,0,1,0.0,0
+opencode,0.0.0-dev-202605291106,1,1,0,100.0,1
+Postman Client - 1e7fc90a-df84-493a-a7b8-7de2e5440283,1.0.0,1,0,1,0.0,0
+abstract-agent,1.0.0,1,0,1,0.0,0
+phase1-validation,0.0.1,1,0,1,0.0,0
+zerotwo-mcp-client-static_provider_huggingface_0974bf11-51db-4947-b610-a778d5394864,1.0.0,1,0,1,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.30,1,1,0,100.0,1
+iris-self,1.0,1,0,1,0.0,0
+vsc-aitoolkit-hugging face,0.26.4,1,0,1,0.0,0
+Postman Client - 8869b8ba-05d9-43a7-8769-acb5c1aedbe1,1.0.0,1,0,1,0.0,0
+adv,1,1,1,0,100.0,1
+oten-probe,0.1,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.115.0-alpha.27,1,0,1,0.0,0
+VisualStudio,18.4.11620.152,1,0,1,0.0,0
+claude-code,2.0.34,1,0,1,0.0,0
+codex-debug,0.1,1,0,1,0.0,0
+VisualStudio,18.6.11822.322,1,0,1,0.0,0
+codex-mcp-client,0.81.0-alpha.8,1,0,1,0.0,0
+ainek,1.0,1,0,1,0.0,0
+exchange-mcp-registry,1.0.0,1,0,1,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.04.29.08.57.stable_01,1,0,1,0.0,0
+ozwell-smoke,0.0.1,1,0,1,0.0,0
+Mission Probe,1.0.0,1,0,1,0.0,0
+lmstudio-config-test,1.0.0,1,1,0,100.0,1
+mcp-hub (via mcp-remote 0.1.37),1.0.0,1,0,1,0.0,0
+opencode,1.3.8,1,1,0,100.0,1
+DeepChat,0.5.3,1,0,1,0.0,0
+mcp-go-oauth-example,0.1.0,1,0,1,0.0,0
+claude-code,2.1.26,1,0,1,0.0,0
+Postman Client - 4fb1796b-24ad-42c1-8e36-f6652d5aae85,1.0.0,1,0,1,0.0,0
+agenttool-probe,0,1,0,1,0.0,0
+opencode-debug,1.3.16,1,0,1,0.0,0
+opencode,0.0.0-beta-202605270418,1,1,0,100.0,1
+cc-statusline,1.0,1,0,1,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.04.01.08.39.stable_02,1,0,1,0.0,0
+avap-agent-tools-discovery,1.0.0,1,0,1,0.0,0
+tembo,1.0.0,1,0,1,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.56-0,1,0,1,0.0,0
+opencode,1.2.6,1,0,1,0.0,0
+VisualStudio,18.7.11819.209,1,0,1,0.0,0
+opencode (via mcp-remote 0.1.37),1.2.27,1,1,0,100.0,1
+mcpc,0.2.6,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.126.0-alpha.8,1,0,1,0.0,0
+opencode,7.2.25,1,1,0,100.0,8
+fast-agent-mcp,0.2.58,1,0,1,0.0,0
+rmcp (via mcp-remote 0.1.15),1.6.0,1,0,1,0.0,0
+github-copilot-developer,1.0.52-4,1,0,1,0.0,0
+auth-probe,0.1,1,0,1,0.0,0
+Postman Client - bed6931a-5608-42a0-94f6-fb830c53ac91,1.0.0,1,0,1,0.0,0
+probe,test,1,0,1,0.0,0
+opencode-debug,1.14.29,1,0,1,0.0,0
+Postman Client - f7e45b27-e84c-4780-a1cc-b82c957946aa,1.0.0,1,0,1,0.0,0
+codex-mcp-client,0.112.0,1,0,1,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.33.1,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.37),1.0.89,1,0,1,0.0,0
+caspian-test,0.1.0,1,0,1,0.0,0
+malaika-cursor-audit,1.0,1,0,1,0.0,0
+use-mcp-react-client,0.1.0,1,0,1,0.0,0
+claude-code,2.1.104-20260409.1,1,0,1,0.0,0
+claw-mcp-probe,1.0,1,0,1,0.0,0
+pentest,1.0,1,1,0,100.0,2
+scout,1.0,1,1,0,100.0,11
+Postman Client - c985af7b-8917-459f-ba0c-6a11356a99f7,1.0.0,1,0,1,0.0,0
+claude-code,2.1.18,1,0,1,0.0,0
+Cherry Studio,1.7.7,1,0,1,0.0,0
+bolt-api,0.1.7,1,0,1,0.0,0
+factory-cli,0.76.0,1,0,1,0.0,0
+Postman Client - 68d716ac-8e51-4236-b7ca-9e415f3bf749,1.0.0,1,0,1,0.0,0
+foldcanvas-probe,0.1,1,0,1,0.0,0
+sold-check,1.0,1,0,1,0.0,0
+solo-router-populate,1.0,1,0,1,0.0,0
+__guest__,1.0.0,1,0,1,0.0,0
+opencode,0.0.0-dev-202605291301,1,1,0,100.0,1
+roder-test,0.1,1,0,1,0.0,0
+github-copilot-developer,1.0.51-1,1,0,1,0.0,0
+code-server,1.103.2,1,0,1,0.0,0
+openclaw,1.0,1,0,1,0.0,0
+factory-cli,0.101.1-build0005258,1,0,1,0.0,0
+step1_probe,1.0.0,1,0,1,0.0,0
+layla,6.8.0,1,0,1,0.0,0
+opencode,1.2.17,1,1,0,100.0,1
+modular-agent,2.0,1,0,1,0.0,0
+grok-shell-hf-mcp-server,0.2.14,1,0,1,0.0,0
+opencode,1.2.18,1,0,1,0.0,0
+a,1,1,0,1,0.0,0
+fast-agent-mcp,0.6.24,1,1,0,100.0,1
+github-copilot-developer,1.0.53,1,0,1,0.0,0
+mcp-compat-probe,1.0,1,0,1,0.0,0
+github-copilot-developer,1.0.55-5,1,0,1,0.0,0
+grok-shell-huggingface,0.1.210,1,0,1,0.0,0
+external-test,1.0,1,0,1,0.0,0
+DeepChat,1.0.5-beta.3,1,0,1,0.0,0
+security-test,0.1,1,1,0,100.0,2
+fast-agent-mcp,0.2.36,1,0,1,0.0,0
+opencode,1.1.31,1,1,0,100.0,1
+Visual Studio Code - Insiders,1.105.0-insider,1,0,1,0.0,0
+supabase-edge-fn,1.0,1,0,1,0.0,0
+Dev ChatBot-huggingface-custom-1779971149729,1.0.0,1,0,1,0.0,0
+Postman Client - 696896b28e4b8ba4533fe2e9,1.0.0,1,0,1,0.0,0
+zerotwo-mcp-client-5739c2bc-45d5-4899-98b2-baf7ecfa49ac,1.0.0,1,0,1,0.0,0
+opencode,0.0.0-beta-202605252151,1,0,1,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.57-3,1,0,1,0.0,0
+apps-radar-openai-sdk-detector,1.0.0,1,0,1,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.56-2,1,0,1,0.0,0
+claude-code,2.0.28,1,0,1,0.0,0
+Postman Client - 43a9d0e7-4a83-496f-bb3e-2932d0361e7e,1.0.0,1,0,1,0.0,0
+factory-cli,0.100.1-build0005219,1,0,1,0.0,0
+claude-code,2.1.22-alpha.20260128.1,1,0,1,0.0,0
+otot-smoke,0.0.1,1,0,1,0.0,0
+hyperagent,1.0.0,1,0,1,0.0,0
+claude-code,2.1.87-dev.20260417.t203847.sha7dc15d6c,1,0,1,0.0,0
+Loop,1.0,1,0,1,0.0,0
+audit,1.0,1,0,1,0.0,0
+Postman Client - 09587389-f2f0-4fda-8a38-a54c3475d48a,1.0.0,1,0,1,0.0,0
+BB8-MCP-Broker-conn-5788a3ee,1.0.0,1,0,1,0.0,0
+codex-test,0.0.0,1,0,1,0.0,0
+JetBrains-PY/copilot-intellij,261.22158.340/1.8.0-243,1,0,1,0.0,0
+EndlessSource,1.0,1,0,1,0.0,0
+bolt-api,0.1.29,1,0,1,0.0,0
+rmcp,1.7.0,1,0,1,0.0,0
+open-mcp-server-tool-tester,1.0.0,1,0,1,0.0,0
+vscode,1.0,1,0,1,0.0,0
+github-copilot-developer,1.0.36-1,1,0,1,0.0,0
+claude-ai (via mcp-remote 0.1.16),0.1.0,1,0,1,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.05.27.15.44.stable_01,1,0,1,0.0,0
+codex-probe,0.0.0,1,0,1,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.29,1,1,0,100.0,1
+test (via mcp-remote 0.1.37),1.0,1,0,1,0.0,0
+auth-probe,1.0,1,0,1,0.0,0
+claude-code,2.0.32,1,0,1,0.0,0
+BB8-MCP-Broker-conn-5ca8486d,1.0.0,1,0,1,0.0,0
+Postman Client - 3f654c68-f8a0-4a8c-8dd1-5e1ff9b5aec2,1.0.0,1,0,1,0.0,0
+stack-install-probe,1.0,1,0,1,0.0,0
+Dev ChatBot-huggingface-5be8ce72,1.0.0,1,0,1,0.0,0
+opencode,0.0.0-beta-202605262121,1,0,1,0.0,0
+opencode,0.0.0-dev-202605291843,1,1,0,100.0,1
+factory-cli,0.100.1-build0005206,1,0,1,0.0,0
+fs-mcp-bridge,1,1,0,1,0.0,0
+opencode,0.0.0-local-models-integration-202603212024,1,0,1,0.0,0
+Postman Client - ad21b33c-2b9c-4fa2-87ad-6718130e67b6,1.0.0,1,0,1,0.0,0
+runlayer-watch,0.1,1,0,1,0.0,0
+codex-mcp-client,0.76.0-alpha.9,1,0,1,0.0,0
+VisualStudio,18.5.11716.220,1,0,1,0.0,0
+DeepChat,1.0.5-beta.5,1,0,1,0.0,0
+mcp-connector,1.0.0,1,0,1,0.0,0
+MindFront,1.0.0,1,0,1,0.0,0
+bolt-api,0.1.19,1,0,1,0.0,0
+Visual Studio Code,1.104.1,1,0,1,0.0,0
+mcphub-health-checker,1.0.0,1,0,1,0.0,0
+openclaw-hf-query,0.1,1,0,1,0.0,0
+smoke-test,0,1,0,1,0.0,0
+ConversationalAI,2026.5.0.23610,1,0,1,0.0,0
+mcp-health,0.1,1,0,1,0.0,0
+nuclei-mcp-scan,1.0,1,0,1,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.12),unknown,1,0,1,0.0,0
+cco-security-scanner,1.0.0,1,0,1,0.0,0
+Visual Studio Code - Insiders,1.107.0-insider,1,0,1,0.0,0
+claude-code,2.0.70,1,0,1,0.0,0
+Visual Studio Code,1.104.2,1,0,1,0.0,0
+DeepChat,1.0.3-beta.6,1,0,1,0.0,0
+test2,1.0,1,0,1,0.0,0
+oic-mcp-gateway,1.0.0,1,0,1,0.0,0
+grok-shell-grok_com_hugging_face,0.1.210-alpha.5,1,0,1,0.0,0
+simple-oauth-client,1.0.0,1,0,1,0.0,0
+Postman Client - 467c3efa-160a-4cfc-b2f3-f5191a74a5e5,1.0.0,1,0,1,0.0,0
+opencode-debug,1.14.20,1,0,1,0.0,0
+mcp-test-client,1.0,1,0,1,0.0,0
+mcpc,0.1.11,1,0,1,0.0,0
+codex-hf-env-check,0.0.1,1,0,1,0.0,0
+discovery,1.0,1,0,1,0.0,0
+claude-code,2.1.106,1,0,1,0.0,0
+codex-smoke,1.0.0,1,0,1,0.0,0
+opencode-debug,1.4.0,1,0,1,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.49,1,1,0,100.0,1
+github-copilot-developer (via mcp-remote 0.1.37),1.0.51,1,0,1,0.0,0
+harbor-probe,0.1,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.29),2.1.111,1,0,1,0.0,0
+Msty Claw (via mcp-remote 0.1.37),0.1.9,1,0,1,0.0,0
+morphed-url-probe,0.0.0,1,0,1,0.0,0
+porto-probe,0.1,1,0,1,0.0,0
+opencode (via mcp-remote 0.1.37),1.14.44,1,1,0,100.0,2
+cursor-vscode (via mcp-remote 0.1.29),1.0.0,1,0,1,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.12),0.42.0,1,0,1,0.0,0
+pi-hf-test,1.0.0,1,0,1,0.0,0
+ConversationalAI,2026.5.0.21352,1,0,1,0.0,0
+oatbox,1.0.0,1,0,1,0.0,0
+inspector,0.21.1,1,0,1,0.0,0
+oten-audit,0,1,0,1,0.0,0
+aigw-mcp-client,master.832.19-05-2026_09:23:02,1,0,1,0.0,0
+Postman Client - bab445b7-fe8b-4c1b-9633-5ec19a44ac8a,1.0.0,1,0,1,0.0,0
+BB8-MCP-Broker-conn-ad9909e2,1.0.0,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.26.0,1,0,1,0.0,0
+BB8-MCP-Broker-conn-8f7a25c5,1.0.0,1,0,1,0.0,0
+Dev ChatBot-huggingface-8c10dac6,1.0.0,1,0,1,0.0,0
+gemini-cli-mcp-client-hf-mcp-server,0.0.1,1,0,1,0.0,0
+claude-code,2.1.87-dev.20260401.t042044.shae5b13b34,1,0,1,0.0,0
+	Hugging Face,1.0.0,1,0,1,0.0,0
+codex-mcp-client,0.47.0,1,0,1,0.0,0
+agentheya,1.0,1,0,1,0.0,0
+mcp-gateway-probe,1.0,1,0,1,0.0,0
+v0.app,1.0.0,1,0,1,0.0,0
+opencode,0.0.0-dev-202604201929,1,1,0,100.0,1
+mcp-remote,0.1.38,1,0,1,0.0,0
+mcp-version-probe,1.0.0,1,0,1,0.0,0
+Postman Client (via mcp-remote 0.1.37),1.0.0,1,1,0,100.0,1
+lobehub-mcp-client,1.0.0,1,0,1,0.0,0
+Context (via mcp-remote 0.1.37),1.0.0,1,0,1,0.0,0
+grok-shell-hugging-face,0.2.11,1,0,1,0.0,0
+mcp-state-client,1.0.0,1,0,1,0.0,0
+local-test,1,1,0,1,0.0,0
+mcp-registry,1.0.0,1,0,1,0.0,0
+Dev ChatBot-huggingface-92d476a7,1.0.0,1,0,1,0.0,0
+claude-code,2.0.62,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.111,1,0,1,0.0,0
+gigacode-plugin-jetbrains,26.4.10-242,1,0,1,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.12),0.38.2,1,0,1,0.0,0
+codex-mcp-client,0.93.0,1,0,1,0.0,0
+Krater.ai,1.0.0,1,0,1,0.0,0
+opencode (via mcp-remote 0.1.37),7.2.14,1,1,0,100.0,1
+openclaw-hf-wamu,0.1,1,1,0,100.0,7
+gemini-cli-mcp-client,0.36.0-nightly.20260402.13ccc1645,1,1,0,100.0,3
+mcp-test-client,1.1.20,1,0,1,0.0,0
+Osaurus,0.18.6,1,0,1,0.0,0
+local-agent-mode-huggingface-images (via mcp-remote 0.1.37),1.0.0,1,0,1,0.0,0
+OneServer Marketplace,1.0.0,1,0,1,0.0,0
+catalog-test,1.0.0,1,0,1,0.0,0
+conduit-smoke,1.0.0,1,0,1,0.0,0
+Visual Studio Code (via mcp-remote 0.1.37),1.104.1,1,0,1,0.0,0
+generation-service,1.0.0,1,0,1,0.0,0
+smoke-test,0.1,1,0,1,0.0,0
+oatbox-probe,1.0.0,1,0,1,0.0,0
+opencode,1.14.36,1,0,1,0.0,0
+hermes,0.1,1,0,1,0.0,0
+MCP Streamable HTTP Client,1.0.0,1,0,1,0.0,0
+Osaurus,0.18.29,1,0,1,0.0,0
+glean-audit,0.0.1,1,0,1,0.0,0
+BB8-MCP-Broker-conn-af10d11c,1.0.0,1,1,0,100.0,1
+Cherry Studio (via mcp-remote 0.1.37),1.7.24,1,0,1,0.0,0
+hermes-test,0,1,0,1,0.0,0
+shibumi-mcp-tester,1.0,1,0,1,0.0,0
+claude-code,2.1.112-20260417.2,1,0,1,0.0,0
+spara-probe,0,1,0,1,0.0,0
+BoltAI (via mcp-remote 0.1.37),1.0,1,0,1,0.0,0
+lyra-smoke,1.0,1,0,1,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.02.11.08.23.stable_02,1,0,1,0.0,0
+mcp-test-client,1.1.18,1,0,1,0.0,0
+opencode,0.0.0-dev-202605301455,1,1,0,100.0,1
+Postman Client - d18432bd-4446-4fdd-9d27-974edb143c15,1.0.0,1,0,1,0.0,0
+cloud-ai-agent-executor,1.0.0,1,1,0,100.0,1
+Visual Studio Code (via mcp-remote 0.1.37),1.122.1,1,0,1,0.0,0
+chatwise,26.4.14,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.125.0,1,0,1,0.0,0
+avap-gateway,1.0,1,0,1,0.0,0
+chloe-test,0.1,1,0,1,0.0,0
+Huggingface,1.0.0,1,1,0,100.0,1
+ironclaw,0.26.0,1,0,1,0.0,0
+layla,6.7.2-direct,1,0,1,0.0,0
+@native/native-mcp-discovery-poc,0,1,0,1,0.0,0
+auth-test,0.1,1,1,0,100.0,2
+linear-agent,1.0.0,1,0,1,0.0,0
+bluenexus-mcp-client,1.2.0-pr1,1,0,1,0.0,0
+Visual Studio Code - Insiders (via mcp-remote 0.1.37),1.117.0-insider,1,0,1,0.0,0
+opencode,7.2.26,1,0,1,0.0,0
+mcp-descriptor-dumper,1.0,1,0,1,0.0,0
+VisualStudio,17.14.37301.10,1,0,1,0.0,0
+vps-test,1.0,1,0,1,0.0,0
+claude-code,1,1,0,1,0.0,0
+BB8-MCP-Broker-conn-b668bbbc,1.0.0,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.29),2.1.101,1,0,1,0.0,0
+test-4d9e837f-6f18-42d4-9f99-fbd425a00207-client,1.0.0,1,0,1,0.0,0
+Huggin Face,1.0,1,0,1,0.0,0
+aivene,1.0,1,0,1,0.0,0
+knowledge-sources,0.1.0,1,0,1,0.0,0
+github-copilot-developer (via mcp-remote 0.1.37),1.0.41,1,0,1,0.0,0
+Postman Client - e1f3c319-495a-4c01-a9d5-082537762897,1.0.0,1,0,1,0.0,0
+mission-verifier,1.0.0,1,0,1,0.0,0
+Postman Client - 364c91c5-d8bb-4591-aff2-25a49b75c0b8,1.0.0,1,0,1,0.0,0
+verify,0.1,1,0,1,0.0,0
+ai-fed-hugging-face,0.1.0,1,0,1,0.0,0
+codex-mcp-client,0.66.0,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.98.0,1,0,1,0.0,0
+grok-shell-hf-mcp-server,0.2.8,1,0,1,0.0,0
+symphony-snapshotter,0.1,1,0,1,0.0,0
+ozwell-spike,0.0.1,1,0,1,0.0,0
+claude-code,2.1.87-dev.20260413.t083416.sha7dc15d6c,1,0,1,0.0,0
+codex-mcp-check-hf-mcp-server (via mcp-remote 0.1.37),0.0.1,1,0,1,0.0,0
+diag (via mcp-remote 0.1.37),1.0.0,1,0,1,0.0,0
+bolt-api,0.1.26,1,0,1,0.0,0
+lyra-self-audit,1.0,1,0,1,0.0,0
+ConversationalAI,2026.5.1.24140,1,0,1,0.0,0
+gemini-cli-mcp-client,0.36.0-nightly.20260323.6055c4707,1,0,1,0.0,0
+factory-cli,0.100.1-build0005203,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.98,1,0,1,0.0,0
+addy-probe,1.0,1,0,1,0.0,0
+Cline (via mcp-remote 0.1.29),3.77.0,1,0,1,0.0,0
+databricks,1.0.0,1,0,1,0.0,0
+grok-shell-grok_com_hugging_face,0.2.14,1,0,1,0.0,0
+olympus-curl-test,0.0.1,1,1,0,100.0,1
+test (via mcp-remote 0.1.16),1.0,1,0,1,0.0,0
+opencode,0.0.0-dev-202605291956,1,1,0,100.0,1
+circuitry-mcp-client,1.0.0,1,0,1,0.0,0
+litellm-test,1.0,1,0,1,0.0,0
+fortis-managed-agents,probe,1,0,1,0.0,0
+DeepChat,1.0.3-beta.1,1,0,1,0.0,0
+llmp-mcp-scanner,1.0,1,0,1,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.05.13.09.15.stable_03,1,0,1,0.0,0
+capy-mcp-client,1.0.0,1,0,1,0.0,0
+mcp-remote,0.1.37,1,0,1,0.0,0
+huggingface_hub.MCPClient (via mcp-remote 0.1.37),0.36.2,1,0,1,0.0,0
+magoneai-connector,1.0,1,1,0,100.0,1
+GenAIWithMEAI,1.0.0.0,1,0,1,0.0,0
+claude-code,2.1.87-dev.20260415.t171142.sha7dc15d6c,1,0,1,0.0,0
+pi-mcp-hf-mcp-server (via mcp-remote 0.1.37),1.0.0,1,0,1,0.0,0
+factory-cli,0.100.1-build0005223,1,0,1,0.0,0
+MAF-ImageGen-01,1.0.0.0,1,0,1,0.0,0
+mcp-spec-conformance-test,1.0.0,1,0,1,0.0,0
+ConversationalAI,2026.4.2.21351,1,0,1,0.0,0
+sr,1,1,0,1,0.0,0
+factory-cli,0.100.1-build0005235,1,0,1,0.0,0
+gemini-cli-mcp-client,0.27.0,1,0,1,0.0,0
+interview-mcp-client,1.0.0,1,1,0,100.0,1
+Roo Code,0.0.8138,1,0,1,0.0,0
+agent-flow,1.0,1,0,1,0.0,0
+layla,6.9.0-alpha3,1,0,1,0.0,0
+gemini-cli-mcp-client (via mcp-remote 0.1.37),0.35.3,1,0,1,0.0,0
+claude-code,2.1.48,1,0,1,0.0,0
+hv-discovery-probe,1.0,1,0,1,0.0,0
+Manus,8.0.9,1,1,0,100.0,2
+lisa-discovery,1.0.0,1,0,1,0.0,0
+wiki-refresh,1.0,1,0,1,0.0,0
+cw-v8,0.1,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.30),2.1.105,1,0,1,0.0,0
+taksamai,1.0,1,0,1,0.0,0
+codex-post-restart-smoke,0.1,1,0,1,0.0,0
+grok-shell-Hugging Face,0.1.162-alpha.4,1,0,1,0.0,0
+@n8n/n8n-nodes-langchain.mcpClientTool,1.1,1,0,1,0.0,0
+DeepChat,0.5.6-beta.5,1,0,1,0.0,0
+zo-probe,1.0,1,0,1,0.0,0
+Visual Studio Code - Insiders,1.110.0-insider,1,0,1,0.0,0
+zenlytic-zoe,1.0,1,0,1,0.0,0
+AI Backend MCP Client,1.0.0,1,0,1,0.0,0
+layla,6.12.0-alpha5.2,1,1,0,100.0,2
+violet-code,2.1.32,1,0,1,0.0,0
+bolt-api,0.1.20,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.18),2.1.66,1,0,1,0.0,0
+audit-probe-A,0.1,1,0,1,0.0,0
+aionrs,0.3.0,1,0,1,0.0,0
+bolt-api,0.1.43,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.37),0.116.0,1,0,1,0.0,0
+bunny,1.0,1,0,1,0.0,0
+Research Client,0.1.0,1,0,1,0.0,0
+foundry-poc,1.0.0,1,0,1,0.0,0
+aidr-auth-probe,0.1.0,1,0,1,0.0,0
+claude-code,2.1.64,1,0,1,0.0,0
+curl-probe,0.0.0,1,0,1,0.0,0
+vsc-aitoolkit-hugging face,0.34.0,1,0,1,0.0,0
+grid-meta-mcp-client,0.1.0,1,0,1,0.0,0
+Reuters Assistant Backend,1.0.0,1,0,1,0.0,0
+BB8-MCP-Broker-conn-237f02dd,1.0.0,1,0,1,0.0,0
+Visual Studio Code - Insiders (via mcp-remote 0.1.37),1.118.0-insider,1,0,1,0.0,0
+grok-shell-grok_com_hugging_face,0.2.0,1,0,1,0.0,0
+grok-shell-grok_com_hugging_face,0.1.182-alpha.2,1,0,1,0.0,0
+fast-agent-mcp,0.7.10,1,1,0,100.0,3
+hf-plugin-precheck,1.0.0,1,0,1,0.0,0
+audit,0,1,0,1,0.0,0
+bio-agents-probe,0.1,1,0,1,0.0,0
+opencode-test,0.1,1,0,1,0.0,0
+opencode,0.0.0-dev-202605310921,1,1,0,100.0,1
+ConversationalAI,2026.5.1.23924,1,0,1,0.0,0
+rmcp,0.12.0,1,0,1,0.0,0
+Visual Studio Code - Insiders,1.106.0-insider,1,0,1,0.0,0
+gb10,0,1,0,1,0.0,0
+factory-cli (via mcp-remote 0.1.37),0.123.1,1,0,1,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.04.08.08.36.stable_02,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.118.0-alpha.2,1,0,1,0.0,0
+com.raycast.macos,1.104.17,1,0,1,0.0,0
+rmcp,1.3.0,1,0,1,0.0,0
+mcporter,0.10.2-khalak.3,1,0,1,0.0,0
+figr-probe,1.0,1,0,1,0.0,0
+native-tenant-api-discovery,1.0.0,1,0,1,0.0,0
+mcp-health,0.2,1,0,1,0.0,0
+opencode,0.0.0-dev-202605291240,1,1,0,100.0,1
+quicksuite-prm-probe,1.0,1,0,1,0.0,0
+ConversationalAI,2026.5.0.0,1,1,0,100.0,1
+ConversationalAI,2026.5.1.24139,1,0,1,0.0,0
+PotatoAI,1.0.0.0,1,0,1,0.0,0
+claude-code,2.1.67,1,0,1,0.0,0
+JetBrains-PY/copilot-intellij,261.23567.174/1.8.2-243,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.124,1,0,1,0.0,0
+Osaurus,0.15.18,1,0,1,0.0,0
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.04.27.15.32.stable_02,1,0,1,0.0,0
+grok-shell-huggingface,0.1.220,1,0,1,0.0,0
+mcp-measurement-research,0.1,1,0,1,0.0,0
+AgentCoreRegistry,1.0.0,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.29),2.1.97,1,0,1,0.0,0
+cc-from-code-001,1.0,1,0,1,0.0,0
+gemini-cli-mcp-client,0.33.0,1,0,1,0.0,0
+opencode,0.0.0-dev-202605292018,1,1,0,100.0,1
+VSCodium - Insiders,1.112.02603-insider,1,0,1,0.0,0
+gemini-cli-mcp-client,0.39.0-nightly.20260411.0957f7d3e,1,0,1,0.0,0
+harbor-qa,0.1,1,0,1,0.0,0
+zax-vector-probe,0.1,1,0,1,0.0,0
+opencode,0.0.0-fix-gpt55-202605091642,1,1,0,100.0,1
+AIAgentCreator,1.0.0,1,0,1,0.0,0
+copilot-validation,0.0.0,1,0,1,0.0,0
+opencode,0.0.0-beta-202605271428,1,1,0,100.0,1
+dev.warp.Warp-Stable (via mcp-remote 0.1.37),v0.2026.05.18.05.32.stable_02,1,0,1,0.0,0
+opencode,0.0.0-dev-202605292122,1,1,0,100.0,1
+audit-probe-anon-init,0.1,1,0,1,0.0,0
+AgenticLoop,1.0.0,1,0,1,0.0,0
+bolt-api,0.1.4,1,0,1,0.0,0
+unauth-test,1.0,1,1,0,100.0,2
+opencode,0.0.0-beta-202605241918,1,0,1,0.0,0
+mcp-ssrf-recon,0.1,1,1,0,100.0,3
+mcp-unpack,0.1.0,1,0,1,0.0,0
+mcprism-live-runner,0.1-unsupported,1,0,1,0.0,0
+grok-shell-grok_com_hugging_face,0.1.210,1,0,1,0.0,0
+Postman Client - 84a96ca7-04fd-4535-a961-18c65221abae,1.0.0,1,0,1,0.0,0
+Davidoutz.Www,1.0.0.0,1,0,1,0.0,0
+deloryx-orchestrator,1.0,1,1,0,100.0,1
+wize-rooms-agent,1.0.0,1,0,1,0.0,0
+DeepChat,1.0.0-beta.7,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.30,1,0,1,0.0,0
+agent-os-probe,1.0,1,0,1,0.0,0
+code-pilot-ai,1.0.0,1,0,1,0.0,0
+conduit-smoke,0.0.0,1,0,1,0.0,0
+claude-code,2.1.8,1,0,1,0.0,0
+lyra-self-audit,1.0.0,1,0,1,0.0,0
+gamma-remote-mcp-auth-enricher,0.1.0,1,0,1,0.0,0
+hadrian-gateway-ui,1.0.0,1,0,1,0.0,0
+qwen-cli-mcp-client-huggingface-tools,0.0.1,1,0,1,0.0,0
+triage,0.1,1,0,1,0.0,0
+oten-executor,0.1,1,1,0,100.0,1
+curl,0.1,1,0,1,0.0,0
+mcp-probe,0.1,1,0,1,0.0,0
+claude-code (via mcp-remote 0.1.37),2.1.78,1,0,1,0.0,0
+claude-code,2.1.40,1,0,1,0.0,0
+Cline,3.68.0,1,0,1,0.0,0
+codex-mcp-client (via mcp-remote 0.1.18),0.135.0,1,0,1,0.0,0
+roo-connectivity-test,1.0.0,1,0,1,0.0,0
+claude-code,2.1.28,1,0,1,0.0,0
+c,0,1,0,1,0.0,0
+coollab-probe,0.1,1,0,1,0.0,0
+hrbr-tool-probe,0.1.0,1,0,1,0.0,0
+stack-install-test,0.1,1,0,1,0.0,0
+codex-mcp-client,0.107.0-alpha.5,1,0,1,0.0,0
+opencode,1.2.22,1,1,0,100.0,1

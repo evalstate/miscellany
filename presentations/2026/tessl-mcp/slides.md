@@ -25,10 +25,8 @@ fonts:
 </main>
 </div>
 
+---
 
----
-layout: default
----
 
 <div class="about-intro">
 <section>
@@ -69,30 +67,30 @@ layout: default
 </div>
 
 ---
-layout: default
----
+
 
 <IntroVideo />
 
+---
 
----
-layout: default
----
 
 # MCP At Hugging Face
 
 <div class="hf-mcp-slide">
 <section class="hf-mcp-copy">
-<div class="kicker">hugging face mcp server</div>
-<h2>One protocol surface for the Hub</h2>
 
 <ul>
-<li>Search models, datasets, papers, Spaces, and docs</li>
-<li>Inspect repos and metadata from the agent loop</li>
-<li>Call hosted tools and demos through MCP</li>
+<li>Gateway to multi-modal inference</li>
+<li>Conduct Research, Inspect Datasets, Find Models</li>
+<li>Run and manage sandboxes</li>
+<li>Allow Authenticated and Unauthenticated access</li>
 </ul>
 
-<p>Discovery · context · execution</p>
+<code>Qwen 3.5-35B-A3B</code> <br/>
+<code>Flux.1-Krea-Dev </code> <br/>
+<code>Qwen-Edit-2509-Multiple-angles-LoRA</code> <br/>
+<code>Wan2.2 First/Last Frame</code>
+
 </section>
 
 <aside class="hf-mcp-video-frame deck-panel">
@@ -100,25 +98,16 @@ layout: default
 </aside>
 </div>
 
-
 ---
 
-
-# Protocol Features
+# MCP Protocol - Transports
 
 <div class="protocol-diagram">
   <ProtocolStack />
 </div>
 
----
-# What's new
+MCP is bidirectional.
 
-## Stateless
-
-
----
-layout: default
-kicker: streamable http
 ---
 
 # Remote MCP through a load balancer
@@ -128,8 +117,7 @@ kicker: streamable http
 </div>
 
 ---
-layout: default
----
+
 
 # Transport Evolution
 
@@ -138,32 +126,28 @@ layout: default
 </div>
 
 ---
-layout: default
----
+
 
 <div class="traffic-chart-slide">
   <McpRemoteTrafficChart client="Claude Code" title="Claude Code" />
 </div>
 
 ---
-layout: default
----
+
 
 <div class="traffic-chart-slide">
   <McpRemoteTrafficChart client="Codex" title="Codex" />
 </div>
 
 ---
-layout: default
----
+
 
 <div class="traffic-chart-slide">
   <McpRemoteTrafficChart client="Codex" range-mode="claude" title="Codex" subtitle="same date range as Claude Code" />
 </div>
 
 ---
-layout: default
----
+
 
 <div class="weekly-activity-slide">
   <McpWeeklyActivityChart />
@@ -172,8 +156,61 @@ layout: default
 ---
 
 
-
-# What's gone?
-
+<div class="conversion-chart-slide">
+  <SessionConversionChart />
+</div>
 
 ---
+
+# Understanding Activity
+
+## Initializations are a bad proxy for use
+
+- Can't measure ambient installation (caching, tool search)
+- Doesn't correlate to Tool Calls
+
+## Tool Calls: More != Better
+
+- High Tool Call volume may indicate poor tool design or discovery
+- Client behaviour can be unpredictable
+
+## Session Conversion is preferred
+
+- Tells us Clients that have connected at least once.
+
+---
+
+# Some Issues
+
+MCP is noisy.
+MCP is complicated.
+
+---
+
+# 2026-07-28 Specification: `The Stateless Core`
+
+---
+
+# Simplifications
+
+- No longer allow Server to Client initiated requests (MCP WebCam)
+- Remove Sampling, Roots (and Logging)
+
+---
+
+# Stateless Protocol
+
+## Remove Initialize and Mcp-Session-Id
+
+## Add /discover endpoint
+
+---
+
+# Cache Control
+
+## Tool List Changed 
+
+---
+
+# HTTP Headers
+

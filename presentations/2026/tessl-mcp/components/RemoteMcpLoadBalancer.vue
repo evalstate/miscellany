@@ -1,29 +1,32 @@
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, ref } from "vue";
 
-const activeServer = ref(1)
-const animationKey = ref(0)
-const isAnimating = ref(false)
+const activeServer = ref(1);
+const animationKey = ref(0);
+const isAnimating = ref(false);
 
 const serverTargets = [
-  { id: 1, name: 'MCP Server 01', y: 105 },
-  { id: 2, name: 'MCP Server 02', y: 215 },
-  { id: 3, name: 'MCP Server 03', y: 325 },
-]
+  { id: 1, name: "MCP Server 01", y: 105 },
+  { id: 2, name: "MCP Server 02", y: 215 },
+  { id: 3, name: "MCP Server 03", y: 325 },
+];
 
-const selectedServer = computed(() => serverTargets[activeServer.value - 1])
-const selectedPath = computed(() => `M 535 215 C 620 215, 660 ${selectedServer.value.y}, 770 ${selectedServer.value.y}`)
+const selectedServer = computed(() => serverTargets[activeServer.value - 1]);
+const selectedPath = computed(
+  () =>
+    `M 535 215 C 620 215, 660 ${selectedServer.value.y}, 770 ${selectedServer.value.y}`,
+);
 
 async function fireRequest() {
-  activeServer.value = (activeServer.value % 3) + 1
-  isAnimating.value = false
-  animationKey.value += 1
-  await nextTick()
-  isAnimating.value = true
+  activeServer.value = (activeServer.value % 3) + 1;
+  isAnimating.value = false;
+  animationKey.value += 1;
+  await nextTick();
+  isAnimating.value = true;
 
   window.setTimeout(() => {
-    isAnimating.value = false
-  }, 3400)
+    isAnimating.value = false;
+  }, 3400);
 }
 </script>
 
@@ -33,14 +36,25 @@ async function fireRequest() {
     :class="{ 'remote-mcp--running': isAnimating }"
     aria-label="Remote MCP request routed through a load balancer"
   >
-    <svg class="remote-mcp__links" viewBox="0 0 1000 430" preserveAspectRatio="none" aria-hidden="true">
+    <svg
+      class="remote-mcp__links"
+      viewBox="0 0 1000 430"
+      preserveAspectRatio="none"
+      aria-hidden="true"
+    >
       <defs>
         <linearGradient id="mcp-link-glow" x1="0" x2="1" y1="0" y2="0">
           <stop offset="0%" stop-color="rgba(245, 164, 0, 0)" />
           <stop offset="48%" stop-color="rgba(255, 198, 73, 0.92)" />
           <stop offset="100%" stop-color="rgba(106, 163, 247, 0.72)" />
         </linearGradient>
-        <filter id="mcp-packet-glow" x="-120%" y="-120%" width="340%" height="340%">
+        <filter
+          id="mcp-packet-glow"
+          x="-120%"
+          y="-120%"
+          width="340%"
+          height="340%"
+        >
           <feGaussianBlur stdDeviation="5" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -49,10 +63,22 @@ async function fireRequest() {
         </filter>
       </defs>
 
-      <path class="remote-mcp__link remote-mcp__link--base" d="M 185 215 C 285 215, 350 215, 430 215" />
-      <path class="remote-mcp__link remote-mcp__link--base" d="M 535 215 C 620 215, 660 105, 770 105" />
-      <path class="remote-mcp__link remote-mcp__link--base" d="M 535 215 C 620 215, 660 215, 770 215" />
-      <path class="remote-mcp__link remote-mcp__link--base" d="M 535 215 C 620 215, 660 325, 770 325" />
+      <path
+        class="remote-mcp__link remote-mcp__link--base"
+        d="M 185 215 C 285 215, 350 215, 430 215"
+      />
+      <path
+        class="remote-mcp__link remote-mcp__link--base"
+        d="M 535 215 C 620 215, 660 105, 770 105"
+      />
+      <path
+        class="remote-mcp__link remote-mcp__link--base"
+        d="M 535 215 C 620 215, 660 215, 770 215"
+      />
+      <path
+        class="remote-mcp__link remote-mcp__link--base"
+        d="M 535 215 C 620 215, 660 325, 770 325"
+      />
 
       <path
         :key="`client-link-${animationKey}`"
@@ -65,15 +91,39 @@ async function fireRequest() {
         :d="selectedPath"
       />
 
-      <circle :key="`packet-one-${animationKey}`" class="remote-mcp__packet remote-mcp__packet--one" r="8" filter="url(#mcp-packet-glow)">
-        <animateMotion dur="0.82s" begin="0s" fill="freeze" path="M 185 215 C 285 215, 350 215, 430 215" />
+      <circle
+        :key="`packet-one-${animationKey}`"
+        class="remote-mcp__packet remote-mcp__packet--one"
+        r="8"
+        filter="url(#mcp-packet-glow)"
+      >
+        <animateMotion
+          dur="0.82s"
+          begin="0s"
+          fill="freeze"
+          path="M 185 215 C 285 215, 350 215, 430 215"
+        />
       </circle>
-      <circle :key="`packet-two-${animationKey}`" class="remote-mcp__packet remote-mcp__packet--two" r="8" filter="url(#mcp-packet-glow)">
-        <animateMotion dur="0.9s" begin="1.42s" fill="freeze" :path="selectedPath" />
+      <circle
+        :key="`packet-two-${animationKey}`"
+        class="remote-mcp__packet remote-mcp__packet--two"
+        r="8"
+        filter="url(#mcp-packet-glow)"
+      >
+        <animateMotion
+          dur="0.9s"
+          begin="1.42s"
+          fill="freeze"
+          :path="selectedPath"
+        />
       </circle>
     </svg>
 
-    <button class="remote-mcp__node remote-mcp__node--client" type="button" @click="fireRequest">
+    <button
+      class="remote-mcp__node remote-mcp__node--client"
+      type="button"
+      @click="fireRequest"
+    >
       <span class="remote-mcp__node-glow" />
       <span class="remote-mcp__eyebrow">click to send</span>
       <strong>MCP Client</strong>
@@ -120,8 +170,16 @@ async function fireRequest() {
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 8px);
   background:
-    radial-gradient(circle at 15% 52%, rgba(245, 164, 0, 0.12), transparent 22%),
-    radial-gradient(circle at 82% 50%, rgba(106, 163, 247, 0.10), transparent 28%),
+    radial-gradient(
+      circle at 15% 52%,
+      rgba(245, 164, 0, 0.12),
+      transparent 22%
+    ),
+    radial-gradient(
+      circle at 82% 50%,
+      rgba(106, 163, 247, 0.1),
+      transparent 28%
+    ),
     linear-gradient(135deg, rgba(245, 164, 0, 0.055), transparent 38%),
     rgba(20, 22, 27, 0.82);
   box-shadow: var(--deck-shadow);
@@ -200,7 +258,11 @@ async function fireRequest() {
   border: 1px solid var(--deck-border-2);
   border-radius: calc(var(--deck-radius) + 6px);
   background:
-    linear-gradient(145deg, rgba(245, 164, 0, 0.105), rgba(20, 22, 27, 0.82) 48%),
+    linear-gradient(
+      145deg,
+      rgba(245, 164, 0, 0.105),
+      rgba(20, 22, 27, 0.82) 48%
+    ),
     rgba(20, 22, 27, 0.92);
   color: var(--deck-text);
   font-family: var(--deck-font-mono);
@@ -232,7 +294,11 @@ button.remote-mcp__node--client:hover {
   top: 50%;
   transform: translate(-50%, -50%);
   background:
-    linear-gradient(145deg, rgba(106, 163, 247, 0.09), rgba(20, 22, 27, 0.86) 50%),
+    linear-gradient(
+      145deg,
+      rgba(106, 163, 247, 0.09),
+      rgba(20, 22, 27, 0.86) 50%
+    ),
     rgba(20, 22, 27, 0.94);
 }
 

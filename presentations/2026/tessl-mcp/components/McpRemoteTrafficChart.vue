@@ -1,172 +1,225 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-import weeklyRows from '../data-viz/mcp_remote_share_weekly.json'
+import { computed } from "vue";
+import weeklyRows from "../data-viz/mcp_remote_share_weekly.json";
 
-type ClientFamily = 'Codex' | 'Claude Code'
-type RangeMode = 'client' | 'claude'
+type ClientFamily = "Codex" | "Claude Code";
+type RangeMode = "client" | "claude";
 
 const props = withDefaults(
   defineProps<{
-    client: ClientFamily
-    rangeMode?: RangeMode
-    title?: string
-    subtitle?: string
+    client: ClientFamily;
+    rangeMode?: RangeMode;
+    title?: string;
+    subtitle?: string;
   }>(),
   {
-    rangeMode: 'client',
+    rangeMode: "client",
     title: undefined,
     subtitle: undefined,
   },
-)
+);
 
 type WeeklyRow = {
-  week_start: string
-  week_end: string
-  client_family: ClientFamily
-  mcp_remote_share_pct: number
-  usage_index_0_100: number
-  mcp_remote_requests: number
-  total_requests: number
-}
+  week_start: string;
+  week_end: string;
+  client_family: ClientFamily;
+  mcp_remote_share_pct: number;
+  usage_index_0_100: number;
+  mcp_remote_requests: number;
+  total_requests: number;
+};
 
-const rows = weeklyRows as WeeklyRow[]
-const width = 1000
-const height = 520
+const rows = weeklyRows as WeeklyRow[];
+const width = 1000;
+const height = 520;
 const plot = {
   left: 74,
   right: 40,
   top: 54,
   bottom: 82,
-}
-const plotWidth = width - plot.left - plot.right
-const plotHeight = height - plot.top - plot.bottom
+};
+const plotWidth = width - plot.left - plot.right;
+const plotHeight = height - plot.top - plot.bottom;
 
-const titleText = computed(() => props.title ?? `${props.client}: mcp-remote share`)
+const titleText = computed(
+  () => props.title ?? `${props.client}: mcp-remote share`,
+);
 
 const subtitleText = computed(() => {
-  if (props.subtitle) return props.subtitle
-  if (props.rangeMode === 'claude' && props.client === 'Codex') {
-    return 'Codex plotted on the Claude Code date range'
+  if (props.subtitle) return props.subtitle;
+  if (props.rangeMode === "claude" && props.client === "Codex") {
+    return "Codex plotted on the Claude Code date range";
   }
-  return 'Weekly buckets · usage index in background'
-})
+  return "Weekly buckets · usage index in background";
+});
 
 const clientRows = computed(() =>
   rows
     .filter((row) => row.client_family === props.client)
     .sort((a, b) => a.week_start.localeCompare(b.week_start)),
-)
+);
 
 const claudeRows = computed(() =>
   rows
-    .filter((row) => row.client_family === 'Claude Code')
+    .filter((row) => row.client_family === "Claude Code")
     .sort((a, b) => a.week_start.localeCompare(b.week_start)),
-)
+);
 
 const rangeRows = computed(() => {
-  if (props.rangeMode === 'claude') return claudeRows.value
-  return clientRows.value
-})
+  if (props.rangeMode === "claude") return claudeRows.value;
+  return clientRows.value;
+});
 
 function toDate(value: string) {
-  const [year, month, day] = value.split('-').map(Number)
-  return new Date(Date.UTC(year, month - 1, day))
+  const [year, month, day] = value.split("-").map(Number);
+  return new Date(Date.UTC(year, month - 1, day));
 }
 
-const startDate = computed(() => toDate(rangeRows.value[0]?.week_start ?? clientRows.value[0]?.week_start))
-const endDate = computed(() => toDate(rangeRows.value.at(-1)?.week_start ?? clientRows.value.at(-1)?.week_start))
-const startMs = computed(() => startDate.value.getTime())
-const endMs = computed(() => endDate.value.getTime())
-const spanMs = computed(() => Math.max(1, endMs.value - startMs.value))
+const startDate = computed(() =>
+  toDate(rangeRows.value[0]?.week_start ?? clientRows.value[0]?.week_start),
+);
+const endDate = computed(() =>
+  toDate(
+    rangeRows.value.at(-1)?.week_start ?? clientRows.value.at(-1)?.week_start,
+  ),
+);
+const startMs = computed(() => startDate.value.getTime());
+const endMs = computed(() => endDate.value.getTime());
+const spanMs = computed(() => Math.max(1, endMs.value - startMs.value));
 
 function xForDate(value: string) {
-  const ms = toDate(value).getTime()
-  return plot.left + ((ms - startMs.value) / spanMs.value) * plotWidth
+  const ms = toDate(value).getTime();
+  return plot.left + ((ms - startMs.value) / spanMs.value) * plotWidth;
 }
 
 function yForShare(value: number) {
-  return plot.top + (1 - value / shareMax.value) * plotHeight
+  return plot.top + (1 - value / shareMax.value) * plotHeight;
 }
 
 function yForUsage(value: number) {
-  return plot.top + (1 - value / 100) * plotHeight
+  return plot.top + (1 - value / 100) * plotHeight;
 }
 
 const visibleRows = computed(() =>
   clientRows.value.filter((row) => {
-    const ms = toDate(row.week_start).getTime()
-    return ms >= startMs.value && ms <= endMs.value
+    const ms = toDate(row.week_start).getTime();
+    return ms >= startMs.value && ms <= endMs.value;
   }),
-)
+);
 
 const shareMax = computed(() => {
-  const max = Math.max(...visibleRows.value.map((row) => row.mcp_remote_share_pct), 1)
-  if (max <= 10) return 10
-  if (max <= 25) return 25
-  if (max <= 50) return 50
-  return 100
-})
+  const max = Math.max(
+    ...visibleRows.value.map((row) => row.mcp_remote_share_pct),
+    1,
+  );
+  if (max <= 10) return 10;
+  if (max <= 25) return 25;
+  if (max <= 50) return 50;
+  return 100;
+});
 
 const shareTicks = computed(() => {
-  if (shareMax.value === 10) return [0, 2.5, 5, 7.5, 10]
-  if (shareMax.value === 25) return [0, 5, 10, 15, 20, 25]
-  if (shareMax.value === 50) return [0, 10, 20, 30, 40, 50]
-  return [0, 20, 40, 60, 80, 100]
-})
+  if (shareMax.value === 10) return [0, 2.5, 5, 7.5, 10];
+  if (shareMax.value === 25) return [0, 5, 10, 15, 20, 25];
+  if (shareMax.value === 50) return [0, 10, 20, 30, 40, 50];
+  return [0, 20, 40, 60, 80, 100];
+});
 
 function pointsFor(getY: (row: WeeklyRow) => number) {
-  return visibleRows.value.map((row) => `${xForDate(row.week_start).toFixed(1)},${getY(row).toFixed(1)}`).join(' ')
+  return visibleRows.value
+    .map(
+      (row) => `${xForDate(row.week_start).toFixed(1)},${getY(row).toFixed(1)}`,
+    )
+    .join(" ");
 }
 
-const sharePolyline = computed(() => pointsFor((row) => yForShare(row.mcp_remote_share_pct)))
+const sharePolyline = computed(() =>
+  pointsFor((row) => yForShare(row.mcp_remote_share_pct)),
+);
 
 const usageArea = computed(() => {
-  const points = visibleRows.value.map((row) => `${xForDate(row.week_start).toFixed(1)},${yForUsage(row.usage_index_0_100).toFixed(1)}`)
-  if (points.length === 0) return ''
-  const firstX = xForDate(visibleRows.value[0].week_start).toFixed(1)
-  const lastX = xForDate(visibleRows.value.at(-1)!.week_start).toFixed(1)
-  const baseY = plot.top + plotHeight
-  return `M ${firstX} ${baseY} L ${points.join(' L ')} L ${lastX} ${baseY} Z`
-})
+  const points = visibleRows.value.map(
+    (row) =>
+      `${xForDate(row.week_start).toFixed(1)},${yForUsage(row.usage_index_0_100).toFixed(1)}`,
+  );
+  if (points.length === 0) return "";
+  const firstX = xForDate(visibleRows.value[0].week_start).toFixed(1);
+  const lastX = xForDate(visibleRows.value.at(-1)!.week_start).toFixed(1);
+  const baseY = plot.top + plotHeight;
+  return `M ${firstX} ${baseY} L ${points.join(" L ")} L ${lastX} ${baseY} Z`;
+});
 
 const monthTicks = computed(() => {
-  const ticks: { label: string; x: number }[] = []
-  const cursor = new Date(Date.UTC(startDate.value.getUTCFullYear(), startDate.value.getUTCMonth(), 1))
-  const formatter = new Intl.DateTimeFormat('en', { month: 'short' })
-  let index = 0
+  const ticks: { label: string; x: number }[] = [];
+  const cursor = new Date(
+    Date.UTC(
+      startDate.value.getUTCFullYear(),
+      startDate.value.getUTCMonth(),
+      1,
+    ),
+  );
+  const formatter = new Intl.DateTimeFormat("en", { month: "short" });
+  let index = 0;
   while (cursor.getTime() <= endMs.value) {
-    const x = plot.left + ((cursor.getTime() - startMs.value) / spanMs.value) * plotWidth
-    const showTick = index % 2 === 0 || cursor.getTime() >= endMs.value - 1000 * 60 * 60 * 24 * 34
+    const x =
+      plot.left +
+      ((cursor.getTime() - startMs.value) / spanMs.value) * plotWidth;
+    const showTick =
+      index % 2 === 0 ||
+      cursor.getTime() >= endMs.value - 1000 * 60 * 60 * 24 * 34;
     if (showTick && x >= plot.left - 1 && x <= plot.left + plotWidth + 1) {
       ticks.push({
         label: formatter.format(cursor),
         x,
-      })
+      });
     }
-    cursor.setUTCMonth(cursor.getUTCMonth() + 1)
-    index += 1
+    cursor.setUTCMonth(cursor.getUTCMonth() + 1);
+    index += 1;
   }
-  return ticks
-})
+  return ticks;
+});
 
-const latest = computed(() => visibleRows.value.at(-1))
-const peakShare = computed(() => visibleRows.value.reduce((peak, row) => (row.mcp_remote_share_pct > peak.mcp_remote_share_pct ? row : peak), visibleRows.value[0]))
-const latestShareLabel = computed(() => `${latest.value?.mcp_remote_share_pct.toFixed(1) ?? '—'}%`)
-const peakShareLabel = computed(() => `${peakShare.value?.mcp_remote_share_pct.toFixed(1) ?? '—'}%`)
-const latestUsageLabel = computed(() => `${latest.value?.usage_index_0_100.toFixed(1) ?? '—'}`)
+const latest = computed(() => visibleRows.value.at(-1));
+const peakShare = computed(() =>
+  visibleRows.value.reduce(
+    (peak, row) =>
+      row.mcp_remote_share_pct > peak.mcp_remote_share_pct ? row : peak,
+    visibleRows.value[0],
+  ),
+);
+const latestShareLabel = computed(
+  () => `${latest.value?.mcp_remote_share_pct.toFixed(1) ?? "—"}%`,
+);
+const peakShareLabel = computed(
+  () => `${peakShare.value?.mcp_remote_share_pct.toFixed(1) ?? "—"}%`,
+);
+const latestUsageLabel = computed(
+  () => `${latest.value?.usage_index_0_100.toFixed(1) ?? "—"}`,
+);
 const latestLabelX = computed(() => {
-  if (!latest.value) return plot.left
-  return Math.min(plot.left + plotWidth - 16, Math.max(plot.left + 90, xForDate(latest.value.week_start) - 12))
-})
+  if (!latest.value) return plot.left;
+  return Math.min(
+    plot.left + plotWidth - 16,
+    Math.max(plot.left + 90, xForDate(latest.value.week_start) - 12),
+  );
+});
 const latestLabelY = computed(() => {
-  if (!latest.value) return plot.top
-  return Math.max(plot.top + 30, Math.min(plot.top + plotHeight - 44, yForShare(latest.value.mcp_remote_share_pct) - 18))
-})
-
+  if (!latest.value) return plot.top;
+  return Math.max(
+    plot.top + 30,
+    Math.min(
+      plot.top + plotHeight - 44,
+      yForShare(latest.value.mcp_remote_share_pct) - 18,
+    ),
+  );
+});
 </script>
 
 <template>
-  <section class="traffic-chart" :class="`traffic-chart--${props.client === 'Codex' ? 'codex' : 'claude'}`">
+  <section
+    class="traffic-chart"
+    :class="`traffic-chart--${props.client === 'Codex' ? 'codex' : 'claude'}`"
+  >
     <header class="traffic-chart__header">
       <div>
         <h1>{{ titleText }}</h1>
@@ -178,17 +231,39 @@ const latestLabelY = computed(() => {
       </div>
     </header>
 
-    <svg class="traffic-chart__svg" :viewBox="`0 0 ${width} ${height}`" role="img">
+    <svg
+      class="traffic-chart__svg"
+      :viewBox="`0 0 ${width} ${height}`"
+      role="img"
+    >
       <defs>
-        <linearGradient :id="`usage-fill-${props.client.replaceAll(' ', '-')}-${props.rangeMode}`" x1="0" x2="0" y1="0" y2="1">
+        <linearGradient
+          :id="`usage-fill-${props.client.replaceAll(' ', '-')}-${props.rangeMode}`"
+          x1="0"
+          x2="0"
+          y1="0"
+          y2="1"
+        >
           <stop offset="0%" stop-color="rgba(106, 163, 247, 0.42)" />
           <stop offset="100%" stop-color="rgba(106, 163, 247, 0.03)" />
         </linearGradient>
-        <linearGradient :id="`share-stroke-${props.client.replaceAll(' ', '-')}-${props.rangeMode}`" x1="0" x2="1" y1="0" y2="0">
+        <linearGradient
+          :id="`share-stroke-${props.client.replaceAll(' ', '-')}-${props.rangeMode}`"
+          x1="0"
+          x2="1"
+          y1="0"
+          y2="0"
+        >
           <stop offset="0%" stop-color="#ffc649" />
           <stop offset="100%" stop-color="#f5a400" />
         </linearGradient>
-        <filter :id="`share-glow-${props.client.replaceAll(' ', '-')}-${props.rangeMode}`" x="-40%" y="-40%" width="180%" height="180%">
+        <filter
+          :id="`share-glow-${props.client.replaceAll(' ', '-')}-${props.rangeMode}`"
+          x="-40%"
+          y="-40%"
+          width="180%"
+          height="180%"
+        >
           <feGaussianBlur stdDeviation="4" result="blur" />
           <feMerge>
             <feMergeNode in="blur" />
@@ -197,7 +272,13 @@ const latestLabelY = computed(() => {
         </filter>
       </defs>
 
-      <rect :x="plot.left" :y="plot.top" :width="plotWidth" :height="plotHeight" class="traffic-chart__plot-bg" />
+      <rect
+        :x="plot.left"
+        :y="plot.top"
+        :width="plotWidth"
+        :height="plotHeight"
+        class="traffic-chart__plot-bg"
+      />
 
       <g class="traffic-chart__grid">
         <line
@@ -218,7 +299,11 @@ const latestLabelY = computed(() => {
         />
       </g>
 
-      <path class="traffic-chart__usage-area" :d="usageArea" :fill="`url(#usage-fill-${props.client.replaceAll(' ', '-')}-${props.rangeMode})`" />
+      <path
+        class="traffic-chart__usage-area"
+        :d="usageArea"
+        :fill="`url(#usage-fill-${props.client.replaceAll(' ', '-')}-${props.rangeMode})`"
+      />
       <polyline
         class="traffic-chart__share-line"
         :points="sharePolyline"
@@ -261,15 +346,33 @@ const latestLabelY = computed(() => {
       </g>
 
       <g v-if="latest" class="traffic-chart__latest">
-        <line :x1="xForDate(latest.week_start)" :x2="xForDate(latest.week_start)" :y1="plot.top" :y2="plot.top + plotHeight" />
-        <circle :cx="xForDate(latest.week_start)" :cy="yForShare(latest.mcp_remote_share_pct)" r="7" />
+        <line
+          :x1="xForDate(latest.week_start)"
+          :x2="xForDate(latest.week_start)"
+          :y1="plot.top"
+          :y2="plot.top + plotHeight"
+        />
+        <circle
+          :cx="xForDate(latest.week_start)"
+          :cy="yForShare(latest.mcp_remote_share_pct)"
+          r="7"
+        />
         <text :x="latestLabelX" :y="latestLabelY" text-anchor="end">
           {{ latestShareLabel }}
         </text>
       </g>
 
-      <text class="traffic-chart__axis-title" :x="plot.left" :y="plot.top - 24">share of traffic using mcp-remote</text>
-      <text class="traffic-chart__usage-label" :x="plot.left + plotWidth - 4" :y="plot.top + 24" text-anchor="end">opaque usage index</text>
+      <text class="traffic-chart__axis-title" :x="plot.left" :y="plot.top - 24">
+        share of traffic using mcp-remote
+      </text>
+      <text
+        class="traffic-chart__usage-label"
+        :x="plot.left + plotWidth - 4"
+        :y="plot.top + 24"
+        text-anchor="end"
+      >
+        opaque usage index
+      </text>
     </svg>
   </section>
 </template>
@@ -289,8 +392,16 @@ const latestLabelY = computed(() => {
   border: 1px solid var(--deck-border);
   border-radius: calc(var(--deck-radius) + 10px);
   background:
-    radial-gradient(circle at 12% 12%, rgba(245, 164, 0, 0.12), transparent 28%),
-    radial-gradient(circle at 78% 30%, rgba(106, 163, 247, 0.11), transparent 30%),
+    radial-gradient(
+      circle at 12% 12%,
+      rgba(245, 164, 0, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 78% 30%,
+      rgba(106, 163, 247, 0.11),
+      transparent 30%
+    ),
     rgba(20, 22, 27, 0.82);
   box-shadow: var(--deck-shadow);
 }
@@ -436,5 +547,4 @@ const latestLabelY = computed(() => {
   font-weight: 950;
   letter-spacing: -0.06em;
 }
-
 </style>

@@ -1,58 +1,57 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    showDescriptions?: boolean
+    showDescriptions?: boolean;
   }>(),
   {
     showDescriptions: false,
   },
-)
+);
 
 const capabilities = [
   {
-    id: 'tools',
-    title: 'Tools',
-    icon: 'wrench',
-    description: 'Invoke actions in the outside world',
-    zone: 'server',
+    id: "tools",
+    title: "Tools",
+    icon: "wrench",
+    description: "Invoke actions in the outside world",
+    zone: "server",
   },
   {
-    id: 'resources',
-    title: 'Resources',
-    icon: 'file',
-    description: 'Expose context the model can read',
-    zone: 'server',
+    id: "resources",
+    title: "Resources",
+    icon: "file",
+    description: "Expose context the model can read",
+    zone: "server",
   },
   {
-    id: 'prompts',
-    title: 'Prompts',
-    icon: 'message',
-    description: 'Package reusable instructions',
-    zone: 'server',
+    id: "prompts",
+    title: "Prompts",
+    icon: "message",
+    description: "Package reusable instructions",
+    zone: "server",
   },
   {
-    id: 'roots',
-    title: 'Roots',
-    icon: 'roots',
-    description: 'Scope filesystem/project boundaries',
-    zone: 'client',
+    id: "roots",
+    title: "Roots",
+    icon: "roots",
+    description: "Scope filesystem/project boundaries",
+    zone: "client",
   },
   {
-    id: 'sampling',
-    title: 'Sampling',
-    icon: 'sparkles',
-    description: 'Let servers request model turns',
-    zone: 'client',
+    id: "sampling",
+    title: "Sampling",
+    icon: "sparkles",
+    description: "Let servers request model turns",
+    zone: "client",
   },
   {
-    id: 'elicitation',
-    title: 'Elicitation',
-    icon: 'question',
-    description: 'Ask users for missing input',
-    zone: 'client',
+    id: "elicitation",
+    title: "Elicitation",
+    icon: "question",
+    description: "Ask users for missing input",
+    zone: "client",
   },
-] as const
-
+] as const;
 </script>
 
 <template>
@@ -63,7 +62,9 @@ const capabilities = [
 
     <div class="protocol-grid protocol-grid--server">
       <ProtocolCapabilityCard
-        v-for="item in capabilities.filter((capability) => capability.zone === 'server')"
+        v-for="item in capabilities.filter(
+          (capability) => capability.zone === 'server',
+        )"
         :key="item.id"
         :title="item.title"
         :icon="item.icon"
@@ -79,7 +80,9 @@ const capabilities = [
 
     <div class="protocol-grid protocol-grid--client">
       <ProtocolCapabilityCard
-        v-for="item in capabilities.filter((capability) => capability.zone === 'client')"
+        v-for="item in capabilities.filter(
+          (capability) => capability.zone === 'client',
+        )"
         :key="item.id"
         :title="item.title"
         :icon="item.icon"
@@ -98,7 +101,8 @@ const capabilities = [
 .protocol-stack {
   container-type: size;
   --stack-gap: clamp(0.5rem, 2.1cqh, 0.85rem);
-  --protocol-card-pad: clamp(0.58rem, 2.2cqh, 0.88rem) clamp(0.72rem, 2.6cqw, 1.1rem);
+  --protocol-card-pad: clamp(0.58rem, 2.2cqh, 0.88rem)
+    clamp(0.72rem, 2.6cqw, 1.1rem);
   --protocol-card-content-gap: clamp(0.58rem, 2.4cqw, 0.98rem);
   --protocol-card-height: clamp(58px, 22cqh, 86px);
   --protocol-icon-size: clamp(2rem, 11cqh, 3rem);
@@ -177,8 +181,14 @@ const capabilities = [
   grid-column: 1 / -1;
   grid-row: 1;
   height: 2px;
-  background:
-    linear-gradient(90deg, transparent, var(--deck-border-2) 22%, var(--deck-accent-line) 50%, var(--deck-border-2) 78%, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--deck-border-2) 22%,
+    var(--deck-accent-line) 50%,
+    var(--deck-border-2) 78%,
+    transparent
+  );
 }
 
 .protocol-transport__label {
@@ -195,5 +205,4 @@ const capabilities = [
   text-transform: uppercase;
   box-shadow: 0 14px 32px rgba(0, 0, 0, 0.24);
 }
-
 </style>
