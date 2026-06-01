@@ -111,7 +111,7 @@ fonts:
 
 ---
 
-# MCP Protocol is bidirectional
+# Current MCP is bi-directional 
 
 <div class="protocol-diagram">
   <ProtocolStack />
@@ -211,11 +211,35 @@ fonts:
 
 # MCP Clients Dataset
 
-## Open Source
+<div class="clients-dataset-slide text-image-slide">
+  <section class="text-image-slide__copy">
+    <p class="kicker">Open dataset</p>
 
-- Clients, Versions and Capabilities
-- Track availability of Features and Extensions
-- 
+  <a class="dataset-link-card" href="https://hf.co/datasets/evalstate/mcp-clients">
+    <span>hf.co/datasets/evalstate</span>
+    <strong>mcp-clients</strong>
+  </a>
+
+  <div class="compact-point-list">
+    <div>
+      <strong>Clients</strong>
+      <span>names, versions, last-seen activity</span>
+    </div>
+    <div>
+      <strong>Capabilities</strong>
+      <span>tools, prompts, roots, sampling, elicitation</span>
+    </div>
+    <div>
+      <strong>Extensions</strong>
+      <span>track emerging feature support over time</span>
+    </div>
+  </div>
+  </section>
+
+  <figure class="dataset-screenshot deck-panel">
+    <img :src="'/images/clients-data.png'" alt="Hugging Face Data Studio table for the mcp-clients dataset" />
+  </figure>
+</div>
 
 
 ---
@@ -234,7 +258,8 @@ fonts:
 - Maintaining open connections speculatively is expensive
 - SSE "cut-off" times in popular hosting platforms
 - Fault Tolerance and Scalability Concerns
-- Elicitation and Sampling require 
+- Elicitation and Sampling require Server->Client channel open
+- Session State not well defined (e.g STDIO, Tool List)
 
 ---
 layout: section
