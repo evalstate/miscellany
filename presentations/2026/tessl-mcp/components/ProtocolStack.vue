@@ -66,51 +66,133 @@ const clientCapabilities = capabilities.filter(
 );
 
 type Channel = "up" | "down";
-type Step = {
+type Actor = "client" | "server";
+type Phase = "wake" | "message" | "quiesce";
+type Frame = {
   label: string;
-  channel: Channel;
+  duration?: number;
+  phase: Phase;
+  actor?: Actor;
+  channel?: Channel;
+  holdChannel?: Channel;
   flash?: CapabilityId;
+  hold?: CapabilityId;
 };
 
-const scriptSteps: Step[] = [
+const scriptFrames: Frame[] = [
   {
     label: "prompts/list",
+    phase: "wake",
+    actor: "client",
     channel: "up",
+    holdChannel: "up",
+    duration: 560,
+  },
+  {
+    label: "prompts/list",
+    phase: "message",
+    actor: "client",
+    channel: "up",
+    holdChannel: "up",
     flash: "prompts",
+    hold: "prompts",
   },
   {
     label: "prompts/GetListResult",
+    phase: "message",
+    actor: "client",
     channel: "down",
+    holdChannel: "up",
+    hold: "prompts",
+  },
+  {
+    label: "ready",
+    phase: "quiesce",
+    duration: 520,
   },
   {
     label: "tools/call",
+    phase: "wake",
+    actor: "client",
     channel: "up",
+    holdChannel: "up",
+    duration: 560,
+  },
+  {
+    label: "tools/call",
+    phase: "message",
+    actor: "client",
+    channel: "up",
+    holdChannel: "up",
     flash: "tools",
+    hold: "tools",
   },
   {
     label: "progress/notification",
+    phase: "message",
+    actor: "client",
     channel: "down",
+    holdChannel: "up",
+    hold: "tools",
   },
   {
     label: "progress/notification",
+    phase: "message",
+    actor: "client",
     channel: "down",
+    holdChannel: "up",
+    hold: "tools",
   },
   {
     label: "progress/notification",
+    phase: "message",
+    actor: "client",
     channel: "down",
+    holdChannel: "up",
+    hold: "tools",
   },
   {
     label: "tools/CallToolResult",
+    phase: "message",
+    actor: "client",
     channel: "down",
+    holdChannel: "up",
+    hold: "tools",
+  },
+  {
+    label: "ready",
+    phase: "quiesce",
+    duration: 520,
   },
   {
     label: "sampling/createMessage",
+    phase: "wake",
+    actor: "server",
     channel: "down",
+    holdChannel: "down",
+    duration: 560,
+  },
+  {
+    label: "sampling/createMessage",
+    phase: "message",
+    actor: "server",
+    channel: "down",
+    holdChannel: "down",
     flash: "sampling",
+    hold: "sampling",
   },
   {
     label: "result",
+    phase: "message",
+    actor: "server",
     channel: "up",
+    holdChannel: "down",
+    hold: "sampling",
+  },
+  {
+    label: "ready",
+    phase: "quiesce",
+    duration: 520,
   },
 ];
 
@@ -119,12 +201,21 @@ const animationKey = ref(0);
 const isRunning = ref(false);
 const timers: number[] = [];
 
-const active = computed(() => scriptSteps[activeStep.value]);
+const active = computed(() => scriptFrames[activeStep.value]);
 const activeFlash = computed<CapabilityId | undefined>(
   () => active.value?.flash,
 );
-const operationLabel = computed(() => active.value?.label ?? "tools/call");
+const activeCapability = computed<CapabilityId | undefined>(
+  () => active.value?.hold,
+);
+const activeActor = computed<Actor | undefined>(() => active.value?.actor);
+const operationLabel = computed(() => active.value?.label ?? "ready");
 const activeChannel = computed<Channel | undefined>(() => active.value?.channel);
+const heldChannel = computed<Channel | undefined>(
+  () => active.value?.holdChannel,
+);
+const isMessagePhase = computed(() => active.value?.phase === "message");
+const isWakePhase = computed(() => active.value?.phase === "wake");
 
 function clearTimers() {
   while (timers.length) window.clearTimeout(timers.pop());
@@ -140,8 +231,10 @@ function play() {
   isRunning.value = true;
   activeStep.value = -1;
 
-  scriptSteps.forEach((_, index) => {
-    timers.push(window.setTimeout(() => pulseStep(index), index * 1120));
+  let delay = 0;
+  scriptFrames.forEach((frame, index) => {
+    timers.push(window.setTimeout(() => pulseStep(index), delay));
+    delay += frame.duration ?? 1120;
   });
 
   timers.push(
@@ -150,7 +243,7 @@ function play() {
         activeStep.value = -1;
         isRunning.value = false;
       },
-      scriptSteps.length * 1120 + 160,
+      delay + 160,
     ),
   );
 }
@@ -163,8 +256,12 @@ onBeforeUnmount(clearTimers);
     class="protocol-stack"
     :class="{
       'protocol-stack--running': isRunning,
+      'protocol-stack--wake': isWakePhase,
+      'protocol-stack--message': isMessagePhase,
       'protocol-stack--channel-up': activeChannel === 'up',
       'protocol-stack--channel-down': activeChannel === 'down',
+      'protocol-stack--hold-up': heldChannel === 'up',
+      'protocol-stack--hold-down': heldChannel === 'down',
     }"
     aria-label="MCP protocol bidirectional message flow"
     @click="play"
@@ -174,7 +271,10 @@ onBeforeUnmount(clearTimers);
         v-for="item in serverCapabilities"
         :key="item.id"
         class="protocol-card-shell"
-        :class="{ 'is-flashing': activeFlash === item.id }"
+        :class="{
+          'is-flashing': activeFlash === item.id,
+          'is-on': activeCapability === item.id,
+        }"
         :title="item.title"
         :icon="item.icon"
         :description="item.description"
@@ -182,7 +282,12 @@ onBeforeUnmount(clearTimers);
       />
     </div>
 
-    <button class="protocol-label protocol-label--server" type="button" @click.stop="play">
+    <button
+      class="protocol-label protocol-label--server"
+      :class="{ 'is-actor-active': activeActor === 'server' }"
+      type="button"
+      @click.stop="play"
+    >
       <span>MCP Server</span>
     </button>
 
@@ -207,7 +312,12 @@ onBeforeUnmount(clearTimers);
       </div>
     </div>
 
-    <button class="protocol-label protocol-label--client" type="button" @click.stop="play">
+    <button
+      class="protocol-label protocol-label--client"
+      :class="{ 'is-actor-active': activeActor === 'client' }"
+      type="button"
+      @click.stop="play"
+    >
       <span>MCP Client</span>
     </button>
 
@@ -216,7 +326,10 @@ onBeforeUnmount(clearTimers);
         v-for="item in clientCapabilities"
         :key="item.id"
         class="protocol-card-shell"
-        :class="{ 'is-flashing': activeFlash === item.id }"
+        :class="{
+          'is-flashing': activeFlash === item.id,
+          'is-on': activeCapability === item.id,
+        }"
         :title="item.title"
         :icon="item.icon"
         :description="item.description"
@@ -304,7 +417,8 @@ onBeforeUnmount(clearTimers);
 
 .protocol-label:hover,
 .protocol-stack--server-active .protocol-label--server,
-.protocol-stack--client-active .protocol-label--client {
+.protocol-stack--client-active .protocol-label--client,
+.protocol-label.is-actor-active {
   border-color: rgba(255, 198, 73, 0.62);
   background:
     radial-gradient(circle at 10% 50%, rgba(255, 198, 73, 0.12), transparent 34%),
@@ -312,11 +426,16 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-label--client:hover,
-.protocol-stack--client-active .protocol-label--client {
+.protocol-stack--client-active .protocol-label--client,
+.protocol-label--client.is-actor-active {
   border-color: rgba(106, 163, 247, 0.7);
   background:
     radial-gradient(circle at 10% 50%, rgba(106, 163, 247, 0.14), transparent 34%),
     rgba(20, 22, 27, 0.62);
+}
+
+.protocol-label.is-actor-active {
+  animation: protocol-actor-wake 560ms ease both;
 }
 
 .protocol-label span {
@@ -365,9 +484,9 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-block-arrow {
-  --arrow-color: rgba(106, 163, 247, 0.82);
-  --arrow-glow: rgba(106, 163, 247, 0.34);
-  --arrow-outline: rgba(225, 234, 255, 0.76);
+  --arrow-color: rgba(185, 179, 165, 0.18);
+  --arrow-glow: rgba(185, 179, 165, 0.08);
+  --arrow-outline: rgba(215, 209, 194, 0.62);
   --arrow-head-extend: clamp(12px, 2.4cqh, 20px);
   position: relative;
   width: clamp(74px, 8.8cqw, 102px);
@@ -388,7 +507,7 @@ onBeforeUnmount(clearTimers);
     drop-shadow(0 2px 0 var(--arrow-outline))
     drop-shadow(0 -2px 0 var(--arrow-outline))
     drop-shadow(0 0 16px var(--arrow-glow));
-  opacity: 0.68;
+  opacity: 0.5;
   overflow: hidden;
   transition:
     filter 160ms ease,
@@ -396,8 +515,8 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-block-arrow--connected {
-  --arrow-outline: rgba(235, 241, 255, 0.9);
-  opacity: 0.72;
+  --arrow-outline: rgba(215, 209, 194, 0.66);
+  opacity: 0.54;
 }
 
 .protocol-block-arrow--disconnected {
@@ -426,9 +545,6 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-block-arrow--up {
-  --arrow-color: rgba(255, 198, 73, 0.82);
-  --arrow-glow: rgba(255, 198, 73, 0.34);
-  --arrow-outline: rgba(255, 232, 166, 0.92);
   height: calc(100% + var(--arrow-head-extend));
   margin-top: calc(var(--arrow-head-extend) * -1);
   transform: rotate(180deg);
@@ -438,19 +554,53 @@ onBeforeUnmount(clearTimers);
   height: calc(100% + var(--arrow-head-extend));
 }
 
+.protocol-stack--channel-up .protocol-block-arrow--up {
+  --arrow-color: rgba(255, 198, 73, 0.82);
+  --arrow-glow: rgba(255, 198, 73, 0.34);
+  --arrow-outline: rgba(255, 232, 166, 0.92);
+}
+
 .protocol-stack--channel-down .protocol-block-arrow--down {
+  --arrow-color: rgba(106, 163, 247, 0.82);
+  --arrow-glow: rgba(106, 163, 247, 0.34);
+  --arrow-outline: rgba(235, 241, 255, 0.9);
+}
+
+.protocol-stack--hold-up .protocol-block-arrow--up {
+  --arrow-color: rgba(255, 198, 73, 0.72);
+  --arrow-glow: rgba(255, 198, 73, 0.28);
+  --arrow-outline: rgba(255, 232, 166, 0.84);
+  opacity: 0.74;
+}
+
+.protocol-stack--hold-down .protocol-block-arrow--down {
+  --arrow-color: rgba(106, 163, 247, 0.72);
+  --arrow-glow: rgba(106, 163, 247, 0.28);
+  --arrow-outline: rgba(235, 241, 255, 0.82);
+  opacity: 0.74;
+}
+
+.protocol-stack--wake.protocol-stack--channel-up .protocol-block-arrow--up {
+  animation: protocol-arrow-up-wake 560ms ease both;
+}
+
+.protocol-stack--wake.protocol-stack--channel-down .protocol-block-arrow--down {
+  animation: protocol-arrow-down-wake 560ms ease both;
+}
+
+.protocol-stack--message.protocol-stack--channel-down .protocol-block-arrow--down {
   animation: protocol-arrow-down 760ms ease both;
 }
 
-.protocol-stack--channel-down .protocol-block-arrow--down .protocol-message-dot {
+.protocol-stack--message.protocol-stack--channel-down .protocol-block-arrow--down .protocol-message-dot {
   animation: protocol-dot-down 720ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
 }
 
-.protocol-stack--channel-up .protocol-block-arrow--up {
+.protocol-stack--message.protocol-stack--channel-up .protocol-block-arrow--up {
   animation: protocol-arrow-up 760ms ease both;
 }
 
-.protocol-stack--channel-up .protocol-block-arrow--up .protocol-message-dot {
+.protocol-stack--message.protocol-stack--channel-up .protocol-block-arrow--up .protocol-message-dot {
   animation: protocol-dot-down 720ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
 }
 
@@ -524,6 +674,25 @@ onBeforeUnmount(clearTimers);
     transform 180ms ease;
 }
 
+.protocol-card-shell.is-on {
+  filter: drop-shadow(0 0 16px rgba(255, 198, 73, 0.22));
+}
+
+.protocol-card-shell.is-on :deep(.protocol-card) {
+  border-color: rgba(255, 198, 73, 0.54);
+  background:
+    radial-gradient(
+      circle at 50% 45%,
+      rgba(255, 198, 73, 0.13),
+      transparent 58%
+    ),
+    rgba(20, 22, 27, 0.94);
+}
+
+.protocol-card-shell.is-on :deep(.protocol-card__icon) {
+  color: var(--deck-accent-hi);
+}
+
 .protocol-card-shell.is-flashing {
   animation: protocol-card-pulse 520ms ease 620ms both;
 }
@@ -536,10 +705,70 @@ onBeforeUnmount(clearTimers);
   animation: protocol-card-icon-pulse 520ms ease 620ms both;
 }
 
+@keyframes protocol-actor-wake {
+  0%,
+  100% {
+    transform: none;
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+  }
+  45% {
+    transform: translateY(-1px) scale(1.008);
+    box-shadow:
+      0 18px 42px rgba(0, 0, 0, 0.26),
+      0 0 26px rgba(255, 198, 73, 0.18);
+  }
+}
+
+@keyframes protocol-arrow-down-wake {
+  0%,
+  100% {
+    opacity: 0.74;
+    filter:
+      drop-shadow(2px 0 0 rgba(235, 241, 255, 0.9))
+      drop-shadow(-2px 0 0 rgba(235, 241, 255, 0.9))
+      drop-shadow(0 2px 0 rgba(235, 241, 255, 0.9))
+      drop-shadow(0 -2px 0 rgba(235, 241, 255, 0.9))
+      drop-shadow(0 0 16px rgba(106, 163, 247, 0.3));
+    transform: none;
+  }
+  48% {
+    opacity: 0.88;
+    filter:
+      drop-shadow(2px 0 0 rgba(245, 248, 255, 0.96))
+      drop-shadow(-2px 0 0 rgba(245, 248, 255, 0.96))
+      drop-shadow(0 2px 0 rgba(245, 248, 255, 0.96))
+      drop-shadow(0 -2px 0 rgba(245, 248, 255, 0.96))
+      drop-shadow(0 0 26px rgba(106, 163, 247, 0.72));
+  }
+}
+
+@keyframes protocol-arrow-up-wake {
+  0%,
+  100% {
+    opacity: 0.74;
+    filter:
+      drop-shadow(2px 0 0 rgba(255, 232, 166, 0.92))
+      drop-shadow(-2px 0 0 rgba(255, 232, 166, 0.92))
+      drop-shadow(0 2px 0 rgba(255, 232, 166, 0.92))
+      drop-shadow(0 -2px 0 rgba(255, 232, 166, 0.92))
+      drop-shadow(0 0 16px rgba(255, 198, 73, 0.3));
+    transform: rotate(180deg);
+  }
+  48% {
+    opacity: 0.88;
+    filter:
+      drop-shadow(2px 0 0 rgba(255, 239, 191, 0.98))
+      drop-shadow(-2px 0 0 rgba(255, 239, 191, 0.98))
+      drop-shadow(0 2px 0 rgba(255, 239, 191, 0.98))
+      drop-shadow(0 -2px 0 rgba(255, 239, 191, 0.98))
+      drop-shadow(0 0 26px rgba(255, 198, 73, 0.72));
+  }
+}
+
 @keyframes protocol-arrow-down {
   0%,
   100% {
-    opacity: 0.72;
+    opacity: 0.74;
     filter:
       drop-shadow(2px 0 0 rgba(235, 241, 255, 0.9))
       drop-shadow(-2px 0 0 rgba(235, 241, 255, 0.9))
@@ -550,7 +779,7 @@ onBeforeUnmount(clearTimers);
   }
   18%,
   78% {
-    opacity: 1;
+    opacity: 0.9;
     filter:
       drop-shadow(2px 0 0 rgba(245, 248, 255, 0.96))
       drop-shadow(-2px 0 0 rgba(245, 248, 255, 0.96))
@@ -564,7 +793,7 @@ onBeforeUnmount(clearTimers);
 @keyframes protocol-arrow-up {
   0%,
   100% {
-    opacity: 0.72;
+    opacity: 0.74;
     filter:
       drop-shadow(2px 0 0 rgba(255, 232, 166, 0.92))
       drop-shadow(-2px 0 0 rgba(255, 232, 166, 0.92))
@@ -575,7 +804,7 @@ onBeforeUnmount(clearTimers);
   }
   18%,
   78% {
-    opacity: 1;
+    opacity: 0.9;
     filter:
       drop-shadow(2px 0 0 rgba(255, 239, 191, 0.98))
       drop-shadow(-2px 0 0 rgba(255, 239, 191, 0.98))

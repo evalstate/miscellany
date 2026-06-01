@@ -258,11 +258,16 @@ fonts:
 # Main Issues with Statefulness and Server-to-Client Comms
 
 - "Sticky" sessions in the load balancer
+  - Scalability
+  - Fault Tolerance
+  - In-Place Changes
+  - 
 - Maintaining open connections speculatively is expensive
 - SSE "cut-off" times in popular hosting platforms
 - Fault Tolerance and Scalability Concerns
 - Elicitation and Sampling require Server->Client channel open
 - Session State not well defined (e.g STDIO, Tool List)
+- Basic analytics requires handling Sessions
 
 ---
 layout: section
@@ -283,23 +288,75 @@ layout: section
 
 # Simplifications
 
+## 80% of the complexity is in 20% of the Protocol...
 
-- No longer allow Server to Client initiated requests (MCP WebCam) - SEP2260
-- Deprecate Sampling, Roots (and Logging)
-- Removes the need for a "GET" handler on the MCP Server
+## No longer allow Server to Client initiated requests (mcp-webcam) - SEP2260
+
+- Server cannot make an unsolicited call to the Client.
+  Server Requests must be contained within a Client initiated request.
+- Removes need for unreliable "GET" SSE Handler on the Server
+
+## Deprecate Sampling, Roots (and Logging)
+
+- Simplify protocol surface for underutilized features.
+
 
 ---
 
 
 # Stateless Protocol
 
-## Remove Initialize and Mcp-Session-Id
+<div class="stateless-discovery-slide">
+<section class="stateless-discovery-copy">
 
-## Add `/discover` endpoint
+<p class="kicker">Discovery</p>
 
-- Can be helpful for UX
+## Remove Initialization Handshake
 
-## Use model-driven state handles
+<div class="compact-point-list">
+<div>
+<strong>From Transport to Data Layer</strong>
+<span>Version, Capability and Client identity move into the JSON-RPC <code>_meta</code> envelope.</span>
+</div>
+<div>
+<strong><code>server/discover</code></strong>
+<span>Optional Client Probe to share Capability information for compatibility/User Experience reasons.</span>
+</div>
+<div>
+<strong><code>subscriptions/listen</code></strong>
+<span>Endpoint to allow Client to initiate a notification stream for Resource Subscriptions or List Changed events </span>
+</div>
+</div>
+
+</section>
+
+<section class="stateless-discovery-json deck-panel">
+<div class="http-json http-json--packet">
+<div class="http-json-line">{</div>
+<div class="http-json-line http-json-line--indent"><em>"jsonrpc"</em>: <strong>"2.0"</strong>,</div>
+<div class="http-json-line http-json-line--indent"><em>"method"</em>: <mark>"server/discover"</mark>,</div>
+<div class="http-json-line http-json-line--indent"><em>"params"</em>: {</div>
+<div class="http-json-line http-json-line--indent-2"><mark>"_meta"</mark>: {</div>
+<div class="http-json-line http-json-line--indent-3"><em>"io.modelcontextprotocol/protocolVersion"</em>: <strong>"2026-07-30"</strong>,</div>
+<div class="http-json-line http-json-line--indent-3"><em>"io.modelcontextprotocol/clientInfo"</em>: { <em>"name"</em>: <strong>"ExampleClient"</strong> }</div>
+<div class="http-json-line http-json-line--indent-2">}</div>
+<div class="http-json-line http-json-line--indent">}</div>
+<div class="http-json-line">}</div>
+<div class="http-json-line stateless-discovery-json__gap">→ response</div>
+<div class="http-json-line">{</div>
+<div class="http-json-line http-json-line--indent"><em>"result"</em>: {</div>
+<div class="http-json-line http-json-line--indent-2"><em>"supportedVersions"</em>: [<strong>"2026-07-30"</strong>],</div>
+<div class="http-json-line http-json-line--indent-2"><mark>"capabilities"</mark>: {</div>
+<div class="http-json-line http-json-line--indent-3"><em>"tools"</em>: {},</div>
+<div class="http-json-line http-json-line--indent-3"><em>"resources"</em>: {},</div>
+<div class="http-json-line http-json-line--indent-3"><em>"prompts"</em>: {}</div>
+<div class="http-json-line http-json-line--indent-2">},</div>
+<div class="http-json-line http-json-line--indent-2"><em>"serverInfo"</em>: { <em>"name"</em>: <strong>"ExampleServer"</strong> }</div>
+<div class="http-json-line http-json-line--indent">}</div>
+<div class="http-json-line">}</div>
+</div>
+</section>
+</div>
 
 ---
 
@@ -353,7 +410,9 @@ Return `inputRequired` rather than SSE Stream.
 
 # Migration Path
 
-
+Draft Specification Release : Now
+Beta SDKs : Soon
+Planned Release Date  : 
 
 ---
 
