@@ -71,6 +71,20 @@ fonts:
 
 ---
 
+# What we are talking about today
+
+## MCP at Hugging Face and Current Transports
+
+## Client Behaviour and Analytics
+
+## Issues Related to MCP Implementation
+
+## New MCP Specification Changes
+
+
+
+---
+
 # MCP At Hugging Face
 
 <div class="hf-mcp-slide">
@@ -106,10 +120,9 @@ fonts:
 Click the diagram to play a message round trip.
 
 
-
 ---
 
-# Transport Evolution
+# Current Transports
 
 <div class="spec-timeline-diagram">
   <McpSpecTransportTimeline variant="before" />
@@ -117,26 +130,46 @@ Click the diagram to play a message round trip.
 
 ---
 
-
-
 <div class="weekly-activity-slide chart-slide">
   <header class="chart-slide__header">
     <div>
-      <h1>Using mcp-remote to track adoption</h1>
-      <p>Initialization requests as bars · remote traffic share as line</p>
+      <h1>Streamable HTTP adoption</h1>
+      <h2>Proportion of <code>mcp-remote</code> usage</h2>
     </div>
   </header>
   <McpRemoteNoFallbackChart />
 </div>
 
+---
+
+<div class="traffic-chart-slide">
+  <McpRemoteTrafficChart client="Claude Code" title="Claude Code" />
+</div>
 
 ---
 
-# Transport Evolution
+# Understanding Activity
 
-<div class="spec-timeline-diagram">
-  <McpSpecTransportTimeline />
-</div>
+## Interactive vs Agentic Workloads
+
+- Session Length
+- Burstiness
+
+## Initializations are a bad proxy for use
+
+- Can't measure ambient installation (caching, tool search)
+- Doesn't correlate to Tool Calls
+
+## Tool Calls: More != Better
+
+- High Tool Call volume may indicate poor tool design or discovery
+- Client behaviour can be unpredictable
+
+## Session Conversion is preferred
+
+- Clients that connect and make at least one tool call.
+- Reduces skew of erratic clients or excessive testing
+
 
 ---
 
@@ -175,23 +208,6 @@ Click the diagram to play a message round trip.
   <SessionConversionChart />
 </div>
 
----
-
-# Understanding Activity
-
-## Initializations are a bad proxy for use
-
-- Can't measure ambient installation (caching, tool search)
-- Doesn't correlate to Tool Calls
-
-## Tool Calls: More != Better
-
-- High Tool Call volume may indicate poor tool design or discovery
-- Client behaviour can be unpredictable
-
-## Session Conversion is preferred
-
-- Tells us Clients that have connected at least once.
 
 ---
 
@@ -203,43 +219,6 @@ Click the diagram to play a message round trip.
 - Track availability of Features and Extensions
 - 
 
----
-
-# Some Issues
-
-MCP is noisy.
-MCP is complicated.
-
----
-layout: section
----
-
-# 2026-07-28 Specification: `The Stateless Core`
-
----
-
-# Simplifications
-
----
-
-
-# Diagram Here showing Stateful Protocol and Initialization Sequence
-
-fff
-
----
-
-
-- No longer allow Server to Client initiated requests (MCP WebCam) - SEP2260
-- Deprecate Sampling, Roots (and Logging) - 
-
----
-
-# Stateless Protocol
-
-## Remove Initialize and Mcp-Session-Id
-
-## Add `/discover` endpoint
 
 ---
 
@@ -249,6 +228,62 @@ fff
   <RemoteMcpLoadBalancerStoryboard />
 </div>
 
+---
+
+# Main Issues with Statefulness and Server-to-Client Comms
+
+- "Sticky" sessions in the load balancer
+- Maintaining open connections speculatively is expensive
+- SSE "cut-off" times in popular hosting platforms
+- Fault Tolerance and Scalability Concerns
+- Elicitation and Sampling require 
+
+---
+layout: section
+---
+
+# 2026-07-28 Specification: `The Stateless Core`
+
+---
+
+# New Specification
+
+<div class="spec-timeline-diagram">
+  <McpSpecTransportTimeline variant="after" />
+</div>
+
+
+---
+
+# Simplifications
+
+
+- No longer allow Server to Client initiated requests (MCP WebCam) - SEP2260
+- Deprecate Sampling, Roots (and Logging)
+- Removes the need for a "GET" handler on the MCP Server
+
+---
+
+
+# Stateless Protocol
+
+## Remove Initialize and Mcp-Session-Id
+
+## Add `/discover` endpoint
+
+- Can be helpful for UX
+
+## Use model-driven state handles
+
+---
+
+# Cache Control
+
+## Tool List Changed
+
+- Tool Metadata can be acquired infrequently and shared
+- Supports "per user" MCP Server configurations too
+- Also allows configuration through `mcp-server.json` files 
 
 ---
 
@@ -261,15 +296,32 @@ Moving to a stateless protocol means that state-based turn taking doesn't apply
 Return `inputRequired` rather than SSE Stream.
 
 
----
-
-# Cache Control
-
-## Tool List Changed
 
 ---
 
-# HTTP Headers
+# HTTP Standardization: Problem
+
+<div class="http-standardization-problem">
+  <HttpRouteMap />
+
+  <section class="http-request-panel deck-panel">
+    <h2>MCP over HTTP</h2>
+    <div class="http-request-line"><strong>POST /mcp/ HTTP/1.1</strong><span>Host: mcp-server.example</span></div>
+    <pre class="http-json"><code>{
+  "jsonrpc": "2.0",
+  "method": <mark>"tools/call"</mark>,
+  "params": {
+    "name": <mark>"spanner.execute_sql"</mark>,
+    "arguments": {
+      "project": <mark>"senseai-prod"</mark>,
+      "region": <mark>"us-west1"</mark>,
+      "instance": <mark>"finance-db-01"</mark>,
+      "query": "SELECT ..."
+    }
+  }
+}</code></pre>
+  </section>
+</div>
 
 ---
 
@@ -279,15 +331,9 @@ Return `inputRequired` rather than SSE Stream.
 
 ---
 
-
 # Related SEPs
 
 
----
-
-<div class="traffic-chart-slide">
-  <McpRemoteTrafficChart client="Claude Code" title="Claude Code" />
-</div>
 
 ---
 
