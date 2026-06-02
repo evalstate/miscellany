@@ -380,6 +380,33 @@
   letter-spacing: -0.04em;
 }
 
+.hackmonty-slide {
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.hackmonty-slide h1 {
+  margin: 0;
+  font-size: clamp(2.8rem, 6.4vw, 4.35rem);
+  line-height: 0.96;
+  letter-spacing: -0.075em;
+  text-wrap: balance;
+}
+
+.hackmonty-slide img {
+  justify-self: center;
+  align-self: center;
+  max-width: min(100%, 1080px);
+  max-height: 100%;
+  object-fit: contain;
+  border: 1px solid rgba(255, 198, 73, 0.42);
+  border-radius: calc(var(--deck-radius) + 10px);
+  box-shadow: var(--deck-shadow);
+}
+
 .protocol-diagram {
   width: min(600px, 100%);
   height: 360px;
@@ -573,20 +600,12 @@
   font-size: var(--deck-chart-subtitle-size, 0.92rem);
 }
 
-:where(.activity-chart__stat, .conversion-chart__stats div) {
+.conversion-chart__stats div {
   padding: 0.7rem 0.85rem;
   text-align: right;
   background: var(--deck-accent-bg);
   border: 1px solid var(--deck-accent-line);
   border-radius: var(--deck-radius-sm);
-}
-
-.activity-chart__stat {
-  position: absolute;
-  top: calc(-1 * (var(--chart-slide-header-height) + 0.42rem));
-  right: 1.1rem;
-  z-index: 2;
-  min-width: 170px;
 }
 
 .conversion-chart__stats {
@@ -602,7 +621,7 @@
   min-width: 126px;
 }
 
-:where(.activity-chart__stat span, .activity-chart__stat em, .conversion-chart__stats span) {
+.conversion-chart__stats span {
   display: block;
   color: var(--deck-dim);
   font-size: 0.58rem;
@@ -612,7 +631,7 @@
   text-transform: uppercase;
 }
 
-:where(.activity-chart__stat strong, .conversion-chart__stats strong) {
+.conversion-chart__stats strong {
   display: block;
   color: var(--deck-accent-hi);
   font-size: var(--deck-chart-stat-size, 1.65rem);

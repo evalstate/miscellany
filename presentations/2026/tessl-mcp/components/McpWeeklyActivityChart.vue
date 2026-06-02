@@ -100,17 +100,10 @@ const monthTicks = computed(() => {
   return ticks;
 });
 
-const latest = rows.at(-1)!;
 </script>
 
 <template>
   <section class="activity-chart">
-    <div class="activity-chart__stat">
-      <span>latest week</span>
-      <strong>{{ formatCount(latest.init_requests) }}</strong>
-      <em>initializations</em>
-    </div>
-
     <svg
       class="activity-chart__svg"
       :viewBox="`0 0 ${width} ${height}`"

@@ -582,14 +582,10 @@ layout: section
 
 ---
 
-<div class="related-seps-slide">
+<div class="hackmonty-slide">
 
-# Related SEPs
+# Hugging Face sponsors Hack Monty
 
-<div class="related-seps-list">
-<div><strong>SEP-2260 / SEP-2257</strong><span>Simplifications</span></div>
-<div><strong>SEP-2575</strong><span>Stateless MCP</span></div>
-<div><strong>SEP-2459</strong><span>Cache control</span></div>
-<div><strong>SEP-2322 / SEP-2243</strong><span>Elicitations and routable HTTP</span></div>
-</div>
+<img :src="'/images/hackmonty.png'" alt="Hack Monty" />
+
 </div>

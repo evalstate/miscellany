@@ -130,17 +130,10 @@ const monthTicks = computed(() => {
   return ticks;
 });
 
-const latest = rows.at(-1)!;
 </script>
 
 <template>
   <section class="activity-chart">
-    <div class="activity-chart__stat">
-      <span>latest share</span>
-      <strong>{{ latest.mcp_remote_share_pct.toFixed(1) }}%</strong>
-      <em>fallback checks excluded</em>
-    </div>
-
     <svg
       class="activity-chart__svg"
       :viewBox="`0 0 ${width} ${height}`"
