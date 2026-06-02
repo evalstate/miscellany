@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
 const props = withDefaults(
   defineProps<{
@@ -205,6 +205,7 @@ const scriptFrames: Frame[] = [
 const activeStep = ref(-1);
 const animationKey = ref(0);
 const isRunning = ref(false);
+const isLooping = ref(false);
 const timers: number[] = [];
 
 const isSimplified = computed(() => props.variant === "simplified");
@@ -230,6 +231,12 @@ const heldChannel = computed<Channel | undefined>(
 );
 const isMessagePhase = computed(() => active.value?.phase === "message");
 const isWakePhase = computed(() => active.value?.phase === "wake");
+const messageHitActor = computed<Actor | undefined>(() => {
+  if (!isMessagePhase.value) return undefined;
+  if (activeChannel.value === "up") return "server";
+  if (activeChannel.value === "down") return "client";
+  return undefined;
+});
 
 function clearTimers() {
   while (timers.length) window.clearTimeout(timers.pop());
@@ -240,8 +247,9 @@ function pulseStep(index: number) {
   animationKey.value += 1;
 }
 
-function play() {
+function play(loop = true) {
   clearTimers();
+  isLooping.value = loop;
   isRunning.value = true;
   activeStep.value = -1;
 
@@ -255,13 +263,18 @@ function play() {
     window.setTimeout(
       () => {
         activeStep.value = -1;
-        isRunning.value = false;
+        if (isLooping.value) {
+          play(true);
+        } else {
+          isRunning.value = false;
+        }
       },
       delay + 160,
     ),
   );
 }
 
+onMounted(() => play(true));
 onBeforeUnmount(clearTimers);
 </script>
 
@@ -279,7 +292,7 @@ onBeforeUnmount(clearTimers);
       'protocol-stack--simplified': isSimplified,
     }"
     aria-label="MCP protocol bidirectional message flow"
-    @click="play"
+    @click="play(true)"
   >
     <div class="protocol-grid protocol-grid--server">
       <ProtocolCapabilityCard
@@ -298,10 +311,14 @@ onBeforeUnmount(clearTimers);
     </div>
 
     <button
+      :key="`server-label-${animationKey}`"
       class="protocol-label protocol-label--server"
-      :class="{ 'is-actor-active': activeActor === 'server' }"
+      :class="{
+        'is-actor-active': activeActor === 'server',
+        'is-message-hit': messageHitActor === 'server',
+      }"
       type="button"
-      @click.stop="play"
+      @click.stop="play(true)"
     >
       <span>MCP Server</span>
     </button>
@@ -310,16 +327,20 @@ onBeforeUnmount(clearTimers);
       <div class="protocol-arrow-pair" aria-hidden="true">
         <div
           :key="`up-${animationKey}`"
-          class="protocol-block-arrow protocol-block-arrow--up protocol-block-arrow--connected"
+          class="protocol-traffic-lane protocol-traffic-lane--up protocol-block-arrow protocol-block-arrow--up protocol-block-arrow--connected"
         >
-          <span class="protocol-message-dot" />
+          <span class="protocol-message-dot" style="--dot-delay: 0ms" />
+          <span class="protocol-message-dot" style="--dot-delay: 120ms" />
+          <span class="protocol-message-dot" style="--dot-delay: 240ms" />
         </div>
         <div
           :key="`down-${animationKey}`"
-          class="protocol-block-arrow protocol-block-arrow--down"
+          class="protocol-traffic-lane protocol-traffic-lane--down protocol-block-arrow protocol-block-arrow--down"
           :class="'protocol-block-arrow--connected'"
         >
-          <span class="protocol-message-dot" />
+          <span class="protocol-message-dot" style="--dot-delay: 0ms" />
+          <span class="protocol-message-dot" style="--dot-delay: 120ms" />
+          <span class="protocol-message-dot" style="--dot-delay: 240ms" />
         </div>
       </div>
       <div class="protocol-operation" aria-live="polite">
@@ -329,10 +350,14 @@ onBeforeUnmount(clearTimers);
     </div>
 
     <button
+      :key="`client-label-${animationKey}`"
       class="protocol-label protocol-label--client"
-      :class="{ 'is-actor-active': activeActor === 'client' }"
+      :class="{
+        'is-actor-active': activeActor === 'client',
+        'is-message-hit': messageHitActor === 'client',
+      }"
       type="button"
-      @click.stop="play"
+      @click.stop="play(true)"
     >
       <span>MCP Client</span>
     </button>
@@ -455,6 +480,14 @@ onBeforeUnmount(clearTimers);
   animation: protocol-actor-wake 560ms ease both;
 }
 
+.protocol-label.is-message-hit {
+  animation: protocol-label-hit 620ms cubic-bezier(0.18, 0.88, 0.24, 1.22) 500ms both;
+}
+
+.protocol-label--client.is-message-hit {
+  animation-name: protocol-label-hit-client;
+}
+
 .protocol-label span {
   color: var(--deck-text);
   font-size: clamp(1rem, 4.2cqh, 1.42rem);
@@ -476,9 +509,9 @@ onBeforeUnmount(clearTimers);
   z-index: 4;
   min-height: 0;
   overflow: visible;
-  border-inline: 1px solid rgba(185, 179, 165, 0.08);
+  border-inline: 0;
   background:
-    linear-gradient(90deg, transparent, rgba(185, 179, 165, 0.1), transparent)
+    linear-gradient(90deg, transparent, rgba(185, 179, 165, 0.055), transparent)
       50% 50% / 46% 1px no-repeat;
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(220px, 0.46fr);
@@ -494,7 +527,7 @@ onBeforeUnmount(clearTimers);
   display: flex;
   align-items: stretch;
   justify-content: center;
-  gap: clamp(0.9rem, 2.2cqw, 1.28rem);
+  gap: clamp(1rem, 2.4cqw, 1.42rem);
   height: calc(100% + var(--stack-gap) * 2);
   transform: translateX(-50%);
   pointer-events: none;
@@ -504,36 +537,61 @@ onBeforeUnmount(clearTimers);
   --arrow-color: rgba(185, 179, 165, 0.18);
   --arrow-glow: rgba(185, 179, 165, 0.04);
   --arrow-outline: rgba(215, 209, 194, 0.62);
-  --arrow-head-extend: clamp(12px, 2.4cqh, 20px);
+  --packet-color: rgba(215, 209, 194, 0.78);
+  --lane-color: rgba(185, 179, 165, 0.3);
+  --lane-glow: rgba(185, 179, 165, 0.04);
   position: relative;
-  width: clamp(74px, 8.8cqw, 102px);
+  width: clamp(36px, 4.8cqw, 56px);
   height: 100%;
-  background: var(--arrow-color);
-  clip-path: polygon(
-    33% 0,
-    67% 0,
-    67% 80%,
-    96% 80%,
-    50% 100%,
-    4% 80%,
-    33% 80%
-  );
-  filter:
-    drop-shadow(2px 0 0 var(--arrow-outline))
-    drop-shadow(-2px 0 0 var(--arrow-outline))
-    drop-shadow(0 2px 0 var(--arrow-outline))
-    drop-shadow(0 -2px 0 var(--arrow-outline))
-    drop-shadow(0 0 8px var(--arrow-glow));
-  opacity: 0.5;
+  background: transparent;
+  filter: drop-shadow(0 0 8px var(--lane-glow));
+  opacity: 0.68;
   overflow: hidden;
   transition:
     filter 160ms ease,
     opacity 160ms ease;
 }
 
+.protocol-block-arrow::before {
+  content: "";
+  position: absolute;
+  top: 4%;
+  bottom: 4%;
+  left: 50%;
+  width: 4px;
+  border-radius: 999px;
+  background:
+    linear-gradient(var(--lane-color), var(--lane-color)) 50% 0 / 100% 100% no-repeat;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--lane-color) 55%, transparent),
+    0 0 12px var(--lane-glow);
+  transform: translateX(-50%);
+}
+
+.protocol-block-arrow::after {
+  content: none;
+  position: absolute;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-inline: 8px solid transparent;
+  transform: translateX(-50%);
+  opacity: 0.72;
+}
+
+.protocol-block-arrow--up::after {
+  top: 1%;
+  border-bottom: 12px solid var(--lane-color);
+}
+
+.protocol-block-arrow--down::after {
+  bottom: 1%;
+  border-top: 12px solid var(--lane-color);
+}
+
 .protocol-block-arrow--connected {
   --arrow-outline: rgba(215, 209, 194, 0.66);
-  opacity: 0.54;
+  opacity: 0.72;
 }
 
 .protocol-block-arrow--disconnected {
@@ -549,44 +607,71 @@ onBeforeUnmount(clearTimers);
 .protocol-message-dot {
   position: absolute;
   left: 50%;
-  top: 8%;
-  width: clamp(12px, 2.1cqw, 18px);
+  top: 82%;
+  width: clamp(10px, 1.45cqw, 15px);
   aspect-ratio: 1;
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.94);
+  background: var(--packet-color);
   box-shadow:
-    0 0 0 5px color-mix(in srgb, var(--arrow-color) 35%, transparent),
-    0 0 12px color-mix(in srgb, var(--arrow-color) 52%, white 8%);
-  opacity: 0;
+    0 0 0 5px color-mix(in srgb, var(--packet-color) 24%, transparent),
+    0 0 16px color-mix(in srgb, var(--packet-color) 70%, white 8%);
+  opacity: 0.34;
   transform: translate(-50%, 0);
 }
 
+.protocol-message-dot:nth-child(2) {
+  top: 68%;
+}
+
+.protocol-message-dot:nth-child(3) {
+  top: 54%;
+}
+
 .protocol-block-arrow--up {
-  height: calc(100% + var(--arrow-head-extend));
-  margin-top: calc(var(--arrow-head-extend) * -1);
-  transform: rotate(180deg);
+  height: 100%;
 }
 
 .protocol-block-arrow--down {
-  height: calc(100% + var(--arrow-head-extend));
+  height: 100%;
+}
+
+.protocol-block-arrow--down .protocol-message-dot {
+  top: 12%;
+}
+
+.protocol-block-arrow--down .protocol-message-dot:nth-child(2) {
+  top: 26%;
+}
+
+.protocol-block-arrow--down .protocol-message-dot:nth-child(3) {
+  top: 40%;
 }
 
 .protocol-stack--channel-up .protocol-block-arrow--up {
   --arrow-color: rgba(255, 198, 73, 0.82);
   --arrow-glow: rgba(255, 198, 73, 0.16);
   --arrow-outline: rgba(255, 232, 166, 0.92);
+  --packet-color: var(--deck-accent-hi);
+  --lane-color: rgba(255, 198, 73, 0.52);
+  --lane-glow: rgba(255, 198, 73, 0.2);
 }
 
 .protocol-stack--channel-down .protocol-block-arrow--down {
   --arrow-color: rgba(106, 163, 247, 0.82);
   --arrow-glow: rgba(106, 163, 247, 0.16);
   --arrow-outline: rgba(235, 241, 255, 0.9);
+  --packet-color: var(--deck-info);
+  --lane-color: rgba(106, 163, 247, 0.52);
+  --lane-glow: rgba(106, 163, 247, 0.2);
 }
 
 .protocol-stack--hold-up .protocol-block-arrow--up {
   --arrow-color: rgba(255, 198, 73, 0.72);
   --arrow-glow: rgba(255, 198, 73, 0.14);
   --arrow-outline: rgba(255, 232, 166, 0.84);
+  --packet-color: var(--deck-accent-hi);
+  --lane-color: rgba(255, 198, 73, 0.42);
+  --lane-glow: rgba(255, 198, 73, 0.15);
   opacity: 0.74;
 }
 
@@ -594,6 +679,9 @@ onBeforeUnmount(clearTimers);
   --arrow-color: rgba(106, 163, 247, 0.72);
   --arrow-glow: rgba(106, 163, 247, 0.14);
   --arrow-outline: rgba(235, 241, 255, 0.82);
+  --packet-color: var(--deck-info);
+  --lane-color: rgba(106, 163, 247, 0.42);
+  --lane-glow: rgba(106, 163, 247, 0.15);
   opacity: 0.74;
 }
 
@@ -614,6 +702,9 @@ onBeforeUnmount(clearTimers);
   --arrow-color: rgba(185, 179, 165, 0.18);
   --arrow-outline: rgba(215, 209, 194, 0.62);
   --arrow-glow: rgba(185, 179, 165, 0.08);
+  --packet-color: rgba(185, 179, 165, 0.62);
+  --lane-color: rgba(185, 179, 165, 0.22);
+  --lane-glow: rgba(185, 179, 165, 0.06);
   opacity: 0.5;
 }
 
@@ -648,27 +739,27 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-stack--wake.protocol-stack--channel-up .protocol-block-arrow--up {
-  animation: protocol-arrow-up-wake 560ms ease both;
+  animation: protocol-lane-wake 560ms ease both;
 }
 
 .protocol-stack--wake.protocol-stack--channel-down .protocol-block-arrow--down {
-  animation: protocol-arrow-down-wake 560ms ease both;
+  animation: protocol-lane-wake 560ms ease both;
 }
 
 .protocol-stack--message.protocol-stack--channel-down .protocol-block-arrow--down {
-  animation: protocol-arrow-down 760ms ease both;
+  animation: protocol-lane-message 760ms ease both;
 }
 
 .protocol-stack--message.protocol-stack--channel-down .protocol-block-arrow--down .protocol-message-dot {
-  animation: protocol-dot-down 720ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+  animation: protocol-dot-down 760ms cubic-bezier(0.2, 0.72, 0.2, 1) var(--dot-delay) both;
 }
 
 .protocol-stack--message.protocol-stack--channel-up .protocol-block-arrow--up {
-  animation: protocol-arrow-up 760ms ease both;
+  animation: protocol-lane-message 760ms ease both;
 }
 
 .protocol-stack--message.protocol-stack--channel-up .protocol-block-arrow--up .protocol-message-dot {
-  animation: protocol-dot-down 720ms cubic-bezier(0.2, 0.72, 0.2, 1) both;
+  animation: protocol-dot-up 760ms cubic-bezier(0.2, 0.72, 0.2, 1) var(--dot-delay) both;
 }
 
 .protocol-operation {
@@ -786,6 +877,69 @@ onBeforeUnmount(clearTimers);
   }
 }
 
+@keyframes protocol-label-hit {
+  0%,
+  100% {
+    transform: none;
+    border-color: rgba(255, 198, 73, 0.62);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+  }
+  45% {
+    transform: translateY(-5px) scale(1.025);
+    border-color: rgba(255, 198, 73, 0.92);
+    background:
+      radial-gradient(circle at 52% 50%, rgba(255, 198, 73, 0.18), transparent 42%),
+      rgba(20, 22, 27, 0.74);
+    box-shadow:
+      0 20px 44px rgba(0, 0, 0, 0.3),
+      0 0 18px rgba(255, 198, 73, 0.2);
+  }
+}
+
+@keyframes protocol-label-hit-client {
+  0%,
+  100% {
+    transform: none;
+    border-color: rgba(106, 163, 247, 0.7);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+  }
+  45% {
+    transform: translateY(5px) scale(1.025);
+    border-color: rgba(139, 184, 255, 0.94);
+    background:
+      radial-gradient(circle at 52% 50%, rgba(106, 163, 247, 0.18), transparent 42%),
+      rgba(20, 22, 27, 0.74);
+    box-shadow:
+      0 20px 44px rgba(0, 0, 0, 0.3),
+      0 0 18px rgba(106, 163, 247, 0.2);
+  }
+}
+
+@keyframes protocol-lane-wake {
+  0%,
+  100% {
+    opacity: 0.74;
+    filter: drop-shadow(0 0 8px var(--lane-glow));
+  }
+  48% {
+    opacity: 0.96;
+    filter: drop-shadow(0 0 18px color-mix(in srgb, var(--lane-glow) 78%, white 8%));
+  }
+}
+
+@keyframes protocol-lane-message {
+  0%,
+  100% {
+    opacity: 0.76;
+    filter: drop-shadow(0 0 8px var(--lane-glow));
+  }
+  18%,
+  78% {
+    opacity: 1;
+    filter: drop-shadow(0 0 20px color-mix(in srgb, var(--lane-glow) 82%, white 8%));
+  }
+}
+
 @keyframes protocol-arrow-down-wake {
   0%,
   100% {
@@ -894,6 +1048,21 @@ onBeforeUnmount(clearTimers);
   100% {
     opacity: 0;
     transform: translate(-50%, 620%) scale(1.08);
+  }
+}
+
+@keyframes protocol-dot-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 30%) scale(0.72);
+  }
+  18%,
+  78% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -620%) scale(1.08);
   }
 }
 
