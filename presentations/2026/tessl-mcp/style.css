@@ -419,6 +419,11 @@
   margin: 0.35rem auto 0;
 }
 
+.remote-mcp-diagram--wide {
+  width: min(1080px, 100%);
+  height: 430px;
+}
+
 .spec-timeline-diagram {
   width: min(960px, 100%);
   height: 440px;

@@ -568,6 +568,14 @@ layout: section
 
 ---
 
+# Scaling MCP in Production
+
+<div class="remote-mcp-diagram remote-mcp-diagram--wide">
+  <RoutableMcpTrafficBurst />
+</div>
+
+---
+
 <div class="migration-path-slide">
 <p class="kicker">migration path</p>
 
