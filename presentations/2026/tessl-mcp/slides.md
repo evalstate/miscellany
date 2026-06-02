@@ -38,6 +38,7 @@ fonts:
 <li>MCP Maintainer and Moderator</li>
 <li>huggingface/mcp</li>
 <li>huggingface/skills</li>
+<li>huggingface/upskill</li>
 <li>Maintainer of <code>fast-agent</code></li>
 </ul>
 
@@ -202,20 +203,6 @@ fonts:
 </aside>
 </div>
 
-
-
-
----
-
-<div class="protocol-efficiency-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Examining 10M Protocol Messages</h1>
-    </div>
-  </header>
-  <McpProtocolEfficiency />
-</div>
-
 ---
 
 <div class="conversion-chart-slide chart-slide">
@@ -227,7 +214,6 @@ fonts:
   </header>
   <SessionConversionChart />
 </div>
-
 
 ---
 
@@ -271,6 +257,23 @@ fonts:
 <div class="remote-mcp-diagram">
   <RemoteMcpLoadBalancerStoryboard />
 </div>
+
+
+
+---
+
+<div class="protocol-efficiency-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Examining 10M Protocol Messages</h1>
+    </div>
+  </header>
+  <McpProtocolEfficiency />
+</div>
+
+
+
+
 
 ---
 
@@ -348,9 +351,11 @@ layout: section
 </section>
 
 <section class="simplifications-visual">
-  <figure class="simplifications-webcam deck-panel">
-    <img :src="'/images/mcp-webcam.png'" alt="mcp-webcam demo screenshot" />
-  </figure>
+  <ClickableImagePopover
+    class="simplifications-webcam deck-panel"
+    src="/images/mcp-webcam.png"
+    alt="mcp-webcam demo screenshot"
+  />
 
   <aside class="simplifications-protocol deck-panel">
     <SimplificationsProtocolRails />
