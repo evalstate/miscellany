@@ -1,0 +1,24 @@
+:root {
+  /* Replace these starter tokens with project values. */
+  --slide-bg: #0b0c0f;
+  --slide-surface: #14161b;
+  --slide-surface-2: #1c1f26;
+  --slide-border: #2b3038;
+
+  --slide-text: #f4f1ea;
+  --slide-muted: #bdb7aa;
+  --slide-dim: #807a70;
+
+  --slide-accent: #f5a400;
+  --slide-accent-hi: #ffc649;
+  --slide-info: #6aa3f7;
+  --slide-ok: #6ad19c;
+  --slide-warn: #f06b5a;
+
+  --slide-font-sans: Inter, ui-sans-serif, system-ui, sans-serif;
+  --slide-font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --slide-radius: 8px;
+  --slide-radius-sm: 3px;
+  --slide-shadow: 0 14px 34px rgb(0 0 0 / 30%);
+}

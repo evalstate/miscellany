@@ -1,0 +1,86 @@
+:root {
+  --deck-bg: #0b1020;
+  --deck-fg: #f6f8ff;
+  --deck-muted: rgba(246, 248, 255, 0.68);
+  --deck-line: rgba(246, 248, 255, 0.18);
+  --deck-panel: rgba(255, 255, 255, 0.07);
+  --deck-accent: #8ee8ff;
+  --deck-accent-2: #ffb86b;
+}
+
+.slidev-layout {
+  background: radial-gradient(circle at 18% 16%, rgba(142, 232, 255, 0.18), transparent 32%),
+    linear-gradient(135deg, #0b1020 0%, #111827 54%, #1b1133 100%);
+  color: var(--deck-fg);
+  font-size: 1.55rem;
+}
+
+.slidev-layout h1 {
+  color: var(--deck-fg);
+  font-weight: 800;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+}
+
+.slidev-layout h2,
+.slidev-layout h3 {
+  color: var(--deck-fg);
+}
+
+.slidev-layout p,
+.slidev-layout li {
+  color: var(--deck-muted);
+}
+
+.slidev-layout code {
+  color: var(--deck-accent);
+  background: rgba(142, 232, 255, 0.12);
+  border: 1px solid rgba(142, 232, 255, 0.22);
+  border-radius: 0.35rem;
+  padding: 0.05em 0.3em;
+}
+
+.default-layout {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 4.5rem;
+}
+
+.kicker {
+  margin-bottom: 0.9rem;
+  color: var(--deck-accent);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.deck-grid {
+  display: grid;
+  gap: 1.1rem;
+}
+
+.deck-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.deck-card {
+  min-height: 14rem;
+  padding: 1.25rem;
+  border: 1px solid var(--deck-line);
+  border-radius: 1.1rem;
+  background: var(--deck-panel);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+}
+
+.deck-card h2 {
+  margin-bottom: 0.75rem;
+  color: var(--deck-accent-2);
+  font-size: 1.35rem;
+}
+
+.deck-card p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.35;
+}

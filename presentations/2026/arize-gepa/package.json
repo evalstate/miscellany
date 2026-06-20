@@ -1,0 +1,26 @@
+{
+  "name": "arize-gepa-presentation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev --open slides.md",
+    "build": "slidev build slides.md --base ./ --router-mode hash --out dist",
+    "export": "slidev export slides.md --output arize-gepa.pdf",
+    "format": "prettier --write slides.md components/**/*.vue layouts/**/*.vue style.css",
+    "preview": "slidev build slides.md --base ./ --router-mode hash --out dist && npx vite preview dist --host 127.0.0.1 --port 4173",
+    "build:single": "SLIDEV_SINGLEFILE=1 slidev build slides.md --base ./ --router-mode hash --out dist-single",
+    "open:single": "npm run build:single && xdg-open dist-single/index.html",
+    "visual:export": "uv run python .fast-agent/scripts/visual_review.py",
+    "visual:review": "uv run python .fast-agent/scripts/visual_review.py --review",
+    "visual:geometry": "uv run python .fast-agent/scripts/check_slide_geometry.py"
+  },
+  "devDependencies": {
+    "@lucide/vue": "^1.17.0",
+    "@slidev/cli": "latest",
+    "@slidev/theme-default": "latest",
+    "playwright-chromium": "^1.60.0",
+    "prettier": "latest",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vue": "latest"
+  }
+}

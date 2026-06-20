@@ -1,0 +1,18 @@
+node_modules/
+dist/
+dist-single/
+.slidev/
+*.pdf
+.DS_Store
+reports/screenshots/*.png
+reports/*.json
+reports/*.txt
+
+# Keep project-local fast-agent configuration/tooling, skip runtime state.
+!.fast-agent/
+.fast-agent/.check_for_update_done
+.fast-agent/sessions/
+.fast-agent/**/*.pyc
+.fast-agent/**/__pycache__/
+
+.venv/
