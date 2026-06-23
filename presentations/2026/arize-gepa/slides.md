@@ -69,20 +69,6 @@ fonts:
 </div>
 
 
----
-layout: default
-kicker: next
----
-
-# Presentation shape
-
-- Audience and desired outcome
-- What skill/tool optimization changes about agent workflows
-- Where vision belongs in the evaluation loop
-- What GEPA adds to prompt and policy refinement
-- Demo path and visual story
-- Key visuals worth building as reusable components
-- Closing takeaway
 
 ---
 layout: default
@@ -108,7 +94,7 @@ layout: default
 class: story-trace-slide
 ---
 
-# GEPA trace
+# Story Writing GEPA trace
 
 <StoryGepaTrace />
 
@@ -197,31 +183,40 @@ layout: default
 class: gepa-run-slide
 ---
 
-# GEPA improves what it sees
+# Optimising the Skill
 
 <GepaRunExplorer />
+
+
 
 ---
 layout: center
 class: text-center
 ---
 
----
-
-# Score
-
-Prompt: "Write a story".
-
-Score: 
-
-NOTE --> Higher is Better
+# Batches, Labels and Tools
 
 
 ---
+layout: default
+class: f1-labels-slide
+---
 
-# HTML Skill
+<figure class="f1-labels-figure">
+  <img :src="'images/f1-labels.png'" alt="F1 label examples" />
+</figure>
 
-# Labelling
+---
+
+# OpenClaw Github Issue Labelling
+
+- Over 700 GitHub PRs and Issues over complicated product surface
+- Created High Quality dataset for training and benchmarking
+- Laddered data creation with 5 run consensus
+- 
+
+---
+
 
 ---
 
@@ -234,9 +229,8 @@ Tempting to use an LLM _but_
 
 # Benchmark
 
-Does it do the same thing twice?
-
-Does the score transfer to my held out set?
+- Does it do the same thing twice?
+- Does the score transfer to my held out set?
 
 
 ---

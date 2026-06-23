@@ -23,8 +23,8 @@ const components = [
   {
     id: 'theme',
     title: 'Required items',
-    weight: '45%',
-    detail: 'Maya · lighthouse · lamp',
+    weight: '30%',
+    detail: 'Lucia · moon · music contest',
     x: 42,
     y: 42,
     w: 310,
@@ -33,8 +33,8 @@ const components = [
   {
     id: 'story',
     title: 'Story length',
-    weight: '25%',
-    detail: '≤ 140 words',
+    weight: '30%',
+    detail: '180–200 words',
     x: 42,
     y: 180,
     w: 310,
@@ -43,8 +43,8 @@ const components = [
   {
     id: 'prompt',
     title: 'Prompt length',
-    weight: '30%',
-    detail: 'short prompts win',
+    weight: '40%',
+    detail: '≤ 20 words; shorter wins',
     x: 42,
     y: 318,
     w: 310,
@@ -135,7 +135,7 @@ function edgePath(edge: EdgeSpec) {
         <text class="story-score-breakdown__score-value" x="137" y="153">0.0–1.0</text>
         <line x1="44" y1="184" x2="230" y2="184" />
         <text class="story-score-breakdown__formula" x="137" y="219">weighted sum</text>
-        <text class="story-score-breakdown__formula story-score-breakdown__formula--muted" x="137" y="249">45% + 25% + 30%</text>
+        <text class="story-score-breakdown__formula story-score-breakdown__formula--muted" x="137" y="249">30% + 30% + 40%</text>
       </g>
 
     </svg>

@@ -641,3 +641,30 @@
 .birch-scoring__evidence figcaption {
   padding: 0.25rem 0.15rem 0;
 }
+
+/* F1 labels image slide. */
+.slidev-layout.f1-labels-slide {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.f1-labels-figure {
+  position: absolute;
+  inset: 0.65rem 1rem;
+  display: grid;
+  place-items: center;
+  margin: 0;
+}
+
+.f1-labels-figure img {
+  box-sizing: border-box;
+  width: auto !important;
+  height: 530px !important;
+  max-width: 100% !important;
+  max-height: 530px !important;
+  border: 1px solid rgba(246, 248, 255, 0.18);
+  border-radius: 1.1rem;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+  object-fit: contain !important;
+}

@@ -19,11 +19,7 @@ const barWidth = (value: number) => `${Math.max(4, Math.min(100, value * 100))}%
 const shortPrompt = (prompt: string) => prompt.replace(/\s+/g, ' ')
 const currentPointX = computed(() => pointX(current.value.iteration))
 const currentPointY = computed(() => pointY(current.value.score))
-const processMove = computed(() => {
-  if (index.value === 0) return 'infer hidden rubric'
-  if (index.value < steps.length - 1) return 'compress prompt'
-  return 'best observed prompt'
-})
+const processMove = computed(() => current.value.processMove)
 
 function pointX(iteration: number) {
   return 20 + ((iteration - 1) / Math.max(1, candidates.length - 1)) * 700
@@ -162,7 +158,7 @@ onBeforeUnmount(() => {
 .story-gepa-trace__rail {
   display: grid;
   align-content: start;
-  gap: 0.58rem;
+  gap: 0.42rem;
   padding-top: 0.05rem;
 }
 
@@ -180,7 +176,7 @@ onBeforeUnmount(() => {
   grid-template-columns: auto 1fr;
   gap: 0.1rem 0.55rem;
   align-items: center;
-  padding: 0.62rem 0.72rem;
+  padding: 0.46rem 0.62rem;
   text-align: left;
 }
 
@@ -188,12 +184,12 @@ onBeforeUnmount(() => {
   grid-row: span 2;
   display: grid;
   place-items: center;
-  width: 1.65rem;
-  height: 1.65rem;
+  width: 1.45rem;
+  height: 1.45rem;
   border-radius: 999px;
   background: rgba(142, 232, 255, 0.16);
   color: #8ee8ff;
-  font-size: 0.86rem;
+  font-size: 0.78rem;
 }
 
 .story-gepa-trace__rail button strong {
