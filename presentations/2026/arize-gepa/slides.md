@@ -96,6 +96,15 @@ class: gepa-loop-slide
 
 ---
 layout: default
+class: story-score-slide
+---
+
+# Score breakdown
+
+<StoryScoreBreakdown />
+
+---
+layout: default
 class: gepa-run-slide
 ---
 

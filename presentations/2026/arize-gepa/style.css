@@ -360,3 +360,14 @@
   font-size: 2.72rem;
   line-height: 0.96;
 }
+
+/* Story score breakdown: compact title band for a full-height SVG diagram. */
+.slidev-layout.story-score-slide {
+  padding: 2.1rem 4.2rem 1.5rem;
+}
+
+.slidev-layout.story-score-slide h1 {
+  margin: 0;
+  font-size: 2.68rem;
+  line-height: 0.96;
+}
