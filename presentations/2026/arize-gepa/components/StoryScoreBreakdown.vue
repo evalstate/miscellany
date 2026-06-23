@@ -1,4 +1,24 @@
 <script setup lang="ts">
+type Anchor = 'left' | 'right' | 'top' | 'bottom'
+type NodeSpec = {
+  id: string
+  title: string
+  weight?: string
+  detail?: string
+  x: number
+  y: number
+  w: number
+  h: number
+}
+type EdgeSpec = {
+  id: string
+  from: string
+  to: string
+  fromAnchor: Anchor
+  toAnchor: Anchor
+  toOffsetY?: number
+}
+
 const components = [
   {
     id: 'theme',
@@ -30,12 +50,47 @@ const components = [
     w: 310,
     h: 110,
   },
-] as const
+] as const satisfies readonly NodeSpec[]
+
+const scoreNode = {
+  id: 'score',
+  title: 'GEPA score',
+  x: 604,
+  y: 92,
+  w: 274,
+  h: 286,
+} as const satisfies NodeSpec
+
+const nodes = new Map<string, NodeSpec>([
+  ...components.map((node) => [node.id, node] as const),
+  [scoreNode.id, scoreNode],
+])
 
 const edges = components.map((node) => ({
-  id: node.id,
-  d: `M ${node.x + node.w + 18} ${node.y + node.h / 2} C 430 ${node.y + node.h / 2}, 524 235, 592 235`,
-}))
+  id: `${node.id}-score`,
+  from: node.id,
+  to: scoreNode.id,
+  fromAnchor: 'right',
+  toAnchor: 'left',
+  toOffsetY: 0,
+})) satisfies EdgeSpec[]
+
+function anchorPoint(node: NodeSpec, anchor: Anchor, offsetY = 0) {
+  if (anchor === 'left') return { x: node.x, y: node.y + node.h / 2 + offsetY }
+  if (anchor === 'right') return { x: node.x + node.w, y: node.y + node.h / 2 + offsetY }
+  if (anchor === 'top') return { x: node.x + node.w / 2, y: node.y + offsetY }
+  return { x: node.x + node.w / 2, y: node.y + node.h + offsetY }
+}
+
+function edgePath(edge: EdgeSpec) {
+  const from = nodes.get(edge.from)!
+  const to = nodes.get(edge.to)!
+  const a = anchorPoint(from, edge.fromAnchor)
+  const b = anchorPoint(to, edge.toAnchor, edge.toOffsetY)
+  const dx = Math.abs(b.x - a.x)
+
+  return `M ${a.x} ${a.y} C ${a.x + dx * 0.34} ${a.y}, ${b.x - dx * 0.34} ${b.y}, ${b.x} ${b.y}`
+}
 </script>
 
 <template>
@@ -56,7 +111,7 @@ const edges = components.map((node) => ({
       </defs>
 
       <g class="story-score-breakdown__edges">
-        <path v-for="edge in edges" :key="edge.id" :d="edge.d" />
+        <path v-for="edge in edges" :key="edge.id" :d="edgePath(edge)" />
       </g>
 
       <g class="story-score-breakdown__components">
@@ -74,8 +129,8 @@ const edges = components.map((node) => ({
         </g>
       </g>
 
-      <g class="story-score-breakdown__score" transform="translate(604 92)">
-        <rect width="274" height="286" rx="32" />
+      <g class="story-score-breakdown__score" :transform="`translate(${scoreNode.x} ${scoreNode.y})`">
+        <rect :width="scoreNode.w" :height="scoreNode.h" rx="32" />
         <text class="story-score-breakdown__score-label" x="137" y="64">GEPA score</text>
         <text class="story-score-breakdown__score-value" x="137" y="153">0.0–1.0</text>
         <line x1="44" y1="184" x2="230" y2="184" />
