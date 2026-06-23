@@ -114,6 +114,33 @@ class: story-trace-slide
 
 ---
 layout: default
+class: html-effectiveness-video-slide
+---
+
+<div class="html-effectiveness-video">
+  <div class="html-effectiveness-video__frame">
+    <video
+      :src="'videos/birch-html-html-intro-sequence.mp4'"
+      autoplay
+      loop
+      muted
+      playsinline
+      preload="metadata"
+    ></video>
+  </div>
+
+  <nav class="html-effectiveness-video__links" aria-label="HTML and Birch resources">
+    <a href="https://thariqs.github.io/html-effectiveness/" target="_blank" rel="noreferrer">
+      The Unreasonable Effectiveness of HTML
+    </a>
+    <a href="https://evalstate-birch-html.hf.space/analysis/report.html" target="_blank" rel="noreferrer">
+      The Birch Benchmark
+    </a>
+  </nav>
+</div>
+
+---
+layout: default
 class: gepa-run-slide
 ---
 
