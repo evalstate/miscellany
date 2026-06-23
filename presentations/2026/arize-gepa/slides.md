@@ -141,6 +141,59 @@ class: html-effectiveness-video-slide
 
 ---
 layout: default
+class: birch-scoring-slide
+---
+
+# Birch scoring → ASI
+
+<div class="birch-scoring">
+  <section class="birch-scoring__inputs" aria-label="Birch skill inputs">
+    <div class="birch-scoring__file birch-scoring__file--skill">
+      <span>skill</span>
+      <strong>SKILL.md</strong>
+      <p>How to produce standalone Birch HTML.</p>
+    </div>
+    <div class="birch-scoring__plus">+</div>
+    <div class="birch-scoring__file birch-scoring__file--recipe">
+      <span>recipe</span>
+      <strong>numeric-data.md</strong>
+      <p>What this benchmark asks the skill to render.</p>
+    </div>
+  </section>
+
+  <section class="birch-scoring__flow" aria-label="Scoring inputs become actionable system intelligence">
+    <article>
+      <span class="birch-scoring__tag">deterministic</span>
+      <strong>render checks</strong>
+      <p>generation success · Birch CSS · semantic primitives · chart/table contracts · mobile geometry</p>
+    </article>
+    <article>
+      <span class="birch-scoring__tag birch-scoring__tag--vision">VLM</span>
+      <strong>screenshot feedback</strong>
+      <p>“table is clipped on mobile” · readability · visual defects the DOM checks miss</p>
+    </article>
+    <div class="birch-scoring__arrow">→</div>
+    <article class="birch-scoring__asi">
+      <span>ASI packet</span>
+      <strong>score + failures + fixes</strong>
+    </article>
+  </section>
+
+  <figure class="birch-scoring__evidence">
+    <div class="birch-scoring__phone">
+      <img :src="'birch-scoring/numeric-data-mobile-clipped.png'" alt="Mobile Birch artifact with clipped table evidence" />
+      <div class="birch-scoring__bbox"></div>
+    </div>
+    <figcaption>
+      <span>example feedback</span>
+      <strong>mobile table clipped</strong>
+      <p>one screenshot becomes actionable mutation pressure</p>
+    </figcaption>
+  </figure>
+</div>
+
+---
+layout: default
 class: gepa-run-slide
 ---
 

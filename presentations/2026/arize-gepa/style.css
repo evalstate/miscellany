@@ -441,3 +441,203 @@
   border-color: rgba(255, 184, 107, 0.52);
   background: rgba(255, 184, 107, 0.16);
 }
+
+/* Birch scoring slide. */
+.slidev-layout.birch-scoring-slide {
+  padding: 2.25rem 3.2rem 2.35rem;
+}
+
+.birch-scoring-slide h1 {
+  margin-bottom: 0.85rem;
+  font-size: 2.9rem;
+}
+
+.birch-scoring {
+  height: calc(100% - 5.35rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(17rem, 0.78fr);
+  grid-template-rows: auto 1fr;
+  gap: 0.85rem 1.15rem;
+}
+
+.birch-scoring__inputs,
+.birch-scoring__flow,
+.birch-scoring__evidence {
+  min-height: 0;
+  border: 1px solid var(--deck-line);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+}
+
+.birch-scoring__inputs {
+  grid-column: 1 / 2;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 0.8rem;
+}
+
+.birch-scoring__file {
+  padding: 0.85rem;
+  border: 1px solid rgba(142, 232, 255, 0.28);
+  border-radius: 0.95rem;
+  background: rgba(142, 232, 255, 0.1);
+}
+
+.birch-scoring__file--recipe {
+  border-color: rgba(255, 184, 107, 0.36);
+  background: rgba(255, 184, 107, 0.12);
+}
+
+.birch-scoring__file span,
+.birch-scoring__tag,
+.birch-scoring__asi span,
+.birch-scoring__evidence figcaption span {
+  display: block;
+  margin-bottom: 0.35rem;
+  color: var(--deck-accent);
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.birch-scoring__file--recipe span,
+.birch-scoring__tag--vision,
+.birch-scoring__evidence figcaption span {
+  color: var(--deck-accent-2);
+}
+
+.birch-scoring__file strong,
+.birch-scoring__flow strong,
+.birch-scoring__asi strong,
+.birch-scoring__evidence figcaption strong {
+  display: block;
+  color: var(--deck-fg);
+  font-size: 1.18rem;
+  font-weight: 900;
+  letter-spacing: -0.035em;
+}
+
+.birch-scoring__file p,
+.birch-scoring__flow p,
+.birch-scoring__asi p,
+.birch-scoring__evidence figcaption p {
+  margin: 0.35rem 0 0;
+  color: var(--deck-muted);
+  font-size: 0.72rem;
+  line-height: 1.28;
+}
+
+.birch-scoring__plus,
+.birch-scoring__arrow {
+  align-self: center;
+  color: rgba(246, 248, 255, 0.86);
+  font-size: 1.65rem;
+  font-weight: 900;
+}
+
+.birch-scoring__flow {
+  grid-column: 1 / 2;
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: minmax(8.15rem, auto) auto;
+  align-items: stretch;
+  gap: 0.7rem;
+  padding: 0.8rem;
+}
+
+.birch-scoring__flow article {
+  padding: 0.9rem 0.95rem;
+  border: 1px solid rgba(246, 248, 255, 0.15);
+  border-radius: 0.95rem;
+  background: rgba(0, 0, 0, 0.16);
+}
+
+.birch-scoring__arrow {
+  position: absolute;
+  left: 50%;
+  top: 4.85rem;
+  z-index: 1;
+  display: grid;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  margin: 0;
+  border-radius: 999px;
+  background: #202939;
+  box-shadow: 0 0 0 0.25rem #202939;
+  line-height: 0.8;
+  transform: translate(-50%, -50%);
+}
+
+.birch-scoring__asi {
+  grid-column: 1 / 3;
+  align-self: end;
+  padding: 0.85rem 1rem !important;
+  text-align: center;
+  border-color: rgba(142, 232, 255, 0.34) !important;
+  background: linear-gradient(135deg, rgba(142, 232, 255, 0.16), rgba(255, 184, 107, 0.11)) !important;
+}
+
+.birch-scoring__asi span {
+  margin-bottom: 0.25rem;
+}
+
+.birch-scoring__evidence {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 0.75rem;
+  padding: 0.85rem;
+}
+
+.birch-scoring__phone {
+  position: relative;
+  min-height: 0;
+  overflow: hidden;
+  border: 0.35rem solid rgba(246, 248, 255, 0.18);
+  border-radius: 1.15rem;
+  background: #f4f3ef;
+}
+
+.birch-scoring__phone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 34%;
+}
+
+.birch-scoring__bbox {
+  position: absolute;
+  right: 0.45rem;
+  bottom: 21%;
+  width: 42%;
+  height: 18%;
+  border: 3px solid #ff5f7e;
+  border-radius: 0.45rem;
+  box-shadow: 0 0 0 999px rgba(11, 16, 32, 0.1), 0 0 24px rgba(255, 95, 126, 0.45);
+}
+
+.birch-scoring__bbox::after {
+  content: "clipped";
+  position: absolute;
+  right: -0.15rem;
+  top: -1.55rem;
+  padding: 0.18rem 0.42rem;
+  border-radius: 999px;
+  background: #ff5f7e;
+  color: white;
+  font-size: 0.52rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.birch-scoring__evidence figcaption {
+  padding: 0.25rem 0.15rem 0;
+}

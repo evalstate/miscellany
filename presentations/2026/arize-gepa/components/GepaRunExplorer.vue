@@ -53,7 +53,7 @@ function stop() {
 
 watch(playing, (isPlaying) => {
   if (timer) window.clearInterval(timer)
-  timer = isPlaying ? window.setInterval(() => go(1), 3000) : undefined
+  timer = isPlaying ? window.setInterval(() => go(1), 2000) : undefined
 }, { immediate: true })
 
 watch(order, () => {
@@ -449,4 +449,3 @@ onBeforeUnmount(() => {
   transform: translateX(-12px) scale(0.985);
 }
 </style>
-
