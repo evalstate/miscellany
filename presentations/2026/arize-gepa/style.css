@@ -668,3 +668,42 @@
   box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
   object-fit: contain !important;
 }
+
+/* Linked fast-agent documentation social cards. */
+.slidev-layout.fast-agent-docs-slide h1 {
+  margin-bottom: 1.7rem;
+}
+
+.fast-agent-docs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.35rem;
+  align-items: center;
+}
+
+.fast-agent-doc-card {
+  display: grid;
+  gap: 0.8rem;
+  color: var(--deck-fg);
+  text-decoration: none;
+}
+
+.fast-agent-doc-card img {
+  width: 100%;
+  border: 1px solid rgba(246, 248, 255, 0.22);
+  border-radius: 1.05rem;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.32);
+}
+
+.fast-agent-doc-card span {
+  justify-self: center;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid rgba(142, 232, 255, 0.28);
+  border-radius: 999px;
+  background: rgba(142, 232, 255, 0.1);
+  color: var(--deck-accent);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}

@@ -12,6 +12,10 @@ type Candidate = {
   hygiene: number
   skillLengthScore: number
   skillLines: number
+  recipeLines: number
+  toolCalls: number
+  turns: number
+  totalTokens: number
   checkerFailures: number
   checkerWarnings: number
   missingCssArtifacts: number
@@ -31,8 +35,6 @@ const ordered = computed(() => {
   })
 })
 const current = computed(() => ordered.value[index.value] ?? ordered.value[0])
-const maxSkillLines = computed(() => Math.max(...items.map((d) => d.skillLines), 1))
-const maxErrors = computed(() => Math.max(...items.map((d) => d.checkerFailures), 1))
 const rank = computed(() => ordered.value.findIndex((d) => d.id === current.value?.id) + 1)
 
 const barWidth = (value: number, max = 1) => `${Math.max(3, Math.min(100, (value / max) * 100))}%`
@@ -116,9 +118,19 @@ onBeforeUnmount(() => {
 
       <div class="gepa-run-explorer__stats">
         <div>
-          <span>skill length</span>
+          <span>SKILL.md</span>
           <strong>{{ current.skillLines }}</strong>
           <small>lines</small>
+        </div>
+        <div>
+          <span>numeric-data.md</span>
+          <strong>{{ current.recipeLines }}</strong>
+          <small>lines</small>
+        </div>
+        <div>
+          <span>tool calls</span>
+          <strong>{{ current.toolCalls }}</strong>
+          <small>{{ current.turns }} turns</small>
         </div>
         <div>
           <span>checker errors</span>
@@ -136,6 +148,7 @@ onBeforeUnmount(() => {
       </svg>
 
       <footer class="gepa-run-explorer__controls">
+        <span class="gepa-run-explorer__run">{{ gepaBirchRun.run }}</span>
         <label>
           order
           <select v-model="order">
@@ -153,8 +166,8 @@ onBeforeUnmount(() => {
   display: grid;
   grid-template-columns: minmax(0, 1.42fr) minmax(340px, 0.78fr);
   gap: 1.35rem;
-  height: 482px;
-  margin-top: 0.65rem;
+  height: 456px;
+  margin-top: 0.45rem;
 }
 
 .gepa-run-explorer__preview,
@@ -207,8 +220,8 @@ onBeforeUnmount(() => {
 .gepa-run-explorer__metrics {
   display: flex;
   flex-direction: column;
-  gap: 0.62rem;
-  padding: 0.86rem 0.95rem;
+  gap: 0.48rem;
+  padding: 0.72rem 0.85rem;
 }
 
 .gepa-run-explorer__metrics header {
@@ -226,7 +239,7 @@ onBeforeUnmount(() => {
 .gepa-run-explorer__metrics h2 {
   margin: 0;
   color: #8ee8ff;
-  font-size: 2.75rem;
+  font-size: 2.45rem;
   font-weight: 900;
   line-height: 0.9;
   letter-spacing: -0.06em;
@@ -265,7 +278,7 @@ onBeforeUnmount(() => {
 
 .gepa-run-explorer__bars {
   display: grid;
-  gap: 0.62rem;
+  gap: 0.45rem;
 }
 
 .gepa-run-explorer__bar {
@@ -307,11 +320,11 @@ onBeforeUnmount(() => {
 .gepa-run-explorer__stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 0.52rem;
 }
 
 .gepa-run-explorer__stats div {
-  padding: 0.68rem;
+  padding: 0.5rem 0.56rem;
   border: 1px solid rgba(246, 248, 255, 0.14);
   border-radius: 0.9rem;
   background: rgba(0, 0, 0, 0.14);
@@ -321,7 +334,7 @@ onBeforeUnmount(() => {
 .gepa-run-explorer__stats small {
   display: block;
   color: rgba(246, 248, 255, 0.58);
-  font-size: 0.62rem;
+  font-size: 0.54rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -329,16 +342,16 @@ onBeforeUnmount(() => {
 
 .gepa-run-explorer__stats strong {
   display: block;
-  margin: 0.25rem 0 0.08rem;
+  margin: 0.18rem 0 0.04rem;
   color: white;
-  font-size: 1.55rem;
+  font-size: 1.32rem;
   font-weight: 900;
   line-height: 1;
 }
 
 .gepa-run-explorer__chart {
   width: 100%;
-  height: 116px;
+  height: 88px;
   padding: 0.15rem 0;
   overflow: visible;
 }
@@ -391,7 +404,20 @@ onBeforeUnmount(() => {
   display: flex;
   gap: 0.42rem;
   align-items: center;
+  justify-content: space-between;
   margin-top: 0;
+}
+
+.gepa-run-explorer__run {
+  min-width: 0;
+  overflow: hidden;
+  color: rgba(246, 248, 255, 0.5);
+  font-size: 0.56rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 

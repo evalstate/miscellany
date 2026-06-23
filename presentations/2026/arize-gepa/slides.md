@@ -211,9 +211,28 @@ class: f1-labels-slide
 # OpenClaw Github Issue Labelling
 
 - Over 700 GitHub PRs and Issues over complicated product surface
-- Created High Quality dataset for training and benchmarking
-- Laddered data creation with 5 run consensus
-- 
+
+- Label Creation: Tempting to use LLM but you need reproducable and correct labels to train and evaluate against. Try a "laddering" process to save time.
+- Label Application: 
+- Optimisation: 
+
+---
+layout: default
+class: fast-agent-docs-slide
+---
+
+# fast-agent docs
+
+<div class="fast-agent-docs-grid">
+  <a class="fast-agent-doc-card" href="https://fast-agent.ai/guides/batch-processing/" target="_blank" rel="noreferrer">
+    <img :src="'fast-agent-batch-processing-social.png'" alt="fast-agent social card — Batch Processing" />
+    <span>Batch Processing</span>
+  </a>
+  <a class="fast-agent-doc-card" href="https://fast-agent.ai/guides/gepa/" target="_blank" rel="noreferrer">
+    <img :src="'fast-agent-gepa-social.png'" alt="fast-agent social card — GEPA Optimization" />
+    <span>GEPA Optimization</span>
+  </a>
+</div>
 
 ---
 
