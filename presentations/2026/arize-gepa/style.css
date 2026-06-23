@@ -928,3 +928,47 @@
   font-weight: 680;
   line-height: 1.28;
 }
+
+/* Refinements after OpenClaw flow was simplified to three phases. */
+.openclaw-labeling__pipeline {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.openclaw-labeling__pipeline article {
+  min-height: 250px;
+  padding: 1.2rem;
+}
+
+.openclaw-labeling__pipeline article strong {
+  font-size: 1.48rem;
+}
+
+.openclaw-labeling__pipeline article p + p {
+  margin-top: 0.16rem;
+}
+
+.openclaw-lessons {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.openclaw-lesson {
+  grid-column: span 3;
+  min-height: 7.9rem;
+}
+
+.openclaw-lesson--wide {
+  grid-column: 2 / span 4;
+}
+
+/* Keep final slide within Slidev center layout bounds. */
+.slidev-layout.thank-you-slide::after {
+  bottom: 0;
+}
+
+.thank-you {
+  margin-bottom: 3.8rem;
+}
+
+.thank-you h1 {
+  font-size: 6.45rem;
+}

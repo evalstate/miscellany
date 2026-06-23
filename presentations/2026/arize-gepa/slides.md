@@ -253,17 +253,11 @@ class: openclaw-labeling-slide
       <strong>Ladder</strong>
       <p>consensus over runs</p>
     </article>
-    <i>→</i>
     <article>
       <span>03</span>
-      <strong>Apply</strong>
-      <p>batch tool routing</p>
-    </article>
-    <i>→</i>
-    <article>
-      <span>04</span>
-      <strong>Evaluate</strong>
+      <strong>Partition</strong>
       <p>held-out benchmark</p>
+      <p>training / pareto set</p>
     </article>
   </section>
 </div>
@@ -273,7 +267,7 @@ layout: default
 class: openclaw-lessons-slide
 ---
 
-# OpenClaw labelling guardrails
+# Common Issues
 
 <div class="openclaw-lessons">
   <article class="openclaw-lesson openclaw-lesson--accent">
@@ -299,7 +293,7 @@ class: openclaw-lessons-slide
   <article class="openclaw-lesson openclaw-lesson--wide">
     <span>benchmark</span>
     <strong>Check transfer and variance</strong>
-    <p>Use a separate benchmark set: do post-loop scores transfer, and how much do they vary across models and runs?</p>
+    <p>Separate the held-out benchmark from training / pareto examples. Do post-loop scores transfer, and how much do they vary across models and runs?</p>
   </article>
 </div>
 
