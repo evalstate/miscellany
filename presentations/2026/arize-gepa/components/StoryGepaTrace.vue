@@ -14,6 +14,7 @@ const current = computed<TraceStep>(() => steps[index.value] ?? steps[0])
 const maxScore = computed(() => Math.max(...candidates.map((candidate) => candidate.score), 1))
 const scoreText = (value: number) => value.toFixed(4)
 const pct = (value: number) => `${Math.round(value * 100)}%`
+const rawScore = (value: number) => value.toFixed(3)
 const barWidth = (value: number) => `${Math.max(4, Math.min(100, value * 100))}%`
 const shortPrompt = (prompt: string) => prompt.replace(/\s+/g, ' ')
 const currentPointX = computed(() => pointX(current.value.iteration))
@@ -71,7 +72,18 @@ onBeforeUnmount(() => {
             <strong>under test</strong>
           </header>
           <blockquote>{{ shortPrompt(current.currentPrompt) }}</blockquote>
-          <div class="story-gepa-trace__score-row">
+          <div class="story-gepa-trace__delta">
+            <span>process move</span>
+            <strong>{{ processMove }}</strong>
+          </div>
+        </article>
+
+        <article class="story-gepa-trace__panel story-gepa-trace__panel--asi">
+          <header>
+            <span>ASI packet</span>
+            <strong>to reflection model</strong>
+          </header>
+          <div class="story-gepa-trace__score-row story-gepa-trace__score-row--asi">
             <div>
               <span>GEPA score</span>
               <strong>{{ scoreText(current.score) }}</strong>
@@ -85,32 +97,21 @@ onBeforeUnmount(() => {
               <strong>{{ current.storyWords }}w</strong>
             </div>
           </div>
-          <div class="story-gepa-trace__delta">
-            <span>process move</span>
-            <strong>{{ processMove }}</strong>
-          </div>
-        </article>
-
-        <article class="story-gepa-trace__panel story-gepa-trace__panel--asi">
-          <header>
-            <span>ASI packet</span>
-            <strong>to reflection model</strong>
-          </header>
           <div class="story-gepa-trace__bars">
             <div>
               <span>required</span>
               <i><b :style="{ width: barWidth(current.scores.requiredItems) }" /></i>
-              <strong>{{ pct(current.scores.requiredItems) }}</strong>
+              <strong><b>{{ rawScore(current.scores.requiredItems) }}</b><em>{{ pct(current.scores.requiredItems) }}</em></strong>
             </div>
             <div>
               <span>story length</span>
               <i><b :style="{ width: barWidth(current.scores.storyLength) }" /></i>
-              <strong>{{ pct(current.scores.storyLength) }}</strong>
+              <strong><b>{{ rawScore(current.scores.storyLength) }}</b><em>{{ pct(current.scores.storyLength) }}</em></strong>
             </div>
             <div>
               <span>prompt length</span>
               <i><b :style="{ width: barWidth(current.scores.promptLength) }" /></i>
-              <strong>{{ pct(current.scores.promptLength) }}</strong>
+              <strong><b>{{ rawScore(current.scores.promptLength) }}</b><em>{{ pct(current.scores.promptLength) }}</em></strong>
             </div>
           </div>
           <ul>
@@ -228,7 +229,7 @@ onBeforeUnmount(() => {
 
 .story-gepa-trace__cards {
   display: grid;
-  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
   gap: 0.9rem;
   min-height: 0;
 }
@@ -292,9 +293,14 @@ onBeforeUnmount(() => {
   margin-top: 0.85rem;
 }
 
+.story-gepa-trace__score-row--asi {
+  margin-top: 0;
+  margin-bottom: 0.82rem;
+}
+
 .story-gepa-trace__score-row div,
 .story-gepa-trace__delta {
-  padding: 0.68rem;
+  padding: 0.72rem;
   border: 1px solid rgba(246, 248, 255, 0.13);
   border-radius: 0.82rem;
   background: rgba(0, 0, 0, 0.14);
@@ -319,30 +325,32 @@ onBeforeUnmount(() => {
   display: block;
   margin-top: 0.22rem;
   color: #ffb86b;
-  font-size: 1.12rem;
+  font-size: 1.44rem;
   font-weight: 900;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
 }
 
 .story-gepa-trace__bars {
   display: grid;
-  gap: 0.64rem;
-  margin-bottom: 1rem;
+  gap: 0.58rem;
+  margin-bottom: 0.82rem;
 }
 
 .story-gepa-trace__bars div {
   display: grid;
-  grid-template-columns: 6.1rem minmax(0, 1fr) 3rem;
+  grid-template-columns: 6.25rem minmax(0, 1fr) 4.5rem;
   gap: 0.58rem;
   align-items: center;
   color: rgba(246, 248, 255, 0.7);
-  font-size: 0.66rem;
+  font-size: 0.68rem;
   font-weight: 850;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .story-gepa-trace__bars i {
-  height: 0.56rem;
+  height: 0.6rem;
   border-radius: 999px;
   background: rgba(246, 248, 255, 0.12);
   overflow: hidden;
@@ -357,8 +365,27 @@ onBeforeUnmount(() => {
 }
 
 .story-gepa-trace__bars strong {
+  display: grid;
+  gap: 0.05rem;
   color: white;
   text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.story-gepa-trace__bars strong b {
+  display: block;
+  height: auto;
+  background: transparent;
+  color: white;
+  font-size: 0.86rem;
+  line-height: 1;
+}
+
+.story-gepa-trace__bars strong em {
+  color: rgba(246, 248, 255, 0.58);
+  font-size: 0.58rem;
+  font-style: normal;
+  line-height: 1;
 }
 
 .story-gepa-trace ul {
@@ -370,8 +397,8 @@ onBeforeUnmount(() => {
 
 .story-gepa-trace li {
   color: rgba(246, 248, 255, 0.82);
-  font-size: 0.98rem;
-  line-height: 1.18;
+  font-size: 0.94rem;
+  line-height: 1.14;
 }
 
 .story-gepa-trace__footer {
