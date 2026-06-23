@@ -84,3 +84,279 @@
   font-size: 1.02rem;
   line-height: 1.35;
 }
+
+.gepa-loop {
+  width: min(50rem, 100%);
+  margin: 0 auto 0;
+}
+
+.gepa-loop svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.gepa-loop__edge path {
+  fill: none;
+  stroke: rgba(142, 232, 255, 0.76);
+  stroke-width: 3.25;
+  stroke-linecap: round;
+  marker-end: url("#gepa-arrow");
+}
+
+.gepa-loop__edge text {
+  fill: rgba(246, 248, 255, 0.8);
+  font-size: 16px;
+  font-weight: 760;
+  letter-spacing: 0.03em;
+  text-anchor: middle;
+}
+
+.gepa-loop marker path {
+  fill: rgba(142, 232, 255, 0.88);
+}
+
+.gepa-loop__node rect {
+  fill: rgba(255, 255, 255, 0.09);
+  stroke: rgba(246, 248, 255, 0.26);
+  stroke-width: 2;
+  filter: drop-shadow(0 24px 44px rgba(0, 0, 0, 0.24));
+}
+
+.gepa-loop__node--task rect {
+  stroke: rgba(142, 232, 255, 0.72);
+}
+
+.gepa-loop__node--score rect {
+  stroke: rgba(255, 184, 107, 0.72);
+}
+
+.gepa-loop__node--reflect rect {
+  fill: rgba(196, 181, 253, 0.1);
+  stroke: rgba(196, 181, 253, 0.92);
+}
+
+.gepa-loop__title {
+  fill: var(--deck-fg);
+  font-size: 31px;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+  text-anchor: middle;
+}
+
+.gepa-loop__detail {
+  fill: var(--deck-muted);
+  font-size: 16px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+/* Intro sequence ported from tessl-mcp */
+.slidev-layout:has(.title-intro) {
+  padding: 0;
+  overflow: hidden;
+}
+
+.title-intro {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+.title-intro main {
+  width: min(980px, 88%);
+}
+
+.title-intro h1 {
+  margin: 0;
+  color: var(--deck-fg);
+  font-size: 5.4rem;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.07em;
+}
+
+.title-intro h2 {
+  margin: 1.15rem auto 0;
+  max-width: 780px;
+  color: var(--deck-muted);
+  font-size: 1.55rem;
+  font-weight: 600;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.title-intro p {
+  margin-top: 2.4rem;
+  color: rgba(246, 248, 255, 0.48);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.title-intro-mark {
+  position: absolute;
+  right: -0.2em;
+  bottom: -0.28em;
+  color: rgba(142, 232, 255, 0.055);
+  font-size: 23rem;
+  font-weight: 900;
+  letter-spacing: -0.12em;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.about-intro {
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: minmax(0, 1.04fr) minmax(390px, 0.96fr);
+  gap: 2.45rem;
+  align-items: center;
+}
+
+.about-intro h1 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 3.18rem;
+  letter-spacing: -0.06em;
+}
+
+.about-intro h1 code,
+.about-intro :not(pre) > code {
+  color: var(--deck-accent);
+  background: transparent;
+  border: 0;
+  padding: 0;
+}
+
+.about-intro h1 code {
+  font-size: 0.52em;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+
+.about-points {
+  margin: 1.35rem 0 0;
+  padding-left: 1.2rem;
+}
+
+.about-points li {
+  font-size: 1.16rem;
+  line-height: 1.48;
+}
+
+.about-social-table {
+  width: min(520px, 100%);
+  margin-top: 1.42rem;
+  border-collapse: separate;
+  border-spacing: 0 0.43rem;
+}
+
+.about-social-table td {
+  color: var(--deck-muted);
+  font-size: 0.98rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  vertical-align: middle;
+}
+
+.about-social-table td:first-child {
+  width: 3.25rem;
+  padding: 0 0.72rem 0 0;
+}
+
+.about-social-table td:last-child {
+  width: 100%;
+  padding: 0.48rem 0.78rem;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--deck-line);
+  border-left: 0;
+  border-radius: 0 0.35rem 0.35rem 0;
+}
+
+.social-icon-cell::before {
+  content: "";
+  display: block;
+  width: 2.48rem;
+  height: 2.48rem;
+}
+
+.social-icon-cell {
+  position: relative;
+}
+
+.social-icon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 2.48rem;
+  height: 2.48rem;
+  transform: translateY(-50%);
+  object-fit: contain;
+  padding: 0.34rem;
+  background: rgba(246, 248, 255, 0.92);
+  border: 1px solid rgba(246, 248, 255, 0.18);
+  border-radius: 0.35rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26);
+}
+
+.social-icon-hf {
+  padding: 0.18rem;
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.about-logo-panel {
+  height: 430px;
+  padding: 2.45rem;
+  display: grid;
+  grid-template-rows: 1.05fr auto 0.95fr;
+  place-items: center;
+  background:
+    radial-gradient(circle at 50% 4%, rgba(142, 232, 255, 0.1), transparent 34%),
+    radial-gradient(circle at 50% 92%, rgba(255, 184, 107, 0.1), transparent 34%),
+    rgba(255, 255, 255, 0.07);
+  border: 1px solid var(--deck-line);
+  border-radius: 1.1rem;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.22);
+}
+
+.about-hf-logo {
+  width: min(360px, 92%);
+  max-height: 160px;
+  object-fit: contain;
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.28));
+}
+
+.about-mcp-logo {
+  width: 154px;
+  height: 154px;
+  object-fit: contain;
+  padding: 1.08rem;
+  background: rgba(11, 16, 32, 0.34);
+  border: 1px solid var(--deck-line);
+  border-radius: 32px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  filter: invert(1);
+}
+
+.about-logo-divider {
+  width: 74%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--deck-line), transparent);
+}
+
+/* GEPA run explorer: reclaim vertical space for the interactive panel. */
+.slidev-layout.gepa-run-slide {
+  padding: 1.45rem 3.6rem 1.15rem;
+}
+
+.slidev-layout.gepa-run-slide h1 {
+  margin: 0;
+  font-size: 2.72rem;
+  line-height: 0.96;
+}
