@@ -105,6 +105,15 @@ class: story-score-slide
 
 ---
 layout: default
+class: story-trace-slide
+---
+
+# GEPA trace
+
+<StoryGepaTrace />
+
+---
+layout: default
 class: gepa-run-slide
 ---
 
