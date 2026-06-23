@@ -130,7 +130,7 @@ layout: default
 class: birch-scoring-slide
 ---
 
-# Birch scoring → ASI
+# HTML Skill → Actionable Side Information
 
 <div class="birch-scoring">
   <section class="birch-scoring__inputs" aria-label="Birch skill inputs">
@@ -183,9 +183,20 @@ layout: default
 class: gepa-run-slide
 ---
 
-# Optimising the Skill
+# Optimising the Skill: gpt-oss-120b
 
 <GepaRunExplorer />
+
+
+
+---
+layout: default
+class: gepa-run-slide
+---
+
+# With a Small Model: Qwen-3.6 35-A3B
+
+<SmallModelRunExplorer />
 
 
 
@@ -194,8 +205,17 @@ layout: center
 class: text-center
 ---
 
-# Batches, Labels and Tools
+# Batches, Labels and Tools and Other Uses
 
+
+---
+layout: default
+class: batches-labels-tools-image-slide
+---
+
+<figure class="batches-labels-tools-image">
+  <img :src="'images/batches-labels-tools-twitter.png'" alt="Batches, Labels and Tools example" />
+</figure>
 
 ---
 layout: default
@@ -207,14 +227,81 @@ class: f1-labels-slide
 </figure>
 
 ---
+layout: default
+class: openclaw-labeling-slide
+---
 
-# OpenClaw Github Issue Labelling
+# OpenClaw GitHub issue labelling
 
-- Over 700 GitHub PRs and Issues over complicated product surface
+<div class="openclaw-labeling">
+  <section class="openclaw-labeling__hero">
+    <div class="kicker">batch labelling case study</div>
+    <strong>700+</strong>
+    <span>PRs and issues</span>
+    <p>Complicated product surface; labels need to be reproducible enough to train and benchmark against.</p>
+  </section>
 
-- Label Creation: Tempting to use LLM but you need reproducable and correct labels to train and evaluate against. Try a "laddering" process to save time.
-- Label Application: 
-- Optimisation: 
+  <section class="openclaw-labeling__pipeline" aria-label="Labelling workflow">
+    <article>
+      <span>01</span>
+      <strong>Curate</strong>
+      <p>high quality seed set</p>
+    </article>
+    <i>→</i>
+    <article>
+      <span>02</span>
+      <strong>Ladder</strong>
+      <p>consensus over runs</p>
+    </article>
+    <i>→</i>
+    <article>
+      <span>03</span>
+      <strong>Apply</strong>
+      <p>batch tool routing</p>
+    </article>
+    <i>→</i>
+    <article>
+      <span>04</span>
+      <strong>Evaluate</strong>
+      <p>held-out benchmark</p>
+    </article>
+  </section>
+</div>
+
+---
+layout: default
+class: openclaw-lessons-slide
+---
+
+# OpenClaw labelling guardrails
+
+<div class="openclaw-lessons">
+  <article class="openclaw-lesson openclaw-lesson--accent">
+    <span>data</span>
+    <strong>Don’t blindly trust LLM labels</strong>
+    <p>Use LLMs to save time, but keep human-curated examples and consensus checks in the loop.</p>
+  </article>
+  <article class="openclaw-lesson">
+    <span>hygiene</span>
+    <strong>Keep row IDs out of prompts</strong>
+    <p>Identifiers leaking into reflection or task text create brittle, non-transferable optimizations.</p>
+  </article>
+  <article class="openclaw-lesson">
+    <span>tools</span>
+    <strong>Make routing instructions explicit</strong>
+    <p>Don’t hide crucial tool-use behavior inside descriptions where the optimizer can miss it.</p>
+  </article>
+  <article class="openclaw-lesson">
+    <span>pressure</span>
+    <strong>Constrain prompt length</strong>
+    <p>Use length pressure to avoid runaway instructions that overfit a labelling run.</p>
+  </article>
+  <article class="openclaw-lesson openclaw-lesson--wide">
+    <span>benchmark</span>
+    <strong>Check transfer and variance</strong>
+    <p>Use a separate benchmark set: do post-loop scores transfer, and how much do they vary across models and runs?</p>
+  </article>
+</div>
 
 ---
 layout: default
@@ -235,39 +322,11 @@ class: fast-agent-docs-slide
 </div>
 
 ---
-
-
+layout: center
+class: thank-you-slide
 ---
 
-# Generating Labels
-
-Tempting to use an LLM _but_
-
-
----
-
-# Benchmark
-
-- Does it do the same thing twice?
-- Does the score transfer to my held out set?
-
-
----
-
-# Other Uses
-
-<div class="deck-grid deck-grid--three mt-8">
-  <div class="deck-card">
-    <h2>1. Tool Optimisation</h2>
-    <p>Keep narrative in <code>slides.md</code>; use layouts and shared CSS before custom components.</p>
-  </div>
-  <div class="deck-card">
-    <h2>2. Code Generation</h2>
-    <p>Run deterministic layout checks before asking a vision model to judge aesthetics.</p>
-  </div>
-  <div class="deck-card">
-    <h2>3. Labelling</h2>
-    <p>Run deterministic layout checks before asking a vision model to judge aesthetics.</p>
-  </div>
-
+<div class="thank-you">
+  <h1>Thank You!</h1>
+  <p>Questions?</p>
 </div>

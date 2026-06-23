@@ -707,3 +707,224 @@
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
+
+/* Batches, labels and tools image slide. */
+.slidev-layout.batches-labels-tools-image-slide {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.batches-labels-tools-image {
+  position: absolute;
+  inset: 1rem;
+  display: grid;
+  place-items: center;
+  margin: 0;
+}
+
+.batches-labels-tools-image img {
+  box-sizing: border-box;
+  width: min(100%, 1050px) !important;
+  height: auto !important;
+  max-height: 520px !important;
+  border: 1px solid rgba(246, 248, 255, 0.18);
+  border-radius: 1.1rem;
+  box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+  object-fit: contain !important;
+}
+
+.fast-agent-docs-slide .fast-agent-doc-card,
+.fast-agent-docs-slide .fast-agent-doc-card:hover,
+.fast-agent-docs-slide .fast-agent-doc-card:focus {
+  border-bottom: 0 !important;
+  background-image: none !important;
+  text-decoration: none !important;
+}
+
+/* Closing slide. */
+.slidev-layout.thank-you-slide {
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+}
+
+.slidev-layout.thank-you-slide::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.25rem;
+  z-index: 2;
+  height: 46%;
+  background: url("/hugs.svg") bottom center / 112% auto no-repeat;
+  opacity: 0.98;
+  pointer-events: none;
+}
+
+.thank-you {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  margin-bottom: 5.2rem;
+  text-align: center;
+}
+
+.thank-you h1 {
+  margin: 0;
+  font-size: 6.8rem;
+  letter-spacing: -0.08em;
+}
+
+.thank-you p {
+  margin: 1.1rem 0 0;
+  color: var(--deck-accent);
+  font-size: 1.35rem;
+  font-weight: 850;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* OpenClaw issue labelling section. */
+.slidev-layout.openclaw-labeling-slide h1,
+.slidev-layout.openclaw-lessons-slide h1 {
+  margin-bottom: 1.35rem;
+}
+
+.openclaw-labeling {
+  display: grid;
+  grid-template-columns: minmax(320px, 0.72fr) minmax(0, 1.28fr);
+  gap: 1.35rem;
+  align-items: stretch;
+}
+
+.openclaw-labeling__hero,
+.openclaw-labeling__pipeline article,
+.openclaw-lesson {
+  border: 1px solid rgba(246, 248, 255, 0.18);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+}
+
+.openclaw-labeling__hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 354px;
+  padding: 1.55rem;
+}
+
+.openclaw-labeling__hero strong {
+  color: var(--deck-accent-2);
+  font-size: 5.2rem;
+  font-weight: 950;
+  line-height: 0.86;
+  letter-spacing: -0.08em;
+}
+
+.openclaw-labeling__hero span {
+  margin-top: 0.38rem;
+  color: white;
+  font-size: 1.28rem;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+}
+
+.openclaw-labeling__hero p {
+  margin: 1.1rem 0 0;
+  font-size: 0.98rem;
+  line-height: 1.38;
+}
+
+.openclaw-labeling__pipeline {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.7rem;
+  align-items: center;
+}
+
+.openclaw-labeling__pipeline i {
+  display: none;
+}
+
+.openclaw-labeling__pipeline article {
+  position: relative;
+  display: grid;
+  min-height: 210px;
+  align-content: center;
+  gap: 0.55rem;
+  padding: 1rem;
+  overflow: hidden;
+}
+
+.openclaw-labeling__pipeline article::after {
+  content: "";
+  position: absolute;
+  inset: auto -14% -20% auto;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 999px;
+  background: rgba(142, 232, 255, 0.08);
+}
+
+.openclaw-labeling__pipeline article span,
+.openclaw-lesson span {
+  color: var(--deck-accent);
+  font-size: 0.68rem;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.openclaw-labeling__pipeline article strong {
+  color: white;
+  font-size: 1.26rem;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+}
+
+.openclaw-labeling__pipeline article p {
+  margin: 0;
+  font-size: 0.78rem;
+  font-weight: 720;
+  line-height: 1.24;
+}
+
+.openclaw-lessons {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.82rem;
+}
+
+.openclaw-lesson {
+  min-height: 9.4rem;
+  padding: 0.95rem;
+}
+
+.openclaw-lesson--wide {
+  grid-column: span 2;
+}
+
+.openclaw-lesson--accent {
+  background: linear-gradient(135deg, rgba(142, 232, 255, 0.16), rgba(255, 184, 107, 0.1));
+  border-color: rgba(142, 232, 255, 0.32);
+}
+
+.openclaw-lesson strong {
+  display: block;
+  margin-top: 0.45rem;
+  color: white;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.openclaw-lesson p {
+  margin: 0.58rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 680;
+  line-height: 1.28;
+}

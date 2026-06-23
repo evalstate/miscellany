@@ -20,16 +20,21 @@ type Candidate = {
   checkerWarnings: number
   missingCssArtifacts: number
   scoreCap: number
+  hasOutput?: boolean
 }
 
-const items = (gepaBirchRun.items as readonly Candidate[]).filter(Boolean)
+const props = withDefaults(defineProps<{ run?: typeof gepaBirchRun }>(), {
+  run: () => gepaBirchRun,
+})
+const runData = computed(() => props.run)
+const items = computed(() => (runData.value.items as readonly Candidate[]).filter(Boolean))
 const order = ref<'iteration' | 'score'>('score')
 const index = ref(0)
 const playing = ref(false)
 let timer: ReturnType<typeof window.setInterval> | undefined
 
 const ordered = computed(() => {
-  return [...items].sort((a, b) => {
+  return [...items.value].sort((a, b) => {
     if (order.value === 'score') return a.score - b.score || a.iteration - b.iteration
     return a.iteration - b.iteration
   })
@@ -71,7 +76,11 @@ onBeforeUnmount(() => {
   <section v-if="current" class="gepa-run-explorer">
     <figure class="gepa-run-explorer__preview">
       <Transition name="gepa-swap" mode="out-in">
-        <img :key="current.id" :src="asset(current.image)" :alt="`${current.id} deep screenshot`" />
+        <img v-if="current.hasOutput !== false" :key="current.id" :src="asset(current.image)" :alt="`${current.id} deep screenshot`" />
+        <div v-else :key="current.id" class="gepa-run-explorer__empty">
+          <strong>no output</strong>
+          <span>artifact was not generated</span>
+        </div>
       </Transition>
       <figcaption>
         <span>deep screenshot</span>
@@ -141,14 +150,14 @@ onBeforeUnmount(() => {
 
       <svg class="gepa-run-explorer__chart" viewBox="0 0 360 132" role="img" aria-label="GEPA score by candidate iteration">
         <line x1="0" y1="118" x2="360" y2="118" />
-        <g v-for="point in items" :key="point.id" :transform="`translate(${((point.iteration - 1) / (items.length - 1)) * 340 + 10} ${118 - point.score * 102})`">
+        <g v-for="point in items" :key="point.id" :transform="`translate(${((point.iteration - 1) / Math.max(items.length - 1, 1)) * 340 + 10} ${118 - point.score * 102})`">
           <circle :class="{ 'is-current': point.id === current.id }" r="6.2" />
         </g>
-        <polyline :points="items.map((point) => `${((point.iteration - 1) / (items.length - 1)) * 340 + 10},${118 - point.score * 102}`).join(' ')" />
+        <polyline :points="items.map((point) => `${((point.iteration - 1) / Math.max(items.length - 1, 1)) * 340 + 10},${118 - point.score * 102}`).join(' ')" />
       </svg>
 
       <footer class="gepa-run-explorer__controls">
-        <span class="gepa-run-explorer__run">{{ gepaBirchRun.run }}</span>
+        <span class="gepa-run-explorer__run">{{ runData.run }}</span>
         <label>
           order
           <select v-model="order">
@@ -190,8 +199,37 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center top;
   border-radius: 0.75rem;
   background: white;
+}
+
+
+.gepa-run-explorer__empty {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  place-content: center;
+  gap: 0.45rem;
+  border: 1px dashed rgba(11, 16, 32, 0.18);
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.86);
+  color: rgba(11, 16, 32, 0.52);
+  text-align: center;
+}
+
+.gepa-run-explorer__empty strong {
+  color: rgba(11, 16, 32, 0.78);
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+}
+
+.gepa-run-explorer__empty span {
+  font-size: 0.72rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
 .gepa-run-explorer__preview figcaption {

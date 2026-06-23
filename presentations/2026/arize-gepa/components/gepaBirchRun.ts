@@ -19,7 +19,8 @@ export const gepaBirchRun = {
       "checkerFailures": 6,
       "checkerWarnings": 5,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0002",
@@ -38,7 +39,8 @@ export const gepaBirchRun = {
       "checkerFailures": 7,
       "checkerWarnings": 4,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0003",
@@ -57,7 +59,8 @@ export const gepaBirchRun = {
       "checkerFailures": 5,
       "checkerWarnings": 5,
       "missingCssArtifacts": 1,
-      "scoreCap": 0.55
+      "scoreCap": 0.55,
+      "hasOutput": true
     },
     {
       "id": "candidate-0004",
@@ -76,7 +79,8 @@ export const gepaBirchRun = {
       "checkerFailures": 5,
       "checkerWarnings": 6,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0005",
@@ -95,7 +99,8 @@ export const gepaBirchRun = {
       "checkerFailures": 2,
       "checkerWarnings": 4,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0006",
@@ -114,7 +119,8 @@ export const gepaBirchRun = {
       "checkerFailures": 3,
       "checkerWarnings": 3,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0007",
@@ -133,7 +139,8 @@ export const gepaBirchRun = {
       "checkerFailures": 5,
       "checkerWarnings": 4,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0008",
@@ -152,7 +159,8 @@ export const gepaBirchRun = {
       "checkerFailures": 0,
       "checkerWarnings": 3,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0009",
@@ -171,7 +179,8 @@ export const gepaBirchRun = {
       "checkerFailures": 2,
       "checkerWarnings": 1,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0010",
@@ -190,7 +199,8 @@ export const gepaBirchRun = {
       "checkerFailures": 2,
       "checkerWarnings": 2,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0011",
@@ -209,7 +219,8 @@ export const gepaBirchRun = {
       "checkerFailures": 0,
       "checkerWarnings": 1,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     },
     {
       "id": "candidate-0012",
@@ -228,7 +239,8 @@ export const gepaBirchRun = {
       "checkerFailures": 0,
       "checkerWarnings": 3,
       "missingCssArtifacts": 0,
-      "scoreCap": 1.0
+      "scoreCap": 1.0,
+      "hasOutput": true
     }
   ]
 } as const
