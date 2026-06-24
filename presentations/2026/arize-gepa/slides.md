@@ -105,16 +105,7 @@ class: html-effectiveness-video-slide
 
 <div class="html-effectiveness-video">
   <div class="html-effectiveness-video__frame">
-    <video
-      :src="'videos/birch-html-html-intro-sequence.mp4'"
-      autoplay
-      loop
-      muted
-      playsinline
-      preload="auto"
-      onerror="this.closest('.html-effectiveness-video__frame')?.classList.add('video-failed')"
-    ></video>
-    <p class="html-effectiveness-video__fallback">Video preview could not load. Open the deck again or use the links below.</p>
+    <ReliableVideo src="videos/birch-html-html-intro-sequence.mp4" />
   </div>
 
   <nav class="html-effectiveness-video__links" aria-label="HTML and Birch resources">
