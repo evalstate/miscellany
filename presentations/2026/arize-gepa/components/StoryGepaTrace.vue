@@ -8,6 +8,7 @@ const steps = storyGepaTraceData.steps
 const candidates = storyGepaTraceData.candidates
 const index = ref(0)
 const playing = ref(false)
+const demoStepDelayMs = 500
 let timer: ReturnType<typeof window.setInterval> | undefined
 
 const current = computed<TraceStep>(() => steps[index.value] ?? steps[0])
@@ -35,7 +36,7 @@ function go(delta: number) {
 
 watch(playing, (isPlaying) => {
   if (timer) window.clearInterval(timer)
-  timer = isPlaying ? window.setInterval(() => go(1), 4200) : undefined
+  timer = isPlaying ? window.setInterval(() => go(1), demoStepDelayMs) : undefined
 }, { immediate: true })
 
 onBeforeUnmount(() => {

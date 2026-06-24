@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onSlideEnter, onSlideLeave } from '@slidev/client'
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
 import { gepaBirchRun } from './gepaBirchRun'
 
@@ -23,8 +24,14 @@ type Candidate = {
   hasOutput?: boolean
 }
 
-const props = withDefaults(defineProps<{ run?: typeof gepaBirchRun }>(), {
+const props = withDefaults(defineProps<{
+  run?: typeof gepaBirchRun
+  demoAutoStart?: boolean
+  demoStepDelayMs?: number
+}>(), {
   run: () => gepaBirchRun,
+  demoAutoStart: false,
+  demoStepDelayMs: 2000,
 })
 const runData = computed(() => props.run)
 const items = computed(() => (runData.value.items as readonly Candidate[]).filter(Boolean))
@@ -60,11 +67,22 @@ function stop() {
 
 watch(playing, (isPlaying) => {
   if (timer) window.clearInterval(timer)
-  timer = isPlaying ? window.setInterval(() => go(1), 2000) : undefined
+  timer = isPlaying ? window.setInterval(() => go(1), props.demoStepDelayMs) : undefined
 }, { immediate: true })
 
 watch(order, () => {
   index.value = 0
+})
+
+onSlideEnter(() => {
+  if (!props.demoAutoStart) return
+  index.value = 0
+  start()
+})
+
+onSlideLeave(() => {
+  if (!props.demoAutoStart) return
+  stop()
 })
 
 onBeforeUnmount(() => {
@@ -343,7 +361,7 @@ onBeforeUnmount(() => {
   height: 100%;
   border-radius: inherit;
   background: linear-gradient(90deg, #8ee8ff, #c4b5fd);
-  transition: width 420ms ease;
+  transition: width 300ms ease;
 }
 
 .gepa-run-explorer__bar--score i {
@@ -411,7 +429,7 @@ onBeforeUnmount(() => {
   fill: rgba(246, 248, 255, 0.56);
   stroke: rgba(11, 16, 32, 0.9);
   stroke-width: 2;
-  transition: r 180ms ease, fill 180ms ease;
+  transition: r 140ms ease, fill 140ms ease;
 }
 
 .gepa-run-explorer__chart circle.is-current {
@@ -435,7 +453,7 @@ onBeforeUnmount(() => {
   height: 0.42rem;
   border-radius: 999px;
   background: rgba(255, 184, 107, 0.78);
-  transition: width 420ms ease;
+  transition: width 300ms ease;
 }
 
 .gepa-run-explorer__controls {
@@ -500,7 +518,7 @@ onBeforeUnmount(() => {
 
 .gepa-swap-enter-active,
 .gepa-swap-leave-active {
-  transition: opacity 280ms ease, transform 280ms ease;
+  transition: opacity 180ms ease, transform 180ms ease;
 }
 
 .gepa-swap-enter-from {

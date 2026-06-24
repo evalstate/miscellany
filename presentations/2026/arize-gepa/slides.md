@@ -178,7 +178,7 @@ class: gepa-run-slide
 
 # Optimising the Skill: gpt-oss-120b
 
-<GepaRunExplorer />
+<GepaRunExplorer demo-auto-start :demo-step-delay-ms="3000" />
 
 
 
