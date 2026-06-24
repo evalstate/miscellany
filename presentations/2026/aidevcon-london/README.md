@@ -1,11 +1,11 @@
-# Tessl MCP presentation
+# AI DevCon London presentation
 
 Fresh Slidev starter deck.
 
 ## Run while editing
 
 ```bash
-cd tessl-mcp
+cd aidevcon-london
 npm install
 npm run dev
 ```

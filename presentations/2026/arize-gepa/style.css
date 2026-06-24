@@ -413,6 +413,30 @@
   min-height: 0;
   object-fit: cover;
   object-position: center 46%;
+  background: rgba(0, 0, 0, 0.62);
+}
+
+.html-effectiveness-video__fallback {
+  display: none;
+  position: absolute;
+  inset: auto 1.25rem 1.25rem;
+  margin: 0;
+  padding: 0.7rem 0.9rem;
+  border: 1px solid rgba(255, 184, 107, 0.42);
+  border-radius: 0.75rem;
+  background: rgba(0, 0, 0, 0.72);
+  color: #ffd4a3;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.html-effectiveness-video__frame {
+  position: relative;
+}
+
+.html-effectiveness-video__frame.video-failed .html-effectiveness-video__fallback {
+  display: block;
 }
 
 .html-effectiveness-video__links {
@@ -971,4 +995,249 @@
 
 .thank-you h1 {
   font-size: 6.45rem;
+}
+
+/* Held-out benchmark transfer slide. */
+.slidev-layout.good-benchmarks-slide h1 {
+  margin-bottom: 1.1rem;
+}
+
+.good-benchmarks {
+  display: grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(300px, 0.58fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.good-benchmarks__plot,
+.good-benchmarks__metrics {
+  border: 1px solid rgba(246, 248, 255, 0.18);
+  border-radius: 1.25rem;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
+}
+
+.good-benchmarks__plot {
+  min-height: 438px;
+  padding: 1rem 1.1rem 0.7rem;
+}
+
+.good-benchmarks__headline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.15rem 1rem;
+  align-items: end;
+  margin: 0 0 0.25rem 0.2rem;
+}
+
+.good-benchmarks__headline span {
+  grid-column: 1 / -1;
+  color: var(--deck-accent);
+  font-size: 0.66rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.good-benchmarks__headline strong {
+  color: white;
+  font-size: 2.45rem;
+  font-weight: 950;
+  line-height: 0.95;
+  letter-spacing: -0.07em;
+}
+
+.good-benchmarks__headline em {
+  color: var(--deck-accent-2);
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+}
+
+.good-benchmarks__plot svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.good-benchmarks__grid line {
+  stroke: rgba(246, 248, 255, 0.14);
+  stroke-width: 1.4;
+}
+
+.good-benchmarks__grid text,
+.good-benchmarks__label,
+.good-benchmarks__callout,
+.good-benchmarks__delta-label,
+.good-benchmarks__improvement-label {
+  fill: rgba(246, 248, 255, 0.68);
+  font-weight: 800;
+}
+
+.good-benchmarks__grid text {
+  font-size: 18px;
+  text-anchor: end;
+}
+
+.good-benchmarks__delta {
+  fill: none;
+  stroke-linecap: round;
+}
+
+.good-benchmarks__delta {
+  stroke: url("#benchmarkDelta");
+  stroke-width: 4;
+  marker-end: url("#benchmarkArrow");
+}
+
+.good-benchmarks__range {
+  fill: rgba(255, 255, 255, 0.08);
+  stroke-width: 2;
+}
+
+.good-benchmarks__range--base {
+  stroke: rgba(142, 232, 255, 0.45);
+}
+
+.good-benchmarks__range--best {
+  stroke: rgba(255, 184, 107, 0.55);
+}
+
+.good-benchmarks__mean {
+  opacity: 0.64;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.good-benchmarks__mean--base {
+  stroke: #8ee8ff;
+}
+
+.good-benchmarks__mean--best {
+  stroke: #ffb86b;
+}
+
+.good-benchmarks__dots circle {
+  stroke: rgba(11, 16, 32, 0.92);
+  stroke-width: 3.2;
+}
+
+.good-benchmarks__dots--base circle {
+  fill: #8ee8ff;
+}
+
+.good-benchmarks__dots--best circle {
+  fill: #ffb86b;
+}
+
+.good-benchmarks__label {
+  font-size: 22px;
+  text-anchor: middle;
+}
+
+.good-benchmarks__callout {
+  font-size: 17px;
+  text-anchor: middle;
+}
+
+.good-benchmarks__callout--base {
+  fill: #8ee8ff;
+}
+
+.good-benchmarks__callout--best {
+  fill: #ffb86b;
+}
+
+.good-benchmarks__delta-label {
+  fill: rgba(246, 248, 255, 0.82);
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  text-anchor: middle;
+  text-transform: uppercase;
+}
+
+.good-benchmarks__improvement-label {
+  fill: #ffb86b;
+  font-size: 19px;
+  text-anchor: start;
+}
+
+.good-benchmarks__improvement-label--strong {
+  font-size: 25px;
+  font-weight: 950;
+  letter-spacing: -0.05em;
+}
+
+.good-benchmarks__metrics {
+  display: grid;
+  grid-template-rows: auto auto;
+  align-content: start;
+  gap: 1rem;
+  padding: 0.9rem;
+}
+
+.good-benchmarks__metrics table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 0.85rem;
+  font-size: 0.69rem;
+}
+
+.good-benchmarks__metrics th,
+.good-benchmarks__metrics td {
+  padding: 0.5rem 0.42rem;
+  border-bottom: 1px solid rgba(246, 248, 255, 0.12);
+  color: rgba(246, 248, 255, 0.76);
+  text-align: right;
+}
+
+.good-benchmarks__metrics th:first-child,
+.good-benchmarks__metrics td:first-child {
+  text-align: left;
+}
+
+.good-benchmarks__metrics th {
+  color: var(--deck-accent);
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.good-benchmarks__metrics td:last-child {
+  color: var(--deck-accent-2);
+  font-weight: 900;
+}
+
+.good-benchmarks__checks {
+  display: grid;
+  gap: 0.42rem;
+  align-content: start;
+}
+
+.good-benchmarks__checks article {
+  padding: 0.58rem 0.66rem;
+  border: 1px solid rgba(142, 232, 255, 0.22);
+  border-radius: 0.9rem;
+  background: rgba(142, 232, 255, 0.08);
+}
+
+.good-benchmarks__checks strong {
+  display: block;
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+}
+
+.good-benchmarks__checks span {
+  display: block;
+  margin-top: 0.18rem;
+  color: rgba(246, 248, 255, 0.66);
+  font-size: 0.55rem;
+  font-weight: 760;
+  line-height: 1.2;
 }

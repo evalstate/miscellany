@@ -79,8 +79,8 @@
   padding: 0 10px 0 58px;
   color: #1f2228;
   background:
-    url("/intro/huggingface-mark-logo.svg") 10px 50% / 18px 18px no-repeat,
-    url("/intro/github-mark.svg") 34px 50% / 18px 18px no-repeat,
+    url("./public/intro/huggingface-mark-logo.svg") 10px 50% / 18px 18px no-repeat,
+    url("./public/intro/github-mark.svg") 34px 50% / 18px 18px no-repeat,
     rgba(242, 239, 231, 0.94);
   border: 1px solid rgba(240, 236, 226, 0.22);
   border-radius: 2px;

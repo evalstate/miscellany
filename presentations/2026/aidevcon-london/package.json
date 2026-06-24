@@ -1,11 +1,11 @@
 {
-  "name": "tessl-mcp-presentation",
+  "name": "aidevcon-london-presentation",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "slidev --open slides.md",
     "build": "slidev build slides.md --base ./ --router-mode hash --out dist",
-    "export": "slidev export slides.md --output tessl-mcp.pdf",
+    "export": "slidev export slides.md --output aidevcon-london.pdf",
     "format": "prettier --write slides.md components/**/*.vue layouts/**/*.vue style.css",
     "preview": "slidev build slides.md --base ./ --router-mode hash --out dist && npx vite preview dist --host 127.0.0.1 --port 4173",
     "build:single": "SLIDEV_SINGLEFILE=1 slidev build slides.md --base ./ --router-mode hash --out dist-single",

@@ -245,7 +245,7 @@ fonts:
   </section>
 
   <figure class="dataset-screenshot deck-panel">
-    <img :src="'/images/clients-data.png'" alt="Hugging Face Data Studio table for the mcp-clients dataset" />
+    <img :src="'images/clients-data.png'" alt="Hugging Face Data Studio table for the mcp-clients dataset" />
   </figure>
 </div>
 
@@ -353,7 +353,7 @@ layout: section
 <section class="simplifications-visual">
   <ClickableImagePopover
     class="simplifications-webcam deck-panel"
-    src="/images/mcp-webcam.png"
+    src="images/mcp-webcam.png"
     alt="mcp-webcam demo screenshot"
   />
 
@@ -599,6 +599,6 @@ layout: section
 
 # Hugging Face sponsors Hack Monty
 
-<img :src="'/images/hackmonty.png'" alt="Hack Monty" />
+<img :src="'images/hackmonty.png'" alt="Hack Monty" />
 
 </div>

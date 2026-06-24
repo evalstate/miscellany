@@ -111,8 +111,10 @@ class: html-effectiveness-video-slide
       loop
       muted
       playsinline
-      preload="metadata"
+      preload="auto"
+      onerror="this.closest('.html-effectiveness-video__frame')?.classList.add('video-failed')"
     ></video>
+    <p class="html-effectiveness-video__fallback">Video preview could not load. Open the deck again or use the links below.</p>
   </div>
 
   <nav class="html-effectiveness-video__links" aria-label="HTML and Birch resources">
@@ -228,6 +230,16 @@ class: f1-labels-slide
 
 ---
 layout: default
+class: good-benchmarks-slide
+---
+
+# Good benchmarks
+
+<GoodBenchmarksSlide />
+
+
+---
+layout: default
 class: openclaw-labeling-slide
 ---
 
@@ -296,6 +308,7 @@ class: openclaw-lessons-slide
     <p>Separate the held-out benchmark from training / pareto examples. Do post-loop scores transfer, and how much do they vary across models and runs?</p>
   </article>
 </div>
+
 
 ---
 layout: default

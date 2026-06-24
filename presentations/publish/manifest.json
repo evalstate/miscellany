@@ -1,0 +1,190 @@
+{
+  "title": "Presentation Archive",
+  "space": "evalstate/presentations",
+  "items": [
+    {
+      "status": "published",
+      "year": 2026,
+      "event": "Arize",
+      "location": "London UK",
+      "eventUrl": "https://luma.com/london-builders-meetup?tk=fXs9VV",
+      "title": "Optimizing Skills and Tools, with Vision and GEPA",
+      "eventUrl": "https://luma.com/",
+      "note": "Included live view of Trackio dashboards.",
+      "date": "Jun 2026",
+      "sortDate": "2026-06-20",
+      "source": "2026/arize-gepa/dist",
+      "provenanceSource": "2026/arize-gepa",
+      "publishPath": "2026/arize-gepa",
+      "entry": "index.html",
+      "include": [
+        "."
+      ]
+    },
+    {
+      "status": "published",
+      "year": 2026,
+      "event": "MCP Conference",
+      "location": "London UK",
+      "eventUrl": "https://www.containerdays.io/containerdays-london-2026/mcpconference-agenda/",
+      "title": "Hugging Face: Connecting ML with Agents and Skills",
+      "date": "Feb 2026",
+      "sortDate": "2026-02-12",
+      "note": "Included live demo of Hugging Face MCP Server, HF Tool Builder Skill and fast-agent used with Toad via ACP.",
+      "source": "2026/mcp-conference",
+      "publishPath": "2026/mcp-conference",
+      "entry": "presentation.html",
+      "include": [
+        "presentation.html",
+        "images",
+        "theme"
+      ]
+    },
+    {
+      "status": "published",
+      "year": 2026,
+      "event": "AI DevCon",
+      "eventUrl": "https://tessl.io/devcon/",
+      "location": "London",
+      "title": "Connecting Context: The Future of MCP Transports",
+      "date": "Jun 2026",
+      "sortDate": "2026-06-02",
+      "source": "2026/aidevcon-london/dist",
+      "provenanceSource": "2026/aidevcon-london",
+      "publishPath": "2026/aidevcon-london",
+      "entry": "index.html",
+      "include": [
+        "."
+      ],
+      "note": "Included live demonstration of fast-agent and mcp-webcam sampling"
+},
+    {
+      "status": "published",
+      "year": 2026,
+      "event": "Agentic AI on CPU",
+      "location": "London",
+      "title": "Upskilling Local Models and Agents",
+      "date": "May 2026",
+      "sortDate": "2026-05-15",
+      "source": "2026/agentic-ai-aws",
+      "publishPath": "2026/agentic-ai-aws",
+      "entry": "presentation.html",
+      "include": [
+        "presentation.html",
+        "images",
+        "theme"
+      ]
+    },
+    {
+      "status": "published",
+      "year": 2026,
+      "event": "AI Native Dev (NVidia)",
+      "location": "London",
+      "eventUrl": "https://luma.com/oojjhxa2?tk=S9bQsj",
+      "title": "Upskilling Models, Agents and the ML Pipeline",
+      "date": "Apr 2026",
+      "sortDate": "2026-04-30",
+      "source": "2026/nvidia-meetup",
+      "publishPath": "2026/nvidia-meetup",
+      "entry": "presentation.html",
+      "include": [
+        "presentation.html",
+        "images",
+        "theme"
+      ]
+    },
+    {
+      "status": "published",
+      "year": 2026,
+      "event": "MCP Dev Summit",
+      "eventUrl": "https://mcpdevsummitna26.sched.com/",
+      "location": "NYC",
+      "title": "MCP at 18 Months: Protocols, Patterns, and the Things We Did Not See Coming",
+      "date": "Apr 2026",
+      "sortDate": "2026-04-02",
+      "source": "2026/mcp-dev-summit-ny/.space-deploy-nyc-pres",
+      "publishPath": "2026/mcp-dev-summit-ny",
+      "entry": "presentation.html",
+      "include": [
+        "presentation.html",
+        "images"
+      ],
+      "note": "Included live demo of fast-agent / Monty Code Generation"
+},
+    {
+      "status": "published",
+      "year": 2026,
+      "event": "MCP Connect",
+      "location": "Paris",
+      "eventUrl": "https://luma.com/bj6kgvxh",
+      "title": "Preparing MCP for the Future",
+      "date": "Feb 2026",
+      "sortDate": "2026-02-06",
+      "source": "2026/mcp-connect",
+      "publishPath": "2026/mcp-connect",
+      "entry": "presentation.html",
+      "include": [
+        "presentation.html",
+        "images",
+        "theme",
+        "animations"
+      ]
+    },
+    {
+      "status": "published",
+      "year": 2025,
+      "event": "MCP Dev Summit",
+      "location": "London",
+      "title": "Streams, Sessions, Stats: Transport and Client Behaviour",
+      "eventUrl": "https://mcpdevsummit.ai/",
+      "date": "Oct 2025",
+      "sortDate": "2025-10-03",
+      "note": "Live demos covered the Hugging Face MCP Server, fast-agent transport tracking, and stateless MCP transport patterns.",
+      "source": "2025/mcp-dev-summit-oct",
+      "publishPath": "2025/mcp-dev-summit-oct",
+      "entry": "presentation.html",
+      "include": [
+        "presentation.html",
+        "images",
+        "theme"
+      ]
+    },
+    {
+      "status": "published",
+      "year": 2025,
+      "event": "Secure AI SE",
+      "location": "Stockholm",
+      "title": "Securing the Model Context Protocol",
+      "eventUrl": "https://secureai.se/",
+      "date": "Sep 2025",
+      "sortDate": "2025-09-01",
+      "note": "Presentation included demonstration of Token Prediction and Selection, and Sampling with fast-agent and webcam.fast-agent.ai.",
+      "source": "2025/secure-se-sep",
+      "publishPath": "2025/secure-se-sep",
+      "entry": "presentation.html",
+      "include": [
+        "presentation.html",
+        "images",
+        "theme"
+      ]
+    },
+    {
+      "status": "published",
+      "year": 2025,
+      "event": "MCP Dev Summit",
+      "location": "",
+      "title": "Resources: Building the Next Wave of MCP Apps",
+      "eventUrl": "https://luma.com/mcpdevsummit2025",
+      "date": "May 2025",
+      "sortDate": "2025-05-22",
+      "source": "2025/mcp-dev-summit-may",
+      "publishPath": "2025/mcp-dev-summit-may",
+      "entry": "presentation.html",
+      "include": [
+        "presentation.html",
+        "images",
+        "theme"
+      ]
+    }
+  ]
+}
