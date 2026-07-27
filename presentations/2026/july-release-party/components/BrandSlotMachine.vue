@@ -31,6 +31,9 @@ function replay() {
   cycle.value += 1;
 
   schedule(() => {
+    const next = [...settledReels.value];
+    next[2] = false;
+    settledReels.value = next;
     showMcp.value = true;
     mcpPhase.value = 0;
   }, 6500);
@@ -46,6 +49,7 @@ function replay() {
   schedule(() => {
     mcpPhase.value = 4;
     mcpSettled.value = true;
+    settleReel(2);
   }, 8300);
 }
 
@@ -172,10 +176,13 @@ onBeforeUnmount(clearTimers);
 
 <style scoped>
 .icon-machine {
-  --cell-height: 520px;
+  --reel-height: 520px;
+  --cell-height: 170px;
+  --start-y: calc((var(--reel-height) - var(--cell-height)) / 2);
+  --rest-y: calc(var(--start-y) - var(--cell-height) * 3);
   display: grid;
   width: min(1080px, 96%);
-  height: var(--cell-height);
+  height: var(--reel-height);
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.3rem;
   align-items: center;
@@ -185,13 +192,15 @@ onBeforeUnmount(clearTimers);
 
 .icon-reel {
   position: relative;
-  height: var(--cell-height);
-  overflow: visible;
-  clip-path: inset(0 -92px);
+  height: var(--reel-height);
+  overflow: hidden;
+  clip-path: none;
   mask-image: linear-gradient(
     transparent 0%,
-    #000 14%,
-    #000 86%,
+    rgba(0, 0, 0, 0.74) 10%,
+    #000 26%,
+    #000 74%,
+    rgba(0, 0, 0, 0.74) 90%,
     transparent 100%
   );
 }
@@ -212,75 +221,61 @@ onBeforeUnmount(clearTimers);
 }
 
 .track-mcp {
-  filter: blur(7px);
-  transform: translateY(0);
+  transform: translateY(var(--start-y));
   animation: none;
   transition: none;
 }
 
 .track-mcp.mcp-phase-1 {
-  filter: blur(2px);
-  transform: translateY(calc(var(--cell-height) * -3.12));
-  transition:
-    transform 1.4s cubic-bezier(0.18, 0.8, 0.2, 1),
-    filter 1.1s ease-out;
+  transform: translateY(calc(var(--rest-y) - 22px));
+  transition: transform 1.4s cubic-bezier(0.18, 0.8, 0.2, 1);
 }
 
 .track-mcp.mcp-phase-2 {
-  filter: blur(0);
-  transform: translateY(calc(var(--cell-height) * -2.94));
+  transform: translateY(calc(var(--rest-y) + 12px));
   transition: transform 180ms ease-out;
 }
 
 .track-mcp.mcp-phase-3 {
-  transform: translateY(calc(var(--cell-height) * -3.035));
+  transform: translateY(calc(var(--rest-y) - 6px));
   transition: transform 160ms ease-in-out;
 }
 
 .track-mcp.mcp-phase-4 {
-  filter: blur(0);
-  transform: translateY(calc(var(--cell-height) * -3));
+  transform: translateY(var(--rest-y));
   transition: transform 140ms ease-out;
 }
 
 .icon-cell {
   display: grid;
   place-items: center;
-  padding: 12px;
-  transition: opacity 260ms ease-out;
+  padding: 10px;
+  transition:
+    opacity 300ms ease-out,
+    scale 420ms cubic-bezier(0.2, 0.86, 0.25, 1.15);
 }
 
 .icon-cell img {
   display: block;
-  width: min(420px, 112%);
-  height: min(420px, 112%);
+  width: 132px;
+  height: 132px;
   object-fit: contain;
 }
 
 .reel-huggy img {
-  width: min(448px, 122%);
-  height: min(448px, 122%);
-  scale: 1.35;
+  width: 144px;
+  height: 144px;
 }
 
 .aaif-symbol,
 .mcp-symbol {
-  width: min(410px, 114%) !important;
-  height: min(410px, 114%) !important;
-}
-
-.aaif-symbol {
-  scale: 1.2;
-}
-
-.mcp-symbol {
-  scale: 1.27;
+  width: 126px !important;
+  height: 126px !important;
 }
 
 .heart-symbol {
-  width: min(430px, 118%) !important;
-  height: min(410px, 112%) !important;
-  scale: 1.18;
+  width: 136px !important;
+  height: 126px !important;
 }
 
 .icon-reel.is-settled .initial-track .icon-cell:not(:last-child),
@@ -288,38 +283,49 @@ onBeforeUnmount(clearTimers);
   opacity: 0;
 }
 
+.icon-reel:not(.is-settled) .icon-cell img,
+.track-mcp:not(.mcp-settled) .icon-cell img {
+  animation: symbol-rotate 620ms linear infinite;
+}
+
 @keyframes reel-in {
   0% {
-    filter: blur(8px);
-    transform: translateY(0);
+    transform: translateY(var(--start-y));
   }
   58% {
-    filter: blur(7px);
-    transform: translateY(calc(var(--cell-height) * -2.15));
+    transform: translateY(
+      calc(var(--start-y) - var(--cell-height) * 2.15)
+    );
   }
   76% {
-    filter: blur(3px);
-    transform: translateY(calc(var(--cell-height) * -2.72));
+    transform: translateY(
+      calc(var(--start-y) - var(--cell-height) * 2.72)
+    );
   }
   86% {
-    transform: translateY(calc(var(--cell-height) * -3.12));
+    transform: translateY(calc(var(--rest-y) - 22px));
   }
   91% {
-    filter: blur(0);
-    transform: translateY(calc(var(--cell-height) * -2.94));
+    transform: translateY(calc(var(--rest-y) + 12px));
   }
   96% {
-    transform: translateY(calc(var(--cell-height) * -3.035));
+    transform: translateY(calc(var(--rest-y) - 6px));
   }
   100% {
-    filter: blur(0);
-    transform: translateY(calc(var(--cell-height) * -3));
+    transform: translateY(var(--rest-y));
   }
 }
 
 .icon-reel.is-settled .initial-track .icon-cell:last-child img,
 .track-mcp.mcp-settled .icon-cell:last-child img {
+  scale: 1.72;
   animation: winner-bounce 420ms cubic-bezier(0.2, 0.86, 0.25, 1.15) both;
+}
+
+@keyframes symbol-rotate {
+  to {
+    transform: rotate(1turn);
+  }
 }
 
 @keyframes winner-bounce {
