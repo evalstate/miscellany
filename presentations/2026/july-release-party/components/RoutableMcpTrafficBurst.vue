@@ -261,6 +261,14 @@ function routePath(packet: Packet) {
   filter: drop-shadow(0 0 14px rgba(106, 163, 247, 0.18));
 }
 
+.routable-burst__node--edge .routable-burst__role {
+  fill: #d1d5db;
+}
+
+.routable-burst__node--edge .routable-burst__title {
+  fill: #ffffff;
+}
+
 .routable-burst__node--server-a rect,
 .routable-burst__node--server-b rect,
 .routable-burst__node--server-c rect,

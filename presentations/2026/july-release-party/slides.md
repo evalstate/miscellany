@@ -31,7 +31,7 @@ Shaun Smith · July 2026
 <section>
 <div class="kicker">about me</div>
 
-<h1>Shaun Smith <code>@evalstate</code></h1>
+<h1><span>Shaun Smith</span><span class="about-handle">@evalstate</span></h1>
 
 <ul class="about-points">
 <li>Open Source @ Hugging Face</li>
@@ -39,7 +39,7 @@ Shaun Smith · July 2026
 <li>huggingface/mcp</li>
 <li>huggingface/skills</li>
 <li>huggingface/upskill</li>
-<li>Maintainer of <code>fast-agent</code></li>
+<li>Maintainer of <span class="about-repo">fast-agent</span></li>
 </ul>
 
 <table class="about-social-table">
@@ -53,7 +53,7 @@ Shaun Smith · July 2026
 <td>github.com/evalstate</td>
 </tr>
 <tr>
-<td class="social-icon-cell"><img class="social-icon social-icon-x" src="/intro/xcom-logo-black.png" alt="X" /></td>
+<td class="social-icon-cell"><img class="social-icon social-icon-x" src="/intro/x-mark.svg" alt="X" /></td>
 <td>x.com/evalstate</td>
 </tr>
 </tbody>
@@ -263,7 +263,7 @@ Click the imagery to replay the animation.
 
 ---
 
-# Scaling MCP in Production...
+# Scaling MCP in Production
 
 <div class="remote-mcp-diagram">
   <RemoteMcpLoadBalancerStoryboard />
