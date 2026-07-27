@@ -240,7 +240,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .icon-machine {
   display: grid;
-  width: min(1080px, 96%);
+  width: min(820px, 92%);
   height: 520px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.3rem;
