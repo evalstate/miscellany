@@ -1,12 +1,61 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref } from "vue";
 
+const CELL_HEIGHT = 170;
+const REEL_HEIGHT = 520;
+const CYCLE_HEIGHT = CELL_HEIGHT * 4;
+const START_Y = (REEL_HEIGHT - CELL_HEIGHT) / 2;
+
+const symbols = [
+  { id: "aaif", src: "/brand/aaif-symbol-black.svg", label: "AAIF" },
+  { id: "mcp", src: "/brand/mcp-symbol-black.svg", label: "MCP" },
+  { id: "heart", src: "/brand/heart.svg", label: "loves" },
+  { id: "huggy", src: "/brand/hugging-face.svg", label: "Hugging Face" },
+] as const;
+
+const repeatedSymbols = [...symbols, ...symbols, ...symbols];
+const winnerIndices = { aaif: 0, mcp: 1, heart: 2, huggy: 3 } as const;
+
+type Mode = "spinning" | "decelerating" | "bouncing" | "stopped";
+
+type ReelState = {
+  phase: number;
+  velocity: number;
+  mode: Mode;
+  startTime: number;
+  startPhase: number;
+  travel: number;
+  targetPhase: number;
+  duration: number;
+};
+
+const phases = ref([0, 110, 235]);
+const bounceOffsets = ref([0, 0, 0]);
+const settled = ref([false, false, false]);
 const cycle = ref(0);
-const settledReels = ref([false, false, false]);
-const showMcp = ref(false);
-const mcpSettled = ref(false);
-const mcpPhase = ref(0);
+
+const reels: ReelState[] = [
+  makeReel(phases.value[0], 1520),
+  makeReel(phases.value[1], 1580),
+  makeReel(phases.value[2], 1640),
+];
+
+let frame = 0;
+let previousTime = 0;
 const timers: ReturnType<typeof setTimeout>[] = [];
+
+function makeReel(phase: number, velocity: number): ReelState {
+  return {
+    phase,
+    velocity,
+    mode: "spinning",
+    startTime: 0,
+    startPhase: phase,
+    travel: 0,
+    targetPhase: 0,
+    duration: 0,
+  };
+}
 
 function schedule(callback: () => void, delay: number) {
   timers.push(setTimeout(callback, delay));
@@ -16,45 +65,131 @@ function clearTimers() {
   while (timers.length) clearTimeout(timers.pop());
 }
 
-function settleReel(index: number) {
-  const next = [...settledReels.value];
-  next[index] = true;
-  settledReels.value = next;
+function wrap(value: number) {
+  return ((value % CYCLE_HEIGHT) + CYCLE_HEIGHT) % CYCLE_HEIGHT;
+}
+
+function setSettled(index: number, value: boolean) {
+  const next = [...settled.value];
+  next[index] = value;
+  settled.value = next;
+}
+
+function startSpin(index: number, velocity: number) {
+  const reel = reels[index];
+  reel.mode = "spinning";
+  reel.velocity = velocity;
+  bounceOffsets.value[index] = 0;
+  setSettled(index, false);
+}
+
+function startDeceleration(
+  index: number,
+  winner: keyof typeof winnerIndices,
+  duration: number,
+) {
+  const reel = reels[index];
+  const targetPhase = winnerIndices[winner] * CELL_HEIGHT;
+  const delta = wrap(targetPhase - reel.phase);
+
+  reel.mode = "decelerating";
+  reel.startTime = performance.now();
+  reel.startPhase = reel.phase;
+  reel.targetPhase = targetPhase;
+  reel.duration = duration;
+  // One complete extra revolution keeps the reel moving forward while it slows.
+  reel.travel = delta + CYCLE_HEIGHT;
+}
+
+function bounceAt(progress: number) {
+  if (progress < 0.28) {
+    const p = progress / 0.28;
+    return -20 * (1 - (1 - p) ** 2);
+  }
+  if (progress < 0.56) {
+    const p = (progress - 0.28) / 0.28;
+    return -20 + 32 * (1 - (1 - p) ** 2);
+  }
+  if (progress < 0.8) {
+    const p = (progress - 0.56) / 0.24;
+    return 12 - 18 * (1 - (1 - p) ** 2);
+  }
+  const p = (progress - 0.8) / 0.2;
+  return -6 + 6 * (1 - (1 - p) ** 2);
+}
+
+function animate(time: number) {
+  const elapsed = previousTime ? Math.min(48, time - previousTime) : 16;
+  previousTime = time;
+
+  reels.forEach((reel, index) => {
+    if (reel.mode === "spinning") {
+      reel.phase = wrap(reel.phase + (reel.velocity * elapsed) / 1000);
+    } else if (reel.mode === "decelerating") {
+      const progress = Math.min(1, (time - reel.startTime) / reel.duration);
+      const eased = 1 - (1 - progress) ** 2;
+      reel.phase = wrap(reel.startPhase + reel.travel * eased);
+
+      if (progress >= 1) {
+        reel.phase = reel.targetPhase;
+        reel.mode = "bouncing";
+        reel.startTime = time;
+      }
+    } else if (reel.mode === "bouncing") {
+      const progress = Math.min(1, (time - reel.startTime) / 440);
+      bounceOffsets.value[index] = bounceAt(progress);
+
+      if (progress >= 1) {
+        bounceOffsets.value[index] = 0;
+        reel.mode = "stopped";
+        setSettled(index, true);
+      }
+    }
+
+    phases.value[index] = reel.phase;
+  });
+
+  // Trigger Vue updates for array element mutations.
+  phases.value = [...phases.value];
+  bounceOffsets.value = [...bounceOffsets.value];
+  frame = requestAnimationFrame(animate);
 }
 
 function replay() {
   clearTimers();
-  settledReels.value = [false, false, false];
-  showMcp.value = false;
-  mcpSettled.value = false;
-  mcpPhase.value = 0;
+  cancelAnimationFrame(frame);
+
+  phases.value = [0, 110, 235];
+  bounceOffsets.value = [0, 0, 0];
+  settled.value = [false, false, false];
   cycle.value += 1;
 
-  schedule(() => {
-    const next = [...settledReels.value];
-    next[2] = false;
-    settledReels.value = next;
-    showMcp.value = true;
-    mcpPhase.value = 0;
-  }, 6500);
-  schedule(() => {
-    mcpPhase.value = 1;
-  }, 6560);
-  schedule(() => {
-    mcpPhase.value = 2;
-  }, 7960);
-  schedule(() => {
-    mcpPhase.value = 3;
-  }, 8140);
-  schedule(() => {
-    mcpPhase.value = 4;
-    mcpSettled.value = true;
-    settleReel(2);
-  }, 8300);
+  Object.assign(reels[0], makeReel(phases.value[0], 1520));
+  Object.assign(reels[1], makeReel(phases.value[1], 1580));
+  Object.assign(reels[2], makeReel(phases.value[2], 1640));
+
+  previousTime = 0;
+  frame = requestAnimationFrame(animate);
+
+  schedule(() => startDeceleration(0, "huggy", 1450), 2550);
+  schedule(() => startDeceleration(1, "heart", 1450), 3000);
+  schedule(() => startDeceleration(2, "aaif", 1450), 3450);
+
+  schedule(() => startSpin(2, 1780), 6600);
+  schedule(() => startDeceleration(2, "mcp", 1350), 7900);
 }
 
+const trackStyles = computed(() =>
+  phases.value.map((phase, index) => ({
+    transform: `translateY(${START_Y - CYCLE_HEIGHT - phase + bounceOffsets.value[index]}px)`,
+  })),
+);
+
 onMounted(replay);
-onBeforeUnmount(clearTimers);
+onBeforeUnmount(() => {
+  clearTimers();
+  cancelAnimationFrame(frame);
+});
 </script>
 
 <template>
@@ -67,107 +202,35 @@ onBeforeUnmount(clearTimers);
     @click.stop="replay"
   >
     <div
-      class="icon-reel reel-huggy"
-      :class="{ 'is-settled': settledReels[0] }"
+      v-for="(_, reelIndex) in reels"
+      :key="reelIndex"
+      class="icon-reel"
+      :class="{ 'is-settled': settled[reelIndex] }"
     >
-      <div
-        class="icon-track initial-track"
-        @animationend.self="settleReel(0)"
-      >
-        <div class="icon-cell">
-          <img src="/brand/aaif-symbol-black.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/mcp-symbol-black.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/heart.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/hugging-face.svg" alt="Hugging Face" />
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="icon-reel reel-heart"
-      :class="{ 'is-settled': settledReels[1] }"
-    >
-      <div
-        class="icon-track initial-track"
-        @animationend.self="settleReel(1)"
-      >
-        <div class="icon-cell">
-          <img src="/brand/hugging-face.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/aaif-symbol-black.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/mcp-symbol-black.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img class="heart-symbol" src="/brand/heart.svg" alt="loves" />
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="icon-reel reel-foundation"
-      :class="{ 'is-settled': settledReels[2] }"
-    >
-      <div
-        v-if="!showMcp"
-        key="aaif"
-        class="icon-track initial-track track-aaif"
-        @animationend.self="settleReel(2)"
-      >
-        <div class="icon-cell">
-          <img src="/brand/heart.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/mcp-symbol-black.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/hugging-face.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img
-            class="aaif-symbol"
-            src="/brand/aaif-symbol-black.svg"
-            alt="Agentic AI Foundation"
-          />
-        </div>
-      </div>
-
-      <div
-        v-else
-        key="mcp"
-        class="icon-track track-mcp"
-        :class="[
-          `mcp-phase-${mcpPhase}`,
-          { 'mcp-settled': mcpSettled },
-        ]"
-      >
-        <div class="icon-cell">
-          <img
-            class="aaif-symbol"
-            src="/brand/aaif-symbol-black.svg"
-            alt=""
-          />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/hugging-face.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img src="/brand/heart.svg" alt="" />
-        </div>
-        <div class="icon-cell">
-          <img
-            class="mcp-symbol"
-            src="/brand/mcp-symbol-black.svg"
-            alt="Model Context Protocol"
-          />
+      <div class="icon-track" :style="trackStyles[reelIndex]">
+        <div
+          v-for="(symbol, symbolIndex) in repeatedSymbols"
+          :key="`${reelIndex}-${symbolIndex}-${symbol.id}`"
+          class="icon-cell"
+          :class="[
+            `symbol-${symbol.id}`,
+            {
+              'is-winner':
+                settled[reelIndex] &&
+                symbolIndex >= 4 &&
+                symbolIndex < 8 &&
+                Math.abs(
+                  symbolIndex * CELL_HEIGHT +
+                    START_Y -
+                    CYCLE_HEIGHT -
+                    phases[reelIndex] -
+                    REEL_HEIGHT / 2 +
+                    CELL_HEIGHT / 2,
+                ) < 2,
+            },
+          ]"
+        >
+          <img :src="symbol.src" :alt="symbolIndex >= 4 ? symbol.label : ''" />
         </div>
       </div>
     </div>
@@ -176,13 +239,9 @@ onBeforeUnmount(clearTimers);
 
 <style scoped>
 .icon-machine {
-  --reel-height: 520px;
-  --cell-height: 170px;
-  --start-y: calc((var(--reel-height) - var(--cell-height)) / 2);
-  --rest-y: calc(var(--start-y) - var(--cell-height) * 3);
   display: grid;
   width: min(1080px, 96%);
-  height: var(--reel-height);
+  height: 520px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.3rem;
   align-items: center;
@@ -192,67 +251,30 @@ onBeforeUnmount(clearTimers);
 
 .icon-reel {
   position: relative;
-  height: var(--reel-height);
+  height: 520px;
   overflow: hidden;
-  clip-path: none;
   mask-image: linear-gradient(
     transparent 0%,
-    rgba(0, 0, 0, 0.74) 10%,
-    #000 26%,
-    #000 74%,
-    rgba(0, 0, 0, 0.74) 90%,
+    rgba(0, 0, 0, 0.76) 10%,
+    #000 25%,
+    #000 75%,
+    rgba(0, 0, 0, 0.76) 90%,
     transparent 100%
   );
 }
 
 .icon-track {
   display: grid;
-  grid-auto-rows: var(--cell-height);
-  animation: reel-in 3s cubic-bezier(0.16, 0.76, 0.22, 1) forwards;
-  will-change: transform, filter;
-}
-
-.reel-heart .icon-track {
-  animation-duration: 3.45s;
-}
-
-.track-aaif {
-  animation-duration: 3.9s;
-}
-
-.track-mcp {
-  transform: translateY(var(--start-y));
-  animation: none;
-  transition: none;
-}
-
-.track-mcp.mcp-phase-1 {
-  transform: translateY(calc(var(--rest-y) - 22px));
-  transition: transform 1.4s cubic-bezier(0.18, 0.8, 0.2, 1);
-}
-
-.track-mcp.mcp-phase-2 {
-  transform: translateY(calc(var(--rest-y) + 12px));
-  transition: transform 180ms ease-out;
-}
-
-.track-mcp.mcp-phase-3 {
-  transform: translateY(calc(var(--rest-y) - 6px));
-  transition: transform 160ms ease-in-out;
-}
-
-.track-mcp.mcp-phase-4 {
-  transform: translateY(var(--rest-y));
-  transition: transform 140ms ease-out;
+  grid-auto-rows: 170px;
+  will-change: transform;
 }
 
 .icon-cell {
   display: grid;
   place-items: center;
   padding: 10px;
-  transition:
-    opacity 300ms ease-out,
-    scale 420ms cubic-bezier(0.2, 0.86, 0.25, 1.15);
+  opacity: 1;
+  transition: opacity 320ms ease-out;
 }
 
 .icon-cell img {
@@ -262,80 +284,28 @@ onBeforeUnmount(clearTimers);
   object-fit: contain;
 }
 
-.reel-huggy img {
+.symbol-huggy img {
   width: 144px;
   height: 144px;
 }
 
-.aaif-symbol,
-.mcp-symbol {
-  width: 126px !important;
-  height: 126px !important;
+.symbol-aaif img,
+.symbol-mcp img {
+  width: 126px;
+  height: 126px;
 }
 
-.heart-symbol {
-  width: 136px !important;
-  height: 126px !important;
+.symbol-heart img {
+  width: 136px;
+  height: 126px;
 }
 
-.icon-reel.is-settled .initial-track .icon-cell:not(:last-child),
-.track-mcp.mcp-settled .icon-cell:not(:last-child) {
+.icon-reel.is-settled .icon-cell:not(.is-winner) {
   opacity: 0;
 }
 
-@keyframes reel-in {
-  0% {
-    transform: translateY(var(--start-y));
-  }
-  58% {
-    transform: translateY(
-      calc(var(--start-y) - var(--cell-height) * 2.15)
-    );
-  }
-  76% {
-    transform: translateY(
-      calc(var(--start-y) - var(--cell-height) * 2.72)
-    );
-  }
-  86% {
-    transform: translateY(calc(var(--rest-y) - 22px));
-  }
-  91% {
-    transform: translateY(calc(var(--rest-y) + 12px));
-  }
-  96% {
-    transform: translateY(calc(var(--rest-y) - 6px));
-  }
-  100% {
-    transform: translateY(var(--rest-y));
-  }
-}
-
-.icon-reel.is-settled .initial-track .icon-cell:last-child img,
-.track-mcp.mcp-settled .icon-cell:last-child img {
-  scale: 1.72;
-  animation: winner-bounce 420ms cubic-bezier(0.2, 0.86, 0.25, 1.15) both;
-}
-
-@keyframes winner-bounce {
-  0% {
-    transform: scale(0.92);
-  }
-  55% {
-    transform: scale(1.055);
-  }
-  78% {
-    transform: scale(0.985);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .icon-track,
-  .track-mcp {
-    animation-duration: 1ms;
+  .icon-cell {
     transition-duration: 1ms;
   }
 }
