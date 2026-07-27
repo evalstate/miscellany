@@ -283,11 +283,6 @@ onBeforeUnmount(clearTimers);
   opacity: 0;
 }
 
-.icon-reel:not(.is-settled) .icon-cell img,
-.track-mcp:not(.mcp-settled) .icon-cell img {
-  animation: symbol-rotate 620ms linear infinite;
-}
-
 @keyframes reel-in {
   0% {
     transform: translateY(var(--start-y));
@@ -320,12 +315,6 @@ onBeforeUnmount(clearTimers);
 .track-mcp.mcp-settled .icon-cell:last-child img {
   scale: 1.72;
   animation: winner-bounce 420ms cubic-bezier(0.2, 0.86, 0.25, 1.15) both;
-}
-
-@keyframes symbol-rotate {
-  to {
-    transform: rotate(1turn);
-  }
 }
 
 @keyframes winner-bounce {
