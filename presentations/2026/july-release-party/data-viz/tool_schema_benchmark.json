@@ -1,0 +1,191 @@
+{
+  "schema": "deck.tool-schema-benchmark.v1",
+  "source": "/home/evalstate/source/hf-mcp-server/tool-benchmark/runs/matrix",
+  "methodology": {
+    "v0.3.31_source_label": "argv-0.3.30",
+    "token_definition": "input_tokens + output_tokens",
+    "runs_per_model_condition": 1,
+    "matched_calls": 604,
+    "gemma_prompt_count": 104,
+    "other_model_prompt_count": 100
+  },
+  "summary": {
+    "v0.3.30": {
+      "tokens": 682658,
+      "calls": 604,
+      "accepted_count": 587,
+      "canonical_count": 542,
+      "accepted_rate": 97.18543046357617,
+      "canonical_rate": 89.73509933774835,
+      "argument_f1": 93.32229580573953
+    },
+    "v0.3.31": {
+      "tokens": 537818,
+      "calls": 604,
+      "accepted_count": 588,
+      "canonical_count": 549,
+      "accepted_rate": 97.35099337748345,
+      "canonical_rate": 90.89403973509934,
+      "argument_f1": 96.68874172185431
+    },
+    "token_change": -144840,
+    "token_change_pct": -21.217066232286154,
+    "accepted_count_change": 1,
+    "accepted_rate_change_pp": 0.16556291390728006,
+    "canonical_count_change": 7,
+    "canonical_rate_change_pp": 1.1589403973509889,
+    "argument_f1_change_pp": 3.3664459161147846
+  },
+  "rows": [
+    {
+      "model": "GPT-5.6",
+      "calls": 100,
+      "v0.3.30": {
+        "rows": 100,
+        "tokens": 84813,
+        "accepted_count": 97,
+        "canonical_count": 77,
+        "argument_f1_sum": 81.33333333333333,
+        "accepted_rate": 97.0,
+        "canonical_rate": 77.0,
+        "argument_f1": 81.33333333333333
+      },
+      "v0.3.31": {
+        "rows": 100,
+        "tokens": 67343,
+        "accepted_count": 95,
+        "canonical_count": 80,
+        "argument_f1_sum": 90.16666666666667,
+        "accepted_rate": 95.0,
+        "canonical_rate": 80.0,
+        "argument_f1": 90.16666666666667
+      },
+      "token_change_pct": -20.598
+    },
+    {
+      "model": "Opus 4.8",
+      "calls": 100,
+      "v0.3.30": {
+        "rows": 100,
+        "tokens": 178876,
+        "accepted_count": 100,
+        "canonical_count": 96,
+        "argument_f1_sum": 98.66666666666667,
+        "accepted_rate": 100.0,
+        "canonical_rate": 96.0,
+        "argument_f1": 98.66666666666667
+      },
+      "v0.3.31": {
+        "rows": 100,
+        "tokens": 129772,
+        "accepted_count": 100,
+        "canonical_count": 95,
+        "argument_f1_sum": 99.0,
+        "accepted_rate": 100.0,
+        "canonical_rate": 95.0,
+        "argument_f1": 99.0
+      },
+      "token_change_pct": -27.451
+    },
+    {
+      "model": "GLM-5.2",
+      "calls": 100,
+      "v0.3.30": {
+        "rows": 100,
+        "tokens": 107744,
+        "accepted_count": 100,
+        "canonical_count": 94,
+        "argument_f1_sum": 96.0,
+        "accepted_rate": 100.0,
+        "canonical_rate": 94.0,
+        "argument_f1": 96.0
+      },
+      "v0.3.31": {
+        "rows": 100,
+        "tokens": 76439,
+        "accepted_count": 98,
+        "canonical_count": 92,
+        "argument_f1_sum": 98.66666666666667,
+        "accepted_rate": 98.0,
+        "canonical_rate": 92.0,
+        "argument_f1": 98.66666666666667
+      },
+      "token_change_pct": -29.055
+    },
+    {
+      "model": "Kimi 2.7",
+      "calls": 100,
+      "v0.3.30": {
+        "rows": 100,
+        "tokens": 80930,
+        "accepted_count": 95,
+        "canonical_count": 85,
+        "argument_f1_sum": 89.66666666666667,
+        "accepted_rate": 95.0,
+        "canonical_rate": 85.0,
+        "argument_f1": 89.66666666666667
+      },
+      "v0.3.31": {
+        "rows": 100,
+        "tokens": 68693,
+        "accepted_count": 96,
+        "canonical_count": 91,
+        "argument_f1_sum": 96.5,
+        "accepted_rate": 96.0,
+        "canonical_rate": 91.0,
+        "argument_f1": 96.5
+      },
+      "token_change_pct": -15.12
+    },
+    {
+      "model": "Grok 4.5",
+      "calls": 100,
+      "v0.3.30": {
+        "rows": 100,
+        "tokens": 129015,
+        "accepted_count": 100,
+        "canonical_count": 96,
+        "argument_f1_sum": 100.0,
+        "accepted_rate": 100.0,
+        "canonical_rate": 96.0,
+        "argument_f1": 100.0
+      },
+      "v0.3.31": {
+        "rows": 100,
+        "tokens": 97237,
+        "accepted_count": 99,
+        "canonical_count": 95,
+        "argument_f1_sum": 99.0,
+        "accepted_rate": 99.0,
+        "canonical_rate": 95.0,
+        "argument_f1": 99.0
+      },
+      "token_change_pct": -24.631
+    },
+    {
+      "model": "Gemma 4 12B",
+      "calls": 104,
+      "v0.3.30": {
+        "rows": 104,
+        "tokens": 101280,
+        "accepted_count": 95,
+        "canonical_count": 94,
+        "argument_f1_sum": 98.0,
+        "accepted_rate": 91.34615384615384,
+        "canonical_rate": 90.38461538461539,
+        "argument_f1": 94.23076923076923
+      },
+      "v0.3.31": {
+        "rows": 104,
+        "tokens": 98334,
+        "accepted_count": 100,
+        "canonical_count": 96,
+        "argument_f1_sum": 100.66666666666667,
+        "accepted_rate": 96.15384615384616,
+        "canonical_rate": 92.3076923076923,
+        "argument_f1": 96.7948717948718
+      },
+      "token_change_pct": -2.909
+    }
+  ]
+}

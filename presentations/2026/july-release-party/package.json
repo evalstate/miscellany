@@ -1,0 +1,22 @@
+{
+  "name": "july-release-party-presentation",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "slidev --open slides.md",
+    "build": "slidev build slides.md --base ./ --router-mode hash --out dist",
+    "export": "slidev export slides.md --output july-release-party.pdf",
+    "format": "prettier --write slides.md layouts/**/*.vue setup/**/*.ts style.css vite.config.ts",
+    "preview": "slidev build slides.md --base ./ --router-mode hash --out dist && vite preview dist --host 127.0.0.1 --port 4173",
+    "build:single": "SLIDEV_SINGLEFILE=1 slidev build slides.md --base ./ --router-mode hash --out dist-single",
+    "open:single": "npm run build:single && xdg-open dist-single/index.html"
+  },
+  "devDependencies": {
+    "@lucide/vue": "^1.17.0",
+    "@slidev/cli": "latest",
+    "@slidev/theme-default": "latest",
+    "prettier": "latest",
+    "vite-plugin-singlefile": "^2.3.3",
+    "vue": "latest"
+  }
+}

@@ -1,0 +1,496 @@
+{
+  "schema": "deck.chart-data.v1",
+  "title": "Weekly MCP initialization requests and tool calls",
+  "generated_at": "2026-05-31T21:38:29+00:00",
+  "source": {
+    "repo": "/home/shaun/source/hf-mcp-stats",
+    "files": "data/YYYY-MM/DD/transport-metrics-*.json",
+    "fields": [
+      "currentTime",
+      "startupTime",
+      "methods[].method",
+      "methods[].count"
+    ]
+  },
+  "definitions": {
+    "week_start": "Monday-aligned week in UTC, assigned from snapshot currentTime.",
+    "init_requests": "Delta of methods[].count where method == 'initialize'.",
+    "tool_calls": "Sum of deltas for methods whose name starts with 'tools/call'.",
+    "restart_handling": "Counters are differenced within each startupTime + method stream."
+  },
+  "series": [
+    {
+      "key": "init_requests",
+      "label": "Initializations",
+      "kind": "bar",
+      "axis": "init"
+    },
+    {
+      "key": "tool_calls",
+      "label": "Tool calls",
+      "kind": "line",
+      "axis": "tools"
+    }
+  ],
+  "rows": [
+    {
+      "week_start": "2025-06-09",
+      "week_end": "2025-06-15",
+      "iso_week": "2025-W24",
+      "init_requests": 21900,
+      "tool_calls": 3722,
+      "snapshot_count": 266,
+      "partial_week": true
+    },
+    {
+      "week_start": "2025-06-16",
+      "week_end": "2025-06-22",
+      "iso_week": "2025-W25",
+      "init_requests": 35137,
+      "tool_calls": 2635,
+      "snapshot_count": 325,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-06-23",
+      "week_end": "2025-06-29",
+      "iso_week": "2025-W26",
+      "init_requests": 61865,
+      "tool_calls": 8769,
+      "snapshot_count": 323,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-06-30",
+      "week_end": "2025-07-06",
+      "iso_week": "2025-W27",
+      "init_requests": 53494,
+      "tool_calls": 8073,
+      "snapshot_count": 323,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-07-07",
+      "week_end": "2025-07-13",
+      "iso_week": "2025-W28",
+      "init_requests": 81755,
+      "tool_calls": 6331,
+      "snapshot_count": 322,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-07-14",
+      "week_end": "2025-07-20",
+      "iso_week": "2025-W29",
+      "init_requests": 96132,
+      "tool_calls": 5998,
+      "snapshot_count": 321,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-07-21",
+      "week_end": "2025-07-27",
+      "iso_week": "2025-W30",
+      "init_requests": 84318,
+      "tool_calls": 7642,
+      "snapshot_count": 320,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-07-28",
+      "week_end": "2025-08-03",
+      "iso_week": "2025-W31",
+      "init_requests": 63111,
+      "tool_calls": 6097,
+      "snapshot_count": 318,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-08-04",
+      "week_end": "2025-08-10",
+      "iso_week": "2025-W32",
+      "init_requests": 142922,
+      "tool_calls": 7202,
+      "snapshot_count": 319,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-08-11",
+      "week_end": "2025-08-17",
+      "iso_week": "2025-W33",
+      "init_requests": 961531,
+      "tool_calls": 10370,
+      "snapshot_count": 322,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-08-18",
+      "week_end": "2025-08-24",
+      "iso_week": "2025-W34",
+      "init_requests": 1526636,
+      "tool_calls": 12730,
+      "snapshot_count": 327,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-08-25",
+      "week_end": "2025-08-31",
+      "iso_week": "2025-W35",
+      "init_requests": 914415,
+      "tool_calls": 41195,
+      "snapshot_count": 328,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-09-01",
+      "week_end": "2025-09-07",
+      "iso_week": "2025-W36",
+      "init_requests": 485506,
+      "tool_calls": 59168,
+      "snapshot_count": 328,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-09-08",
+      "week_end": "2025-09-14",
+      "iso_week": "2025-W37",
+      "init_requests": 506081,
+      "tool_calls": 16255,
+      "snapshot_count": 329,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-09-15",
+      "week_end": "2025-09-21",
+      "iso_week": "2025-W38",
+      "init_requests": 514600,
+      "tool_calls": 16336,
+      "snapshot_count": 329,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-09-22",
+      "week_end": "2025-09-28",
+      "iso_week": "2025-W39",
+      "init_requests": 567543,
+      "tool_calls": 14920,
+      "snapshot_count": 329,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-09-29",
+      "week_end": "2025-10-05",
+      "iso_week": "2025-W40",
+      "init_requests": 742914,
+      "tool_calls": 13775,
+      "snapshot_count": 329,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-10-06",
+      "week_end": "2025-10-12",
+      "iso_week": "2025-W41",
+      "init_requests": 715811,
+      "tool_calls": 15616,
+      "snapshot_count": 329,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-10-13",
+      "week_end": "2025-10-19",
+      "iso_week": "2025-W42",
+      "init_requests": 819410,
+      "tool_calls": 17554,
+      "snapshot_count": 329,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-10-20",
+      "week_end": "2025-10-26",
+      "iso_week": "2025-W43",
+      "init_requests": 935681,
+      "tool_calls": 17974,
+      "snapshot_count": 328,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-10-27",
+      "week_end": "2025-11-02",
+      "iso_week": "2025-W44",
+      "init_requests": 1050171,
+      "tool_calls": 17831,
+      "snapshot_count": 327,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-11-03",
+      "week_end": "2025-11-09",
+      "iso_week": "2025-W45",
+      "init_requests": 1067253,
+      "tool_calls": 226447,
+      "snapshot_count": 327,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-11-10",
+      "week_end": "2025-11-16",
+      "iso_week": "2025-W46",
+      "init_requests": 812865,
+      "tool_calls": 19507,
+      "snapshot_count": 309,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-11-17",
+      "week_end": "2025-11-23",
+      "iso_week": "2025-W47",
+      "init_requests": 851168,
+      "tool_calls": 18139,
+      "snapshot_count": 324,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-11-24",
+      "week_end": "2025-11-30",
+      "iso_week": "2025-W48",
+      "init_requests": 897021,
+      "tool_calls": 23834,
+      "snapshot_count": 314,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-12-01",
+      "week_end": "2025-12-07",
+      "iso_week": "2025-W49",
+      "init_requests": 1002315,
+      "tool_calls": 35544,
+      "snapshot_count": 322,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-12-08",
+      "week_end": "2025-12-14",
+      "iso_week": "2025-W50",
+      "init_requests": 1070077,
+      "tool_calls": 39466,
+      "snapshot_count": 322,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-12-15",
+      "week_end": "2025-12-21",
+      "iso_week": "2025-W51",
+      "init_requests": 1113034,
+      "tool_calls": 67975,
+      "snapshot_count": 321,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-12-22",
+      "week_end": "2025-12-28",
+      "iso_week": "2025-W52",
+      "init_requests": 1056543,
+      "tool_calls": 58678,
+      "snapshot_count": 320,
+      "partial_week": false
+    },
+    {
+      "week_start": "2025-12-29",
+      "week_end": "2026-01-04",
+      "iso_week": "2026-W01",
+      "init_requests": 1094247,
+      "tool_calls": 55316,
+      "snapshot_count": 319,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-01-05",
+      "week_end": "2026-01-11",
+      "iso_week": "2026-W02",
+      "init_requests": 1216924,
+      "tool_calls": 77087,
+      "snapshot_count": 320,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-01-12",
+      "week_end": "2026-01-18",
+      "iso_week": "2026-W03",
+      "init_requests": 1302421,
+      "tool_calls": 54563,
+      "snapshot_count": 317,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-01-19",
+      "week_end": "2026-01-25",
+      "iso_week": "2026-W04",
+      "init_requests": 1628655,
+      "tool_calls": 51391,
+      "snapshot_count": 315,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-01-26",
+      "week_end": "2026-02-01",
+      "iso_week": "2026-W05",
+      "init_requests": 1836657,
+      "tool_calls": 82324,
+      "snapshot_count": 312,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-02-02",
+      "week_end": "2026-02-08",
+      "iso_week": "2026-W06",
+      "init_requests": 1990724,
+      "tool_calls": 103357,
+      "snapshot_count": 299,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-02-09",
+      "week_end": "2026-02-15",
+      "iso_week": "2026-W07",
+      "init_requests": 2335179,
+      "tool_calls": 114450,
+      "snapshot_count": 299,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-02-16",
+      "week_end": "2026-02-22",
+      "iso_week": "2026-W08",
+      "init_requests": 2445363,
+      "tool_calls": 90325,
+      "snapshot_count": 309,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-02-23",
+      "week_end": "2026-03-01",
+      "iso_week": "2026-W09",
+      "init_requests": 2303860,
+      "tool_calls": 97508,
+      "snapshot_count": 309,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-03-02",
+      "week_end": "2026-03-08",
+      "iso_week": "2026-W10",
+      "init_requests": 2467408,
+      "tool_calls": 100979,
+      "snapshot_count": 304,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-03-09",
+      "week_end": "2026-03-15",
+      "iso_week": "2026-W11",
+      "init_requests": 1969531,
+      "tool_calls": 90016,
+      "snapshot_count": 305,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-03-16",
+      "week_end": "2026-03-22",
+      "iso_week": "2026-W12",
+      "init_requests": 2006485,
+      "tool_calls": 99522,
+      "snapshot_count": 303,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-03-23",
+      "week_end": "2026-03-29",
+      "iso_week": "2026-W13",
+      "init_requests": 2957288,
+      "tool_calls": 120820,
+      "snapshot_count": 295,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-03-30",
+      "week_end": "2026-04-05",
+      "iso_week": "2026-W14",
+      "init_requests": 3536483,
+      "tool_calls": 154360,
+      "snapshot_count": 265,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-04-06",
+      "week_end": "2026-04-12",
+      "iso_week": "2026-W15",
+      "init_requests": 4148196,
+      "tool_calls": 156189,
+      "snapshot_count": 280,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-04-13",
+      "week_end": "2026-04-19",
+      "iso_week": "2026-W16",
+      "init_requests": 4199169,
+      "tool_calls": 196087,
+      "snapshot_count": 263,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-04-20",
+      "week_end": "2026-04-26",
+      "iso_week": "2026-W17",
+      "init_requests": 4040005,
+      "tool_calls": 176164,
+      "snapshot_count": 260,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-04-27",
+      "week_end": "2026-05-03",
+      "iso_week": "2026-W18",
+      "init_requests": 4116117,
+      "tool_calls": 179786,
+      "snapshot_count": 231,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-05-04",
+      "week_end": "2026-05-10",
+      "iso_week": "2026-W19",
+      "init_requests": 4238519,
+      "tool_calls": 195477,
+      "snapshot_count": 216,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-05-11",
+      "week_end": "2026-05-17",
+      "iso_week": "2026-W20",
+      "init_requests": 4178607,
+      "tool_calls": 237542,
+      "snapshot_count": 197,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-05-18",
+      "week_end": "2026-05-24",
+      "iso_week": "2026-W21",
+      "init_requests": 3751889,
+      "tool_calls": 207649,
+      "snapshot_count": 182,
+      "partial_week": false
+    },
+    {
+      "week_start": "2026-05-25",
+      "week_end": "2026-05-31",
+      "iso_week": "2026-W22",
+      "init_requests": 3572018,
+      "tool_calls": 212447,
+      "snapshot_count": 145,
+      "partial_week": true
+    }
+  ]
+}
