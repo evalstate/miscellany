@@ -90,7 +90,7 @@ function startDeceleration(
 ) {
   const reel = reels[index];
   const targetPhase = winnerIndices[winner] * CELL_HEIGHT;
-  const delta = wrap(targetPhase - reel.phase);
+  const delta = wrap(reel.phase - targetPhase);
 
   reel.mode = "decelerating";
   reel.startTime = performance.now();
@@ -130,11 +130,11 @@ function animate(time: number) {
 
   reels.forEach((reel, index) => {
     if (reel.mode === "spinning") {
-      reel.phase = wrap(reel.phase + (reel.velocity * elapsed) / 1000);
+      reel.phase = wrap(reel.phase - (reel.velocity * elapsed) / 1000);
     } else if (reel.mode === "decelerating") {
       const progress = Math.min(1, (time - reel.startTime) / reel.duration);
       const eased = 1 - (1 - progress) ** 2;
-      reel.phase = wrap(reel.startPhase + reel.travel * eased);
+      reel.phase = wrap(reel.startPhase - reel.travel * eased);
 
       if (progress >= 1) {
         reel.phase = reel.targetPhase;
@@ -246,7 +246,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .icon-machine {
   display: grid;
-  width: min(780px, 92%);
+  width: min(600px, 88%);
   height: 520px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.3rem;
