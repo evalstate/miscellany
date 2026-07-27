@@ -2,52 +2,74 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
 const cycle = ref(0);
-const initialSettled = ref(false);
+const settledReels = ref([false, false, false]);
 const showMcp = ref(false);
 const mcpSettled = ref(false);
-let shiftTimer: ReturnType<typeof setTimeout> | undefined;
-let settleTimer: ReturnType<typeof setTimeout> | undefined;
-let initialSettleTimer: ReturnType<typeof setTimeout> | undefined;
+const mcpPhase = ref(0);
+const timers: ReturnType<typeof setTimeout>[] = [];
+
+function schedule(callback: () => void, delay: number) {
+  timers.push(setTimeout(callback, delay));
+}
+
+function clearTimers() {
+  while (timers.length) clearTimeout(timers.pop());
+}
+
+function settleReel(index: number) {
+  const next = [...settledReels.value];
+  next[index] = true;
+  settledReels.value = next;
+}
 
 function replay() {
-  if (shiftTimer) clearTimeout(shiftTimer);
-  if (settleTimer) clearTimeout(settleTimer);
-  if (initialSettleTimer) clearTimeout(initialSettleTimer);
-  initialSettled.value = false;
+  clearTimers();
+  settledReels.value = [false, false, false];
   showMcp.value = false;
   mcpSettled.value = false;
+  mcpPhase.value = 0;
   cycle.value += 1;
-  initialSettleTimer = setTimeout(() => {
-    initialSettled.value = true;
-  }, 1900);
-  shiftTimer = setTimeout(() => {
+
+  schedule(() => {
     showMcp.value = true;
-    settleTimer = setTimeout(() => {
-      mcpSettled.value = true;
-    }, 50);
-  }, 3200);
+    mcpPhase.value = 0;
+  }, 6500);
+  schedule(() => {
+    mcpPhase.value = 1;
+  }, 6560);
+  schedule(() => {
+    mcpPhase.value = 2;
+  }, 7960);
+  schedule(() => {
+    mcpPhase.value = 3;
+  }, 8140);
+  schedule(() => {
+    mcpPhase.value = 4;
+    mcpSettled.value = true;
+  }, 8300);
 }
 
 onMounted(replay);
-onBeforeUnmount(() => {
-  if (shiftTimer) clearTimeout(shiftTimer);
-  if (settleTimer) clearTimeout(settleTimer);
-  if (initialSettleTimer) clearTimeout(initialSettleTimer);
-});
+onBeforeUnmount(clearTimers);
 </script>
 
 <template>
   <div
     :key="cycle"
     class="icon-machine"
-    :class="{ 'is-initial-settled': initialSettled }"
     role="img"
     aria-label="Hugging Face loves AAIF, then MCP"
     title="Click to replay"
     @click.stop="replay"
   >
-    <div class="icon-reel reel-huggy">
-      <div class="icon-track initial-track">
+    <div
+      class="icon-reel reel-huggy"
+      :class="{ 'is-settled': settledReels[0] }"
+    >
+      <div
+        class="icon-track initial-track"
+        @animationend.self="settleReel(0)"
+      >
         <div class="icon-cell">
           <img src="/brand/aaif-symbol-black.svg" alt="" />
         </div>
@@ -63,8 +85,14 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <div class="icon-reel reel-heart">
-      <div class="icon-track initial-track">
+    <div
+      class="icon-reel reel-heart"
+      :class="{ 'is-settled': settledReels[1] }"
+    >
+      <div
+        class="icon-track initial-track"
+        @animationend.self="settleReel(1)"
+      >
         <div class="icon-cell">
           <img src="/brand/hugging-face.svg" alt="" />
         </div>
@@ -80,11 +108,15 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <div class="icon-reel reel-foundation">
+    <div
+      class="icon-reel reel-foundation"
+      :class="{ 'is-settled': settledReels[2] }"
+    >
       <div
         v-if="!showMcp"
         key="aaif"
         class="icon-track initial-track track-aaif"
+        @animationend.self="settleReel(2)"
       >
         <div class="icon-cell">
           <img src="/brand/heart.svg" alt="" />
@@ -108,7 +140,10 @@ onBeforeUnmount(() => {
         v-else
         key="mcp"
         class="icon-track track-mcp"
-        :class="{ 'mcp-settled': mcpSettled }"
+        :class="[
+          `mcp-phase-${mcpPhase}`,
+          { 'mcp-settled': mcpSettled },
+        ]"
       >
         <div class="icon-cell">
           <img
@@ -137,7 +172,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .icon-machine {
-  --cell-height: 360px;
+  --cell-height: 520px;
   display: grid;
   width: min(1080px, 96%);
   height: var(--cell-height);
@@ -151,7 +186,8 @@ onBeforeUnmount(() => {
 .icon-reel {
   position: relative;
   height: var(--cell-height);
-  overflow: hidden;
+  overflow: visible;
+  clip-path: inset(0 -92px);
   mask-image: linear-gradient(
     transparent 0%,
     #000 14%,
@@ -163,30 +199,48 @@ onBeforeUnmount(() => {
 .icon-track {
   display: grid;
   grid-auto-rows: var(--cell-height);
-  animation: reel-in 1.45s cubic-bezier(0.16, 0.76, 0.22, 1) forwards;
+  animation: reel-in 3s cubic-bezier(0.16, 0.76, 0.22, 1) forwards;
   will-change: transform, filter;
 }
 
 .reel-heart .icon-track {
-  animation-delay: 160ms;
+  animation-duration: 3.45s;
 }
 
 .track-aaif {
-  animation-delay: 320ms;
+  animation-duration: 3.9s;
 }
 
 .track-mcp {
   filter: blur(7px);
   transform: translateY(0);
   animation: none;
-  transition:
-    transform 1.15s cubic-bezier(0.18, 0.8, 0.2, 1),
-    filter 0.85s ease-out;
+  transition: none;
 }
 
-.track-mcp.mcp-settled {
+.track-mcp.mcp-phase-1 {
+  filter: blur(2px);
+  transform: translateY(calc(var(--cell-height) * -3.12));
+  transition:
+    transform 1.4s cubic-bezier(0.18, 0.8, 0.2, 1),
+    filter 1.1s ease-out;
+}
+
+.track-mcp.mcp-phase-2 {
+  filter: blur(0);
+  transform: translateY(calc(var(--cell-height) * -2.94));
+  transition: transform 180ms ease-out;
+}
+
+.track-mcp.mcp-phase-3 {
+  transform: translateY(calc(var(--cell-height) * -3.035));
+  transition: transform 160ms ease-in-out;
+}
+
+.track-mcp.mcp-phase-4 {
   filter: blur(0);
   transform: translateY(calc(var(--cell-height) * -3));
+  transition: transform 140ms ease-out;
 }
 
 .icon-cell {
@@ -198,30 +252,38 @@ onBeforeUnmount(() => {
 
 .icon-cell img {
   display: block;
-  width: min(318px, 94%);
-  height: min(318px, 94%);
+  width: min(420px, 112%);
+  height: min(420px, 112%);
   object-fit: contain;
 }
 
 .reel-huggy img {
-  width: min(338px, 98%);
-  height: min(338px, 98%);
+  width: min(448px, 122%);
+  height: min(448px, 122%);
+  scale: 1.35;
 }
 
 .aaif-symbol,
 .mcp-symbol {
-  width: min(308px, 92%) !important;
-  height: min(308px, 92%) !important;
+  width: min(410px, 114%) !important;
+  height: min(410px, 114%) !important;
+}
+
+.aaif-symbol {
+  scale: 1.2;
+}
+
+.mcp-symbol {
+  scale: 1.27;
 }
 
 .heart-symbol {
-  width: min(320px, 94%) !important;
-  height: min(300px, 90%) !important;
+  width: min(430px, 118%) !important;
+  height: min(410px, 112%) !important;
+  scale: 1.18;
 }
 
-.icon-machine.is-initial-settled
-  .initial-track
-  .icon-cell:not(:last-child),
+.icon-reel.is-settled .initial-track .icon-cell:not(:last-child),
 .track-mcp.mcp-settled .icon-cell:not(:last-child) {
   opacity: 0;
 }
@@ -231,15 +293,47 @@ onBeforeUnmount(() => {
     filter: blur(8px);
     transform: translateY(0);
   }
-  70% {
-    filter: blur(3px);
+  58% {
+    filter: blur(7px);
+    transform: translateY(calc(var(--cell-height) * -2.15));
   }
-  88% {
-    transform: translateY(calc(var(--cell-height) * -3 - 18px));
+  76% {
+    filter: blur(3px);
+    transform: translateY(calc(var(--cell-height) * -2.72));
+  }
+  86% {
+    transform: translateY(calc(var(--cell-height) * -3.12));
+  }
+  91% {
+    filter: blur(0);
+    transform: translateY(calc(var(--cell-height) * -2.94));
+  }
+  96% {
+    transform: translateY(calc(var(--cell-height) * -3.035));
   }
   100% {
     filter: blur(0);
     transform: translateY(calc(var(--cell-height) * -3));
+  }
+}
+
+.icon-reel.is-settled .initial-track .icon-cell:last-child img,
+.track-mcp.mcp-settled .icon-cell:last-child img {
+  animation: winner-bounce 420ms cubic-bezier(0.2, 0.86, 0.25, 1.15) both;
+}
+
+@keyframes winner-bounce {
+  0% {
+    transform: scale(0.92);
+  }
+  55% {
+    transform: scale(1.055);
+  }
+  78% {
+    transform: scale(0.985);
+  }
+  100% {
+    transform: scale(1);
   }
 }
 

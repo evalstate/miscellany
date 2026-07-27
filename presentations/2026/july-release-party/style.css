@@ -223,7 +223,7 @@
 .slidev-layout.icon-reel-slide {
   display: grid;
   place-items: center;
-  padding: 36px 54px;
+  padding: 14px 34px;
 }
 
 .slidev-layout.icon-reel-slide::after {
