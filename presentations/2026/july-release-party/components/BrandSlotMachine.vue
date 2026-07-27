@@ -35,9 +35,9 @@ const settled = ref([false, false, false]);
 const cycle = ref(0);
 
 const reels: ReelState[] = [
-  makeReel(phases.value[0], 1520),
-  makeReel(phases.value[1], 1580),
-  makeReel(phases.value[2], 1640),
+  makeReel(phases.value[0], 1680),
+  makeReel(phases.value[1], 1740),
+  makeReel(phases.value[2], 1800),
 ];
 
 let frame = 0;
@@ -97,8 +97,14 @@ function startDeceleration(
   reel.startPhase = reel.phase;
   reel.targetPhase = targetPhase;
   reel.duration = duration;
-  // One complete extra revolution keeps the reel moving forward while it slows.
-  reel.travel = delta + CYCLE_HEIGHT;
+  // Match the start of the ease-out to the incoming reel speed, then land
+  // after a whole number of additional revolutions.
+  const idealTravel = (reel.velocity * duration) / 2000;
+  const extraCycles = Math.max(
+    1,
+    Math.round((idealTravel - delta) / CYCLE_HEIGHT),
+  );
+  reel.travel = delta + extraCycles * CYCLE_HEIGHT;
 }
 
 function bounceAt(progress: number) {
@@ -164,9 +170,9 @@ function replay() {
   settled.value = [false, false, false];
   cycle.value += 1;
 
-  Object.assign(reels[0], makeReel(phases.value[0], 1520));
-  Object.assign(reels[1], makeReel(phases.value[1], 1580));
-  Object.assign(reels[2], makeReel(phases.value[2], 1640));
+  Object.assign(reels[0], makeReel(phases.value[0], 1680));
+  Object.assign(reels[1], makeReel(phases.value[1], 1740));
+  Object.assign(reels[2], makeReel(phases.value[2], 1800));
 
   previousTime = 0;
   frame = requestAnimationFrame(animate);
@@ -175,7 +181,7 @@ function replay() {
   schedule(() => startDeceleration(1, "heart", 1450), 3000);
   schedule(() => startDeceleration(2, "aaif", 1450), 3450);
 
-  schedule(() => startSpin(2, 1780), 6600);
+  schedule(() => startSpin(2, 1900), 6600);
   schedule(() => startDeceleration(2, "mcp", 1350), 7900);
 }
 
@@ -240,7 +246,7 @@ onBeforeUnmount(() => {
 <style scoped>
 .icon-machine {
   display: grid;
-  width: min(820px, 92%);
+  width: min(1020px, 94%);
   height: 520px;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0.3rem;
