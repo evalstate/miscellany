@@ -2,17 +2,24 @@
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
 const cycle = ref(0);
+const initialSettled = ref(false);
 const showMcp = ref(false);
 const mcpSettled = ref(false);
 let shiftTimer: ReturnType<typeof setTimeout> | undefined;
 let settleTimer: ReturnType<typeof setTimeout> | undefined;
+let initialSettleTimer: ReturnType<typeof setTimeout> | undefined;
 
 function replay() {
   if (shiftTimer) clearTimeout(shiftTimer);
   if (settleTimer) clearTimeout(settleTimer);
+  if (initialSettleTimer) clearTimeout(initialSettleTimer);
+  initialSettled.value = false;
   showMcp.value = false;
   mcpSettled.value = false;
   cycle.value += 1;
+  initialSettleTimer = setTimeout(() => {
+    initialSettled.value = true;
+  }, 1900);
   shiftTimer = setTimeout(() => {
     showMcp.value = true;
     settleTimer = setTimeout(() => {
@@ -25,6 +32,7 @@ onMounted(replay);
 onBeforeUnmount(() => {
   if (shiftTimer) clearTimeout(shiftTimer);
   if (settleTimer) clearTimeout(settleTimer);
+  if (initialSettleTimer) clearTimeout(initialSettleTimer);
 });
 </script>
 
@@ -32,16 +40,23 @@ onBeforeUnmount(() => {
   <div
     :key="cycle"
     class="icon-machine"
+    :class="{ 'is-initial-settled': initialSettled }"
     role="img"
     aria-label="Hugging Face loves AAIF, then MCP"
     title="Click to replay"
     @click.stop="replay"
   >
     <div class="icon-reel reel-huggy">
-      <div class="icon-track">
-        <div class="icon-cell ghost">✦</div>
-        <div class="icon-cell ghost">●</div>
-        <div class="icon-cell ghost">◆</div>
+      <div class="icon-track initial-track">
+        <div class="icon-cell">
+          <img src="/brand/aaif-symbol-black.svg" alt="" />
+        </div>
+        <div class="icon-cell">
+          <img src="/brand/mcp-symbol-black.svg" alt="" />
+        </div>
+        <div class="icon-cell">
+          <img src="/brand/heart.svg" alt="" />
+        </div>
         <div class="icon-cell">
           <img src="/brand/hugging-face.svg" alt="Hugging Face" />
         </div>
@@ -49,21 +64,37 @@ onBeforeUnmount(() => {
     </div>
 
     <div class="icon-reel reel-heart">
-      <div class="icon-track">
-        <div class="icon-cell ghost">●</div>
-        <div class="icon-cell ghost">+</div>
-        <div class="icon-cell ghost">✦</div>
+      <div class="icon-track initial-track">
         <div class="icon-cell">
-          <span class="heart" aria-label="loves">♥</span>
+          <img src="/brand/hugging-face.svg" alt="" />
+        </div>
+        <div class="icon-cell">
+          <img src="/brand/aaif-symbol-black.svg" alt="" />
+        </div>
+        <div class="icon-cell">
+          <img src="/brand/mcp-symbol-black.svg" alt="" />
+        </div>
+        <div class="icon-cell">
+          <img class="heart-symbol" src="/brand/heart.svg" alt="loves" />
         </div>
       </div>
     </div>
 
     <div class="icon-reel reel-foundation">
-      <div v-if="!showMcp" key="aaif" class="icon-track track-aaif">
-        <div class="icon-cell ghost">◆</div>
-        <div class="icon-cell ghost">●</div>
-        <div class="icon-cell ghost">✦</div>
+      <div
+        v-if="!showMcp"
+        key="aaif"
+        class="icon-track initial-track track-aaif"
+      >
+        <div class="icon-cell">
+          <img src="/brand/heart.svg" alt="" />
+        </div>
+        <div class="icon-cell">
+          <img src="/brand/mcp-symbol-black.svg" alt="" />
+        </div>
+        <div class="icon-cell">
+          <img src="/brand/hugging-face.svg" alt="" />
+        </div>
         <div class="icon-cell">
           <img
             class="aaif-symbol"
@@ -86,8 +117,12 @@ onBeforeUnmount(() => {
             alt=""
           />
         </div>
-        <div class="icon-cell ghost">●</div>
-        <div class="icon-cell ghost">◆</div>
+        <div class="icon-cell">
+          <img src="/brand/hugging-face.svg" alt="" />
+        </div>
+        <div class="icon-cell">
+          <img src="/brand/heart.svg" alt="" />
+        </div>
         <div class="icon-cell">
           <img
             class="mcp-symbol"
@@ -102,12 +137,14 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .icon-machine {
-  --cell-height: 410px;
+  --cell-height: 360px;
   display: grid;
-  width: 100%;
+  width: min(1080px, 96%);
   height: var(--cell-height);
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.3rem;
   align-items: center;
+  margin-inline: auto;
   cursor: pointer;
 }
 
@@ -155,38 +192,38 @@ onBeforeUnmount(() => {
 .icon-cell {
   display: grid;
   place-items: center;
-  padding: 34px;
+  padding: 12px;
+  transition: opacity 260ms ease-out;
 }
 
 .icon-cell img {
   display: block;
-  width: min(292px, 88%);
-  height: min(292px, 88%);
+  width: min(318px, 94%);
+  height: min(318px, 94%);
   object-fit: contain;
 }
 
 .reel-huggy img {
-  width: min(330px, 94%);
-  height: min(330px, 94%);
+  width: min(338px, 98%);
+  height: min(338px, 98%);
 }
 
 .aaif-symbol,
 .mcp-symbol {
-  width: min(278px, 84%) !important;
-  height: min(278px, 84%) !important;
+  width: min(308px, 92%) !important;
+  height: min(308px, 92%) !important;
 }
 
-.heart {
-  color: #ef3340;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 19rem;
-  line-height: 0.75;
-  transform: translateY(-9px);
+.heart-symbol {
+  width: min(320px, 94%) !important;
+  height: min(300px, 90%) !important;
 }
 
-.ghost {
-  color: #d1d5db;
-  font: 600 4rem/1 var(--deck-font-mono);
+.icon-machine.is-initial-settled
+  .initial-track
+  .icon-cell:not(:last-child),
+.track-mcp.mcp-settled .icon-cell:not(:last-child) {
+  opacity: 0;
 }
 
 @keyframes reel-in {
