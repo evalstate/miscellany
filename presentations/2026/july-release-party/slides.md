@@ -48,15 +48,15 @@ Click the imagery to replay the animation.
 <table class="about-social-table">
 <tbody>
 <tr>
-<td class="social-icon-cell"><img class="social-icon social-icon-hf" src="/brand/hugging-face.svg" alt="Hugging Face" /></td>
+<td class="social-icon-cell"><img class="social-icon social-icon-hf" :src="'brand/hugging-face.svg'" alt="Hugging Face" /></td>
 <td>huggingface.co/evalstate</td>
 </tr>
 <tr>
-<td class="social-icon-cell"><img class="social-icon social-icon-github" src="/intro/github-mark.svg" alt="GitHub" /></td>
+<td class="social-icon-cell"><img class="social-icon social-icon-github" :src="'intro/github-mark.svg'" alt="GitHub" /></td>
 <td>github.com/evalstate</td>
 </tr>
 <tr>
-<td class="social-icon-cell"><img class="social-icon social-icon-x" src="/intro/x-mark.svg" alt="X" /></td>
+<td class="social-icon-cell"><img class="social-icon social-icon-x" :src="'intro/x-mark.svg'" alt="X" /></td>
 <td>x.com/evalstate</td>
 </tr>
 </tbody>
@@ -64,9 +64,9 @@ Click the imagery to replay the animation.
 </section>
 
 <aside class="about-logo-panel deck-panel">
-<img class="about-hf-logo" src="/brand/hugging-face.svg" alt="Hugging Face" />
+<img class="about-hf-logo" :src="'brand/hugging-face.svg'" alt="Hugging Face" />
 <div class="about-logo-divider"></div>
-<img class="about-mcp-logo" src="/brand/mcp-symbol-black.svg" alt="Model Context Protocol" />
+<img class="about-mcp-logo" :src="'brand/mcp-symbol-black.svg'" alt="Model Context Protocol" />
 </aside>
 </div>
 
@@ -232,7 +232,7 @@ class: ported-section-slide
       </div>
       <ClickableImagePopover
         class="simplifications-evidence deck-panel"
-        src="/images/mcp-webcam.png"
+:src="'images/mcp-webcam.png'"
         alt="mcp-webcam demo screenshot"
         prompt="enlarge"
       />
@@ -601,7 +601,7 @@ Triggers and Events: modelcontextprotocol.io/community/working-groups/triggers-e
   </section>
 
   <figure class="dataset-screenshot deck-panel">
-    <img :src="'/images/clients-data.png'" alt="Hugging Face Data Studio table for the mcp-clients dataset" />
+<img :src="'images/clients-data.png'" alt="Hugging Face Data Studio table for the mcp-clients dataset" />
   </figure>
 </div>
 

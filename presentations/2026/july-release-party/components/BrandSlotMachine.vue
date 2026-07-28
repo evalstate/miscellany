@@ -14,10 +14,10 @@ const INITIAL_PHASES = [0, CELL_HEIGHT, CELL_HEIGHT * 2] as const;
 const INITIAL_VELOCITY = 1740;
 
 const symbols = [
-  { id: "aaif", src: "/brand/aaif-symbol-black.svg", label: "AAIF" },
-  { id: "mcp", src: "/brand/mcp-symbol-black.svg", label: "MCP" },
-  { id: "heart", src: "/brand/heart.svg", label: "loves" },
-  { id: "huggy", src: "/brand/hugging-face.svg", label: "Hugging Face" },
+  { id: "aaif", src: "brand/aaif-symbol-black.svg", label: "AAIF" },
+  { id: "mcp", src: "brand/mcp-symbol-black.svg", label: "MCP" },
+  { id: "heart", src: "brand/heart.svg", label: "loves" },
+  { id: "huggy", src: "brand/hugging-face.svg", label: "Hugging Face" },
 ] as const;
 
 const repeatedSymbols = [...symbols, ...symbols, ...symbols];
