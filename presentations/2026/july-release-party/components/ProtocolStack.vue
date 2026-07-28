@@ -244,7 +244,9 @@ const activeCapability = computed<CapabilityId | undefined>(
   () => active.value?.hold,
 );
 const activeActor = computed<Actor | undefined>(() => active.value?.actor);
-const operationLabel = computed(() => active.value?.label ?? "ready");
+const operationLabel = computed(
+  () => active.value?.label ?? "click to initialize",
+);
 const activeChannel = computed<Channel | undefined>(() => active.value?.channel);
 const heldChannel = computed<Channel | undefined>(
   () => active.value?.holdChannel,
@@ -268,7 +270,7 @@ function pulseStep(index: number) {
   animationKey.value += 1;
 }
 
-function play(loop = true) {
+function play(loop = false) {
   clearTimers();
   isLooping.value = loop;
   isRunning.value = true;
@@ -283,8 +285,8 @@ function play(loop = true) {
   timers.push(
     window.setTimeout(
       () => {
-        activeStep.value = -1;
         if (isLooping.value) {
+          activeStep.value = -1;
           play(true);
         } else {
           isRunning.value = false;
@@ -306,7 +308,6 @@ onMounted(() => {
   ) {
     signalVariant.value = requestedVariant;
   }
-  play(true);
 });
 onBeforeUnmount(clearTimers);
 </script>
@@ -329,7 +330,11 @@ onBeforeUnmount(clearTimers);
       'protocol-stack--signal-sweep': signalVariant === 'sweep',
     }"
     aria-label="MCP protocol bidirectional message flow"
-    @click="play(true)"
+    role="button"
+    tabindex="0"
+    @click="play(false)"
+    @keydown.enter.prevent="play(false)"
+    @keydown.space.prevent="play(false)"
   >
     <div class="protocol-grid protocol-grid--server">
       <ProtocolCapabilityCard
@@ -356,7 +361,7 @@ onBeforeUnmount(clearTimers);
         'is-message-hit': messageHitActor === 'server',
       }"
       type="button"
-      @click.stop="play(true)"
+      @click.stop="play(false)"
     >
       <span>MCP Server</span>
       <small>{{ serverReady ? "ready" : "unavailable" }}</small>
@@ -396,7 +401,7 @@ onBeforeUnmount(clearTimers);
         'is-message-hit': messageHitActor === 'client',
       }"
       type="button"
-      @click.stop="play(true)"
+      @click.stop="play(false)"
     >
       <span>MCP Client</span>
       <small>{{ serverReady ? "ready" : "negotiating" }}</small>
@@ -453,6 +458,13 @@ onBeforeUnmount(clearTimers);
   text-align: left;
   background: transparent;
   border: 0;
+  outline: none;
+  cursor: pointer;
+}
+
+.protocol-stack:focus-visible {
+  border-radius: calc(var(--deck-radius) + 6px);
+  box-shadow: 0 0 0 3px rgba(106, 163, 247, 0.34);
 }
 
 .protocol-label,
