@@ -546,7 +546,7 @@ onBeforeUnmount(clearTimers);
 
 .protocol-process-gap {
   position: relative;
-  z-index: 4;
+  z-index: 1;
   min-height: 0;
   overflow: visible;
   border-inline: 0;
@@ -561,14 +561,17 @@ onBeforeUnmount(clearTimers);
 
 .protocol-arrow-pair {
   position: absolute;
-  top: calc(var(--stack-gap) * -1);
+  top: calc(-1 * (var(--protocol-label-height) + var(--stack-gap)));
   left: 47%;
-  z-index: 5;
+  z-index: 1;
   display: flex;
   align-items: stretch;
   justify-content: center;
   gap: clamp(1rem, 2.4cqw, 1.42rem);
-  height: calc(100% + var(--stack-gap) * 2);
+  height: calc(
+    100% + var(--protocol-label-height) + var(--protocol-label-height) +
+      var(--stack-gap) + var(--stack-gap)
+  );
   transform: translateX(-50%);
   pointer-events: none;
 }
@@ -1208,24 +1211,33 @@ onBeforeUnmount(clearTimers);
 
 .protocol-block-arrow {
   width: clamp(28px, 3.7cqw, 42px);
-  opacity: 0.48;
+  opacity: 0.62;
   filter: none;
 }
 
 .protocol-block-arrow::before {
-  width: 2px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
   background: linear-gradient(
     to bottom,
-    transparent,
-    var(--lane-color) 14%,
-    var(--lane-color) 86%,
-    transparent
+    color-mix(in srgb, var(--lane-color) 28%, transparent),
+    var(--lane-color) 12%,
+    var(--lane-color) 88%,
+    color-mix(in srgb, var(--lane-color) 28%, transparent)
   );
-  box-shadow: none;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--lane-color) 18%, transparent);
 }
 
 .protocol-stack--message .protocol-block-arrow {
   opacity: 1;
+}
+
+.protocol-stack--message .protocol-block-arrow::before {
+  width: 4px;
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--lane-color) 16%, transparent),
+    0 0 12px color-mix(in srgb, var(--lane-color) 34%, transparent);
 }
 
 /* Variant A: one physical packet with a restrained trailing halo. */
