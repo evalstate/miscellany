@@ -392,3 +392,117 @@
   color: var(--deck-accent-ink);
   font-size: 1.35rem;
 }
+
+.state-handle-slide {
+  display: grid;
+  gap: 1.3rem;
+  margin-top: 0.25rem;
+}
+
+.state-handle-slide .kicker {
+  margin-bottom: 0;
+}
+
+.state-handle-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) auto minmax(0, 1.35fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.state-handle-card,
+.state-handle-call {
+  min-height: 200px;
+  padding: 1.35rem 1.5rem;
+}
+
+.state-handle-card {
+  display: grid;
+  place-content: center;
+  text-align: center;
+}
+
+.state-handle-card span,
+.state-handle-call > span {
+  color: var(--deck-dim);
+  font: 600 0.68rem/1 var(--deck-font-mono);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.state-handle-card strong {
+  margin: 0.72rem 0 0.4rem;
+  color: var(--deck-accent-ink);
+  font: 700 2.15rem/1 var(--deck-font-mono);
+}
+
+.state-handle-card small {
+  color: var(--deck-muted);
+  font-size: 0.78rem;
+}
+
+.state-handle-arrow {
+  color: var(--deck-accent);
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.state-handle-call {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #101623;
+  border-color: #263044;
+}
+
+.state-handle-call > span {
+  margin-bottom: 0.9rem;
+  color: #9ca3af;
+}
+
+.slidev-layout .state-handle-call > code {
+  padding: 0;
+  color: #e5e7eb;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  font-size: 0.82rem;
+  line-height: 1.75;
+}
+
+.state-handle-call mark {
+  padding: 0.08rem 0.2rem;
+  color: #111827;
+  background: var(--deck-yellow);
+  border-radius: 3px;
+}
+
+.state-handle-summary {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  column-gap: 1rem;
+  align-items: center;
+  padding: 1rem 1.2rem;
+  background: var(--deck-accent-bg);
+  border: 1px solid var(--deck-accent-line);
+  border-radius: var(--deck-radius);
+}
+
+.state-handle-summary span {
+  grid-row: 1 / span 2;
+  padding: 0.5rem 0.7rem;
+  color: var(--deck-no);
+  background: var(--deck-surface);
+  border: 1px solid #fecaca;
+  border-radius: var(--deck-radius-sm);
+  font: 600 0.74rem/1 var(--deck-font-mono);
+}
+
+.state-handle-summary strong {
+  font-size: 1.05rem;
+}
+
+.state-handle-summary small {
+  color: var(--deck-muted);
+  font-size: 0.78rem;
+}

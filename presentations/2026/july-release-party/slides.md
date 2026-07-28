@@ -291,36 +291,36 @@ class: ported-section-slide
 
 ---
 
-# SEP-2260, SEP-2575, SEP-2577: Simplifications
+# Simplifications (SEP-2260,SEP-2577)
 
 <div class="simplifications-slide">
 <section class="simplifications-copy">
 
-  ## Simplify and Deprecate
-
   <div class="compact-point-list">
-    <div>
-      <strong>No unsolicited Server → Client calls</strong>
-      <span>Server requests must be contained inside a client-initiated request.</span>
+    <div class="simplifications-point simplifications-point--evidence">
+      <div>
+        <strong>No unsolicited Server → Client calls</strong>
+        <span>Server requests must be contained inside a client-initiated request.</span>
+      </div>
+      <ClickableImagePopover
+        class="simplifications-evidence deck-panel"
+        src="/images/mcp-webcam.png"
+        alt="mcp-webcam demo screenshot"
+        prompt="enlarge"
+      />
     </div>
     <div>
       <strong>Drop the fragile GET/SSE handler</strong>
-      <span>No speculative open channel just in case the server wants to call back.</span>
+      <span>Modern clients no longer need it; previous-version Streamable HTTP remains available by fallback.</span>
     </div>
     <div>
       <strong>Deprecate Roots, Sampling + Logging</strong>
-      <span>Keep wire behavior available while signaling future removal.</span>
+      <span>Roots and Sampling remain available through MRTR during deprecation.</span>
     </div>
   </div>
 </section>
 
 <section class="simplifications-visual">
-  <ClickableImagePopover
-    class="simplifications-webcam deck-panel"
-    src="/images/mcp-webcam.png"
-    alt="mcp-webcam demo screenshot"
-  />
-
   <aside class="simplifications-protocol deck-panel">
     <SimplificationsProtocolRails />
   </aside>
@@ -329,13 +329,12 @@ class: ported-section-slide
 
 ---
 
-# SEP-2575: Make MCP Stateless
+# Remove Initialization Handshake (SEP-2575)
 
 <div class="stateless-discovery-slide">
 <section class="stateless-discovery-copy">
 
 
-## Remove Initialization Handshake
 
 <dl class="compact-point-list">
 <div>
@@ -357,42 +356,31 @@ class: ported-section-slide
 <section class="stateless-discovery-json deck-panel">
 <div class="http-json http-json--packet">
 <div class="http-json-line stateless-discovery-json__gap">→ request</div>
-<div class="http-json-line">{</div>
-<div class="http-json-line http-json-line--indent"><em>"jsonrpc"</em>: <strong>"2.0"</strong>,</div>
-<div class="http-json-line http-json-line--indent"><em>"id"</em>: <strong>"discover-1"</strong>,</div>
+<div class="http-json-line">{ <em>"jsonrpc"</em>: <strong>"2.0"</strong>, <em>"id"</em>: <strong>"discover-1"</strong>,</div>
 <div class="http-json-line http-json-line--indent"><em>"method"</em>: <mark>"server/discover"</mark>,</div>
-<div class="http-json-line http-json-line--indent"><em>"params"</em>: {</div>
-<div class="http-json-line http-json-line--indent-2"><mark>"_meta"</mark>: {</div>
-<div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/protocolVersion"</em>: <strong>"2026-07-28"</strong>,</div>
-<div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/clientInfo"</em>: { <em>"name"</em>: <strong>"Client"</strong>, <em>"version"</em>: <strong>"1.0"</strong> },</div>
-<div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/clientCapabilities"</em>: {}</div>
-<div class="http-json-line http-json-line--indent-2">}</div>
-<div class="http-json-line http-json-line--indent">}</div>
-<div class="http-json-line">}</div>
+<div class="http-json-line http-json-line--indent"><em>"params"</em>: { <mark>"_meta"</mark>: {</div>
+<div class="http-json-line http-json-line--indent-2 http-json-line--meta"><em>"io.modelcontextprotocol/protocolVersion"</em>: <strong>"2026-07-28"</strong>,</div>
+<div class="http-json-line http-json-line--indent-2 http-json-line--meta"><em>"io.modelcontextprotocol/clientInfo"</em>: { <em>"name"</em>: <strong>"Client"</strong>, <em>"version"</em>: <strong>"1.0"</strong> },</div>
+<div class="http-json-line http-json-line--indent-2 http-json-line--meta"><em>"io.modelcontextprotocol/clientCapabilities"</em>: {}</div>
+<div class="http-json-line">} } }</div>
 <div class="http-json-line stateless-discovery-json__gap">← response</div>
-<div class="http-json-line">{</div>
-<div class="http-json-line http-json-line--indent"><em>"jsonrpc"</em>: <strong>"2.0"</strong>, <em>"id"</em>: <strong>"discover-1"</strong>,</div>
+<div class="http-json-line">{ <em>"jsonrpc"</em>: <strong>"2.0"</strong>, <em>"id"</em>: <strong>"discover-1"</strong>,</div>
 <div class="http-json-line http-json-line--indent"><em>"result"</em>: {</div>
 <div class="http-json-line http-json-line--indent-2"><em>"resultType"</em>: <strong>"complete"</strong>,</div>
 <div class="http-json-line http-json-line--indent-2"><em>"supportedVersions"</em>: [<strong>"2026-07-28"</strong>],</div>
-<div class="http-json-line http-json-line--indent-2"><mark>"capabilities"</mark>: {</div>
-<div class="http-json-line http-json-line--indent-3"><em>"tools"</em>: {}, <em>"resources"</em>: {}, <em>"prompts"</em>: {}</div>
-<div class="http-json-line http-json-line--indent-2">},</div>
+<div class="http-json-line http-json-line--indent-2 http-json-line--meta"><mark>"capabilities"</mark>: { <em>"tools"</em>: {}, <em>"resources"</em>: {}, <em>"prompts"</em>: {} },</div>
 <div class="http-json-line http-json-line--indent-2 http-json-line--meta"><em>"serverInfo"</em>: { <em>"name"</em>: <strong>"Server"</strong>, <em>"version"</em>: <strong>"1.0"</strong> }</div>
-<div class="http-json-line http-json-line--indent">}</div>
-<div class="http-json-line">}</div>
+<div class="http-json-line">} }</div>
 </div>
 </section>
 </div>
 
 ---
 
-# SEP-2549: TTL for List Results
+# List Caching (SEP-2549)
 
 <div class="cache-control-slide">
 <section class="cache-control-copy">
-
-## Cacheable Results
 
 <div class="compact-point-list">
 <div>
@@ -424,89 +412,136 @@ class: ported-section-slide
 
 ---
 
-# SEP-2322: Stateful Elicitations
+# SEP-2322: Modern Elicitations
 
-<div class="mrtr-contrast-slide">
-<section class="mrtr-contrast-copy">
-
-## Before: wait for the answer
-
-<div class="compact-point-list">
-<div>
-<strong>SSE POST response stream stays open</strong>
-<span>The server asks for more input on the original stream.</span>
-</div>
-<div>
-<strong>Client POSTs the answer</strong>
-<span>The Client separately POSTs the JSON-RPC response to <code>elicitation/create</code>.</span>
-</div>
-<div>
-<strong>Load balancer parses JSON</strong>
-<span>It must route by JSON-RPC request id, or use shared storage.</span>
-</div>
+<div class="modern-elicitation-story deck-panel">
+  <ModernElicitationFlow />
 </div>
 
+---
+
+# SEP-2322: Request 1 Ends
+
+<div class="elicitation-packet-slide elicitation-packet-slide--focused">
+<section class="elicitation-packet-copy">
+  <div class="compact-point-list">
+    <div>
+      <strong>A final response</strong>
+      <span><code>input_required</code> closes request 1. Nothing remains open on the Server.</span>
+    </div>
+    <div>
+      <strong>Ask the person</strong>
+      <span>The keyed <code>elicitation/create</code> asks the Client to confirm the hourly cost.</span>
+    </div>
+    <div>
+      <strong>Keep state opaque</strong>
+      <span>The Client stores <code>requestState</code> without inspecting or changing it.</span>
+    </div>
+  </div>
 </section>
 
-<aside class="mrtr-stateful-flow deck-panel">
-<div class="kicker">stateful turn-taking</div>
-<div class="mrtr-flow-row">
-  <div class="mrtr-node mrtr-node--client">Client</div>
-  <div class="mrtr-arrow">POST tools/call</div>
-  <div class="mrtr-node mrtr-node--lb">LB</div>
-  <div class="mrtr-arrow">route</div>
-  <div class="mrtr-node">A</div>
+<aside class="elicitation-packet-json deck-panel">
+<div class="http-json http-json--packet">
+  <div class="http-json-line elicitation-packet-json__gap">→ request 1</div>
+  <div class="http-json-line">{ <em>"id"</em>: <strong>1</strong>, <em>"method"</em>: <mark>"tools/call"</mark>,</div>
+  <div class="http-json-line http-json-line--indent"><em>"name"</em>: <strong>"hf.create_sandbox"</strong>,</div>
+  <div class="http-json-line http-json-line--indent"><em>"arguments"</em>: { <em>"hardware"</em>: <strong>"t4-small"</strong> } }</div>
+
+  <div class="http-json-line elicitation-packet-json__gap">← response 1 · <mark>request closed</mark></div>
+  <div class="http-json-line">{ <em>"id"</em>: <strong>1</strong>, <em>"result"</em>: {</div>
+  <div class="http-json-line http-json-line--indent"><mark><em>"resultType"</em>: <strong>"input_required"</strong></mark>,</div>
+  <div class="http-json-line http-json-line--indent"><em>"inputRequests"</em>: {</div>
+  <div class="http-json-line http-json-line--indent-2"><mark><strong>"confirm_cost"</strong></mark>: {</div>
+  <div class="http-json-line http-json-line--indent-3"><em>"method"</em>: <strong>"elicitation/create"</strong>,</div>
+  <div class="http-json-line http-json-line--indent-3"><em>"mode"</em>: <strong>"form"</strong>,</div>
+  <div class="http-json-line http-json-line--indent-3"><em>"message"</em>:</div>
+  <div class="http-json-line http-json-line--indent-4"><strong>"Create sandbox for <mark>$0.40/hour</mark>?"</strong>,</div>
+  <div class="http-json-line http-json-line--indent-3"><em>"schema"</em>: { <em>"confirmed"</em>: <strong>"boolean"</strong> }</div>
+  <div class="http-json-line http-json-line--indent-2">} },</div>
+  <div class="http-json-line http-json-line--indent"><em>"requestState"</em>:</div>
+  <div class="http-json-line http-json-line--indent-2"><mark><strong>"opaque-sbx-state"</strong></mark> } }</div>
 </div>
-<div class="mrtr-sse">elicitation over SSE · Server A waits…</div>
-<div class="mrtr-flow-row">
-  <div class="mrtr-node mrtr-node--client">Client</div>
-  <div class="mrtr-arrow">POST answer</div>
-  <div class="mrtr-node mrtr-node--warn">LB</div>
-  <div class="mrtr-arrow">inspect id</div>
-  <div class="mrtr-node">A</div>
-</div>
-<div class="mrtr-problem">Routing depends on the elicitation’s JSON-RPC id</div>
 </aside>
 </div>
 
 ---
 
-# SEP-2322: Modern Elicitations
+# SEP-2322: Request 2 Starts Fresh
 
-<div class="mrtr-cumulative-slide">
-<section class="mrtr-cumulative-copy">
+<div class="elicitation-packet-slide elicitation-packet-slide--focused">
+<section class="elicitation-packet-copy">
+  <div class="compact-point-list">
+    <div>
+      <strong>A new request</strong>
+      <span>Request 2 has a different id and repeats the original tool arguments.</span>
+    </div>
+    <div>
+      <strong>The key matches</strong>
+      <span><code>confirm_cost</code> identifies both the input request and its accepted response.</span>
+    </div>
+    <div>
+      <strong>State returns exactly</strong>
+      <span>The accepted confirmation and unchanged opaque state complete the retry.</span>
+    </div>
+  </div>
 
-## After: retry with context
-
-<p class="mrtr-lede">The Server ends the request with <code>input_required</code>. The Client fulfills <code>inputRequests</code>, then retries independently.</p>
-
-<div class="mrtr-field-strip">
-<span>new JSON-RPC id</span>
-<span>original params</span>
-<span>keyed inputResponses</span>
-<span>exact opaque requestState?</span>
-</div>
-
+  <div class="elicitation-result-callout">
+    <span>Result to carry forward</span>
+    <strong>sbx-7f3c</strong>
+    <small>created · ready</small>
+  </div>
 </section>
 
-<aside class="mrtr-cumulative-flow deck-panel">
-<div class="mrtr-step">
-  <strong>1</strong>
-  <span>Client sends <code>tools/call</code></span>
-</div>
-<div class="mrtr-step mrtr-step--accent">
-  <strong>2</strong>
-  <span>Server returns <code>input_required</code> with <code>inputRequests</code> and optional state</span>
-</div>
-<div class="mrtr-step">
-  <strong>3</strong>
-  <span>Client fulfills the keyed elicitation / sampling / roots requests</span>
-</div>
-<div class="mrtr-step mrtr-step--final">
-  <strong>4</strong>
-  <span>Client retries <code>tools/call</code> with a new id, responses and exact state</span>
+<aside class="elicitation-packet-json deck-panel">
+<div class="http-json http-json--packet">
+  <div class="http-json-line elicitation-packet-json__gap">→ request 2 · independent retry</div>
+  <div class="http-json-line">{ <em>"id"</em>: <mark><strong>2 · new id</strong></mark>,</div>
+  <div class="http-json-line http-json-line--indent"><em>"method"</em>: <strong>"tools/call"</strong>,</div>
+  <div class="http-json-line http-json-line--indent"><em>"name"</em>: <strong>"hf.create_sandbox"</strong>,</div>
+  <div class="http-json-line http-json-line--indent"><em>"arguments"</em>: { <em>"hardware"</em>: <strong>"t4-small"</strong> },</div>
+  <div class="http-json-line http-json-line--indent"><em>"inputResponses"</em>: {</div>
+  <div class="http-json-line http-json-line--indent-2"><mark><strong>"confirm_cost"</strong></mark>: {</div>
+  <div class="http-json-line http-json-line--indent-3"><mark><em>"action"</em>: <strong>"accept"</strong></mark>,</div>
+  <div class="http-json-line http-json-line--indent-3"><em>"content"</em>: { <mark><em>"confirmed"</em>: <strong>true</strong></mark> }</div>
+  <div class="http-json-line http-json-line--indent-2">} },</div>
+  <div class="http-json-line http-json-line--indent"><em>"requestState"</em>:</div>
+  <div class="http-json-line http-json-line--indent-2"><mark><strong>"opaque-sbx-state"</strong></mark> }</div>
+
+  <div class="http-json-line elicitation-packet-json__gap">← response 2</div>
+  <div class="http-json-line">{ <em>"id"</em>: <strong>2</strong>, <em>"result"</em>: {</div>
+  <div class="http-json-line http-json-line--indent"><mark><em>"resultType"</em>: <strong>"complete"</strong></mark>,</div>
+  <div class="http-json-line http-json-line--indent"><em>"text"</em>:</div>
+  <div class="http-json-line http-json-line--indent-2"><strong>"Sandbox <mark>sbx-7f3c</mark> created"</strong> } }</div>
 </div>
 </aside>
+</div>
+
+---
+
+# Replace Sessions with State Handles
+
+<div class="state-handle-slide">
+<div class="kicker">SEP-2567 · explicit application state</div>
+<div class="state-handle-flow">
+<div class="state-handle-card deck-panel">
+<span>Previous tool result</span>
+<strong>sbx-7f3c</strong>
+<small>server-minted sandbox ID</small>
+</div>
+<div class="state-handle-arrow" aria-hidden="true">&rarr;</div>
+<div class="state-handle-call deck-panel">
+<span>Next tool call</span>
+<code>hf.run_in_sandbox({</code>
+<code>&nbsp;&nbsp;sandbox_id: <mark>"sbx-7f3c"</mark>,</code>
+<code>&nbsp;&nbsp;command: "python train.py"</code>
+<code>})</code>
+</div>
+</div>
+<div class="state-handle-summary">
+<span><s>Mcp-Session-Id</s></span>
+<strong>State becomes explicit tool data.</strong>
+<small>No hidden protocol session to create, route, or resume.</small>
+</div>
 </div>
 
 ---

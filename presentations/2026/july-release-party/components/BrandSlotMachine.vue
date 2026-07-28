@@ -10,6 +10,8 @@ const AAIF_HOLD_DURATION = 5_000;
 const MCP_HOLD_DURATION = 6_000;
 const FINAL_PULSE_DURATION = 600;
 const REVEAL_DURATION = 550;
+const INITIAL_PHASES = [0, CELL_HEIGHT, CELL_HEIGHT * 2] as const;
+const INITIAL_VELOCITY = 1740;
 
 const symbols = [
   { id: "aaif", src: "/brand/aaif-symbol-black.svg", label: "AAIF" },
@@ -34,7 +36,7 @@ type ReelState = {
   duration: number;
 };
 
-const phases = ref([0, 110, 235]);
+const phases = ref<number[]>([...INITIAL_PHASES]);
 const bounceOffsets = ref([0, 0, 0]);
 const settled = ref([false, false, false]);
 const heartPulse = ref(false);
@@ -42,9 +44,9 @@ const isRevealing = ref(false);
 const cycle = ref(0);
 
 const reels: ReelState[] = [
-  makeReel(phases.value[0], 1680),
-  makeReel(phases.value[1], 1740),
-  makeReel(phases.value[2], 1800),
+  makeReel(phases.value[0], INITIAL_VELOCITY),
+  makeReel(phases.value[1], INITIAL_VELOCITY),
+  makeReel(phases.value[2], INITIAL_VELOCITY),
 ];
 
 let frame = 0;
@@ -177,14 +179,14 @@ function replay() {
 
   heartPulse.value = false;
   isRevealing.value = false;
-  phases.value = [0, 110, 235];
+  phases.value = [...INITIAL_PHASES];
   bounceOffsets.value = [0, 0, 0];
   settled.value = [false, false, false];
   cycle.value += 1;
 
-  Object.assign(reels[0], makeReel(phases.value[0], 1680));
-  Object.assign(reels[1], makeReel(phases.value[1], 1740));
-  Object.assign(reels[2], makeReel(phases.value[2], 1800));
+  Object.assign(reels[0], makeReel(phases.value[0], INITIAL_VELOCITY));
+  Object.assign(reels[1], makeReel(phases.value[1], INITIAL_VELOCITY));
+  Object.assign(reels[2], makeReel(phases.value[2], INITIAL_VELOCITY));
 
   previousTime = 0;
   frame = requestAnimationFrame(animate);
