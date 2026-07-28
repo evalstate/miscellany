@@ -75,7 +75,7 @@ const clientCapabilities = computed(() =>
 
 type Channel = "up" | "down";
 type Actor = "client" | "server";
-type Phase = "wake" | "message" | "quiesce";
+type Phase = "wake" | "message" | "quiesce" | "disconnect" | "waiting";
 type Frame = {
   label: string;
   duration?: number;
@@ -204,7 +204,7 @@ const scriptFrames: Frame[] = [
     holdChannel: "down",
     hold: "tools",
   },
-  { label: "ready", phase: "quiesce", duration: 620 },
+  { label: "tools quiesced", phase: "quiesce", duration: 7000 },
 
   // Bidirectionality: the server can request a model turn from the client.
   {
@@ -239,7 +239,18 @@ const scriptFrames: Frame[] = [
     holdChannel: "up",
     hold: "sampling",
   },
-  { label: "ready", phase: "quiesce", duration: 700 },
+  { label: "sampling quiesced", phase: "quiesce", duration: 7000 },
+  {
+    label: "transport disconnect",
+    phase: "disconnect",
+    actor: "client",
+    duration: 1200,
+  },
+  {
+    label: "waiting for client",
+    phase: "waiting",
+    duration: 7000,
+  },
 ];
 
 const activeStep = ref(-1);
@@ -260,7 +271,12 @@ const frames = computed(() =>
 const active = computed(() => frames.value[activeStep.value]);
 const activeSegment = computed<CapabilityId | undefined>(() => {
   if (activeStep.value >= 7 && activeStep.value <= 16) return "tools";
-  if (!isSimplified.value && activeStep.value >= 19) return "sampling";
+  if (
+    !isSimplified.value &&
+    activeStep.value >= 19 &&
+    activeStep.value <= 21
+  )
+    return "sampling";
   return undefined;
 });
 const activeFlash = computed<CapabilityId | undefined>(() => {
@@ -282,15 +298,23 @@ const heldChannel = computed<Channel | undefined>(
 );
 const isMessagePhase = computed(() => active.value?.phase === "message");
 const isWakePhase = computed(() => active.value?.phase === "wake");
-const serverReady = computed(() => activeStep.value >= 4);
+const isDisconnecting = computed(() => active.value?.phase === "disconnect");
+const isWaiting = computed(() => active.value?.phase === "waiting");
+const serverReady = computed(
+  () => activeStep.value >= 4 && !isDisconnecting.value && !isWaiting.value,
+);
 const serverStatus = computed(() => {
+  if (isWaiting.value) return "waiting";
+  if (isDisconnecting.value) return "closing";
   if (serverReady.value) return "ready";
   if (activeStep.value >= 0) return "negotiating";
   return "unavailable";
 });
-const clientStatus = computed(() =>
-  serverReady.value ? "ready" : "negotiating",
-);
+const clientStatus = computed(() => {
+  if (isWaiting.value) return "disconnected";
+  if (isDisconnecting.value) return "closing";
+  return serverReady.value ? "ready" : "negotiating";
+});
 const messageHitActor = computed<Actor | undefined>(() => {
   if (!isMessagePhase.value) return undefined;
   if (activeChannel.value === "up") return "server";
@@ -365,13 +389,15 @@ onBeforeUnmount(clearTimers);
       'protocol-stack--signal-packet': signalVariant === 'packet',
       'protocol-stack--signal-ripple': signalVariant === 'ripple',
       'protocol-stack--signal-sweep': signalVariant === 'sweep',
+      'protocol-stack--disconnecting': isDisconnecting,
+      'protocol-stack--waiting': isWaiting,
     }"
     aria-label="MCP protocol bidirectional message flow"
     role="button"
     tabindex="0"
-    @click="play(false)"
-    @keydown.enter.prevent="play(false)"
-    @keydown.space.prevent="play(false)"
+    @click="play(true)"
+    @keydown.enter.prevent="play(true)"
+    @keydown.space.prevent="play(true)"
   >
     <div class="protocol-grid protocol-grid--server">
       <ProtocolCapabilityCard
@@ -398,7 +424,7 @@ onBeforeUnmount(clearTimers);
         'is-message-hit': serverReady && messageHitActor === 'server',
       }"
       type="button"
-      @click.stop="play(false)"
+      @click.stop="play(true)"
     >
       <span>MCP Server</span>
       <small :class="`is-status-${serverStatus}`">{{ serverStatus }}</small>
@@ -438,7 +464,7 @@ onBeforeUnmount(clearTimers);
         'is-message-hit': messageHitActor === 'client',
       }"
       type="button"
-      @click.stop="play(false)"
+      @click.stop="play(true)"
     >
       <span>MCP Client</span>
       <small :class="`is-status-${clientStatus}`">{{ clientStatus }}</small>
@@ -1316,6 +1342,38 @@ onBeforeUnmount(clearTimers);
     0 0 12px rgba(34, 160, 107, 0.24);
 }
 
+.protocol-label small.is-status-closing::before {
+  background: var(--deck-no);
+  box-shadow:
+    0 0 0 4px rgba(240, 107, 90, 0.14),
+    0 0 12px rgba(240, 107, 90, 0.24);
+}
+
+.protocol-stack--disconnecting .protocol-block-arrow::before {
+  transform-origin: 50% 50%;
+  animation: protocol-lane-close 980ms ease-in both;
+}
+
+.protocol-stack--waiting .protocol-block-arrow {
+  opacity: 0;
+  filter: none;
+}
+
+.protocol-stack--waiting .protocol-label--client,
+.protocol-stack--waiting .protocol-grid--client {
+  opacity: 0.36;
+  filter: grayscale(1);
+}
+
+.protocol-stack--disconnecting .protocol-operation {
+  border-color: rgba(240, 107, 90, 0.68);
+}
+
+.protocol-stack--waiting .protocol-operation {
+  border-color: rgba(185, 179, 165, 0.5);
+  box-shadow: none;
+}
+
 /* Shared, quieter traffic rails ------------------------------------------ */
 
 .protocol-arrow-pair {
@@ -1462,6 +1520,20 @@ onBeforeUnmount(clearTimers);
   to {
     opacity: 1;
     transform: scale(1.08);
+  }
+}
+
+@keyframes protocol-lane-close {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) scaleY(1);
+  }
+  58% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) scaleY(0);
   }
 }
 
