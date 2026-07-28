@@ -32,6 +32,8 @@ type ReelState = {
 const phases = ref([0, 110, 235]);
 const bounceOffsets = ref([0, 0, 0]);
 const settled = ref([false, false, false]);
+const heartPulse = ref(false);
+const isRevealing = ref(false);
 const cycle = ref(0);
 
 const reels: ReelState[] = [
@@ -165,6 +167,8 @@ function replay() {
   clearTimers();
   cancelAnimationFrame(frame);
 
+  heartPulse.value = false;
+  isRevealing.value = false;
   phases.value = [0, 110, 235];
   bounceOffsets.value = [0, 0, 0];
   settled.value = [false, false, false];
@@ -183,6 +187,16 @@ function replay() {
 
   schedule(() => startSpin(2, 1900), 6600);
   schedule(() => startDeceleration(2, "mcp", 1350), 7900);
+
+  schedule(() => {
+    heartPulse.value = true;
+  }, 10050);
+  schedule(() => {
+    heartPulse.value = false;
+    isRevealing.value = true;
+    settled.value = [false, false, false];
+  }, 10650);
+  schedule(replay, 11200);
 }
 
 const trackStyles = computed(() =>
@@ -202,6 +216,10 @@ onBeforeUnmount(() => {
   <div
     :key="cycle"
     class="icon-machine"
+    :class="{
+      'is-heart-pulsing': heartPulse,
+      'is-revealing': isRevealing,
+    }"
     role="img"
     aria-label="Hugging Face loves AAIF, then MCP"
     title="Click to replay"
@@ -308,6 +326,37 @@ onBeforeUnmount(() => {
 
 .icon-reel.is-settled .icon-cell:not(.is-winner) {
   opacity: 0;
+}
+
+.icon-machine.is-heart-pulsing
+  .icon-reel:nth-child(2)
+  .symbol-heart.is-winner
+  img {
+  animation: heart-loop-cue 600ms cubic-bezier(0.2, 0.78, 0.24, 1) both;
+}
+
+.icon-machine.is-revealing .icon-cell {
+  transition-duration: 440ms;
+}
+
+@keyframes heart-loop-cue {
+  0%,
+  100% {
+    filter: none;
+    transform: scale(1);
+  }
+  24% {
+    filter: drop-shadow(0 0 14px rgba(245, 55, 71, 0.24));
+    transform: scale(1.12);
+  }
+  48% {
+    filter: none;
+    transform: scale(1);
+  }
+  72% {
+    filter: drop-shadow(0 0 12px rgba(245, 55, 71, 0.2));
+    transform: scale(1.08);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
