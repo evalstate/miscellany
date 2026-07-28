@@ -357,8 +357,8 @@ onBeforeUnmount(clearTimers);
       :key="`server-label-${animationKey}`"
       class="protocol-label protocol-label--server"
       :class="{
-        'is-actor-active': activeActor === 'server',
-        'is-message-hit': messageHitActor === 'server',
+        'is-actor-active': serverReady && activeActor === 'server',
+        'is-message-hit': serverReady && messageHitActor === 'server',
       }"
       type="button"
       @click.stop="play(false)"
