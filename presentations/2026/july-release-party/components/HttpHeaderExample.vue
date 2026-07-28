@@ -17,20 +17,24 @@ const props = withDefaults(
 
       <div class="http-request-line">
         <strong>POST /mcp/ HTTP/1.1</strong>
-        <span>Host: hf.co/mcp</span>
+        <span>Host: hf.co</span>
+        <span>MCP-Protocol-Version: 2026-07-28</span>
         <span>Content-Type: application/json</span>
       </div>
 
       <div class="http-json http-json--packet">
         <div class="http-json-line">{</div>
         <div class="http-json-line http-json-line--indent"><em>"jsonrpc"</em>: <strong>"2.0"</strong>,</div>
+        <div class="http-json-line http-json-line--indent"><em>"id"</em>: <strong>1</strong>,</div>
         <div class="http-json-line http-json-line--indent"><em>"method"</em>: <mark>"tools/call"</mark>,</div>
         <div class="http-json-line http-json-line--indent"><em>"params"</em>: {</div>
+        <div class="http-json-line http-json-line--indent-2"><em>"_meta"</em>: {</div>
+        <div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/protocolVersion"</em>: <strong>"2026-07-28"</strong>,</div>
+        <div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/clientInfo"</em>: { <em>"name"</em>: <strong>"HF"</strong>, <em>"version"</em>: <strong>"1"</strong> },</div>
+        <div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/clientCapabilities"</em>: {}</div>
+        <div class="http-json-line http-json-line--indent-2">},</div>
         <div class="http-json-line http-json-line--indent-2"><em>"name"</em>: <mark>"hf.hub_search"</mark>,</div>
-        <div class="http-json-line http-json-line--indent-2"><em>"arguments"</em>: {</div>
-        <div class="http-json-line http-json-line--indent-3"><em>"query"</em>: <strong>"image generation models"</strong>,</div>
-        <div class="http-json-line http-json-line--indent-3"><em>"type"</em>: <strong>"model"</strong></div>
-        <div class="http-json-line http-json-line--indent-2">}</div>
+        <div class="http-json-line http-json-line--indent-2"><em>"arguments"</em>: { <em>"query"</em>: <strong>"image generation models"</strong>, <em>"type"</em>: <strong>"model"</strong> }</div>
         <div class="http-json-line http-json-line--indent">}</div>
         <div class="http-json-line">}</div>
       </div>
@@ -87,7 +91,8 @@ const props = withDefaults(
 
       <div class="http-request-line http-request-line--solution">
         <strong>POST /mcp/ HTTP/1.1</strong>
-        <span>Host: hf.co/mcp</span>
+        <span>Host: hf.co</span>
+        <span>MCP-Protocol-Version: 2026-07-28</span>
         <span><mark>Mcp-Method: tools/call</mark></span>
         <span><mark>Mcp-Name: hf.generate_image</mark></span>
         <span><mark>Mcp-Param-Pipeline: image-generation</mark></span>
@@ -96,13 +101,16 @@ const props = withDefaults(
       <div class="http-json http-json--packet">
         <div class="http-json-line">{</div>
         <div class="http-json-line http-json-line--indent"><em>"jsonrpc"</em>: <strong>"2.0"</strong>,</div>
+        <div class="http-json-line http-json-line--indent"><em>"id"</em>: <strong>2</strong>,</div>
         <div class="http-json-line http-json-line--indent"><em>"method"</em>: <mark>"tools/call"</mark>,</div>
         <div class="http-json-line http-json-line--indent"><em>"params"</em>: {</div>
+        <div class="http-json-line http-json-line--indent-2"><em>"_meta"</em>: {</div>
+        <div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/protocolVersion"</em>: <strong>"2026-07-28"</strong>,</div>
+        <div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/clientInfo"</em>: { <em>"name"</em>: <strong>"HF"</strong>, <em>"version"</em>: <strong>"1"</strong> },</div>
+        <div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/clientCapabilities"</em>: {}</div>
+        <div class="http-json-line http-json-line--indent-2">},</div>
         <div class="http-json-line http-json-line--indent-2"><em>"name"</em>: <mark>"hf.generate_image"</mark>,</div>
-        <div class="http-json-line http-json-line--indent-2"><em>"arguments"</em>: {</div>
-        <div class="http-json-line http-json-line--indent-3"><em>"prompt"</em>: <strong>"robot on a skateboard"</strong>,</div>
-        <div class="http-json-line http-json-line--indent-3"><em>"pipeline"</em>: <mark>"image-generation"</mark></div>
-        <div class="http-json-line http-json-line--indent-2">}</div>
+        <div class="http-json-line http-json-line--indent-2"><em>"arguments"</em>: { <em>"prompt"</em>: <strong>"robot on a skateboard"</strong>, <em>"pipeline"</em>: <mark>"image-generation"</mark> }</div>
         <div class="http-json-line http-json-line--indent">}</div>
         <div class="http-json-line">}</div>
       </div>

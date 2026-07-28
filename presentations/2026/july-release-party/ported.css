@@ -965,8 +965,12 @@
   padding-left: 2.58rem;
 }
 
+.stateless-discovery-json .http-json-line--meta {
+  font-size: 0.48rem;
+}
+
 .stateless-discovery-json .http-json mark {
-  background: rgba(255, 198, 73, 0.78);
+  background: var(--deck-highlight);
 }
 
 .stateless-discovery-json__gap {
@@ -1258,11 +1262,11 @@
   width: 2.25rem;
   height: 2.25rem;
   place-items: center;
-  color: var(--deck-bg);
+  color: #19160b;
   font-size: 1rem;
   font-weight: 900;
   border-radius: 999px;
-  background: var(--deck-muted);
+  background: var(--deck-highlight);
 }
 
 .mrtr-step span {
@@ -1278,7 +1282,7 @@
 
 .mrtr-step--accent strong,
 .mrtr-step--final strong {
-  background: var(--deck-accent-hi);
+  background: var(--deck-highlight);
 }
 
 .mrtr-step--final {
@@ -1604,6 +1608,10 @@
   color: var(--deck-text);
 }
 
+.http-json-line--meta {
+  font-size: 0.62rem;
+}
+
 .http-request-line {
   padding: 0.68rem 0.84rem;
   color: var(--deck-info);
@@ -1620,6 +1628,10 @@
   color: var(--deck-muted);
 }
 
+.http-request-panel--problem {
+  grid-template-rows: auto auto minmax(0, 1fr);
+}
+
 .http-request-line--solution {
   border-color: rgba(255, 198, 73, 0.48);
   background:
@@ -1634,8 +1646,12 @@
 }
 
 .http-request-panel--solution .http-json-line {
-  font-size: 0.62rem;
-  line-height: 1.12;
+  font-size: 0.56rem;
+  line-height: 1.06;
+}
+
+.http-request-panel--solution .http-json-line--meta {
+  font-size: 0.46rem;
 }
 
 .http-request-panel--solution .http-json {
@@ -1673,7 +1689,7 @@
 .http-json mark {
   padding: 0.02rem 0.18rem;
   color: #19160b;
-  background: var(--deck-accent-hi);
+  background: var(--deck-highlight);
   border-radius: var(--deck-radius-sm);
 }
 
@@ -1681,7 +1697,7 @@
 .http-request-line mark {
   padding: 0.02rem 0.18rem;
   color: #19160b;
-  background: var(--deck-accent-hi);
+  background: var(--deck-highlight);
   border-radius: var(--deck-radius-sm);
 }
 

@@ -15,8 +15,8 @@ const server = [
 ];
 
 const client = [
-  { title: "Roots", icon: FolderTree, removed: true },
-  { title: "Sampling", icon: Sparkles, removed: true },
+  { title: "Roots", icon: FolderTree, deprecated: true },
+  { title: "Sampling", icon: Sparkles, deprecated: true },
   { title: "Elicitation", icon: MessageCircleQuestion },
 ];
 </script>
@@ -44,10 +44,11 @@ const client = [
         v-for="item in client"
         :key="item.title"
         class="cap-slab"
-        :class="{ 'cap-slab--removed': item.removed }"
+        :class="{ 'cap-slab--deprecated': item.deprecated }"
       >
         <component :is="item.icon" :stroke-width="2.2" />
         <strong>{{ item.title }}</strong>
+        <small v-if="item.deprecated">deprecated</small>
       </article>
     </div>
   </section>
@@ -109,29 +110,30 @@ const client = [
   white-space: nowrap;
 }
 
-.cap-slab--removed {
+.cap-slab--deprecated {
   border-color: rgba(240, 107, 90, 0.66);
   background:
-    linear-gradient(135deg, rgba(240, 107, 90, 0.16), rgba(255, 255, 255, 0.52)),
+    linear-gradient(135deg, rgba(240, 107, 90, 0.1), rgba(255, 255, 255, 0.52)),
     rgba(255, 255, 255, 0.5);
 }
 
-.cap-slab--removed svg,
-.cap-slab--removed strong {
+.cap-slab--deprecated svg,
+.cap-slab--deprecated strong {
   color: color-mix(in srgb, var(--deck-no) 82%, var(--deck-text));
 }
 
-.cap-slab--removed::after {
-  content: "";
+.cap-slab small {
   position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 50%;
-  height: clamp(2px, 0.9cqh, 4px);
+  right: 0.38rem;
+  bottom: 0.28rem;
+  padding: 0.08rem 0.24rem;
+  color: color-mix(in srgb, var(--deck-no) 82%, var(--deck-text));
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(240, 107, 90, 0.36);
   border-radius: 999px;
-  background: rgba(240, 107, 90, 0.84);
-  box-shadow: 0 0 14px rgba(240, 107, 90, 0.24);
-  transform: rotate(-8deg);
+  font: 700 clamp(0.36rem, 2.2cqh, 0.5rem)/1 var(--deck-font-mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .actor-rail {

@@ -10,12 +10,25 @@ highlighter: shiki
 lineNumbers: false
 drawings:
   persist: false
-transition: fade-out
+# transition: fade-out
 mdc: true
 fonts:
   sans: Source Sans 3
   mono: IBM Plex Mono
 ---
+
+
+<div class="brand-machine-wrap">
+  <BrandSlotMachine />
+</div>
+
+<!--
+AAIF and the AAIF logo design are registered trademarks of the Linux Foundation.
+Click the imagery to replay the animation.
+-->
+
+---
+
 
 # July Release Party
 
@@ -72,34 +85,6 @@ Shaun Smith · July 2026
 <IntroVideo />
 
 ---
-layout: default
-kicker: Introduction
----
-
-# Tonight’s agenda
-
-<div class="agenda-list">
-  <div>Introduction</div>
-  <div>Motivation</div>
-  <div>What’s New</div>
-  <div>What’s Next</div>
-</div>
-
----
-layout: default
-class: icon-reel-slide
----
-
-<div class="brand-machine-wrap">
-  <BrandSlotMachine />
-</div>
-
-<!--
-AAIF and the AAIF logo design are registered trademarks of the Linux Foundation.
-Click the imagery to replay the animation.
--->
-
----
 
 # MCP At Hugging Face
 
@@ -129,7 +114,7 @@ Click the imagery to replay the animation.
 
 ---
 
-# Today, MCP design is bi-directional 
+# Legacy MCP is fully bi-directional
 
 <div class="protocol-diagram">
   <ProtocolStack />
@@ -142,41 +127,6 @@ Click the imagery to replay the animation.
 
 <div class="spec-timeline-diagram">
   <McpSpecTransportTimeline variant="before" />
-</div>
-
----
-
-<div class="weekly-activity-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Streamable HTTP adoption</h1>
-      <h2>Proportion of <code>mcp-remote</code> usage</h2>
-    </div>
-  </header>
-  <McpRemoteNoFallbackChart />
-</div>
-
----
-
-<div class="traffic-chart-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Claude Code</h1>
-      <h2>Weekly <code>mcp-remote</code> share · usage index </h2>
-    </div>
-  </header>
-  <McpRemoteTrafficChart client="Claude Code" :showHeader="false" />
-</div>
-
----
-
-<div class="weekly-activity-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Weekly MCP activity</h1>
-    </div>
-  </header>
-  <McpWeeklyActivityChart />
 </div>
 
 ---
@@ -326,9 +276,9 @@ layout: default
 class: ported-section-slide
 ---
 
-# 2026-07-28 Specification
+# What's new
 
-## The Stateless Core
+## 2026-07-28 Specification
 
 ---
 
@@ -341,7 +291,7 @@ class: ported-section-slide
 
 ---
 
-# SEP-2260, SEP-2257: "Simplifications"
+# SEP-2260, SEP-2575, SEP-2577: Simplifications
 
 <div class="simplifications-slide">
 <section class="simplifications-copy">
@@ -358,8 +308,8 @@ class: ported-section-slide
       <span>No speculative open channel just in case the server wants to call back.</span>
     </div>
     <div>
-      <strong>Deprecate Sampling + Roots</strong>
-      <span>Retire underused protocol surface instead of standardizing around it.</span>
+      <strong>Deprecate Roots, Sampling + Logging</strong>
+      <span>Keep wire behavior available while signaling future removal.</span>
     </div>
   </div>
 </section>
@@ -412,11 +362,11 @@ class: ported-section-slide
 <dl class="compact-point-list">
 <div>
 <dt>Handshake Info to Data Layer</dt>
-<dd>Version, Capability and Client identity move into the JSON-RPC <code>_meta</code> envelope on each request/response.</dd>
+<dd>Protocol version, Client identity and Client capabilities move into namespaced JSON-RPC <code>_meta</code> fields on every request.</dd>
 </div>
 <div>
 <dt>New <code>server/discover</code> endpoint</dt>
-<dd>Optional Client Probe to share Capability information for compatibility/User Experience reasons.</dd>
+<dd>Optional Client call to learn the Server’s supported versions, capabilities and implementation metadata.</dd>
 </div>
 <div>
 <dt>New <code>subscriptions/listen</code> endpoint</dt>
@@ -431,24 +381,26 @@ class: ported-section-slide
 <div class="http-json-line stateless-discovery-json__gap">→ request</div>
 <div class="http-json-line">{</div>
 <div class="http-json-line http-json-line--indent"><em>"jsonrpc"</em>: <strong>"2.0"</strong>,</div>
+<div class="http-json-line http-json-line--indent"><em>"id"</em>: <strong>"discover-1"</strong>,</div>
 <div class="http-json-line http-json-line--indent"><em>"method"</em>: <mark>"server/discover"</mark>,</div>
 <div class="http-json-line http-json-line--indent"><em>"params"</em>: {</div>
 <div class="http-json-line http-json-line--indent-2"><mark>"_meta"</mark>: {</div>
-<div class="http-json-line http-json-line--indent-3"><em>"protocolVersion"</em>: <strong>"2026-07-28"</strong>,</div>
-<div class="http-json-line http-json-line--indent-3"><em>"clientInfo"</em>: { <em>"name"</em>: <strong>"ExampleClient"</strong> }</div>
+<div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/protocolVersion"</em>: <strong>"2026-07-28"</strong>,</div>
+<div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/clientInfo"</em>: { <em>"name"</em>: <strong>"Client"</strong>, <em>"version"</em>: <strong>"1.0"</strong> },</div>
+<div class="http-json-line http-json-line--indent-3 http-json-line--meta"><em>"io.modelcontextprotocol/clientCapabilities"</em>: {}</div>
 <div class="http-json-line http-json-line--indent-2">}</div>
 <div class="http-json-line http-json-line--indent">}</div>
 <div class="http-json-line">}</div>
 <div class="http-json-line stateless-discovery-json__gap">← response</div>
 <div class="http-json-line">{</div>
+<div class="http-json-line http-json-line--indent"><em>"jsonrpc"</em>: <strong>"2.0"</strong>, <em>"id"</em>: <strong>"discover-1"</strong>,</div>
 <div class="http-json-line http-json-line--indent"><em>"result"</em>: {</div>
+<div class="http-json-line http-json-line--indent-2"><em>"resultType"</em>: <strong>"complete"</strong>,</div>
 <div class="http-json-line http-json-line--indent-2"><em>"supportedVersions"</em>: [<strong>"2026-07-28"</strong>],</div>
 <div class="http-json-line http-json-line--indent-2"><mark>"capabilities"</mark>: {</div>
-<div class="http-json-line http-json-line--indent-3"><em>"tools"</em>: {},</div>
-<div class="http-json-line http-json-line--indent-3"><em>"resources"</em>: {},</div>
-<div class="http-json-line http-json-line--indent-3"><em>"prompts"</em>: {}</div>
+<div class="http-json-line http-json-line--indent-3"><em>"tools"</em>: {}, <em>"resources"</em>: {}, <em>"prompts"</em>: {}</div>
 <div class="http-json-line http-json-line--indent-2">},</div>
-<div class="http-json-line http-json-line--indent-2"><em>"serverInfo"</em>: { <em>"name"</em>: <strong>"ExampleServer"</strong> }</div>
+<div class="http-json-line http-json-line--indent-2 http-json-line--meta"><em>"serverInfo"</em>: { <em>"name"</em>: <strong>"Server"</strong>, <em>"version"</em>: <strong>"1.0"</strong> }</div>
 <div class="http-json-line http-json-line--indent">}</div>
 <div class="http-json-line">}</div>
 </div>
@@ -457,7 +409,7 @@ class: ported-section-slide
 
 ---
 
-# SEP-2459: Cache Control
+# SEP-2549: TTL for List Results
 
 <div class="cache-control-slide">
 <section class="cache-control-copy">
@@ -475,7 +427,7 @@ class: ported-section-slide
 </div>
 <div>
 <strong>Notifications invalidate</strong>
-<span>TTL avoids unnecessary refetches between changes; list-changed notifications make cached results stale immediately.</span>
+<span>Relevant list-changed or resource-updated notifications make cached results stale immediately.</span>
 </div>
 </div>
 
@@ -487,7 +439,7 @@ class: ported-section-slide
 | Value | Meaning |
 | --- | --- |
 | `"public"` | Does not contain user-specific data. Any client, gateway, or caching proxy may store and serve it to any user. |
-| `"private"` | May contain caller-specific data. Reuse only within the same authorization context; never share across access tokens. |
+| `"private"` | Contains user-specific data. Only the requesting user’s Client may cache it; shared caches must not serve it to another user. |
 
 </aside>
 </div>
@@ -508,7 +460,7 @@ class: ported-section-slide
 </div>
 <div>
 <strong>Client POSTs the answer</strong>
-<span>The elicitation response is a new JSON-RPC HTTP request.</span>
+<span>The Client separately POSTs the JSON-RPC response to <code>elicitation/create</code>.</span>
 </div>
 <div>
 <strong>Load balancer parses JSON</strong>
@@ -535,25 +487,26 @@ class: ported-section-slide
   <div class="mrtr-arrow">inspect id</div>
   <div class="mrtr-node">A</div>
 </div>
-<div class="mrtr-problem">Routing depends on the JSON-RPC request id</div>
+<div class="mrtr-problem">Routing depends on the elicitation’s JSON-RPC id</div>
 </aside>
 </div>
 
 ---
 
-# SEP-2322: Stateless Elicitations
+# SEP-2322: Modern Elicitations
 
 <div class="mrtr-cumulative-slide">
 <section class="mrtr-cumulative-copy">
 
 ## After: retry with context
 
-<p class="mrtr-lede">The server returns <code>input_required</code>. The client retries with everything learned so far.</p>
+<p class="mrtr-lede">The Server ends the request with <code>input_required</code>. The Client fulfills <code>inputRequests</code>, then retries independently.</p>
 
 <div class="mrtr-field-strip">
-<span>original arguments</span>
-<span>inputResponses</span>
-<span>requestState?</span>
+<span>new JSON-RPC id</span>
+<span>original params</span>
+<span>keyed inputResponses</span>
+<span>exact opaque requestState?</span>
 </div>
 
 </section>
@@ -565,15 +518,15 @@ class: ported-section-slide
 </div>
 <div class="mrtr-step mrtr-step--accent">
   <strong>2</strong>
-  <span>Server returns <code>resultType: "input_required"</code></span>
+  <span>Server returns <code>input_required</code> with <code>inputRequests</code> and optional state</span>
 </div>
 <div class="mrtr-step">
   <strong>3</strong>
-  <span>Client collects elicitation / sampling / roots responses</span>
+  <span>Client fulfills the keyed elicitation / sampling / roots requests</span>
 </div>
 <div class="mrtr-step mrtr-step--final">
   <strong>4</strong>
-  <span>Client replays <code>tools/call</code> with cumulative input</span>
+  <span>Client retries <code>tools/call</code> with a new id, responses and exact state</span>
 </div>
 </aside>
 </div>
@@ -589,7 +542,7 @@ class: ported-section-slide
 
 ---
 
-# SEP-2243: Tool Data in HTTP Headers 
+# SEP-2243: Tool Data in HTTP Headers
 
 <div class="http-standardization-schema">
   <HttpHeaderExample variant="tool" />
@@ -597,7 +550,7 @@ class: ported-section-slide
 
 ---
 
-# SEP-2243: Routable MCP Traffic 
+# SEP-2243: Routable MCP Traffic
 
 <div class="http-standardization-problem">
   <HttpRouteMap mode="solution" />
@@ -637,3 +590,40 @@ layout: intro
 ::meta::
 
 huggingface.co/evalstate · github.com/evalstate
+
+---
+
+<div class="weekly-activity-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Streamable HTTP adoption</h1>
+      <h2>Proportion of <code>mcp-remote</code> usage</h2>
+    </div>
+  </header>
+  <McpRemoteNoFallbackChart />
+</div>
+
+---
+
+<div class="traffic-chart-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Claude Code</h1>
+      <h2>Weekly <code>mcp-remote</code> share · usage index </h2>
+    </div>
+  </header>
+  <McpRemoteTrafficChart client="Claude Code" :showHeader="false" />
+</div>
+
+---
+
+<div class="weekly-activity-slide chart-slide">
+  <header class="chart-slide__header">
+    <div>
+      <h1>Weekly MCP activity</h1>
+    </div>
+  </header>
+  <McpWeeklyActivityChart />
+</div>
+
+---

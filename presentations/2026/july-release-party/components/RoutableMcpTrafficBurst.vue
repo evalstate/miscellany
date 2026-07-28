@@ -174,7 +174,7 @@ function routePath(packet: Packet) {
       </g>
 
       <g class="routable-burst__metrics" transform="translate(74 64)">
-        <text class="routable-burst__metrics-kicker" x="0" y="0">stateless hot path</text>
+        <text class="routable-burst__metrics-kicker" x="0" y="0">modern hot path</text>
         <text class="routable-burst__metrics-main" x="0" y="43">High volume, no affinity</text>
         <text class="routable-burst__metrics-sub" x="0" y="76">hot path is just tools/call; discovery and lists are cached</text>
       </g>

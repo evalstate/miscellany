@@ -75,7 +75,7 @@ const isBefore = props.variant === "before";
           v-if="!isBefore"
           class="spec-timeline__bar spec-timeline__bar--stateless-stdio"
         >
-          <strong>Stateless STDIO</strong>
+          <strong>Modern STDIO</strong>
         </div>
       </div>
 
@@ -105,7 +105,7 @@ const isBefore = props.variant === "before";
           v-if="!isBefore"
           class="spec-timeline__bar spec-timeline__bar--stateless"
         >
-          <strong>Stateless HTTP</strong>
+          <strong>Modern HTTP</strong>
         </div>
       </div>
 
