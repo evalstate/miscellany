@@ -237,11 +237,18 @@ const frames = computed(() =>
     : scriptFrames,
 );
 const active = computed(() => frames.value[activeStep.value]);
-const activeFlash = computed<CapabilityId | undefined>(
-  () => active.value?.flash,
-);
+const activeSegment = computed<CapabilityId | undefined>(() => {
+  if (activeStep.value >= 5 && activeStep.value <= 14) return "tools";
+  if (!isSimplified.value && activeStep.value >= 15) return "sampling";
+  return undefined;
+});
+const activeFlash = computed<CapabilityId | undefined>(() => {
+  if (activeStep.value === 5) return "tools";
+  if (!isSimplified.value && activeStep.value === 15) return "sampling";
+  return undefined;
+});
 const activeCapability = computed<CapabilityId | undefined>(
-  () => active.value?.hold,
+  () => activeSegment.value,
 );
 const activeActor = computed<Actor | undefined>(() => active.value?.actor);
 const operationLabel = computed(
@@ -953,26 +960,20 @@ onBeforeUnmount(clearTimers);
   color: var(--deck-info);
 }
 
-.protocol-grid--server .protocol-card-shell.is-flashing,
-.protocol-grid--client .protocol-card-shell.is-flashing {
-  animation: none;
-}
-
-.protocol-grid--client .protocol-card-shell.is-flashing
-  :deep(.protocol-card__icon) {
-  animation: protocol-card-icon-pulse-client 520ms ease 620ms both;
-}
-
 .protocol-card-shell.is-flashing {
-  animation: protocol-card-pulse 520ms ease 620ms both;
+  animation: protocol-capability-activate 100ms steps(1, end) 6 both;
 }
 
-.protocol-card-shell.is-flashing :deep(.protocol-card) {
-  animation: protocol-card-surface-pulse 520ms ease 620ms both;
-}
-
-.protocol-card-shell.is-flashing :deep(.protocol-card__icon) {
-  animation: protocol-card-icon-pulse 520ms ease 620ms both;
+@keyframes protocol-capability-activate {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+    transform: none;
+  }
+  50% {
+    filter: brightness(1.24) saturate(1.36) contrast(1.04);
+    transform: translateY(-1px) scale(1.012);
+  }
 }
 
 @keyframes protocol-actor-wake {
@@ -1257,8 +1258,7 @@ onBeforeUnmount(clearTimers);
   box-shadow: none;
 }
 
-.protocol-stack--initialized .protocol-grid--server,
-.protocol-stack--initialized .protocol-label--server {
+.protocol-stack--initialized .protocol-grid--server {
   animation: protocol-server-online 520ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
 }
 
