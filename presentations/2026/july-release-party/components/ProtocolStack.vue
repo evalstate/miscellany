@@ -80,6 +80,7 @@ type Frame = {
   label: string;
   duration?: number;
   phase: Phase;
+  ending?: boolean;
   actor?: Actor;
   channel?: Channel;
   holdChannel?: Channel;
@@ -204,7 +205,7 @@ const scriptFrames: Frame[] = [
     holdChannel: "down",
     hold: "tools",
   },
-  { label: "tools quiesced", phase: "quiesce", duration: 7000 },
+  { label: "", phase: "quiesce", duration: 7000 },
 
   // Bidirectionality: the server can request a model turn from the client.
   {
@@ -239,15 +240,40 @@ const scriptFrames: Frame[] = [
     holdChannel: "up",
     hold: "sampling",
   },
-  { label: "sampling quiesced", phase: "quiesce", duration: 7000 },
+  { label: "", phase: "quiesce", duration: 7000 },
   {
-    label: "transport disconnect",
-    phase: "disconnect",
+    label: "sessions/delete",
+    phase: "wake",
     actor: "client",
-    duration: 1200,
+    channel: "up",
+    holdChannel: "up",
+    ending: true,
+    duration: 480,
   },
   {
-    label: "waiting for client",
+    label: "sessions/delete",
+    phase: "message",
+    actor: "client",
+    channel: "up",
+    holdChannel: "up",
+    ending: true,
+  },
+  {
+    label: "DeleteSessionResult",
+    phase: "message",
+    actor: "server",
+    channel: "down",
+    holdChannel: "down",
+    ending: true,
+  },
+  {
+    label: "",
+    phase: "disconnect",
+    actor: "client",
+    duration: 900,
+  },
+  {
+    label: "",
     phase: "waiting",
     duration: 7000,
   },
@@ -292,6 +318,7 @@ const activeActor = computed<Actor | undefined>(() => active.value?.actor);
 const operationLabel = computed(
   () => active.value?.label ?? "click to initialize",
 );
+const hasOperation = computed(() => operationLabel.value.trim().length > 0);
 const activeChannel = computed<Channel | undefined>(() => active.value?.channel);
 const heldChannel = computed<Channel | undefined>(
   () => active.value?.holdChannel,
@@ -299,20 +326,23 @@ const heldChannel = computed<Channel | undefined>(
 const isMessagePhase = computed(() => active.value?.phase === "message");
 const isWakePhase = computed(() => active.value?.phase === "wake");
 const isDisconnecting = computed(() => active.value?.phase === "disconnect");
+const isConnectionClosing = computed(
+  () => Boolean(active.value?.ending) || isDisconnecting.value,
+);
 const isWaiting = computed(() => active.value?.phase === "waiting");
 const serverReady = computed(
   () => activeStep.value >= 4 && !isDisconnecting.value && !isWaiting.value,
 );
 const serverStatus = computed(() => {
   if (isWaiting.value) return "waiting";
-  if (isDisconnecting.value) return "closing";
+  if (isConnectionClosing.value) return "closing";
   if (serverReady.value) return "ready";
   if (activeStep.value >= 0) return "negotiating";
   return "unavailable";
 });
 const clientStatus = computed(() => {
   if (isWaiting.value) return "disconnected";
-  if (isDisconnecting.value) return "closing";
+  if (isConnectionClosing.value) return "closing";
   return serverReady.value ? "ready" : "negotiating";
 });
 const messageHitActor = computed<Actor | undefined>(() => {
@@ -389,6 +419,7 @@ onBeforeUnmount(clearTimers);
       'protocol-stack--signal-packet': signalVariant === 'packet',
       'protocol-stack--signal-ripple': signalVariant === 'ripple',
       'protocol-stack--signal-sweep': signalVariant === 'sweep',
+      'protocol-stack--closing': isConnectionClosing,
       'protocol-stack--disconnecting': isDisconnecting,
       'protocol-stack--waiting': isWaiting,
     }"
@@ -450,7 +481,12 @@ onBeforeUnmount(clearTimers);
           <span class="protocol-message-dot" style="--dot-delay: 240ms" />
         </div>
       </div>
-      <div class="protocol-operation" aria-live="polite">
+      <div
+        class="protocol-operation"
+        :class="{ 'is-empty': !hasOperation }"
+        :aria-hidden="!hasOperation"
+        aria-live="polite"
+      >
         <span>operation</span>
         <strong>{{ operationLabel }}</strong>
       </div>
@@ -892,6 +928,15 @@ onBeforeUnmount(clearTimers);
   border-radius: calc(var(--deck-radius) + 5px);
   background: rgba(243, 244, 246, 0.84);
   box-shadow: 0 18px 38px rgba(0, 0, 0, 0.28);
+  transition:
+    opacity 180ms ease,
+    visibility 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.protocol-operation.is-empty {
+  display: none;
 }
 
 .protocol-operation span {
@@ -1365,7 +1410,7 @@ onBeforeUnmount(clearTimers);
   filter: grayscale(1);
 }
 
-.protocol-stack--disconnecting .protocol-operation {
+.protocol-stack--closing .protocol-operation {
   border-color: rgba(240, 107, 90, 0.68);
 }
 
