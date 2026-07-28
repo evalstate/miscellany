@@ -13,8 +13,8 @@ analysis scripts that feed the presentation visuals.
 
 ## Primary paths
 
-- Deck workspace: `/home/shaun/source/miscellany/presentations/2026/tessl-mcp`
-- Deck data-viz directory: `/home/shaun/source/miscellany/presentations/2026/tessl-mcp/data-viz`
+- Deck workspace: `/home/shaun/source/miscellany/presentations/2026/aidevcon-london`
+- Deck data-viz directory: `/home/shaun/source/miscellany/presentations/2026/aidevcon-london/data-viz`
 - Source stats repository: `/home/shaun/source/hf-mcp-stats`
 
 Treat `/home/shaun/source/hf-mcp-stats` as the authoritative source data

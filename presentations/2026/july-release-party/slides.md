@@ -2,6 +2,7 @@
 theme: default
 layout: intro
 title: July Release Party
+titleTemplate: "%s"
 author: Shaun Smith
 info: |
   July Release Party presentation.

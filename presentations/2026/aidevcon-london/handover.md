@@ -3,7 +3,7 @@
 Current workspace:
 
 ```text
-/home/shaun/source/miscellany/presentations/2026/tessl-mcp
+/home/shaun/source/miscellany/presentations/2026/aidevcon-london
 ```
 
 This is a Slidev conference deck. The source of truth for slide flow and

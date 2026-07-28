@@ -1,9 +1,10 @@
 ---
 theme: default
-title: Tessl + MCP
+title: "Connecting Context: The Future of MCP Transports"
+titleTemplate: "%s"
 author: Shaun Smith
 info: |
-  Starter Slidev deck for Tessl + MCP.
+  AI DevCon London presentation on the future of MCP transports.
 class: deck-root
 highlighter: shiki
 lineNumbers: false

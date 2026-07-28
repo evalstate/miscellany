@@ -5,6 +5,7 @@ import argparse
 import datetime as dt
 import html
 import json
+import os
 import shutil
 import subprocess
 from pathlib import Path
@@ -13,7 +14,6 @@ ROOT = Path(__file__).resolve().parents[2]
 PUBLISH = ROOT / "publish"
 MANIFEST = PUBLISH / "manifest.json"
 SITE = PUBLISH / "site"
-CURRENT_SPACE_INFO = PUBLISH / "current-space-info.json"
 
 EXCLUDE_NAMES = {
     ".git",
@@ -65,31 +65,18 @@ def is_dirty_under(source: Path, dirty_paths: set[str], repo_root: Path) -> bool
     return any(path == source_rel or path.startswith(source_rel + "/") or source_rel.startswith(path.rstrip("/") + "/") for path in dirty_paths)
 
 
-def source_provenance(item: dict, dirty_paths: set[str], git_commit: str | None, space_info: dict | None, repo_root: Path) -> dict:
-    source = ROOT / item["source"]
+def source_provenance(item: dict, dirty_paths: set[str], git_commit: str | None, repo_root: Path) -> dict:
     provenance_source = ROOT / item.get("provenanceSource", item["source"])
-    source_str = item["source"]
-    prov = {
-        "source": source_str,
+    return {
+        "source": item["source"],
         "provenanceSource": item.get("provenanceSource", item["source"]),
         "publishPath": item["publishPath"],
         "entry": item["entry"],
         "status": item.get("status"),
+        "kind": "local-git",
+        "gitCommit": git_commit,
+        "dirty": is_dirty_under(provenance_source, dirty_paths, repo_root),
     }
-    if source_str.startswith("publish/current-space/"):
-        prov.update({
-            "kind": "mirrored-space",
-            "space": space_info.get("id") if space_info else None,
-            "spaceSha": space_info.get("sha") if space_info else None,
-            "spaceLastModified": space_info.get("last_modified") if space_info else None,
-        })
-    else:
-        prov.update({
-            "kind": "local-git",
-            "gitCommit": git_commit,
-            "dirty": is_dirty_under(provenance_source, dirty_paths, repo_root),
-        })
-    return prov
 
 def copy_path(src: Path, dst: Path) -> None:
     if src.name in EXCLUDE_NAMES:
@@ -114,6 +101,36 @@ def clean_site() -> None:
 def selected_items(manifest: dict, include_candidates: bool) -> list[dict]:
     statuses = {"published"} | ({"candidate"} if include_candidates else set())
     return [item for item in manifest["items"] if item.get("status") in statuses]
+
+
+def run_build_commands(items: list[dict]) -> None:
+    for item in items:
+        build = item.get("build")
+        if not build:
+            continue
+
+        cwd = (ROOT / build.get("cwd", item.get("provenanceSource", item["source"]))).resolve()
+        try:
+            cwd.relative_to(ROOT.resolve())
+        except ValueError:
+            raise SystemExit(f"Build directory must be inside {ROOT}: {cwd}") from None
+        if not cwd.is_dir():
+            raise SystemExit(f"Missing build directory for {item['title']}: {cwd}")
+
+        commands = build.get("commands", [])
+        if not commands:
+            raise SystemExit(f"No build commands configured for {item['title']}")
+        configured_env = build.get("env", {})
+        if not isinstance(configured_env, dict) or not all(
+            isinstance(key, str) and isinstance(value, str) for key, value in configured_env.items()
+        ):
+            raise SystemExit(f"Invalid build environment for {item['title']}: {configured_env!r}")
+        env = os.environ | configured_env
+        for command in commands:
+            if not isinstance(command, list) or not command or not all(isinstance(arg, str) for arg in command):
+                raise SystemExit(f"Invalid build command for {item['title']}: {command!r}")
+            print(f"Building {item['title']}: {' '.join(command)}")
+            subprocess.run(command, cwd=cwd, env=env, check=True)
 
 
 def stage_items(items: list[dict]) -> None:
@@ -640,19 +657,19 @@ def main() -> None:
     git_commit = git_output("rev-parse", "HEAD")
     repo_root = git_root()
     dirty_paths = git_status_paths()
-    space_info = json.loads(CURRENT_SPACE_INFO.read_text(encoding="utf-8")) if CURRENT_SPACE_INFO.exists() else None
     build_meta = {
         "generatedAt": dt.datetime.now(dt.UTC).isoformat(),
         "gitCommit": git_commit,
         "gitDirty": bool(dirty_paths),
     }
+    run_build_commands(items)
     clean_site()
     stage_items(items)
     provenance = {
         "title": manifest.get("title"),
         "space": manifest.get("space"),
         "build": build_meta,
-        "items": [source_provenance(item, dirty_paths, git_commit, space_info, repo_root) for item in items],
+        "items": [source_provenance(item, dirty_paths, git_commit, repo_root) for item in items],
     }
     (SITE / "publish-manifest.json").write_text(json.dumps(provenance, indent=2) + "\n", encoding="utf-8")
     (SITE / "index.html").write_text(render_index(manifest, items, build_meta), encoding="utf-8")

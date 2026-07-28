@@ -5,16 +5,66 @@
     {
       "status": "published",
       "year": 2026,
+      "event": "MCP Release Party",
+      "eventUrl": "https://luma.com/klu2tegz",
+      "location": "",
+      "title": "MCP 2026-07-28 Release Party",
+      "date": "Jul 2026",
+      "sortDate": "2026-07-28",
+      "source": "2026/july-release-party/dist",
+      "provenanceSource": "2026/july-release-party",
+      "build": {
+        "cwd": "2026/july-release-party",
+        "env": {
+          "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
+        },
+        "commands": [
+          [
+            "npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "run",
+            "build"
+          ]
+        ]
+      },
+      "publishPath": "2026/july-release-party",
+      "entry": "index.html",
+      "include": [
+        "."
+      ]
+    },
+    {
+      "status": "published",
+      "year": 2026,
       "event": "Arize",
       "location": "London UK",
       "eventUrl": "https://luma.com/london-builders-meetup?tk=fXs9VV",
       "title": "Optimizing Skills and Tools, with Vision and GEPA",
-      "eventUrl": "https://luma.com/",
       "note": "Included live view of Trackio dashboards.",
       "date": "Jun 2026",
       "sortDate": "2026-06-20",
       "source": "2026/arize-gepa/dist",
       "provenanceSource": "2026/arize-gepa",
+      "build": {
+        "cwd": "2026/arize-gepa",
+        "env": {
+          "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
+        },
+        "commands": [
+          [
+            "npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "run",
+            "build"
+          ]
+        ]
+      },
       "publishPath": "2026/arize-gepa",
       "entry": "index.html",
       "include": [
@@ -51,6 +101,23 @@
       "sortDate": "2026-06-02",
       "source": "2026/aidevcon-london/dist",
       "provenanceSource": "2026/aidevcon-london",
+      "build": {
+        "cwd": "2026/aidevcon-london",
+        "env": {
+          "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
+        },
+        "commands": [
+          [
+            "npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "run",
+            "build"
+          ]
+        ]
+      },
       "publishPath": "2026/aidevcon-london",
       "entry": "index.html",
       "include": [
