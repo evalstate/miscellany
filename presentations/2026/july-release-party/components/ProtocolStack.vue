@@ -254,6 +254,14 @@ const heldChannel = computed<Channel | undefined>(
 const isMessagePhase = computed(() => active.value?.phase === "message");
 const isWakePhase = computed(() => active.value?.phase === "wake");
 const serverReady = computed(() => activeStep.value >= 4);
+const serverStatus = computed(() => {
+  if (serverReady.value) return "ready";
+  if (activeStep.value >= 0) return "negotiating";
+  return "unavailable";
+});
+const clientStatus = computed(() =>
+  serverReady.value ? "ready" : "negotiating",
+);
 const messageHitActor = computed<Actor | undefined>(() => {
   if (!isMessagePhase.value) return undefined;
   if (activeChannel.value === "up") return "server";
@@ -364,7 +372,7 @@ onBeforeUnmount(clearTimers);
       @click.stop="play(false)"
     >
       <span>MCP Server</span>
-      <small>{{ serverReady ? "ready" : "unavailable" }}</small>
+      <small :class="`is-status-${serverStatus}`">{{ serverStatus }}</small>
     </button>
 
     <div class="protocol-process-gap">
@@ -404,7 +412,7 @@ onBeforeUnmount(clearTimers);
       @click.stop="play(false)"
     >
       <span>MCP Client</span>
-      <small>{{ serverReady ? "ready" : "negotiating" }}</small>
+      <small :class="`is-status-${clientStatus}`">{{ clientStatus }}</small>
     </button>
 
     <div class="protocol-grid protocol-grid--client">
@@ -891,7 +899,7 @@ onBeforeUnmount(clearTimers);
   filter: drop-shadow(0 0 8px rgba(255, 198, 73, 0.11));
 }
 
-.protocol-card-shell.is-on :deep(.protocol-card) {
+.protocol-card-shell.is-on {
   border-color: rgba(255, 198, 73, 0.54);
   background:
     radial-gradient(
@@ -904,6 +912,55 @@ onBeforeUnmount(clearTimers);
 
 .protocol-card-shell.is-on :deep(.protocol-card__icon) {
   color: var(--deck-accent-hi);
+}
+
+.protocol-grid--server .protocol-card-shell.is-on {
+  border-color: rgba(245, 164, 0, 0.82);
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(255, 198, 73, 0.46),
+      transparent 68%
+    ),
+    rgba(255, 238, 174, 0.98);
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(255, 198, 73, 0.12),
+    0 0 22px rgba(245, 164, 0, 0.18);
+}
+
+.protocol-grid--client .protocol-card-shell.is-on {
+  filter: drop-shadow(0 0 10px rgba(106, 163, 247, 0.16));
+}
+
+.protocol-grid--client .protocol-card-shell.is-on {
+  border-color: rgba(106, 163, 247, 0.84);
+  background:
+    radial-gradient(
+      circle at 50% 42%,
+      rgba(106, 163, 247, 0.4),
+      transparent 68%
+    ),
+    rgba(218, 233, 255, 0.98);
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.2),
+    0 0 0 2px rgba(106, 163, 247, 0.12),
+    0 0 22px rgba(106, 163, 247, 0.18);
+}
+
+.protocol-grid--client .protocol-card-shell.is-on
+  :deep(.protocol-card__icon) {
+  color: var(--deck-info);
+}
+
+.protocol-grid--server .protocol-card-shell.is-flashing,
+.protocol-grid--client .protocol-card-shell.is-flashing {
+  animation: none;
+}
+
+.protocol-grid--client .protocol-card-shell.is-flashing
+  :deep(.protocol-card__icon) {
+  animation: protocol-card-icon-pulse-client 520ms ease 620ms both;
 }
 
 .protocol-card-shell.is-flashing {
@@ -1162,6 +1219,18 @@ onBeforeUnmount(clearTimers);
   }
 }
 
+@keyframes protocol-card-icon-pulse-client {
+  0%,
+  100% {
+    color: var(--deck-info);
+    transform: none;
+  }
+  45% {
+    color: #316bd7;
+    transform: scale(1.06);
+  }
+}
+
 /* Initialization state ---------------------------------------------------- */
 
 .protocol-card-shell.is-unavailable {
@@ -1196,23 +1265,33 @@ onBeforeUnmount(clearTimers);
 .protocol-label small {
   display: inline-flex;
   align-items: center;
-  gap: 0.42rem;
+  gap: 0.54rem;
+  font-size: clamp(0.62rem, 2.25cqh, 0.78rem);
+  letter-spacing: 0.13em;
 }
 
 .protocol-label small::before {
   content: "";
-  width: 0.48rem;
+  width: 0.64rem;
   aspect-ratio: 1;
   border-radius: 999px;
   background: rgba(185, 179, 165, 0.72);
-  box-shadow: 0 0 0 3px rgba(185, 179, 165, 0.12);
+  box-shadow: 0 0 0 4px rgba(185, 179, 165, 0.12);
 }
 
-.protocol-stack--initialized .protocol-label small::before {
+.protocol-label small.is-status-negotiating::before {
+  background: var(--deck-accent);
+  box-shadow:
+    0 0 0 4px rgba(245, 164, 0, 0.14),
+    0 0 12px rgba(245, 164, 0, 0.24);
+  animation: protocol-status-breathe 920ms ease-in-out infinite alternate;
+}
+
+.protocol-label small.is-status-ready::before {
   background: #22a06b;
   box-shadow:
-    0 0 0 3px rgba(34, 160, 107, 0.14),
-    0 0 10px rgba(34, 160, 107, 0.22);
+    0 0 0 4px rgba(34, 160, 107, 0.14),
+    0 0 12px rgba(34, 160, 107, 0.24);
 }
 
 /* Shared, quieter traffic rails ------------------------------------------ */
@@ -1350,6 +1429,17 @@ onBeforeUnmount(clearTimers);
     opacity: 1;
     filter: none;
     transform: none;
+  }
+}
+
+@keyframes protocol-status-breathe {
+  from {
+    opacity: 0.72;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1.08);
   }
 }
 
