@@ -1344,7 +1344,8 @@ onBeforeUnmount(clearTimers);
 @keyframes protocol-packet-down {
   0% {
     opacity: 0;
-    transform: translate(-50%, -35%) scaleY(0.7);
+    top: 5%;
+    transform: translateX(-50%) scaleY(0.7);
   }
   16%,
   82% {
@@ -1352,14 +1353,16 @@ onBeforeUnmount(clearTimers);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, 390%) scaleY(1);
+    top: calc(95% - 18px);
+    transform: translateX(-50%) scaleY(1);
   }
 }
 
 @keyframes protocol-packet-up {
   0% {
     opacity: 0;
-    transform: translate(-50%, 35%) scaleY(0.7);
+    top: calc(95% - 18px);
+    transform: translateX(-50%) scaleY(0.7);
   }
   16%,
   82% {
@@ -1367,14 +1370,16 @@ onBeforeUnmount(clearTimers);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -390%) scaleY(1);
+    top: 5%;
+    transform: translateX(-50%) scaleY(1);
   }
 }
 
 @keyframes protocol-ripple-down {
   0% {
     opacity: 0;
-    transform: translate(-50%, -45%) scale(0.55);
+    top: 5%;
+    transform: translateX(-50%) scale(0.55);
   }
   20%,
   70% {
@@ -1382,14 +1387,16 @@ onBeforeUnmount(clearTimers);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, 520%) scale(1.28);
+    top: calc(95% - 13px);
+    transform: translateX(-50%) scale(1.28);
   }
 }
 
 @keyframes protocol-ripple-up {
   0% {
     opacity: 0;
-    transform: translate(-50%, 45%) scale(0.55);
+    top: calc(95% - 13px);
+    transform: translateX(-50%) scale(0.55);
   }
   20%,
   70% {
@@ -1397,14 +1404,16 @@ onBeforeUnmount(clearTimers);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -520%) scale(1.28);
+    top: 5%;
+    transform: translateX(-50%) scale(1.28);
   }
 }
 
 @keyframes protocol-sweep-down {
   0% {
     opacity: 0;
-    transform: translate(-50%, -30%) scaleY(0.45);
+    top: 5%;
+    transform: translateX(-50%) scaleY(0.45);
   }
   15%,
   82% {
@@ -1412,14 +1421,16 @@ onBeforeUnmount(clearTimers);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, 220%) scaleY(1);
+    top: calc(95% - 24px);
+    transform: translateX(-50%) scaleY(1);
   }
 }
 
 @keyframes protocol-sweep-up {
   0% {
     opacity: 0;
-    transform: translate(-50%, 30%) scaleY(0.45);
+    bottom: 5%;
+    transform: translateX(-50%) scaleY(0.45);
   }
   15%,
   82% {
@@ -1427,7 +1438,8 @@ onBeforeUnmount(clearTimers);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -220%) scaleY(1);
+    bottom: calc(95% - 24px);
+    transform: translateX(-50%) scaleY(1);
   }
 }
 </style>
