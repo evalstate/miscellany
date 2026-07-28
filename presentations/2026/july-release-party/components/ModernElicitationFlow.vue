@@ -141,7 +141,7 @@ function run() {
   >
     <header class="sandbox-elicit__header">
       <div>
-        <span>practical example · ephemeral workflow</span>
+        <span>paid sandbox confirmation</span>
         <strong>{{ active?.title ?? "Click to create a GPU sandbox" }}</strong>
       </div>
       <p>{{ active?.detail ?? "A person must approve the hourly cost before creation." }}</p>
@@ -175,7 +175,7 @@ function run() {
           <small v-if="active?.server === 'handling-request'">handling id 1</small>
           <small v-else-if="active?.server === 'creating-sandbox'">creating sandbox</small>
           <small v-else-if="active?.server === 'ready'">sbx-7f3c · ready</small>
-          <small v-else>idle · no open request</small>
+          <small v-else>stateless · no open request</small>
         </div>
         <Box v-if="active?.sandbox === 'ready'" class="sandbox-elicit__box" :stroke-width="2.2" />
       </article>

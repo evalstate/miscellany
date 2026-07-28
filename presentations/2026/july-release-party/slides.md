@@ -29,17 +29,6 @@ Click the imagery to replay the animation.
 
 ---
 
-
-# July Release Party
-
-## What shipped, what changed, and what comes next
-
-::meta::
-
-Shaun Smith · July 2026
-
----
-
 <div class="about-intro">
 <section>
 <div class="kicker">about me</div>
@@ -82,10 +71,6 @@ Shaun Smith · July 2026
 
 ---
 
-<IntroVideo />
-
----
-
 # MCP At Hugging Face
 
 <div class="hf-mcp-slide">
@@ -121,13 +106,6 @@ Shaun Smith · July 2026
 </div>
 
 
----
-
-# Current Transports
-
-<div class="spec-timeline-diagram">
-  <McpSpecTransportTimeline variant="before" />
-</div>
 
 ---
 
@@ -164,62 +142,6 @@ Shaun Smith · July 2026
 </aside>
 </div>
 
----
-
-<div class="conversion-chart-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Daily session conversion</h1>
-      <h2>Session → query conversion rate</h2>
-    </div>
-  </header>
-  <SessionConversionChart />
-</div>
-
----
-
-# MCP Clients Dataset
-
-<div class="clients-dataset-slide text-image-slide">
-  <section class="text-image-slide__copy">
-    <p class="kicker">Open dataset</p>
-
-  <a class="dataset-link-card" href="https://hf.co/datasets/evalstate/mcp-clients">
-    <span>hf.co/datasets/evalstate</span>
-    <strong>mcp-clients</strong>
-  </a>
-
-  <div class="compact-point-list">
-    <div>
-      <strong>Clients</strong>
-      <span>names, versions, last-seen activity</span>
-    </div>
-    <div>
-      <strong>Capabilities</strong>
-      <span>tools, prompts, roots, sampling, elicitation</span>
-    </div>
-    <div>
-      <strong>Extensions</strong>
-      <span>track emerging feature support over time</span>
-    </div>
-  </div>
-  </section>
-
-  <figure class="dataset-screenshot deck-panel">
-    <img :src="'/images/clients-data.png'" alt="Hugging Face Data Studio table for the mcp-clients dataset" />
-  </figure>
-</div>
-
-
----
-
-# Scaling MCP in Production
-
-<div class="remote-mcp-diagram">
-  <RemoteMcpLoadBalancerStoryboard />
-</div>
-
-
 
 ---
 
@@ -238,7 +160,7 @@ Shaun Smith · July 2026
 
 ---
 
-# Main Issues with Statefulness
+# Motivation for Stateless
 
 <div class="statefulness-slide">
 <section class="statefulness-list statefulness-list--accent">
@@ -291,10 +213,14 @@ class: ported-section-slide
 
 ---
 
-# Simplifications (SEP-2260,SEP-2577)
+# Simplifications
 
 <div class="simplifications-slide">
 <section class="simplifications-copy">
+  <div class="kicker sep-kicker-stack">
+    <span>SEP-2260 · Require Server requests to be associated with a Client request.</span>
+    <span>SEP-2577 · Deprecate Roots, Sampling, and Logging</span>
+  </div>
 
   <div class="compact-point-list">
     <div class="simplifications-point simplifications-point--evidence">
@@ -329,12 +255,11 @@ class: ported-section-slide
 
 ---
 
-# Remove Initialization Handshake (SEP-2575)
+# Remove Initialization Handshake
 
 <div class="stateless-discovery-slide">
 <section class="stateless-discovery-copy">
-
-
+<div class="kicker">SEP-2575 · Make MCP Stateless</div>
 
 <dl class="compact-point-list">
 <div>
@@ -377,10 +302,11 @@ class: ported-section-slide
 
 ---
 
-# List Caching (SEP-2549)
+# List Caching
 
 <div class="cache-control-slide">
 <section class="cache-control-copy">
+<div class="kicker">SEP-2549 · TTL for List Results</div>
 
 <div class="compact-point-list">
 <div>
@@ -412,7 +338,9 @@ class: ported-section-slide
 
 ---
 
-# SEP-2322: Modern Elicitations
+# Modern Elicitations
+
+<div class="kicker modern-elicitation-kicker">SEP-2322 · Multi Round-Trip Requests</div>
 
 <div class="modern-elicitation-story deck-panel">
   <ModernElicitationFlow />
@@ -420,10 +348,11 @@ class: ported-section-slide
 
 ---
 
-# SEP-2322: Request 1 Ends
+# Elicitation Request 1
 
 <div class="elicitation-packet-slide elicitation-packet-slide--focused">
 <section class="elicitation-packet-copy">
+  <div class="kicker">SEP-2322 · Multi Round-Trip Requests</div>
   <div class="compact-point-list">
     <div>
       <strong>A final response</strong>
@@ -466,10 +395,11 @@ class: ported-section-slide
 
 ---
 
-# SEP-2322: Request 2 Starts Fresh
+# Elicitation Request 2
 
 <div class="elicitation-packet-slide elicitation-packet-slide--focused">
 <section class="elicitation-packet-copy">
+  <div class="kicker">SEP-2322 · Multi Round-Trip Requests</div>
   <div class="compact-point-list">
     <div>
       <strong>A new request</strong>
@@ -521,7 +451,7 @@ class: ported-section-slide
 # Replace Sessions with State Handles
 
 <div class="state-handle-slide">
-<div class="kicker">SEP-2567 · explicit application state</div>
+<div class="kicker">SEP-2567 · Sessionless MCP via Explicit State Handles</div>
 <div class="state-handle-flow">
 <div class="state-handle-card deck-panel">
 <span>Previous tool result</span>
@@ -546,7 +476,9 @@ class: ported-section-slide
 
 ---
 
-# SEP-2243: HTTP Standardization
+# HTTP Standardization
+
+<div class="kicker sep-slide-kicker">SEP-2243 · HTTP Standardization</div>
 
 <div class="http-standardization-problem">
   <HttpRouteMap mode="problem" />
@@ -555,7 +487,9 @@ class: ported-section-slide
 
 ---
 
-# SEP-2243: Tool Data in HTTP Headers
+# Tool Data in HTTP Headers
+
+<div class="kicker sep-slide-kicker">SEP-2243 · HTTP Standardization</div>
 
 <div class="http-standardization-schema">
   <HttpHeaderExample variant="tool" />
@@ -563,7 +497,9 @@ class: ported-section-slide
 
 ---
 
-# SEP-2243: Routable MCP Traffic
+# Routable MCP Traffic
+
+<div class="kicker sep-slide-kicker">SEP-2243 · HTTP Standardization</div>
 
 <div class="http-standardization-problem">
   <HttpRouteMap mode="solution" />
@@ -580,17 +516,56 @@ class: ported-section-slide
 
 ---
 
-<div class="migration-path-slide">
-<p class="kicker">What’s Next</p>
+# MCP Clients Dataset
 
-# Migration Path
+<div class="clients-dataset-slide text-image-slide">
+  <section class="text-image-slide__copy">
+    <p class="kicker">Open dataset</p>
 
-<div class="migration-path-list">
-<div><span>Now</span><strong>Release Candidate Specification</strong></div>
-<div><span>30 Jun 2026</span><strong>Beta SDKs</strong></div>
-<div><span>28 Jul 2026</span><strong>Planned release date</strong></div>
+  <a class="dataset-link-card" href="https://hf.co/datasets/evalstate/mcp-clients">
+    <span>hf.co/datasets/evalstate</span>
+    <strong>mcp-clients</strong>
+  </a>
+
+  <div class="compact-point-list">
+    <div>
+      <strong>Clients</strong>
+      <span>names, versions, last-seen activity</span>
+    </div>
+    <div>
+      <strong>Capabilities</strong>
+      <span>tools, prompts, roots, sampling, elicitation</span>
+    </div>
+    <div>
+      <strong>Extensions</strong>
+      <span>track emerging feature support over time</span>
+    </div>
+  </div>
+  </section>
+
+  <figure class="dataset-screenshot deck-panel">
+    <img :src="'/images/clients-data.png'" alt="Hugging Face Data Studio table for the mcp-clients dataset" />
+  </figure>
 </div>
+
+
+---
+
+# Scaling MCP in Production
+
+<div class="remote-mcp-diagram">
+  <RemoteMcpLoadBalancerStoryboard />
 </div>
+
+
+
+
+---
+
+<IntroVideo />
+
+---
+
 
 ---
 layout: intro

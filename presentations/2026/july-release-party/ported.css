@@ -1300,9 +1300,13 @@
   font-weight: 750;
 }
 
+.modern-elicitation-kicker {
+  margin: -0.18rem 0 0.46rem;
+}
+
 .modern-elicitation-story {
   width: 100%;
-  height: calc(100% - 4.7rem);
+  height: calc(100% - 5.55rem);
   min-height: 0;
   padding: 0.38rem;
   overflow: hidden;
@@ -1434,6 +1438,10 @@
 .elicitation-packet-copy {
   min-width: 0;
   min-height: 0;
+}
+
+.elicitation-packet-copy > .kicker {
+  margin: 0 0 0.48rem;
 }
 
 .elicitation-packet-copy .compact-point-list {
@@ -1600,6 +1608,12 @@
   margin-bottom: 0.48rem;
 }
 
+.sep-kicker-stack {
+  display: grid;
+  gap: 0.2rem;
+  line-height: 1.18;
+}
+
 .simplifications-copy h2 {
   margin: 0 0 0.82rem !important;
   color: var(--deck-accent-hi);
@@ -1679,8 +1693,12 @@
 }
 
 /* HTTP standardization problem slide */
+.sep-slide-kicker {
+  margin: -0.22rem 0 0.5rem;
+}
+
 .http-standardization-problem {
-  height: calc(100% - 4.35rem);
+  height: calc(100% - 5.25rem);
   display: grid;
   grid-template-columns: minmax(0, 0.92fr) minmax(430px, 1.08fr);
   gap: 1.35rem;
@@ -1688,7 +1706,7 @@
 }
 
 .http-standardization-schema {
-  height: calc(100% - 4.35rem);
+  height: calc(100% - 5.25rem);
   display: grid;
   place-items: stretch center;
 }
