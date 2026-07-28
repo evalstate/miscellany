@@ -200,11 +200,11 @@ function run() {
           <span>confirmation required</span>
           <strong v-if="active.confirmation === 'accepted'"><Check /> approved</strong>
         </header>
-        <h3>Create this GPU sandbox?</h3>
-        <p><strong>t4-small</strong> will cost <mark>$0.40 per hour</mark>.</p>
+        <h3>Create a paid GPU sandbox?</h3>
+        <p>Start <strong>t4-small</strong> at <mark>$0.40 per hour</mark>.</p>
         <div>
           <span>Cancel</span>
-          <strong>{{ active.confirmation === "accepted" ? "Confirmed" : "Create sandbox" }}</strong>
+          <strong>{{ active.confirmation === "accepted" ? "Approved" : "Approve & create" }}</strong>
         </div>
       </div>
     </div>
@@ -322,7 +322,7 @@ function run() {
   padding: 0.78rem 0.86rem;
   border: 1px solid var(--deck-border-2);
   border-radius: calc(var(--deck-radius) + 4px);
-  background: rgba(255, 255, 255, 0.92);
+  background: #ffffff;
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.1);
 }
 
@@ -376,26 +376,28 @@ function run() {
   top: 30%;
   padding: 0.34rem 0.5rem;
   color: var(--deck-text);
-  border: 1px solid rgba(255, 198, 73, 0.72);
+  border: 1px solid #e9ad26;
   border-radius: 999px;
-  background: var(--deck-highlight);
-  box-shadow: 0 5px 16px rgba(180, 83, 9, 0.2);
+  background: #f7cf72;
+  box-shadow:
+    0 5px 16px rgba(180, 83, 9, 0.24),
+    0 0 0 2px rgba(255, 255, 255, 0.72);
   font-family: var(--deck-font-mono);
   white-space: nowrap;
 }
 
-.sandbox-elicit__packet strong { font-size: 0.66rem; }
-.sandbox-elicit__packet span { margin-left: 0.34rem; font-size: 0.54rem; }
+.sandbox-elicit__packet strong { font-size: 0.72rem; font-weight: 800; }
+.sandbox-elicit__packet span { margin-left: 0.34rem; font-size: 0.58rem; font-weight: 700; }
 .sandbox-elicit__packet--outbound { animation: sandbox-packet-out 1050ms ease both; }
 .sandbox-elicit__packet--return { animation: sandbox-packet-back 1050ms ease both; }
 
 .sandbox-elicit__confirmation {
   position: absolute;
   z-index: 8;
-  left: 7%;
+  left: 4%;
   bottom: 4%;
-  width: 49%;
-  padding: 0.92rem 1rem;
+  width: 62%;
+  padding: 1.18rem 1.28rem;
   border: 1px solid rgba(255, 198, 73, 0.66);
   border-radius: calc(var(--deck-radius) + 5px);
   background: rgba(255, 255, 255, 0.96);
@@ -413,7 +415,7 @@ function run() {
 
 .sandbox-elicit__confirmation header span {
   color: var(--deck-accent-hi);
-  font: 800 0.6rem/1 var(--deck-font-mono);
+  font: 800 0.72rem/1 var(--deck-font-mono);
   letter-spacing: 0.1em;
   text-transform: uppercase;
 }
@@ -423,23 +425,26 @@ function run() {
   align-items: center;
   gap: 0.2rem;
   color: var(--deck-ok);
-  font-size: 0.76rem;
+  font-size: 0.92rem;
 }
 
 .sandbox-elicit__confirmation header svg {
-  width: 0.8rem;
-  height: 0.8rem;
+  width: 0.96rem;
+  height: 0.96rem;
 }
 
 .sandbox-elicit__confirmation h3 {
-  margin: 0.58rem 0 0;
-  font-size: 1.28rem;
+  margin: 0.76rem 0 0;
+  font-size: 1.72rem;
+  line-height: 1.04;
+  letter-spacing: -0.045em;
 }
 
 .sandbox-elicit__confirmation p {
-  margin: 0.34rem 0 0.68rem;
+  margin: 0.52rem 0 0.94rem;
   color: var(--deck-muted);
-  font-size: 0.9rem;
+  font-size: 1.08rem;
+  line-height: 1.24;
 }
 
 .sandbox-elicit__confirmation mark {
@@ -451,9 +456,9 @@ function run() {
 
 .sandbox-elicit__confirmation > div span,
 .sandbox-elicit__confirmation > div strong {
-  padding: 0.38rem 0.56rem;
+  padding: 0.52rem 0.72rem;
   border-radius: var(--deck-radius-sm);
-  font-size: 0.78rem;
+  font-size: 0.94rem;
 }
 
 .sandbox-elicit__confirmation > div span {
@@ -481,16 +486,32 @@ function run() {
 .sandbox-elicit__requests article {
   position: relative;
   padding: 0.6rem 0.7rem;
-  border: 1px solid var(--deck-border);
+  border: 2px solid var(--deck-border-2);
   border-radius: var(--deck-radius);
-  background: rgba(255, 255, 255, 0.68);
-  opacity: 0.46;
+  background: var(--deck-surface-2);
+  box-shadow: none;
+  opacity: 1;
+  transition:
+    color 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
 }
 
-.sandbox-elicit__requests article.is-open,
-.sandbox-elicit__requests article.is-closed { opacity: 1; }
-.sandbox-elicit__requests article.is-open { border-color: rgba(106, 163, 247, 0.62); }
-.sandbox-elicit__requests article.is-closed { border-color: rgba(255, 198, 73, 0.58); }
+.sandbox-elicit__requests article.is-open {
+  color: #ffffff;
+  border-color: var(--deck-info);
+  background: #172033;
+  box-shadow:
+    0 8px 20px rgba(15, 23, 42, 0.18),
+    0 0 0 3px rgba(37, 99, 235, 0.13);
+}
+
+.sandbox-elicit__requests article.is-closed {
+  border-color: rgba(245, 164, 0, 0.78);
+  background: var(--deck-surface-warm);
+  box-shadow: 0 5px 14px rgba(180, 83, 9, 0.08);
+}
 
 .sandbox-elicit__requests article > span,
 .sandbox-elicit__requests article > small {
@@ -505,6 +526,20 @@ function run() {
   display: block;
   margin-top: 0.28rem;
   font: 750 0.68rem/1 var(--deck-font-mono);
+}
+
+.sandbox-elicit__requests article.is-open > span,
+.sandbox-elicit__requests article.is-open > small {
+  color: #bfdbfe;
+}
+
+.sandbox-elicit__requests article.is-open > strong {
+  color: #ffffff;
+}
+
+.sandbox-elicit__requests article.is-closed > span,
+.sandbox-elicit__requests article.is-closed > small {
+  color: var(--deck-accent-hi);
 }
 
 .sandbox-elicit__requests article > small {
@@ -527,13 +562,13 @@ function run() {
 .sandbox-elicit__handoff strong { font-size: 1.1rem; }
 
 @keyframes sandbox-packet-out {
-  from { left: 48%; opacity: 0; }
-  to { left: 77%; opacity: 1; }
+  from { left: 48%; }
+  to { left: 77%; }
 }
 
 @keyframes sandbox-packet-back {
-  from { left: 77%; opacity: 0; }
-  to { left: 48%; opacity: 1; }
+  from { left: 77%; }
+  to { left: 48%; }
 }
 
 @keyframes sandbox-confirm-in {

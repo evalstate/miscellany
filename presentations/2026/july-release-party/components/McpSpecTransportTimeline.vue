@@ -209,7 +209,9 @@ const isBefore = props.variant === "before";
     border-color 180ms ease,
     background 180ms ease,
     box-shadow 180ms ease,
-    transform 180ms ease;
+    transform 180ms ease,
+    opacity 180ms ease,
+    filter 180ms ease;
 }
 
 .spec-timeline__tick strong {
@@ -337,13 +339,6 @@ const isBefore = props.variant === "before";
       rgba(185, 179, 165, 0.12) calc(66.666% - 1px),
       rgba(185, 179, 165, 0.12) calc(66.666% + 1px),
       transparent calc(66.666% + 1px)
-    ),
-    linear-gradient(
-      90deg,
-      transparent calc(83.333% - 1px),
-      rgba(106, 163, 247, 0.18) calc(83.333% - 1px),
-      rgba(106, 163, 247, 0.18) calc(83.333% + 1px),
-      transparent calc(83.333% + 1px)
     );
 }
 
@@ -521,6 +516,23 @@ const isBefore = props.variant === "before";
     0 0 10px rgba(245, 164, 0, 0.05);
 }
 
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--5, .spec-timeline__tick--col-5):hover
+  )
+  :is(
+    .spec-timeline__tick--col-1,
+    .spec-timeline__tick--col-2,
+    .spec-timeline__tick--col-3,
+    .spec-timeline__tick--col-4
+  ) {
+  opacity: 0.42;
+  filter: grayscale(1);
+  border-color: var(--deck-border);
+  background: rgba(243, 244, 246, 0.34);
+  box-shadow: none;
+  transform: none;
+}
+
 .spec-timeline--before .spec-timeline__tick--col-5,
 .spec-timeline--before .spec-timeline__tick--col-6 {
   opacity: 0.32;
@@ -541,6 +553,12 @@ const isBefore = props.variant === "before";
   border-radius: 999px;
   box-shadow: 0 15px 28px rgba(0, 0, 0, 0.22);
   pointer-events: none;
+  transition:
+    opacity 180ms ease,
+    filter 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
 }
 
 .spec-timeline__bar strong {
@@ -626,5 +644,20 @@ const isBefore = props.variant === "before";
 
 .spec-timeline__bar--auth-rs-before {
   grid-column-end: 5;
+}
+
+.spec-timeline:has(
+    :is(.spec-timeline__hotspot--5, .spec-timeline__tick--col-5):hover
+  )
+  :is(
+    .spec-timeline__bar--stdio,
+    .spec-timeline__bar--sse,
+    .spec-timeline__bar--streamable
+  ) {
+  opacity: 0.34;
+  filter: grayscale(1);
+  border-color: var(--deck-border);
+  background: rgba(243, 244, 246, 0.34);
+  box-shadow: none;
 }
 </style>
