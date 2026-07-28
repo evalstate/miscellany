@@ -332,7 +332,7 @@ class: ported-section-slide
 
 ---
 
-# 2026-07-28 Release Candidate
+# 2026-07-28 Specification
 
 <div class="spec-timeline-diagram">
   <McpSpecTransportTimeline variant="after" />

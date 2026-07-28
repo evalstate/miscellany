@@ -5,10 +5,12 @@ const props = withDefaults(
   defineProps<{
     showDescriptions?: boolean;
     variant?: "current" | "simplified";
+    signalVariant?: "packet" | "ripple" | "sweep";
   }>(),
   {
     showDescriptions: false,
     variant: "current",
+    signalVariant: "packet",
   },
 );
 
@@ -86,43 +88,74 @@ type Frame = {
 };
 
 const scriptFrames: Frame[] = [
+  // Initialization: capabilities remain unavailable until the final notification.
   {
-    label: "prompts/list",
+    label: "initialize",
     phase: "wake",
     actor: "client",
     channel: "up",
     holdChannel: "up",
-    duration: 560,
+    duration: 480,
   },
   {
-    label: "prompts/list",
+    label: "initialize",
     phase: "message",
     actor: "client",
     channel: "up",
     holdChannel: "up",
-    flash: "prompts",
-    hold: "prompts",
   },
   {
-    label: "prompts/GetListResult",
+    label: "InitializeResult",
+    phase: "message",
+    actor: "server",
+    channel: "down",
+    holdChannel: "down",
+  },
+  {
+    label: "notifications/initialized",
     phase: "message",
     actor: "client",
-    channel: "down",
+    channel: "up",
     holdChannel: "up",
-    hold: "prompts",
+  },
+  { label: "both ready", phase: "quiesce", duration: 760 },
+
+  // Discovery: the client asks the server to list its tools.
+  {
+    label: "tools/list",
+    phase: "wake",
+    actor: "client",
+    channel: "up",
+    holdChannel: "up",
+    duration: 480,
   },
   {
-    label: "ready",
-    phase: "quiesce",
-    duration: 520,
+    label: "tools/list",
+    phase: "message",
+    actor: "client",
+    channel: "up",
+    holdChannel: "up",
+    flash: "tools",
+    hold: "tools",
   },
+  {
+    label: "ListToolsResult",
+    phase: "message",
+    actor: "server",
+    channel: "down",
+    holdChannel: "down",
+    hold: "tools",
+  },
+  { label: "ready", phase: "quiesce", duration: 620 },
+
+  // Invocation: a tool call returns progress before its final result.
   {
     label: "tools/call",
     phase: "wake",
     actor: "client",
     channel: "up",
     holdChannel: "up",
-    duration: 560,
+    duration: 480,
   },
   {
     label: "tools/call",
@@ -134,49 +167,39 @@ const scriptFrames: Frame[] = [
     hold: "tools",
   },
   {
-    label: "progress/notification",
+    label: "progress 25%",
     phase: "message",
-    actor: "client",
+    actor: "server",
     channel: "down",
-    holdChannel: "up",
+    holdChannel: "down",
     hold: "tools",
   },
   {
-    label: "progress/notification",
+    label: "progress 70%",
     phase: "message",
-    actor: "client",
+    actor: "server",
     channel: "down",
-    holdChannel: "up",
+    holdChannel: "down",
     hold: "tools",
   },
   {
-    label: "progress/notification",
+    label: "CallToolResult",
     phase: "message",
-    actor: "client",
+    actor: "server",
     channel: "down",
-    holdChannel: "up",
+    holdChannel: "down",
     hold: "tools",
   },
-  {
-    label: "tools/CallToolResult",
-    phase: "message",
-    actor: "client",
-    channel: "down",
-    holdChannel: "up",
-    hold: "tools",
-  },
-  {
-    label: "ready",
-    phase: "quiesce",
-    duration: 520,
-  },
+  { label: "ready", phase: "quiesce", duration: 620 },
+
+  // Bidirectionality: the server can request a model turn from the client.
   {
     label: "sampling/createMessage",
     phase: "wake",
     actor: "server",
     channel: "down",
     holdChannel: "down",
-    duration: 560,
+    duration: 480,
   },
   {
     label: "sampling/createMessage",
@@ -188,24 +211,21 @@ const scriptFrames: Frame[] = [
     hold: "sampling",
   },
   {
-    label: "result",
+    label: "CreateMessageResult",
     phase: "message",
-    actor: "server",
+    actor: "client",
     channel: "up",
-    holdChannel: "down",
+    holdChannel: "up",
     hold: "sampling",
   },
-  {
-    label: "ready",
-    phase: "quiesce",
-    duration: 520,
-  },
+  { label: "ready", phase: "quiesce", duration: 700 },
 ];
 
 const activeStep = ref(-1);
 const animationKey = ref(0);
 const isRunning = ref(false);
 const isLooping = ref(false);
+const signalVariant = ref(props.signalVariant);
 const timers: number[] = [];
 
 const isSimplified = computed(() => props.variant === "simplified");
@@ -231,6 +251,7 @@ const heldChannel = computed<Channel | undefined>(
 );
 const isMessagePhase = computed(() => active.value?.phase === "message");
 const isWakePhase = computed(() => active.value?.phase === "wake");
+const serverReady = computed(() => activeStep.value >= 4);
 const messageHitActor = computed<Actor | undefined>(() => {
   if (!isMessagePhase.value) return undefined;
   if (activeChannel.value === "up") return "server";
@@ -274,7 +295,19 @@ function play(loop = true) {
   );
 }
 
-onMounted(() => play(true));
+onMounted(() => {
+  const requestedVariant = new URLSearchParams(window.location.search).get(
+    "signal",
+  );
+  if (
+    requestedVariant === "packet" ||
+    requestedVariant === "ripple" ||
+    requestedVariant === "sweep"
+  ) {
+    signalVariant.value = requestedVariant;
+  }
+  play(true);
+});
 onBeforeUnmount(clearTimers);
 </script>
 
@@ -290,6 +323,10 @@ onBeforeUnmount(clearTimers);
       'protocol-stack--hold-up': heldChannel === 'up',
       'protocol-stack--hold-down': heldChannel === 'down',
       'protocol-stack--simplified': isSimplified,
+      'protocol-stack--initialized': serverReady,
+      'protocol-stack--signal-packet': signalVariant === 'packet',
+      'protocol-stack--signal-ripple': signalVariant === 'ripple',
+      'protocol-stack--signal-sweep': signalVariant === 'sweep',
     }"
     aria-label="MCP protocol bidirectional message flow"
     @click="play(true)"
@@ -302,6 +339,7 @@ onBeforeUnmount(clearTimers);
         :class="{
           'is-flashing': activeFlash === item.id,
           'is-on': activeCapability === item.id,
+          'is-unavailable': !serverReady,
         }"
         :title="item.title"
         :icon="item.icon"
@@ -321,6 +359,7 @@ onBeforeUnmount(clearTimers);
       @click.stop="play(true)"
     >
       <span>MCP Server</span>
+      <small>{{ serverReady ? "ready" : "unavailable" }}</small>
     </button>
 
     <div class="protocol-process-gap">
@@ -360,6 +399,7 @@ onBeforeUnmount(clearTimers);
       @click.stop="play(true)"
     >
       <span>MCP Client</span>
+      <small>{{ serverReady ? "ready" : "negotiating" }}</small>
     </button>
 
     <div class="protocol-grid protocol-grid--client">
@@ -1104,6 +1144,278 @@ onBeforeUnmount(clearTimers);
   45% {
     color: var(--deck-accent-hi);
     transform: scale(1.06);
+  }
+}
+
+/* Initialization state ---------------------------------------------------- */
+
+.protocol-card-shell.is-unavailable {
+  opacity: 0.34;
+  filter: grayscale(1);
+  transform: translateY(2px);
+}
+
+.protocol-card-shell.is-unavailable :deep(.protocol-card) {
+  border-color: rgba(185, 179, 165, 0.42);
+  background: rgba(225, 225, 222, 0.42);
+  box-shadow: none;
+}
+
+.protocol-card-shell.is-unavailable :deep(.protocol-card__icon),
+.protocol-card-shell.is-unavailable :deep(.protocol-card h3) {
+  color: rgba(112, 109, 102, 0.66);
+}
+
+.protocol-stack:not(.protocol-stack--initialized) .protocol-label--server {
+  color: var(--deck-dim);
+  border-color: rgba(185, 179, 165, 0.42);
+  background: rgba(225, 225, 222, 0.46);
+  box-shadow: none;
+}
+
+.protocol-stack--initialized .protocol-grid--server,
+.protocol-stack--initialized .protocol-label--server {
+  animation: protocol-server-online 520ms cubic-bezier(0.18, 0.82, 0.22, 1) both;
+}
+
+.protocol-label small {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+}
+
+.protocol-label small::before {
+  content: "";
+  width: 0.48rem;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: rgba(185, 179, 165, 0.72);
+  box-shadow: 0 0 0 3px rgba(185, 179, 165, 0.12);
+}
+
+.protocol-stack--initialized .protocol-label small::before {
+  background: #22a06b;
+  box-shadow:
+    0 0 0 3px rgba(34, 160, 107, 0.14),
+    0 0 10px rgba(34, 160, 107, 0.22);
+}
+
+/* Shared, quieter traffic rails ------------------------------------------ */
+
+.protocol-arrow-pair {
+  gap: clamp(0.82rem, 1.8cqw, 1.08rem);
+}
+
+.protocol-block-arrow {
+  width: clamp(28px, 3.7cqw, 42px);
+  opacity: 0.48;
+  filter: none;
+}
+
+.protocol-block-arrow::before {
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--lane-color) 14%,
+    var(--lane-color) 86%,
+    transparent
+  );
+  box-shadow: none;
+}
+
+.protocol-stack--message .protocol-block-arrow {
+  opacity: 1;
+}
+
+/* Variant A: one physical packet with a restrained trailing halo. */
+
+.protocol-stack--signal-packet .protocol-message-dot {
+  width: 10px;
+  height: 18px;
+  border: 1px solid color-mix(in srgb, var(--packet-color) 72%, white);
+  border-radius: 999px;
+  background: var(--packet-color);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--packet-color) 14%, transparent),
+    0 4px 12px color-mix(in srgb, var(--packet-color) 36%, transparent);
+  opacity: 0;
+}
+
+.protocol-stack--signal-packet .protocol-message-dot:nth-child(n + 2) {
+  display: none;
+}
+
+.protocol-stack--signal-packet.protocol-stack--message.protocol-stack--channel-down
+  .protocol-block-arrow--down
+  .protocol-message-dot {
+  animation: protocol-packet-down 760ms cubic-bezier(0.22, 0.7, 0.18, 1) both;
+}
+
+.protocol-stack--signal-packet.protocol-stack--message.protocol-stack--channel-up
+  .protocol-block-arrow--up
+  .protocol-message-dot {
+  animation: protocol-packet-up 760ms cubic-bezier(0.22, 0.7, 0.18, 1) both;
+}
+
+/* Variant B: three expanding rings, like a signal propagating. */
+
+.protocol-stack--signal-ripple .protocol-message-dot {
+  width: 13px;
+  height: 13px;
+  border: 2px solid var(--packet-color);
+  background: transparent;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--packet-color) 28%, transparent);
+  opacity: 0;
+}
+
+.protocol-stack--signal-ripple.protocol-stack--message.protocol-stack--channel-down
+  .protocol-block-arrow--down
+  .protocol-message-dot {
+  animation: protocol-ripple-down 800ms cubic-bezier(0.2, 0.68, 0.18, 1)
+    var(--dot-delay) both;
+}
+
+.protocol-stack--signal-ripple.protocol-stack--message.protocol-stack--channel-up
+  .protocol-block-arrow--up
+  .protocol-message-dot {
+  animation: protocol-ripple-up 800ms cubic-bezier(0.2, 0.68, 0.18, 1)
+    var(--dot-delay) both;
+}
+
+/* Variant C: no particles; a short pulse sweeps along the rail. */
+
+.protocol-stack--signal-sweep .protocol-message-dot {
+  display: none;
+}
+
+.protocol-stack--signal-sweep .protocol-block-arrow::after {
+  content: "";
+  left: 50%;
+  width: 6px;
+  height: 24px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--packet-color);
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--packet-color) 12%, transparent),
+    0 0 16px color-mix(in srgb, var(--packet-color) 38%, transparent);
+  opacity: 0;
+}
+
+.protocol-stack--signal-sweep.protocol-stack--message.protocol-stack--channel-down
+  .protocol-block-arrow--down::after {
+  top: 6%;
+  animation: protocol-sweep-down 760ms cubic-bezier(0.2, 0.72, 0.18, 1) both;
+}
+
+.protocol-stack--signal-sweep.protocol-stack--message.protocol-stack--channel-up
+  .protocol-block-arrow--up::after {
+  top: auto;
+  bottom: 6%;
+  animation: protocol-sweep-up 760ms cubic-bezier(0.2, 0.72, 0.18, 1) both;
+}
+
+@keyframes protocol-server-online {
+  0% {
+    opacity: 0.42;
+    filter: grayscale(1);
+    transform: translateY(2px);
+  }
+  100% {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+}
+
+@keyframes protocol-packet-down {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -35%) scaleY(0.7);
+  }
+  16%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 390%) scaleY(1);
+  }
+}
+
+@keyframes protocol-packet-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 35%) scaleY(0.7);
+  }
+  16%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -390%) scaleY(1);
+  }
+}
+
+@keyframes protocol-ripple-down {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.55);
+  }
+  20%,
+  70% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 520%) scale(1.28);
+  }
+}
+
+@keyframes protocol-ripple-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 45%) scale(0.55);
+  }
+  20%,
+  70% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -520%) scale(1.28);
+  }
+}
+
+@keyframes protocol-sweep-down {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -30%) scaleY(0.45);
+  }
+  15%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, 220%) scaleY(1);
+  }
+}
+
+@keyframes protocol-sweep-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 30%) scaleY(0.45);
+  }
+  15%,
+  82% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -220%) scaleY(1);
   }
 }
 </style>
