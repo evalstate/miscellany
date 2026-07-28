@@ -136,8 +136,6 @@ const scriptFrames: Frame[] = [
     actor: "client",
     channel: "up",
     holdChannel: "up",
-    flash: "tools",
-    hold: "tools",
   },
   {
     label: "tools/list received",
@@ -154,7 +152,12 @@ const scriptFrames: Frame[] = [
     holdChannel: "down",
     hold: "tools",
   },
-  { label: "ready", phase: "quiesce", duration: 620 },
+  {
+    label: "ready",
+    phase: "quiesce",
+    hold: "tools",
+    duration: 620,
+  },
 
   // Invocation: a tool call returns progress before its final result.
   {
@@ -163,6 +166,7 @@ const scriptFrames: Frame[] = [
     actor: "client",
     channel: "up",
     holdChannel: "up",
+    hold: "tools",
     duration: 480,
   },
   {
@@ -171,7 +175,6 @@ const scriptFrames: Frame[] = [
     actor: "client",
     channel: "up",
     holdChannel: "up",
-    flash: "tools",
     hold: "tools",
   },
   {
@@ -205,7 +208,27 @@ const scriptFrames: Frame[] = [
     holdChannel: "down",
     hold: "tools",
   },
-  { label: "", phase: "quiesce", duration: 7000 },
+  { label: "", phase: "quiesce", duration: 5000 },
+
+  // Server notification: the available prompt list has changed.
+  {
+    label: "notifications/prompts/list_changed",
+    phase: "wake",
+    actor: "server",
+    channel: "down",
+    holdChannel: "down",
+    duration: 480,
+  },
+  {
+    label: "notifications/prompts/list_changed",
+    phase: "message",
+    actor: "server",
+    channel: "down",
+    holdChannel: "down",
+    flash: "prompts",
+    hold: "prompts",
+  },
+  { label: "", phase: "quiesce", duration: 5000 },
 
   // Bidirectionality: the server can request a model turn from the client.
   {
@@ -222,8 +245,6 @@ const scriptFrames: Frame[] = [
     actor: "server",
     channel: "down",
     holdChannel: "down",
-    flash: "sampling",
-    hold: "sampling",
   },
   {
     label: "sampling request received",
@@ -240,7 +261,7 @@ const scriptFrames: Frame[] = [
     holdChannel: "up",
     hold: "sampling",
   },
-  { label: "", phase: "quiesce", duration: 7000 },
+  { label: "", phase: "quiesce", duration: 5000 },
   {
     label: "sessions/delete",
     phase: "wake",
@@ -275,7 +296,7 @@ const scriptFrames: Frame[] = [
   {
     label: "",
     phase: "waiting",
-    duration: 7000,
+    duration: 5000,
   },
 ];
 
@@ -295,24 +316,11 @@ const frames = computed(() =>
     : scriptFrames,
 );
 const active = computed(() => frames.value[activeStep.value]);
-const activeSegment = computed<CapabilityId | undefined>(() => {
-  if (activeStep.value >= 7 && activeStep.value <= 15) return "tools";
-  if (
-    !isSimplified.value &&
-    activeStep.value >= 19 &&
-    activeStep.value <= 20
-  )
-    return "sampling";
-  return undefined;
-});
-const activeFlash = computed<CapabilityId | undefined>(() => {
-  if (activeStep.value === 7) return "tools";
-  if (activeStep.value === 12) return "tools";
-  if (!isSimplified.value && activeStep.value === 19) return "sampling";
-  return undefined;
-});
+const activeFlash = computed<CapabilityId | undefined>(
+  () => active.value?.flash,
+);
 const activeCapability = computed<CapabilityId | undefined>(
-  () => activeSegment.value,
+  () => active.value?.hold,
 );
 const activeActor = computed<Actor | undefined>(() => active.value?.actor);
 const operationLabel = computed(
