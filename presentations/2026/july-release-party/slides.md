@@ -76,12 +76,13 @@ Click the imagery to replay the animation.
 <div class="hf-mcp-slide">
 <section class="hf-mcp-copy">
 <h2>The Hub for Agents and Assistants</h2>
-
 <div class="hf-mcp-capabilities">
-<div><strong>Inference gateway</strong><span>Route agents to multimodal models and hosted endpoints.</span></div>
-<div><strong>Research workspace</strong><span>Inspect datasets, find models, and run experiments.</span></div>
+<div><strong>Inference gateway</strong><span>Dynamically route agents to multimodal models and hosted endpoints.</span></div>
+<div><strong>Research workspace</strong><span>Inspect datasets, find models, papers, and run experiments.</span></div>
 <div><strong>Sandboxes</strong><span>Create and manage isolated execution environments.</span></div>
 <div><strong>Access modes</strong><span>Support authenticated and unauthenticated workflows.</span></div>
+<div><strong>llama.cpp, chatui, and more</strong><span>Local and Web Client Integrations</span></div>
+
 </div>
 
 <div class="hf-mcp-models" aria-label="Example models">
@@ -97,6 +98,7 @@ Click the imagery to replay the animation.
 </aside>
 </div>
 
+
 ---
 
 # Legacy MCP is fully bi-directional
@@ -105,6 +107,41 @@ Click the imagery to replay the animation.
   <ProtocolStack />
 </div>
 
+
+---
+
+# Motivation for Stateless
+
+<div class="statefulness-slide">
+<section class="statefulness-list statefulness-list--accent">
+<h2>Operational coupling</h2>
+<ul>
+<li><strong>“Sticky” sessions in the load balancer</strong>
+  <ul>
+  <li>scalability</li>
+  <li>fault tolerance</li>
+  <li>in-place changes</li>
+  </ul>
+</li>
+<li><strong>Speculative open connections are expensive</strong></li>
+<li><strong>SSE cut-off and durability</strong> on popular hosting platforms</li>
+</ul>
+</section>
+
+<section class="statefulness-list">
+<h2>Protocol ambiguity</h2>
+<ul>
+<li><strong>Elicitation and Sampling</strong> require a Server → Client channel to stay open</li>
+<li><strong>Session state is not well defined</strong>
+  <ul>
+  <li>STDIO lifecycle</li>
+  <li>tool list and capability changes</li>
+  </ul>
+</li>
+<li><strong>Basic analytics</strong> requires handling sessions</li>
+</ul>
+</section>
+</div>
 
 
 ---
@@ -156,42 +193,6 @@ Click the imagery to replay the animation.
 
 
 
-
-
----
-
-# Motivation for Stateless
-
-<div class="statefulness-slide">
-<section class="statefulness-list statefulness-list--accent">
-<h2>Operational coupling</h2>
-<ul>
-<li><strong>“Sticky” sessions in the load balancer</strong>
-  <ul>
-  <li>scalability</li>
-  <li>fault tolerance</li>
-  <li>in-place changes</li>
-  </ul>
-</li>
-<li><strong>Speculative open connections are expensive</strong></li>
-<li><strong>SSE cut-off and durability</strong> on popular hosting platforms</li>
-</ul>
-</section>
-
-<section class="statefulness-list">
-<h2>Protocol ambiguity</h2>
-<ul>
-<li><strong>Elicitation and Sampling</strong> require a Server → Client channel to stay open</li>
-<li><strong>Session state is not well defined</strong>
-  <ul>
-  <li>STDIO lifecycle</li>
-  <li>tool list and capability changes</li>
-  </ul>
-</li>
-<li><strong>Basic analytics</strong> requires handling sessions</li>
-</ul>
-</section>
-</div>
 
 ---
 layout: default
@@ -621,40 +622,5 @@ layout: intro
 ::meta::
 
 huggingface.co/evalstate · github.com/evalstate
-
----
-
-<div class="weekly-activity-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Streamable HTTP adoption</h1>
-      <h2>Proportion of <code>mcp-remote</code> usage</h2>
-    </div>
-  </header>
-  <McpRemoteNoFallbackChart />
-</div>
-
----
-
-<div class="traffic-chart-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Claude Code</h1>
-      <h2>Weekly <code>mcp-remote</code> share · usage index </h2>
-    </div>
-  </header>
-  <McpRemoteTrafficChart client="Claude Code" :showHeader="false" />
-</div>
-
----
-
-<div class="weekly-activity-slide chart-slide">
-  <header class="chart-slide__header">
-    <div>
-      <h1>Weekly MCP activity</h1>
-    </div>
-  </header>
-  <McpWeeklyActivityChart />
-</div>
 
 ---

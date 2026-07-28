@@ -213,7 +213,7 @@ const scriptFrames: Frame[] = [
 
   // Server notification: the available prompt list has changed.
   {
-    label: "notifications/prompts/list_changed",
+    label: "notifications/prompts",
     phase: "wake",
     actor: "server",
     channel: "down",
@@ -221,7 +221,7 @@ const scriptFrames: Frame[] = [
     duration: 480,
   },
   {
-    label: "notifications/prompts/list_changed",
+    label: "notifications/prompts",
     phase: "message",
     actor: "server",
     channel: "down",
