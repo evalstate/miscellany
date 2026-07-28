@@ -143,7 +143,7 @@ const scriptFrames: Frame[] = [
     phase: "quiesce",
     flash: "tools",
     hold: "tools",
-    duration: 600,
+    duration: 1000,
   },
   {
     label: "ListToolsResult",
@@ -172,6 +172,13 @@ const scriptFrames: Frame[] = [
     holdChannel: "up",
     flash: "tools",
     hold: "tools",
+  },
+  {
+    label: "tools/call received",
+    phase: "quiesce",
+    flash: "tools",
+    hold: "tools",
+    duration: 1000,
   },
   {
     label: "progress 25%",
@@ -222,7 +229,7 @@ const scriptFrames: Frame[] = [
     phase: "quiesce",
     flash: "sampling",
     hold: "sampling",
-    duration: 600,
+    duration: 1000,
   },
   {
     label: "CreateMessageResult",
@@ -252,13 +259,14 @@ const frames = computed(() =>
 );
 const active = computed(() => frames.value[activeStep.value]);
 const activeSegment = computed<CapabilityId | undefined>(() => {
-  if (activeStep.value >= 7 && activeStep.value <= 15) return "tools";
-  if (!isSimplified.value && activeStep.value >= 18) return "sampling";
+  if (activeStep.value >= 7 && activeStep.value <= 16) return "tools";
+  if (!isSimplified.value && activeStep.value >= 19) return "sampling";
   return undefined;
 });
 const activeFlash = computed<CapabilityId | undefined>(() => {
   if (activeStep.value === 7) return "tools";
-  if (!isSimplified.value && activeStep.value === 18) return "sampling";
+  if (activeStep.value === 12) return "tools";
+  if (!isSimplified.value && activeStep.value === 19) return "sampling";
   return undefined;
 });
 const activeCapability = computed<CapabilityId | undefined>(
@@ -975,7 +983,7 @@ onBeforeUnmount(clearTimers);
 }
 
 .protocol-card-shell.is-flashing {
-  animation: protocol-capability-activate 100ms steps(1, end) 6 both;
+  animation: protocol-capability-activate 166ms steps(1, end) 6 both;
 }
 
 @keyframes protocol-capability-activate {
