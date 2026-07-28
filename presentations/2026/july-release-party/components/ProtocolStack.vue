@@ -296,11 +296,11 @@ const frames = computed(() =>
 );
 const active = computed(() => frames.value[activeStep.value]);
 const activeSegment = computed<CapabilityId | undefined>(() => {
-  if (activeStep.value >= 7 && activeStep.value <= 16) return "tools";
+  if (activeStep.value >= 7 && activeStep.value <= 15) return "tools";
   if (
     !isSimplified.value &&
     activeStep.value >= 19 &&
-    activeStep.value <= 21
+    activeStep.value <= 20
   )
     return "sampling";
   return undefined;
