@@ -174,7 +174,7 @@ Click the imagery to replay the animation.
   </ul>
 </li>
 <li><strong>Speculative open connections are expensive</strong></li>
-<li><strong>SSE cut-off times</strong> on popular hosting platforms</li>
+<li><strong>SSE cut-off and durability</strong> on popular hosting platforms</li>
 </ul>
 </section>
 
@@ -218,7 +218,7 @@ class: ported-section-slide
 <div class="simplifications-slide">
 <section class="simplifications-copy">
   <div class="kicker sep-kicker-stack">
-    <span>SEP-2260 · Require Server requests to be associated with a Client request.</span>
+    <span>SEP-2260 · Client/Server association</span>
     <span>SEP-2577 · Deprecate Roots, Sampling, and Logging</span>
   </div>
 
@@ -476,23 +476,13 @@ class: ported-section-slide
 
 ---
 
-# HTTP Standardization
+# Before: One Endpoint, Opaque JSON
 
 <div class="kicker sep-slide-kicker">SEP-2243 · HTTP Standardization</div>
 
 <div class="http-standardization-problem">
   <HttpRouteMap mode="problem" />
   <HttpHeaderExample variant="problem" />
-</div>
-
----
-
-# Tool Data in HTTP Headers
-
-<div class="kicker sep-slide-kicker">SEP-2243 · HTTP Standardization</div>
-
-<div class="http-standardization-schema">
-  <HttpHeaderExample variant="tool" />
 </div>
 
 ---
@@ -508,11 +498,76 @@ class: ported-section-slide
 
 ---
 
+# Optional: Tool-Defined Routing Keys
+
+<div class="kicker sep-slide-kicker">SEP-2243 · HTTP Standardization</div>
+
+<div class="http-standardization-schema">
+  <HttpHeaderExample variant="tool" />
+</div>
+
+---
+
 # Scaling MCP in Production
 
 <div class="remote-mcp-diagram remote-mcp-diagram--wide">
   <RoutableMcpTrafficBurst />
 </div>
+
+
+---
+layout: default
+class: ported-section-slide
+---
+
+# What's next
+
+## Future Roadmap Items
+
+---
+
+# What's next
+
+<div class="whats-next-slide">
+<section class="whats-next-streaming">
+<div class="whats-next-streaming__copy">
+<div class="kicker">Streaming</div>
+<strong>Useful results before the tool finishes.</strong>
+<span>Partial text, images, audio, video, and structured data—observable and steerable before a clear terminal result.</span>
+</div>
+<div class="whats-next-streaming__preview">
+<StreamingDiffusionPreview />
+</div>
+</section>
+<aside class="whats-next-roadmap">
+<article class="whats-next-card whats-next-card--triggers deck-panel">
+<div class="kicker">Triggers &amp; events</div>
+<div class="whats-next-trigger-path" aria-label="Subscribe, callback, then ordered event">
+<span>subscribe</span><b>→</b><span>callback</span><b>→</b><span>event</span>
+</div>
+<strong>Updates arrive without polling.</strong>
+<p>Standard callbacks let Servers push ordered notifications when new data is available.</p>
+</article>
+<article class="whats-next-card whats-next-card--tracks deck-panel">
+<div class="kicker">Also in flight</div>
+<div class="whats-next-track-list">
+<span>Enhanced caching</span>
+<span>Pluggable transports</span>
+<span>HTTP over stdio</span>
+<span>Internationalization</span>
+<span>Tool capability scoping</span>
+</div>
+</article>
+</aside>
+</div>
+
+<!--
+Streaming preview uses verified changing FLUX denoising snapshots captured by
+the MCP Transports WG. Click the image to start; it loops after activation.
+Roadmap source: modelcontextprotocol/transports-wg PR #50.
+Triggers and Events: modelcontextprotocol.io/community/working-groups/triggers-events.
+-->
+
 
 ---
 
@@ -534,7 +589,7 @@ class: ported-section-slide
     </div>
     <div>
       <strong>Capabilities</strong>
-      <span>tools, prompts, roots, sampling, elicitation</span>
+      <span><strong>protocol version,</strong>tools, prompts, resources, elicitation</span>
     </div>
     <div>
       <strong>Extensions</strong>
@@ -551,20 +606,8 @@ class: ported-section-slide
 
 ---
 
-# Scaling MCP in Production
-
-<div class="remote-mcp-diagram">
-  <RemoteMcpLoadBalancerStoryboard />
-</div>
-
-
-
-
----
-
 <IntroVideo />
 
----
 
 
 ---

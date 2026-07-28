@@ -37,7 +37,7 @@ type Edge = {
 const nodes: Record<NodeId, DiagramNode> = {
   regionA: {
     id: "regionA",
-    label: "Hub Query",
+    label: "Hub API",
     x: 48,
     y: 44,
     w: 180,
@@ -48,7 +48,7 @@ const nodes: Record<NodeId, DiagramNode> = {
   },
   regionB: {
     id: "regionB",
-    label: "Image Gen",
+    label: "Sandbox API",
     x: 412,
     y: 44,
     w: 180,
@@ -259,10 +259,10 @@ function edgePath(edge: Edge) {
 
     <div class="http-route-note">
       <template v-if="props.mode === 'problem'">
-        Edge only sees <strong>POST /mcp</strong>; routing fields are buried in JSON.
+        Edge only sees <strong>POST /mcp</strong>; method and target are buried in JSON.
       </template>
       <template v-else>
-        Edge sees <strong>Mcp-Name</strong> and <strong>Mcp-Param-Pipeline</strong>.
+        Edge sees <strong>Mcp-Method</strong> and <strong>Mcp-Name</strong>; the Server verifies both.
       </template>
     </div>
   </section>

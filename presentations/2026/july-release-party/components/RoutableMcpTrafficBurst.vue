@@ -26,10 +26,10 @@ const height = 520;
 const nodes: NodeSpec[] = [
   { id: "client", role: "clients", title: "MCP clients", x: 52, y: 205, w: 214, h: 110 },
   { id: "edge", role: "http edge", title: "Router", x: 450, y: 204, w: 218, h: 112 },
-  { id: "server-a", role: "server", title: "Server 01", x: 875, y: 52, w: 214, h: 78 },
-  { id: "server-b", role: "server", title: "Server 02", x: 875, y: 154, w: 214, h: 78 },
-  { id: "server-c", role: "server", title: "Server 03", x: 875, y: 256, w: 214, h: 78 },
-  { id: "server-d", role: "server", title: "Server 04", x: 875, y: 358, w: 214, h: 78 },
+  { id: "server-a", role: "sandbox runtime", title: "Sandbox 01", x: 875, y: 52, w: 214, h: 78 },
+  { id: "server-b", role: "sandbox runtime", title: "Sandbox 02", x: 875, y: 154, w: 214, h: 78 },
+  { id: "server-c", role: "sandbox runtime", title: "Sandbox 03", x: 875, y: 256, w: 214, h: 78 },
+  { id: "server-d", role: "sandbox runtime", title: "Sandbox 04", x: 875, y: 358, w: 214, h: 78 },
 ];
 
 const nodeById = new Map(nodes.map((node) => [node.id, node]));
@@ -84,7 +84,7 @@ function routePath(packet: Packet) {
 <template>
   <section class="routable-burst" aria-labelledby="routable-burst-title">
     <svg class="routable-burst__canvas" :viewBox="`0 0 ${width} ${height}`" role="img">
-      <title id="routable-burst-title">High-volume routable MCP tools calls</title>
+      <title id="routable-burst-title">High-volume sandbox tool calls routed by explicit state handles</title>
       <defs>
         <filter id="routable-burst-glow" x="-60%" y="-60%" width="220%" height="220%">
           <feGaussianBlur stdDeviation="3.2" result="blur" />
@@ -144,7 +144,7 @@ function routePath(packet: Packet) {
         <circle r="13" />
         <circle r="4.5" />
         <text x="22" y="-10">routed by</text>
-        <text x="22" y="10">tools/call</text>
+        <text x="22" y="10">Sandbox-Id</text>
       </g>
 
       <g class="routable-burst__callout routable-burst__callout--cache" transform="translate(56 334)">
@@ -169,14 +169,14 @@ function routePath(packet: Packet) {
       <g class="routable-burst__callout routable-burst__callout--method" transform="translate(436 344)">
         <path d="M 122 0 L 122 -30 L 226 -92" />
         <rect width="246" height="54" rx="14" />
-        <text x="18" y="22">every request carries</text>
-        <text x="18" y="42">Mcp-Method: tools/call</text>
+        <text x="18" y="22">each call exposes</text>
+        <text x="18" y="42">method + target + handle</text>
       </g>
 
       <g class="routable-burst__metrics" transform="translate(74 64)">
-        <text class="routable-burst__metrics-kicker" x="0" y="0">modern hot path</text>
-        <text class="routable-burst__metrics-main" x="0" y="43">High volume, no affinity</text>
-        <text class="routable-burst__metrics-sub" x="0" y="76">hot path is just tools/call; discovery and lists are cached</text>
+        <text class="routable-burst__metrics-kicker" x="0" y="0">stateless hot path</text>
+        <text class="routable-burst__metrics-main" x="0" y="43">High volume, no protocol session</text>
+        <text class="routable-burst__metrics-sub" x="0" y="76">explicit state routes each independent tool call</text>
       </g>
     </svg>
   </section>
