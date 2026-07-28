@@ -139,6 +139,13 @@ const scriptFrames: Frame[] = [
     hold: "tools",
   },
   {
+    label: "tools/list received",
+    phase: "quiesce",
+    flash: "tools",
+    hold: "tools",
+    duration: 600,
+  },
+  {
     label: "ListToolsResult",
     phase: "message",
     actor: "server",
@@ -211,6 +218,13 @@ const scriptFrames: Frame[] = [
     hold: "sampling",
   },
   {
+    label: "sampling request received",
+    phase: "quiesce",
+    flash: "sampling",
+    hold: "sampling",
+    duration: 600,
+  },
+  {
     label: "CreateMessageResult",
     phase: "message",
     actor: "client",
@@ -238,13 +252,13 @@ const frames = computed(() =>
 );
 const active = computed(() => frames.value[activeStep.value]);
 const activeSegment = computed<CapabilityId | undefined>(() => {
-  if (activeStep.value >= 5 && activeStep.value <= 14) return "tools";
-  if (!isSimplified.value && activeStep.value >= 15) return "sampling";
+  if (activeStep.value >= 7 && activeStep.value <= 15) return "tools";
+  if (!isSimplified.value && activeStep.value >= 18) return "sampling";
   return undefined;
 });
 const activeFlash = computed<CapabilityId | undefined>(() => {
-  if (activeStep.value === 5) return "tools";
-  if (!isSimplified.value && activeStep.value === 15) return "sampling";
+  if (activeStep.value === 7) return "tools";
+  if (!isSimplified.value && activeStep.value === 18) return "sampling";
   return undefined;
 });
 const activeCapability = computed<CapabilityId | undefined>(
