@@ -327,29 +327,7 @@ class: ported-section-slide
 </section>
 </div>
 
-
 ---
-
-<div class="tool-benchmark-slide">
-<header>
-  <h1>v0.3.31 does more with less</h1>
-  <div class="tool-benchmark-slide__versions">
-    <span>v0.3.30</span>
-    <i>→</i>
-    <strong>v0.3.31</strong>
-  </div>
-</header>
-
-<div class="tool-benchmark-slide__body">
-  <ToolSchemaBenchmark />
-</div>
-
-<footer>One matched run per model · logical tokens = input + output</footer>
-</div>
-
----
-
-
 
 # SEP-2575: Make MCP Stateless
 
