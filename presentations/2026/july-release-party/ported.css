@@ -1421,9 +1421,15 @@
   font: 700 0.48rem/1 var(--deck-font-mono);
 }
 
+.slidev-layout:has(.elicitation-packet-slide) {
+  position: relative;
+}
+
 .elicitation-packet-slide {
-  width: calc(100% + 60px);
-  height: calc(100% - 4.8rem);
+  position: absolute;
+  inset: 38px 0 160px;
+  width: auto;
+  height: auto;
   min-height: 0;
   display: grid;
   grid-template-columns: minmax(280px, 0.29fr) minmax(0, 0.71fr);
@@ -1509,13 +1515,17 @@
 }
 
 .elicitation-packet-slide--focused {
-  grid-template-columns: minmax(360px, 0.38fr) minmax(0, 0.62fr);
+  grid-template-columns: minmax(360px, 38%) minmax(0, 1fr);
 }
 
 .elicitation-packet-slide--focused .elicitation-packet-json .http-json-line {
   font-size: clamp(0.94rem, 1.16vw, 1.06rem);
   line-height: 1.2;
-  white-space: normal;
+  white-space: nowrap;
+}
+
+.elicitation-packet-slide--focused .elicitation-packet-json .http-json {
+  align-content: start;
 }
 
 .elicitation-packet-slide--focused .elicitation-packet-json__gap {
