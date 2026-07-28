@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
+import { useTimedStoryboard } from "../composables/useTimedStoryboard";
 
 const props = withDefaults(
   defineProps<{
@@ -300,12 +301,7 @@ const scriptFrames: Frame[] = [
   },
 ];
 
-const activeStep = ref(-1);
-const animationKey = ref(0);
-const isRunning = ref(false);
-const isLooping = ref(false);
 const signalVariant = ref(props.signalVariant);
-const timers: number[] = [];
 
 const isSimplified = computed(() => props.variant === "simplified");
 const frames = computed(() =>
@@ -315,7 +311,8 @@ const frames = computed(() =>
       )
     : scriptFrames,
 );
-const active = computed(() => frames.value[activeStep.value]);
+const { active, activeStep, animationKey, isRunning, play } =
+  useTimedStoryboard<Frame>(frames);
 const activeFlash = computed<CapabilityId | undefined>(
   () => active.value?.flash,
 );
@@ -360,42 +357,6 @@ const messageHitActor = computed<Actor | undefined>(() => {
   return undefined;
 });
 
-function clearTimers() {
-  while (timers.length) window.clearTimeout(timers.pop());
-}
-
-function pulseStep(index: number) {
-  activeStep.value = index;
-  animationKey.value += 1;
-}
-
-function play(loop = false) {
-  clearTimers();
-  isLooping.value = loop;
-  isRunning.value = true;
-  activeStep.value = -1;
-
-  let delay = 0;
-  frames.value.forEach((frame, index) => {
-    timers.push(window.setTimeout(() => pulseStep(index), delay));
-    delay += frame.duration ?? 1120;
-  });
-
-  timers.push(
-    window.setTimeout(
-      () => {
-        if (isLooping.value) {
-          activeStep.value = -1;
-          play(true);
-        } else {
-          isRunning.value = false;
-        }
-      },
-      delay + 160,
-    ),
-  );
-}
-
 onMounted(() => {
   const requestedVariant = new URLSearchParams(window.location.search).get(
     "signal",
@@ -408,7 +369,6 @@ onMounted(() => {
     signalVariant.value = requestedVariant;
   }
 });
-onBeforeUnmount(clearTimers);
 </script>
 
 <template>
