@@ -8,329 +8,88 @@ fonts:
   mono: IBM Plex Mono
 drawings:
   persist: false
+defaults:
+  layout: default
+  class: keynote-section
 ---
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>01 / 05</span></div>
+# Hugging Face MCP
 
-# Create a sandbox.
-
-<div class="es-stage" data-flow="old" data-phase="request">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-transfer "><strong>Create sandbox →</strong><div class="es-arrow"></div><small>Client starts a tool call</small></div>
-</div>
-
-<div class="es-caption">The same starting point.</div>
+<div class="keynote-topics">An overview · A bidirectional beginning</div>
 
 <!--
-Client initiates tools/call. No sandbox is created before approval.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Section 1 of 7 · 0:00–2:00 · 2 minutes
+Working section placeholder, not final slide copy.
+Hugging Face MCP overview; early MCP as a bidirectional protocol.
 -->
 
 ---
 
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>02 / 05</span></div>
+# Streamable HTTP
 
-# The Server needs permission.
-
-<div class="es-stage" data-flow="old" data-phase="question">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble"><small>QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div><div class="es-transfer es-left"><strong>Ask the Client</strong><div class="es-arrow"></div><small>Server → Client request</small></div>
-</div>
-
-<div class="es-caption">A paid resource needs a decision.</div>
+<div class="keynote-topics">Auth · Client migration</div>
 
 <!--
-Legacy: Server sends elicitation/create to the Client while the original tools/call remains pending.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Section 2 of 7 · 2:00–3:30 · 90 seconds
+Working section placeholder, not final slide copy.
+Introduction of Streamable HTTP and protocol auth; client migration to it.
 -->
 
 ---
 
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>03 / 05</span></div>
+# HTTP in practice
 
-# The Client shows the question.
-
-<div class="es-stage" data-flow="old" data-phase="dialog">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble"><small>QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div>
-<div class="es-dialog"><div class="es-dialog-bar"><span>Sandbox confirmation</span><span>×</span></div><div class="es-dialog-body"><small>SERVER ASKS</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong><div class="es-buttons"><span>No</span><span class="es-yes">Yes</span></div></div></div><div class="es-transfer es-left"><strong>Ask the Client</strong><div class="es-arrow"></div><small>Server → Client request</small></div><div class="es-status es-waiting es-rack-waiting"><strong>OPEN</strong><span><i class="es-spinner" aria-hidden="true"></i> WAITING</span></div>
-</div>
-
-<div class="es-caption">The dialog is on the Client. The question is still open on the Server.</div>
+<div class="keynote-topics">Observability · Optimisation<br>Traffic-management challenges</div>
 
 <!--
-Modern: input_required terminates the first request. Client displays the question and retains returned context. Legacy: elicitation/create remains pending. These are conceptual states, not literal wire payloads.
-Advance manually. Only the decorative waiting indicator spins; no timed slide transitions.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Section 3 of 7 · 3:30–5:00 · 90 seconds
+Working section placeholder, not final slide copy.
+Benefits of Streamable HTTP, including observability and optimisation. Traffic-management challenges: client/server behaviour in practice.
 -->
 
 ---
 
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>04 / 05</span></div>
+# The stateless version
 
-# Send just the answer.
-
-<div class="es-stage" data-flow="old" data-phase="answer">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble"><small>OPEN QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div>
-<div class="es-dialog"><div class="es-dialog-bar"><span>Sandbox confirmation</span><span>×</span></div><div class="es-dialog-body"><small>SERVER ASKS</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong><div class="es-buttons"><span>No</span><span class="es-selected">✓ Yes</span></div></div></div><div class="es-transfer "><strong>Yes</strong><div class="es-arrow"></div><small>Response to the pending question</small></div><div class="es-status es-waiting es-rack-waiting"><strong>OPEN</strong><span><i class="es-spinner" aria-hidden="true"></i> WAITING</span></div>
-</div>
-
-<div class="es-caption">“Yes” relies on the question the Server kept pending.</div>
+<div class="keynote-topics">Key changes · Deprecations</div>
 
 <!--
-Yes is an illustrative user decision, not a literal JSON-RPC response. Modern retry: new id, original params, keyed inputResponses and unchanged requestState if supplied. Question context is not necessarily the literal question text. Server validates context and authorization.
-Advance manually. Only the decorative waiting indicator spins; no timed slide transitions.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Section 4 of 7 · 5:00–6:00 · 1 minute
+Working section placeholder, not final slide copy.
+The new stateless version: key changes and deprecations. Verify exact changes against protocol sources when developing this section.
 -->
 
 ---
 
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>05 / 05</span></div>
+# Client migration paths
 
-# Now create the sandbox.
-
-<div class="es-stage" data-flow="old" data-phase="complete">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-result"><span>✓</span><strong>GPU Sandbox created</strong><small>Approved · ready to use</small></div><div class="es-transfer es-left"><strong>Sandbox ready</strong><div class="es-arrow"></div><small>Original call completes</small></div><div class="es-status es-free"><span>✓</span> Complete</div>
-</div>
-
-<div class="es-caption">The waiting question is resolved. The original call can finish.</div>
+<div class="keynote-topics">Popular clients · Animated charts</div>
 
 <!--
-Approved path shown. No/decline does not create a paid sandbox. Modern has two independent calls; legacy has a pending elicitation within the original operation.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Section 5 of 7 · 6:00–7:30 · 90 seconds
+Working section placeholder, not final slide copy.
+Look at popular clients’ migration paths. Animated charts will be developed from supplied data; no animation or invented data in this placeholder.
 -->
 
 ---
 
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>01 / 05</span></div>
+# The overall traffic picture
 
-# Create a sandbox.
-
-<div class="es-stage" data-flow="modern" data-phase="request">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-transfer "><strong>Create sandbox →</strong><div class="es-arrow"></div><small>Client starts a tool call</small></div>
-</div>
-
-<div class="es-caption">The same starting point.</div>
+<div class="keynote-topics">Volume · Patterns over time</div>
 
 <!--
-Client initiates tools/call. No sandbox is created before approval.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Section 6 of 7 · 7:30–9:00 · 90 seconds
+Working section placeholder, not final slide copy.
+Overall traffic picture. Data and chart design to follow; subtitle is a working direction, not a factual claim.
 -->
 
 ---
 
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>02 / 05</span></div>
+# Beyond the transport
 
-# The Server needs permission.
-
-<div class="es-stage" data-flow="modern" data-phase="question">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble"><small>TOOL REQUIRES ELICITATION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div><div class="es-status ">Tool requires Elicitation</div>
-</div>
-
-<div class="es-caption">A paid resource needs a decision.</div>
+<div class="keynote-topics">Routing by type<br>Tasks for keeping models warm</div>
 
 <!--
-This frame is before delivery. Modern server prepares input_required, including an elicitation and optional opaque requestState.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>03 / 05</span></div>
-
-# The Client shows the question.
-
-<div class="es-stage" data-flow="modern" data-phase="dialog">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble es-bubble-delivered"><small>DELIVERED QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div>
-<div class="es-dialog es-dialog-delivered"><div class="es-dialog-bar"><span>Sandbox confirmation</span><span>×</span></div><div class="es-dialog-body"><strong>Do you want to create a<br>paid GPU Sandbox?</strong><div class="es-buttons"><span>No</span><span class="es-yes">Yes</span></div><div class="es-context">▣ &nbsp; Question context attached</div></div></div><div class="es-transfer es-left"><strong>Question delivered</strong><div class="es-arrow"></div><small>First request ends</small></div><div class="es-status es-free"><span>✓</span> No open question</div>
-</div>
-
-<div class="es-caption">The user can take their time. Nothing is held open on the Server.</div>
-
-<!--
-Modern: input_required terminates the first request. Client displays the question and retains returned context. Legacy: elicitation/create remains pending. These are conceptual states, not literal wire payloads.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>04 / 05</span></div>
-
-# Send the question context with the answer.
-
-<div class="es-stage" data-flow="modern" data-phase="answer">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble es-bubble-delivered"><small>DELIVERED QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div>
-<div class="es-dialog es-dialog-delivered"><div class="es-dialog-bar"><span>Sandbox confirmation</span><span>×</span></div><div class="es-dialog-body"><strong>Do you want to create a<br>paid GPU Sandbox?</strong><div class="es-buttons"><span>No</span><span class="es-selected">✓ Yes</span></div><div class="es-context">▣ &nbsp; Question context attached</div></div></div><div class="es-transfer "><strong>Question context + Yes</strong><div class="es-arrow"></div><small>New call · original arguments included</small></div><div class="es-status es-free"><span>✓</span> Ready for a new call</div>
-</div>
-
-<div class="es-caption">The Server receives what it needs to continue.</div>
-
-<!--
-Yes is an illustrative user decision, not a literal JSON-RPC response. Modern retry: new id, original params, keyed inputResponses and unchanged requestState if supplied. Question context is not necessarily the literal question text. Server validates context and authorization.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>05 / 05</span></div>
-
-# Now create the sandbox.
-
-<div class="es-stage" data-flow="modern" data-phase="complete">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-delivered-pair" aria-label="Question and confirmation received together"><div class="es-bubble"><small>QUESTION + CONFIRMATION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div><div class="es-confirmation"><small>CONFIRMATION</small><strong>✓ Yes</strong></div></div>
-<div class="es-result"><span>✓</span><strong>GPU Sandbox created</strong><small>Approved · ready to use</small></div><div class="es-transfer es-left"><strong>Sandbox ready</strong><div class="es-arrow"></div><small>New call completes</small></div><div class="es-status es-free"><span>✓</span> Complete</div>
-</div>
-
-<div class="es-caption">Question context + Answer. Not an open conversation.</div>
-
-<!--
-Question + Confirmation is conceptual shorthand, not a literal question echo. The retry carries original parameters, keyed inputResponses, and unchanged opaque requestState when supplied. Both context and answer arrive together on the Server.
-Approved path shown. No/decline does not create a paid sandbox. Modern has two independent calls; legacy has a pending elicitation within the original operation.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
-
-
----
-
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>HTTP Standardization</span><span>01 / 04</span></div>
-
-# The routing clues are inside the body.
-
-<div class="hs-stage" data-flow="http" data-phase="opaque" role="img" aria-label="Client sends an HTTP request through an LB/router to inference, API, or sandbox servers. ">
-<div class="es-client"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="hs-client-name">Client</div>
-<div class="hs-packet"><small>POST /mcp</small><strong>JSON body</strong><span>Tool + arguments inside</span></div>
-<div class="hs-incoming"></div>
-<div class="hs-router"><span>?</span><strong>LB / Router</strong><small>HTTP infrastructure</small></div>
-<div class="hs-branches"><div class="hs-branch hs-inference"></div><div class="hs-branch hs-api"></div><div class="hs-branch hs-sandbox"></div></div>
-<div class="hs-backends">
-<div class="hs-backend hs-inference"><span class="hs-icon">✦</span><div><strong>Inference</strong><small>Generate</small></div></div>
-<div class="hs-backend hs-api"><span class="hs-icon">↔</span><div><strong>API</strong><small>Fetch data</small></div></div>
-<div class="hs-backend hs-sandbox"><span class="hs-icon">&gt;_</span><div><strong>Sandbox</strong><small>Run code</small></div></div>
-</div>
-</div>
-
-<div class="es-caption">HTTP routing needs MCP-aware body parsing.</div>
-
-<!--
-The body is not encrypted or inherently unreadable. Existing HTTP infrastructure can parse JSON with custom logic, but ordinary header-based routing does not see the MCP method, tool name, or tool arguments. The LB/router is shown at the HTTP inspection point, after TLS termination.
-Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
--->
-
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>HTTP Standardization</span><span>02 / 04</span></div>
-
-# Make the message visible to HTTP.
-
-<div class="hs-stage" data-flow="http" data-phase="inspect" role="img" aria-label="Client sends an HTTP request through an LB/router to inference, API, or sandbox servers. ">
-<div class="es-client"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="hs-client-name">Client</div>
-<div class="hs-packet"><small>HTTP metadata</small><strong>Method · Tool name</strong><span>JSON body unchanged</span></div>
-<div class="hs-incoming"></div>
-<div class="hs-router"><span>Inspect</span><strong>LB / Router</strong><small>HTTP infrastructure</small></div>
-<div class="hs-branches"><div class="hs-branch hs-inference"></div><div class="hs-branch hs-api"></div><div class="hs-branch hs-sandbox"></div></div>
-<div class="hs-backends">
-<div class="hs-backend hs-inference"><span class="hs-icon">✦</span><div><strong>Inference</strong><small>Generate</small></div></div>
-<div class="hs-backend hs-api"><span class="hs-icon">↔</span><div><strong>API</strong><small>Fetch data</small></div></div>
-<div class="hs-backend hs-sandbox"><span class="hs-icon">&gt;_</span><div><strong>Sandbox</strong><small>Run code</small></div></div>
-</div>
-</div>
-
-<div class="es-caption">Existing HTTP infrastructure can read the routing clues.</div>
-
-<!--
-Conceptual HTTP metadata, not a complete wire request. Standardization exposes selected message information in HTTP headers; it does not move the entire body into headers. This lets configured L7 load balancers, gateways, and routers inspect and route using their normal HTTP facilities. Not all LBs inspect HTTP; TLS termination or equivalent access is required.
-Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
--->
-
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>HTTP Standardization</span><span>03 / 04</span></div>
-
-# The right tool. The right server.
-
-<div class="hs-stage" data-flow="http" data-phase="route" role="img" aria-label="Client sends an HTTP request through an LB/router to inference, API, or sandbox servers. Sandbox route highlighted.">
-<div class="es-client"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="hs-client-name">Client</div>
-<div class="hs-packet"><small>HTTP metadata</small><strong>Tool: run_in_sandbox</strong><span>JSON body unchanged</span></div>
-<div class="hs-incoming"></div>
-<div class="hs-router"><span>Route</span><strong>LB / Router</strong><small>HTTP infrastructure</small></div>
-<div class="hs-branches"><div class="hs-branch hs-inference"></div><div class="hs-branch hs-api"></div><div class="hs-branch hs-sandbox"></div></div>
-<div class="hs-backends">
-<div class="hs-backend hs-inference"><span class="hs-icon">✦</span><div><strong>Inference</strong><small>Generate</small></div></div>
-<div class="hs-backend hs-api"><span class="hs-icon">↔</span><div><strong>API</strong><small>Fetch data</small></div></div>
-<div class="hs-backend hs-sandbox"><span class="hs-icon">&gt;_</span><div><strong>Sandbox</strong><small>Run code</small></div></div>
-</div>
-</div>
-
-<div class="es-caption">One front door. Different kinds of servers.</div>
-
-<!--
-Illustrative tool names and deployment topology. Header-visible tool names allow configured rules to send inference tools to inference servers, API tools to API servers, and sandbox tools to sandbox servers. Three possible routes are shown; this call follows only the sandbox route. Standardization enables these rules; it does not automatically discover backends or configure the router.
-Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
--->
-
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">OPTIONAL</span><span>HTTP Standardization</span><span>04 / 04</span></div>
-
-# Copy a routing key into HTTP metadata.
-
-<div class="hs-stage" data-flow="http" data-phase="copy" role="img" aria-label="Client sends an HTTP request through an LB/router to inference, API, or sandbox servers. Sandbox route highlighted.">
-<div class="es-client"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="hs-client-name">Client</div>
-<div class="hs-packet"><small>Tool argument → HTTP metadata</small><strong>sandbox_id: sbx-7f3c</strong><span>Still in the JSON body</span></div>
-<div class="hs-incoming"></div>
-<div class="hs-router"><span>Route</span><strong>LB / Router</strong><small>HTTP infrastructure</small></div>
-<div class="hs-branches"><div class="hs-branch hs-inference"></div><div class="hs-branch hs-api"></div><div class="hs-branch hs-sandbox"></div></div>
-<div class="hs-backends">
-<div class="hs-backend hs-inference"><span class="hs-icon">✦</span><div><strong>Inference</strong><small>Generate</small></div></div>
-<div class="hs-backend hs-api"><span class="hs-icon">↔</span><div><strong>API</strong><small>Fetch data</small></div></div>
-<div class="hs-backend hs-sandbox"><span class="hs-icon">&gt;_</span><div><strong>Sandbox</strong><small>sbx-7f3c</small></div></div>
-</div>
-</div>
-
-<div class="es-caption">Tool-defined keys. Ordinary HTTP routing.</div>
-
-<!--
-Conceptual illustration of optional tool-declared argument-to-header copying, not literal header syntax. A declared sandbox_id argument can be mirrored into HTTP metadata so infrastructure can route to the appropriate sandbox backend. The body remains the source of truth; copied metadata must match it. Do not imply that arbitrary tool arguments, secrets, or the entire message are copied. Exact declaration and header syntax must be rechecked against the 2026-07-28 protocol checkout, which was unavailable in this workspace; the historical July deck was consulted read-only for context.
-Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
+Section 7 of 7 · 9:00–10:00 · 1 minute
+Working section placeholder, not final slide copy.
+Other benefits, including routing by type and tasks for keeping models warm. Content and verified task semantics to follow.
 -->

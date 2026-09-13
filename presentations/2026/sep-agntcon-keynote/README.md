@@ -20,19 +20,12 @@ CI=1 NO_COLOR=1 npx slidev slides.md --port 3031 </dev/null
 ## Talk plan
 
 See `PLAN.md` for the rough 10-minute outline and keynote readability priorities.
-The copied slides are sketching references only, not the planned keynote content.
+`slides.md` contains seven large-type section placeholders matching that outline.
+Timings and planning details are in speaker notes, not tiny on-slide labels.
+The original elicitation and HTTP storyboards remain in `../sep-agntcon`.
 
-## Reference content
-
-- Slides 1–5: legacy elicitation storyboard.
-- Slides 6–10: modern elicitation storyboard.
-- Slides 11–14: HTTP inspection, tool routing to inference/API/sandbox servers,
-  and optional tool-defined routing keys.
-
-All frames advance manually. Dialog buttons are illustrations.
 Edit `slides.md` for narrative and speaker notes; `style.css` for shared visuals.
-See `AGENTS.md` for editing and protocol-verification guidance. HTTP labels are
-conceptual; verify exact protocol syntax against an available source checkout.
+See `AGENTS.md` for editing and protocol-verification guidance.
 
 ## Commands
 

@@ -59,17 +59,8 @@ This is a Slidev conference deck.
 
 - This is the standalone September AGNTCON keynote deck. Edit the root `slides.md`.
 - `../sep-agntcon` is the source deck; `../july-release-party` is the historical archive. Do not edit either as part of this deck.
-- `PLAN.md` holds the working 10-minute keynote outline. The copied slides are sketching references, not the intended keynote content.
-- The reference deck has ten static elicitation frames and four static HTTP standardization frames. Dialog buttons are illustrations.
-- Animated charts are requested for the planned client migration section. Keep other visuals static unless further animation is requested.
-- Preserve fixed Client/Server positions and the yellow question card’s visual
-  identity across frames. The legacy OPEN / WAITING state is deliberately prominent.
-- `data-flow` and `data-phase` in the markdown identify semantic storyboard states.
-- The previously referenced protocol checkout is `/home/ssmith/source/modelcontextprotocol` (unavailable when this deck was copied; locate and verify sources before protocol changes).
-  Current illustrated versions: legacy 2025-11-25 elicitation and modern
-  2026-07-28 MRTR. Recheck sources before changing protocol behaviour.
-- “Question context + Answer” is conceptual shorthand, not a literal question echo.
-  Modern retry carries original parameters, keyed inputResponses and unchanged
-  opaque requestState when supplied. Keep that distinction in speaker notes.
-- `composables/useTimedStoryboard.ts` is available for future animation work;
-  the current static slides do not use it.
+- `PLAN.md` holds the rough 10-minute keynote outline. `slides.md` contains seven large-type section placeholders matching it; timings are in speaker notes.
+- The original reference storyboards remain in `../sep-agntcon`; they are not part of the active keynote deck.
+- Animated charts are requested for the planned client migration section. The current placeholders are static and contain no data; keep other visuals static unless further animation is requested.
+- The previously referenced protocol checkout is `/home/ssmith/source/modelcontextprotocol` (unavailable when this deck was copied). Locate and verify sources before developing protocol claims or behaviour.
+- `composables/useTimedStoryboard.ts` is available for future animation work; the current slides do not use it.

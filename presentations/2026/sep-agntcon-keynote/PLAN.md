@@ -1,7 +1,7 @@
 # Keynote — rough 10-minute outline
 
-Data and content will follow. The copied slides are sketching references only,
-not the intended keynote content.
+Data and content will follow. `slides.md` now has seven large-type section
+placeholders matching this outline. Reference storyboards remain in `../sep-agntcon`.
 
 | Time | Duration | Topic |
 | --- | --- | --- |
