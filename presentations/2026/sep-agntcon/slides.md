@@ -25,12 +25,12 @@ drawings:
 <!--
 Client initiates tools/call. No sandbox is created before approval.
 Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Sources checked against local modelcontextprotocol/dcd ocs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
 -->
 
 ---
 
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>02 / 05</span></div>
+<div class="es-heading"><spancd class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>02 / 05</span></div>
 
 # The Server needs permission.
 
