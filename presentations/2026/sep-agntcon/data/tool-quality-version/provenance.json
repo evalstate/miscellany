@@ -1,0 +1,133 @@
+{
+  "window": [
+    "2026-08-25",
+    "2026-09-13"
+  ],
+  "tool": "hf_fs",
+  "metric": "exclusive tool_quality failed calls / all calls in the selected published client cells",
+  "population": "fixed-five-excluded; missing hashes retained; original reconstruction corroborated by historical excluded totals",
+  "comparison": "Claude Code versus sum of explicitly non-Claude Code day_client cells; no all-total minus Claude subtraction",
+  "suppression": "Client/version/day cells have floor 20; omitted cells are not zero and not attributed to either group",
+  "coverage_denominator": "sum of published day_client calls / complete published day calls for hf_fs",
+  "coverage_pct_range": [
+    98.3535417996171,
+    99.36239953302501
+  ],
+  "client_event_semantics": "changed daily usage-leading Claude Code version; self-reported, not release dates or first-ever sightings",
+  "server_event_semantics": "first observed build hour from historical build aggregates; not verified release/deployment timestamps",
+  "counts": "calls, not batch operations; quality numerator excludes mixed-category failures and successful partial batches",
+  "caveats": [
+    "No deduplication; completeness unknown.",
+    "Attribution is not proof of client/server fault.",
+    "No causal inference from pulses or coincident changes.",
+    "Daily anchors UTC noon; intermediate line drawing is illustrative, not intraday samples."
+  ],
+  "classifier_policy": "tool-errors-v1",
+  "source_server_commit": "119a488653c1bbe46d8dce012a62dfc3f11f7817",
+  "build_inputs": [
+    {
+      "path": "charts/tool-quality-top-ribbon/data.json",
+      "sha256": "c1574c5d06eb8e7a7c57e5d1be3f7245380c127e2c6b5e2d42e4f9afbccf0178"
+    },
+    {
+      "path": "charts/tool-quality-top-ribbon/daily.csv",
+      "sha256": "e8941d02ceeada0958f157a429bd29d3887b1208b6224b75afc3b038c4c6cf27"
+    },
+    {
+      "path": "charts/tool-quality-top-ribbon/provenance.json",
+      "sha256": "8da67757a9b7ce69737f8ad298ddfd3ed4c13af907e433688c6bb2222a50233d"
+    },
+    {
+      "path": "scripts/templates/tool_quality_version_focus.html",
+      "sha256": "0aae86ec7c36ef9a56d20c9c14e746d8f82d9d1a4d340645e34a97853c3f31d7"
+    },
+    {
+      "path": "scripts/build_tool_quality_tape.py",
+      "sha256": "288c70caee5f94405e50e1834b28a5a9ce2ca05f577e8d0751f9c85585563c38"
+    },
+    {
+      "path": "scripts/build_tool_quality_keynote.py",
+      "sha256": "988a99b42c08082857cf86b28b4dda5cc8a9aa0d83a9fb758e4d9cd55f30cd53"
+    },
+    {
+      "path": "scripts/build_tool_quality_animation.py",
+      "sha256": "4cadbdf15b8bd659f518ae0e83f9c32f84de0a99cc0b48514785b0c631dcfcd2"
+    },
+    {
+      "path": "inspection/hf-token-analysis/SHA256SUMS",
+      "sha256": "62660a18609d4488252eb73fb190e0f86cc2c20283db9be784c9a40b5db2514c"
+    },
+    {
+      "path": "inspection/hf-token-analysis/canonical/v0.4.12/hf_fs.json",
+      "sha256": "8c84115e9d5e7040b39b126496f671d6fc0b041c9a4fc86c4de7e5bae3490a8f"
+    },
+    {
+      "path": "inspection/hf-token-analysis/canonical/v0.4.13/hf_fs.json",
+      "sha256": "5021b03203d153bd3ee023e4094f702b41bab544f0ebaa024c9f1095378ffa9a"
+    },
+    {
+      "path": "inspection/hf-token-analysis/canonical/v0.4.14/hf_fs.json",
+      "sha256": "5021b03203d153bd3ee023e4094f702b41bab544f0ebaa024c9f1095378ffa9a"
+    },
+    {
+      "path": "inspection/hf-token-analysis/canonical/v0.4.15/hf_fs.json",
+      "sha256": "ab85e00c294ae0b9b352337c08611e6b4363af9c5f9ffe53f91012b5c934ca17"
+    },
+    {
+      "path": "inspection/hf-token-analysis/canonical/v0.4.16/hf_fs.json",
+      "sha256": "ab85e00c294ae0b9b352337c08611e6b4363af9c5f9ffe53f91012b5c934ca17"
+    },
+    {
+      "path": "inspection/hf-token-analysis/canonical/v0.4.18/hf_fs.json",
+      "sha256": "d11678464526c7d2c9cd5b75cba274797069fce534710976d3c7acb1fee2e380"
+    },
+    {
+      "path": "inspection/hf-token-analysis/canonical/v0.4.17/hf_fs.json",
+      "sha256": "d11678464526c7d2c9cd5b75cba274797069fce534710976d3c7acb1fee2e380"
+    },
+    {
+      "path": "inspection/hf-token-analysis/canonical/v0.4.19/hf_fs.json",
+      "sha256": "965384a3996d295066a171667cf2155a7ab17c8e3a59be09ed8c1865e4d79279"
+    },
+    {
+      "path": "scripts/build_tool_quality_version_focus.py",
+      "sha256": "c291c77c83e770cc53040497aec09497c091099f41e0e34847b61c7915a49628"
+    },
+    {
+      "path": "scripts/build_tool_quality_tape.py",
+      "sha256": "288c70caee5f94405e50e1834b28a5a9ce2ca05f577e8d0751f9c85585563c38"
+    },
+    {
+      "path": "scripts/build_tool_quality_feedback.py",
+      "sha256": "f93f0bccf254589bead7f256076af124b28e2105c717a4f8678b516e797d1227"
+    }
+  ],
+  "output_sha256": {
+    "index.html": "1c05f4f4c09ca36d7d93aa59f1c3092caf19522808e55ef551027fef615eb240",
+    "data.json": "c1574c5d06eb8e7a7c57e5d1be3f7245380c127e2c6b5e2d42e4f9afbccf0178",
+    "daily.csv": "e8941d02ceeada0958f157a429bd29d3887b1208b6224b75afc3b038c4c6cf27",
+    "changes.json": "ac2f64cd4c60e6b9351d3ed6d7b1805a981c5c9ec651116b94dba6f5f807dd93"
+  },
+  "publication_verification": "COMPLETE, publication, every listed artifact and report hashes verified before build",
+  "review_status": "private aggregates; review before external sharing",
+  "iteration": "version-focus-v8",
+  "timing": {
+    "intro_ms": 1200,
+    "clock_motion_ms": 30000,
+    "event_dwell_ms": 0,
+    "unique_event_holds": 0,
+    "flag_drop_ms": 450,
+    "final_hold_ms": 2500,
+    "total_ms": 33700
+  },
+  "viewport": "Seven-day fixed initial window, then trailing seven days; final Sep7\u201314 exclusive, noon observations Sep7\u201313",
+  "event_choreography": "No lollipop labels. Top ribbon boundaries emit 450ms downward dashed strokes; deterministic contrast settling, continuous clock, pause freezes all effects.",
+  "event_interpretation": "CC daily usage leaders, not release dates; MCP first-observed build hours, not verified deployment dates",
+  "presentation_geometry": "Daily noon anchors; connecting geometry interpolated, numerical rates last revealed daily observation",
+  "comparison_values": "Byte-identical data.json and daily.csv to original; independently recomputed from verified filtered publication",
+  "narrative": "Observe errors \u2192 refine instructions \u2192 measure again. Conceptual instrumentation workflow, not evidence that errors prompted these historical edits or edits caused rate changes.",
+  "annotations": "Last observed definition change persists until next change, labelled with its server version; descriptions and input schemas verified; observed .18 carries the definition first tagged .17; no fabricated .17 deployment or .14 change.",
+  "source_iteration": "charts/tool-quality-top-ribbon",
+  "presentation": "Current versions moved from bottom right to large full-version labels in top ribbon headers; historical ribbon labels enlarged 18px to 22px where width allows. Sidebar space used for larger tool-change text. Plot and time/drop mechanics unchanged.",
+  "freshness": "Compatible verified tool-quality publication ends Sep13. Local client-protocol-20260915-v1 and protocol-overall-20260915 reach Sep14 but contain protocol counts, not compatible quality classifications. No remote refresh performed."
+}

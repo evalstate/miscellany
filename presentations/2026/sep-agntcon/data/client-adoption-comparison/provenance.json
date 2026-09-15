@@ -1,0 +1,620 @@
+{
+  "source_manifest": {
+    "source": "evalstate/hf-mcp-logs",
+    "revision": "12c284c96e556c16aa7cb09ff1370dbbd6342941",
+    "pinning": "API resolved exact SHA; every remote hf_hub_download explicitly at that revision",
+    "window": [
+      "2026-07-28",
+      "2026-09-14"
+    ],
+    "generated_at_utc": "2026-09-15T09:53:56.060981+00:00",
+    "population": "everyone_else",
+    "counting": "UTC query rows excluding initialize/session_delete; failures included, no deduplication. Unknown protocol rows included in volume.",
+    "cohort": "Fixed historical five excluded across every client/version/day; missing hashes included. Only everyone_else is exported; excluded-cohort traffic is never charted.",
+    "cohort_file_sha256": "5ba16cf4445d0f591d9a7a2137d90c48b9f340551a8f7f7da273355956183fbd",
+    "cohort_audit": {
+      "mode": "Existing private file matched historical membership digest",
+      "historical_excluded_calls": 364305,
+      "historical_excluded_failures": 56171,
+      "historical_all_cells_match": true,
+      "reference_sha256": "a6d5cfec52d6f73955ccaddfef6bc156d706558285ec9f5cfebcaea8657d968b"
+    },
+    "client_policy": {
+      "exact_allowlist": [
+        "Anthropic/ClaudeAI",
+        "Anthropic/ClaudeDesign",
+        "Cursor",
+        "Gemini",
+        "Manus",
+        "Visual Studio Code",
+        "antigravity-client",
+        "chat-ui-intern",
+        "chat-ui-mcp",
+        "claude-ai",
+        "claude-code",
+        "claude-desktop",
+        "codex-mcp-client",
+        "connectors-manager",
+        "cursor-vscode",
+        "github-copilot-developer",
+        "grok-shell-huggingface",
+        "llama-ui-mcp",
+        "lmstudio-mcp-server-session",
+        "mcp",
+        "openai-mcp",
+        "openai-mcp (Codex)",
+        "opencode",
+        "zcode"
+      ],
+      "bridge_regex": "mcp (via mcp-remote VERSION) -> mcp (via mcp-remote)",
+      "other": "All nonallowlisted nonempty client names",
+      "unknown": "Missing/placeholder names"
+    },
+    "coverage": [
+      {
+        "partition": "2026-07-27",
+        "files": 47,
+        "input_content_sha256": "2aaa47dd0e5ffdedc07e9a73ed0caf9dabb2843f89eb40a41a1f348e0911dec3",
+        "health": {
+          "rows_read": 39877,
+          "outside_window": 39877
+        }
+      },
+      {
+        "partition": "2026-07-28",
+        "files": 44,
+        "input_content_sha256": "f29c893a60f0f565d9fbf90d3d133e7917149e7b5980dda30dad6c8ff53594b5",
+        "health": {
+          "rows_read": 31878,
+          "outside_window": 57,
+          "calls": 31821,
+          "missing_hash_calls": 1313
+        }
+      },
+      {
+        "partition": "2026-07-29",
+        "files": 47,
+        "input_content_sha256": "606d7f0cb6575c75d418dee1e2575a67a5151b2318f9dc5466fbd8dcb5d7b7fd",
+        "health": {
+          "rows_read": 36548,
+          "calls": 36548,
+          "missing_hash_calls": 2462
+        }
+      },
+      {
+        "partition": "2026-07-30",
+        "files": 46,
+        "input_content_sha256": "31dda0e082e5a938df946fcf96467e7c2455a38eca6bfe7c7cb1d953f88d2abf",
+        "health": {
+          "rows_read": 32497,
+          "calls": 32497,
+          "missing_hash_calls": 2143
+        }
+      },
+      {
+        "partition": "2026-07-31",
+        "files": 48,
+        "input_content_sha256": "2146df7d900e3f467418804379c732838a278579cff757510f366eb4b6f39417",
+        "health": {
+          "rows_read": 41558,
+          "calls": 41558,
+          "missing_hash_calls": 1809
+        }
+      },
+      {
+        "partition": "2026-08-01",
+        "files": 48,
+        "input_content_sha256": "8103f8b7976a3b7328162daacde40887028594719d7153be5e905478ac4ab0c1",
+        "health": {
+          "rows_read": 30847,
+          "calls": 30847,
+          "missing_hash_calls": 1559
+        }
+      },
+      {
+        "partition": "2026-08-02",
+        "files": 47,
+        "input_content_sha256": "2e330cb55b1680742a56466ce744828d0346a0ee6f93f3d6e44ac16b28868ff9",
+        "health": {
+          "rows_read": 26653,
+          "calls": 26653,
+          "missing_hash_calls": 1525
+        }
+      },
+      {
+        "partition": "2026-08-03",
+        "files": 46,
+        "input_content_sha256": "8f2ffc368335f42293a9c2570ca7fee56434f934eee875ea1b0c2bed98fd1aa2",
+        "health": {
+          "rows_read": 32360,
+          "calls": 32360,
+          "missing_hash_calls": 2789
+        }
+      },
+      {
+        "partition": "2026-08-04",
+        "files": 48,
+        "input_content_sha256": "702ede7cad053ba50b52d5eda33933878200414ba115e96ca61c2124c0e5b2ab",
+        "health": {
+          "rows_read": 33328,
+          "calls": 33328,
+          "missing_hash_calls": 1876
+        }
+      },
+      {
+        "partition": "2026-08-05",
+        "files": 46,
+        "input_content_sha256": "8550d831977693de1f4cc83547dbe299260f46bff82bc4ad57695ad09c093695",
+        "health": {
+          "rows_read": 33130,
+          "calls": 33130,
+          "missing_hash_calls": 2373
+        }
+      },
+      {
+        "partition": "2026-08-06",
+        "files": 48,
+        "input_content_sha256": "8e3e97d32054746dc3a4f1033d940df8cd0bbc1ebbe69528a06afaa42ee7ed24",
+        "health": {
+          "rows_read": 36265,
+          "calls": 36265,
+          "missing_hash_calls": 1996
+        }
+      },
+      {
+        "partition": "2026-08-07",
+        "files": 47,
+        "input_content_sha256": "6c6b54dd8c276f4006ac416b7f8c28897ce739e35d4df7e2329115833b4fbb09",
+        "health": {
+          "rows_read": 34188,
+          "calls": 34188,
+          "missing_hash_calls": 1879
+        }
+      },
+      {
+        "partition": "2026-08-08",
+        "files": 48,
+        "input_content_sha256": "3d769694fdb24eb12df1e596f74abe4efcdd1fd84bd9206a8df34363082e779d",
+        "health": {
+          "rows_read": 37754,
+          "calls": 37754,
+          "missing_hash_calls": 5343
+        }
+      },
+      {
+        "partition": "2026-08-09",
+        "files": 47,
+        "input_content_sha256": "1a6e420ee3f53d889176246b2baa08ce1dfb647ffbfa021e609a3bcc89df7c2a",
+        "health": {
+          "rows_read": 39805,
+          "calls": 39805,
+          "missing_hash_calls": 2545
+        }
+      },
+      {
+        "partition": "2026-08-10",
+        "files": 48,
+        "input_content_sha256": "2ccb6382c010651eaf15f7ccde38af92e3980d35b423f13c12d826fe535a108b",
+        "health": {
+          "rows_read": 58324,
+          "calls": 58324,
+          "missing_hash_calls": 4140
+        }
+      },
+      {
+        "partition": "2026-08-11",
+        "files": 46,
+        "input_content_sha256": "4aadd054e65dfe397f86541044c66e47356f62aeb86813aa61a5e743213f39bb",
+        "health": {
+          "rows_read": 60654,
+          "calls": 60654,
+          "missing_hash_calls": 2345
+        }
+      },
+      {
+        "partition": "2026-08-12",
+        "files": 38,
+        "input_content_sha256": "2e31720cc06b405f343f8c301285c3514fa0a1e647f4388461acd47665cd0d07",
+        "health": {
+          "rows_read": 48681,
+          "calls": 48681,
+          "missing_hash_calls": 2803
+        }
+      },
+      {
+        "partition": "2026-08-13",
+        "files": 40,
+        "input_content_sha256": "a4aa21ee1cded609bda797d8290cc93992a09acbdf57340bb1731ae7ff4804de",
+        "health": {
+          "rows_read": 39806,
+          "calls": 39806,
+          "missing_hash_calls": 2698
+        }
+      },
+      {
+        "partition": "2026-08-14",
+        "files": 38,
+        "input_content_sha256": "c6bfde421dc742ebdfc017c38c50510084e061ce693a2e1cb1549672655561d1",
+        "health": {
+          "rows_read": 37343,
+          "calls": 37343,
+          "missing_hash_calls": 2158
+        }
+      },
+      {
+        "partition": "2026-08-15",
+        "files": 47,
+        "input_content_sha256": "f6793599d5e7fec6a1b54c8ee8d85a584f8d153ff45a96bba8b16a004af97a03",
+        "health": {
+          "rows_read": 47968,
+          "calls": 47968,
+          "missing_hash_calls": 2276
+        }
+      },
+      {
+        "partition": "2026-08-16",
+        "files": 47,
+        "input_content_sha256": "f572b53848ed885c703463e7fb9ac95f1fb56f71f41b99ca647e963256fe06ec",
+        "health": {
+          "rows_read": 65513,
+          "calls": 65513,
+          "missing_hash_calls": 1947
+        }
+      },
+      {
+        "partition": "2026-08-17",
+        "files": 48,
+        "input_content_sha256": "adf8ec9eb285d752a7dd17f3ddfad60071e528d798dd4bef15073a970e919c08",
+        "health": {
+          "rows_read": 58465,
+          "calls": 58465,
+          "missing_hash_calls": 2810
+        }
+      },
+      {
+        "partition": "2026-08-18",
+        "files": 46,
+        "input_content_sha256": "5d3fdca087124b77690ab6c03cda48073fbca2c72b5580873434993978d2f766",
+        "health": {
+          "rows_read": 50491,
+          "calls": 50491,
+          "missing_hash_calls": 2840
+        }
+      },
+      {
+        "partition": "2026-08-19",
+        "files": 47,
+        "input_content_sha256": "a83f5b4a2d17ae9e2f73b0c89120198c394003a135ac172a6ec2280632275c51",
+        "health": {
+          "rows_read": 51876,
+          "calls": 51876,
+          "missing_hash_calls": 2462
+        }
+      },
+      {
+        "partition": "2026-08-20",
+        "files": 46,
+        "input_content_sha256": "6ac9e3957bd1663bca11ede510266398e4d9be943e557f19b52bb7a5aac5406b",
+        "health": {
+          "rows_read": 54802,
+          "calls": 54802,
+          "missing_hash_calls": 4303
+        }
+      },
+      {
+        "partition": "2026-08-21",
+        "files": 47,
+        "input_content_sha256": "3db68cc6c6ce896b4fdeeb90a4c19c80c0af99687fc10c3b681568e08eba00f6",
+        "health": {
+          "rows_read": 51760,
+          "calls": 51760,
+          "missing_hash_calls": 1946
+        }
+      },
+      {
+        "partition": "2026-08-22",
+        "files": 46,
+        "input_content_sha256": "2db0838f4eb11decd2ca1a37d6f5c87d28df40c7a17f85140eda632f015764a4",
+        "health": {
+          "rows_read": 51479,
+          "calls": 51479,
+          "missing_hash_calls": 1544
+        }
+      },
+      {
+        "partition": "2026-08-23",
+        "files": 47,
+        "input_content_sha256": "15994206ca3d8e969b8004aec65165cff6e1ff2b467b33ab6a49ef633412d8fa",
+        "health": {
+          "rows_read": 61914,
+          "calls": 61914,
+          "missing_hash_calls": 1967
+        }
+      },
+      {
+        "partition": "2026-08-24",
+        "files": 48,
+        "input_content_sha256": "47a21bd72e1534f90c517d376e22c1150b8565a2958016ef8e0e4b52ec4242d1",
+        "health": {
+          "rows_read": 58375,
+          "calls": 58375,
+          "missing_hash_calls": 2074
+        }
+      },
+      {
+        "partition": "2026-08-25",
+        "files": 46,
+        "input_content_sha256": "52d2e514c6ab88c1cdeed535cb8056f41702ff3938f8f27e1d0f27d1fe6f38a8",
+        "health": {
+          "rows_read": 65776,
+          "calls": 65776,
+          "missing_hash_calls": 2050
+        }
+      },
+      {
+        "partition": "2026-08-26",
+        "files": 47,
+        "input_content_sha256": "636d74884d48e32496c9f8bf7797c0b1043a27f8c47991db95a03efad3da3164",
+        "health": {
+          "rows_read": 64396,
+          "calls": 64396,
+          "missing_hash_calls": 2699
+        }
+      },
+      {
+        "partition": "2026-08-27",
+        "files": 47,
+        "input_content_sha256": "a4dd4828a5e921d4d66cb3832ece50e5694c879ad64d8ac6abc3b2c1dc95dd2a",
+        "health": {
+          "rows_read": 71809,
+          "calls": 71809,
+          "missing_hash_calls": 2217
+        }
+      },
+      {
+        "partition": "2026-08-28",
+        "files": 47,
+        "input_content_sha256": "1774462d29ab3938ae8237aefcbbb5e224346602c09a22fa62507213cf506a49",
+        "health": {
+          "rows_read": 62565,
+          "calls": 62565,
+          "missing_hash_calls": 2817
+        }
+      },
+      {
+        "partition": "2026-08-29",
+        "files": 48,
+        "input_content_sha256": "f16ca04824e81b11ee10c01097446c15f76f4b48d5ea4714c53f0475273c7fca",
+        "health": {
+          "rows_read": 46843,
+          "calls": 46843,
+          "missing_hash_calls": 1801
+        }
+      },
+      {
+        "partition": "2026-08-30",
+        "files": 47,
+        "input_content_sha256": "6fe3acbfc4eb88ededf3b32322d9c64abf15c2dd492161c80605d2e8824a7dd2",
+        "health": {
+          "rows_read": 40904,
+          "calls": 40904,
+          "missing_hash_calls": 2032
+        }
+      },
+      {
+        "partition": "2026-08-31",
+        "files": 48,
+        "input_content_sha256": "bafd2c731ebdd2ad57894bb59d0515dacfc3b32260dd331b6ff0d8209fe1ce62",
+        "health": {
+          "rows_read": 40522,
+          "calls": 40522,
+          "missing_hash_calls": 1896
+        }
+      },
+      {
+        "partition": "2026-09-01",
+        "files": 48,
+        "input_content_sha256": "929df978e971b230b4ccffa7691669413c69e32084f1c33cc834a1cc66f8a8fa",
+        "health": {
+          "rows_read": 60751,
+          "calls": 60751,
+          "missing_hash_calls": 3261
+        }
+      },
+      {
+        "partition": "2026-09-02",
+        "files": 43,
+        "input_content_sha256": "3874728bf5b4d480086bd5d369f94ec95d16f193b5079d79229adf707b535749",
+        "health": {
+          "rows_read": 66091,
+          "calls": 66091,
+          "missing_hash_calls": 4085
+        }
+      },
+      {
+        "partition": "2026-09-03",
+        "files": 45,
+        "input_content_sha256": "0c319be39d6743978551e4567251378d7cfb7789377bff0d48ac12104b1482d7",
+        "health": {
+          "rows_read": 65208,
+          "calls": 65208,
+          "missing_hash_calls": 2739
+        }
+      },
+      {
+        "partition": "2026-09-04",
+        "files": 47,
+        "input_content_sha256": "d642ff3efdbe46f7d8599f7bd433e1ae3f0e8c7f454d38faa50a6d4b930a3247",
+        "health": {
+          "rows_read": 67717,
+          "calls": 67717,
+          "missing_hash_calls": 2273
+        }
+      },
+      {
+        "partition": "2026-09-05",
+        "files": 47,
+        "input_content_sha256": "940ad789a48ff230eed6a8373898bacde684e9ae8097a7d4b6f237f1a50aa19c",
+        "health": {
+          "rows_read": 61504,
+          "calls": 61504,
+          "missing_hash_calls": 2231
+        }
+      },
+      {
+        "partition": "2026-09-06",
+        "files": 48,
+        "input_content_sha256": "4d25c6dd5efc7b1b7141d38ebf829bae3dbd1049dadbf0b3ee10f2bf3919a8b0",
+        "health": {
+          "rows_read": 67477,
+          "calls": 67477,
+          "missing_hash_calls": 1923
+        }
+      },
+      {
+        "partition": "2026-09-07",
+        "files": 47,
+        "input_content_sha256": "2f1a722d650cffdcefe9f94edb4f1b6f53671004d1d3e31adb9ddf385d6a363b",
+        "health": {
+          "rows_read": 68378,
+          "calls": 68378,
+          "missing_hash_calls": 2044
+        }
+      },
+      {
+        "partition": "2026-09-08",
+        "files": 47,
+        "input_content_sha256": "83254c449516061aacb05d722f6687fdb9a61e6ba1ddd99df9447c0baa712726",
+        "health": {
+          "rows_read": 63951,
+          "calls": 63951,
+          "missing_hash_calls": 2147
+        }
+      },
+      {
+        "partition": "2026-09-09",
+        "files": 46,
+        "input_content_sha256": "77ad556aa9a5cc77d4ce7d7d4f35fb17f446f5ac85f009ede048d6e5cbb48729",
+        "health": {
+          "rows_read": 69766,
+          "calls": 69766,
+          "missing_hash_calls": 2191
+        }
+      },
+      {
+        "partition": "2026-09-10",
+        "files": 45,
+        "input_content_sha256": "8f692ac05e3d2c1b520fe77639c1f01dd2b45a1039dbbdc807c777242ab4c7b4",
+        "health": {
+          "rows_read": 76721,
+          "calls": 76721,
+          "missing_hash_calls": 1966
+        }
+      },
+      {
+        "partition": "2026-09-11",
+        "files": 48,
+        "input_content_sha256": "9d9390d50a13b3e8f445df02ca359bff1e3c6e4d2bd68dd0d257effab46b38bd",
+        "health": {
+          "rows_read": 69051,
+          "calls": 69051,
+          "missing_hash_calls": 2470
+        }
+      },
+      {
+        "partition": "2026-09-12",
+        "files": 47,
+        "input_content_sha256": "73bd21051363dfadb1e689f70deafa555deb88533b7e44dd8ff0a1c8030f6021",
+        "health": {
+          "rows_read": 76146,
+          "calls": 76146,
+          "missing_hash_calls": 2133
+        }
+      },
+      {
+        "partition": "2026-09-13",
+        "files": 48,
+        "input_content_sha256": "9ab0e92287b55bff6fd7e68af460109d72954bcef644b22de2c582304c6ab1b8",
+        "health": {
+          "rows_read": 69991,
+          "calls": 69991,
+          "missing_hash_calls": 2047
+        }
+      },
+      {
+        "partition": "2026-09-14",
+        "files": 47,
+        "input_content_sha256": "d86b65e9b0cc6c2612c2110383964483b6446e697845e06de7ebd2e441be013b",
+        "health": {
+          "rows_read": 69983,
+          "calls": 69983,
+          "missing_hash_calls": 2119
+        }
+      },
+      {
+        "partition": "2026-09-15",
+        "files": 19,
+        "input_content_sha256": "962885dc67dfe72cc903417fc5160809aa8a47f5fb7bbb5491ddbf91c3514b10",
+        "health": {
+          "rows_read": 22161,
+          "calls": 884,
+          "missing_hash_calls": 63,
+          "outside_window": 21277
+        }
+      }
+    ],
+    "coverage_limits": "One padded partition each side; late ingestion beyond this is not covered. Calendar-completed days only. Source snapshot does not prove complete traffic.",
+    "script_sha256": "04803fec572f3b608b33e9ed2f3edd413765a7cfa5d420898e3477fdc2d3c08d",
+    "input_bytes": 3784652268,
+    "outputs": {
+      "daily_client_protocol.csv": "396a8ca8710839307b11b390d098949322bb6f096ae44b5807b5dfacc7ee03a3",
+      "daily_protocol.csv": "33fb67c0dc6e2603bcb2986179d7c6b28535fa4b03819cbbfad4e24a8156f86e"
+    }
+  },
+  "source_path": "summaries/client-protocol-20260915-v1",
+  "source_manifest_sha256": "b8546c3016f0e3c94c250afb988eddb8b38bdc730f17d340ef93a54e4e5b1c3e",
+  "script_sha256": "179cb529a72b975f58a91cc7d602b30e68337c3fd3d27f0281c5d02e9aca8d24",
+  "allowlist_sha256": "553056a83e98bfdd10978c1a001877ce06a48e2aff8d3316824d1771c8f4cf4d",
+  "valid_protocols": [
+    "2024-11-05",
+    "2025-03-26",
+    "2025-06-18",
+    "2025-11-25",
+    "2026-07-28"
+  ],
+  "input_hashes": {
+    "daily_client_protocol.csv": "396a8ca8710839307b11b390d098949322bb6f096ae44b5807b5dfacc7ee03a3",
+    "daily_protocol.csv": "33fb67c0dc6e2603bcb2986179d7c6b28535fa4b03819cbbfad4e24a8156f86e"
+  },
+  "complete_sha256": "9dd5af473046f7331ae8a9956ccf706729d949955c5dcfcae5a8588cfeecb22d",
+  "population": "everyone_else only; fixed five excluded across identities/versions; missing hashes retained",
+  "denominator": "Modern / reviewed valid-protocol calls; unknown/unreviewed protocols volume only",
+  "rates": "Count weighted; minimum 100 valid calls; exactly 7 calendar days for trailing and last7 rates",
+  "zero_policy": "Missing source dates fail; absent client rows on covered dates mean zero observed calls, not zero rates",
+  "focus_clients": [
+    "claude-code",
+    "Anthropic/ClaudeAI",
+    "chat-ui-mcp",
+    "openai-mcp",
+    "openai-mcp (Codex)",
+    "codex-mcp-client"
+  ],
+  "display_names": {
+    "chat-ui-mcp": "Hugging Face Chat UI",
+    "codex-mcp-client": "Codex CLI"
+  },
+  "focus_volume_display": "Independently scaled daily activity strips; no numerical volume ticks or sample-size labels",
+  "contribution_policy": "Top5 by full-period modern calls across all retained identities + remaining clients; period shares",
+  "output_hashes": {
+    "README.md": "ba9f8e15a29f46d4ccdfb35868dfaa68cf4802c84e032ae09bbb01fe796b1780",
+    "client_migration_focus.pdf": "b05b9c120d2c84041943839deca08122c5b508cf2c47657eba162e5c96b6b233",
+    "client_migration_focus.png": "2419536427d4612f3e71b8b9b1a01c8e35b9345829f7e4d6881d881d9db85aa2",
+    "client_migration_focus.svg": "c66a24a6b04aea8091a0df150f510e1e6583ceaf829d80013649bb69d0a85313",
+    "daily.csv": "08c8fdc851b1a626c9ec4b1a848ad1313d6102b38342e2957f9d44c879eb0dea",
+    "modern_traffic_contribution.pdf": "925ddb64c7fea1dc9bf2b1af8a956b250e72fcc476298f1d19569f9498b6d84f",
+    "modern_traffic_contribution.png": "7909b7288e2f7424e94ead6fe09a445af7275da1fb3c1a570337c5ebc738305b",
+    "modern_traffic_contribution.svg": "048776169498d7c2c80d054413f004d24ef3cbf5998375d36b88b8b832e3a66b",
+    "stats.json": "5949c20c821d636636bc97c4ac3f51eea54937cc169d1a5d7cbc3bd21def5208",
+    "summary.csv": "bb614bd4a49be41c64f2a50dd823b3fcd7623bd8f4db6b92c920bf961e2e4b69"
+  }
+}

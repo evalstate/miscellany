@@ -9,6 +9,239 @@ fonts:
 drawings:
   persist: false
 ---
+
+<div class="speaker-intro">
+<section class="speaker-copy">
+
+# Shaun Smith
+
+<div class="speaker-subtitle">Hugging Face</div>
+
+<nav class="speaker-socials" aria-label="Social profiles">
+<a href="https://huggingface.co/evalstate"><img src="/brand/hugging-face.svg" alt="Hugging Face" /><span>huggingface.co/evalstate</span></a>
+<a href="https://github.com/evalstate"><img src="/intro/github-mark.svg" alt="GitHub" /><span>github.com/evalstate</span></a>
+<a href="https://x.com/evalstate"><img src="/intro/x-mark.svg" alt="X" /><span>x.com/evalstate</span></a>
+</nav>
+</section>
+
+<aside class="speaker-logos" aria-label="Hugging Face and Model Context Protocol">
+<img class="speaker-hf" src="/brand/hugging-face.svg" alt="Hugging Face" />
+<div class="speaker-logo-divider"></div>
+<img class="speaker-mcp" src="/brand/mcp-symbol-black.svg" alt="Model Context Protocol" />
+</aside>
+</div>
+
+---
+
+# Legacy MCP is fully bi-directional
+
+<div class="legacy-horizontal" aria-label="Client and Server exchange messages in both directions">
+<div class="legacy-types legacy-types-client">
+<div class="legacy-type"><CapabilityIcon name="roots" /><span>Roots</span></div>
+<div class="legacy-type"><CapabilityIcon name="sampling" /><span>Sampling</span></div>
+<div class="legacy-type"><CapabilityIcon name="elicitation" /><span>Elicitation</span></div>
+</div>
+<div class="legacy-actor legacy-actor-client"><span>Client</span></div>
+<div class="legacy-channels">
+<div class="legacy-lane legacy-lane-right"><span>Client → Server</span><i></i></div>
+<div class="legacy-lane legacy-lane-left"><i></i><span>Server → Client</span></div>
+</div>
+<div class="legacy-actor legacy-actor-server"><span>Server</span></div>
+<div class="legacy-types legacy-types-server">
+<div class="legacy-type"><CapabilityIcon name="tools" /><span>Tools</span></div>
+<div class="legacy-type"><CapabilityIcon name="resources" /><span>Resources</span></div>
+<div class="legacy-type"><CapabilityIcon name="prompts" /><span>Prompts</span></div>
+</div>
+</div>
+
+<!--
+Static horizontal layout study of July's ProtocolStack: client capabilities on the
+far left, server capabilities on the far right. Arrows represent message direction,
+not separate physical transports. Established connection with negotiated capabilities
+is assumed; not every implementation offers every capability. Legacy 2025-11-25.
+No lifecycle sequence or protocol method names have been ported from the animation.
+-->
+
+---
+
+# Modern MCP
+
+<div class="legacy-horizontal legacy-horizontal-modern" aria-label="Modern MCP: Client initiates requests to Server">
+<div class="legacy-types legacy-types-client">
+<div class="legacy-type legacy-type-deprecated"><CapabilityIcon name="roots" /><span>Roots</span><small>DEPRECATED</small></div>
+<div class="legacy-type legacy-type-deprecated"><CapabilityIcon name="sampling" /><span>Sampling</span><small>DEPRECATED</small></div>
+<div class="legacy-type"><CapabilityIcon name="elicitation" /><span>Elicitation</span></div>
+</div>
+<div class="legacy-actor legacy-actor-client"><span>Client</span></div>
+<div class="legacy-channels">
+<div class="legacy-lane legacy-lane-right"><span>Client → Server</span><i></i></div>
+</div>
+<div class="legacy-actor legacy-actor-server"><span>Server</span></div>
+<div class="legacy-types legacy-types-server">
+<div class="legacy-type"><CapabilityIcon name="tools" /><span>Tools</span></div>
+<div class="legacy-type"><CapabilityIcon name="resources" /><span>Resources</span></div>
+<div class="legacy-type"><CapabilityIcon name="prompts" /><span>Prompts</span></div>
+</div>
+</div>
+
+<!--
+Modern 2026-07-28 conceptual comparison. Roots and Sampling are marked deprecated
+as requested by the presenter; the documented local protocol checkout was unavailable
+on this host, so that status still needs independent source verification.
+The single arrow represents request initiation, not all message traffic: the Server
+still returns responses. Elicitation is retained through MRTR rather than a separate
+Server → Client request. Modern retry carries original parameters, keyed inputResponses,
+and unchanged opaque requestState when supplied, not necessarily a literal question echo.
+-->
+
+---
+
+# Legacy MCP is fully bi-directional
+
+<div class="legacy-horizontal" aria-label="Client and Server exchange messages in both directions">
+<div class="legacy-types legacy-types-client">
+<div class="legacy-type" data-capability="roots"><CapabilityIcon name="roots" /><span>Roots</span></div>
+<div class="legacy-type" data-capability="sampling"><CapabilityIcon name="sampling" /><span>Sampling</span></div>
+<div class="legacy-type" data-capability="elicitation"><CapabilityIcon name="elicitation" /><span>Elicitation</span></div>
+</div>
+<div class="legacy-actor legacy-actor-client"><span>Client</span></div>
+<CommunicationTraffic variant="legacy" />
+<div class="legacy-actor legacy-actor-server"><span>Server</span></div>
+<div class="legacy-types legacy-types-server">
+<div class="legacy-type" data-capability="tools"><CapabilityIcon name="tools" /><span>Tools</span></div>
+<div class="legacy-type" data-capability="resources"><CapabilityIcon name="resources" /><span>Resources</span></div>
+<div class="legacy-type" data-capability="prompts"><CapabilityIcon name="prompts" /><span>Prompts</span></div>
+</div>
+</div>
+
+<!--
+Animated layout experiment; original static slides are preserved immediately before
+these copies. Start manually; loops until Stop or slide departure.
+Each pulse is an independent visual activation, not a request/response round trip.
+Legacy alternates activation direction; Modern only shows Client → Server activation.
+The receiving actor and a capability glow on arrival. These are illustrative cues,
+not exact method mappings or a literal wire trace. Server responses still exist but
+are deliberately omitted. Modern Elicitation remains visible without a reverse pulse;
+deprecated capabilities never activate. No lifecycle sequence is implied.
+Illustrated versions remain legacy 2025-11-25 and modern 2026-07-28. The documented
+local protocol checkout is unavailable on this host; source verification remains
+outstanding, including the presenter-requested Roots/Sampling deprecation labels.
+-->
+
+---
+
+# Modern MCP
+
+<div class="legacy-horizontal legacy-horizontal-modern" aria-label="Modern MCP: Client initiates requests to Server">
+<div class="legacy-types legacy-types-client">
+<div class="legacy-type legacy-type-deprecated"><CapabilityIcon name="roots" /><span>Roots</span><small>DEPRECATED</small></div>
+<div class="legacy-type legacy-type-deprecated"><CapabilityIcon name="sampling" /><span>Sampling</span><small>DEPRECATED</small></div>
+<div class="legacy-type" data-capability="elicitation"><CapabilityIcon name="elicitation" /><span>Elicitation</span></div>
+</div>
+<div class="legacy-actor legacy-actor-client"><span>Client</span></div>
+<CommunicationTraffic variant="modern" />
+<div class="legacy-actor legacy-actor-server"><span>Server</span></div>
+<div class="legacy-types legacy-types-server">
+<div class="legacy-type" data-capability="tools"><CapabilityIcon name="tools" /><span>Tools</span></div>
+<div class="legacy-type" data-capability="resources"><CapabilityIcon name="resources" /><span>Resources</span></div>
+<div class="legacy-type" data-capability="prompts"><CapabilityIcon name="prompts" /><span>Prompts</span></div>
+</div>
+</div>
+
+<!--
+Animated layout experiment; original static slides are preserved immediately before
+these copies. Start manually; loops until Stop or slide departure.
+Each pulse is an independent visual activation, not a request/response round trip.
+Legacy alternates activation direction; Modern only shows Client → Server activation.
+The receiving actor and a capability glow on arrival. These are illustrative cues,
+not exact method mappings or a literal wire trace. Server responses still exist but
+are deliberately omitted. Modern Elicitation remains visible without a reverse pulse;
+deprecated capabilities never activate. No lifecycle sequence is implied.
+Illustrated versions remain legacy 2025-11-25 and modern 2026-07-28. The documented
+local protocol checkout is unavailable on this host; source verification remains
+outstanding, including the presenter-requested Roots/Sampling deprecation labels.
+-->
+
+---
+
+# Hugging Face MCP Server
+
+<div class="hf-topology" data-phase="overview">
+<div class="hf-topology-router" data-node="router">
+<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="8" y="23" width="32" height="16" rx="4"/><path d="M15 23V10m18 13V10M11 13l4-4 4 4m10 0 4-4 4 4"/><circle cx="16" cy="31" r="1"/><path d="M23 31h10"/></svg>
+<strong>Router</strong>
+</div>
+<div class="hf-topology-link" aria-hidden="true"></div>
+<section class="hf-topology-server" data-node="hf-mcp-server" aria-label="Hugging Face MCP Server and its capabilities">
+<div class="hf-topology-identity">
+<img src="/brand/hugging-face.svg" alt="Hugging Face" />
+<strong>MCP Server</strong>
+</div>
+<div class="hf-topology-internal" aria-hidden="true"></div>
+<div class="hf-topology-capabilities">
+<div class="hf-topology-capability" data-capability="models"><img src="/hf-icons/models.svg" alt="" /><span>Models</span></div>
+<div class="hf-topology-capability" data-capability="datasets"><img src="/hf-icons/datasets.svg" alt="" /><span>Datasets</span></div>
+<div class="hf-topology-capability" data-capability="buckets"><img src="/hf-icons/buckets.svg" alt="" /><span>Buckets</span></div>
+<div class="hf-topology-capability" data-capability="papers"><img src="/hf-icons/papers.svg" alt="" /><span>Papers</span></div>
+<div class="hf-topology-capability" data-capability="gpu-apps"><img class="hf-topology-fan" src="/hf-icons/gpu-fan.svg" alt="" /><span>GPU Apps</span></div>
+<div class="hf-topology-capability" data-capability="compute"><img src="/hf-icons/hardware.svg" alt="" /><span>Compute</span></div>
+</div>
+</section>
+</div>
+
+<!--
+Conceptual Hugging Face MCP Server topology, based on the presenter's requested
+capability grouping, not a claim about individual physical services or deployments.
+The router is outside and in front of the server. All six capabilities belong within
+the server boundary. No traffic animation or routing policy is illustrated yet.
+Semantic node/capability attributes provide stable targets for later routing work.
+Icons are extracted from huggingface.co navigation and its Spaces GPU status fan;
+see public/hf-icons/SOURCES.md. Compute uses Hardware; GPU Apps uses the GPU fan.
+Only the decorative fan rotates; routing and topology remain static.
+-->
+
+---
+
+# Hugging Face MCP Server
+
+<div class="hf-stack-topology" data-phase="overview">
+<div class="hf-stack-clients" data-node="clients">
+<svg viewBox="0 0 64 48" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 38h31a11 11 0 0 0 1-22 17 17 0 0 0-32-4 13 13 0 0 0 0 26Z"/><rect x="22" y="20" width="19" height="12" rx="2"/><path d="M28 35h7m-4-3v3"/></svg>
+<strong>Clients</strong>
+</div>
+<div class="hf-topology-link" aria-hidden="true"></div>
+<div class="hf-topology-router" data-node="router">
+<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="8" y="23" width="32" height="16" rx="4"/><path d="M15 23V10m18 13V10M11 13l4-4 4 4m10 0 4-4 4 4"/><circle cx="16" cy="31" r="1"/><path d="M23 31h10"/></svg>
+<strong>Router</strong>
+</div>
+<div class="hf-topology-link" aria-hidden="true"></div>
+<section class="hf-stack-server" aria-label="Hugging Face MCP Server and its capabilities">
+<div class="hf-stack-node" data-node="hf-mcp-server">
+<img src="/brand/hugging-face.svg" alt="Hugging Face" />
+<strong>MCP Server</strong>
+</div>
+<div class="hf-stack-branches" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+<div class="hf-stack-capabilities">
+<div class="hf-topology-capability" data-capability="models"><img src="/hf-icons/models.svg" alt="" /><span>Models</span></div>
+<div class="hf-topology-capability" data-capability="datasets"><img src="/hf-icons/datasets.svg" alt="" /><span>Datasets</span></div>
+<div class="hf-topology-capability" data-capability="buckets"><img src="/hf-icons/buckets.svg" alt="" /><span>Buckets</span></div>
+<div class="hf-topology-capability" data-capability="papers"><img src="/hf-icons/papers.svg" alt="" /><span>Papers</span></div>
+<div class="hf-topology-capability" data-capability="gpu-apps"><img class="hf-topology-fan" src="/hf-icons/gpu-fan.svg" alt="" /><span>GPU Apps</span></div>
+<div class="hf-topology-capability" data-capability="compute"><img src="/hf-icons/hardware.svg" alt="" /><span>Compute</span></div>
+</div>
+</section>
+</div>
+
+<!--
+Alternative topology layout: Clients → Router → Hugging Face MCP Server node,
+with six vertically stacked capability cards. The warm grouping contains both the
+MCP Server node and its capabilities; branches show offerings, not separate physical
+servers. Tight card padding preserves large icons and labels. Original topology
+slide is retained. No routing animation yet, apart from the decorative GPU fan.
+Website icon provenance: public/hf-icons/SOURCES.md.
+-->
+
+---
 <div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>01 / 05</span></div>
 
 # Create a sandbox.
@@ -30,7 +263,7 @@ Sources checked against local modelcontextprotocol/dcd ocs/specification: 2025-1
 
 ---
 
-<div class="es-heading"><spancd class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>02 / 05</span></div>
+<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>02 / 05</span></div>
 
 # The Server needs permission.
 
@@ -333,4 +566,134 @@ Static storyboard: advance manually. Client, LB/router, and backend positions ar
 <!--
 Conceptual illustration of optional tool-declared argument-to-header copying, not literal header syntax. A declared sandbox_id argument can be mirrored into HTTP metadata so infrastructure can route to the appropriate sandbox backend. The body remains the source of truth; copied metadata must match it. Do not imply that arbitrary tool arguments, secrets, or the entire message are copied. Exact declaration and header syntax must be rechecked against the 2026-07-28 protocol checkout, which was unavailable in this workspace; the historical July deck was consulted read-only for context.
 Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
+-->
+
+---
+class: message-ratio-slide
+---
+
+<div class="message-ratio-frame">
+<LegacyMessageRatio>
+<template #heading="{ otherCount }">
+<h1><span class="message-ratio-tool-head">1 TOOL CALL.</span><span>{{ otherCount }} OTHER MESSAGES.</span></h1>
+</template>
+<template #footnote>Hugging Face MCP · June 2026 · Rounded average ratio, not a literal message sequence</template>
+</LegacyMessageRatio>
+</div>
+
+<!--
+Native Slidev migration of /home/evalstate/source/data-analysis/charts/legacy-message-animation/index.html.
+Click Play to begin; Pause/Resume, Replay, Show all, speed, and optional looping are
+available. Slidev owns fullscreen and navigation; there are no chart-global keyboard
+shortcuts. Reduced-motion and print/overview show the completed static chart.
+
+74 equal-sized squares: 1 tool call, 27 initialization, 39 listing, 7 other.
+The exact June 2026 aggregate ratio was 72.91097292652765 non-tool messages per
+tool-call attempt. Largest-remainder rounding preserves 73 non-tool squares.
+This counts inbound MCP method invocations and notifications, not responses,
+bytes or tokens. Tool-call attempts include failures. All observed clients,
+including test traffic; no fixed-five exclusion. These are historical transport
+counters, not the canonical five-excluded protocol query-log chart.
+Initialization includes initialize and notifications/initialized. Listing includes
+tools/list, prompts/list, resources/list and resources/templates/list. Other includes
+pings, resource operations, other notifications and prompt retrievals; some are
+legitimate. Non-tool does not mean useless or avoidable. Cascade timing/grouping is
+illustrative, not observed session ordering or latency. This is historical data,
+not a new claim about protocol lifecycle behaviour.
+
+Source: evalstate/hf-mcp-stats at 3554a77eba80ec06d06af689bf26ee80b795fe14.
+Window: 2026-06-01 through 2026-06-30; coverage 713.82468 of 720 wall hours.
+Full source provenance, coverage caveats and hashes retained in
+ data/legacy-message-ratio.provenance.json. No data re-query or cohort changes.
+-->
+
+---
+class: native-data-slide
+---
+
+<ChartRecordingStage chart="protocol-adoption" title="2026-07-28 Protocol Adoption (Tool Calls)" subtitle="" />
+
+<!--
+Native port of charts/protocol-adoption-dashboard from the local data-analysis workspace.
+Private aggregates: review before external sharing. This is a pinned snapshot, not live.
+Source evalstate/hf-mcp-logs @ 1b5b83fbc3b4be2870345edf498b2644167caf18.
+Window July 28–September 15, 2026 UTC; September 15 is partial. Source publication
+cutoff September 15 16:06:46 UTC does not guarantee ingestion completeness.
+
+Logged tool calls, not protocol messages or users; failures included, no deduplication.
+Fixed five hashes excluded across every client/version; missing hashes retained.
+Only recognized protocol versions enter the rate denominator; unknown/unreviewed
+versions remain in count tables. Null is unavailable, not zero. No sample threshold.
+Rolling7 is a strict count-weighted ratio over seven completed UTC dates, not a mean
+of daily percentages. A partial day uses the preceding seven completed calendar dates.
+Viewport selection changes visible dates, not the rolling denominator. KPIs use the
+last reached daily anchor (floor position). No lines bridge nulls/calendar gaps.
+Purple connections are illustrative reveals, not intraday estimates. Amber marks
+actual partial observations. Overall includes all retained client identities.
+Chat UI = chat-ui-mcp, not chat-ui-intern. Codex CLI = codex-mcp-client, not openai-mcp.
+No version/event evidence or causal interpretation is inferred.
+
+Data, raw selected-client count table and downloads are available via Data & provenance.
+Unmodified source JSON, CSV and provenance live in data/protocol-adoption/.
+Default playback is 4× (7.5 seconds of motion); source ratios/timestamps are unchanged.
+Stage decoration is omitted for keynote use; caveats remain in these notes and data.
+Append ?capture=1 for a controls-free stage; automated recording uses exact timestamps.
+-->
+
+---
+class: native-data-slide
+---
+
+<div class="native-chart-stage">
+<ClientAdoptionComparison title="2026-07-28 Protocol Adoption (Tool Calls)" :capture="$route.query.capture === '1'" />
+</div>
+
+<!--
+Six-client contact sheet restyled from client-migration-chat-ui-20260914/client_migration_focus.png.
+Native SVG; source data are accessible in data/client-adoption-comparison/ and via
+Data & provenance. Private review aggregates: review before public sharing.
+
+IMPORTANT: this reference uses the completed July 28–September 14 snapshot at
+12c284c96e556c16aa7cb09ff1370dbbd6342941, not the preceding dashboard's partial
+September 15 snapshot. It also requires ≥100 valid calls for rates, unlike the
+unsuppressed dashboard. Do not treat missing rates as zero or compare those
+snapshots as if their dates/support policy were identical. No rate recomputation.
+Last7 September 8–14: 95.2%, 99.3%, 100.0%, 28.4%, 15.1%, 0.0% in panel order.
+
+Purple daily / slate count-weighted strict trailing-seven shares, common 0–100% axes.
+Activity bars retain actual all-protocol call counts with independent client scales:
+compare activity patterns within each panel, not relative popularity across panels.
+Unknown/unreviewed protocols enter volumes but not rate denominators. Fixed five
+excluded across client/version; missing hashes retained. Blank rates are unavailable.
+Identity labels preserve chat-ui-mcp (not chat-ui-intern) and codex-mcp-client
+(not openai-mcp (Codex)). Self-reported clients are not users or proven migrations.
+Coverage of padded partitions does not prove complete real-world traffic.
+-->
+
+---
+class: native-data-slide
+---
+
+<ChartRecordingStage chart="tool-quality-version" title="Tool Error Rate" subtitle="hf_fs · daily quality-classified errors" />
+
+<!--
+Native port of charts/tool-quality-version-focus from the local data-analysis workspace.
+Private aggregate outputs: review before external sharing. No source refresh or remote scan.
+August 25–September 13, 2026 published tool-quality cells; newer local protocol snapshots
+lack the classifications required to extend this chart. Published cell coverage ~98–99%.
+Metric: exclusive tool_quality failed calls / selected calls, not all failures/operations.
+Disjoint Claude/non-Claude client cells. Fixed five excluded; missing hashes retained;
+suppressed cells are not zero. Numeric rates use the last revealed daily observation.
+Daily noon UTC anchors; straight connections and guide effects are illustrative.
+
+Client ribbon = daily usage leader, NOT verified release date. MCP Server ribbon =
+first-observed build hour, NOT a claimed global rollout. Initial .12 is not an event.
+Exact .14/.15 six-hour boundary is retained without widening or merging.
+Verified tool-description/argument-schema notes at .13/.15/.18/.19; .14 is unchanged.
+.17 guidance appears at observed .18, not an invented .17 deployment. Notes persist
+until superseded. Version changes and error rates are not causally attributed.
+
+Unmodified source data.json, daily.csv, changes.json, provenance.json and README are
+available through methodology/download controls and in data/tool-quality-version/.
+Append ?capture=1 for a controls-free stage; automated recording uses exact timestamps.
 -->

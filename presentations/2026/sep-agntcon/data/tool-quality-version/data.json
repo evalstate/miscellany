@@ -1,0 +1,414 @@
+{
+  "days": [
+    {
+      "date": "2026-08-25",
+      "claude": {
+        "calls": 4166,
+        "failures": 60,
+        "rate": 1.4402304368698993
+      },
+      "others": {
+        "calls": 9539,
+        "failures": 375,
+        "rate": 3.9312296886466087
+      },
+      "coverage_pct": 98.44131590288751,
+      "claude_version": "2.1.245",
+      "reported_daily_calls": 13922,
+      "visible_calls": 13705,
+      "omitted_client_cell_calls": 217
+    },
+    {
+      "date": "2026-08-26",
+      "claude": {
+        "calls": 6282,
+        "failures": 80,
+        "rate": 1.2734797835084368
+      },
+      "others": {
+        "calls": 8535,
+        "failures": 384,
+        "rate": 4.499121265377856
+      },
+      "coverage_pct": 98.35380019913707,
+      "claude_version": "2.1.246",
+      "reported_daily_calls": 15065,
+      "visible_calls": 14817,
+      "omitted_client_cell_calls": 248
+    },
+    {
+      "date": "2026-08-27",
+      "claude": {
+        "calls": 6943,
+        "failures": 114,
+        "rate": 1.6419415238369581
+      },
+      "others": {
+        "calls": 9973,
+        "failures": 477,
+        "rate": 4.782913867442094
+      },
+      "coverage_pct": 98.49199417758369,
+      "claude_version": "2.1.247",
+      "reported_daily_calls": 17175,
+      "visible_calls": 16916,
+      "omitted_client_cell_calls": 259
+    },
+    {
+      "date": "2026-08-28",
+      "claude": {
+        "calls": 6597,
+        "failures": 95,
+        "rate": 1.4400485068970745
+      },
+      "others": {
+        "calls": 9991,
+        "failures": 436,
+        "rate": 4.363927534781303
+      },
+      "coverage_pct": 98.70871764355846,
+      "claude_version": "2.1.250",
+      "reported_daily_calls": 16805,
+      "visible_calls": 16588,
+      "omitted_client_cell_calls": 217
+    },
+    {
+      "date": "2026-08-29",
+      "claude": {
+        "calls": 5491,
+        "failures": 86,
+        "rate": 1.5661992351120015
+      },
+      "others": {
+        "calls": 7370,
+        "failures": 273,
+        "rate": 3.704206241519674
+      },
+      "coverage_pct": 98.48380427291524,
+      "claude_version": "2.1.251",
+      "reported_daily_calls": 13059,
+      "visible_calls": 12861,
+      "omitted_client_cell_calls": 198
+    },
+    {
+      "date": "2026-08-30",
+      "claude": {
+        "calls": 5250,
+        "failures": 77,
+        "rate": 1.4666666666666666
+      },
+      "others": {
+        "calls": 9034,
+        "failures": 702,
+        "rate": 7.770644232897941
+      },
+      "coverage_pct": 98.44245348035837,
+      "claude_version": "2.1.251",
+      "reported_daily_calls": 14510,
+      "visible_calls": 14284,
+      "omitted_client_cell_calls": 226
+    },
+    {
+      "date": "2026-08-31",
+      "claude": {
+        "calls": 5669,
+        "failures": 81,
+        "rate": 1.4288234256482626
+      },
+      "others": {
+        "calls": 9743,
+        "failures": 479,
+        "rate": 4.916350200143693
+      },
+      "coverage_pct": 98.3535417996171,
+      "claude_version": "2.1.251",
+      "reported_daily_calls": 15670,
+      "visible_calls": 15412,
+      "omitted_client_cell_calls": 258
+    },
+    {
+      "date": "2026-09-01",
+      "claude": {
+        "calls": 6016,
+        "failures": 79,
+        "rate": 1.3131648936170213
+      },
+      "others": {
+        "calls": 11574,
+        "failures": 549,
+        "rate": 4.743390357698289
+      },
+      "coverage_pct": 98.78137810973213,
+      "claude_version": "2.1.252",
+      "reported_daily_calls": 17807,
+      "visible_calls": 17590,
+      "omitted_client_cell_calls": 217
+    },
+    {
+      "date": "2026-09-02",
+      "claude": {
+        "calls": 7459,
+        "failures": 101,
+        "rate": 1.3540689100415606
+      },
+      "others": {
+        "calls": 11244,
+        "failures": 462,
+        "rate": 4.108858057630736
+      },
+      "coverage_pct": 98.79562622154138,
+      "claude_version": "2.1.258",
+      "reported_daily_calls": 18931,
+      "visible_calls": 18703,
+      "omitted_client_cell_calls": 228
+    },
+    {
+      "date": "2026-09-03",
+      "claude": {
+        "calls": 6872,
+        "failures": 99,
+        "rate": 1.440628637951106
+      },
+      "others": {
+        "calls": 14166,
+        "failures": 512,
+        "rate": 3.61428773118735
+      },
+      "coverage_pct": 98.94647728341643,
+      "claude_version": "2.1.259",
+      "reported_daily_calls": 21262,
+      "visible_calls": 21038,
+      "omitted_client_cell_calls": 224
+    },
+    {
+      "date": "2026-09-04",
+      "claude": {
+        "calls": 6929,
+        "failures": 92,
+        "rate": 1.3277529224996392
+      },
+      "others": {
+        "calls": 11407,
+        "failures": 429,
+        "rate": 3.760848601735776
+      },
+      "coverage_pct": 98.36909871244636,
+      "claude_version": "2.1.260",
+      "reported_daily_calls": 18640,
+      "visible_calls": 18336,
+      "omitted_client_cell_calls": 304
+    },
+    {
+      "date": "2026-09-05",
+      "claude": {
+        "calls": 6128,
+        "failures": 87,
+        "rate": 1.4197127937336815
+      },
+      "others": {
+        "calls": 10676,
+        "failures": 387,
+        "rate": 3.624953165979768
+      },
+      "coverage_pct": 98.91688250529786,
+      "claude_version": "2.1.261",
+      "reported_daily_calls": 16988,
+      "visible_calls": 16804,
+      "omitted_client_cell_calls": 184
+    },
+    {
+      "date": "2026-09-06",
+      "claude": {
+        "calls": 7291,
+        "failures": 96,
+        "rate": 1.3166918118227953
+      },
+      "others": {
+        "calls": 12429,
+        "failures": 477,
+        "rate": 3.837798696596669
+      },
+      "coverage_pct": 98.91157145006771,
+      "claude_version": "2.1.263",
+      "reported_daily_calls": 19937,
+      "visible_calls": 19720,
+      "omitted_client_cell_calls": 217
+    },
+    {
+      "date": "2026-09-07",
+      "claude": {
+        "calls": 6834,
+        "failures": 107,
+        "rate": 1.565700907228563
+      },
+      "others": {
+        "calls": 13800,
+        "failures": 518,
+        "rate": 3.753623188405797
+      },
+      "coverage_pct": 99.01151631477927,
+      "claude_version": "2.1.263",
+      "reported_daily_calls": 20840,
+      "visible_calls": 20634,
+      "omitted_client_cell_calls": 206
+    },
+    {
+      "date": "2026-09-08",
+      "claude": {
+        "calls": 6244,
+        "failures": 91,
+        "rate": 1.4573991031390134
+      },
+      "others": {
+        "calls": 12096,
+        "failures": 435,
+        "rate": 3.5962301587301586
+      },
+      "coverage_pct": 99.1512137103314,
+      "claude_version": "2.1.263",
+      "reported_daily_calls": 18497,
+      "visible_calls": 18340,
+      "omitted_client_cell_calls": 157
+    },
+    {
+      "date": "2026-09-09",
+      "claude": {
+        "calls": 5443,
+        "failures": 120,
+        "rate": 2.204666544185192
+      },
+      "others": {
+        "calls": 12439,
+        "failures": 554,
+        "rate": 4.45373422300828
+      },
+      "coverage_pct": 98.74647965100226,
+      "claude_version": "2.1.266",
+      "reported_daily_calls": 18109,
+      "visible_calls": 17882,
+      "omitted_client_cell_calls": 227
+    },
+    {
+      "date": "2026-09-10",
+      "claude": {
+        "calls": 7804,
+        "failures": 181,
+        "rate": 2.319323423885187
+      },
+      "others": {
+        "calls": 13696,
+        "failures": 628,
+        "rate": 4.585280373831775
+      },
+      "coverage_pct": 99.11488106214273,
+      "claude_version": "2.1.267",
+      "reported_daily_calls": 21692,
+      "visible_calls": 21500,
+      "omitted_client_cell_calls": 192
+    },
+    {
+      "date": "2026-09-11",
+      "claude": {
+        "calls": 5923,
+        "failures": 87,
+        "rate": 1.4688502448083742
+      },
+      "others": {
+        "calls": 11912,
+        "failures": 663,
+        "rate": 5.5658159838818
+      },
+      "coverage_pct": 98.90749778172139,
+      "claude_version": "2.1.268",
+      "reported_daily_calls": 18032,
+      "visible_calls": 17835,
+      "omitted_client_cell_calls": 197
+    },
+    {
+      "date": "2026-09-12",
+      "claude": {
+        "calls": 5280,
+        "failures": 104,
+        "rate": 1.9696969696969697
+      },
+      "others": {
+        "calls": 16849,
+        "failures": 617,
+        "rate": 3.6619383939699683
+      },
+      "coverage_pct": 99.36239953302501,
+      "claude_version": "2.1.269",
+      "reported_daily_calls": 22271,
+      "visible_calls": 22129,
+      "omitted_client_cell_calls": 142
+    },
+    {
+      "date": "2026-09-13",
+      "claude": {
+        "calls": 6632,
+        "failures": 85,
+        "rate": 1.281664656212304
+      },
+      "others": {
+        "calls": 11683,
+        "failures": 612,
+        "rate": 5.2383805529401695
+      },
+      "coverage_pct": 98.93582541054451,
+      "claude_version": "2.1.270",
+      "reported_daily_calls": 18512,
+      "visible_calls": 18315,
+      "omitted_client_cell_calls": 197
+    }
+  ],
+  "server_events": [
+    {
+      "date": "2026-08-25T10:00:00Z",
+      "version": "0.4.13"
+    },
+    {
+      "date": "2026-08-26T12:00:00Z",
+      "version": "0.4.14"
+    },
+    {
+      "date": "2026-08-26T18:00:00Z",
+      "version": "0.4.15"
+    },
+    {
+      "date": "2026-09-09T10:00:00Z",
+      "version": "0.4.18"
+    },
+    {
+      "date": "2026-09-10T18:00:00Z",
+      "version": "0.4.19"
+    }
+  ],
+  "initial_server_version": "0.4.12",
+  "meta": {
+    "window": [
+      "2026-08-25",
+      "2026-09-13"
+    ],
+    "tool": "hf_fs",
+    "metric": "exclusive tool_quality failed calls / all calls in the selected published client cells",
+    "population": "fixed-five-excluded; missing hashes retained; original reconstruction corroborated by historical excluded totals",
+    "comparison": "Claude Code versus sum of explicitly non-Claude Code day_client cells; no all-total minus Claude subtraction",
+    "suppression": "Client/version/day cells have floor 20; omitted cells are not zero and not attributed to either group",
+    "coverage_denominator": "sum of published day_client calls / complete published day calls for hf_fs",
+    "coverage_pct_range": [
+      98.3535417996171,
+      99.36239953302501
+    ],
+    "client_event_semantics": "changed daily usage-leading Claude Code version; self-reported, not release dates or first-ever sightings",
+    "server_event_semantics": "first observed build hour from historical build aggregates; not verified release/deployment timestamps",
+    "counts": "calls, not batch operations; quality numerator excludes mixed-category failures and successful partial batches",
+    "caveats": [
+      "No deduplication; completeness unknown.",
+      "Attribution is not proof of client/server fault.",
+      "No causal inference from pulses or coincident changes.",
+      "Daily anchors UTC noon; intermediate line drawing is illustrative, not intraday samples."
+    ],
+    "classifier_policy": "tool-errors-v1",
+    "source_server_commit": "119a488653c1bbe46d8dce012a62dfc3f11f7817"
+  }
+}

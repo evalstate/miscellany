@@ -1,0 +1,53 @@
+{
+  "title": "1 tool call. 73 other messages. \u2014 animated keynote illustration",
+  "source_repo": "evalstate/hf-mcp-stats",
+  "source_revision": "3554a77eba80ec06d06af689bf26ee80b795fe14",
+  "window": [
+    "2026-06-01",
+    "2026-06-30"
+  ],
+  "counting": "Inbound MCP method invocations and notifications. Tool-call attempts include failures. Not responses/bytes/tokens.",
+  "cohort_policy": "All observed clients, including test traffic. No fixed-five exclusion. Not the canonical five-excluded protocol query-log chart.",
+  "coverage": {
+    "snapshots_scanned": 1078,
+    "snapshots_captured_in_month": 655,
+    "contributing_startup_streams": 18,
+    "wall_hours": 713.8246800000001,
+    "calendar_hours": 720,
+    "audit": {
+      "month_intervals": 657,
+      "month_intervals_over_24h": 5
+    }
+  },
+  "square_counts": {
+    "tool": 1,
+    "initialize": 27,
+    "listing": 39,
+    "other": 7
+  },
+  "exact_non_tool_messages_per_tool_call": 72.91097292652765,
+  "rounding": "Largest-remainder allocation to preserve 73 total non-tool squares",
+  "animation_semantics": "Illustrative category-grouped cascade, not a measured session sequence or latency. Category counters always match revealed squares.",
+  "build_inputs": [
+    {
+      "path": "summaries/legacy_june_2026/keynote/slide_data.json",
+      "sha256": "a8b46e0faf583fac5ae234a7dc4eee915c267113279da17626ba8a1c611834c4"
+    },
+    {
+      "path": "summaries/legacy_june_2026/manifest.json",
+      "sha256": "1b59c33fadc9d8c0953752e829285cb343bc7d09918cf16cef9f7fa7db25f8cf"
+    },
+    {
+      "path": "scripts/templates/message_ratio_animation.html",
+      "sha256": "7a4f5abcafae2d45c8045c53f55903c4922dd19408f5566ba6c9c4e6a159fc75"
+    },
+    {
+      "path": "scripts/build_message_animation.py",
+      "sha256": "8fcf8c07229e5ed527f610a291991b8432fcdb60d03b5544ae4b5672a9368c5d"
+    }
+  ],
+  "output": {
+    "file": "index.html",
+    "sha256": "3f85f7b43dc83ff6870a1c5f6bcddff6817711929883e8c326b62fea7e5c5c03"
+  }
+}
