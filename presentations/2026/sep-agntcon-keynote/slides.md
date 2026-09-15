@@ -47,7 +47,7 @@ Hugging Face MCP overview; early MCP as a bidirectional protocol.
 
 - Locally running STDIO Servers
 - MCP Client and Server were closely coupled
-- Came with a very basic remote transport (named "SSE").
+- Came with a simple remote transport (`SSE`).
 
 ---
 class: native-data-slide
@@ -152,7 +152,7 @@ Full source provenance, coverage caveats and hashes retained in
 - Changes both STDIO and HTTP Transports
 - Removes lifecycle handshakes
 - Adds caching and HTTP native features
-- Improved mechanism for Elicitations
+- Improved support for Elicitations
 <!--
 Section 4 of 7 · 5:00–6:00 · 1 minute
 Working section placeholder, not final slide copy.
@@ -253,8 +253,7 @@ Coverage of padded partitions does not prove complete real-world traffic.
 
 - Migrate to latest SDK Versions
 - Enable List Caching
-- Think stateless:- do you need `discover` or `subscribe`? 
-- Migrate away from Sampling/Roots
+- Stateless:- do you need `discover` or `subscribe`? 
 
 ---
 class: keynote-brand-slide

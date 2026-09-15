@@ -45,14 +45,14 @@
 
 /* Ordinary Markdown must be room-readable too, not only custom subtitles. */
 .slidev-layout.keynote-section :is(p, li) {
-  font-size: 32px;
+  font-size: 36px;
   line-height: 1.3;
 }
 
 .slidev-layout.keynote-section :is(ul, ol) {
   margin: 24px 0 0;
   padding-left: 1.15em;
-  font-size: 32px;
+  font-size: 36px;
 }
 
 .slidev-layout.keynote-section li {
@@ -68,6 +68,16 @@
   margin: 0;
 }
 
+
+/* Inline API names should read as emphasis, not default black/grey code chips. */
+.slidev-layout.keynote-section :not(pre) > code {
+  color: var(--keynote-accent);
+  background: #f3edff;
+  font-size: 0.95em;
+  font-weight: 600;
+  padding: 0.06em 0.18em;
+  border-radius: 0.15em;
+}
 
 /* Native migration of the June 2026 message-ratio keynote chart. */
 .slidev-layout.message-ratio-slide { padding: 0; background: #fff; }
