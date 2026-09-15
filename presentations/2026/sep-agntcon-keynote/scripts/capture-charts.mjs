@@ -10,14 +10,14 @@ const args = Object.fromEntries(process.argv.slice(2).map(arg => {
   const [key, ...value] = arg.replace(/^--/, '').split('='); return [key, value.join('=') || true];
 }));
 if (args.help) {
-  console.log('npm run capture:charts -- --chart=all|protocol-adoption|tool-quality-version --base=http://localhost:3031 --fps=30 --width=1920 --out=recordings --client=overall --viewport=full|seven --speed=4');
+  console.log('npm run capture:charts -- --chart=all|protocol-adoption|tool-quality-version|legacy-message-ratio|legacy-protocol-video --base=http://localhost:3030 --fps=30 --width=1920 --out=recordings --client=overall --viewport=full|seven --speed=4');
   process.exit(0);
 }
-const base = args.base ?? 'http://localhost:3031';
+const base = args.base ?? 'http://localhost:3030';
 const fps = Number(args.fps ?? 30), width = Number(args.width ?? 1920), height = width * 9 / 16;
 if (!Number.isInteger(fps) || fps < 1 || fps > 60 || !Number.isInteger(width) || width < 640 || width % 2 || !Number.isInteger(height) || height % 2) throw new Error('Use 1–60 FPS and even 16:9 dimensions, e.g. width 1280 or 1920.');
 const requested = args.chart ?? 'all';
-const charts = ['protocol-adoption', 'tool-quality-version'].filter(chart => requested === 'all' || chart === requested);
+const charts = ['protocol-adoption', 'tool-quality-version', 'legacy-message-ratio', 'legacy-protocol-video'].filter(chart => requested === 'all' || chart === requested);
 if (!charts.length) throw new Error('Unknown chart');
 const out = path.resolve(String(args.out ?? 'recordings'));
 await mkdir(out, { recursive: true });
@@ -77,14 +77,15 @@ try {
       const probe = JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-show_streams', '-show_format', '-of', 'json', output], { encoding: 'utf8' }));
       const video = probe.streams.find(stream => stream.codec_type === 'video');
       if (video.codec_name !== 'h264' || video.width !== width || video.height !== height || video.pix_fmt !== 'yuv420p' || Number(video.nb_frames) !== frameCount) throw new Error('Encoded output failed validation');
-      const dataFolder = chart === 'protocol-adoption' ? 'protocol-adoption' : 'tool-quality-version';
+      const dataFile = chart === 'legacy-protocol-video' ? 'data/legacy-protocol-video.provenance.json' : chart === 'legacy-message-ratio' ? 'data/legacy-message-ratio.provenance.json' : `data/${chart}/data.json`;
+      const provenanceFile = ['legacy-message-ratio', 'legacy-protocol-video'].includes(chart) ? dataFile : `data/${chart}/provenance.json`;
       const metadata = {
         chart, slide, dimensions: [width, height], fps, frameCount, leadMs, sourceDurationMs, playbackDurationMs: durationMs, tailMs,
         settings: chart === 'protocol-adoption' ? { client, viewport, speed: captureSpeed } : { speed: 1 },
         capture: 'Deterministic native SVG frames, H.264 MP4 / yuv420p / faststart, no audio, controls or cursor',
         privateAggregateWarning: 'Review the underlying aggregate data before external sharing. No upload performed.',
-        sourceDataSha256: createHash('sha256').update(await readFile(`data/${dataFolder}/data.json`)).digest('hex'),
-        provenanceSha256: createHash('sha256').update(await readFile(`data/${dataFolder}/provenance.json`)).digest('hex'),
+        sourceDataSha256: createHash('sha256').update(await readFile(dataFile)).digest('hex'),
+        provenanceSha256: createHash('sha256').update(await readFile(provenanceFile)).digest('hex'),
         deckSha256: createHash('sha256').update(markdown).digest('hex'),
         outputSha256: createHash('sha256').update(await readFile(output)).digest('hex'),
         finalState: await page.evaluate(() => window.__deckCapture.state), probe,

@@ -89,7 +89,7 @@ const y = (v: number) => 825 - v * 620;
 const x = (i: number) =>
   80 +
   ((i - bounds.value[0]) / Math.max(1, bounds.value[1] - bounds.value[0])) *
-    1100;
+    1420;
 const ticks = computed(() => {
   const [lo, hi] = bounds.value;
   const stride =
@@ -102,6 +102,7 @@ const ticks = computed(() => {
       : [],
   );
 });
+// Purple rolling7 leads; muted slate daily follows, with amber partial observations.
 // Preserve source drawing order: rolling first, then daily; line before its point.
 // Supplied rates/denominators are never recomputed. Only guide geometry interpolates.
 const seriesMarks = computed(() =>
@@ -118,7 +119,7 @@ const seriesMarks = computed(() =>
           v,
           date: r.date,
           partial,
-          color: partial ? amber : field === "daily_share" ? purple : slate,
+          color: partial ? amber : field === "daily_share" ? slate : purple,
           previous: previous?.[field],
           connected:
             !!previous &&
@@ -156,6 +157,22 @@ const plotted = computed(() =>
     }),
   })),
 );
+// Endpoint adornments are derived only from the reached, complete frame. Null
+// remains unavailable; no look-ahead or synthetic zero is used for either rate.
+const endpoints = computed(() =>
+  renderedPosition.value === lastIndex
+    ? plotted.value.flatMap(series => {
+        const mark = series.marks.find(m => m.i === index.value && m.dot);
+        return mark ? [{ ...mark, field: series.field }] : [];
+      })
+    : [],
+);
+const starPoints = (cx: number, cy: number) =>
+  Array.from({ length: 10 }, (_, i) => {
+    const angle = -Math.PI / 2 + i * Math.PI / 5;
+    const radius = i % 2 === 0 ? 13 : 5.5;
+    return `${cx + Math.cos(angle) * radius},${cy + Math.sin(angle) * radius}`;
+  }).join(" ");
 const status = computed(
   () =>
     `${playing.value ? "Playing" : "Paused"} · ${selected.value.label} · ${row.value.date}${row.value.partial ? " (partial)" : ""} · Daily ${pct(row.value.daily_share)} · Rolling7 ${pct(row.value.rolling_share)} (${row.value.rolling_start} – ${row.value.rolling_end})`,
@@ -351,7 +368,7 @@ defineExpose({
       >
         <title :id="`${uid}-title`">{{ title }} · {{ data.protocol }}</title>
         <desc :id="`${uid}-desc`">
-          Purple daily tool-call share and slate count-weighted rolling seven
+          Muted slate daily tool-call share and purple count-weighted rolling seven
           completed days. Five hashes excluded; recognized protocol versions
           only. Amber hollow point and dotted segment denote a partial day. Data
           table and snapshot provenance follow controls.
@@ -385,7 +402,7 @@ defineExpose({
             <g v-for="p in [0, 20, 40, 60, 80, 100]" :key="p">
               <line
                 x1="80"
-                x2="1180"
+                x2="1500"
                 :y1="y(p / 100)"
                 :y2="y(p / 100)"
                 stroke="#e7e9ee"
@@ -401,9 +418,15 @@ defineExpose({
               </text>
             </g>
           </g>
+          <g data-role="half-reference">
+            <line x1="80" x2="1500" :y1="y(0.5)" :y2="y(0.5)"
+              stroke="#94a3b8" stroke-dasharray="5 8" style="opacity: 0.45" />
+            <text x="65" :y="y(0.5) + 6" text-anchor="end"
+              fill="#64748b" style="font-size: 18px; opacity: 0.8">50%</text>
+          </g>
           <defs>
             <clipPath :id="`${uid}-clip`" clipPathUnits="userSpaceOnUse">
-              <rect x="70" y="195" width="1120" height="640" />
+              <rect x="70" y="195" width="1440" height="640" />
             </clipPath>
           </defs>
           <g data-role="lines" :clip-path="`url(#${uid}-clip)`">
@@ -422,21 +445,22 @@ defineExpose({
                   v-if="mark.line"
                   v-bind="mark.line"
                   :stroke="mark.color"
-                  :stroke-width="series.field === 'daily_share' ? 6 : 5"
+                  :stroke-width="series.field === 'daily_share' ? 2.5 : 7.5"
+                  :style="{ opacity: series.field === 'daily_share' && !mark.partial ? 0.6 : 1 }"
                   :stroke-dasharray="mark.partial ? '3 9' : undefined"
                   :stroke-linecap="mark.partial ? 'round' : undefined"
                   data-role="connection"
                 />
                 <circle
-                  v-if="mark.dot"
+                  v-if="mark.dot && !(renderedPosition === lastIndex && mark.i === index)"
                   :data-index="mark.i"
                   :data-field="series.field"
                   :cx="mark.cx"
                   :cy="mark.cy"
-                  :r="mark.partial ? 8 : 4"
+                  :r="mark.partial ? 8 : series.field === 'daily_share' ? 2.5 : 5"
                   :fill="mark.partial ? 'white' : mark.color"
                   :stroke="mark.color"
-                  stroke-width="3"
+                  :stroke-width="series.field === 'daily_share' ? 1.5 : 3"
                   data-role="point"
                 >
                   <title>
@@ -460,69 +484,51 @@ defineExpose({
               {{ t.label }}
             </text>
           </g>
-          <line x1="1210" x2="1210" y1="180" y2="860" stroke="#e7e9ee" />
-          <text
-            data-role="daily-heading"
-            x="1240"
-            y="205"
-            style="font-size: 20px"
-            font-weight="800"
-            fill="#6430d8"
-          >
-            DAILY
-          </text>
-          <text
-            data-role="daily"
-            x="1235"
-            y="298"
-            style="font-size: 76px"
-            font-weight="800"
-            :fill="row.partial ? amber : purple"
-          >
-            {{ pct(row.daily_share) }}
-          </text>
-          <text
-            data-role="partial-label"
-            x="1240"
-            y="340"
-            style="font-size: 22px"
-            :fill="row.partial ? amber : '#64748b'"
-          >
-            {{
-              row.partial ? "Partial day" : ""
-            }}
-          </text>
-          <text
-            x="1240"
-            y="465"
-            style="font-size: 20px"
-            font-weight="800"
-            fill="#475569"
-          >
-            ROLLING 7
-          </text>
-          <text
-            data-role="rolling"
-            x="1235"
-            y="558"
-            style="font-size: 76px"
-            font-weight="800"
-            fill="#475569"
-          >
-            {{ pct(row.rolling_share) }}
-          </text>
-          <text data-role="rolling-start" x="1240" y="603" style="font-size: 23px">
-            {{ row.rolling_start + " →" }}
-          </text>
-          <text data-role="rolling-end" x="1240" y="639" style="font-size: 23px">
-            {{ row.rolling_end + " UTC" }}
-          </text>
-          <text x="1240" y="800" style="font-size: 20px" fill="#6430d8">
-            ━ Daily
-          </text>
-          <text x="1240" y="837" style="font-size: 20px" fill="#475569">
-            ━ Rolling 7
-          </text>
+          <!-- Compact translucent inset: high client traces remain visible beneath
+               the backing, rather than disappearing behind a full plot mask. -->
+          <g data-role="kpi">
+            <rect x="90" y="216" width="560" height="220" rx="12"
+              fill="white" style="opacity: 0.88" />
+            <text data-role="rolling" x="100" y="290"
+              style="font-size: 104px" font-weight="800" :fill="purple">
+              {{ pct(row.rolling_share) }}
+            </text>
+            <text x="490" y="254" style="font-size: 19px"
+              font-weight="800" :fill="purple">ROLLING 7</text>
+            <text x="490" y="281" style="font-size: 17px"
+              fill="#64748b">count-weighted</text>
+            <text x="100" y="330" style="font-size: 26px" fill="#475569">
+              of tool calls · trailing 7 days
+            </text>
+            <text x="100" y="361" style="font-size: 19px" fill="#64748b">
+              <tspan data-role="rolling-start">{{ row.rolling_start }}</tspan>
+              <tspan> → </tspan>
+              <tspan data-role="rolling-end">{{ row.rolling_end }} UTC</tspan>
+              <tspan> · completed</tspan>
+            </text>
+            <text data-role="daily-heading" x="100" y="412"
+              style="font-size: 20px" font-weight="700" :fill="slate">Daily</text>
+            <text data-role="daily" x="162" y="414"
+              style="font-size: 40px" font-weight="700" :fill="row.partial ? amber : slate">
+              {{ pct(row.daily_share) }}
+            </text>
+            <text data-role="partial-label" x="320" y="412"
+              style="font-size: 20px" :fill="amber">{{ row.partial ? "○ Partial day" : "" }}</text>
+          </g>
+          <!-- Callouts are separate from the KPI test roles and point counts.
+               Daily sits above its endpoint, rolling below, including at 0/100%. -->
+          <g v-for="mark in endpoints" :key="mark.field"
+            data-role="endpoint" :data-field="mark.field">
+            <polygon :points="starPoints(mark.cx, mark.cy)"
+              :fill="mark.partial ? 'white' : mark.color" :stroke="mark.color"
+              stroke-width="2.5" stroke-linejoin="round" />
+            <text :x="mark.cx - 18"
+              :y="mark.field === 'daily_share' ? mark.cy - 22 : (mark.cy > 790 ? 892 : mark.cy + 39)"
+              text-anchor="end" :fill="mark.color" font-weight="800"
+              style="font-size: 30px; paint-order: stroke; stroke: white; stroke-width: 6px; stroke-linejoin: round">
+              {{ pct(mark.v) }}
+            </text>
+          </g>
         </g>
       </svg>
     </div>

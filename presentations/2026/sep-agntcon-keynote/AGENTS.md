@@ -14,6 +14,14 @@ This is a Slidev conference deck.
   terminal CPR/raw-keyboard issues: `CI=1 NO_COLOR=1 npx slidev slides.md </dev/null`.
 - Do not commit `node_modules/`, `dist/`, `dist-single/`, reports, or PDFs.
 
+## Palette and deck ownership
+
+- This is the white/purple keynote, not the HF transport deck. Use white backgrounds,
+  purple `#6430d8` (message-ratio tool `#4531ba`), slate `#475569`, dark text and Arial.
+- The former midnight/gold experiment is retired. Preserve approved chart styles.
+- `../sep-agntcon` is the separate HF/yellow transport deck. Do not edit it as part
+  of keynote work unless explicitly asked to coordinate both decks.
+
 ## Keynote readability — a primary requirement
 
 - The presenter strongly dislikes small fonts and unnecessary tiny detail.
@@ -58,9 +66,9 @@ This is a Slidev conference deck.
 ## This workspace
 
 - This is the standalone September AGNTCON keynote deck. Edit the root `slides.md`.
-- `../sep-agntcon` is the source deck; `../july-release-party` is the historical archive. Do not edit either as part of this deck.
-- `PLAN.md` holds the rough 10-minute keynote outline. `slides.md` contains seven large-type section placeholders matching it; timings are in speaker notes.
-- The original reference storyboards remain in `../sep-agntcon`; they are not part of the active keynote deck.
-- Animated charts are requested for the planned client migration section. The current placeholders are static and contain no data; keep other visuals static unless further animation is requested.
+- `../sep-agntcon` is the independent transport deck; `../july-release-party` is the historical archive. Do not edit either as part of this deck.
+- `PLAN.md` holds the rough 10-minute keynote outline. `slides.md` preserves the draft section prose and now includes six imported visual experiments; timings are in speaker notes.
+- The transport storyboards remain in `../sep-agntcon`; they are not part of the active keynote deck.
+- Animated charts are requested for the planned client migration section. The imported adoption and quality charts now contain pinned source data. Legacy traffic and the message-ratio animation were also explicitly requested; keep other visuals static.
 - The previously referenced protocol checkout is `/home/ssmith/source/modelcontextprotocol` (unavailable when this deck was copied). Locate and verify sources before developing protocol claims or behaviour.
-- `composables/useTimedStoryboard.ts` is available for future animation work; the current slides do not use it.
+- `composables/useTimedStoryboard.ts` is available for future animation work; the imported traffic and message-ratio components use it.

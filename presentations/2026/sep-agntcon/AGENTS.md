@@ -34,7 +34,8 @@ This is a Slidev conference deck.
 
 ## This workspace
 
-- This is the standalone September AGNTCON deck. Edit the root `slides.md`.
+- This is the September AGNTCON **transport** deck (HF/yellow styling). Edit the root `slides.md`.
+- The white/purple keynote lives in `../sep-agntcon-keynote`; its charts, data, capture tools and videos are owned there. Do not mix the two decks.
 - `../july-release-party` is the historical archive; do not edit it as part of this deck.
 - The starting deck is a ten-frame static elicitation storyboard. Keep it static
   unless animation is explicitly requested. Dialog buttons are illustrations.

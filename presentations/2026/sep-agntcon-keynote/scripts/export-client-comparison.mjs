@@ -3,7 +3,7 @@ import { parse } from '@slidev/parser';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import path from 'node:path';
-const base = process.env.SLIDEV_URL ?? 'http://localhost:3031';
+const base = process.env.SLIDEV_URL ?? 'http://localhost:3030';
 const out = path.resolve('recordings');
 await mkdir(out, { recursive: true });
 const markdown = await readFile('slides.md', 'utf8');
@@ -22,7 +22,16 @@ try {
     const clone = el.cloneNode(true);
     clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
     clone.setAttribute('width', '1600'); clone.setAttribute('height', '900');
-    clone.setAttribute('style', 'font-family:Arial,Helvetica,sans-serif;font-variant-numeric:tabular-nums;background:white');
+    // Resolve shared HF tokens into standalone SVG presentation styles.
+    const originals = [el, ...el.querySelectorAll('*')];
+    const copies = [clone, ...clone.querySelectorAll('*')];
+    const properties = ['fill', 'stroke', 'font-family', 'font-size', 'font-weight', 'letter-spacing', 'opacity'];
+    originals.forEach((node, i) => {
+      const computed = getComputedStyle(node);
+      for (const property of properties) copies[i].style.setProperty(property, computed.getPropertyValue(property));
+    });
+    clone.style.background = '#f9fafb';
+    clone.style.fontVariantNumeric = 'tabular-nums';
     return new XMLSerializer().serializeToString(clone);
   });
   await writeFile(path.join(out, 'client-adoption-contact-sheet.svg'), svg);

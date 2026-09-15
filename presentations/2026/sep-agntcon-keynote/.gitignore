@@ -7,3 +7,6 @@ reports/
 .DS_Store
 
 .fast-agent/
+
+recordings/
+.deck-backups/

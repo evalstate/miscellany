@@ -1,38 +1,60 @@
-# September AGNTCON Keynote
+# September AGNTCON — Keynote
 
-Independent Slidev deck copied from `../sep-agntcon` on 11 September 2026.
-The source deck and July archive are unchanged. No runtime imports depend on them.
+This is the **white/purple keynote deck**. Edit `slides.md` here for keynote content
+and ordering. The separate **HF/yellow transport deck** is `../sep-agntcon/`.
+Both decks are self-contained; no runtime imports link them.
 
-## Work here
+Your eight draft prose slides (with obvious typos corrected), notes, `PLAN.md` and `speaking-notes.md` are preserved.
+The prose now uses the same white/purple family as the approved visuals. The old
+midnight/gold experiment is retired. The preferred speaker intro and animated-fan
+HF server topology are restored at the start.
+
+## Preview and build
 
 ```sh
-cd ../sep-agntcon-keynote
 npm ci
-npm run dev -- --port 3031
+CI=1 NO_COLOR=1 npx slidev slides.md --port 3030 </dev/null
+npm run build
+npm run test:charts
 ```
 
-For an agent-managed dev server:
+Preview: http://localhost:3030/ (tests accept `SLIDEV_URL` to override).
 
-```sh
-CI=1 NO_COLOR=1 npx slidev slides.md --port 3031 </dev/null
-```
+## Current order
 
-## Talk plan
+| Slide | Content |
+| --- | --- |
+| 1 | Shaun Smith — original speaker intro format |
+| 2 | Hugging Face MCP Server — Clients → HTTP Router, animated GPU fan |
+| 3 | In the Beginning — draft prose |
+| 4 | MCP Communications — original layout/icons, slowed pulses, 5s highlights |
+| 5 | Streamable HTTP — draft prose |
+| 6 | Practical Challenges — draft prose |
+| 7 | 1 tool call / 73 other messages — lighter greys, shortened footer |
+| 8 | Observability — draft prose |
+| 9 | Tool Error Rate — approved 6% plot ceiling |
+| 10 | Stateless (2026-07-28) — draft prose |
+| 11 | 2026-07-28 MCP Communications — static crossed-out Roots/Sampling |
+| 12 | Migration Progress — draft prose |
+| 13 | Protocol Adoption — rolling-led reveal, larger figures, final stars |
+| 14 | Six-client contact sheet |
+| 15 | Deployment Tips — draft prose |
+| 16 | Beyond the transport — draft prose |
 
-See `PLAN.md` for the rough 10-minute outline and keynote readability priorities.
-`slides.md` contains seven large-type section placeholders matching that outline.
-Timings and planning details are in speaker notes, not tiny on-slide labels.
-The original elicitation and HTTP storyboards remain in `../sep-agntcon`.
+## Exports and data
 
-Edit `slides.md` for narrative and speaker notes; `style.css` for shared visuals.
-See `AGENTS.md` for editing and protocol-verification guidance.
+- `npm run capture:charts`: deterministic MP4 + poster exports.
+- `npm run export:comparison`: contact-sheet PNG/SVG.
+- `npm run export`: PDF; `npm run build:single`: standalone HTML build.
+- See `RECORDING.md` for capture options and Google Slides/PowerPoint guidance.
+- **Approved existing exports:** `recordings/README.md` lists canonical files.
+  Earlier variants remain available; videos are local, ignored and not uploaded.
+- Source aggregates and provenance moved unchanged to `data/`. Private review data:
+  review before public sharing. Fixed-five exclusions and window caveats remain
+  in the relevant source files and speaker notes. No data refresh during the split.
 
-## Commands
+Add prose slides with a Markdown heading and three or four bullets between `---`
+separators. Keep narrative in `slides.md`, shared appearance in `style.css`, and
+reusable visuals in `components/`. Read `AGENTS.md` before editing protocol claims.
 
-- `npm run build` — static site in `dist/`.
-- `npm run build:single` — single-file build in `dist-single/`.
-- `npm run export` — `sep-agntcon-keynote.pdf` (requires browser export tooling).
-- `npm run format` — format source files.
-
-The toolchain, lockfile, route setup, and optional storyboard composable are
-retained. Dependencies, build outputs, and agent runtime files were not copied.
+Pre-split source backup: `.deck-backups/sep-keynote-before-split.tgz` (local/ignored).

@@ -36,7 +36,8 @@ const changes = changeData.map(c => {
   return { ...c, time: event.time, logicalTime: timeForDate(event.time) }
 })
 const intervals: Record<Kind, Event[]> = { claude: leaders, server: [{ time: START, date: iso(START), version: data.initial_server_version, kind: 'server', initial: true }, ...servers] }
-const ymax = Math.max(8, Math.ceil(Math.max(...days.flatMap(d => [d.claude.rate, d.others.rate]))))
+// Fixed experimental viewport: preserve values above 6%; the plot clip hides them.
+const ymax = 6
 const y = (v: number) => 840 - v / ymax * 540
 const uid = `tqv-${useId().replace(/[^a-zA-Z0-9_-]/g, '')}`
 const clip = (name: string) => `url(#${uid}-${name})`
@@ -209,9 +210,9 @@ defineExpose({ seek, play, pause, reset, state, durationMs, renderAt })
         <rect width="1600" height="900" fill="white" />
         <text ref="measureNode" visibility="hidden" aria-hidden="true" />
         <rect x="45" y="36" width="9" height="48" rx="2" fill="#6430d8" />
-        <text x="80" y="76" style="font-size: 54px" font-weight="800" letter-spacing="-1.5"><slot name="title">{{ title }}</slot></text>
+        <text x="80" y="76" fill="#000" style="font-size: 54px" font-weight="800" letter-spacing="-1.5"><slot name="title">{{ title }}</slot></text>
         <text x="80" y="118" style="font-size: 22px" fill="#64748b"><slot name="subtitle">{{ subtitle }}</slot></text>
-        <text data-clock x="1510" y="76" text-anchor="end" style="font-size: 31px" font-weight="800">{{ date(Math.min(t, END - 1)).toUpperCase() }} 2026</text>
+        <text data-clock fill="#000" x="1510" y="76" text-anchor="end" style="font-size: 31px" font-weight="800">{{ date(Math.min(t, END - 1)).toUpperCase() }} 2026</text>
         <g data-axes :style="{ opacity: effectsOff ? 1 : clamp(clock / INTRO) }">
           <g v-for="v in ymax + 1" :key="v">
             <line x1="80" x2="1190" :y1="y(v - 1)" :y2="y(v - 1)" :stroke="v === 1 ? '#94a3b8' : '#e9ecf1'" stroke-width="1" />

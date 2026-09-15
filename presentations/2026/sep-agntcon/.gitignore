@@ -9,3 +9,5 @@ reports/
 
 # Locally generated video captures (private aggregates; review before sharing)
 recordings/
+
+.deck-backups/

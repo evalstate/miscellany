@@ -1,0 +1,11 @@
+{
+  "kind": "conceptual illustration, not telemetry",
+  "source": "Existing CommunicationTraffic legacy variant in this deck",
+  "protocolVersion": "2025-11-25",
+  "semantics": "Independent one-way activations; no lifecycle or literal method trace",
+  "travelMs": 1275,
+  "holdMs": 5000,
+  "durationMs": 37650,
+  "sequence": ["tools", "sampling", "resources", "elicitation", "prompts", "roots"],
+  "verification": "Protocol behaviour unchanged; documented local checkout unavailable"
+}

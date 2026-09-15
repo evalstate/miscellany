@@ -9,10 +9,7 @@
     "format": "prettier --write slides.md style.css composables/**/*.ts setup/**/*.ts vite.config.ts",
     "preview": "slidev build slides.md --base ./ --router-mode hash --out dist && vite preview dist --host 127.0.0.1 --port 4173",
     "build:single": "SLIDEV_SINGLEFILE=1 slidev build slides.md --base ./ --router-mode hash --out dist-single",
-    "open:single": "npm run build:single && xdg-open dist-single/index.html",
-    "capture:charts": "node scripts/capture-charts.mjs",
-    "test:charts": "node scripts/test-native-charts.mjs",
-    "export:comparison": "node scripts/export-client-comparison.mjs"
+    "open:single": "npm run build:single && xdg-open dist-single/index.html"
   },
   "devDependencies": {
     "@lucide/vue": "^1.17.0",

@@ -1,6 +1,6 @@
 ---
 theme: default
-title: Modern Elicitations — storyboard
+title: September AGNTCON Transport
 titleTemplate: "%s"
 transition: none
 fonts:
@@ -456,7 +456,6 @@ Static storyboard: advance manually. Fixed actor positions, no timers or animati
 Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
 -->
 
-
 ---
 
 <div class="es-heading"><span class="es-mode ">OLD WAY</span><span>HTTP Standardization</span><span>01 / 04</span></div>
@@ -483,7 +482,6 @@ Sources checked against local modelcontextprotocol/docs/specification: 2025-11-2
 The body is not encrypted or inherently unreadable. Existing HTTP infrastructure can parse JSON with custom logic, but ordinary header-based routing does not see the MCP method, tool name, or tool arguments. The LB/router is shown at the HTTP inspection point, after TLS termination.
 Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
 -->
-
 
 ---
 
@@ -512,7 +510,6 @@ Conceptual HTTP metadata, not a complete wire request. Standardization exposes s
 Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
 -->
 
-
 ---
 
 <div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>HTTP Standardization</span><span>03 / 04</span></div>
@@ -540,7 +537,6 @@ Illustrative tool names and deployment topology. Header-visible tool names allow
 Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
 -->
 
-
 ---
 
 <div class="es-heading"><span class="es-mode es-modern">OPTIONAL</span><span>HTTP Standardization</span><span>04 / 04</span></div>
@@ -566,134 +562,4 @@ Static storyboard: advance manually. Client, LB/router, and backend positions ar
 <!--
 Conceptual illustration of optional tool-declared argument-to-header copying, not literal header syntax. A declared sandbox_id argument can be mirrored into HTTP metadata so infrastructure can route to the appropriate sandbox backend. The body remains the source of truth; copied metadata must match it. Do not imply that arbitrary tool arguments, secrets, or the entire message are copied. Exact declaration and header syntax must be rechecked against the 2026-07-28 protocol checkout, which was unavailable in this workspace; the historical July deck was consulted read-only for context.
 Static storyboard: advance manually. Client, LB/router, and backend positions are fixed across all four frames. Yellow highlights indicate inspectable HTTP metadata, not an elicitation question.
--->
-
----
-class: message-ratio-slide
----
-
-<div class="message-ratio-frame">
-<LegacyMessageRatio>
-<template #heading="{ otherCount }">
-<h1><span class="message-ratio-tool-head">1 TOOL CALL.</span><span>{{ otherCount }} OTHER MESSAGES.</span></h1>
-</template>
-<template #footnote>Hugging Face MCP · June 2026 · Rounded average ratio, not a literal message sequence</template>
-</LegacyMessageRatio>
-</div>
-
-<!--
-Native Slidev migration of /home/evalstate/source/data-analysis/charts/legacy-message-animation/index.html.
-Click Play to begin; Pause/Resume, Replay, Show all, speed, and optional looping are
-available. Slidev owns fullscreen and navigation; there are no chart-global keyboard
-shortcuts. Reduced-motion and print/overview show the completed static chart.
-
-74 equal-sized squares: 1 tool call, 27 initialization, 39 listing, 7 other.
-The exact June 2026 aggregate ratio was 72.91097292652765 non-tool messages per
-tool-call attempt. Largest-remainder rounding preserves 73 non-tool squares.
-This counts inbound MCP method invocations and notifications, not responses,
-bytes or tokens. Tool-call attempts include failures. All observed clients,
-including test traffic; no fixed-five exclusion. These are historical transport
-counters, not the canonical five-excluded protocol query-log chart.
-Initialization includes initialize and notifications/initialized. Listing includes
-tools/list, prompts/list, resources/list and resources/templates/list. Other includes
-pings, resource operations, other notifications and prompt retrievals; some are
-legitimate. Non-tool does not mean useless or avoidable. Cascade timing/grouping is
-illustrative, not observed session ordering or latency. This is historical data,
-not a new claim about protocol lifecycle behaviour.
-
-Source: evalstate/hf-mcp-stats at 3554a77eba80ec06d06af689bf26ee80b795fe14.
-Window: 2026-06-01 through 2026-06-30; coverage 713.82468 of 720 wall hours.
-Full source provenance, coverage caveats and hashes retained in
- data/legacy-message-ratio.provenance.json. No data re-query or cohort changes.
--->
-
----
-class: native-data-slide
----
-
-<ChartRecordingStage chart="protocol-adoption" title="2026-07-28 Protocol Adoption (Tool Calls)" subtitle="" />
-
-<!--
-Native port of charts/protocol-adoption-dashboard from the local data-analysis workspace.
-Private aggregates: review before external sharing. This is a pinned snapshot, not live.
-Source evalstate/hf-mcp-logs @ 1b5b83fbc3b4be2870345edf498b2644167caf18.
-Window July 28–September 15, 2026 UTC; September 15 is partial. Source publication
-cutoff September 15 16:06:46 UTC does not guarantee ingestion completeness.
-
-Logged tool calls, not protocol messages or users; failures included, no deduplication.
-Fixed five hashes excluded across every client/version; missing hashes retained.
-Only recognized protocol versions enter the rate denominator; unknown/unreviewed
-versions remain in count tables. Null is unavailable, not zero. No sample threshold.
-Rolling7 is a strict count-weighted ratio over seven completed UTC dates, not a mean
-of daily percentages. A partial day uses the preceding seven completed calendar dates.
-Viewport selection changes visible dates, not the rolling denominator. KPIs use the
-last reached daily anchor (floor position). No lines bridge nulls/calendar gaps.
-Purple connections are illustrative reveals, not intraday estimates. Amber marks
-actual partial observations. Overall includes all retained client identities.
-Chat UI = chat-ui-mcp, not chat-ui-intern. Codex CLI = codex-mcp-client, not openai-mcp.
-No version/event evidence or causal interpretation is inferred.
-
-Data, raw selected-client count table and downloads are available via Data & provenance.
-Unmodified source JSON, CSV and provenance live in data/protocol-adoption/.
-Default playback is 4× (7.5 seconds of motion); source ratios/timestamps are unchanged.
-Stage decoration is omitted for keynote use; caveats remain in these notes and data.
-Append ?capture=1 for a controls-free stage; automated recording uses exact timestamps.
--->
-
----
-class: native-data-slide
----
-
-<div class="native-chart-stage">
-<ClientAdoptionComparison title="2026-07-28 Protocol Adoption (Tool Calls)" :capture="$route.query.capture === '1'" />
-</div>
-
-<!--
-Six-client contact sheet restyled from client-migration-chat-ui-20260914/client_migration_focus.png.
-Native SVG; source data are accessible in data/client-adoption-comparison/ and via
-Data & provenance. Private review aggregates: review before public sharing.
-
-IMPORTANT: this reference uses the completed July 28–September 14 snapshot at
-12c284c96e556c16aa7cb09ff1370dbbd6342941, not the preceding dashboard's partial
-September 15 snapshot. It also requires ≥100 valid calls for rates, unlike the
-unsuppressed dashboard. Do not treat missing rates as zero or compare those
-snapshots as if their dates/support policy were identical. No rate recomputation.
-Last7 September 8–14: 95.2%, 99.3%, 100.0%, 28.4%, 15.1%, 0.0% in panel order.
-
-Purple daily / slate count-weighted strict trailing-seven shares, common 0–100% axes.
-Activity bars retain actual all-protocol call counts with independent client scales:
-compare activity patterns within each panel, not relative popularity across panels.
-Unknown/unreviewed protocols enter volumes but not rate denominators. Fixed five
-excluded across client/version; missing hashes retained. Blank rates are unavailable.
-Identity labels preserve chat-ui-mcp (not chat-ui-intern) and codex-mcp-client
-(not openai-mcp (Codex)). Self-reported clients are not users or proven migrations.
-Coverage of padded partitions does not prove complete real-world traffic.
--->
-
----
-class: native-data-slide
----
-
-<ChartRecordingStage chart="tool-quality-version" title="Tool Error Rate" subtitle="hf_fs · daily quality-classified errors" />
-
-<!--
-Native port of charts/tool-quality-version-focus from the local data-analysis workspace.
-Private aggregate outputs: review before external sharing. No source refresh or remote scan.
-August 25–September 13, 2026 published tool-quality cells; newer local protocol snapshots
-lack the classifications required to extend this chart. Published cell coverage ~98–99%.
-Metric: exclusive tool_quality failed calls / selected calls, not all failures/operations.
-Disjoint Claude/non-Claude client cells. Fixed five excluded; missing hashes retained;
-suppressed cells are not zero. Numeric rates use the last revealed daily observation.
-Daily noon UTC anchors; straight connections and guide effects are illustrative.
-
-Client ribbon = daily usage leader, NOT verified release date. MCP Server ribbon =
-first-observed build hour, NOT a claimed global rollout. Initial .12 is not an event.
-Exact .14/.15 six-hour boundary is retained without widening or merging.
-Verified tool-description/argument-schema notes at .13/.15/.18/.19; .14 is unchanged.
-.17 guidance appears at observed .18, not an invented .17 deployment. Notes persist
-until superseded. Version changes and error rates are not causally attributed.
-
-Unmodified source data.json, daily.csv, changes.json, provenance.json and README are
-available through methodology/download controls and in data/tool-quality-version/.
-Append ?capture=1 for a controls-free stage; automated recording uses exact timestamps.
 -->
