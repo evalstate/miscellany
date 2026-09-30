@@ -1,0 +1,8 @@
+node_modules/
+dist/
+dist-single/
+.slidev/
+reports/
+.scratch/
+*.pdf
+.DS_Store
