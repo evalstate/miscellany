@@ -11,7 +11,7 @@ class: answer-lookup-slide
 <tbody>
 <tr><td class="al-n">414</td><td>requested the benchmark's own task material</td></tr>
 <tr><td class="al-n">184</td><td>asked for a solution, a test or a finished answer by URL</td></tr>
-<tr><td class="al-n">334</td><td>flagged with benchmark content arriving in context. In context means known.</td></tr>
+<tr><td class="al-n">334</td><td>had benchmark content arrive in the agent's context</td></tr>
 </tbody>
 </table>
 <p class="al-sub">Four tasks hold 93 of the 184 answer-request flags (50%), from 4% of trials.</p>

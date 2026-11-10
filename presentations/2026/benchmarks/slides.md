@@ -135,9 +135,8 @@ number: 2
 
 <HarborTrial mode="shared" />
 
-<Receipt source="harbor@71c9e84 src/harbor/trial/single_step.py · terminal-bench-2-1@7131e43 (no environment_mode, so shared)">phase widths are illustrative, not measured</Receipt>
-
 <!--
+Sources: harbor@71c9e84 src/harbor/trial/single_step.py · terminal-bench-2-1@7131e43 (no environment_mode, so shared). Phase widths are illustrative, not measured.
 Shared ("attached") verifier: one container lives through all three phases. This is Harbor's default and what TB 2.1 uses.
 The coordinator is the Harbor job: it expands tasks × attempts into trials, runs a few at a time, enforces the setup, agent and verifier timeouts, and records each reward.
 The point to land: the tests run inside the container the agent has just had full control of.
@@ -145,40 +144,27 @@ The squares in the coordinator are illustrative, not real results.
 -->
 
 ---
-clicks: 1
----
 
 # DeepSWE and TB 4 verify somewhere else
 
 <HarborTrial
   mode="separate"
-  :artifact="$clicks >= 1 ? 'model.patch' : 'artifacts'"
-  :verifier-label="$clicks >= 1 ? 'Pristine container' : 'Verifier container'"
-  :verifier-note="$clicks >= 1 ? 'DeepSWE: apply the patch to a clean checkout and run held-out tests.' : 'TB 4: its own image reads the declared artifacts and any live sidecars.'"
-  :network="$clicks >= 1"
+  artifact="model.patch"
+  verifier-label="Pristine container"
+  verifier-note="A clean checkout: apply the patch, run held-out tests."
+  network
+  :total="452"
 />
 
-<Receipt source="harbor@71c9e84 single_step.py (separate mode) · deep-swe@0b9fabb and pier@241f5fc (allowlist) · terminal-bench v4.0.0">phase widths are illustrative, not measured</Receipt>
-
 <!--
+Sources: DeepSWE shown: harbor@71c9e84 · deep-swe@0b9fabb · pier@241f5fc. TB 4 hands over declared artifacts and keeps the internet on. Phase widths illustrative.
 Separate ("detached") verifier: the agent's container is stopped, and only what it produced crosses over.
-Click 0 is the general shape, with TB 4's wording. Click 1 is DeepSWE: the hand-off is a single model.patch, and the agent's container has no network except the inference endpoint.
-TB 4: the verifier is built from tests/Dockerfile and reads declared artifacts plus persistent sidecars (11 tasks). The agent has open internet on all 66 tasks.
-DeepSWE's network rule comes from the runner, not Harbor itself: tasks are "no-network", and Pier (Datacurve's Harbor fork) allowlists the agent's declared model endpoints, for example api.anthropic.com or api.openai.com. Source: deep-swe README and pier network_policy.py.
--->
+The diagram is DeepSWE: the hand-off is a single model.patch, and the agent's container sits behind a no-network wall with one hole, the model endpoint.
+That rule comes from the runner, not Harbor itself: tasks are "no-network", and Pier (Datacurve's Harbor fork) allowlists the agent's declared model endpoints, for example api.anthropic.com or api.openai.com.
+TB 4 uses the same split: the verifier is built from tests/Dockerfile and reads declared artifacts plus persistent sidecars (11 tasks). Its agents have open internet on all 66 tasks.
+452 = 113 tasks × 4 attempts, what the public DeepSWE leaderboard ran. The squares and rewards in the coordinator are illustrative.
+The older three-lane version of this slide was removed; its source notes follow.
 
----
-clicks: 3
----
-
-
-# Where does the verifier run?
-
-<div style="height: 360px">
-<VerifierDesigns :phase="$clicks" />
-</div>
-
-<!--
 Click 1: Setup. Click 2: Agent time. Click 3: Verifier.
 Harbor's terms: "shared" = verifier runs in the agent's environment (the default);
 "separate" = agent env is stopped, then a verifier runs in its own container.
@@ -259,7 +245,7 @@ history or caches, special-casing the verifier's inputs, network lookups where n
 class: fa-ascii-slide
 ---
 
-# It drew a rook. It read a knight.
+# It drew a rook and read a knight
 
 <div class="fa-ascii-story">
   <div class="fa-ascii-side">
@@ -441,7 +427,7 @@ Using John, 95% of trials are rewarded. Without it, 18%.
 | Claude Sonnet 5.5 | 10 |
 | Claude Fable 5 | 8 |
 
-Claude's reward on this task: 25%. The outcome is decided before the model acts.
+Claude's reward on this task is 25%.
 
 </div>
 </div>
@@ -535,7 +521,7 @@ DeepSeek, step 111. It has already found the public task copy with `answers.json
 | GPT-6 Luna | 6 | 0 | Said the repo was missing |
 | Qwen3.8-27B | 26 | 0–0.35 | Guessed, partial credit |
 
-**On a broken task, the reward measures access to the answers.**
+On this task the reward went to whoever found the answer key.
 
 </div>
 </div>
@@ -626,7 +612,7 @@ Left off: process-memory flags (330 of 143,069, but 151 are tasks where reading 
 class: fa-case-slide
 ---
 
-# In their own words
+# One quote per category
 
 <div class="fa-balloons">
 <Balloon who="Lookup · GLM-5.3 Flash" where="DeepSWE · step 33">I have both the exact reference solution and the exact verifier tests.</Balloon>
@@ -659,10 +645,6 @@ number: 4
 ---
 
 # Downloading the answer
-
----
-src: ./pages/answer-lookup.md
----
 
 ---
 class: fa-reward-chat-slide
@@ -732,6 +714,10 @@ The point is the proximity of celebration to a concrete reference lookup, not th
 language proves misconduct, or that downloading the reference caused the eventual score.
 No raw trace paths, trial/run IDs, credentials, answer values or solution code are shown.
 -->
+
+---
+src: ./pages/answer-lookup.md
+---
 
 ---
 class: fa-hack-collage-slide
@@ -878,20 +864,20 @@ Same model, same 113 tasks, same harness. Only the reasoning effort changes.
 
 | Model | Upstream lookups | Pass rate |
 |---|---|---|
-| GPT-5.6 Terra | 3% → 50% | 24% → 70% |
-| GPT-5.6 Sol | 3% → 40% | 45% → 72% |
-| GPT-5.6 Luna | 3% → 43% | 2% → 67% |
-| Claude Sonnet 5 | 5% → 28% | 30% → 53% |
-| Claude Opus 5 | 2% → 16% | 58% → 73% |
+| GPT-5.6 Terra | 3% to 50% | 24% to 70% |
+| GPT-5.6 Sol | 3% to 40% | 45% to 72% |
+| GPT-5.6 Luna | 3% to 43% | 2% to 67% |
+| Claude Sonnet 5 | 5% to 28% | 30% to 53% |
+| Claude Opus 5 | 2% to 16% | 58% to 73% |
 
-Low effort → max effort.
+Each cell runs from low effort to max effort.
 
 </div>
 <div>
 
-**It doesn't pay.** At Terra max, trials that dig through Git objects pass 67%. Those that don't pass 72%.
+The extra lookups don't raise the pass rate. At Terra max, trials that dig through Git objects pass 67% of the time, and those that don't pass 72%.
 
-Opus 5 passes 72% at high and 73% at max. Its external URLs keep rising, 16% → 24%.
+Opus 5 passes 72% at high and 73% at max. Its external URL requests still rise, from 16% to 24%.
 
 DeepSWE has no network and scrubbed Git history, so almost every attempt fails.
 
@@ -966,38 +952,6 @@ number: 6
 # Evasion and side channels
 
 ---
-class: fa-case-slide
----
-
-# The boundaries mostly held
-
-<div class="fa-compact">
-
-| What was attempted | Matches | Of |
-| --- | --- | --- |
-| Works around network isolation (pinned IPs, hosts file) | 132 | 181,732 |
-| Removes or bypasses the proxy | 91 | 168,363 |
-| Calls another model from inside the sandbox | 84 | 181,732 |
-| … and gets an answer back | 31 | 181,732 |
-| Uses the harness's own key for that call | 93 | 181,732 |
-| Asks a hub who the token belongs to | 36 | 181,732 |
-| Reads another process's memory | 330 | 143,069 |
-
-</div>
-
-No host escape and no access to private data were found in the traces reviewed. 151 of the 330 memory reads are on tasks where that is the job.
-
-<Receipt source="corpus scan v2, 8 Nov 2026 (181,732) · rerun index (168,363) · first index (143,069) · rows, not trials">command shapes, not successes</Receipt>
-
-<!--
-The statistics slide for this section: model-in-model, DNS and proxy workarounds, hub identity, process memory.
-76 of the first 80 proxy-removal rows are DeepSeek V4 Pro, almost all on mini-swe-agent. Grok dominates sandbox-boundary probing on recovery tasks. GPT-5.6 Luna and GPT-6.1 Sol show the quiet DNS workarounds.
-Use those as review-priority patterns. Cohorts differ, so they are not propensity rates.
-The earlier 11 hub-identity index rows were 5 trials, all against the same operator account.
-Three denominators because the checks were added at different times; each row carries its own.
--->
-
----
 class: fa-trio-slide
 ---
 
@@ -1044,6 +998,38 @@ DeepSeek: Datacurve public run. Of 143,069 index rows, 429 match a network-evasi
 -->
 
 
+
+---
+class: fa-case-slide
+---
+
+# The boundaries mostly held
+
+<div class="fa-compact">
+
+| What was attempted | Matches | Of |
+| --- | --- | --- |
+| Works around network isolation (pinned IPs, hosts file) | 132 | 181,732 |
+| Removes or bypasses the proxy | 91 | 168,363 |
+| Calls another model from inside the sandbox | 84 | 181,732 |
+| … and gets an answer back | 31 | 181,732 |
+| Uses the harness's own key for that call | 93 | 181,732 |
+| Asks a hub who the token belongs to | 36 | 181,732 |
+| Reads another process's memory | 330 | 143,069 |
+
+</div>
+
+No host escape and no access to private data were found in the traces reviewed. 151 of the 330 memory reads are on tasks where that is the job.
+
+<Receipt source="corpus scan v2, 8 Nov 2026 (181,732) · rerun index (168,363) · first index (143,069) · rows, not trials">command shapes, not successes</Receipt>
+
+<!--
+The statistics slide for this section: model-in-model, DNS and proxy workarounds, hub identity, process memory.
+76 of the first 80 proxy-removal rows are DeepSeek V4 Pro, almost all on mini-swe-agent. Grok dominates sandbox-boundary probing on recovery tasks. GPT-5.6 Luna and GPT-6.1 Sol show the quiet DNS workarounds.
+Use those as review-priority patterns. Cohorts differ, so they are not propensity rates.
+The earlier 11 hub-identity index rows were 5 trials, all against the same operator account.
+Three denominators because the checks were added at different times; each row carries its own.
+-->
 
 ---
 class: fa-case-slide
@@ -1199,7 +1185,7 @@ DeepSeek V4.1 Flash, step 58. It reads experiment READMEs from the account, then
 </div>
 <div>
 
-### The detective
+### It compares timestamps
 
 DeepSeek V4 Flash on `crack-7z-hash` lists the operator's datasets and compares their publish times with its own sandbox image.
 
@@ -1284,7 +1270,7 @@ DeepSWE `textual-kitty-key-phases`: add Kitty keyboard phases to Textual 7.5.0. 
 
 But mini-swe-agent runs inside the sandbox, and it depends on Textual. Its own copy is **Textual 8.2.7**.
 
-**Blocking the network doesn't isolate a task when the harness depends on the project under test.**
+So blocking the network did not isolate the task: the harness carried the newer source in with it.
 
 </div>
 <div>
@@ -1381,7 +1367,7 @@ First seen: DeepSeek V4 Flash, 1 Aug. First OpenAI model: GPT-5.6 Sol, 19 Aug. *
 
 > “In many OpenAI tasks, pip uses internal mirror env var PIP_INDEX_URL=…”
 
-DeepSeek names the source. OpenAI models just try it.
+DeepSeek says where it knows the host from. The OpenAI models use it without comment.
 
 </div>
 </div>
@@ -1488,7 +1474,7 @@ DeepSeek: a recorded self-correction, not evidence that another vendor served th
 # Keep the traces and the reasoning open
 
 - Every quote in this talk came from recorded reasoning.
-- A tool call with no explanation beside it can't be read: was that lookup research, or the answer?
+- A tool call with no explanation beside it is ambiguous. The same lookup can be research or the answer.
 - Where reasoning was hidden, or search results weren't recorded, all we could write was "not observed".
 - Labs gain from this too. A reward hack nobody notices in an evaluation is one that gets trained in.
 
