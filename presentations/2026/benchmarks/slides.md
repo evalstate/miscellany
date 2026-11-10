@@ -265,13 +265,15 @@ number: 2
 
 
 ---
+class: fa-shot-slide
+---
 
 # Terminal-Bench 2.1: Anthropic and OpenAI
 
-<img src="/screens/tb21-leaderboard-anthropic-openai.png" class="fa-screenshot" alt="Terminal-Bench 2.1 leaderboard filtered to Anthropic and OpenAI agents" />
+<img src="/screens/tb21-leaderboard-fable-terra.png" class="fa-screenshot" alt="Terminal-Bench 2.1 leaderboard filtered to Fable 5 and GPT-5.6 Terra: Fable 5 xhigh on Claude Code 83.8%, Fable 5 high on Terminus 2 80.5%, GPT-5.6 Terra max on Codex 78.4%" />
 
 <!--
-Screenshot of the public Terminal-Bench 2.1 leaderboard, filtered to Anthropic and OpenAI agent orgs.
+Screenshot of the public Terminal-Bench 2.1 leaderboard, filtered to Fable 5 and GPT-5.6 Terra. Fable 5 xhigh on Claude Code 83.8% ± 2.3% ($0.6k); Fable 5 high on Terminus 2 80.5% ± 2.3% ($0.4k); GPT-5.6 Terra max on Codex 78.4% ± 2.5% ($0.4k).
 Use this when introducing atif-scan: the adjustments to the Anthropic and GPT-5.6 Terra scores after the reward-hacking review.
 -->
 
