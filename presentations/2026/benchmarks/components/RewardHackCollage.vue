@@ -135,10 +135,6 @@ defineProps<{ examples: Example[] }>();
 :global(.slidev-layout.fa-hack-collage-slide) {
   padding-top: 28px;
 }
-:global(.fa-hack-collage-slide h1) {
-  font-size: 43px;
-  margin-bottom: 18px;
-}
 :global(.fa-hack-collage-slide .fa-receipt) {
   margin-top: 7px;
   padding-top: 7px;

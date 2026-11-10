@@ -155,10 +155,6 @@ defineProps<{ examples: Example[] }>();
 :global(.slidev-layout.fa-reward-chat-slide) {
   padding-top: 30px;
 }
-:global(.fa-reward-chat-slide h1) {
-  margin-bottom: 16px;
-  font-size: 46px;
-}
 :global(.fa-reward-chat-slide .fa-receipt) {
   margin-top: 10px;
   padding-top: 8px;
