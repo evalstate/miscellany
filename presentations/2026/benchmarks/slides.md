@@ -50,62 +50,11 @@ number: 1
 # Why benchmark?
 
 ---
-
-
-<div class="fa-grid-4" style="margin-top: 12px">
-<Card>
-
-
-### Harness optimisers
-
-Did my change help, and what did it cost?
-
-<!-- cost of running has them has reduced come down -->
-<!-- show compaction threshold graphic -->
-
-</Card>
-<Card>
-
-### Consumers
-
-Which model and harness suit my task and budget?
-
-<!-- difficulty/solve rate from tb21 -->
-<!-- No refund for bad tokens / deepseek quality issue -->
-
-</Card>
-<Card>
-
-
-### Researchers
-
-Is the new checkpoint better?
-
-</Card>
-<Card>
-
-
-### Investors
-
-Who is ahead, do we continue to fund?
-
-</Card>
-</div>
-
-
-
-<!-- so benchmark integrity really really matters -->
-<!--
-DRAFT questions under each audience. Replace with your own framing.
-Cards are deliberately equal (paper): no one audience is "us", so no amber.
--->
-
----
 clicks: 5
 class: fa-case-slide
 ---
 
-# A full run got cheaper at each new model
+# Benchmarking got more affordable
 
 <RunCostByMonth :shown="$clicks + 1" />
 
@@ -132,7 +81,7 @@ This is the "cost of running them has come down" point for harness optimisers on
 class: fa-case-slide
 ---
 
-# Compact earlier: score up, cost down
+# Harness optimization: compaction point
 
 <CompactionCost />
 
@@ -153,7 +102,7 @@ Source: the fast-agent docs chart, docs/benchmark_data/tb4/compaction.py. Figure
 class: fa-ladder-slide
 ---
 
-# Calibrate reasoning for task difficulty
+# Effort level calibration for task difficulty
 
 <TaskHeatmap
   :runs="[
@@ -185,7 +134,7 @@ Data: data/luna-effort.json (built from bench-run luna6-*-6h trajectories).
 clicks: 1
 ---
 
-# Cheaper per token isn't cheaper per run
+# Meaningful price comparisons
 
 <ListVsRunCost
   :reveal="$clicks >= 1"
@@ -211,7 +160,7 @@ Source: fast-agent docs/benchmark_data/runs/fa-grok46-high.json and fa-sol-high.
 clicks: 2
 ---
 
-# Competitive pricing comparison
+# Competitive price setting
 
 <PricePoints
   :shown="$clicks"
@@ -247,7 +196,7 @@ Sources: fast-agent docs/benchmark_data/runs/luna56-high-6h.json and fa-deepseek
 class: fa-refunds-slide
 ---
 
-# No refunds for output tokens
+# No refunds for bad inference...
 
 <div class="fa-refunds">
 
@@ -274,28 +223,27 @@ Source: birchline status report, fast-agent-pr/.cdx/artifacts/birchline-status-2
 -->
 
 ---
-layout: default
+class: fa-shot-slide
 ---
 
-# Terminal-Bench 2.1: Anthropic and OpenAI
+# Research: Checkpoint quality
 
-<img src="/screens/tb21-leaderboard-anthropic-openai.png" class="fa-screenshot" alt="Terminal-Bench 2.1 leaderboard filtered to Anthropic and OpenAI agents" />
+<a href="https://mimo.xiaomi.com/rl/#overview" target="_blank" class="fa-shot-link"><img src="/screens/mimo-v2.6-rl-overview.png" class="fa-screenshot" alt="Xiaomi MiMo V2.6 RL training dashboard: DeepSWE v1.1, an in-house coding bench and AutomationBench scored at every checkpoint" /></a>
+
+<p class="fa-shot-caption">MiMo V2.6 RL run: every checkpoint scored on public benchmarks · <a href="https://mimo.xiaomi.com/rl/#overview" target="_blank">mimo.xiaomi.com/rl</a></p>
 
 <!--
-Screenshot of the public Terminal-Bench 2.1 leaderboard, filtered to Anthropic and OpenAI agent orgs.
-Use this when introducing atif-scan: the adjustments to the Anthropic and GPT-5.6 Terra scores after the reward-hacking review.
+Benchmarks as a research instrument: a training run uses them to judge each checkpoint, not just the final model.
+The MiMo V2.6 RL dashboard (Pro and Flash, started 15 Sep 2026, 30 steps) plots DeepSWE v1.1 (mini-swe-agent, avg@3), an in-house coding bench and AutomationBench v1.0.6 at every step.
+At step 30: DeepSWE 72.57 (Pro) and 65.68 (Flash). The run's dashboard shows a total cost of about $3.47M ($2.62M Pro, $0.85M Flash).
+This links to the next section's point: RL environments and benchmark environments look alike, so the same traces matter in both.
+Screenshot taken from the public page; figures as shown there.
 -->
 
 ---
-
-
-# Reading a benchmark
-
-Accuracy, Efficiency
-
-## Examples of Anthropic Model Fallbacks
-
+layout: default
 ---
+
 
 <!-- Up and to the right -->
 
@@ -315,15 +263,67 @@ number: 2
 
 # Running a benchmark
 
+
 ---
 
-# One Harbor trial: setup, task, verify
+# Terminal-Bench 2.1: Anthropic and OpenAI
+
+<img src="/screens/tb21-leaderboard-anthropic-openai.png" class="fa-screenshot" alt="Terminal-Bench 2.1 leaderboard filtered to Anthropic and OpenAI agents" />
+
+<!--
+Screenshot of the public Terminal-Bench 2.1 leaderboard, filtered to Anthropic and OpenAI agent orgs.
+Use this when introducing atif-scan: the adjustments to the Anthropic and GPT-5.6 Terra scores after the reward-hacking review.
+-->
+
+
+---
+class: fa-bench-slide
+---
+
+# The benchmarks behind these traces
+
+<div class="fa-bench">
+
+| | Tasks × attempts | Trials | Cost of one run | Agent internet | Verifier |
+|---|---|---|---|---|---|
+| **TB 2.1** | 89 × 5 | 445 | **$50** <small>GPT-6.1 Sol high</small> | open | shared |
+| **TB-lite** | 100 × 3 | 300 | **$31** <small>DeepSeek V4.1 Flash max</small> | open | shared |
+| **DeepSWE 1.1** | 113 × 4 | 452 | **$232** <small>GPT-6.1 Sol high</small> | model API only | separate |
+| **TB 4.0 and 4.1** | 66 × 5 | 330 | **$634** <small>GPT-6.1 Sol max</small> | open | separate |
+
+</div>
+
+<!--
+Sources: task.toml and README: terminal-bench-2-1@7131e43 · OpenThoughts-TBLite@f075e46 · deep-swe@0b9fabb · terminal-bench v4.0.0, v4.1.0. Attempts are the leaderboard protocol; DeepSWE states none (4 is what its public leaderboard ran); TB-lite's 3 is from our run definition, not its README.
+Cost of one run is a ballpark for a recent mid-priced model, at list-price equivalents (not invoices), and not on one harness:
+- TB 2.1: GPT-6.1 Sol high, fast-agent 0.10.43, 8 Oct 2026, $50.04 recorded (6-hour timeout variant). Medium was $31.20.
+- TB-lite: DeepSeek V4.1 Flash max (no Sol run on TB-lite), fast-agent, 13 Oct 2026, $31.07 over 300 trials (Hugging Face Novita route). GPT-6 Luna high was $1.94.
+- DeepSWE: GPT-6.1 Sol high, fast-agent on Pier/Daytona, 13 Oct 2026, ~$232 configured-pricing estimate over 452 trials (Copilot-billed; compute excluded). bench-run records/deepswe-sol61-high-copilot-2026-10-12.md.
+- TB 4: GPT-6.1 Sol max on Codex, the public leaderboard row, 29 Sep 2026, $634.24 over 330 trials. Our 19-task subset at high was $32.88 for 95 trials.
+Range for context: on TB 2.1 our runs go from under $1 (GPT-6 Luna low) to over $500 (Grok 4.7 medium).
+Previously on this slide: median time limit per task 15 min / 3 h / 8 h for TB 2.1 / DeepSWE / TB 4 (TB-lite 6 to 60 min); resources 1 CPU · 2 GB / 2 CPU · 8 GB / 2 CPU · 4 GB.
+Composition table checked 10 Nov 2026 against every task.toml.
+TB 2.1: README and leaderboard config require at least 5 trials per task. TB 4: SUBMIT.md says the same; 4.1 is a verifier-only regrade of the 4.0 trials, same 66 tasks.
+TB 4 agent internet is open on all 66; the two allow_internet = false lines are on the verifier's container (batched-eval-parity, lake-temp-glm).
+TB-lite is OpenThoughts-TBLite v2.0. Its verifier is shared, and 56 verifiers fetch tooling at verify time.
+DeepSWE: tasks are no-network; the runner (Pier, Datacurve's Harbor fork) allowlists only the agent's model endpoint.
+Agents' Last Exam is left out: the census bucket with that name is TB-lite tasks run on the pi harness, not ALE tasks.
+Dropped from the earlier version of this slide, still true: median agent timeout 15 min / 3 h / 8 h and median resources 1 CPU · 2 GB / 2 CPU · 8 GB / 2 CPU · 4 GB for TB 2.1 / DeepSWE / TB 4
+(medians of agent.timeout_sec and environment.cpus/memory_mb, computed 29 Sep 2026).
+Totals if useful: summed agent-timeout budget per single pass is ~42 h (TB 2.1), ~339 h (DeepSWE), ~528 h (TB 4).
+TB 4 max: 16 CPU / 32 GB; 3 GPU tasks. TB 2.1 max agent timeout 12000 s.
+Wall-clock and cost need our run data; state concurrency next to any time-to-run number.
+-->
+
+---
+
+# TB 2.1 and TB-lite: verify where the agent worked
 
 <HarborTrial mode="shared" />
 
 <!--
 Sources: harbor@71c9e84 src/harbor/trial/single_step.py · terminal-bench-2-1@7131e43 (no environment_mode, so shared). Phase widths are illustrative, not measured.
-Shared ("attached") verifier: one container lives through all three phases. This is Harbor's default and what TB 2.1 uses.
+Shared ("attached") verifier: one container lives through all three phases. This is Harbor's default, and what TB 2.1 and TB-lite use (TB-lite: 56 of its verifiers also fetch tooling at verify time).
 The coordinator is the Harbor job: it expands tasks × attempts into trials, runs a few at a time, enforces the setup, agent and verifier timeouts, and records each reward.
 The point to land: the tests run inside the container the agent has just had full control of.
 The squares in the coordinator are illustrative, not real results.
@@ -331,7 +331,7 @@ The squares in the coordinator are illustrative, not real results.
 
 ---
 
-# DeepSWE and TB 4 verify somewhere else
+# DeepSWE: no internet, a pristine verifier
 
 <HarborTrial
   mode="separate"
@@ -371,40 +371,27 @@ deep-swe@0b9fabb README.md + tasks/*/task.toml; terminal-bench v4.0.0 CONTRIBUTI
 -->
 
 ---
+class: fa-tb4-slide
+---
 
-# The benchmarks behind these traces
+# TB 4: open internet, a separate verifier
 
-<div class="fa-compact">
+<p class="fa-tb4-rule">TB 4 task instructions end: <q>You have 28800 seconds to complete this task. Do not cheat by using online solutions or hints specific to this task.</q></p>
 
-| | Tasks | Attempts | Trials per run | Agent internet | Verifier |
-| --- | --- | --- | --- | --- | --- |
-| **TB 2.1** | 89 | 5 | 445 | Open | Shared: tests run in the agent's container |
-| **TB-lite** | 100 | 3 | 300 | Open | Shared |
-| **DeepSWE 1.1** | 113 | 4 | 452 | None, except the model endpoint | Separate: one patch crosses over |
-| **TB 4.0 and 4.1** | 66 | 5 | 330 | Open | Separate: declared artifacts, sidecars on 11 tasks |
-
-</div>
-
-<Receipt source="task.toml and README: terminal-bench-2-1@7131e43 · OpenThoughts-TBLite@f075e46 · deep-swe@0b9fabb · terminal-bench v4.0.0, v4.1.0">
-Attempts are the leaderboard protocol. DeepSWE states none: 4 is what its public leaderboard ran. TB-lite's 3 is from our run definition, not its README.
-</Receipt>
-
-<!-- phoebus certel -->
-<!-- fighting against public apis, timeouts etc. -->
-
+<HarborTrial
+  mode="separate"
+  artifact="artifacts"
+  verifier-label="Verifier image"
+  verifier-note="Its own image: reads the declared artifacts and live sidecars."
+  :total="330"
+/>
 
 <!--
-Composition table checked 10 Nov 2026 against every task.toml.
-TB 2.1: README and leaderboard config require at least 5 trials per task. TB 4: SUBMIT.md says the same; 4.1 is a verifier-only regrade of the 4.0 trials, same 66 tasks.
-TB 4 agent internet is open on all 66; the two allow_internet = false lines are on the verifier's container (batched-eval-parity, lake-temp-glm).
-TB-lite is OpenThoughts-TBLite v2.0. Its verifier is shared, and 56 verifiers fetch tooling at verify time.
-DeepSWE: tasks are no-network; the runner (Pier, Datacurve's Harbor fork) allowlists only the agent's model endpoint.
-Agents' Last Exam is left out: the census bucket with that name is TB-lite tasks run on the pi harness, not ALE tasks.
-Dropped from the earlier version of this slide, still true: median agent timeout 15 min / 3 h / 8 h and median resources 1 CPU · 2 GB / 2 CPU · 8 GB / 2 CPU · 4 GB for TB 2.1 / DeepSWE / TB 4
-(medians of agent.timeout_sec and environment.cpus/memory_mb, computed 29 Sep 2026).
-Totals if useful: summed agent-timeout budget per single pass is ~42 h (TB 2.1), ~339 h (DeepSWE), ~528 h (TB 4).
-TB 4 max: 16 CPU / 32 GB; 3 GPU tasks. TB 2.1 max agent timeout 12000 s.
-Wall-clock and cost need our run data; state concurrency next to any time-to-run number.
+TB 4 (4.0 and 4.1): separate verifier is required. The agent container is torn down; the verifier is built from tests/Dockerfile (ground truth baked in, never visible to the agent) and reads only the declared artifacts, its own image, and persistent sidecars from environment/docker-compose.yaml (11 of 66 tasks).
+Agents have open internet on all 66 tasks. Instead of a network wall, TB 4 asks: every task instruction ends with the time budget and "Do not cheat by using online solutions or hints specific to this task." The seconds vary by task (28800 = 8 h is the common case). TB 2.1's instructions have no such line.
+Checked: all 31 TB 4 instruction.md files in the local Harbor task cache end with that line; TB 2.1 has none (terminal-bench-2-1 repo).
+4.1 is a verifier-only regrade of the 4.0 trials, same 66 tasks. 330 = 66 × 5.
+Sources: terminal-bench v4.0.0 CONTRIBUTING.md "Tests"; harbor task cache (terminal-bench/*/instruction.md).
 -->
 
 ---
@@ -425,6 +412,26 @@ Some of the tricks models use to pass:
 Collect concrete examples from our traces (with task IDs).
 Candidate categories to check against our traces: reading or editing the tests, finding answers in git
 history or caches, special-casing the verifier's inputs, network lookups where not intended.
+-->
+
+---
+class: fa-ascii-slide
+---
+
+# No eyes? Print the board.
+
+<ChessAsciiGallery />
+
+<Receipt source="6 trials, 30 Apr – 13 Aug 2026 · TB 2.1 chess-best-move · every character is verbatim tool output" />
+
+<!--
+The task: a PNG of a chess position, white to move, write the best move to a file.
+A text-only model can't open the image, so it writes a few lines of Python that print the pixels as characters and reads the result. Some models that can see do the same on other harnesses: Claude Opus 4.7 and GPT-5.5 here are on terminus-2.
+All six tiles are the same square, d8, the black queen, exactly as each agent printed it.
+DeepSeek V4 Flash, fast-agent 0.9.30, 2 Aug 2026, step 22, reward 1. Grok 4.6, nano-grok-build 0.6.4, 13 Aug, step 11, reward 1. Claude Opus 4.7, terminus-2 2.0.0, 30 Apr, step 19, reward 1. GPT-5.5, terminus-2 2.0.0, 30 Apr, step 6, reward 1. GLM-5.1, claude-code 2.1.123, 1 May, step 26, reward 0. GPT-5.5, agav 0.1.0, 13 Aug, step 8, reward 1.
+In our own fast-agent runs, 28 of 1,013 print the board as ASCII, and 27 of those never read the image. 21 of the 28 are DeepSeek V4 Flash.
+Grids are set on square cells so they keep the picture's proportions; in a terminal they looked about twice as tall.
+The board image is regenerated from the task's own generator; it matches two agents' prints at 98–99% of characters.
 -->
 
 ---
@@ -464,94 +471,6 @@ Verbatim renders and quotes; masked atif-inspect. Don't show the trial ID public
 class: fa-ascii-slide
 ---
 
-# Building its own eyes
-
-> <q>I could actually use my vision by examining crops as ASCII art.</q>
-
-<div class="fa-ascii-guide">
-  <div><AsciiArt art="kingE1" label="e1 K" /><p>king by cross</p></div>
-  <div><AsciiArt art="queenD8" label="d8 q" /><p>queen by crown</p></div>
-  <div><AsciiArt art="rookA8" label="a8 r" /><p>rooks by battlements</p></div>
-  <div><AsciiArt art="bishopC1" label="c1 B" /><p>bishops by mitre</p></div>
-  <div><AsciiArt art="knightC6" label="c6 N" /><p>knights by head</p></div>
-  <div><AsciiArt art="pawnB7" label="b7" /><p>pawns by head + base</p></div>
-</div>
-
-<Receipt n="45 (21 draw ASCII: 5 pass; 9 of 24 without)" date="31 Jul – 9 Aug 2026" model="DeepSeek V4 Flash" harness="fast-agent 0.9.30–0.10.3 (44) · TB 2.1" />
-
-<!--
-OPTION B: field guide. Captions are the model's own classification rules, from its final answer (step 35).
-Quote is step 5 of the same trial. Renders are the model's own output, steps 22–27.
-Rendering ASCII art doesn't raise the success rate. It's ingenuity, not an advantage.
--->
-
----
-class: fa-ascii-slide
----
-
-# Pixels, glyphs, position, move
-
-<div class="fa-ascii-pipe">
-  <div><AsciiArt art="board" label="step 4 · whole board" :size="5" /><p>Brightness to characters. <q>A bit noisy.</q></p></div>
-  <span class="fa-ascii-arrow" aria-hidden="true">❯</span>
-  <div><AsciiArt art="knightC3" label="step 23 · c3" :size="7" /><p>Crop, mask, read the silhouette.</p></div>
-  <span class="fa-ascii-arrow" aria-hidden="true">❯</span>
-  <div>
-<pre class="fa-ascii-fen">r . b q . r . .
-. p . . . p p .
-p . n . p . . .
-. . . n P k b P
-. . . . . . . .
-P . N . . . . .
-. P . . Q P P .
-R . B . K . . R</pre>
-  <p>Step 28: the position, checked with python-chess.</p></div>
-  <span class="fa-ascii-arrow" aria-hidden="true">❯</span>
-  <div>
-<pre class="fa-ascii-fen fa-ascii-move">g2g4
-e2e4</pre>
-  <p>Stockfish 16: mate in one. Reward 1.</p></div>
-</div>
-
-<Receipt n="1 trial" date="2 Aug 2026" model="DeepSeek V4 Flash (max)" harness="fast-agent 0.9.30 · TB 2.1 chess-best-move" />
-
-<!--
-OPTION C: the whole pipeline on one line. No numpy, OpenCV or Stockfish in the image at the start; it installs them (steps 7–20).
-The board grid is the step 28 python-chess print, verbatim.
--->
-
----
-class: fa-ascii-slide
----
-
-# When OCR reads SALT as CALT
-
-<div class="fa-ascii-code">
-  <div>
-<pre class="fa-ascii-fen fa-ascii-ocr">def main ():
-CALT = 6’0000TBENCH-SALT”
-hO = cha256(img_ bytes)
-H = chaz56(ho, hof:10], SALT)</pre>
-  <p>Step 8: tesseract's reading of the image.</p>
-  </div>
-  <div><AsciiArt art="codeSal" label="step 14 · first word, as ASCII" :size="5" /><p>Step 12: <q>render lines as ASCII art… to read it myself.</q></p></div>
-  <div>
-<pre class="fa-ascii-fen fa-ascii-move">b'0000TBENCH-SALT'
-total found: 1</pre>
-  <p>Step 16: hash every candidate reading; keep the one matching the <code>bee26a…</code> hint.</p>
-  </div>
-</div>
-
-<Receipt n="1 (20 of 80 render ASCII)" date="12 Aug 2026" model="DeepSeek V4 Flash" harness="fast-agent 0.10.4 · TB 2.1" />
-
-<!--
-OPTION D: same trick on text, not pieces. The ASCII view helps it localise the garbled characters; the hash check settles it. Reward 1.
--->
-
----
-class: fa-ascii-slide
----
-
 # How 1,013 runs tackled the chess task
 
 <ChessSankey />
@@ -569,21 +488,20 @@ Rendering ASCII doesn't raise the success rate. Reaching for an engine does.
 class: fa-ascii-slide
 ---
 
-# Stockfish helps most models, not all
+# Which models reach for the engine
 
-Pooled: 70% rewarded with Stockfish, 41% without. Within the same model the gap is 20 points.
+<ChessStrategyByModel />
 
-<ChessEngineByModel />
-
-<Receipt n="847 trials (pooled figures: 1,013)" date="12 Jul – 6 Nov 2026" model="9 families with 8+ trials each way" harness="fast-agent 0.9.6–0.10.53 · TB 2.1 chess-best-move" />
+<Receipt n="971 trials, 12 model families with 18 or more" date="12 Jul – 6 Nov 2026" model="as listed; families merge versions and effort levels" harness="fast-agent 0.9.6–0.10.53 · TB 2.1 chess-best-move" />
 
 <!--
-Is the engine effect just model mix? Partly. Use varies from 17% of Claude runs to 93% of GPT-6 Astra runs, and the stronger models use it more.
-Stratified by model the gap falls from 29 points to 20. Two families go the other way: GPT-5.6 Sol and GPT-5.6 Terra do no better with it.
-GPT-5.5 never ran Stockfish and was rewarded 16 of 18 times; it isn't on the chart (no engine arm).
-Correlation, not an experiment: cohorts, effort settings and dates differ.
+Same trials as the Sankey, split by model family and sorted by how often each runs Stockfish.
+GPT-6 Astra runs Stockfish in 93% of trials and is rewarded in 97%. Claude runs it in 17%; in 40% of its trials it uses no chess library at all and answers from looking at the board. GPT-5.5 never runs Stockfish, uses python-chess every time, and is still rewarded 16 of 18 times.
+GPT-6 Luna is the largest group: mostly python-chess without an engine, rewarded 18% of the time.
+DeepSeek V4 Flash can't see the image: 21 of its 44 trials print the board as ASCII. Printing doesn't raise its success rate.
+Labels are pattern matches on the agent's own tool calls. This is correlation across cohorts: effort settings and dates differ.
+Earlier version of this slide compared reward with and without Stockfish per model (ChessEngineByModel.vue, still in the repo): pooled 70% against 41%, 20 points within the same model.
 -->
-
 
 ---
 src: ./pages/zork-walkthrough.md

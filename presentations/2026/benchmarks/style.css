@@ -431,7 +431,42 @@
 .fa-refunds p.fa-refunds-meta { margin: 0; font-size: 13px; color: var(--text-muted); }
 .fa-refunds-bad { font-weight: 800; text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 3px; text-underline-offset: 4px; }
 
+/* ---------- Benchmarks table (open style: rules only) ---------- */
+
+.fa-bench-slide h1 { margin-bottom: 28px; }
+.slidev-layout .fa-bench table {
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 18px;
+}
+.slidev-layout .fa-bench th {
+  background: none;
+  border-bottom: var(--border);
+  padding: 10px 12px 10px 0;
+  vertical-align: bottom;
+  font-size: 11px;
+}
+.slidev-layout .fa-bench td {
+  padding: 16px 12px 16px 0;
+  border-bottom: 2px solid var(--line);
+  white-space: nowrap;
+}
+.slidev-layout .fa-bench td:first-child { font-family: var(--font-voice); font-size: 22px; letter-spacing: var(--track-voice); }
+.slidev-layout .fa-bench td:nth-child(n + 5) { font-size: 15px; color: var(--text-muted); }
+.slidev-layout .fa-bench td strong { font-size: 24px; font-weight: 900; font-variant-numeric: tabular-nums; margin-right: 6px; }
+.slidev-layout .fa-bench td small { font-size: 13px; color: var(--text-muted); }
+
+/* ---------- TB 4 rule line ---------- */
+
+.slidev-layout p.fa-tb4-rule { margin: -6px 0 14px; font-size: 17px; color: var(--text-muted); }
+.fa-tb4-rule q { quotes: "“" "”"; font-style: italic; color: var(--petrol); font-weight: 600; }
+
 /* ---------- Screenshot slides ---------- */
+
+.fa-shot-link { display: block; border: 0 !important; text-decoration: none !important; }
+.slidev-layout p.fa-shot-caption { margin: 14px 0 0; text-align: center; font-size: 16px; color: var(--text-muted); }
+.fa-shot-slide .fa-screenshot { height: 340px !important; width: auto !important; max-width: 100%; }
 
 .fa-screenshot {
   display: block;
@@ -481,7 +516,9 @@
 .fa-chess-panel .fa-default-body > p:empty { display: none; }
 
 /* ---------- Zork walkthrough (pages/zork-walkthrough.md) ---------- */
-.zork-slide .zork-task { display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; align-items: start; }
+.zork-slide .zork-task { display: grid; grid-template-columns: 604px 1fr; gap: 28px; align-items: start; }
+.zork-slide .zork-columns > div > p:not(.zork-small) { font-size: 18px; }
+.zork-slide .fa-rates + .zork-small, .zork-slide .zork-columns .zork-small { margin-top: 12px; }
 .zork-slide figure { margin: 0; }
 .zork-slide figure video { display: block; width: 100%; border: var(--border); border-radius: var(--radius-md); }
 .zork-slide figcaption { font: 500 13px/1.4 var(--font-read); color: var(--text-muted); margin-top: 6px; }
