@@ -30,17 +30,17 @@ const parts = computed(() => !isRun.value ? [] : [
 .fa-receipt {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 18px;
+  gap: 2px 14px;
   margin: 0;
-  padding-top: 10px;
+  padding-top: 6px;
   border-top: 2px solid var(--line);
-  font: 500 13px/1.4 var(--font-read);
+  font: 500 12px/1.35 var(--font-read);
   color: var(--text-muted);
   font-variant-numeric: tabular-nums;
 }
 .fa-receipt b {
   font-weight: 700;
-  letter-spacing: var(--track-label);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   font-size: 12px;
   margin-right: 4px;

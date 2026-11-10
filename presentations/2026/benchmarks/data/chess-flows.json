@@ -1,0 +1,319 @@
+{
+ "n": 1013,
+ "families": 19,
+ "minArm": 8,
+ "versions": [
+  "0.9.6",
+  "0.10.53"
+ ],
+ "dates": [
+  "2026-07-12",
+  "2026-11-06"
+ ],
+ "dated": 997,
+ "ascii": 28,
+ "asciiNoImage": 27,
+ "links": [
+  {
+   "path": [
+    "image",
+    "none"
+   ],
+   "n": 61
+  },
+  {
+   "path": [
+    "image",
+    "none",
+    "fail"
+   ],
+   "n": 57
+  },
+  {
+   "path": [
+    "image",
+    "none",
+    "pass"
+   ],
+   "n": 4
+  },
+  {
+   "path": [
+    "image",
+    "pychess"
+   ],
+   "n": 396
+  },
+  {
+   "path": [
+    "image",
+    "pychess",
+    "fail"
+   ],
+   "n": 202
+  },
+  {
+   "path": [
+    "image",
+    "pychess",
+    "pass"
+   ],
+   "n": 194
+  },
+  {
+   "path": [
+    "image",
+    "stockfish"
+   ],
+   "n": 474
+  },
+  {
+   "path": [
+    "image",
+    "stockfish",
+    "fail"
+   ],
+   "n": 126
+  },
+  {
+   "path": [
+    "image",
+    "stockfish",
+    "pass"
+   ],
+   "n": 348
+  },
+  {
+   "path": [
+    "noimage",
+    "none"
+   ],
+   "n": 22
+  },
+  {
+   "path": [
+    "noimage",
+    "none",
+    "fail"
+   ],
+   "n": 21
+  },
+  {
+   "path": [
+    "noimage",
+    "none",
+    "pass"
+   ],
+   "n": 1
+  },
+  {
+   "path": [
+    "noimage",
+    "pychess"
+   ],
+   "n": 21
+  },
+  {
+   "path": [
+    "noimage",
+    "pychess",
+    "fail"
+   ],
+   "n": 14
+  },
+  {
+   "path": [
+    "noimage",
+    "pychess",
+    "pass"
+   ],
+   "n": 7
+  },
+  {
+   "path": [
+    "noimage",
+    "stockfish"
+   ],
+   "n": 39
+  },
+  {
+   "path": [
+    "noimage",
+    "stockfish",
+    "fail"
+   ],
+   "n": 24
+  },
+  {
+   "path": [
+    "noimage",
+    "stockfish",
+    "pass"
+   ],
+   "n": 15
+  },
+  {
+   "path": [
+    "none",
+    "fail"
+   ],
+   "n": 78
+  },
+  {
+   "path": [
+    "none",
+    "pass"
+   ],
+   "n": 5
+  },
+  {
+   "path": [
+    "pychess",
+    "fail"
+   ],
+   "n": 216
+  },
+  {
+   "path": [
+    "pychess",
+    "pass"
+   ],
+   "n": 201
+  },
+  {
+   "path": [
+    "stockfish",
+    "fail"
+   ],
+   "n": 150
+  },
+  {
+   "path": [
+    "stockfish",
+    "pass"
+   ],
+   "n": 363
+  }
+ ],
+ "models": [
+  {
+   "model": "Claude",
+   "n": 52,
+   "withEngine": [
+    9,
+    9
+   ],
+   "without": [
+    43,
+    16
+   ]
+  },
+  {
+   "model": "GPT-6.1 Terra",
+   "n": 135,
+   "withEngine": [
+    51,
+    51
+   ],
+   "without": [
+    84,
+    50
+   ]
+  },
+  {
+   "model": "Grok",
+   "n": 104,
+   "withEngine": [
+    86,
+    69
+   ],
+   "without": [
+    18,
+    8
+   ]
+  },
+  {
+   "model": "GPT-6 Luna",
+   "n": 201,
+   "withEngine": [
+    46,
+    20
+   ],
+   "without": [
+    155,
+    18
+   ]
+  },
+  {
+   "model": "DeepSeek V4 Flash",
+   "n": 44,
+   "withEngine": [
+    28,
+    10
+   ],
+   "without": [
+    16,
+    3
+   ]
+  },
+  {
+   "model": "GLM",
+   "n": 56,
+   "withEngine": [
+    26,
+    16
+   ],
+   "without": [
+    30,
+    14
+   ]
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "n": 129,
+   "withEngine": [
+    96,
+    41
+   ],
+   "without": [
+    33,
+    11
+   ]
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "n": 89,
+   "withEngine": [
+    43,
+    32
+   ],
+   "without": [
+    46,
+    39
+   ]
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "n": 37,
+   "withEngine": [
+    11,
+    3
+   ],
+   "without": [
+    26,
+    12
+   ]
+  }
+ ],
+ "crude": {
+  "withEngine": [
+   513,
+   363
+  ],
+  "without": [
+   500,
+   206
+  ]
+ },
+ "withinModelDiff": 0.207
+}
