@@ -1,0 +1,3257 @@
+{
+ "generated": "2026-11-10",
+ "scanner": "v0.8.23",
+ "sources": [
+  "https://evalstate-tb21-annotated.static.hf.space",
+  "https://evalstate-tb21-submissions-annotated.static.hf.space",
+  "https://evalstate-tb21-fast-agent-annotated.static.hf.space"
+ ],
+ "dates": [
+  "2025-11-18",
+  "2026-11-07"
+ ],
+ "total": {
+  "rows": 65,
+  "trials": 28932,
+  "rewarded": 22792,
+  "lookup": 511,
+  "lookupRewarded": 426,
+  "received": 317,
+  "own": 132
+ },
+ "kinds": [
+  {
+   "key": "own",
+   "label": "Own task's solution or tests",
+   "trials": 132,
+   "rewarded": 122,
+   "received": 130,
+   "tasks": [
+    [
+     "extract-elf",
+     20
+    ],
+    [
+     "db-wal-recovery",
+     14
+    ],
+    [
+     "count-dataset-tokens",
+     9
+    ]
+   ]
+  },
+  {
+   "key": "material",
+   "label": "Other benchmark material",
+   "trials": 187,
+   "rewarded": 170,
+   "received": 187,
+   "tasks": [
+    [
+     "mteb-leaderboard",
+     49
+    ],
+    [
+     "count-dataset-tokens",
+     20
+    ],
+    [
+     "build-pov-ray",
+     16
+    ]
+   ]
+  },
+  {
+   "key": "upstream",
+   "label": "Upstream fix",
+   "trials": 64,
+   "rewarded": 64,
+   "received": 0,
+   "tasks": [
+    [
+     "fix-ocaml-gc",
+     62
+    ],
+    [
+     "regex-chess",
+     1
+    ],
+    [
+     "polyglot-rust-c",
+     1
+    ]
+   ]
+  },
+  {
+   "key": "git",
+   "label": "Git objects",
+   "trials": 64,
+   "rewarded": 29,
+   "received": 0,
+   "tasks": [
+    [
+     "sanitize-git-repo",
+     33
+    ],
+    [
+     "merge-diff-arc-agi-task",
+     13
+    ],
+    [
+     "git-multibranch",
+     5
+    ]
+   ]
+  },
+  {
+   "key": "search",
+   "label": "Search only",
+   "trials": 64,
+   "rewarded": 41,
+   "received": 0,
+   "tasks": [
+    [
+     "mteb-leaderboard",
+     12
+    ],
+    [
+     "torch-pipeline-parallelism",
+     9
+    ],
+    [
+     "extract-elf",
+     7
+    ]
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "site": "submissions",
+   "agent": "Devin CLI",
+   "model": "SWE-1.7",
+   "effort": "max",
+   "date": "2026-08-13",
+   "webHidden": 39,
+   "webTrials": 157,
+   "trials": 445,
+   "rewarded": 357,
+   "lookup": 81,
+   "lookupRewarded": 71,
+   "received": 74,
+   "own": 37,
+   "kinds": {
+    "own": 37,
+    "material": 37,
+    "upstream": 5,
+    "git": 0,
+    "search": 2
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.24",
+   "model": "DeepSeek V4.1 Flash",
+   "effort": "max",
+   "date": "2026-09-11",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 423,
+   "lookup": 58,
+   "lookupRewarded": 57,
+   "received": 42,
+   "own": 21,
+   "kinds": {
+    "own": 21,
+    "material": 21,
+    "upstream": 5,
+    "git": 5,
+    "search": 6
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Cursor CLI",
+   "model": "Grok 4.5",
+   "effort": "high",
+   "date": "2026-07-08",
+   "webHidden": 0,
+   "webTrials": 103,
+   "trials": 445,
+   "rewarded": 393,
+   "lookup": 50,
+   "lookupRewarded": 48,
+   "received": 49,
+   "own": 15,
+   "kinds": {
+    "own": 15,
+    "material": 34,
+    "upstream": 1,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-5.6 Terra",
+   "effort": "max",
+   "date": "2026-06-26",
+   "webHidden": 0,
+   "webTrials": 74,
+   "trials": 445,
+   "rewarded": 350,
+   "lookup": 46,
+   "lookupRewarded": 41,
+   "received": 35,
+   "own": 8,
+   "kinds": {
+    "own": 8,
+    "material": 27,
+    "upstream": 3,
+    "git": 5,
+    "search": 3
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Slai Agent Runtime",
+   "model": "GPT-5.5 xhigh",
+   "effort": "none",
+   "date": "2026-08-22",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 445,
+   "lookup": 20,
+   "lookupRewarded": 20,
+   "received": 20,
+   "own": 20,
+   "kinds": {
+    "own": 20,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.9.30",
+   "model": "DeepSeek V4 Flash",
+   "effort": "max",
+   "date": "2026-08-02",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 336,
+   "lookup": 20,
+   "lookupRewarded": 13,
+   "received": 6,
+   "own": 5,
+   "kinds": {
+    "own": 5,
+    "material": 1,
+    "upstream": 5,
+    "git": 3,
+    "search": 6
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.13",
+   "model": "DeepSeek V4 Flash Vision (exp)",
+   "effort": "max",
+   "date": "2026-08-28",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 370,
+   "lookup": 17,
+   "lookupRewarded": 13,
+   "received": 3,
+   "own": 3,
+   "kinds": {
+    "own": 3,
+    "material": 0,
+    "upstream": 5,
+    "git": 1,
+    "search": 8
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "Grok 4.7",
+   "effort": "medium",
+   "date": "2026-10-04",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 402,
+   "lookup": 16,
+   "lookupRewarded": 15,
+   "received": 7,
+   "own": 7,
+   "kinds": {
+    "own": 7,
+    "material": 0,
+    "upstream": 1,
+    "git": 1,
+    "search": 7
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Mobile Coder",
+   "model": "DeepSeek V4 Flash",
+   "effort": "max",
+   "date": "2026-08-15",
+   "webHidden": 5,
+   "webTrials": 32,
+   "trials": 445,
+   "rewarded": 266,
+   "lookup": 13,
+   "lookupRewarded": 11,
+   "received": 5,
+   "own": 5,
+   "kinds": {
+    "own": 5,
+    "material": 0,
+    "upstream": 4,
+    "git": 1,
+    "search": 3
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Agav",
+   "model": "GPT-5.5",
+   "effort": "none",
+   "date": "2026-08-13",
+   "webHidden": 0,
+   "webTrials": 64,
+   "trials": 445,
+   "rewarded": 377,
+   "lookup": 11,
+   "lookupRewarded": 6,
+   "received": 7,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 6,
+    "upstream": 0,
+    "git": 1,
+    "search": 3
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Dext",
+   "model": "GPT-5.6 Sol",
+   "effort": "xhigh",
+   "date": "2026-08-07",
+   "webHidden": 0,
+   "webTrials": 103,
+   "trials": 445,
+   "rewarded": 346,
+   "lookup": 11,
+   "lookupRewarded": 8,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 3,
+    "git": 1,
+    "search": 5
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.11",
+   "model": "GLM-5.3-Flash",
+   "effort": "max",
+   "date": "2026-08-27",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 376,
+   "lookup": 11,
+   "lookupRewarded": 10,
+   "received": 4,
+   "own": 4,
+   "kinds": {
+    "own": 4,
+    "material": 0,
+    "upstream": 5,
+    "git": 2,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.12",
+   "model": "GPT-5.6 Luna",
+   "effort": "max",
+   "date": "2026-08-28",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 366,
+   "lookup": 11,
+   "lookupRewarded": 9,
+   "received": 3,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 2,
+    "upstream": 4,
+    "git": 2,
+    "search": 2
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "IndusAGI",
+   "model": "GPT-5.6 Sol",
+   "effort": "xhigh",
+   "date": "2026-08-19",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 452,
+   "rewarded": 356,
+   "lookup": 10,
+   "lookupRewarded": 9,
+   "received": 5,
+   "own": 5,
+   "kinds": {
+    "own": 5,
+    "material": 1,
+    "upstream": 1,
+    "git": 3,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.9.15",
+   "model": "GPT-5.6 Terra",
+   "effort": "high",
+   "date": "2026-07-18",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 346,
+   "lookup": 10,
+   "lookupRewarded": 5,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 2,
+    "git": 8,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "GPT-6 Luna",
+   "effort": "high",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 336,
+   "lookup": 9,
+   "lookupRewarded": 5,
+   "received": 7,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 7,
+    "upstream": 0,
+    "git": 2,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Claude Code",
+   "model": "Sonnet 5",
+   "effort": "high",
+   "date": "2026-06-30",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 335,
+   "lookup": 8,
+   "lookupRewarded": 5,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 4,
+    "git": 2,
+    "search": 1
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Ouroboros",
+   "model": "Grok 4.5",
+   "effort": "medium",
+   "date": "2026-07-15",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 383,
+   "lookup": 8,
+   "lookupRewarded": 6,
+   "received": 7,
+   "own": 4,
+   "kinds": {
+    "own": 4,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Ouroboros",
+   "model": "Grok 4.5",
+   "effort": "none",
+   "date": "2026-07-09",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 355,
+   "lookup": 8,
+   "lookupRewarded": 6,
+   "received": 4,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 3,
+    "upstream": 0,
+    "git": 3,
+    "search": 1
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Claude Code",
+   "model": "Haiku 4.5",
+   "effort": "high",
+   "date": "2026-07-30",
+   "webHidden": 0,
+   "webTrials": 14,
+   "trials": 445,
+   "rewarded": 172,
+   "lookup": 8,
+   "lookupRewarded": 3,
+   "received": 8,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 8,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.9",
+   "model": "Grok 4.6",
+   "effort": "high",
+   "date": "2026-08-16",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 388,
+   "lookup": 8,
+   "lookupRewarded": 8,
+   "received": 5,
+   "own": 5,
+   "kinds": {
+    "own": 5,
+    "material": 0,
+    "upstream": 3,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-5.6 Luna",
+   "effort": "max",
+   "date": "2026-06-26",
+   "webHidden": 0,
+   "webTrials": 19,
+   "trials": 445,
+   "rewarded": 341,
+   "lookup": 7,
+   "lookupRewarded": 7,
+   "received": 7,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 7,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.10",
+   "model": "Grok 4.6",
+   "effort": "medium",
+   "date": "2026-08-24",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 390,
+   "lookup": 7,
+   "lookupRewarded": 4,
+   "received": 3,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 2,
+    "upstream": 1,
+    "git": 0,
+    "search": 3
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "GPT-6 Luna",
+   "effort": "max",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 359,
+   "lookup": 7,
+   "lookupRewarded": 4,
+   "received": 4,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 4,
+    "upstream": 0,
+    "git": 3,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Claude Code",
+   "model": "Opus 4.7",
+   "effort": "max",
+   "date": "2026-04-16",
+   "webHidden": 0,
+   "webTrials": 18,
+   "trials": 445,
+   "rewarded": 310,
+   "lookup": 6,
+   "lookupRewarded": 6,
+   "received": 5,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 5,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.9.24",
+   "model": "GPT-5.6 Sol",
+   "effort": "high",
+   "date": "2026-07-26",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 393,
+   "lookup": 6,
+   "lookupRewarded": 5,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 4,
+    "git": 2,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.53",
+   "model": "Kimi K3.1 Pro",
+   "effort": "high",
+   "date": "2026-11-07",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 392,
+   "lookup": 6,
+   "lookupRewarded": 5,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 4,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "GPT-6 Luna",
+   "effort": "xhigh",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 347,
+   "lookup": 5,
+   "lookupRewarded": 5,
+   "received": 5,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 4,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.46",
+   "model": "GPT-5.6 Luna",
+   "effort": "high",
+   "date": "2026-10-18",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 339,
+   "lookup": 5,
+   "lookupRewarded": 4,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 2,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "max",
+   "date": "2026-09-03",
+   "webHidden": 301,
+   "webTrials": 309,
+   "trials": 445,
+   "rewarded": 386,
+   "lookup": 4,
+   "lookupRewarded": 4,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 1,
+    "git": 3,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "xhigh",
+   "date": "2026-09-03",
+   "webHidden": 279,
+   "webTrials": 282,
+   "trials": 445,
+   "rewarded": 382,
+   "lookup": 4,
+   "lookupRewarded": 3,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 4,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Gemini CLI",
+   "model": "Gemini 3 Pro",
+   "effort": "high",
+   "date": "2025-11-18",
+   "webHidden": 4,
+   "webTrials": 33,
+   "trials": 445,
+   "rewarded": 295,
+   "lookup": 4,
+   "lookupRewarded": 3,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 4
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.43",
+   "model": "GPT-6 Astra",
+   "effort": "high",
+   "date": "2026-10-09",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 394,
+   "lookup": 4,
+   "lookupRewarded": 4,
+   "received": 3,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-5.5",
+   "effort": "xhigh",
+   "date": "2026-04-23",
+   "webHidden": 0,
+   "webTrials": 39,
+   "trials": 445,
+   "rewarded": 371,
+   "lookup": 3,
+   "lookupRewarded": 2,
+   "received": 0,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 1,
+    "git": 0,
+    "search": 1
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Gemini CLI",
+   "model": "Gemini 3.1 Pro",
+   "effort": "high",
+   "date": "2026-02-19",
+   "webHidden": 4,
+   "webTrials": 17,
+   "trials": 445,
+   "rewarded": 294,
+   "lookup": 3,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 3
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.48",
+   "model": "GPT-6.1 Terra",
+   "effort": "medium",
+   "date": "2026-10-27",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 385,
+   "lookup": 3,
+   "lookupRewarded": 3,
+   "received": 3,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 2,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.9.21",
+   "model": "GPT-5.6 Sol",
+   "effort": "medium",
+   "date": "2026-07-23",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 365,
+   "lookup": 3,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 2,
+    "search": 1
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "GPT-6 Luna",
+   "effort": "medium",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 334,
+   "lookup": 3,
+   "lookupRewarded": 2,
+   "received": 3,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "effort": "xhigh",
+   "date": "2026-06-09",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 374,
+   "lookup": 2,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "mini-SWE-agent",
+   "model": "Muse Spark 1.1",
+   "effort": "xhigh",
+   "date": "2026-07-09",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 339,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Ouroboros",
+   "model": "GPT-5.5",
+   "effort": "none",
+   "date": "2026-07-05",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 374,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.43",
+   "model": "GPT-6.1 Sol",
+   "effort": "high",
+   "date": "2026-10-08",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 381,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "high",
+   "date": "2026-09-03",
+   "webHidden": 252,
+   "webTrials": 256,
+   "trials": 445,
+   "rewarded": 389,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "medium",
+   "date": "2026-09-03",
+   "webHidden": 207,
+   "webTrials": 210,
+   "trials": 445,
+   "rewarded": 387,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Ouroboros",
+   "model": "Claude Opus 5",
+   "effort": "high",
+   "date": "2026-07-26",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 387,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "IndusAGI",
+   "model": "GPT-6 Astra",
+   "effort": "xhigh",
+   "date": "2026-09-08",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 386,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "Linghun",
+   "model": "GPT-5.5",
+   "effort": "xhigh",
+   "date": "2026-07-20",
+   "webHidden": 4,
+   "webTrials": 7,
+   "trials": 445,
+   "rewarded": 349,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "OrcaTerm AI",
+   "model": "GLM-5.2-FP8",
+   "effort": "none",
+   "date": "2026-08-05",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 285,
+   "lookup": 1,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.43",
+   "model": "Haiku 5.5",
+   "effort": "high",
+   "date": "2026-10-08",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 370,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "GPT-6.1 Sol",
+   "effort": "medium",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 364,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "GPT-6 Luna",
+   "effort": "low",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 203,
+   "lookup": 1,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "low",
+   "date": "2026-09-03",
+   "webHidden": 170,
+   "webTrials": 178,
+   "trials": 445,
+   "rewarded": 386,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "effort": "high",
+   "date": "2026-06-09",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 358,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Claude Code",
+   "model": "Opus 4.8",
+   "effort": "high",
+   "date": "2026-05-28",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 351,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Terminus 2",
+   "model": "GPT-5.5",
+   "effort": "xhigh",
+   "date": "2026-04-23",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 348,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Terminus 2",
+   "model": "Gemini 3 Pro",
+   "effort": "high",
+   "date": "2025-11-18",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 331,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Terminus 2",
+   "model": "Opus 4.7",
+   "effort": "max",
+   "date": "2026-04-16",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 294,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Terminus 2",
+   "model": "Gemini 3.1 Pro",
+   "effort": "high",
+   "date": "2026-02-19",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 294,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Claude Code",
+   "model": "GLM-5.1",
+   "effort": "max",
+   "date": "2026-03-27",
+   "webHidden": 1,
+   "webTrials": 19,
+   "trials": 445,
+   "rewarded": 261,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "submissions",
+   "agent": "ACE",
+   "model": "Doubao-Seed-2.1-Pro",
+   "effort": "none",
+   "date": "2026-08-23",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 225,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "Opus 5.5",
+   "effort": "high",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 394,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "Opus 5.5",
+   "effort": "medium",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 386,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "Sonnet 5.5",
+   "effort": "high",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 378,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.43",
+   "model": "Haiku 5.5",
+   "effort": "medium",
+   "date": "2026-10-08",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 368,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "Sonnet 5.5",
+   "effort": "medium",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 364,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.43",
+   "model": "Haiku 5.5",
+   "effort": "low",
+   "date": "2026-10-08",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 356,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  }
+ ],
+ "models": [
+  {
+   "model": "SWE-1.7",
+   "trials": 445,
+   "lookup": 81,
+   "received": 74,
+   "runs": 1
+  },
+  {
+   "model": "Grok 4.5",
+   "trials": 1335,
+   "lookup": 66,
+   "received": 60,
+   "runs": 3
+  },
+  {
+   "model": "DeepSeek V4.1 Flash",
+   "trials": 445,
+   "lookup": 58,
+   "received": 42,
+   "runs": 1
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "trials": 890,
+   "lookup": 56,
+   "received": 35,
+   "runs": 2
+  },
+  {
+   "model": "GPT-6 Luna",
+   "trials": 2225,
+   "lookup": 25,
+   "received": 19,
+   "runs": 5
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "trials": 1335,
+   "lookup": 23,
+   "received": 12,
+   "runs": 3
+  },
+  {
+   "model": "DeepSeek V4 Flash",
+   "trials": 890,
+   "lookup": 33,
+   "received": 11,
+   "runs": 2
+  },
+  {
+   "model": "GPT-5.5",
+   "trials": 2225,
+   "lookup": 17,
+   "received": 9,
+   "runs": 5
+  },
+  {
+   "model": "Grok 4.6",
+   "trials": 890,
+   "lookup": 15,
+   "received": 8,
+   "runs": 2
+  },
+  {
+   "model": "Haiku 4.5",
+   "trials": 445,
+   "lookup": 8,
+   "received": 8,
+   "runs": 1
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "trials": 1787,
+   "lookup": 30,
+   "received": 7,
+   "runs": 4
+  },
+  {
+   "model": "Grok 4.7",
+   "trials": 445,
+   "lookup": 16,
+   "received": 7,
+   "runs": 1
+  },
+  {
+   "model": "Opus 4.7",
+   "trials": 890,
+   "lookup": 6,
+   "received": 5,
+   "runs": 2
+  },
+  {
+   "model": "GLM-5.3-Flash",
+   "trials": 445,
+   "lookup": 11,
+   "received": 4,
+   "runs": 1
+  },
+  {
+   "model": "DeepSeek V4 Flash Vision (exp)",
+   "trials": 445,
+   "lookup": 17,
+   "received": 3,
+   "runs": 1
+  },
+  {
+   "model": "GPT-6 Astra",
+   "trials": 3115,
+   "lookup": 15,
+   "received": 3,
+   "runs": 7
+  },
+  {
+   "model": "GPT-6.1 Terra",
+   "trials": 445,
+   "lookup": 3,
+   "received": 3,
+   "runs": 1
+  },
+  {
+   "model": "GPT-6.1 Sol",
+   "trials": 890,
+   "lookup": 3,
+   "received": 2,
+   "runs": 2
+  },
+  {
+   "model": "Muse Spark 1.1",
+   "trials": 445,
+   "lookup": 2,
+   "received": 2,
+   "runs": 1
+  },
+  {
+   "model": "Sonnet 5",
+   "trials": 445,
+   "lookup": 8,
+   "received": 1,
+   "runs": 1
+  },
+  {
+   "model": "Kimi K3.1 Pro",
+   "trials": 445,
+   "lookup": 6,
+   "received": 1,
+   "runs": 1
+  },
+  {
+   "model": "Fable 5",
+   "trials": 890,
+   "lookup": 2,
+   "received": 1,
+   "runs": 2
+  },
+  {
+   "model": "Gemini 3 Pro",
+   "trials": 890,
+   "lookup": 4,
+   "received": 0,
+   "runs": 2
+  },
+  {
+   "model": "Gemini 3.1 Pro",
+   "trials": 890,
+   "lookup": 3,
+   "received": 0,
+   "runs": 2
+  },
+  {
+   "model": "GLM-5.2-FP8",
+   "trials": 445,
+   "lookup": 1,
+   "received": 0,
+   "runs": 1
+  },
+  {
+   "model": "Haiku 5.5",
+   "trials": 1335,
+   "lookup": 1,
+   "received": 0,
+   "runs": 3
+  },
+  {
+   "model": "Opus 5",
+   "trials": 445,
+   "lookup": 1,
+   "received": 0,
+   "runs": 1
+  },
+  {
+   "model": "Doubao-Seed-2.1-Pro",
+   "trials": 445,
+   "lookup": 0,
+   "received": 0,
+   "runs": 1
+  },
+  {
+   "model": "GLM-5.1",
+   "trials": 445,
+   "lookup": 0,
+   "received": 0,
+   "runs": 1
+  },
+  {
+   "model": "Opus 4.8",
+   "trials": 445,
+   "lookup": 0,
+   "received": 0,
+   "runs": 1
+  },
+  {
+   "model": "Opus 5.5",
+   "trials": 890,
+   "lookup": 0,
+   "received": 0,
+   "runs": 2
+  },
+  {
+   "model": "Sonnet 5.5",
+   "trials": 890,
+   "lookup": 0,
+   "received": 0,
+   "runs": 2
+  }
+ ],
+ "tasks": [
+  {
+   "task": "mteb-leaderboard",
+   "trials": 325,
+   "lookup": 67,
+   "lookupRewarded": 58,
+   "received": 51,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 49,
+    "upstream": 0,
+    "git": 4,
+    "search": 12
+   },
+   "network": "required"
+  },
+  {
+   "task": "fix-ocaml-gc",
+   "trials": 325,
+   "lookup": 63,
+   "lookupRewarded": 63,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 62,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "extract-elf",
+   "trials": 325,
+   "lookup": 37,
+   "lookupRewarded": 32,
+   "received": 30,
+   "own": 20,
+   "kinds": {
+    "own": 20,
+    "material": 10,
+    "upstream": 0,
+    "git": 0,
+    "search": 7
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "count-dataset-tokens",
+   "trials": 325,
+   "lookup": 35,
+   "lookupRewarded": 34,
+   "received": 28,
+   "own": 9,
+   "kinds": {
+    "own": 9,
+    "material": 20,
+    "upstream": 0,
+    "git": 0,
+    "search": 6
+   },
+   "network": "required"
+  },
+  {
+   "task": "sanitize-git-repo",
+   "trials": 325,
+   "lookup": 35,
+   "lookupRewarded": 3,
+   "received": 2,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 0,
+    "upstream": 0,
+    "git": 33,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "db-wal-recovery",
+   "trials": 325,
+   "lookup": 30,
+   "lookupRewarded": 22,
+   "received": 22,
+   "own": 14,
+   "kinds": {
+    "own": 14,
+    "material": 9,
+    "upstream": 0,
+    "git": 2,
+    "search": 5
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "build-pov-ray",
+   "trials": 325,
+   "lookup": 27,
+   "lookupRewarded": 26,
+   "received": 24,
+   "own": 8,
+   "kinds": {
+    "own": 8,
+    "material": 16,
+    "upstream": 0,
+    "git": 0,
+    "search": 3
+   },
+   "network": "required"
+  },
+  {
+   "task": "torch-pipeline-parallelism",
+   "trials": 325,
+   "lookup": 27,
+   "lookupRewarded": 20,
+   "received": 18,
+   "own": 9,
+   "kinds": {
+    "own": 9,
+    "material": 9,
+    "upstream": 0,
+    "git": 0,
+    "search": 9
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "gpt2-codegolf",
+   "trials": 325,
+   "lookup": 19,
+   "lookupRewarded": 12,
+   "received": 14,
+   "own": 7,
+   "kinds": {
+    "own": 7,
+    "material": 7,
+    "upstream": 0,
+    "git": 0,
+    "search": 5
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "raman-fitting",
+   "trials": 325,
+   "lookup": 16,
+   "lookupRewarded": 14,
+   "received": 15,
+   "own": 9,
+   "kinds": {
+    "own": 9,
+    "material": 6,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   },
+   "network": "expected"
+  },
+  {
+   "task": "merge-diff-arc-agi-task",
+   "trials": 325,
+   "lookup": 13,
+   "lookupRewarded": 13,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 13,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "polyglot-rust-c",
+   "trials": 325,
+   "lookup": 13,
+   "lookupRewarded": 13,
+   "received": 11,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 10,
+    "upstream": 1,
+    "git": 0,
+    "search": 1
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "mteb-retrieve",
+   "trials": 326,
+   "lookup": 12,
+   "lookupRewarded": 12,
+   "received": 10,
+   "own": 5,
+   "kinds": {
+    "own": 5,
+    "material": 5,
+    "upstream": 0,
+    "git": 0,
+    "search": 2
+   },
+   "network": "required"
+  },
+  {
+   "task": "torch-tensor-parallelism",
+   "trials": 325,
+   "lookup": 11,
+   "lookupRewarded": 10,
+   "received": 10,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 8,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "regex-chess",
+   "trials": 325,
+   "lookup": 9,
+   "lookupRewarded": 9,
+   "received": 8,
+   "own": 8,
+   "kinds": {
+    "own": 8,
+    "material": 0,
+    "upstream": 1,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "protein-assembly",
+   "trials": 325,
+   "lookup": 8,
+   "lookupRewarded": 5,
+   "received": 5,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 3
+   },
+   "network": "required"
+  },
+  {
+   "task": "crack-7z-hash",
+   "trials": 325,
+   "lookup": 7,
+   "lookupRewarded": 7,
+   "received": 4,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 3
+   },
+   "network": "expected"
+  },
+  {
+   "task": "dna-insert",
+   "trials": 325,
+   "lookup": 6,
+   "lookupRewarded": 4,
+   "received": 6,
+   "own": 3,
+   "kinds": {
+    "own": 3,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "expected"
+  },
+  {
+   "task": "feal-linear-cryptanalysis",
+   "trials": 325,
+   "lookup": 5,
+   "lookupRewarded": 5,
+   "received": 5,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "git-multibranch",
+   "trials": 325,
+   "lookup": 5,
+   "lookupRewarded": 4,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 5,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "winning-avg-corewars",
+   "trials": 325,
+   "lookup": 5,
+   "lookupRewarded": 4,
+   "received": 4,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "break-filter-js-from-html",
+   "trials": 325,
+   "lookup": 4,
+   "lookupRewarded": 4,
+   "received": 4,
+   "own": 4,
+   "kinds": {
+    "own": 4,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "dna-assembly",
+   "trials": 325,
+   "lookup": 4,
+   "lookupRewarded": 3,
+   "received": 3,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 3,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   },
+   "network": "expected"
+  },
+  {
+   "task": "headless-terminal",
+   "trials": 325,
+   "lookup": 4,
+   "lookupRewarded": 3,
+   "received": 3,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "password-recovery",
+   "trials": 325,
+   "lookup": 4,
+   "lookupRewarded": 4,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 4,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "compile-compcert",
+   "trials": 325,
+   "lookup": 3,
+   "lookupRewarded": 3,
+   "received": 3,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 2,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "fix-code-vulnerability",
+   "trials": 325,
+   "lookup": 3,
+   "lookupRewarded": 3,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "install-windows-3.11",
+   "trials": 326,
+   "lookup": 3,
+   "lookupRewarded": 2,
+   "received": 3,
+   "own": 3,
+   "kinds": {
+    "own": 3,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "make-mips-interpreter",
+   "trials": 325,
+   "lookup": 3,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "write-compressor",
+   "trials": 325,
+   "lookup": 3,
+   "lookupRewarded": 3,
+   "received": 3,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "caffe-cifar-10",
+   "trials": 326,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 2,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "circuit-fibsqrt",
+   "trials": 325,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 2,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "extract-moves-from-video",
+   "trials": 325,
+   "lookup": 2,
+   "lookupRewarded": 1,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "expected"
+  },
+  {
+   "task": "filter-js-from-html",
+   "trials": 325,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "financial-document-processor",
+   "trials": 326,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "pytorch-model-recovery",
+   "trials": 325,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "regex-log",
+   "trials": 325,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 2,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "sam-cell-seg",
+   "trials": 325,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 1
+   },
+   "network": "expected"
+  },
+  {
+   "task": "video-processing",
+   "trials": 325,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "bn-fit-modify",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
+   },
+   "network": "expected"
+  },
+  {
+   "task": "chess-best-move",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "optional"
+  },
+  {
+   "task": "configure-git-webserver",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "constraints-scheduling",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "gcode-to-text",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "expected"
+  },
+  {
+   "task": "mailman",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "mcmc-sampling-stan",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "multi-source-data-merger",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "path-tracing",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "qemu-alpine-ssh",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "reshard-c4-data",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "sqlite-db-truncate",
+   "trials": 325,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 1,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "adaptive-rejection-sampler",
+   "trials": 326,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "build-cython-ext",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "build-pmars",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "cancel-async-tasks",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "cobol-modernization",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "code-from-image",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "custom-memory-heap-crash",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "distribution-search",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "feal-differential-cryptanalysis",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "fix-git",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "git-leak-recovery",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "hf-model-inference",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "kv-store-grpc",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "large-scale-text-editing",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "largest-eigenval",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "expected"
+  },
+  {
+   "task": "llm-inference-batching-scheduler",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "log-summary-date-ranges",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "make-doom-for-mips",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "model-extraction-relu-logits",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "modernize-scientific-stack",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "nginx-request-logging",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "openssl-selfsigned-cert",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "overfull-hbox",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "path-tracing-reverse",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "polyglot-c-py",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "portfolio-optimization",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "prove-plus-comm",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "pypi-server",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "optional"
+  },
+  {
+   "task": "pytorch-model-cli",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "qemu-startup",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "query-optimize",
+   "trials": 326,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "rstan-to-pystan",
+   "trials": 326,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "schemelike-metacircular-eval",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "sparql-university",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "sqlite-with-gcov",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "train-fasttext",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "required"
+  },
+  {
+   "task": "tune-mjcf",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  },
+  {
+   "task": "vulnerable-secret",
+   "trials": 325,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
+  }
+ ],
+ "checks": {
+  "access.benchmark_material_received": 317,
+  "lookup.search_named_benchmark": 275,
+  "lookup.search_surfaced_benchmark": 249,
+  "lookup.benchmark_source": 217,
+  "lookup.benchmark_lookup_answered": 216,
+  "lookup.benchmark_content_obtained": 186,
+  "lookup.solution_file_in_result": 152,
+  "lookup.benchmark_task_files": 147,
+  "lookup.benchmark_oracle_named": 143,
+  "lookup.own_task_files": 124,
+  "lookup.benchmark_solution_url": 92,
+  "lookup.git_unreachable_objects": 70,
+  "tb21.fix_ocaml_gc.upstream_source": 63,
+  "lookup.task_fingerprint_code_search": 53,
+  "lookup.instruction_phrase_search": 53,
+  "lookup.task_named_skill": 14,
+  "lookup.task_named_skill_obtained": 13,
+  "tb21.task_origin_solution": 12,
+  "access.benchmark_material_requested_only": 6,
+  "lookup.summary_reports_solution": 3
+ }
+}

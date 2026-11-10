@@ -17,7 +17,7 @@ defineProps<{ examples: Example[] }>();
   >
     <article
       v-for="(example, i) in examples"
-      :key="example.model"
+      :key="i"
       class="hack-collage-note"
       :class="[
         `hack-collage-note-${i}`,

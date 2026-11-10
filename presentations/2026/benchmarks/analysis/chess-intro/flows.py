@@ -18,7 +18,9 @@ NAMES = {
     "gpt-6-luna": "GPT-6 Luna", "gpt-6.1-terra": "GPT-6.1 Terra", "gpt-5.6-luna": "GPT-5.6 Luna", "grok*": "Grok",
     "gpt-5.6-sol": "GPT-5.6 Sol", "gpt-6-astra": "GPT-6 Astra", "glm*": "GLM", "claude*": "Claude",
     "deepseek-v4-flash": "DeepSeek V4 Flash", "gpt-5.6-terra": "GPT-5.6 Terra", "gpt-6.1-sol": "GPT-6.1 Sol",
+    "gpt-5.5": "GPT-5.5", "muse*": "Muse Spark", "kimi*": "Kimi",
 }
+MIN_FAMILY = 18  # trials a model family needs to appear in the strategy-by-model chart
 MIN_ARM = 8  # a model needs this many trials with and without the engine to be compared
 
 art = {r["path"]: r["art_lines"] for r in json.loads((REVIEW / "asciiart_rows.json").read_text())}
@@ -65,8 +67,21 @@ for r in rows:
         dates.append(d.group(0)[:10])
 v = lambda t: ".".join(map(str, t))
 
+# Strategy mix per model family: how the move was found, plus who printed ASCII.
+mix = collections.defaultdict(lambda: collections.Counter())
+for r in rows:
+    m = mix[r["fam"]]
+    m["n"] += 1
+    m[eng(r)] += 1
+    m["rewarded"] += r["reward"] >= 1
+    m["imageRead"] += r["vision_n"] > 0
+    m["ascii"] += art.get(r["path"], 0) >= 12
+strategy = [dict(model=NAMES.get(k, k), **{f: v[f] for f in ("n", "stockfish", "pychess", "none", "rewarded", "imageRead", "ascii")})
+            for k, v in mix.items() if v["n"] >= MIN_FAMILY]
+strategy.sort(key=lambda m: -m["stockfish"] / m["n"])
+
 data = dict(
-    n=len(rows), families=len(fam), minArm=MIN_ARM,
+    n=len(rows), families=len(fam), minArm=MIN_ARM, minFamily=MIN_FAMILY, strategy=strategy,
     versions=[v(min(versions)), v(max(versions))], dates=[min(dates), max(dates)], dated=len(dates),
     ascii=sum(art.get(r["path"], 0) >= 12 for r in rows),
     asciiNoImage=sum(art.get(r["path"], 0) >= 12 and r["vision_n"] == 0 for r in rows),

@@ -1,0 +1,104 @@
+{
+ "source": "lure-timeline-2026-11-06 report v5 (8 Nov 2026) and its 8 Nov follow-up: cohort rebuild, revision matching, package reading, provenance, harness-leaderboard runs",
+ "corpus": 143186,
+ "encounters": 236,
+ "models": 19,
+ "first": "2026-07-09",
+ "last": "2026-11-04",
+ "targets": 17,
+ "targetsSeen": 8,
+ "ladder": [
+  {
+   "n": 236,
+   "label": "met the lure",
+   "note": "a name, a link or a search snippet in the trace"
+  },
+  {
+   "n": 69,
+   "label": "saw the install instruction",
+   "note": "curl | bash, or pip install"
+  },
+  {
+   "n": 53,
+   "label": "requested a lure page",
+   "note": "some came back 404"
+  },
+  {
+   "n": 9,
+   "label": "fetched the script",
+   "note": "8 from the container, 1 hosted"
+  },
+  {
+   "n": 4,
+   "label": "opened the bundle",
+   "note": "3 unpacked it, 1 printed it"
+  },
+  {
+   "n": 0,
+   "label": "seen running it",
+   "note": "no install of the package seen either"
+  }
+ ],
+ "months": [
+  {
+   "month": "2026-04",
+   "searched": 38,
+   "met": 0
+  },
+  {
+   "month": "2026-05",
+   "searched": 49,
+   "met": 0
+  },
+  {
+   "month": "2026-06",
+   "searched": 0,
+   "met": 0
+  },
+  {
+   "month": "2026-07",
+   "searched": 471,
+   "met": 66
+  },
+  {
+   "month": "2026-08",
+   "searched": 785,
+   "met": 74
+  },
+  {
+   "month": "2026-09",
+   "searched": 260,
+   "met": 34
+  },
+  {
+   "month": "2026-10",
+   "searched": 337,
+   "met": 53
+  },
+  {
+   "month": "2026-11",
+   "searched": 72,
+   "met": 9
+  }
+ ],
+ "tasks": [
+  {
+   "task": "mteb-leaderboard",
+   "met": 176,
+   "rate": 21.7
+  },
+  {
+   "task": "build-pov-ray",
+   "met": 42,
+   "rate": 8.3
+  },
+  {
+   "task": "db-wal-recovery",
+   "met": 7,
+   "rate": 6.9
+  }
+ ],
+ "decoySubmissions": 3,
+ "calledMalicious": 6,
+ "excludedSites": 19
+}

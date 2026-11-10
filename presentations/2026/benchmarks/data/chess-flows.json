@@ -2,6 +2,129 @@
  "n": 1013,
  "families": 19,
  "minArm": 8,
+ "minFamily": 18,
+ "strategy": [
+  {
+   "model": "GPT-6 Astra",
+   "n": 81,
+   "stockfish": 76,
+   "pychess": 4,
+   "none": 1,
+   "rewarded": 79,
+   "imageRead": 80,
+   "ascii": 0
+  },
+  {
+   "model": "GPT-6.1 Sol",
+   "n": 25,
+   "stockfish": 21,
+   "pychess": 4,
+   "none": 0,
+   "rewarded": 25,
+   "imageRead": 25,
+   "ascii": 0
+  },
+  {
+   "model": "Grok",
+   "n": 104,
+   "stockfish": 86,
+   "pychess": 8,
+   "none": 10,
+   "rewarded": 77,
+   "imageRead": 94,
+   "ascii": 1
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "n": 129,
+   "stockfish": 96,
+   "pychess": 33,
+   "none": 0,
+   "rewarded": 52,
+   "imageRead": 127,
+   "ascii": 0
+  },
+  {
+   "model": "DeepSeek V4 Flash",
+   "n": 44,
+   "stockfish": 28,
+   "pychess": 15,
+   "none": 1,
+   "rewarded": 13,
+   "imageRead": 0,
+   "ascii": 21
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "n": 89,
+   "stockfish": 43,
+   "pychess": 46,
+   "none": 0,
+   "rewarded": 71,
+   "imageRead": 89,
+   "ascii": 0
+  },
+  {
+   "model": "GLM",
+   "n": 56,
+   "stockfish": 26,
+   "pychess": 17,
+   "none": 13,
+   "rewarded": 30,
+   "imageRead": 50,
+   "ascii": 1
+  },
+  {
+   "model": "GPT-6.1 Terra",
+   "n": 135,
+   "stockfish": 51,
+   "pychess": 77,
+   "none": 7,
+   "rewarded": 101,
+   "imageRead": 135,
+   "ascii": 0
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "n": 37,
+   "stockfish": 11,
+   "pychess": 25,
+   "none": 1,
+   "rewarded": 15,
+   "imageRead": 36,
+   "ascii": 0
+  },
+  {
+   "model": "GPT-6 Luna",
+   "n": 201,
+   "stockfish": 46,
+   "pychess": 133,
+   "none": 22,
+   "rewarded": 38,
+   "imageRead": 196,
+   "ascii": 0
+  },
+  {
+   "model": "Claude",
+   "n": 52,
+   "stockfish": 9,
+   "pychess": 22,
+   "none": 21,
+   "rewarded": 25,
+   "imageRead": 52,
+   "ascii": 0
+  },
+  {
+   "model": "GPT-5.5",
+   "n": 18,
+   "stockfish": 0,
+   "pychess": 18,
+   "none": 0,
+   "rewarded": 16,
+   "imageRead": 17,
+   "ascii": 0
+  }
+ ],
  "versions": [
   "0.9.6",
   "0.10.53"

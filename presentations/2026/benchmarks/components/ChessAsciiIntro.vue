@@ -10,7 +10,7 @@
 //   frame. There is no scramble or tween between characters.
 // - Each grid is drawn over the part of the board its script sampled, so the
 //   renders stay registered with the image and with each other.
-import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, useSlots, watch } from "vue";
 import { useIsSlideActive } from "@slidev/client";
 import raw from "../data/chess-intro.json";
 
@@ -21,7 +21,31 @@ import raw from "../data/chess-intro.json";
 // `scheme` picks the terminal colours (defined as --term-* in style.css):
 // "petrol" is the deck's own, "green" and "amber" are phosphor. `raster`
 // lays scan lines over the full-screen version.
-const props = withDefaults(defineProps<{ full?: boolean; scheme?: "petrol" | "green" | "amber"; raster?: boolean }>(), { full: false, scheme: "petrol", raster: false });
+// Title mode (full only): the default slot is the talk title, set in a band
+// across the running loop with `speaker`, `org`, `event`, `location` and `date`. `titled`
+// shows or hides the band, so a slide can bring it in on a click
+// (`:titled="$clicks > 0"`); the loop keeps running behind it, dithered down.
+// `socials` places the `handle` links: "line" (one line in the band), "stack"
+// (three addresses in the band), "prompt" (a terminal box, bottom left) or "none".
+const props = withDefaults(
+  defineProps<{
+    full?: boolean;
+    scheme?: "petrol" | "green" | "amber";
+    raster?: boolean;
+    titled?: boolean;
+    speaker?: string;
+    org?: string;
+    event?: string;
+    location?: string;
+    date?: string;
+    handle?: string;
+    sites?: string[];
+    socials?: "line" | "stack" | "prompt" | "none";
+  }>(),
+  { full: false, scheme: "petrol", raster: false, titled: true, socials: "line", sites: () => ["x.com", "github.com", "huggingface.co"] },
+);
+
+const slots = useSlots();
 
 type Block = { cols: number; rows: number; region: number[]; lines: string[] };
 type Board = { cols: number; rows: number; gap: number[] | null; lines: string[] };
@@ -180,6 +204,7 @@ const paused = ref(false);
 const active = useIsSlideActive();
 const shot = computed(() => shots[index.value]);
 const source = computed(() => (shot.value.src ? data.sources[shot.value.src] : undefined));
+const showTitle = computed(() => props.titled && !!slots.default);
 const legend = computed(() => mosaicIds.map((id) => data.sources[id]));
 // The terminal has one narrow line for the model, so effort and release-stage
 // suffixes are dropped there: "DeepSeek V4 Flash (max)" -> "DeepSeek V4 Flash".
@@ -417,8 +442,30 @@ onBeforeUnmount(() => cancelAnimationFrame(raf));
 <template>
   <div v-if="full" class="fa-chess-term" :class="`fa-term--${scheme}`" @click.stop="toggle">
     <canvas ref="canvas" :width="PXW" :height="PXH" />
-    <div v-if="$slots.default" class="fa-chess-overlay"><slot /></div>
-    <ul v-if="shot.content.kind === 'mosaic'" class="fa-chess-term-legend">
+    <template v-if="$slots.default">
+      <div class="fa-chess-dither" :class="{ 'is-on': titled }" aria-hidden="true" />
+      <div class="fa-chess-band" :class="[{ 'is-on': titled }, `is-${socials}`]">
+        <div class="fa-chess-band-main">
+          <h1><slot /></h1>
+          <p v-if="speaker" class="fa-chess-who">
+            <b>{{ speaker }}</b><template v-if="org"> · {{ org }}</template>
+          </p>
+          <p v-if="event || location || date" class="fa-chess-where">{{ [event, location, date].filter(Boolean).join(" · ") }}</p>
+        </div>
+        <p v-if="handle && socials === 'line'" class="fa-chess-social-line">
+          <b>{{ handle }}</b> on {{ sites.join(" · ") }}
+        </p>
+        <ul v-if="handle && socials === 'stack'" class="fa-chess-social-stack">
+          <li v-for="site in sites" :key="site">{{ site }}/<b>{{ handle }}</b></li>
+        </ul>
+      </div>
+      <div v-if="handle && socials === 'prompt'" class="fa-chess-whoami" :class="{ 'is-on': titled }">
+        <p class="fa-chess-prompt"><span aria-hidden="true">❯</span> whoami</p>
+        <p class="fa-chess-model">{{ handle }}</p>
+        <p v-for="site in sites" :key="site">{{ site }}/{{ handle }}</p>
+      </div>
+    </template>
+    <ul v-if="shot.content.kind === 'mosaic' && !(showTitle && socials === 'prompt')" class="fa-chess-term-legend">
       <li v-for="s in legend" :key="s.harness + s.model + s.step">
         <b>{{ short(s.model) }}</b>
         {{ s.harness }} {{ s.version }}
@@ -570,22 +617,95 @@ onBeforeUnmount(() => cancelAnimationFrame(raf));
 }
 .fa-chess-term-legend li::before { content: none; }
 .fa-chess-term-legend b { display: block; }
-.fa-chess-overlay {
+/* ---------- title mode ---------- */
+/* Hard-edged throughout: a 2px checker dims the loop, and the band opens in
+   steps from its centre line, the way the loop's own frames replace each other. */
+.fa-chess-dither {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 0 48px;
-  text-align: center;
   pointer-events: none;
-  font-family: var(--font-voice);
-  font-variation-settings: var(--voice-settings);
-  font-weight: 900;
-  font-size: 64px;
-  line-height: 1;
-  letter-spacing: var(--track-voice);
+  background: repeating-conic-gradient(var(--term-ground) 0 25%, transparent 0 50%) 0 0 / 4px 4px;
+  visibility: hidden;
+}
+.fa-chess-dither.is-on { visibility: visible; }
+.fa-chess-band {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 96px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px 32px;
+  align-items: end;
+  padding: 26px 44px 24px;
+  background: var(--term-ground);
+  border-block: 2px solid var(--term-ink);
+  pointer-events: none;
+  clip-path: inset(50% 0);
+  transition: clip-path 0.45s steps(9);
+}
+.fa-chess-band.is-on { clip-path: inset(0); }
+/* scan lines over the band, whether or not the whole screen has them */
+.fa-chess-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to bottom, transparent 0 2px, var(--term-raster) 2px 3px);
+}
+.fa-chess-band.is-stack { grid-template-columns: 1fr auto; }
+/* Terminal type throughout: the band is set in the code face, like the loop. */
+.fa-chess-band h1 {
+  margin: 0 0 20px;
+  font: 500 50px/1.05 var(--font-code);
+  letter-spacing: -0.02em;
   color: var(--term-ink);
 }
+.fa-chess-band.is-stack h1 { font-size: 34px; }
+.fa-chess-band p {
+  margin: 0;
+  color: var(--term-ink);
+}
+.fa-chess-who { font: 400 24px/1.25 var(--font-code); }
+.fa-chess-who b { font-weight: 500; }
+.fa-chess-where { font: 400 17px/1.4 var(--font-code); color: var(--term-dim) !important; margin-top: 6px !important; }
+.fa-chess-social-line {
+  padding-top: 12px;
+  border-top: 2px solid var(--term-raised);
+  font: 400 17px/1.3 var(--font-code);
+  color: var(--term-dim) !important;
+}
+.fa-chess-social-line b,
+.fa-chess-social-stack b { font-weight: 500; color: var(--term-ink); }
+.fa-chess-social-stack {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 2px 24px;
+  border-left: 2px solid var(--term-raised);
+  display: grid;
+  gap: 4px;
+  font: 400 17px/1.3 var(--font-code);
+  color: var(--term-dim);
+  text-align: right;
+}
+.fa-chess-social-stack li { margin: 0; padding: 0; }
+.fa-chess-social-stack li::before { content: none; }
+.fa-chess-whoami {
+  position: absolute;
+  left: 14px;
+  bottom: 14px;
+  width: 232px;
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--term-ground);
+  border: 2px solid var(--term-raised);
+  border-radius: var(--radius-sm);
+  font: 400 12.5px/1.45 var(--font-code);
+  color: var(--term-dim);
+  visibility: hidden;
+}
+.fa-chess-whoami.is-on { visibility: visible; }
+.fa-chess-whoami p { margin: 0; font: inherit; color: inherit; }
+.fa-chess-whoami .fa-chess-model { font-weight: 500; font-size: 15px; color: var(--term-ink); }
 
 /* ---------- board + copy panel ---------- */
 .fa-chess-intro {

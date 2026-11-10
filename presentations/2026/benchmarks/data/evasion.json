@@ -1,0 +1,218 @@
+{
+ "source": "corpus scan v2, 8 Nov 2026",
+ "trajectories": 181732,
+ "checks": {
+  "archive": {
+   "n": 546,
+   "families": [
+    [
+     "Grok",
+     136
+    ],
+    [
+     "Claude",
+     63
+    ],
+    [
+     "DeepSeek V4.1 Flash",
+     54
+    ],
+    [
+     "Ripple",
+     52
+    ]
+   ]
+  },
+  "reader": {
+   "n": 431,
+   "families": [
+    [
+     "DeepSeek V4.1 Flash",
+     116
+    ],
+    [
+     "GPT-5.6 Luna",
+     59
+    ],
+    [
+     "DeepSeek V4 Flash",
+     49
+    ],
+    [
+     "other GPT",
+     45
+    ]
+   ]
+  },
+  "pinned": {
+   "n": 132,
+   "families": [
+    [
+     "DeepSeek V4.1 Flash",
+     29
+    ],
+    [
+     "Ripple",
+     20
+    ],
+    [
+     "GLM",
+     18
+    ],
+    [
+     "GPT-6 Luna",
+     10
+    ]
+   ]
+  },
+  "noproxy": {
+   "n": 80,
+   "families": [
+    [
+     "DeepSeek V4 Pro",
+     76
+    ],
+    [
+     "DeepSeek V4 Flash",
+     1
+    ],
+    [
+     "GPT-5.6 Luna",
+     1
+    ],
+    [
+     "other GPT",
+     1
+    ]
+   ]
+  },
+  "model": {
+   "n": 84,
+   "families": [
+    [
+     "GPT-5.6 Luna",
+     14
+    ],
+    [
+     "DeepSeek V4.1 Flash",
+     14
+    ],
+    [
+     "DeepSeek V4 Pro",
+     10
+    ],
+    [
+     "Ripple",
+     10
+    ]
+   ]
+  },
+  "modelAnswered": {
+   "n": 31,
+   "families": [
+    [
+     "DeepSeek V4.1 Flash",
+     9
+    ],
+    [
+     "DeepSeek V4 Pro",
+     9
+    ],
+    [
+     "Flint",
+     5
+    ],
+    [
+     "Muse",
+     3
+    ]
+   ]
+  },
+  "k8sCredentials": {
+   "n": 63,
+   "families": [
+    [
+     "DeepSeek V4.1 Flash",
+     30
+    ],
+    [
+     "Ripple",
+     17
+    ],
+    [
+     "Grok",
+     7
+    ],
+    [
+     "GLM",
+     4
+    ]
+   ]
+  },
+  "k8sRequest": {
+   "n": 39,
+   "families": [
+    [
+     "DeepSeek V4.1 Flash",
+     12
+    ],
+    [
+     "Ripple",
+     12
+    ],
+    [
+     "Grok",
+     7
+    ],
+    [
+     "GLM",
+     4
+    ]
+   ]
+  }
+ },
+ "k8s": {
+  "tasks": [
+   [
+    "db-wal-recovery",
+    25
+   ],
+   [
+    "kgateway-consistent-hash-policy",
+    4
+   ],
+   [
+    "count-dataset-tokens",
+    2
+   ],
+   [
+    "cargo-flight-dispatch",
+    2
+   ],
+   [
+    "mteb-retrieve",
+    2
+   ],
+   [
+    "vpp-loss-divergence",
+    1
+   ],
+   [
+    "extract-elf",
+    1
+   ],
+   [
+    "configure-git-webserver",
+    1
+   ],
+   [
+    "helm-array-merge-strategies",
+    1
+   ]
+  ],
+  "answered": {
+   "no_match": 36,
+   "unknown": 3
+  }
+ }
+}

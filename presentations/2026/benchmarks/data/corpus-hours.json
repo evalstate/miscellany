@@ -1,0 +1,14 @@
+{
+ "trials": 164870,
+ "timed": 164653,
+ "sources": {
+  "result": 135306,
+  "trajectory": 29349,
+  "unknown": 215
+ },
+ "capped": 0,
+ "hours": 41071,
+ "days": 1711,
+ "years": 4.69,
+ "medianMinutes": 6.0
+}

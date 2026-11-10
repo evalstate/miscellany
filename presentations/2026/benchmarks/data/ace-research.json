@@ -1,0 +1,158 @@
+{
+ "corpus": 142275,
+ "trials": 36,
+ "usedInCommand": 23,
+ "rows": [
+  {
+   "family": "DeepSeek V4 Flash",
+   "lab": "DeepSeek",
+   "trials": 5356,
+   "wrote": 12,
+   "before": 136,
+   "days": [
+    {
+     "date": "2026-08-01",
+     "n": 2
+    },
+    {
+     "date": "2026-08-02",
+     "n": 2
+    },
+    {
+     "date": "2026-08-04",
+     "n": 2
+    },
+    {
+     "date": "2026-08-05",
+     "n": 1
+    },
+    {
+     "date": "2026-08-07",
+     "n": 1
+    },
+    {
+     "date": "2026-08-09",
+     "n": 4
+    }
+   ],
+   "later": []
+  },
+  {
+   "family": "DeepSeek V4 Pro",
+   "lab": "DeepSeek",
+   "trials": 937,
+   "wrote": 18,
+   "before": 6,
+   "days": [
+    {
+     "date": "2026-08-12",
+     "n": 18
+    }
+   ],
+   "later": []
+  },
+  {
+   "family": "GPT-5.6 Sol",
+   "lab": "OpenAI",
+   "trials": 9977,
+   "wrote": 1,
+   "before": 6993,
+   "days": [
+    {
+     "date": "2026-08-19",
+     "n": 1
+    }
+   ],
+   "later": []
+  },
+  {
+   "family": "GPT-6 Astra",
+   "lab": "OpenAI",
+   "trials": 12706,
+   "wrote": 1,
+   "before": 11603,
+   "days": [
+    {
+     "date": "2026-10-08",
+     "n": 1
+    }
+   ],
+   "later": []
+  },
+  {
+   "family": "GPT-6.1 Sol",
+   "lab": "OpenAI",
+   "trials": 5261,
+   "wrote": 3,
+   "before": 2885,
+   "days": [
+    {
+     "date": "2026-10-12",
+     "n": 1
+    },
+    {
+     "date": "2026-10-13",
+     "n": 2
+    }
+   ],
+   "later": []
+  },
+  {
+   "family": "DeepSeek V4.1 Flash",
+   "lab": "DeepSeek",
+   "trials": 1446,
+   "wrote": 1,
+   "before": 963,
+   "days": [
+    {
+     "date": "2026-11-02",
+     "n": 1
+    }
+   ],
+   "later": [
+    {
+     "family": "DeepSeek V4.1 Flash",
+     "date": "2026-10-30",
+     "note": "rewrote resolv.conf, then looked the hosts up"
+    }
+   ]
+  },
+  {
+   "family": "Ripple-65B-Preview",
+   "lab": "other",
+   "trials": null,
+   "wrote": 0,
+   "before": null,
+   "days": [],
+   "later": [
+    {
+     "family": "Ripple-65B-Preview",
+     "date": "2026-11-07",
+     "note": "named it as OpenAI's; no request"
+    }
+   ]
+  }
+ ],
+ "never": [
+  {
+   "family": "GPT-6 Luna",
+   "trials": 27626
+  },
+  {
+   "family": "GPT-5.6 Luna",
+   "trials": 13102
+  },
+  {
+   "family": "Claude, all",
+   "trials": 17464
+  },
+  {
+   "family": "Grok, all",
+   "trials": 14763
+  },
+  {
+   "family": "GLM, all",
+   "trials": 9871
+  }
+ ]
+}

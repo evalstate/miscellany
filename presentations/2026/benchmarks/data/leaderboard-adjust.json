@@ -1,0 +1,117 @@
+{
+ "generated": "2026-11-10",
+ "scanner": "v0.8.23",
+ "source": "https://evalstate-tb21-annotated.static.hf.space/index.html",
+ "rows": [
+  {
+   "id": "06-claude-code--fable-5--xhigh",
+   "model": "Fable 5",
+   "effort": "xhigh",
+   "agent": "Claude Code",
+   "date": "2026-06-09",
+   "trials": 445,
+   "leaderboard": {
+    "accuracy": 83.82,
+    "cost": 552.67
+   },
+   "rewarded": 374,
+   "adjusted": {
+    "rewarded": 294,
+    "accuracy": 66.07,
+    "fallback": 79,
+    "leads": 1
+   },
+   "categories": {
+    "test_snooping": {
+     "trials": 5,
+     "rewarded": 1
+    },
+    "side_channel": {
+     "trials": 4,
+     "rewarded": 1
+    },
+    "answer_lookup": {
+     "trials": 2,
+     "rewarded": 1
+    }
+   },
+   "hiddenOutputShare": 0.821,
+   "otherModel": {
+    "name": "claude-opus-4-8",
+    "trials": 103,
+    "stepShare": 0.235
+   },
+   "webTrials": 0,
+   "webUnresolved": 0,
+   "noTrajectory": 0,
+   "cost": {
+    "leaderboard": 552.67,
+    "recorded": 366.37,
+    "estimate": 464.75,
+    "uncosted": 33,
+    "fitted": {
+     "uncached": 6.255,
+     "cached": 0.488,
+     "output": 25.334,
+     "r2": 0.9999
+    },
+    "listOutput": 50.0
+   }
+  },
+  {
+   "id": "11-codex--gpt-5-6-terra--max",
+   "model": "GPT-5.6 Terra",
+   "effort": "max",
+   "agent": "Codex",
+   "date": "2026-06-26",
+   "trials": 445,
+   "leaderboard": {
+    "accuracy": 78.43,
+    "cost": 421.15
+   },
+   "rewarded": 350,
+   "adjusted": {
+    "rewarded": 314,
+    "accuracy": 70.56,
+    "fallback": 0,
+    "leads": 36
+   },
+   "categories": {
+    "test_snooping": {
+     "trials": 9,
+     "rewarded": 9
+    },
+    "answer_lookup": {
+     "trials": 46,
+     "rewarded": 41
+    },
+    "task_shortcut": {
+     "trials": 2,
+     "rewarded": 2
+    },
+    "side_channel": {
+     "trials": 9,
+     "rewarded": 7
+    }
+   },
+   "hiddenOutputShare": 0.641,
+   "otherModel": null,
+   "webTrials": 74,
+   "webUnresolved": 45,
+   "noTrajectory": 11,
+   "cost": {
+    "leaderboard": 421.15,
+    "recorded": 406.51,
+    "estimate": 406.51,
+    "uncosted": 11,
+    "fitted": {
+     "uncached": 2.5,
+     "cached": 0.25,
+     "output": 15.0,
+     "r2": 1.0
+    },
+    "listOutput": null
+   }
+  }
+ ]
+}

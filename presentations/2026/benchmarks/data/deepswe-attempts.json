@@ -1,0 +1,1035 @@
+{
+ "generated": "2026-11-10",
+ "scanner": "v0.8.23",
+ "source": "https://evalstate-deepswe-annotated.static.hf.space",
+ "total": {
+  "runs": 63,
+  "trials": 28458,
+  "rewarded": 15084,
+  "upstream": 2516,
+  "git": 1185,
+  "attempt": 2964,
+  "attemptRewarded": 1833
+ },
+ "efforts": [
+  "low",
+  "medium",
+  "high",
+  "xhigh",
+  "max"
+ ],
+ "grid": [
+  {
+   "model": "DeepSeek V4 Pro",
+   "cells": [
+    null,
+    null,
+    null,
+    null,
+    {
+     "effort": "max",
+     "trials": 452,
+     "attempt": 396,
+     "rewarded": 284,
+     "attemptRewarded": 246
+    }
+   ]
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 449,
+     "attempt": 11,
+     "rewarded": 108,
+     "attemptRewarded": 1
+    },
+    {
+     "effort": "medium",
+     "trials": 450,
+     "attempt": 10,
+     "rewarded": 158,
+     "attemptRewarded": 1
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 18,
+     "rewarded": 243,
+     "attemptRewarded": 7
+    },
+    {
+     "effort": "xhigh",
+     "trials": 452,
+     "attempt": 84,
+     "rewarded": 272,
+     "attemptRewarded": 52
+    },
+    {
+     "effort": "max",
+     "trials": 451,
+     "attempt": 275,
+     "rewarded": 314,
+     "attemptRewarded": 189
+    }
+   ]
+  },
+  {
+   "model": "DeepSeek V4 Flash",
+   "cells": [
+    null,
+    null,
+    null,
+    null,
+    {
+     "effort": "max",
+     "trials": 452,
+     "attempt": 211,
+     "rewarded": 241,
+     "attemptRewarded": 105
+    }
+   ]
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 452,
+     "attempt": 12,
+     "rewarded": 205,
+     "attemptRewarded": 4
+    },
+    {
+     "effort": "medium",
+     "trials": 452,
+     "attempt": 6,
+     "rewarded": 276,
+     "attemptRewarded": 5
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 24,
+     "rewarded": 313,
+     "attemptRewarded": 17
+    },
+    {
+     "effort": "xhigh",
+     "trials": 452,
+     "attempt": 58,
+     "rewarded": 319,
+     "attemptRewarded": 38
+    },
+    {
+     "effort": "max",
+     "trials": 452,
+     "attempt": 208,
+     "rewarded": 327,
+     "attemptRewarded": 147
+    }
+   ]
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 452,
+     "attempt": 14,
+     "rewarded": 7,
+     "attemptRewarded": 0
+    },
+    {
+     "effort": "medium",
+     "trials": 452,
+     "attempt": 14,
+     "rewarded": 51,
+     "attemptRewarded": 0
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 36,
+     "rewarded": 200,
+     "attemptRewarded": 14
+    },
+    {
+     "effort": "xhigh",
+     "trials": 452,
+     "attempt": 88,
+     "rewarded": 257,
+     "attemptRewarded": 45
+    },
+    {
+     "effort": "max",
+     "trials": 448,
+     "attempt": 205,
+     "rewarded": 301,
+     "attemptRewarded": 150
+    }
+   ]
+  },
+  {
+   "model": "Grok 4.6",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 452,
+     "attempt": 12,
+     "rewarded": 187,
+     "attemptRewarded": 4
+    },
+    {
+     "effort": "medium",
+     "trials": 452,
+     "attempt": 61,
+     "rewarded": 305,
+     "attemptRewarded": 34
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 58,
+     "rewarded": 294,
+     "attemptRewarded": 38
+    },
+    {
+     "effort": "xhigh",
+     "trials": 452,
+     "attempt": 107,
+     "rewarded": 301,
+     "attemptRewarded": 75
+    },
+    null
+   ]
+  },
+  {
+   "model": "Sonnet 5",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 452,
+     "attempt": 7,
+     "rewarded": 137,
+     "attemptRewarded": 3
+    },
+    {
+     "effort": "medium",
+     "trials": 452,
+     "attempt": 18,
+     "rewarded": 179,
+     "attemptRewarded": 7
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 46,
+     "rewarded": 218,
+     "attemptRewarded": 23
+    },
+    {
+     "effort": "xhigh",
+     "trials": 452,
+     "attempt": 89,
+     "rewarded": 224,
+     "attemptRewarded": 42
+    },
+    {
+     "effort": "max",
+     "trials": 452,
+     "attempt": 96,
+     "rewarded": 238,
+     "attemptRewarded": 61
+    }
+   ]
+  },
+  {
+   "model": "Fable 5",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 452,
+     "attempt": 17,
+     "rewarded": 258,
+     "attemptRewarded": 12
+    },
+    {
+     "effort": "medium",
+     "trials": 452,
+     "attempt": 44,
+     "rewarded": 285,
+     "attemptRewarded": 29
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 56,
+     "rewarded": 295,
+     "attemptRewarded": 40
+    },
+    {
+     "effort": "xhigh",
+     "trials": 452,
+     "attempt": 60,
+     "rewarded": 316,
+     "attemptRewarded": 41
+    },
+    {
+     "effort": "max",
+     "trials": 452,
+     "attempt": 47,
+     "rewarded": 304,
+     "attemptRewarded": 35
+    }
+   ]
+  },
+  {
+   "model": "Opus 5",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 452,
+     "attempt": 6,
+     "rewarded": 261,
+     "attemptRewarded": 4
+    },
+    {
+     "effort": "medium",
+     "trials": 452,
+     "attempt": 20,
+     "rewarded": 308,
+     "attemptRewarded": 14
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 36,
+     "rewarded": 327,
+     "attemptRewarded": 28
+    },
+    {
+     "effort": "xhigh",
+     "trials": 451,
+     "attempt": 49,
+     "rewarded": 327,
+     "attemptRewarded": 39
+    },
+    {
+     "effort": "max",
+     "trials": 449,
+     "attempt": 49,
+     "rewarded": 327,
+     "attemptRewarded": 36
+    }
+   ]
+  },
+  {
+   "model": "Opus 4.8",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 452,
+     "attempt": 5,
+     "rewarded": 184,
+     "attemptRewarded": 2
+    },
+    {
+     "effort": "medium",
+     "trials": 452,
+     "attempt": 7,
+     "rewarded": 220,
+     "attemptRewarded": 1
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 7,
+     "rewarded": 234,
+     "attemptRewarded": 2
+    },
+    {
+     "effort": "xhigh",
+     "trials": 452,
+     "attempt": 11,
+     "rewarded": 243,
+     "attemptRewarded": 5
+    },
+    {
+     "effort": "max",
+     "trials": 452,
+     "attempt": 8,
+     "rewarded": 253,
+     "attemptRewarded": 6
+    }
+   ]
+  },
+  {
+   "model": "GPT-5.5",
+   "cells": [
+    {
+     "effort": "low",
+     "trials": 452,
+     "attempt": 0,
+     "rewarded": 122,
+     "attemptRewarded": 0
+    },
+    {
+     "effort": "medium",
+     "trials": 452,
+     "attempt": 2,
+     "rewarded": 244,
+     "attemptRewarded": 2
+    },
+    {
+     "effort": "high",
+     "trials": 452,
+     "attempt": 3,
+     "rewarded": 291,
+     "attemptRewarded": 3
+    },
+    {
+     "effort": "xhigh",
+     "trials": 452,
+     "attempt": 4,
+     "rewarded": 303,
+     "attemptRewarded": 4
+    },
+    null
+   ]
+  }
+ ],
+ "rows": [
+  {
+   "model": "DeepSeek V4 Pro",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 284,
+   "upstream": 347,
+   "git": 334,
+   "attempt": 396,
+   "attemptRewarded": 246
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "effort": "max",
+   "trials": 451,
+   "rewarded": 314,
+   "upstream": 213,
+   "git": 225,
+   "attempt": 275,
+   "attemptRewarded": 189
+  },
+  {
+   "model": "DeepSeek V4 Flash",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 241,
+   "upstream": 172,
+   "git": 88,
+   "attempt": 211,
+   "attemptRewarded": 105
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 327,
+   "upstream": 138,
+   "git": 151,
+   "attempt": 208,
+   "attemptRewarded": 147
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "effort": "max",
+   "trials": 448,
+   "rewarded": 301,
+   "upstream": 121,
+   "git": 166,
+   "attempt": 205,
+   "attemptRewarded": 150
+  },
+  {
+   "model": "Grok 4.6",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 301,
+   "upstream": 107,
+   "git": 0,
+   "attempt": 107,
+   "attemptRewarded": 75
+  },
+  {
+   "model": "Sonnet 5",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 238,
+   "upstream": 94,
+   "git": 2,
+   "attempt": 96,
+   "attemptRewarded": 61
+  },
+  {
+   "model": "Sonnet 5",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 224,
+   "upstream": 89,
+   "git": 0,
+   "attempt": 89,
+   "attemptRewarded": 42
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 257,
+   "upstream": 45,
+   "git": 54,
+   "attempt": 88,
+   "attemptRewarded": 45
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 272,
+   "upstream": 68,
+   "git": 44,
+   "attempt": 84,
+   "attemptRewarded": 52
+  },
+  {
+   "model": "GLM-5.3 Flash",
+   "effort": "max",
+   "trials": 448,
+   "rewarded": 284,
+   "upstream": 62,
+   "git": 3,
+   "attempt": 64,
+   "attemptRewarded": 41
+  },
+  {
+   "model": "Grok 4.6",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 305,
+   "upstream": 61,
+   "git": 0,
+   "attempt": 61,
+   "attemptRewarded": 34
+  },
+  {
+   "model": "Fable 5",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 316,
+   "upstream": 57,
+   "git": 3,
+   "attempt": 60,
+   "attemptRewarded": 41
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 319,
+   "upstream": 41,
+   "git": 28,
+   "attempt": 58,
+   "attemptRewarded": 38
+  },
+  {
+   "model": "Grok 4.6",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 294,
+   "upstream": 58,
+   "git": 0,
+   "attempt": 58,
+   "attemptRewarded": 38
+  },
+  {
+   "model": "Fable 5",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 295,
+   "upstream": 53,
+   "git": 3,
+   "attempt": 56,
+   "attemptRewarded": 40
+  },
+  {
+   "model": "Grok 4.5",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 243,
+   "upstream": 56,
+   "git": 0,
+   "attempt": 56,
+   "attemptRewarded": 30
+  },
+  {
+   "model": "GLM-5.3",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 311,
+   "upstream": 54,
+   "git": 3,
+   "attempt": 55,
+   "attemptRewarded": 39
+  },
+  {
+   "model": "Opus 5",
+   "effort": "max",
+   "trials": 449,
+   "rewarded": 327,
+   "upstream": 45,
+   "git": 5,
+   "attempt": 49,
+   "attemptRewarded": 36
+  },
+  {
+   "model": "Opus 5",
+   "effort": "xhigh",
+   "trials": 451,
+   "rewarded": 327,
+   "upstream": 44,
+   "git": 5,
+   "attempt": 49,
+   "attemptRewarded": 39
+  },
+  {
+   "model": "Fable 5",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 304,
+   "upstream": 42,
+   "git": 6,
+   "attempt": 47,
+   "attemptRewarded": 35
+  },
+  {
+   "model": "Sonnet 5",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 218,
+   "upstream": 45,
+   "git": 1,
+   "attempt": 46,
+   "attemptRewarded": 23
+  },
+  {
+   "model": "Kimi K3",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 309,
+   "upstream": 44,
+   "git": 3,
+   "attempt": 45,
+   "attemptRewarded": 25
+  },
+  {
+   "model": "Fable 5",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 285,
+   "upstream": 44,
+   "git": 0,
+   "attempt": 44,
+   "attemptRewarded": 29
+  },
+  {
+   "model": "Opus 5",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 327,
+   "upstream": 35,
+   "git": 1,
+   "attempt": 36,
+   "attemptRewarded": 28
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 200,
+   "upstream": 22,
+   "git": 15,
+   "attempt": 36,
+   "attemptRewarded": 14
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 313,
+   "upstream": 20,
+   "git": 6,
+   "attempt": 24,
+   "attemptRewarded": 17
+  },
+  {
+   "model": "Opus 5",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 308,
+   "upstream": 19,
+   "git": 1,
+   "attempt": 20,
+   "attemptRewarded": 14
+  },
+  {
+   "model": "Gemini 3.7 Flash",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 296,
+   "upstream": 19,
+   "git": 0,
+   "attempt": 19,
+   "attemptRewarded": 9
+  },
+  {
+   "model": "Gemini 3.7 Flash",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 295,
+   "upstream": 18,
+   "git": 0,
+   "attempt": 18,
+   "attemptRewarded": 12
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 243,
+   "upstream": 12,
+   "git": 9,
+   "attempt": 18,
+   "attemptRewarded": 7
+  },
+  {
+   "model": "Sonnet 5",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 179,
+   "upstream": 18,
+   "git": 0,
+   "attempt": 18,
+   "attemptRewarded": 7
+  },
+  {
+   "model": "Fable 5",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 258,
+   "upstream": 17,
+   "git": 0,
+   "attempt": 17,
+   "attemptRewarded": 12
+  },
+  {
+   "model": "Qwen3.8 Max",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 258,
+   "upstream": 14,
+   "git": 2,
+   "attempt": 16,
+   "attemptRewarded": 12
+  },
+  {
+   "model": "Muse Spark 1.1",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 241,
+   "upstream": 14,
+   "git": 1,
+   "attempt": 15,
+   "attemptRewarded": 12
+  },
+  {
+   "model": "Muse Spark 1.2",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 248,
+   "upstream": 14,
+   "git": 1,
+   "attempt": 14,
+   "attemptRewarded": 6
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 51,
+   "upstream": 8,
+   "git": 7,
+   "attempt": 14,
+   "attemptRewarded": 0
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 7,
+   "upstream": 10,
+   "git": 6,
+   "attempt": 14,
+   "attemptRewarded": 0
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 205,
+   "upstream": 11,
+   "git": 3,
+   "attempt": 12,
+   "attemptRewarded": 4
+  },
+  {
+   "model": "Grok 4.6",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 187,
+   "upstream": 12,
+   "git": 0,
+   "attempt": 12,
+   "attemptRewarded": 4
+  },
+  {
+   "model": "Opus 4.8",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 243,
+   "upstream": 11,
+   "git": 0,
+   "attempt": 11,
+   "attemptRewarded": 5
+  },
+  {
+   "model": "Gemini 3.7 Flash",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 243,
+   "upstream": 11,
+   "git": 0,
+   "attempt": 11,
+   "attemptRewarded": 7
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "effort": "low",
+   "trials": 449,
+   "rewarded": 108,
+   "upstream": 11,
+   "git": 5,
+   "attempt": 11,
+   "attemptRewarded": 1
+  },
+  {
+   "model": "GPT-5.6 Terra",
+   "effort": "medium",
+   "trials": 450,
+   "rewarded": 158,
+   "upstream": 9,
+   "git": 3,
+   "attempt": 10,
+   "attemptRewarded": 1
+  },
+  {
+   "model": "GLM-5.2",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 197,
+   "upstream": 9,
+   "git": 0,
+   "attempt": 9,
+   "attemptRewarded": 5
+  },
+  {
+   "model": "Kimi K2.7 Code",
+   "effort": "default",
+   "trials": 452,
+   "rewarded": 138,
+   "upstream": 9,
+   "git": 0,
+   "attempt": 9,
+   "attemptRewarded": 5
+  },
+  {
+   "model": "Opus 4.8",
+   "effort": "max",
+   "trials": 452,
+   "rewarded": 253,
+   "upstream": 8,
+   "git": 0,
+   "attempt": 8,
+   "attemptRewarded": 6
+  },
+  {
+   "model": "Gemini 3.6 Flash",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 211,
+   "upstream": 8,
+   "git": 0,
+   "attempt": 8,
+   "attemptRewarded": 5
+  },
+  {
+   "model": "GLM-5.2",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 164,
+   "upstream": 8,
+   "git": 0,
+   "attempt": 8,
+   "attemptRewarded": 5
+  },
+  {
+   "model": "Opus 4.8",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 234,
+   "upstream": 7,
+   "git": 0,
+   "attempt": 7,
+   "attemptRewarded": 2
+  },
+  {
+   "model": "Opus 4.8",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 220,
+   "upstream": 7,
+   "git": 0,
+   "attempt": 7,
+   "attemptRewarded": 1
+  },
+  {
+   "model": "Sonnet 5",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 137,
+   "upstream": 7,
+   "git": 0,
+   "attempt": 7,
+   "attemptRewarded": 3
+  },
+  {
+   "model": "Sonnet 4.6",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 135,
+   "upstream": 7,
+   "git": 0,
+   "attempt": 7,
+   "attemptRewarded": 0
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 276,
+   "upstream": 6,
+   "git": 1,
+   "attempt": 6,
+   "attemptRewarded": 5
+  },
+  {
+   "model": "Opus 5",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 261,
+   "upstream": 6,
+   "git": 0,
+   "attempt": 6,
+   "attemptRewarded": 4
+  },
+  {
+   "model": "Gemini 3.5 Flash",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 163,
+   "upstream": 6,
+   "git": 0,
+   "attempt": 6,
+   "attemptRewarded": 4
+  },
+  {
+   "model": "GPT-5.4",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 234,
+   "upstream": 5,
+   "git": 0,
+   "attempt": 5,
+   "attemptRewarded": 4
+  },
+  {
+   "model": "Opus 4.8",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 184,
+   "upstream": 5,
+   "git": 0,
+   "attempt": 5,
+   "attemptRewarded": 2
+  },
+  {
+   "model": "GPT-5.5",
+   "effort": "xhigh",
+   "trials": 452,
+   "rewarded": 303,
+   "upstream": 4,
+   "git": 0,
+   "attempt": 4,
+   "attemptRewarded": 4
+  },
+  {
+   "model": "Gemini 3.1 Pro Preview",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 53,
+   "upstream": 4,
+   "git": 0,
+   "attempt": 4,
+   "attemptRewarded": 1
+  },
+  {
+   "model": "GPT-5.5",
+   "effort": "high",
+   "trials": 452,
+   "rewarded": 291,
+   "upstream": 3,
+   "git": 0,
+   "attempt": 3,
+   "attemptRewarded": 3
+  },
+  {
+   "model": "GPT-5.5",
+   "effort": "medium",
+   "trials": 452,
+   "rewarded": 244,
+   "upstream": 2,
+   "git": 0,
+   "attempt": 2,
+   "attemptRewarded": 2
+  },
+  {
+   "model": "GPT-5.5",
+   "effort": "low",
+   "trials": 452,
+   "rewarded": 122,
+   "upstream": 0,
+   "git": 0,
+   "attempt": 0,
+   "attemptRewarded": 0
+  }
+ ]
+}

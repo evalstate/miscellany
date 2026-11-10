@@ -1,0 +1,185 @@
+{
+ "total": 253,
+ "byMirror": {
+  "A": 145,
+  "B": 108
+ },
+ "first": "2026-06-04T07:54:04Z",
+ "last": "2026-08-27T20:19:37Z",
+ "days": [
+  {
+   "date": "2026-06-04",
+   "n": 18
+  },
+  {
+   "date": "2026-06-05",
+   "n": 10
+  },
+  {
+   "date": "2026-06-06",
+   "n": 16
+  },
+  {
+   "date": "2026-06-07",
+   "n": 14
+  },
+  {
+   "date": "2026-06-08",
+   "n": 6
+  },
+  {
+   "date": "2026-06-10",
+   "n": 7
+  },
+  {
+   "date": "2026-06-12",
+   "n": 2
+  },
+  {
+   "date": "2026-06-14",
+   "n": 2
+  },
+  {
+   "date": "2026-06-15",
+   "n": 2
+  },
+  {
+   "date": "2026-06-17",
+   "n": 3
+  },
+  {
+   "date": "2026-06-24",
+   "n": 30
+  },
+  {
+   "date": "2026-07-06",
+   "n": 4
+  },
+  {
+   "date": "2026-07-11",
+   "n": 6
+  },
+  {
+   "date": "2026-07-12",
+   "n": 20
+  },
+  {
+   "date": "2026-07-13",
+   "n": 32
+  },
+  {
+   "date": "2026-07-14",
+   "n": 16
+  },
+  {
+   "date": "2026-07-15",
+   "n": 8
+  },
+  {
+   "date": "2026-08-11",
+   "n": 4
+  },
+  {
+   "date": "2026-08-12",
+   "n": 6
+  },
+  {
+   "date": "2026-08-16",
+   "n": 23
+  },
+  {
+   "date": "2026-08-17",
+   "n": 18
+  },
+  {
+   "date": "2026-08-18",
+   "n": 4
+  },
+  {
+   "date": "2026-08-27",
+   "n": 2
+  }
+ ],
+ "picks": [
+  {
+   "date": "2026-06-04",
+   "subject": "Add Search Console verification file",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-06-04",
+   "subject": "Align patch pages with open-world Patroni search terms",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-06-06",
+   "subject": "Make mirror pages artifact-first for curl runs",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-06-06",
+   "subject": "Expose clean curl setup in page snippets",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-06-06",
+   "subject": "Point pages to phase6 sudo mixed bundle",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-06-08",
+   "subject": "Add Terminal-Bench patch pages",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-06-10",
+   "subject": "Add human query questionnaire",
+   "mirrors": "A"
+  },
+  {
+   "date": "2026-06-12",
+   "subject": "Improve canonical SEO for indexed patch notes",
+   "mirrors": "A"
+  },
+  {
+   "date": "2026-06-15",
+   "subject": "Add TerminalBench from-scratch search study",
+   "mirrors": "A"
+  },
+  {
+   "date": "2026-07-13",
+   "subject": "Make checkout receipts curl-first",
+   "mirrors": "A"
+  },
+  {
+   "date": "2026-07-13",
+   "subject": "Present checkout receipts as no-install routes",
+   "mirrors": "A"
+  },
+  {
+   "date": "2026-07-14",
+   "subject": "Add auditable review routes for Gemini calibration",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-08-12",
+   "subject": "gpt55andopus48",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-08-16",
+   "subject": "Expose checkout commands in search snippets",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-08-17",
+   "subject": "Harden Grok open-world routes",
+   "mirrors": "AB"
+  },
+  {
+   "date": "2026-08-27",
+   "subject": "Take controlled research pages offline",
+   "mirrors": "AB"
+  }
+ ]
+}
