@@ -101,6 +101,208 @@ Cards are deliberately equal (paper): no one audience is "us", so no amber.
 -->
 
 ---
+clicks: 5
+class: fa-case-slide
+---
+
+# A full run got cheaper at each new model
+
+<RunCostByMonth :shown="$clicks + 1" />
+
+<!--
+Receipt, kept off the slide on purpose (this is a narrative slide): 12 runs of 445 trials (89 tasks × 5), 30 Apr – Nov 2026. GPT-5.5, then Sol at high effort; Luna at max effort (Nov medium). terminus-2 2.0.0 and Codex for the two public runs, fast-agent 0.9.24–0.10.52 for the rest, all on TB 2.1. Amber is list price for the tokens used at one rate table of 5 Nov 2026; petrol is cost as that run recorded it. Neither is money spent.
+Click through six steps. Each panel opens with a public leaderboard run (petrol), then the fast-agent runs for July to November (amber). There is no run for May or June.
+Luna opens with the public Codex run of GPT-5.6 Luna on 11 July: $241 at 76% (341 of 445). GPT-5.6 Luna's price was then cut about fivefold (our runs were configured at $1 / $0.10 / $6 per million tokens in July and $0.20 / $0.02 / $1.20 from August), which is most of the drop to the amber bars. The amber bars are all priced at the later rates. The Codex version isn't in the listing.
+April is GPT-5.5, the model before the Sol line, from a public Terminal-Bench 2.1 leaderboard run on terminus-2: $493 at 78% (348 of 445). It is petrol because it isn't a fast-agent run, and its cost is what that run recorded, not repriced, so compare it with the amber bars loosely.
+The same public job also ran GPT-5.5 on Codex: 83% (371 of 445) with a recorded cost of $2,059. That figure looks high for 6.0M output tokens and may not include cache discounts, so it is left off the chart.
+Our own GPT-5.5 run on fast-agent in late July recorded $394 at 84% on 420 of the 445 trials; it isn't shown because it is incomplete.
+Sol at high effort: about $270 and $281 on GPT-5.6 Sol, then $65 on GPT-6 Sol, $50 and $41 on GPT-6.1 Sol. The score stays between 85% and 88%.
+Luna at max effort: $36 and $29 on GPT-5.6 Luna, then $8 and $14 on GPT-6 Luna, at about 80%. November's Luna run is medium effort (72%), so it is drawn as an outline and doesn't continue the series.
+The fall is a step at each model change, not a steady monthly decline: July to August on the same model is flat. New models had lower list rates and used fewer output tokens.
+Effort is as big a lever as the month: in July, GPT-5.6 Sol cost $151 at low effort and about $350 at xhigh.
+What "cost" means for the amber bars: each run's recorded tokens priced at one standard list-rate table, so subscription, flex-tier and route differences don't move the bars. Most runs were billed through subscriptions or the flex tier; no invoices were used. Recorded costs are lower bounds, because trials with stream errors record no usage.
+Scores are published figures where the run was published (Aug Luna, Oct Sol, Oct Luna) and the submitted figure for Jul Sol; the rest are raw means before review, with errored trials counted as 0.
+The evaluation changed in September: from then the fast-agent runs use the fixed-QEMU, 6-hour-timeout variant on HF sandboxes, which is not leaderboard-eligible. None of the fast-agent runs is on the official leaderboard.
+October's Luna run used the API flex route and more input tokens than September's Codex-route run, which is why its bar is higher.
+Source: data/run-costs.json (61 complete fast-agent runs, of which 10 are the monthly picks, plus 3 public runs from the Harbor Hub mirror, 2 of them charted).
+This is the "cost of running them has come down" point for harness optimisers on the previous slide.
+-->
+
+---
+class: fa-case-slide
+---
+
+# Compact earlier: score up, cost down
+
+<CompactionCost />
+
+<!--
+This is what a harness developer does with a cheap benchmark: change one setting, run it again, read score and cost side by side.
+About 45 seconds. Each chart is one model: cost per trial runs along the bottom, score up the side, so up and to the left is better. The grey dot is the old compaction point, the amber dot the new one, and the arrow is the move.
+Axes: both are zoomed. Cost runs $0.15 to $0.30 (GLM) and $5 to $8 (Grok), so the leftward move looks bigger than to scale; the 23% and 16% under each chart are the real sizes. Score shows 30% to 50%, so the 2-point rise looks steeper than on a full axis.
+Receipt, kept off the slide (narrative slide): Terminal-Bench 4.0, the 19-task subset, 95 trials per run (19 tasks × 5), fast-agent. GLM-5.3 Flash at high effort on Z.ai; Grok 4.7 at xhigh on xAI. The two Grok runs also differ in fast-agent version, 0.10.44 and 0.10.46. Chart drawn 4 Nov 2026; the four runs are not in the published benchmark manifest, so their dates aren't given here.
+GLM-5.3 Flash: no compaction (1M window) scores 35.8% at $0.28 a trial; compacting at 200k scores 37.9% at $0.21, 23% less.
+Grok 4.7: compacting at 425k (the default) scores 40.0% at $7.59 a trial; compacting at 190k scores 42.1% at $6.37, 16% less.
+Score is verifier reward ÷ 95, with ± one standard error clustered by task. With 19 tasks, differences under about 10 points are within noise; both score gaps here are about 2 points. The slide states the measured direction (score up 2 points in both pairs). If asked: on 19 tasks that gain is within one standard error, so the firm result is the cost.
+Cost is fast-agent's recorded cost at the provider's list prices, not billing. The later-compaction runs have more trials with incomplete usage records (11 against 3 for GLM, 17 against 1 for Grok), so their bars are, if anything, short, and the true saving may be larger.
+Not shown: GLM at 256k scored 35.8% at $0.35 a trial, or $0.22 without one trial that re-ran a script 2,238 times.
+Source: the fast-agent docs chart, docs/benchmark_data/tb4/compaction.py. Figures are copied from it, not re-derived.
+-->
+
+---
+class: fa-ladder-slide
+---
+
+# Calibrate the reasoning level
+
+<div class="fa-ladder">
+<EffortLadder
+  pick="medium"
+  :levels="[
+    { effort: 'low', score: 44.94, reasoning: 584, cost: 0.57 },
+    { effort: 'medium', score: 74.83, reasoning: 6445, cost: 3.30 },
+    { effort: 'high', score: 73.93, reasoning: 10387, cost: 4.48 },
+    { effort: 'xhigh', score: 77.08, reasoning: 11885, cost: 4.77 },
+    { effort: 'max', score: 80.0, reasoning: 23421, cost: 7.20 },
+  ]"
+/>
+<div class="fa-ladder-copy">
+
+Medium scores 74%. Max adds 5 points for 3.6× the reasoning.
+
+70 of 89 tasks are solved by medium. For work of similar difficulty, start at medium.
+
+<p class="fa-ladder-meta">GPT-6 Luna, flex tier · TB 2.1, 445 trials per level · fast-agent 0.10.42 · 3 Oct 2026</p>
+
+</div>
+</div>
+
+<EffortLadder
+  part="strip"
+  :buckets="[
+    { label: 'low', tasks: 41, tone: 'low' },
+    { label: 'medium', tasks: 29, tone: 'medium' },
+    { label: 'higher', tasks: 9, tone: 'higher' },
+    { label: 'unsolved', tasks: 10, tone: 'never' },
+  ]"
+/>
+
+<!--
+Why benchmark, for builders: one model, five reasoning levels, the same tasks. The benchmark tells you where the knee is.
+Low to medium: 45% to 75% for 11× the reasoning tokens. Medium to max: 75% to 80% for 3.6× more.
+Task strip: the lowest level at which each task is solved in at least 3 of 5 attempts. 41 at low, 29 more at medium, 9 need high, xhigh or max (1 high, 1 xhigh, 7 max), 10 unsolved at any level.
+Caveat: "similar difficulty" is the claim to make carefully; TB 2.1 tasks are terminal tasks, so this calibrates for that kind of work.
+Reasoning tokens are the per-trial reasoning totals recorded in the ATIF trajectories (fast-agent final_metrics), mean over trials with usage (426 to 443 of 445). Costs are the recorded run totals at flex rates.
+Runs use the modified evaluation: fixed QEMU and a six-hour agent deadline.
+Sources: bench-run state/publish/luna6-{low,medium,high,xhigh,max}-6h; fast-agent docs/benchmark_data/runs/luna6-*-6h.json.
+-->
+
+---
+clicks: 1
+---
+
+# Cheaper per token isn't cheaper per run
+
+<ListVsRunCost
+  :reveal="$clicks >= 1"
+  benchmark="TB 2.1, 445 trials"
+  :models="[
+    { name: 'Grok 4.6', effort: 'high', tone: 'teal', price: { input: 2, cached: 0.5, output: 6 }, run: { cost: 238.32, input: 284.8, cached: 254.3, output: 8.38, score: 85.39 } },
+    { name: 'GPT-5.6 Sol', effort: 'high', tone: 'petrol', price: { input: 5, cached: 0.5, output: 30 }, run: { cost: 270.14, input: 122.3, cached: 99.5, output: 3.55, score: 87.19 } },
+  ]"
+/>
+
+<Receipt n="445 trials each" date="26 Jul (Sol), 16 Aug 2026 (Grok)" model="Grok 4.6 high, GPT-5.6 Sol high" harness="fast-agent 0.9.24 (Sol), 0.10.9 (Grok) · TB 2.1" />
+
+<!--
+Open on the prices: Grok is 2.5× cheaper per input token and 5× cheaper per output token. Click: the run costs about the same.
+Why: Grok used 2.3× the input tokens (285M against 122M) and 2.3× the output (8.4M against 3.5M). Both pay $0.50 per million cached tokens, and cached reads are most of the input (89% for Grok, 81% for Sol), so cached volume alone is $127 of Grok's $238.
+Costs are Harbor's recorded totals; the prices are the card-packs catalog rates in effect on the run dates, and they reproduce those totals. Grok's long-context band (over 200k prompt tokens) is $4 / $1 / $12; this run barely touched it.
+OpenAI cut Sol prices by 20% on 24 August 2026, after this run. At current prices the Sol run would be about $216.
+Sol: 444 of 445 trials have a recorded cost. Scores: Grok 85.4%, Sol 87.2%.
+Source: fast-agent docs/benchmark_data/runs/fa-grok46-high.json and fa-sol-high.json; card-packs pricing_catalog.json (2026-08-19.1).
+-->
+
+---
+clicks: 2
+---
+
+# Competitive pricing comparison
+
+<PricePoints
+  :shown="$clicks"
+  :max="32"
+  :ticks="[0, 10, 20, 30]"
+  :rows="[
+    { model: 'GPT-5.6 Luna', detail: 'high', harness: 'fast-agent 0.10.46 · TB 2.1 · 18 Oct', score: 74.16, tone: 'petrol', points: [
+      { label: 'Flex tier', note: 'what we paid', rate: '$0.10 / $0.01 / $0.60', cost: 8.89, recorded: true, step: 0 },
+      { label: 'Standard tier', note: 'same tokens', rate: '$0.20 / $0.02 / $1.20', cost: 17.78, step: 1 },
+    ] },
+    { model: 'DeepSeek V4 Flash', detail: 'max', harness: 'fast-agent 0.9.30 · TB 2.1 · 2 Aug', score: 73.03, tone: 'teal', points: [
+      { label: 'August rate', note: '(withdrawn)', cost: 8.57, recorded: true, muted: true, step: 0 },
+      { label: 'Off-peak', note: 'same tokens', rate: '$0.15 / $0.003 / $0.60', cost: 14.56, step: 2 },
+      { label: 'Peak hours', note: 'same tokens', rate: '$0.30 / $0.006 / $1.20', cost: 29.12, step: 2 },
+    ] },
+  ]"
+/>
+
+<!--
+Open: the two runs we actually paid for. Same score (74% and 73%), same cost, about $9 each.
+Click 1: Luna was run on OpenAI's flex tier, which is half the standard rate. The same tokens at standard rates cost $17.78.
+Click 2: DeepSeek repriced V4 Flash in September, and now has peak and off-peak rates. The same August tokens cost $14.56 off-peak and $29.12 at peak.
+The point: at this end the token volume is fixed by the model, so the tier and the time of day decide the bill: the dearest point is more than 3× the cheapest.
+Rates (per million input / cached / output tokens):
+- Luna flex $0.10 / $0.01 / $0.60; standard $0.20 / $0.02 / $1.20 (plus cache writes at 125% of input, which the recorded cost includes). Standard is exactly twice flex, so $8.89 × 2.
+- DeepSeek V4 Flash as recorded in August: $0.14 / $0.0028 / $0.28 (checked: these rates reproduce every one of the 434 costed trials). From September: off-peak $0.15 / $0.003 / $0.60; peak (weekday UTC 01:00–04:00 and 06:00–10:00) $0.30 / $0.006 / $1.20.
+- Repriced points use the run's recorded token totals: Luna 407M input (392M cached), 5.0M output; DeepSeek 792M input (783M cached), 17.9M output. 11 DeepSeek trials have no recorded usage, so its figures are lower bounds.
+Caveat: Luna used the six-hour agent timeout; the DeepSeek run used the standard one.
+Sources: fast-agent docs/benchmark_data/runs/luna56-high-6h.json and fa-deepseek-v4-flash-max.json; card-packs pricing_catalog.json; per-trial result.json in tb21-run/jobs.
+-->
+
+---
+class: fa-refunds-slide
+---
+
+# No refunds for output tokens
+
+<div class="fa-refunds">
+
+| Route | Success | Input tokens | Output tokens | Tokens per success |
+|---|---|---|---|---|
+| GPT-5.4 mini (comparator) | 87% · 113/129 | 263,011 | 26,328 | 2,560 |
+| DeepSeek V4 Pro · Provider A | 81% · 105/129 | 395,942 | 30,388 | 4,060 |
+| DeepSeek V4 Pro · Provider B | 81% · 105/129 | 410,088 | 32,264 | 4,212 |
+| <span class="fa-refunds-bad">DeepSeek V4 Pro · Provider C</span> | <span class="fa-refunds-bad">63% · 82/129</span> | 409,200 | 30,582 | <span class="fa-refunds-bad">5,363</span> |
+
+Same model name, about the same tokens. One route solved 23 fewer tasks. **You pay for the tokens either way.**
+
+<p class="fa-refunds-meta">Tool-calling eval, 129 rows per route, 13 May 2026 · DeepSeek V4 Pro via Hugging Face inference providers · fast-agent</p>
+
+</div>
+
+<!--
+Private evaluation: the hf-mcp-server file-tools tool-calling eval (GEPA best card), 129 rows, every route on the same rows, 13 May 2026.
+Provider C also made tool calls on far fewer rows: 94 of 129 (73%) against 95–97% for the others. Its failures are almost all "no acceptable call set matched" (47).
+Tokens per success = total tokens ÷ successful rows. Provider C spends about a third more tokens per solved task than Provider A (5,363 against 4,060).
+Price: the report includes no pricing. If quoting "charging the same", give the per-provider list prices from that date. TBC.
+Root cause isn't established by the report: a different quantisation, serving configuration or template are all possible.
+Source: birchline status report, fast-agent-pr/.cdx/artifacts/birchline-status-20260513-130853.html (raw run files no longer on disk).
+-->
+
+---
+layout: default
+---
+
+# Terminal-Bench 2.1: Anthropic and OpenAI
+
+<img src="/screens/tb21-leaderboard-anthropic-openai.png" class="fa-screenshot" alt="Terminal-Bench 2.1 leaderboard filtered to Anthropic and OpenAI agents" />
+
+<!--
+Screenshot of the public Terminal-Bench 2.1 leaderboard, filtered to Anthropic and OpenAI agent orgs.
+Use this when introducing atif-scan: the adjustments to the Anthropic and GPT-5.6 Terra scores after the reward-hacking review.
+-->
+
+---
 
 
 # Reading a benchmark

@@ -412,6 +412,36 @@
 .fa-trio-slide .fa-card p { margin-bottom: 10px !important; }
 .fa-trio-slide .fa-receipt { margin-top: 14px; }
 
+/* ---------- Reasoning calibration ---------- */
+
+.fa-ladder-slide h1 { font-size: 46px; }
+.fa-ladder { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+.fa-ladder-copy p { font-size: 22px; line-height: 1.35; }
+.fa-ladder-copy p.fa-ladder-meta { font-size: 13px; color: var(--text-muted); }
+
+/* ---------- No refunds table ---------- */
+
+.fa-refunds-slide h1 { font-size: 46px; }
+.fa-refunds table { font-size: 17px; }
+.slidev-layout .fa-refunds td { padding: 8px 16px; white-space: nowrap; }
+.slidev-layout .fa-refunds th { padding: 8px 16px; }
+.fa-refunds td:nth-child(n + 2), .fa-refunds th:nth-child(n + 2) { text-align: right; }
+.fa-refunds td { font-variant-numeric: tabular-nums; }
+.fa-refunds p { margin: 14px 0 4px; font-size: 21px; }
+.fa-refunds p.fa-refunds-meta { margin: 0; font-size: 13px; color: var(--text-muted); }
+.fa-refunds-bad { font-weight: 800; text-decoration: underline; text-decoration-color: var(--orange); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+/* ---------- Screenshot slides ---------- */
+
+.fa-screenshot {
+  display: block;
+  max-height: 400px;
+  max-width: 100%;
+  margin: 0 auto;
+  border: var(--border);
+  border-radius: var(--radius-lg);
+}
+
 @media (prefers-reduced-motion: reduce) {
   .slidev-layout *,
   .slidev-layout *::before,
@@ -479,3 +509,8 @@
 .fa-case-slide .fa-compact table { font-size: 15px; }
 .fa-case-slide .fa-compact td, .fa-case-slide .fa-compact th { padding: 5px 12px; }
 .fa-case-slide .fa-compact + p { font-size: 17px; margin: 10px 0 0; }
+
+/* ---------- Palette extension for charts ---------- */
+/* A flat neutral for "before" marks, so the "after" colour carries the eye.
+   It is petrol at about 30% on ivory, written as a solid so it never blends. */
+:root { --petrol-tint: #B5BAB2; }
