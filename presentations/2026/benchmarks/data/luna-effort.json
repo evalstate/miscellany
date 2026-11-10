@@ -1,0 +1,1634 @@
+{
+ "_comment": "GPT-6 Luna on TB 2.1 (qemu-fixed, 6h), fast-agent 0.10.42, flex, 3 Oct 2026. need = median reasoning tokens of passing trials across all levels. Source: bench-run state/publish/luna6-*-6h trajectories (final_metrics.extra.total_reasoning_tokens) and fast-agent docs/benchmark_data/runs/luna6-*-6h.json. passes are raw verifier passes before review disqualifications (203/334/336/347/359 here vs 200/333/329/343/356 published).",
+ "levels": [
+  {
+   "effort": "low",
+   "median": 514,
+   "mean": 584
+  },
+  {
+   "effort": "medium",
+   "median": 3131,
+   "mean": 6445
+  },
+  {
+   "effort": "high",
+   "median": 4856,
+   "mean": 10387
+  },
+  {
+   "effort": "xhigh",
+   "median": 6593,
+   "mean": 11885
+  },
+  {
+   "effort": "max",
+   "median": 13542,
+   "mean": 23421
+  }
+ ],
+ "tasks": [
+  {
+   "task": "code-from-image",
+   "need": 280,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "log-summary-date-ranges",
+   "need": 299,
+   "passes": {
+    "low": 0,
+    "medium": 4,
+    "high": 5,
+    "xhigh": 5,
+    "max": 3
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "modernize-scientific-stack",
+   "need": 327,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "openssl-selfsigned-cert",
+   "need": 517,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "kv-store-grpc",
+   "need": 559,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 3,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "configure-git-webserver",
+   "need": 565,
+   "passes": {
+    "low": 4,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 1,
+    "max": 0
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "hf-model-inference",
+   "need": 638,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "fix-code-vulnerability",
+   "need": 706,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "pypi-server",
+   "need": 763,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "multi-source-data-merger",
+   "need": 798,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "vulnerable-secret",
+   "need": 889,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "db-wal-recovery",
+   "need": 918,
+   "passes": {
+    "low": 3,
+    "medium": 3,
+    "high": 4,
+    "xhigh": 5,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "cancel-async-tasks",
+   "need": 974,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 3,
+    "xhigh": 4,
+    "max": 3
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "mteb-retrieve",
+   "need": 1002,
+   "passes": {
+    "low": 3,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "constraints-scheduling",
+   "need": 1056,
+   "passes": {
+    "low": 5,
+    "medium": 4,
+    "high": 3,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "crack-7z-hash",
+   "need": 1204,
+   "passes": {
+    "low": 2,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "prove-plus-comm",
+   "need": 1284,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "sanitize-git-repo",
+   "need": 1380,
+   "passes": {
+    "low": 2,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 1,
+    "max": 0
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "count-dataset-tokens",
+   "need": 1510,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "sqlite-with-gcov",
+   "need": 1563,
+   "passes": {
+    "low": 5,
+    "medium": 4,
+    "high": 4,
+    "xhigh": 3,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "nginx-request-logging",
+   "need": 1678,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "fix-git",
+   "need": 1780,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 4,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "bn-fit-modify",
+   "need": 1966,
+   "passes": {
+    "low": 2,
+    "medium": 5,
+    "high": 4,
+    "xhigh": 5,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "mteb-leaderboard",
+   "need": 2293,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 2,
+    "xhigh": 2,
+    "max": 3
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "merge-diff-arc-agi-task",
+   "need": 2409,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "git-leak-recovery",
+   "need": 2429,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "large-scale-text-editing",
+   "need": 2448,
+   "passes": {
+    "low": 5,
+    "medium": 4,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "sqlite-db-truncate",
+   "need": 2558,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "pytorch-model-cli",
+   "need": 2648,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "distribution-search",
+   "need": 2776,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "sparql-university",
+   "need": 2921,
+   "passes": {
+    "low": 2,
+    "medium": 4,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "build-pmars",
+   "need": 2949,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "qemu-startup",
+   "need": 3082,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "regex-log",
+   "need": 3135,
+   "passes": {
+    "low": 3,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "tune-mjcf",
+   "need": 3174,
+   "passes": {
+    "low": 2,
+    "medium": 5,
+    "high": 4,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "pytorch-model-recovery",
+   "need": 3261,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "feal-linear-cryptanalysis",
+   "need": 3548,
+   "passes": {
+    "low": 3,
+    "medium": 4,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "portfolio-optimization",
+   "need": 3884,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "headless-terminal",
+   "need": 4002,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "chess-best-move",
+   "need": 4003,
+   "passes": {
+    "low": 0,
+    "medium": 1,
+    "high": 0,
+    "xhigh": 2,
+    "max": 1
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "rstan-to-pystan",
+   "need": 4201,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 4,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "mcmc-sampling-stan",
+   "need": 4638,
+   "passes": {
+    "low": 1,
+    "medium": 2,
+    "high": 1,
+    "xhigh": 2,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "financial-document-processor",
+   "need": 4774,
+   "passes": {
+    "low": 0,
+    "medium": 3,
+    "high": 3,
+    "xhigh": 4,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "git-multibranch",
+   "need": 4821,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 4,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "password-recovery",
+   "need": 4869,
+   "passes": {
+    "low": 2,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "query-optimize",
+   "need": 5192,
+   "passes": {
+    "low": 0,
+    "medium": 2,
+    "high": 1,
+    "xhigh": 3,
+    "max": 3
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "cobol-modernization",
+   "need": 5765,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "gcode-to-text",
+   "need": 5888,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 1,
+    "max": 0
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "build-pov-ray",
+   "need": 5890,
+   "passes": {
+    "low": 1,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "custom-memory-heap-crash",
+   "need": 6198,
+   "passes": {
+    "low": 2,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "polyglot-c-py",
+   "need": 6359,
+   "passes": {
+    "low": 3,
+    "medium": 4,
+    "high": 5,
+    "xhigh": 5,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "fix-ocaml-gc",
+   "need": 6606,
+   "passes": {
+    "low": 2,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "caffe-cifar-10",
+   "need": 6685,
+   "passes": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 4,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "video-processing",
+   "need": 6687,
+   "passes": {
+    "low": 1,
+    "medium": 1,
+    "high": 0,
+    "xhigh": 0,
+    "max": 1
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "build-cython-ext",
+   "need": 6990,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "largest-eigenval",
+   "need": 7056,
+   "passes": {
+    "low": 3,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 4,
+    "max": 2
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "compile-compcert",
+   "need": 7233,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "sam-cell-seg",
+   "need": 9231,
+   "passes": {
+    "low": 5,
+    "medium": 3,
+    "high": 3,
+    "xhigh": 3,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "torch-pipeline-parallelism",
+   "need": 9291,
+   "passes": {
+    "low": 0,
+    "medium": 3,
+    "high": 3,
+    "xhigh": 1,
+    "max": 2
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "mailman",
+   "need": 9322,
+   "passes": {
+    "low": 3,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "feal-differential-cryptanalysis",
+   "need": 9592,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "qemu-alpine-ssh",
+   "need": 9918,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "polyglot-rust-c",
+   "need": 10778,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "torch-tensor-parallelism",
+   "need": 11228,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 2,
+    "xhigh": 1,
+    "max": 3
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "reshard-c4-data",
+   "need": 11736,
+   "passes": {
+    "low": 4,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "llm-inference-batching-scheduler",
+   "need": 12602,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "winning-avg-corewars",
+   "need": 13722,
+   "passes": {
+    "low": 1,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "dna-insert",
+   "need": 13988,
+   "passes": {
+    "low": 0,
+    "medium": 1,
+    "high": 0,
+    "xhigh": 0,
+    "max": 1
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "overfull-hbox",
+   "need": 14368,
+   "passes": {
+    "low": 0,
+    "medium": 4,
+    "high": 3,
+    "xhigh": 3,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "write-compressor",
+   "need": 16543,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "break-filter-js-from-html",
+   "need": 16903,
+   "passes": {
+    "low": 0,
+    "medium": 3,
+    "high": 4,
+    "xhigh": 3,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "adaptive-rejection-sampler",
+   "need": 18544,
+   "passes": {
+    "low": 1,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 4,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "make-doom-for-mips",
+   "need": 19602,
+   "passes": {
+    "low": 0,
+    "medium": 1,
+    "high": 1,
+    "xhigh": 0,
+    "max": 0
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "schemelike-metacircular-eval",
+   "need": 19855,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "model-extraction-relu-logits",
+   "need": 22186,
+   "passes": {
+    "low": 0,
+    "medium": 4,
+    "high": 4,
+    "xhigh": 2,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "make-mips-interpreter",
+   "need": 23436,
+   "passes": {
+    "low": 0,
+    "medium": 2,
+    "high": 1,
+    "xhigh": 2,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "install-windows-3.11",
+   "need": 25495,
+   "passes": {
+    "low": 0,
+    "medium": 2,
+    "high": 4,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "dna-assembly",
+   "need": 26131,
+   "passes": {
+    "low": 0,
+    "medium": 2,
+    "high": 0,
+    "xhigh": 1,
+    "max": 0
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "circuit-fibsqrt",
+   "need": 27705,
+   "passes": {
+    "low": 0,
+    "medium": 4,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "train-fasttext",
+   "need": 30245,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 3
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "regex-chess",
+   "need": 33800,
+   "passes": {
+    "low": 0,
+    "medium": 3,
+    "high": 5,
+    "xhigh": 4,
+    "max": 4
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "protein-assembly",
+   "need": 41275,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 2,
+    "xhigh": 2,
+    "max": 3
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "path-tracing-reverse",
+   "need": 47283,
+   "passes": {
+    "low": 0,
+    "medium": 3,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "path-tracing",
+   "need": 60136,
+   "passes": {
+    "low": 0,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "gpt2-codegolf",
+   "need": 89602,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 1,
+    "max": 3
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "extract-moves-from-video",
+   "need": 101312,
+   "passes": {
+    "low": 1,
+    "medium": 4,
+    "high": 4,
+    "xhigh": 5,
+    "max": 5
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "filter-js-from-html",
+   "need": null,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "extract-elf",
+   "need": null,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  },
+  {
+   "task": "raman-fitting",
+   "need": null,
+   "passes": {
+    "low": 0,
+    "medium": 0,
+    "high": 0,
+    "xhigh": 0,
+    "max": 0
+   },
+   "attempts": {
+    "low": 5,
+    "medium": 5,
+    "high": 5,
+    "xhigh": 5,
+    "max": 5
+   }
+  }
+ ]
+}

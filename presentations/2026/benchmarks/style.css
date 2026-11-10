@@ -415,9 +415,9 @@
 /* ---------- Reasoning calibration ---------- */
 
 .fa-ladder-slide h1 { font-size: 46px; }
-.fa-ladder { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 36px; align-items: center; }
-.fa-ladder-copy p { font-size: 22px; line-height: 1.35; }
-.fa-ladder-copy p.fa-ladder-meta { font-size: 13px; color: var(--text-muted); }
+.slidev-layout p.fa-heat-copy { margin: 14px 0 0; font-size: 21px; line-height: 1.35; }
+.slidev-layout p.fa-ladder-meta { font-size: 13px; line-height: 1.4; color: var(--text-muted); margin-top: 8px; }
+
 
 /* ---------- No refunds table ---------- */
 

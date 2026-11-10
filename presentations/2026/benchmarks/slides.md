@@ -153,48 +153,32 @@ Source: the fast-agent docs chart, docs/benchmark_data/tb4/compaction.py. Figure
 class: fa-ladder-slide
 ---
 
-# Calibrate the reasoning level
+# Calibrate reasoning for task difficulty
 
-<div class="fa-ladder">
-<EffortLadder
-  pick="medium"
-  :levels="[
-    { effort: 'low', score: 44.94, reasoning: 584, cost: 0.57 },
-    { effort: 'medium', score: 74.83, reasoning: 6445, cost: 3.30 },
-    { effort: 'high', score: 73.93, reasoning: 10387, cost: 4.48 },
-    { effort: 'xhigh', score: 77.08, reasoning: 11885, cost: 4.77 },
-    { effort: 'max', score: 80.0, reasoning: 23421, cost: 7.20 },
+<TaskHeatmap
+  :runs="[
+    { effort: 'low', score: 44.94, cost: 0.57 },
+    { effort: 'medium', score: 74.83, cost: 3.30 },
+    { effort: 'high', score: 73.93, cost: 4.48 },
+    { effort: 'xhigh', score: 77.08, cost: 4.77 },
+    { effort: 'max', score: 80.0, cost: 7.20 },
   ]"
 />
-<div class="fa-ladder-copy">
 
-Medium scores 74%. Max adds 5 points for 3.6× the reasoning.
+<p class="fa-heat-copy">Know your task’s difficulty, and you know what reasoning to pay for.</p>
 
-70 of 89 tasks are solved by medium. For work of similar difficulty, start at medium.
-
-<p class="fa-ladder-meta">GPT-6 Luna, flex tier · TB 2.1, 445 trials per level · fast-agent 0.10.42 · 3 Oct 2026</p>
-
-</div>
-</div>
-
-<EffortLadder
-  part="strip"
-  :buckets="[
-    { label: 'low', tasks: 41, tone: 'low' },
-    { label: 'medium', tasks: 29, tone: 'medium' },
-    { label: 'higher', tasks: 9, tone: 'higher' },
-    { label: 'unsolved', tasks: 10, tone: 'never' },
-  ]"
-/>
+<p class="fa-ladder-meta">Cell: passes out of 5. Orange: each level’s reach (3+ of 5). GPT-6 Luna, flex · TB 2.1, 5 attempts per task · fast-agent 0.10.42 · 3 Oct 2026</p>
 
 <!--
-Why benchmark, for builders: one model, five reasoning levels, the same tasks. The benchmark tells you where the knee is.
-Low to medium: 45% to 75% for 11× the reasoning tokens. Medium to max: 75% to 80% for 3.6× more.
-Task strip: the lowest level at which each task is solved in at least 3 of 5 attempts. 41 at low, 29 more at medium, 9 need high, xhigh or max (1 high, 1 xhigh, 7 max), 10 unsolved at any level.
-Caveat: "similar difficulty" is the claim to make carefully; TB 2.1 tasks are terminal tasks, so this calibrates for that kind of work.
-Reasoning tokens are the per-trial reasoning totals recorded in the ATIF trajectories (fast-agent final_metrics), mean over trials with usage (426 to 443 of 445). Costs are the recorded run totals at flex rates.
-Runs use the modified evaluation: fixed QEMU and a six-hour agent deadline.
-Sources: bench-run state/publish/luna6-{low,medium,high,xhigh,max}-6h; fast-agent docs/benchmark_data/runs/luna6-*-6h.json.
+Each row is one reasoning level of the same model on the same 89 tasks; each column is a task; darker = more of its 5 attempts passed.
+The orange tick is each level's reach: the tasks it (or a lower level) solves in 3+ of 5 attempts. Low 41, medium 70, high 71, xhigh 72, max 79.
+Right-hand panel: published score, mean reasoning tokens per trial, recorded run cost (flex rates).
+Tasks are ordered by the lowest level that solves them in at least 3 of 5 attempts, then by total passes. Darker = more of the 5 attempts passed. Read it as a staircase: each level fills in more of the right-hand side.
+Under each group, the median reasoning tokens that group's passing trials used: about 2.4k for tasks low already solves, 9.9k for those that need medium, about 23k for those that need high to max. That's the reasoning-cost link.
+Not a perfect staircase: 8 task-level cells drop back below 3 of 5 at a higher level than the one that first solved them (run-to-run variance).
+"Unsolved" = 10 tasks never reach 3 of 5 at any level (3 are never solved at all).
+Passes are raw verifier passes before review disqualifications (a handful per level).
+Data: data/luna-effort.json (built from bench-run luna6-*-6h trajectories).
 -->
 
 ---
