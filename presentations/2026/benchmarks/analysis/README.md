@@ -8,6 +8,8 @@ Each folder has its own README with rebuild steps, inclusion rules and caveats.
 | `tb4-subset-calibration/` | A 19-task TB 4 subset calibrated against the public Terminal-Bench 4.0 leaderboard: score gap, rank correlation, cost multiplier | `subset_sheet.png`, `subset_scatter.png`, `subset_models.png`, `subset_cost.png` |
 | `cc-comparison-charts/` | Claude Code default vs Minimal Mode vs fast-agent (Opus 5 / high, TB 2.1 7-task slice, 21 trials each) | `v14d_cost_hero_light_nochip.png`, `v15_dual_light_big.png` |
 | `fable5-harness-charts/` | Fable 5 harness comparison on TB 2.1: Terminus 2 re-scored Fable-only, Strands, OpenCode, Oh-my-pi, fast-agent | `fable5_harness_comparison.png`, plus `install-windows-3.11/same_task_different_attempts.png` |
+| `safety-stops/` | Provider safety stops: `extract.py` (65 public TB 2.1 runs) and `corpus.py` (whole private corpus census, counts only) | `data/safety-stops.json`, `data/safety-corpus.json` |
+| `awareness-channels/` | Flags by evidence channel (reasoning text against tool calls), split by whether reasoning is recorded; 128 public runs | `data/awareness-channels.json` |
 
 ## Not copied (rebuildable)
 

@@ -261,12 +261,12 @@ class: fa-bench-slide
 
 <div class="fa-bench">
 
-| | Tasks × attempts | Trials | Cost of one run | Agent internet | Verifier |
-|---|---|---|---|---|---|
-| **TB 2.1** | 89 × 5 | 445 | **$50** <small>GPT-6.1 Sol high</small> | open | shared |
-| **TB-lite** | 100 × 3 | 300 | **$31** <small>DeepSeek V4.1 Flash max</small> | open | shared |
-| **DeepSWE 1.1** | 113 × 4 | 452 | **$232** <small>GPT-6.1 Sol high</small> | model API only | separate |
-| **TB 4.0 and 4.1** | 66 × 5 | 330 | **$634** <small>GPT-6.1 Sol max</small> | open | separate |
+| | Tasks | Attempts | Trials | Cost of one run | Agent internet | Verifier |
+|---|---|---|---|---|---|---|
+| **TB 2.1** | **89** | **5** | **445** | **$50** <small>GPT-6.1 Sol high</small> | open | shared |
+| **TB-lite** | **100** | **3** | **300** | **$31** <small>DeepSeek V4.1 Flash max</small> | open | shared |
+| **DeepSWE 1.1** | **113** | **4** | **452** | **$232** <small>GPT-6.1 Sol high</small> | model API only | separate |
+| **TB 4.0 and 4.1** | **66** | **5** | **330** | **$634** <small>GPT-6.1 Sol max</small> | open | separate |
 
 </div>
 
@@ -294,7 +294,7 @@ Wall-clock and cost need our run data; state concurrency next to any time-to-run
 
 ---
 
-# TB 2.1 and TB-lite: verify where the agent worked
+# TB 2.1 and TB-lite: Verify in task container
 
 <HarborTrial mode="shared" />
 
@@ -488,29 +488,48 @@ src: ./pages/zork-walkthrough.md
 class: fa-lookup-slide
 ---
 
-# Safety stops: which tasks set them off
+# Safety stops: two labs, nobody else
 
-<SafetyTriggers />
+<SafetyLabs />
 
-<Receipt source="65 public runs of Terminal-Bench 2.1, 28,932 trials · 239 ended on a provider safety stop · atif-scan v0.8.23 reports, 10 Nov 2026" />
+<Receipt source="164,853 trials, corpus census of 8 Nov 2026 · stops as the harness recorded them · counts, not rates: models were not run equally" />
 
 <!--
-Some of what a model does on a task isn't its choice. In 239 of the 28,932 trials the provider's safety classifier ended the run: the model call comes back as a safety stop or refusal and the harness records an error.
-It happens to two groups of models and to nobody else in these 65 runs.
-Claude 5.5 on fast-agent: Opus 5.5 71 stops, Sonnet 5.5 31, Haiku 5.5 5. Six runs, 2,670 trials. Each bar is out of 30: five attempts in each of the six runs.
-- Two thirds of the attempts stop on break-filter-js-from-html (get JavaScript past an HTML sanitiser), crack-7z-hash (recover an archive password) and vulnerable-secret (get a secret out of a vulnerable program): 20 of 30 each.
-- password-recovery 11 of 30.
-- Biology: protein-assembly 11, dna-assembly 10, dna-insert 10. These are cloning and primer-design tasks.
-- sparql-university 4 and fix-code-vulnerability 1 are the odd ones. I can't say what set those off.
-OpenAI: GPT-6 Astra 62 stops, GPT-5.6 Sol 37, GPT-6.1 Sol 23, GPT-6.1 Terra 10. Thirteen runs across four harnesses (Codex 51, fast-agent 46, IndusAGI 22, Dext 13), 5,792 trials. Each bar is out of 65.
-- vulnerable-secret: 58 of 65. For these models that task is close to unscoreable.
-- break-filter-js-from-html: 51 of 65.
-- model-extraction-relu-logits: 18 of 65. Only the OpenAI classifier objects to extracting a model's weights.
-- feal-differential-cryptanalysis: 5.
-What the two have in common: the exploit and filter-bypass tasks. What differs: Claude also stops on biology and password recovery; OpenAI also stops on model extraction.
-These are benign benchmark tasks. The classifier is reacting to the subject, and the reason text isn't in the trial files, so I can't say which words did it. The task descriptions here are mine, from the task names and instructions.
-The earlier version of this slide had 28 of 93 Claude trials stopped on crack-7z-hash, from the wider private corpus. Same effect, wider population.
-Source: data/safety-stops.json, built by analysis/safety-stops/extract.py from the public Spaces' report files.
+Some of what a model does on a task isn't its choice. The provider's safety classifier ends the run: the model call comes back as a safety stop or a refusal, the harness records an error, and the trial is over.
+This is every trial we hold, public and our own: 164,853 after removing copies. 790 ended that way. 545 are OpenAI models and 245 are Anthropic models. There are none from anybody else: 49,932 trials across Grok, GLM, DeepSeek, Gemini, Qwen, Muse, Kimi and eight other models.
+The earlier version of these slides counted 239, from the 65 public Terminal-Bench 2.1 runs only. The next two slides after the task grid still use that public set, because the leaderboard comparison needs it.
+Within the two labs it is the newer and larger models. Anthropic: Fable 5 96, Opus 5.5 92, Sonnet 5.5 32, Haiku 5.5 19. Opus 5 has 4, Opus 4.8 and Fable 5.1 one each. Sonnet 5, Opus 4.7, Sonnet 4.6 and Haiku 4.5 have none.
+OpenAI: GPT-6 Astra 317, GPT-5.6 Sol 101, GPT-6.1 Terra 69, GPT-6.1 Sol 54. GPT-6 Luna has 3 in 27,606 trials and GPT-5.5 has 1. GPT-5.6 Luna (15,275 trials), GPT-5.6 Terra, GPT-5.4 and GPT-6 Sol have none.
+These are counts, not rates. GPT-6 Astra has 12,706 trials and Opus 5.5 has 1,514, so the bars say who gets stopped, not who gets stopped most often. The grid on the next slide has the rates.
+One job accounts for 146 of the GPT-6 Astra stops: a low-effort run on 6 Sep 2026 that was stopped on 37 unrelated tasks, most of them nothing to do with security. I can't say what happened there; it is in the 790 and left out of the next slide.
+By benchmark: Terminal-Bench 2.x 759 of 115,618, Terminal-Bench 4 29 of 7,358, TB-lite 2 of 2,496, DeepSWE 0 of 39,366. DeepSWE is ordinary software engineering, and 24,343 of its trials are the public Datacurve grid, where the report files show no safety error either.
+44 of the 790 were still rewarded: the answer was already written when the stop came.
+Caveats. A stop is what the harness recorded. fast-agent, Codex, Claude Code, Dext and IndusAGI all record them; a harness that swallows the error, or a model that declines in ordinary prose, would not show up here. I searched the other error messages for policy and filter wording: one GPT-5.6 Luna trial failed on an "invalid prompt" usage-policy error and is not counted. Nothing turned up for the other labs' models.
+Source: data/safety-corpus.json, built by analysis/safety-stops/corpus.py from the census and each trial's result file.
+-->
+
+---
+class: fa-lookup-slide
+---
+
+# Safety stops: which tasks set them off
+
+<SafetyMatrix />
+
+<Receipt source="fast-agent on Terminal-Bench 2.x, Jul – Nov 2026 · 516 stops in 25,273 attempts · tasks with 4+ stops and 30%+ of a model's attempts" />
+
+<!--
+The same stops by task, for the eight models that are stopped regularly. One harness, fast-agent, so the columns compare. Each cell is stops out of that model's attempts at the task.
+What everyone shares: vulnerable-secret (get a secret out of a vulnerable program) and break-filter-js-from-html (get JavaScript past an HTML sanitiser). Fable 5 6 of 6, Opus 5.5 and Sonnet 5.5 10 of 10, GPT-6.1 Terra 34 of 35 and 35 of 35. For these models those two tasks are close to unscoreable.
+Anthropic only: crack-7z-hash and password-recovery, and the biology tasks: protein-assembly, dna-assembly, dna-insert. These are cloning and primer-design tasks.
+OpenAI only: model-extraction-relu-logits, GPT-6 Astra 20 of 81 and GPT-6.1 Sol 12 of 26. Only that classifier objects to extracting a model's weights.
+Fable 5 is the widest. It is stopped every time on thirteen tasks, including ones with no obvious subject: write-compressor, code-from-image, sqlite-with-gcov, path-tracing-reverse, extract-elf, custom-memory-heap-crash. Six runs of one attempt each, 22 to 24 Sep 2026, through the Copilot provider. That is 96 stops, about 16 of 89 tasks a run.
+The note at the bottom. On the main leaderboard, Fable 5 on Claude Code has no safety stops at all. What it has is 103 trials, on 24 tasks, where Opus 4.8 answered some or all of the steps. 16 of the 19 tasks where fast-agent records a Fable 5 stop are among those 24. So the same thing appears to be happening, and the harness covers it with another model. That is the row we re-scored earlier. Terminus 2 does the same on 16 tasks. I'm inferring the link from the task overlap: the trial files don't say why the model was swapped.
+Haiku 5.5 is the odd one: 8 of 25 on sparql-university and almost nothing else.
+The rates move with date and provider route. GPT-5.6 Sol was stopped on vulnerable-secret in most of its July runs and rarely after. GPT-6 Astra through Copilot was not stopped on it at all; through the Codex route it was stopped 5 of 5. So read the OpenAI columns as an average over a period, not a fixed property.
+These are benign benchmark tasks. The classifier is reacting to the subject, and the reason text isn't in the trial files for the Anthropic stops. The OpenAI error says "flagged for possible cybersecurity risk". The task descriptions here are mine, from the task names and instructions.
+Left out: the 6 Sep GPT-6 Astra job (previous slide), attempts with no result, and the other harnesses. Codex, IndusAGI and Dext are on the by-run slide.
+Source: data/safety-corpus.json (analysis/safety-stops/corpus.py).
 -->
 
 ---
@@ -530,7 +549,7 @@ Recoverable? Not within a run. A stop is returned to the harness as an error, an
 13 were still rewarded, because the answer was already written when the stop came: sparql-university 4 of 4, feal-differential-cryptanalysis 4 of 5, break-filter-js-from-html 4, fix-code-vulnerability 1. So a late stop can cost nothing; an early one costs the task.
 Cost. Opus 5.5 loses 71 of 890 trials, 7% of the whole benchmark, before it has done anything. Sonnet 5.5 loses 31 of 890. The OpenAI runs lose 7 to 13 of 445 each. That is a ceiling on the score that has nothing to do with ability.
 Effort makes little difference for Claude (Opus 5.5: 36 at medium, 35 at high). For GPT-6 Astra on Codex it rises a little: 7, 7, 11, 13, 13 from low to max.
-Who never stops: every Luna run, GPT-5.5, GPT-5.6 Terra, and the earlier Claude models (Fable 5, Opus 4.7, Opus 4.8, Sonnet 5, Haiku 4.5, Opus 5) on Claude Code, Terminus 2 and Ouroboros. I can't separate model from provider route here: the Claude 5.5 runs are all fast-agent, and the earlier crack-7z finding had them going through the Copilot provider.
+Who never stops in these 65 public runs: every Luna run, GPT-5.5, GPT-5.6 Terra, and the Claude models on Claude Code, Terminus 2 and Ouroboros. That last group is not the same as never being stopped: Fable 5 is stopped on fast-agent, and on Claude Code and Terminus 2 another model answers instead (previous slide).
 One I can't explain: GPT-5.6 Sol on fast-agent has 12 stops at medium effort (23 Jul) and none at high (26 Jul).
 Whether it's recoverable outside a run, by rewording the task or retrying, isn't something these files can answer. The harness could retry or rephrase; none of these did.
 -->
@@ -1116,6 +1135,46 @@ Source: data/evasion.json (analysis/evasion/extract.py); talk-hunt-2026-11-08/ne
 -->
 
 ---
+class: fa-case-slide
+---
+
+# Already inside: a newer Textual
+
+<div class="fa-case">
+<div>
+
+The task is DeepSWE `textual-kitty-key-phases`: add Kitty keyboard phases to Textual 7.5.0. There is no network, and requests to GitHub return 403.
+
+mini-swe-agent is installed in the same sandbox and depends on Textual. Its copy is version **8.2.7**.
+
+GPT-5.6 Terra finds that copy in site-packages and reads its Kitty parser.
+
+</div>
+<div>
+
+<ol class="fa-case-steps">
+  <li><b>Step 66</b> <q>The newer installed Textual implementation intentionally still requests only <code>>1u</code>.</q> It reverts one of its own changes to match.</li>
+  <li><b>Step 74</b> Greps site-packages and finds the harness's Textual.</li>
+  <li><b>Step 75</b> <q>I'll inspect its version, <code>Key</code> event, and Kitty parser/driver implementation for a closer upstream reference.</q></li>
+  <li><b>Result</b> <code>Version: 8.2.7</code>. Reward 1.</li>
+</ol>
+
+GPT-5.6 Luna (max) reads the same copy on the same task. Reward 0.
+
+</div>
+</div>
+
+<Receipt n="2 trials" date="7 Jul 2026" model="GPT-5.6 Terra (max), GPT-5.6 Luna (max)" harness="mini-swe-agent 2.4.2 · DeepSWE 1.1, Datacurve public run" />
+
+<!--
+Moved here from the spare slides. It isn't one of the three doors: nothing leaves the sandbox. It belongs in this section because the agent ends up with content the task didn't intend it to have, and that content helps with the task. It is the same task as "Pin the IP" two slides back: there the agent went out to GitHub for Textual's source, here a newer Textual was already on disk.
+Source: talk-hunt-2026-11-08/wildcard/delta-datacurve.md DC-W01 and rerun/DELTA.md insight 2.
+The point to make aloud: the network block doesn't help when the harness has a newer version of the project under test as a dependency. That is a problem with how the environment was built, not a cheating verdict. Reading installed packages may well be allowed.
+The newer source doesn't contain the exact hidden reference; what it contributed to Terra's reward is unknown.
+Terra had already done substantial independent work. The step 66 revert happens before 74–76 (it read the installed driver earlier, at 65).
+-->
+
+---
 class: fa-lookup-slide
 ---
 
@@ -1227,7 +1286,7 @@ number: 6
 class: fa-lookup-slide
 ---
 
-# An agent works out who is running it
+# An identifies me, and atif-scan!
 
 <EvaluatorTrail />
 
@@ -1514,6 +1573,34 @@ It is someone else's live page. Have a screenshot or a recording as a fallback.
 -->
 
 ---
+class: fa-lookup-slide
+---
+
+# Flags in reasoning, flags in tool calls
+
+<FlagChannels />
+
+<Receipt source="57,514 trials, 128 public runs: Terminal-Bench 2.1 and DeepSWE 1.1 · atif-scan v0.8.23, 10 Nov 2026 · flags are review candidates" />
+
+<!--
+The macro view of the awareness and medium-severity findings, split by where the evidence is. Every match in an atif-scan report cites a channel. I count two things per trial.
+Flagged in reasoning: the agent remarks on being benchmarked, names the benchmark, or reasons about evading a check, or a medium-or-higher behavioural check cites its reasoning text.
+Flagged in a tool call: a medium-or-higher behavioural check (access, lookup, side channel, tampering, network, recall, and the task-specific ones) cites a command, a path, a URL or a query.
+Matches that an allowance explains are left out of both. The info-level "hidden tests discussed" check is left out too: it fires on a third of the DeepSWE trials that have reasoning text and isn't awareness of being benchmarked.
+Top block: the 37,200 trials whose trace has some reasoning text. 5.7% are flagged in reasoning (2,135) and 10.1% in a tool call (3,761).
+The spread by model family is the point. Qwen 37.8%, DeepSeek 36.0%, GLM 21.9%, SWE-1.7 20.8%, Kimi 9.8% flagged in reasoning. Then Grok 3.0%, Claude 0.9%, GPT 0.6%, Gemini 0.4%. The tool-call column doesn't follow that order: GPT 9.2% and GLM 10.8% are flagged in tool calls about as often, and GLM is flagged in reasoning about 35 times as often. Grok is at 15.7% in tool calls and 3.0% in reasoning.
+What I think that is: the first group records the model's full reasoning. For GPT, Claude and Gemini the recorded text is mostly a provider summary. I can't measure that from the reports: "recorded" means some text is present, not that it is complete. So this is how often awareness is expressed on the recorded surface, not a comparison of what the models know.
+Bottom block: 20,314 trials, 35%, record no reasoning text at all: 10,111 Claude (Fable 5, Opus 5 and Sonnet 5 on DeepSWE, and the Claude Code and Terminus rows), 5,789 GPT (mostly Codex), Muse, Gemini CLI, Grok on Ouroboros. They cannot be flagged in reasoning. 1,564 are flagged in a tool call, 7.6%, about the same rate as everyone else's.
+The three numbers on the right.
+38% against 8%: among trials with text, 823 of the 2,135 flagged in reasoning also have a flagged tool call; of the 35,065 not flagged in reasoning, 2,938 do. That holds inside every family: DeepSeek 52% against 20%, GPT 46% against 8%, Claude 24% against 2%, Grok 61% against 14%. So a reasoning flag is a good pointer to which trials to read.
+1,312: flagged in reasoning with no flagged tool call. That is 61% of the reasoning flags. With hidden reasoning those trials have nothing on them. Many are harmless remarks; the concealment quotes in this talk are in that group too.
+35% and 1,564: a flagged tool call with no explanation recorded next to it. The same lookup can be research or the answer, and without the reasoning we can't tell which.
+Caveats. This mixes two benchmarks and 128 runs that are not balanced by model: DeepSWE's upstream-lookup check supplies a lot of the tool-call flags. Messages are a third channel, not shown: in the runs that report no reasoning tokens at all, about 2% of trials carry a benchmark remark in a message, so some of it moves there. Low-severity awareness has no tool-call equivalent, so the two columns are not the same checks.
+What counts: benchmark-awareness checks and behavioural checks of medium severity or above, with allowance-explained matches removed. 65 Terminal-Bench 2.1 runs and 63 DeepSWE runs. Percentages are rounded down.
+Source: data/awareness-channels.json (analysis/awareness-channels/extract.py).
+-->
+
+---
 
 # Keep the traces and the reasoning open
 
@@ -1684,43 +1771,4 @@ Source: talk-hunt-2026-11-08/tamper-conceal/findings.md TC01, TC02; awareness/fi
 DeepSeek's final does acknowledge comparing with a reference; what's missing is that the submission was copied from it.
 Haiku also used a validation split; the disputed claim is only "used only for the final check". atif-scan doesn't flag it (a detector gap).
 GPT-5.5: trace starts from compacted history; reasoning is summary headings. 3/3 public tests, SSIM 1.0.
--->
-
----
-class: fa-case-slide
----
-
-# mini-swe-agent ships a newer Textual
-
-<div class="fa-case">
-<div>
-
-The task is DeepSWE `textual-kitty-key-phases`: add Kitty keyboard phases to Textual 7.5.0. There is no network, and requests to GitHub return 403.
-
-mini-swe-agent is installed in the same sandbox and depends on Textual. Its copy is version **8.2.7**.
-
-GPT-5.6 Terra finds that copy in site-packages and reads its Kitty parser.
-
-</div>
-<div>
-
-<ol class="fa-case-steps">
-  <li><b>Step 66</b> <q>The newer installed Textual implementation intentionally still requests only <code>>1u</code>.</q> It reverts one of its own changes to match.</li>
-  <li><b>Step 74</b> Greps site-packages and finds the harness's Textual.</li>
-  <li><b>Step 75</b> <q>I'll inspect its version, <code>Key</code> event, and Kitty parser/driver implementation for a closer upstream reference.</q></li>
-  <li><b>Result</b> <code>Version: 8.2.7</code>. Reward 1.</li>
-</ol>
-
-GPT-5.6 Luna (max) reads the same copy on the same task. Reward 0.
-
-</div>
-</div>
-
-<Receipt n="2 trials" date="7 Jul 2026" model="GPT-5.6 Terra (max), GPT-5.6 Luna (max)" harness="mini-swe-agent 2.4.2 · DeepSWE 1.1, Datacurve public run" />
-
-<!--
-Source: talk-hunt-2026-11-08/wildcard/delta-datacurve.md DC-W01 and rerun/DELTA.md insight 2.
-The point to make aloud: the network block doesn't help when the harness has a newer version of the project under test as a dependency. That is a problem with how the environment was built, not a cheating verdict. Reading installed packages may well be allowed.
-The newer source doesn't contain the exact hidden reference; what it contributed to Terra's reward is unknown.
-Terra had already done substantial independent work. The step 66 revert happens before 74–76 (it read the installed driver earlier, at 65).
 -->

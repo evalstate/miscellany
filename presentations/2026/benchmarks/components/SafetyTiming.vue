@@ -12,9 +12,6 @@ const labs = (["Claude", "OpenAI"] as const).map((lab) => {
 const opus = data.rows.filter((r) => r.model === "Opus 5.5");
 const opusStops = opus.reduce((s, r) => s + r.stops, 0), opusTrials = opus.reduce((s, r) => s + r.trials, 0);
 const openai = data.rows.filter((r) => r.lab === "OpenAI" && r.stops > 1).map((r) => r.stops);
-// models with no stop in any of their runs
-const stopped = new Set(data.rows.map((r) => r.model));
-const names = (lab: "Claude" | "OpenAI") => [...new Set(data.noStops[lab].map((r) => r.model.replace("Claude ", "")))].filter((m) => !stopped.has(m));
 </script>
 
 <template>
@@ -38,7 +35,7 @@ const names = (lab: "Claude" | "OpenAI") => [...new Set(data.noStops[lab].map((r
       <h3>What it costs</h3>
       <p>Opus 5.5: <b>{{ opusStops }} of {{ opusTrials }}</b> trials, {{ pct(opusStops, opusTrials) }}% of the benchmark.</p>
       <p>The OpenAI runs: <b>{{ Math.min(...openai) }} to {{ Math.max(...openai) }}</b> of 445 each.</p>
-      <p class="sfx-none"><b>No stops at all:</b> {{ names("OpenAI").join(", ") }}; {{ names("Claude").join(", ") }}.</p>
+      <p class="sfx-none"><b>Not within a run:</b> no harness here retries or rewords after a stop.</p>
     </section>
   </div>
 </template>

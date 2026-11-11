@@ -1,0 +1,190 @@
+{
+ "generated": "2026-11-11",
+ "scanner": "v0.8.23",
+ "trials": 57514,
+ "runs": 128,
+ "sites": {
+  "Terminal-Bench 2.1 leaderboard": 22,
+  "Terminal-Bench 2.1 submissions": 14,
+  "Terminal-Bench 2.1 fast-agent runs": 29,
+  "DeepSWE 1.1": 63
+ },
+ "recorded": {
+  "trials": 37200,
+  "tool": 3761,
+  "reasoning": 2135,
+  "both": 823
+ },
+ "notRecorded": {
+  "trials": 20314,
+  "tool": 1564,
+  "reasoning": 0,
+  "both": 0
+ },
+ "toolGivenReasoning": {
+  "trials": 2135,
+  "tool": 823,
+  "reasoning": 2135,
+  "both": 823
+ },
+ "toolGivenNoReasoning": {
+  "trials": 35065,
+  "tool": 2938,
+  "reasoning": 0,
+  "both": 0
+ },
+ "families": [
+  {
+   "family": "GPT",
+   "recorded": true,
+   "trials": 16185,
+   "tool": 1492,
+   "reasoning": 100,
+   "both": 46
+  },
+  {
+   "family": "Claude",
+   "recorded": true,
+   "trials": 6516,
+   "tool": 170,
+   "reasoning": 62,
+   "both": 15
+  },
+  {
+   "family": "Grok",
+   "recorded": true,
+   "trials": 4036,
+   "tool": 637,
+   "reasoning": 123,
+   "both": 76
+  },
+  {
+   "family": "Gemini",
+   "recorded": true,
+   "trials": 3334,
+   "tool": 166,
+   "reasoning": 14,
+   "both": 3
+  },
+  {
+   "family": "DeepSeek",
+   "recorded": true,
+   "trials": 2624,
+   "tool": 839,
+   "reasoning": 945,
+   "both": 492
+  },
+  {
+   "family": "GLM",
+   "recorded": true,
+   "trials": 2249,
+   "tool": 244,
+   "reasoning": 494,
+   "both": 90
+  },
+  {
+   "family": "Kimi",
+   "recorded": true,
+   "trials": 1363,
+   "tool": 97,
+   "reasoning": 134,
+   "both": 25
+  },
+  {
+   "family": "Qwen",
+   "recorded": true,
+   "trials": 452,
+   "tool": 45,
+   "reasoning": 171,
+   "both": 24
+  },
+  {
+   "family": "SWE-1.7",
+   "recorded": true,
+   "trials": 441,
+   "tool": 71,
+   "reasoning": 92,
+   "both": 52
+  },
+  {
+   "family": "Claude",
+   "recorded": false,
+   "trials": 10111,
+   "tool": 1061,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "GPT",
+   "recorded": false,
+   "trials": 5789,
+   "tool": 250,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "Muse",
+   "recorded": false,
+   "trials": 1349,
+   "tool": 82,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "Gemini",
+   "recorded": false,
+   "trials": 1158,
+   "tool": 31,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "Grok",
+   "recorded": false,
+   "trials": 897,
+   "tool": 113,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "GLM",
+   "recorded": false,
+   "trials": 445,
+   "tool": 10,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "other",
+   "recorded": false,
+   "trials": 445,
+   "tool": 17,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "DeepSeek",
+   "recorded": false,
+   "trials": 66,
+   "tool": 0,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "Kimi",
+   "recorded": false,
+   "trials": 50,
+   "tool": 0,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "family": "SWE-1.7",
+   "recorded": false,
+   "trials": 4,
+   "tool": 0,
+   "reasoning": 0,
+   "both": 0
+  }
+ ]
+}
