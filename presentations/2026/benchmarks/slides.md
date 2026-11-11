@@ -1699,9 +1699,11 @@ layout: cover
 
 huggingface.co/evalstate · github.com/evalstate · x.com/evalstate
 
-<img src="/fa/talk-qr.svg" alt="QR code for the companion page of links" style="width:150px;height:150px;background:#fff;margin-top:14px" />
+Links: evalstate-benchmarks-talk.static.hf.space
 
-evalstate-benchmarks-talk.static.hf.space
+::splash::
+
+<img class="fa-qr-big" src="/fa/talk-qr.svg" alt="QR code for the companion page of links" />
 
 ---
 layout: section

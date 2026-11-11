@@ -882,3 +882,5 @@
 .slidev-layout p.fa-rl-table-point { margin: 12px 0 0; font-size: 20px; white-space: nowrap; font-weight: 700; }
 .fa-rl-table-slide h1 { margin-bottom: 8px; }
 .fa-tool .fa-qr-img { width: 96px; height: 96px; border: 0; border-radius: 0; background: #fff; }
+.fa-qr-big { width: 380px; height: 380px; border: var(--border); border-radius: var(--radius-lg); background: var(--paper); }
+.fa-tool .fa-qr-img { background: var(--paper); }

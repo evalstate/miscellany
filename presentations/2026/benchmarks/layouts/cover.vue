@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // Title slide: headline + meta on the left, the homepage splash on the right.
-// Named slot `::meta::` for speaker/event details.
+// Named slot `::meta::` for speaker/event details; `::splash::` replaces the wordmark on the right.
 withDefaults(defineProps<{ tagline?: string }>(), {
   tagline: "The harness your model deserves.",
 });
@@ -13,7 +13,7 @@ withDefaults(defineProps<{ tagline?: string }>(), {
       <div v-if="$slots.meta" class="fa-cover-meta"><slot name="meta" /></div>
     </div>
     <div class="fa-cover-splash">
-      <Wordmark :tagline="tagline" :size="300" />
+      <slot name="splash"><Wordmark :tagline="tagline" :size="300" /></slot>
     </div>
   </section>
 </template>
