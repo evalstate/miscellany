@@ -12,7 +12,7 @@ const funnel = [
   { n: 0, label: "Claude, Gemini, GPT or Grok", note: "of more than 700 that saw a key" },
 ];
 const why = [
-  { what: "Eyes", who: "Muse Spark, later GLM and Flint",
+  { what: "Vision model", who: "Muse Spark, later GLM and Flint",
     text: "Sends the task's images to a vision model it can't run itself." },
   { what: "The upstream code", who: "DeepSeek V4 Pro, on no-network DeepSWE",
     text: "9 trials ask deepseek-chat for the library's real implementation. The answers were mostly made up. 3 passed.",

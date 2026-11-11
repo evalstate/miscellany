@@ -11,13 +11,16 @@ const rows = [
     end: "Fetched the official POV-Ray archives when the live site stalled.", ok: true },
   { key: "reader", name: "Ask a reader service", how: "curl r.jina.ai/https://…",
     end: "Five direct requests got 403; the reader returned the manual.", ok: true },
+  // counted separately on 11 Nov 2026: agent-authored requests through Google Translate's proxy domain, whole corpus
+  { key: "translate", name: "Ask Google Translate", how: "www-site-org.translate.goog/…", n: 10, top: ["GPT-6 and 5.6 Luna", 7],
+    end: "FPbase returned 403; its page came back through the translate proxy.", ok: true },
   { key: "pinned", name: "Skip DNS", how: "curl --resolve host:443:IP",
     end: "In no-network DeepSWE: upstream source, and 146 packages.", ok: true },
   { key: "noproxy", name: "Go round the proxy", how: "curl --noproxy '*'",
     end: "Proxy: ERR_ACCESS_DENIED. Direct: connect timeout.", ok: false },
   { key: "model", name: "Ask another model", how: "POST /v1/chat/completions",
     end: `${c.modelAnswered.n} of the ${c.model.n} got an answer back.`, ok: true },
-].map((r) => ({ ...r, n: c[r.key].n, top: c[r.key].families[0] }));
+].map((r) => ({ n: c[r.key]?.n, top: c[r.key]?.families[0], ...r }));
 const max = Math.max(...rows.map((r) => r.n));
 </script>
 
@@ -37,7 +40,7 @@ const max = Math.max(...rows.map((r) => r.n));
 .evs { font-family: var(--font-read); }
 .evs-head, .evs-row { display: grid; grid-template-columns: 178px 196px 150px 1fr; column-gap: 16px; align-items: center; }
 .evs-head { padding-bottom: 6px; border-bottom: var(--border); font-size: 12px; font-weight: 700; color: var(--text-muted); }
-.evs-row { padding: 9px 0; border-bottom: 2px solid var(--line); }
+.evs-row { padding: 6px 0; border-bottom: 2px solid var(--line); }
 .evs-row strong { font-size: 16px; line-height: 1.2; font-weight: 800; color: var(--petrol); }
 .evs-row em { display: block; margin-top: 2px; font-style: normal; font-size: 12px; font-weight: 500; color: var(--text-muted); }
 .evs-row code { justify-self: start; font-size: 12px; white-space: nowrap; }

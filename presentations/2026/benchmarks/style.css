@@ -433,7 +433,7 @@
 
 /* ---------- Benchmarks table (open style: rules only) ---------- */
 
-.fa-bench-slide h1 { margin-bottom: 28px; }
+.fa-bench-slide h1 { margin-bottom: 14px; }
 .slidev-layout .fa-bench table {
   border: 0;
   border-radius: 0;
@@ -448,14 +448,25 @@
   font-size: 11px;
 }
 .slidev-layout .fa-bench td {
-  padding: 16px 12px 16px 0;
+  padding: 21px 12px 21px 0;
+  position: relative;
   border-bottom: 2px solid var(--line);
   white-space: nowrap;
 }
 .slidev-layout .fa-bench td:first-child { font-family: var(--font-voice); font-size: 22px; letter-spacing: var(--track-voice); }
-.slidev-layout .fa-bench td:nth-child(n + 6) { font-size: 15px; color: var(--text-muted); }
+.slidev-layout .fa-bench td:nth-child(n + 6) { font-size: 17px; }
+.fa-bench .bx { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; color: var(--petrol); }
+.fa-bench .bx::before { content: ""; width: 14px; height: 14px; border-radius: 3px; }
+.fa-bench .bx-open::before { background: var(--orange); }
+.fa-bench .bx-closed::before { background: var(--teal); }
+.slidev-layout .fa-bench td:first-child { color: var(--teal); }
+.fa-case-big { font-size: 20px; line-height: 1.38; }
+.fa-case-big p { margin-bottom: 14px; }
+.fa-case-big .fa-case-steps li { font-size: 18px; line-height: 1.38; padding: 10px 0; }
+.fa-case-big .fa-case-steps b { font-size: 15px; }
+.fa-case-big .fa-case-end { font: 900 22px var(--font-read); color: var(--petrol); }
 .slidev-layout .fa-bench td strong { font-size: 24px; font-weight: 900; font-variant-numeric: tabular-nums; margin-right: 6px; }
-.slidev-layout .fa-bench td small { font-size: 13px; color: var(--text-muted); }
+.slidev-layout .fa-bench td small { position: absolute; left: 0; bottom: 3px; font-size: 12px; line-height: 1; color: var(--text-muted); white-space: nowrap; }
 
 /* ---------- TB 4 rule line ---------- */
 

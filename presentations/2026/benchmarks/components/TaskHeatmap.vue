@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 89 tasks × 5 reasoning levels; each cell is the task's passes out of 5.
 // Tasks are ordered by the lowest level that solves them reliably (3+ of 5),
-// then by total passes, so the dark area grows to the right as the level
+// then by reasoning tokens, so the dark area grows to the right as the level
 // rises. The orange tick on each row marks that level's reach: the last task
 // it, or a lower level, solves reliably. The right-hand panel carries the
 // run figures for the level: score, reasoning tokens per trial, run cost.
@@ -24,7 +24,9 @@ const firstSolve = (t: Task) => {
   return i < 0 ? levels.length : i;
 };
 const total = (t: Task) => levels.reduce((a, e) => a + pass(t, e), 0);
-const tasks = [...data.tasks].sort((a, b) => firstSolve(a) - firstSolve(b) || total(b) - total(a));
+// within each group, fewest reasoning tokens first (median over the task's passing trials); never-passed tasks last
+const need = (t: Task) => t.need ?? Infinity;
+const tasks = [...data.tasks].sort((a, b) => firstSolve(a) - firstSolve(b) || need(a) - need(b) || total(b) - total(a));
 
 const median = (xs: number[]) => {
   const s = [...xs].sort((a, b) => a - b);
@@ -83,7 +85,7 @@ const PX = W - PANEL + 8;
       <template v-if="run(lv)">
         <text :x="PX" :y="r * rowH + rowH / 2 + 4" class="th-score">{{ Math.floor(run(lv)!.score) }}%</text>
         <text :x="PX + 84" :y="r * rowH + rowH / 2 + 4" class="th-score">${{ run(lv)!.cost.toFixed(2) }}</text>
-        <text :x="PX" :y="r * rowH + rowH / 2 + 21" class="th-meta">{{ k(meanTokens[lv]) }} reasoning tokens a trial</text>
+        <text :x="PX" :y="r * rowH + rowH / 2 + 21" class="th-meta">{{ k(meanTokens[lv]) }} reasoning / trial · {{ (Math.floor((run(lv)!.cost / tasks.length) * 1000) / 10).toFixed(1) }}¢ a task</text>
       </template>
     </g>
     <g v-for="g in groups" :key="g.label">

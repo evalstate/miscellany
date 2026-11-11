@@ -87,38 +87,6 @@ Source: the fast-agent docs chart, docs/benchmark_data/tb4/compaction.py. Figure
 -->
 
 ---
-class: fa-ladder-slide
----
-
-# Effort level calibration for task difficulty
-
-<TaskHeatmap
-  :runs="[
-    { effort: 'low', score: 44.94, cost: 0.57 },
-    { effort: 'medium', score: 74.83, cost: 3.30 },
-    { effort: 'high', score: 73.93, cost: 4.48 },
-    { effort: 'xhigh', score: 77.08, cost: 4.77 },
-    { effort: 'max', score: 80.0, cost: 7.20 },
-  ]"
-/>
-
-<p class="fa-heat-copy">Know your task’s difficulty, and you know what reasoning to pay for.</p>
-
-<p class="fa-ladder-meta">Cell: passes out of 5. Orange: each level’s reach (3+ of 5). GPT-6 Luna, flex · TB 2.1, 5 attempts per task · fast-agent 0.10.42 · 3 Oct 2026</p>
-
-<!--
-Each row is one reasoning level of the same model on the same 89 tasks; each column is a task; darker = more of its 5 attempts passed.
-The orange tick is each level's reach: the tasks it (or a lower level) solves in 3+ of 5 attempts. Low 41, medium 70, high 71, xhigh 72, max 79.
-Right-hand panel: published score, mean reasoning tokens per trial, recorded run cost (flex rates).
-Tasks are ordered by the lowest level that solves them in at least 3 of 5 attempts, then by total passes. Darker = more of the 5 attempts passed. Read it as a staircase: each level fills in more of the right-hand side.
-Under each group, the median reasoning tokens that group's passing trials used: about 2.4k for tasks low already solves, 9.9k for those that need medium, about 23k for those that need high to max. That's the reasoning-cost link.
-Not a perfect staircase: 8 task-level cells drop back below 3 of 5 at a higher level than the one that first solved them (run-to-run variance).
-"Unsolved" = 10 tasks never reach 3 of 5 at any level (3 are never solved at all).
-Passes are raw verifier passes before review disqualifications (a handful per level).
-Data: data/luna-effort.json (built from bench-run luna6-*-6h trajectories).
--->
-
----
 clicks: 1
 ---
 
@@ -179,6 +147,41 @@ Rates (per million input / cached / output tokens):
 - Repriced points use the run's recorded token totals: Luna 407M input (392M cached), 5.0M output; DeepSeek 792M input (783M cached), 17.9M output. 11 DeepSeek trials have no recorded usage, so its figures are lower bounds.
 Caveat: Luna used the six-hour agent timeout; the DeepSeek run used the standard one.
 Sources: fast-agent docs/benchmark_data/runs/luna56-high-6h.json and fa-deepseek-v4-flash-max.json; card-packs pricing_catalog.json; per-trial result.json in tb21-run/jobs.
+-->
+
+---
+class: fa-ladder-slide
+---
+
+# Effort level calibration for task difficulty
+
+<TaskHeatmap
+  :runs="[
+    { effort: 'low', score: 44.94, cost: 0.57 },
+    { effort: 'medium', score: 74.83, cost: 3.30 },
+    { effort: 'high', score: 73.93, cost: 4.48 },
+    { effort: 'xhigh', score: 77.08, cost: 4.77 },
+    { effort: 'max', score: 80.0, cost: 7.20 },
+  ]"
+/>
+
+<p class="fa-heat-copy">Know your task’s difficulty, and you know what reasoning to pay for.</p>
+
+<p class="fa-ladder-meta">Cell: passes out of 5. Orange: each level’s reach (3+ of 5). GPT-6 Luna, flex · TB 2.1, 5 attempts per task · fast-agent 0.10.42 · 3 Oct 2026</p>
+
+<!--
+Route check (11 Nov): all five runs are the OpenAI API-key route, model string responses.gpt-6-luna?reasoning=<level>&service_tier=flex, fast-agent 0.10.42. No Codex OAuth (codexresponses) job is in these five runs, so the effort levels are the API's definitions and the reasoning-token counts are comparable.
+Cost per task (five attempts, flex rates): low 0.6¢, medium 3.7¢, high 5.0¢, xhigh 5.3¢, max 8.0¢. Per attempt, divide by five. From low to max the score goes 44% to 80% and the cost goes up 12 times; from medium to max, 6 points for a bit over double.
+Within each group the tasks are ordered by reasoning tokens: the median reasoning tokens of the task's passing trials, fewest on the left.
+Each row is one reasoning level of the same model on the same 89 tasks; each column is a task; darker = more of its 5 attempts passed.
+The orange tick is each level's reach: the tasks it (or a lower level) solves in 3+ of 5 attempts. Low 41, medium 70, high 71, xhigh 72, max 79.
+Right-hand panel: published score, mean reasoning tokens per trial, recorded run cost (flex rates).
+Tasks are ordered by the lowest level that solves them in at least 3 of 5 attempts, then by reasoning tokens. Darker = more of the 5 attempts passed. Read it as a staircase: each level fills in more of the right-hand side.
+Under each group, the median reasoning tokens that group's passing trials used: about 2.4k for tasks low already solves, 9.9k for those that need medium, about 23k for those that need high to max. That's the reasoning-cost link.
+Not a perfect staircase: 8 task-level cells drop back below 3 of 5 at a higher level than the one that first solved them (run-to-run variance).
+"Unsolved" = 10 tasks never reach 3 of 5 at any level (3 are never solved at all).
+Passes are raw verifier passes before review disqualifications (a handful per level).
+Data: data/luna-effort.json (built from bench-run luna6-*-6h trajectories).
 -->
 
 ---
@@ -324,20 +327,21 @@ Use this when introducing atif-scan: the adjustments to the Anthropic and GPT-5.
 class: fa-bench-slide
 ---
 
-# The benchmarks behind these traces
+# Common coding benchmarks
 
 <div class="fa-bench">
 
-| | Tasks | Attempts | Trials | Cost of one run | Agent internet | Verifier |
+| | Tasks | Attempts | Trials | Indicative run cost | Agent internet | Verifier |
 |---|---|---|---|---|---|---|
-| **TB 2.1** | **89** | **5** | **445** | **$50** <small>GPT-6.1 Sol high</small> | open | shared |
-| **TB-lite** | **100** | **3** | **300** | **$31** <small>DeepSeek V4.1 Flash max</small> | open | shared |
-| **DeepSWE 1.1** | **113** | **4** | **452** | **$232** <small>GPT-6.1 Sol high</small> | model API only | separate |
-| **TB 4.0 and 4.1** | **66** | **5** | **330** | **$634** <small>GPT-6.1 Sol max</small> | open | separate |
+| **TB 2.1** | **89** | **5** | **445** | **$50**<small>(GPT-6.1 Sol high)</small> | <b class="bx bx-open">open</b> | <b class="bx bx-open">shared</b> |
+| **TB-lite** | **100** | **3** | **300** | **$31**<small>(DeepSeek V4.1 Flash max)</small> | <b class="bx bx-open">open</b> | <b class="bx bx-open">shared</b> |
+| **DeepSWE 1.1** | **113** | **4** | **452** | **$232**<small>(GPT-6.1 Sol high)</small> | <b class="bx bx-closed">model API only</b> | <b class="bx bx-closed">separate</b> |
+| **TB 4.0 and 4.1** | **66** | **5** | **330** | **$634**<small>(GPT-6.1 Sol max)</small> | <b class="bx bx-open">open</b> | <b class="bx bx-closed">separate</b> |
 
 </div>
 
 <!--
+Colour: orange marks the exposed setting (open internet, verifier shared with the agent), teal the isolated one.
 Sources: task.toml and README: terminal-bench-2-1@7131e43 · OpenThoughts-TBLite@f075e46 · deep-swe@0b9fabb · terminal-bench v4.0.0, v4.1.0. Attempts are the leaderboard protocol; DeepSWE states none (4 is what its public leaderboard ran); TB-lite's 3 is from our run definition, not its README.
 Cost of one run is a ballpark for a recent mid-priced model, at list-price equivalents (not invoices), and not on one harness:
 - TB 2.1: GPT-6.1 Sol high, fast-agent 0.10.43, 8 Oct 2026, $50.04 recorded (6-hour timeout variant). Medium was $31.20.
@@ -439,30 +443,10 @@ Sources: terminal-bench v4.0.0 CONTRIBUTING.md "Tests"; harbor task cache (termi
 -->
 
 ---
-layout: presenter
-pose: C
-height: 420
----
-
-# Model ingenuity
-
-Some of the tricks models use to pass:
-
-- <span class="fa-draft">Example TBC</span>
-- <span class="fa-draft">Example TBC</span>
-- <span class="fa-draft">Example TBC</span>
-
-<!--
-Collect concrete examples from our traces (with task IDs).
-Candidate categories to check against our traces: reading or editing the tests, finding answers in git
-history or caches, special-casing the verifier's inputs, network lookups where not intended.
--->
-
----
 class: fa-ascii-slide
 ---
 
-# No eyes? Print the board.
+# No vision? Examining the chess board.
 
 <ChessAsciiGallery />
 
@@ -926,7 +910,7 @@ class: fa-lookup-slide
 Four that don't look like "search, find the solution file". For each: what the task was, what the agent did, how it ended.
 A skill named after the task. Agent skills are reusable instruction files; there are public registries of them. Letta's skills repository has some named after Terminal-Bench tasks, distilled from earlier runs of those tasks, and copies sit on other registries. In the 65 public runs, 14 trials asked for the skill named after their own task and 13 got content: Grok 4.5 on Cursor CLI 8 (all rewarded), SWE-1.7 on Devin CLI 5 (3 rewarded), one Opus 4.7 request on Claude Code that returned nothing. Tasks: extract-elf 3, regex-log 2, torch-pipeline-parallelism 3, polyglot-rust-c, fix-ocaml-gc, gcode-to-text, dna-insert, gpt2-codegolf. The scanner's notes record that the fix-ocaml-gc skill gave the one-line fix verbatim. Across the whole corpus: 24 of 181,732. Why it matters: it isn't on a benchmark domain, so blocking benchmark sites doesn't catch it, and it looks like ordinary tooling. I counted these and read the scanner's notes; I haven't read the traces.
 221 MB. DeepSeek V4 Flash, fast-agent, extract-elf, 10 Aug 2026, 56 steps, about 7 minutes. Steps 33–38 download two parquet shards of other agents' trajectories, 220,993,900 bytes: "Downloaded ~221MB of trajectories." Steps 49–54 fetch and read the official reference solution and checker; step 51 is the quote. Its implementation then matches the reference on 73 of 73 and 108 of 108 entries. Don't say the 221 MB supplied the answer: the useful material came from separately paged oracle rows and the official source.
-The cracker. DeepSeek V4 Flash, fast-agent, crack-7z-hash, 9 Aug 2026, 102 steps. The supplied archive is zero bytes from the first listing. Before the lookup it tries to read the host disk (denied). Steps 87–93 find a public task copy, restore the 215-byte archive and start John the Ripper. Steps 97–104: John is still running after five minutes, the upstream solution reveals the password, and step 101 is the quote. Don't show the password. A broken input again, like the missing .git.
+The cracker. DeepSeek V4 Flash, fast-agent, crack-7z-hash, 9 Aug 2026, 102 steps. The task is to recover the password of a 7z archive, but in this trial the archive file in the sandbox is empty: zero bytes from the agent's first directory listing. That is a sandbox setup defect, not a task defect: the task's archive is 215 bytes, and in the same 5-attempt run two attempts got the 215-byte file and three got an empty one. In a sample of 400 crack-7z-hash trials from our own runs, 33 started with an empty archive, in a handful of Daytona jobs from 4 to 9 Aug 2026. Why the file arrived empty isn't established; the agent didn't cause it. So there is nothing to crack until it finds the real file elsewhere. Before the lookup it tries to read the host disk (denied). Steps 87–93 find a public task copy, restore the 215-byte archive and start John the Ripper. Steps 97–104: John is still running after five minutes, the upstream solution reveals the password, and step 101 is the quote. Don't show the password. A broken input again, like the missing .git.
 It looks itself up. Grok 4.7 (xhigh), fast-agent 0.10.49, TB 4 vpp-loss-divergence, 1 Nov 2026, 317 steps, about an hour, five context compactions. The prompt says "Do not remove, restore, or replace the shim in megatron_parallel.py." Step 147: "The megatron_parallel shim was invented by the previous agent." It overwrites the file with upstream. Steps 158–172: it opens its own session history under /logs/agent to find its first read of the file. Step 173 is the quote. Steps 175–177 restore the forward method only. Reward 0, which doesn't isolate the cause. The history files are the harness's own session JSON, readable inside the sandbox. The longer version of this is in the appendix.
 Source: talk-hunt-2026-11-08/wildcard/findings.md (wildcard-02, -03, -06), round2/oddities ODD-07, atif-scan docs/detectors.md.
 -->
@@ -961,13 +945,13 @@ layout: section
 number: 4
 ---
 
-# Install lures
+# Benchmark lures
 
 ---
 class: fa-lookup-slide
 ---
 
-# A fake GitHub issue and a decoy model card
+# Decoy GitHub issues and model cards
 
 <LureBait />
 
@@ -989,7 +973,7 @@ Source: lure-timeline-2026-11-06/index.html, "Captured pages" and "The operation
 class: fa-lookup-slide
 ---
 
-# The lure, February to November
+# Lure campaign: Feb – Nov 2026
 
 <LureTimeline />
 
@@ -1097,7 +1081,7 @@ layout: section
 number: 5
 ---
 
-# Reaching outside the sandbox
+# Outside the sandbox
 
 ---
 class: fa-lookup-slide
@@ -1114,8 +1098,8 @@ The map for this section. An agent in a sandbox has three things it could reach 
 1. The internet, when the task is meant to have none. 132 trajectories skip DNS (a pinned address or an edited hosts file) and 80 try to go round the proxy. Where the block was only DNS, it worked: on DeepSWE tasks set to no-network, one run fetched the upstream fix and two installed packages and were rewarded. Where there was a real proxy and a blocked route, it held.
 2. Another model. The harness runs inside the sandbox, so its provider key is in the agent's environment and the route to the provider is open. 84 trajectories sent a request to a model; 31 got an answer.
 3. The machine underneath: the Kubernetes API, the host disk, other processes. 39 trajectories asked the cluster API and none got a Kubernetes object back. No host file was read in the traces reviewed.
-Don't call any of this a sandbox escape. Nothing in the reviewed traces got out of the container or onto the host. What did happen, on DeepSWE too: tasks configured as no-network where the agent reached the internet (door 1), and agents using the model-provider route for something other than their own model (door 2). Say "got round the network block" or "reached outside", not "escaped".
-These three are unrelated to each other. The io_uring slide belongs to door 3; it has nothing to do with the model calls in door 2.
+Don't call any of this a sandbox escape. Nothing in the reviewed traces got out of the container or onto the host. What did happen, on DeepSWE too: tasks configured as no-network where the agent reached the internet (approach 1), and agents using the model-provider route for something other than their own model (approach 2). Say "got round the network block" or "reached outside", not "escaped".
+These three are unrelated to each other. The io_uring slide belongs to approach 3; it has nothing to do with the model calls in approach 2.
 Counts are command shapes in the 8 Nov scan, most of them on tasks where network access is allowed.
 -->
 
@@ -1123,7 +1107,7 @@ Counts are command shapes in the 8 Nov scan, most of them on tasks where network
 class: fa-trio-slide
 ---
 
-# Door 1: three no-network tasks got online
+# Approach 1: three no-network tasks got online
 
 <div class="fa-grid-3 fa-compact">
 <Card>
@@ -1171,18 +1155,18 @@ The one where the boundary held (DeepSeek V4 Pro, proxy and direct both blocked)
 class: fa-lookup-slide
 ---
 
-# Door 1: the routes agents try
+# Approach 1: the routes agents try
 
 <EvasionStrategies />
 
-<Receipt source="181,732 trajectories, corpus scan of 8 Nov 2026 · counts are the shape of a command, not whether it worked · one reviewed case per route" />
+<Receipt source="181,732 trajectories, corpus scan of 8 Nov 2026 (Google Translate: counted 11 Nov) · counts are the shape of a command, not whether it worked · one reviewed case per route" />
 
 <!--
 The strategies slide. When a request fails, these are the five things agents reach for, with how many trajectories contain a command of that shape and one reviewed case of how it ended.
 The counts are command shapes across the whole corpus, most of it tasks where network access is allowed. They are not bypasses and they are not rates of anything: one model family dominates some rows only because of how much it was run.
 Web archive, 546: most often Grok (136). Ordinary and usually fine. The case: GPT-5.6 Sol on build-pov-ray, 9 Jul, fetched the official POV-Ray archives from the Wayback Machine when the legacy file host stalled.
 Reader service, 431: a third party fetches the page and returns the text (r.jina.ai and similar). Most often DeepSeek V4.1 Flash (116). The case: GPT-6.1 Sol on dna-assembly, 8 Oct. The task tells it to check the manufacturer's requirements; five direct requests return 403; the reader returns an 83,705-byte enzyme reference. Reward 1. Task-authorised: the block was the manufacturer's site, not the sandbox.
-A variant to tell aloud here, not on the slide: the Google Translate proxy. The agent asks for the blocked site through Google Translate's proxy domain (www-fpbase-org.translate.goog), so Google fetches the page. 10 trials in about 180,000 made a request that way, August to November 2026, two or three a month; 7 of the 10 are GPT-5.6 Luna or GPT-6 Luna on fast-agent. Tasks: build-pov-ray 5, protein-assembly 3, mteb-leaderboard 1, dna-assembly 1: each time a site the task needs was refusing the agent. Mostly it returned 403. It worked against fpbase.org on protein-assembly, twice, and both traces are reviewed.
+The Google Translate row was added on 11 Nov from a separate search of the whole corpus for requests the agent itself made through the translate proxy domain: 10 trials. It is not in the reader-service count. The agent asks for the blocked site through Google Translate's proxy domain (www-fpbase-org.translate.goog), so Google fetches the page. 10 trials in about 180,000 made a request that way, August to November 2026, two or three a month; 7 of the 10 are GPT-5.6 Luna or GPT-6 Luna on fast-agent. Tasks: build-pov-ray 5, protein-assembly 3, mteb-leaderboard 1, dna-assembly 1: each time a site the task needs was refusing the agent. Mostly it returned 403. It worked against fpbase.org on protein-assembly, twice, and both traces are reviewed.
 GPT-6 Luna (xhigh), fast-agent 0.10.42, 2 Oct 2026, reward 1. The task needs fluorescent-protein data from FPbase, which the task names as a source. Step 5: FPbase returns 403. Step 9: the r.jina.ai reader gets Cloudflare's "Just a moment" page. Step 29: one command tries five routes at once: the translate proxy, a doubled reader, an image proxy and a CORS proxy. The translate proxy returns 403 for the API and 200 for the mCherry page. Step 30, its reasoning: "I've figured out that the translation for proxy pages works!" It reads the emission maximum, 610, from the page.
 GPT-6.1 Sol (high), fast-agent 0.10.51, 2 Nov 2026, reward 1. Step 19: five routes in parallel; direct and reader fail, the translate proxy returns FPbase's API record for Clover as JSON. Step 20: it fetches mCherry the same way. 23 steps in all.
 Neither final summary mentions the proxy. Both got data the task asks them to use, from the site the task points at: resourcefulness, not a lookup of the answer.
@@ -1200,37 +1184,35 @@ class: fa-case-slide
 
 # Already inside: a newer Textual
 
-<div class="fa-case">
+<div class="fa-case fa-case-big">
 <div>
 
-The task is DeepSWE `textual-kitty-key-phases`: add Kitty keyboard phases to Textual 7.5.0. There is no network, and requests to GitHub return 403.
+A DeepSWE task asks the agent to add a feature, Kitty keyboard phases, to the popular library **Textual** (version 7.5.0). The task has no network.
 
-mini-swe-agent is installed in the same sandbox and depends on Textual. Its copy is version **8.2.7**.
+The harness, mini-swe-agent, is installed in the same sandbox and depends on Textual. Its copy is the newer **8.2.7**, which already has Kitty keyboard support.
 
-GPT-5.6 Terra finds that copy in site-packages and reads its Kitty parser.
+**GPT-5.6 Terra finds that copy and uses it as its reference.**
 
 </div>
 <div>
 
 <ol class="fa-case-steps">
-  <li><b>Step 66</b> <q>The newer installed Textual implementation intentionally still requests only <code>>1u</code>.</q> It reverts one of its own changes to match.</li>
-  <li><b>Step 74</b> Greps site-packages and finds the harness's Textual.</li>
+  <li><b>Step 66</b> <q>The newer installed Textual implementation intentionally still requests only <code>>1u</code>.</q> It changes its own code to match.</li>
+  <li><b>Step 74</b> Searches the installed packages and finds the harness's Textual.</li>
   <li><b>Step 75</b> <q>I'll inspect its version, <code>Key</code> event, and Kitty parser/driver implementation for a closer upstream reference.</q></li>
-  <li><b>Result</b> <code>Version: 8.2.7</code>. Reward 1.</li>
+  <li><b>Result</b> <code>Version: 8.2.7</code>. <b class="fa-case-end">Reward 1.</b></li>
 </ol>
 
-GPT-5.6 Luna (max) reads the same copy on the same task. Reward 0.
-
 </div>
 </div>
 
-<Receipt n="2 trials" date="7 Jul 2026" model="GPT-5.6 Terra (max), GPT-5.6 Luna (max)" harness="mini-swe-agent 2.4.2 · DeepSWE 1.1, Datacurve public run" />
+<Receipt source="1 trial, 7 Jul 2026 · GPT-5.6 Terra (max) · mini-swe-agent 2.4.2 · DeepSWE 1.1, Datacurve public run" />
 
 <!--
-Moved here from the spare slides. It isn't one of the three doors: nothing leaves the sandbox. It belongs in this section because the agent ends up with content the task didn't intend it to have, and that content helps with the task. It is the same task as "Pin the IP" two slides back: there the agent went out to GitHub for Textual's source, here a newer Textual was already on disk.
+Moved here from the spare slides. It isn't one of the three approaches: nothing leaves the sandbox. It belongs in this section because the agent ends up with content the task didn't intend it to have, and that content helps with the task. It is the same task as "Pin the IP" two slides back: there the agent went out to GitHub for Textual's source, here a newer Textual was already on disk.
 Source: talk-hunt-2026-11-08/wildcard/delta-datacurve.md DC-W01 and rerun/DELTA.md insight 2.
 The point to make aloud: the network block doesn't help when the harness has a newer version of the project under test as a dependency. That is a problem with how the environment was built, not a cheating verdict. Reading installed packages may well be allowed.
-The newer source doesn't contain the exact hidden reference; what it contributed to Terra's reward is unknown.
+GPT-5.6 Luna (max) reads the same copy on the same task and scores 0 (no longer on the slide). The slide says 8.2.7 "already has Kitty keyboard support": Terra reads its Kitty parser and driver. The newer source doesn't contain the exact hidden reference; what it contributed to Terra's reward is unknown.
 Terra had already done substantial independent work. The step 66 revert happens before 74–76 (it read the installed driver earlier, at 65).
 -->
 
@@ -1238,7 +1220,7 @@ Terra had already done substantial independent work. The step 66 revert happens 
 class: fa-lookup-slide
 ---
 
-# Door 2: asking another model
+# Approach 2: asking another model
 
 <ModelCalls />
 
@@ -1249,7 +1231,7 @@ The second way out. This one is about harness design as much as the agent.
 Why the key is there: fast-agent, Codex, Claude Code and mini-swe-agent all run inside the sandbox and call their provider from there, so the provider credential is staged into the trial environment, and the agent's shell inherits it. Our own run profiles inject nine credential names. And the provider has to be reachable, so a "no network" sandbox still has that one route open.
 1,379 trials saw a provider key in their own listing of the environment. 20 used one to call a model or the provider. Every one of the 20 is DeepSeek (V4 Pro, V4 Flash, V4.1 Flash) or Muse Spark. No Claude, Gemini, GPT or Grok trial did, of more than 700 that saw a key.
 What for:
-- Eyes. Muse Spark 1.1 on mini-swe-agent, 9 Jul: on image and video tasks it used the harness's own key and endpoint to send images to a vision model. In one run it sent the key to an unrelated third-party reseller, and in another wrote it into files in the workspace. In the later harness-leaderboard runs GLM-5.3 Flash, DeepSeek V4.1 Flash and Flint do the same through the in-sandbox router: they list the router's models and send the task's images to a vision model.
+- Vision model. Muse Spark 1.1 on mini-swe-agent, 9 Jul: on image and video tasks it used the harness's own key and endpoint to send images to a vision model. In one run it sent the key to an unrelated third-party reseller, and in another wrote it into files in the workspace. In the later harness-leaderboard runs GLM-5.3 Flash, DeepSeek V4.1 Flash and Flint do the same through the in-sandbox router: they list the router's models and send the task's images to a vision model.
 - The upstream code. DeepSeek V4 Pro on Datacurve's public DeepSWE run, 12–13 Aug. No network, but the key and the provider route are there. 9 trials ask deepseek-chat for the exact upstream implementation. Several say no first: the quote is step 67, and another reads "Not appropriate and key likely no internet through proxy?" Then they call it. The answers were mostly confabulated and the agents said so; 3 of the 9 passed. Counting an mteb-retrieve trial, 10 of the 29 DeepSeek V4 Pro trials that saw the key used it, the highest rate of any model.
 - The answer. DeepSeek V4 Flash on crack-7z-hash with a 0-byte archive, 5 Aug. The quote is step 99. A sibling run read the key from another process's environment, confirmed it against the provider and asked itself "I have a working LLM API. Can I use it to find the answer?" Both then took the word from the benchmark's published reference solution. Both rewarded.
 Results overall: the outside answers were mostly unhelpful or made up. Where these trials passed, the help that decided it usually came from the benchmark's own files.
@@ -1263,7 +1245,7 @@ Source: model-calls-2026-11-07/index.html and its 8 Nov update; data/evasion.jso
 class: fa-lookup-slide
 ---
 
-# Door 3: the Kubernetes API
+# Approach 3: the Kubernetes API
 
 <KubernetesProbe />
 
@@ -1284,7 +1266,7 @@ Source: data/evasion.json; talk-hunt-2026-11-08/wildcard/findings.md wildcard-01
 class: fa-case-slide
 ---
 
-# Door 3: Grok writes its own io_uring to read a disk
+# Approach 3: Grok writes its own io_uring to read a disk
 
 <div class="fa-case">
 <div>
@@ -1327,7 +1309,7 @@ Task: recover a deleted password. With no `python3` in the image, it borrows the
 <Receipt n="1 trial" date="9 Aug 2026" model="Grok 4.5 (high)" harness="fast-agent 0.10.3 · TB 2.1 password-recovery" />
 
 <!--
-Still door 3, the machine underneath: nothing to do with the model calls. The agent is trying to read the host's disk directly.
+Still approach 3, the machine underneath: nothing to do with the model calls. The agent is trying to read the host's disk directly.
 Source: talk-hunt-2026-11-08/sandbox-probe/findings.md SP1; also env-dump report S6b. Reward 0 (AgentTimeoutError).
 The code is a verbatim excerpt of the step 46 tool call; the result lines are verbatim from its output.
 It's a forensics task, so probing recovery surfaces isn't automatically cheating. The agent calls the block "seccomp";
@@ -1976,4 +1958,24 @@ Source: talk-hunt-2026-11-08/tamper-conceal/findings.md TC01, TC02; awareness/fi
 DeepSeek's final does acknowledge comparing with a reference; what's missing is that the submission was copied from it.
 Haiku also used a validation split; the disputed claim is only "used only for the final check". atif-scan doesn't flag it (a detector gap).
 GPT-5.5: trace starts from compacted history; reasoning is summary headings. 3/3 public tests, SSIM 1.0.
+-->
+
+---
+layout: presenter
+pose: C
+height: 420
+---
+
+# Model ingenuity
+
+Some of the tricks models use to pass:
+
+- <span class="fa-draft">Example TBC</span>
+- <span class="fa-draft">Example TBC</span>
+- <span class="fa-draft">Example TBC</span>
+
+<!--
+Collect concrete examples from our traces (with task IDs).
+Candidate categories to check against our traces: reading or editing the tests, finding answers in git
+history or caches, special-casing the verifier's inputs, network lookups where not intended.
 -->

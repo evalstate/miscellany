@@ -5,7 +5,7 @@
 // wildcard-03 and wildcard-06.
 const cases = [
   { title: "A skill named after the task",
-    task: "Skills are how-to files an agent can install. Some public ones are named after Terminal-Bench tasks.",
+    task: "Skills are how-to files an agent can install. Letta's public skills repository has some named after Terminal-Bench tasks.",
     did: "13 trials fetched the one for their own task. One held the task's one-line fix, word for word.",
     who: "Grok 4.5 on Cursor CLI, SWE-1.7 on Devin CLI", end: "11 of 13 rewarded" },
   { title: "221 MB of other agents' attempts",
@@ -14,7 +14,7 @@ const cases = [
     quote: "These will tell me exactly what the reference produces and how it's graded.",
     who: "DeepSeek V4 Flash · 10 Aug", end: "Reward 1" },
   { title: "It stops its own password cracker",
-    task: "Task: recover an archive's password. The archive it was given is empty, 0 bytes.",
+    task: "Task: recover an archive's password. The sandbox was set up wrongly: the archive file is empty. Other attempts in the same run got the real one.",
     did: "It fetches the real archive from a public copy of the task and starts cracking. Then it finds the password in the published solution.",
     quote: "Let me stop the slow crack and extract properly.",
     who: "DeepSeek V4 Flash · 9 Aug", end: "Reward 1" },
