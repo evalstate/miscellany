@@ -145,7 +145,7 @@ Source: fast-agent docs/benchmark_data/runs/fa-grok46-high.json and fa-sol-high.
 -->
 
 ---
-clicks: 2
+clicks: 1
 ---
 
 # Competitive price setting
@@ -157,21 +157,22 @@ clicks: 2
   :rows="[
     { model: 'GPT-5.6 Luna', detail: 'high', harness: 'fast-agent 0.10.46 · TB 2.1 · 18 Oct', score: 74.16, tone: 'petrol', points: [
       { label: 'Flex tier', note: 'what we paid', rate: '$0.10 / $0.01 / $0.60', cost: 8.89, recorded: true, step: 0 },
-      { label: 'Standard tier', note: 'same tokens', rate: '$0.20 / $0.02 / $1.20', cost: 17.78, step: 1 },
+      { label: 'Standard tier', note: 'same tokens', rate: '$0.20 / $0.02 / $1.20', cost: 17.78, step: 0 },
     ] },
     { model: 'DeepSeek V4 Flash', detail: 'max', harness: 'fast-agent 0.9.30 · TB 2.1 · 2 Aug', score: 73.03, tone: 'teal', points: [
-      { label: 'August rate', note: '(withdrawn)', cost: 8.57, recorded: true, muted: true, step: 0 },
-      { label: 'Off-peak', note: 'same tokens', rate: '$0.15 / $0.003 / $0.60', cost: 14.56, step: 2 },
-      { label: 'Peak hours', note: 'same tokens', rate: '$0.30 / $0.006 / $1.20', cost: 29.12, step: 2 },
+      { label: 'Launch, off-peak', note: 'what we paid', rate: '$0.14 / $0.0028 / $0.28', cost: 8.57, recorded: true, mutedFrom: 1, step: 0 },
+      { label: 'Launch, peak', note: 'same tokens', rate: '$0.28 / $0.0056 / $0.56', cost: 17.14, mutedFrom: 1, step: 0 },
+      { label: 'Now, off-peak', note: 'same tokens', rate: '$0.15 / $0.003 / $0.60', cost: 14.56, low: true, step: 1 },
+      { label: 'Now, peak', note: 'same tokens', rate: '$0.30 / $0.006 / $1.20', cost: 29.12, low: true, step: 1 },
     ] },
   ]"
 />
 
 <!--
-Open: the two runs we actually paid for. Same score (74% and 73%), same cost, about $9 each.
-Click 1: Luna was run on OpenAI's flex tier, which is half the standard rate. The same tokens at standard rates cost $17.78.
-Click 2: DeepSeek repriced V4 Flash in September, and now has peak and off-peak rates. The same August tokens cost $14.56 off-peak and $29.12 at peak.
-The point: at this end the token volume is fixed by the model, so the tier and the time of day decide the bill: the dearest point is more than 3× the cheapest.
+Open: launch pricing, two points for each model. Luna: $8.89 on OpenAI's flex tier, which is what we paid, and $17.78 at the standard tier, exactly double. DeepSeek V4 Flash: $8.57 at the off-peak discount, which is what we paid, and $17.14 at peak, also double. Same score (74% and 73%), and the two price pairs sit almost on top of each other: within 4% at both ends. That is how closely the two were priced against each other.
+Click: the price rise. DeepSeek raised V4 Flash's rates. The same tokens now cost $14.56 off-peak and $29.12 at peak; the launch prices shrink to struck-through markers.
+The point: these two were priced to match, and then one of them moved. At this end the token volume is fixed by the model, so the tier and the time of day decide the bill: the dearest point is more than 3× the cheapest.
+The launch peak figure is the off-peak rate doubled ($0.28 / $0.0056 / $0.56), so $8.57 × 2. That is your account of the launch tariff: the pricing catalog of 6 Aug lists only the single $0.14 rate, so the peak point isn't backed by a file here.
 Rates (per million input / cached / output tokens):
 - Luna flex $0.10 / $0.01 / $0.60; standard $0.20 / $0.02 / $1.20 (plus cache writes at 125% of input, which the recorded cost includes). Standard is exactly twice flex, so $8.89 × 2.
 - DeepSeek V4 Flash as recorded in August: $0.14 / $0.0028 / $0.28 (checked: these rates reproduce every one of the 434 costed trials). From September: off-peak $0.15 / $0.003 / $0.60; peak (weekday UTC 01:00–04:00 and 06:00–10:00) $0.30 / $0.006 / $1.20.
@@ -227,6 +228,72 @@ The MiMo V2.6 RL dashboard (Pro and Flash, started 15 Sep 2026, 30 steps) plots 
 At step 30: DeepSWE 72.57 (Pro) and 65.68 (Flash). The run's dashboard shows a total cost of about $3.47M ($2.62M Pro, $0.85M Flash).
 This links to the next section's point: RL environments and benchmark environments look alike, so the same traces matter in both.
 Screenshot taken from the public page; figures as shown there.
+-->
+
+---
+title: Launches come with benchmark scores
+class: fa-launch-desk-slide
+footer: false
+clicks: 6
+sites:
+  - id: inkling2
+    title: Thinking Machines
+    model: Inkling 2 Small
+    date: 5 Nov 2026
+    domain: thinkingmachines.ai
+    n: varies by benchmark; task totals not shown
+    harness: not stated in this panel
+    press: inkling2-venturebeat-headline.png
+    pressSource: VentureBeat, 6 Nov 2026
+  - id: beam
+    title: Reflection
+    model: Beam
+    date: 5 Oct 2026
+    domain: reflection.ai
+    n: varies by benchmark; task totals not shown
+    harness: not stated in this panel
+    press: beam-techcrunch-headline.png
+    pressSource: TechCrunch, 5 Oct 2026
+  - id: flint
+    title: Recursive
+    model: Flint
+    date: 18 Oct 2026
+    domain: recursive.com
+    n: pass@1 over at least 5 attempts; task totals not shown
+    harness: Terminus 2 / mini-swe-agent; versions not shown
+    press: flint-techcrunch-headline.png
+    pressSource: TechCrunch, 21 Oct 2026
+---
+
+<LaunchCollage :stage="$clicks" :sites="$frontmatter.sites" heading="Launches come with benchmark scores" />
+
+<!--
+One full-canvas news-desk collage, immediately after Research: Checkpoint quality.
+The earlier headline and website-gallery slides have been consolidated here, rather than repeated.
+At entry: Thinking Machines' launch page, benchmark panel and press headline are spread across the canvas.
+Click 1: Reflection joins the desk; the first pair moves aside.
+Click 2: Recursive joins; all three launch/benchmark pairs and press headlines remain visible.
+Clicks 3–5: each benchmark panel grows forward from its position on the desk. It is the same image, not a redraw or a new slide. Its own receipt appears below.
+Click 6: pull back to the complete collage. Move on to Running a benchmark.
+Normal back/forward navigation reverses every step. Reduced-motion mode shows the same states without the spatial animation.
+Spoken link from checkpoint quality: “They use benchmarks during training. Then the launch arrives with a scorecard.”
+The investment point is capability signalling, not evidence that a particular score caused an investment. Semafor's Beam launch article places capability comparisons beside named investors and valuation:
+https://www.semafor.com/article/10/05/2026/reflection-ai-unveils-an-open-source-answer-to-chinese-labs
+Press originals:
+https://venturebeat.com/technology/thinking-machines-launches-inkling-2-small-with-near-frontier-performance-on-enterprise-benchmarks
+https://techcrunch.com/2026/10/05/reflection-debuts-beam-a-open-weight-ai-model-to-rival-chinese-models-at-lower-compute-cost/
+https://techcrunch.com/2026/10/21/recursive-launches-flint-a-laptop-coding-model-it-says-was-largely-built-by-AI/
+All images are local. The original panels are shown intact; the montage is not a claim that results are directly comparable.
+These are genuine browser screenshots, not re-created page mock-ups. Viewport crops preserve each site's typography, colours, navigation and chart labels. Reflection's cookie banner was rejected using its own control. No text or numbers were edited, hidden or rearranged.
+Source URLs:
+https://thinkingmachines.ai/news/inkling-2-small/
+https://reflection.ai/blog/introducing-beam
+https://recursive.com/updates/introducing-recursive-flint
+Publication dates here belong to the official pages. Recursive's page displays 18 October; the TechCrunch clipping on the previous slide is dated 21 October.
+Benchmark settings vary. The panels do not provide complete task denominators or exact harness versions, so this slide demonstrates how results are presented, not an independently harmonised comparison.
+Flint's surrounding methodology says single-turn average pass@1 across five attempts; agentic average pass@1 across at least five attempts, Terminus 2 XML for Terminal-Bench 2.1 and mini-swe-agent for SWE-bench. The task totals and harness versions are not provided with the panel.
+Caution: Beam's rendered chart image and hidden accessible HTML table currently differ for some rows. The image here is exactly what a visitor sees, not a reconciliation or a new score claim. Likewise, use the original chart labels rather than silently changing them to match prose elsewhere.
+Capture metadata: analysis/launch-rl-research-2026-11-11/site-captures.json.
 -->
 
 ---
@@ -488,47 +555,29 @@ src: ./pages/zork-walkthrough.md
 class: fa-lookup-slide
 ---
 
-# Safety stops: two labs, nobody else
-
-<SafetyLabs />
-
-<Receipt source="164,853 trials, corpus census of 8 Nov 2026 · stops as the harness recorded them · counts, not rates: models were not run equally" />
-
-<!--
-Some of what a model does on a task isn't its choice. The provider's safety classifier ends the run: the model call comes back as a safety stop or a refusal, the harness records an error, and the trial is over.
-This is every trial we hold, public and our own: 164,853 after removing copies. 790 ended that way. 545 are OpenAI models and 245 are Anthropic models. There are none from anybody else: 49,932 trials across Grok, GLM, DeepSeek, Gemini, Qwen, Muse, Kimi and eight other models.
-The earlier version of these slides counted 239, from the 65 public Terminal-Bench 2.1 runs only. The next two slides after the task grid still use that public set, because the leaderboard comparison needs it.
-Within the two labs it is the newer and larger models. Anthropic: Fable 5 96, Opus 5.5 92, Sonnet 5.5 32, Haiku 5.5 19. Opus 5 has 4, Opus 4.8 and Fable 5.1 one each. Sonnet 5, Opus 4.7, Sonnet 4.6 and Haiku 4.5 have none.
-OpenAI: GPT-6 Astra 317, GPT-5.6 Sol 101, GPT-6.1 Terra 69, GPT-6.1 Sol 54. GPT-6 Luna has 3 in 27,606 trials and GPT-5.5 has 1. GPT-5.6 Luna (15,275 trials), GPT-5.6 Terra, GPT-5.4 and GPT-6 Sol have none.
-These are counts, not rates. GPT-6 Astra has 12,706 trials and Opus 5.5 has 1,514, so the bars say who gets stopped, not who gets stopped most often. The grid on the next slide has the rates.
-One job accounts for 146 of the GPT-6 Astra stops: a low-effort run on 6 Sep 2026 that was stopped on 37 unrelated tasks, most of them nothing to do with security. I can't say what happened there; it is in the 790 and left out of the next slide.
-By benchmark: Terminal-Bench 2.x 759 of 115,618, Terminal-Bench 4 29 of 7,358, TB-lite 2 of 2,496, DeepSWE 0 of 39,366. DeepSWE is ordinary software engineering, and 24,343 of its trials are the public Datacurve grid, where the report files show no safety error either.
-44 of the 790 were still rewarded: the answer was already written when the stop came.
-Caveats. A stop is what the harness recorded. fast-agent, Codex, Claude Code, Dext and IndusAGI all record them; a harness that swallows the error, or a model that declines in ordinary prose, would not show up here. I searched the other error messages for policy and filter wording: one GPT-5.6 Luna trial failed on an "invalid prompt" usage-policy error and is not counted. Nothing turned up for the other labs' models.
-Source: data/safety-corpus.json, built by analysis/safety-stops/corpus.py from the census and each trial's result file.
--->
-
----
-class: fa-lookup-slide
----
-
-# Safety stops: which tasks set them off
+# Safety stops: two labs, a handful of tasks
 
 <SafetyMatrix />
 
-<Receipt source="fast-agent on Terminal-Bench 2.x, Jul – Nov 2026 · 516 stops in 25,273 attempts · tasks with 4+ stops and 30%+ of a model's attempts" />
+<Receipt source="164,853 trials, corpus census of 8 Nov 2026 · grid: fast-agent on Terminal-Bench 2.x, Jul – Nov 2026, 516 stops in 25,273 attempts" />
 
 <!--
-The same stops by task, for the eight models that are stopped regularly. One harness, fast-agent, so the columns compare. Each cell is stops out of that model's attempts at the task.
+Two safety-stop slides are left in the talk: this one (who, and on what) and the next (what it does to a leaderboard). The lab-by-lab counts and the timing slide are in the spares.
+Some of what a model does on a task isn't its choice. The provider's safety classifier ends the run: the model call comes back as a safety stop or a refusal and the harness records an error.
+The line at the top is every trial we hold: 790 of 164,853 ended that way. 545 are OpenAI models, 245 Anthropic, and there are none from anybody else in 49,932 trials (Grok, GLM, DeepSeek, Gemini, Qwen, Muse, Kimi and others). A stop is what the harness recorded; a model declining in ordinary prose wouldn't show.
+The grid is the stops by task, for the eight models that are stopped regularly. The task groups are mine, from the task names and instructions. One harness, fast-agent, so the columns compare. Each cell is the share of that model's attempts at the task that were stopped; the attempts per task are under each name, because the OpenAI columns have far more data than the Anthropic ones (Fable 5 has 6 attempts a task, GPT-6 Astra 73 to 86).
+Why the models are kept apart and not rolled up into two labs: the data doesn't support rolling them up. Inside Anthropic, Sonnet 5.5 is stopped on three tasks, Opus 5.5 on those plus password recovery and the biology tasks, Fable 5 on thirteen, and Haiku 5.5 on none of them. Inside OpenAI the four are closer: all share the two exploit tasks, but model-extraction-relu-logits is 46% for GPT-6.1 Sol, 24% for GPT-6 Astra, 2% for GPT-5.6 Sol and 0 for GPT-6.1 Terra. A lab-level column would average those away.
+Whether a hand-off succeeds is on the next slide. By task, for Fable 5 on Claude Code (its main-leaderboard row): On the exploit and password tasks Opus 4.8 takes all five and passes all five: vulnerable-secret, break-filter-js-from-html, crack-7z-hash, password-recovery. It is never stopped itself: none of the 103 handed-over trials ends in a safety error (4 time out). Where it fails, it fails at the task: protein-assembly 0 of 5, dna-insert 0 of 5, extract-elf 1 of 5. Overall 79 of 103 pass, 76%, against 86% for the trials Fable 5 kept (295 of 342).
+So the stop is not about the task being undoable or the request being refused by every model: an older model from the same lab does it without complaint.
 What everyone shares: vulnerable-secret (get a secret out of a vulnerable program) and break-filter-js-from-html (get JavaScript past an HTML sanitiser). Fable 5 6 of 6, Opus 5.5 and Sonnet 5.5 10 of 10, GPT-6.1 Terra 34 of 35 and 35 of 35. For these models those two tasks are close to unscoreable.
 Anthropic only: crack-7z-hash and password-recovery, and the biology tasks: protein-assembly, dna-assembly, dna-insert. These are cloning and primer-design tasks.
 OpenAI only: model-extraction-relu-logits, GPT-6 Astra 20 of 81 and GPT-6.1 Sol 12 of 26. Only that classifier objects to extracting a model's weights.
 Fable 5 is the widest. It is stopped every time on thirteen tasks, including ones with no obvious subject: write-compressor, code-from-image, sqlite-with-gcov, path-tracing-reverse, extract-elf, custom-memory-heap-crash. Six runs of one attempt each, 22 to 24 Sep 2026, through the Copilot provider. That is 96 stops, about 16 of 89 tasks a run.
-The note at the bottom. On the main leaderboard, Fable 5 on Claude Code has no safety stops at all. What it has is 103 trials, on 24 tasks, where Opus 4.8 answered some or all of the steps. 16 of the 19 tasks where fast-agent records a Fable 5 stop are among those 24. So the same thing appears to be happening, and the harness covers it with another model. That is the row we re-scored earlier. Terminus 2 does the same on 16 tasks. I'm inferring the link from the task overlap: the trial files don't say why the model was swapped.
-Haiku 5.5 is the odd one: 8 of 25 on sparql-university and almost nothing else.
+On the main leaderboard, Fable 5 on Claude Code has no safety stops at all. What it has is 103 trials, on 24 tasks, where Opus 4.8 answered some or all of the steps (95 of them entirely). 16 of the 19 tasks where fast-agent records a Fable 5 stop are among those 24. Nine of the 24 aren't rows here because fast-agent's Fable 5 wasn't regularly stopped on them: db-wal-recovery, headless-terminal, sam-cell-seg, git-leak-recovery, feal-linear-cryptanalysis and four with one or two hand-offs. So the same thing appears to be happening, and the harness covers it with another model. That is the row we re-scored earlier. Terminus 2 does the same on 16 tasks. I'm inferring the link from the task overlap: the trial files don't say why the model was swapped.
+Haiku 5.5 is the odd one: 8 of 25 on sparql-university and almost nothing else. That row is off the grid, with qemu-startup (Fable 5, 4 of 6) and fix-code-vulnerability (Fable 5, 5 of 6): the grid keeps a task when some model is stopped on it nine times in ten, or two models are stopped on it in a fifth of attempts or more.
 The rates move with date and provider route. GPT-5.6 Sol was stopped on vulnerable-secret in most of its July runs and rarely after. GPT-6 Astra through Copilot was not stopped on it at all; through the Codex route it was stopped 5 of 5. So read the OpenAI columns as an average over a period, not a fixed property.
 These are benign benchmark tasks. The classifier is reacting to the subject, and the reason text isn't in the trial files for the Anthropic stops. The OpenAI error says "flagged for possible cybersecurity risk". The task descriptions here are mine, from the task names and instructions.
-Left out: the 6 Sep GPT-6 Astra job (previous slide), attempts with no result, and the other harnesses. Codex, IndusAGI and Dext are on the by-run slide.
+Left out: one GPT-6 Astra job of 6 Sep that was stopped on 37 unrelated tasks (146 stops, in the 790, unexplained), attempts with no result, and the other harnesses. Codex, IndusAGI and Dext are on the by-run slide.
 Source: data/safety-corpus.json (analysis/safety-stops/corpus.py).
 -->
 
@@ -536,41 +585,22 @@ Source: data/safety-corpus.json (analysis/safety-stops/corpus.py).
 class: fa-lookup-slide
 ---
 
-# Safety stops: when, and what survives
-
-<SafetyTiming />
-
-<Receipt source="same 239 stops in 28,932 trials · a stop is a trial that ends in a safety-stop or safety-refusal error · atif-scan v0.8.23" />
-
-<!--
-When. For the Claude 5.5 models, 79 of 107 stops come before any tool has run: usually the very first model call, with no output tokens, a few seconds in. The prompt alone is enough. The other 28 come after the agent has started: all 10 dna-insert stops come after tool calls, so there it is something in the work, not the prompt.
-For the OpenAI models it is the other way round: 41 of 132 before any tool call, 91 after one to eight steps. On model-extraction-relu-logits only 2 of 18 are at the start.
-Recoverable? Not within a run. A stop is returned to the harness as an error, and the trial ends at that step. None of the 239 continues, and the trial files show no retry.
-13 were still rewarded, because the answer was already written when the stop came: sparql-university 4 of 4, feal-differential-cryptanalysis 4 of 5, break-filter-js-from-html 4, fix-code-vulnerability 1. So a late stop can cost nothing; an early one costs the task.
-Cost. Opus 5.5 loses 71 of 890 trials, 7% of the whole benchmark, before it has done anything. Sonnet 5.5 loses 31 of 890. The OpenAI runs lose 7 to 13 of 445 each. That is a ceiling on the score that has nothing to do with ability.
-Effort makes little difference for Claude (Opus 5.5: 36 at medium, 35 at high). For GPT-6 Astra on Codex it rises a little: 7, 7, 11, 13, 13 from low to max.
-Who never stops in these 65 public runs: every Luna run, GPT-5.5, GPT-5.6 Terra, and the Claude models on Claude Code, Terminus 2 and Ouroboros. That last group is not the same as never being stopped: Fable 5 is stopped on fast-agent, and on Claude Code and Terminus 2 another model answers instead (previous slide).
-One I can't explain: GPT-5.6 Sol on fast-agent has 12 stops at medium effort (23 Jul) and none at high (26 Jul).
-Whether it's recoverable outside a run, by rewording the task or retrying, isn't something these files can answer. The harness could retry or rephrase; none of these did.
--->
-
----
-class: fa-lookup-slide
----
-
-# Safety stops by run
+# A stop can look like a pass
 
 <SafetyRuns />
 
-<Receipt source="every main-leaderboard row with a stop, and other runs with 12 or more · 65 public Terminal-Bench 2.1 runs · atif-scan v0.8.23" />
+<Receipt source="65 public Terminal-Bench 2.1 runs · leaderboard rows with a stop or hand-off, other runs with 12+ stops · atif-scan v0.8.23" />
 
 <!--
-The same 239 stops, by run, with where each run comes from. The dark tags are rows on the main Terminal-Bench 2.1 leaderboard.
+Is a hand-off always a pass? No. Opus 4.8 passes 79 of the 103 trials it takes over on Claude Code (76%) and 55 of 79 on Terminus 2 (69%): 134 of 182. The teal part of each bar is the hand-offs that passed, the grey part the ones that failed. It is never stopped itself; where it fails, it fails at the task (protein-assembly and dna-insert 0 of 5 on Claude Code).
+The 239 stops in the 65 public runs, by run, with where each run comes from, and with the hand-offs next to them. The dark tags are rows on the main Terminal-Bench 2.1 leaderboard.
+Why the hand-offs are here. We deliberately run fast-agent with no fallback model, so when the classifier stops a trial, the trial ends and scores zero. Claude Code and Terminus 2 have a fallback: the trial carries on with Opus 4.8 and usually passes. Counting only stops makes fast-agent look like the harness with the problem. Counting both shows the same event on both sides: Fable 5 on Claude Code has 103 trials it didn't finish (23% of the row), Fable 5 on Terminus 2 has 79. Those are the two largest bars on the chart. Only these two of the 65 runs have any step answered by a second model.
+The last column is the fair comparison: the named model's pass rate over the trials it finished itself. Fable 5 on Claude Code: 84.0% as scored from its files (the leaderboard publishes 83.8%), own trials 86.2% (295 of 342). Opus 5.5 medium on fast-agent: 86.7% as scored, 94.1% on its own trials. Without the fallback's 79 passes the Claude Code row would score 295 of 445, 66%.
 On the main leaderboard it is the five GPT-6 Astra rows on Codex, which are the top of the board: 13 stops at max, 13 at xhigh, 11 at high, 7 at medium, 7 at low. 51 trials. No other leaderboard row has any: not the Claude Code rows, not Terminus 2, not the Gemini or GPT-5.5 or GPT-5.6 rows.
 Pull-request submissions: GPT-5.6 Sol on Dext (13) and on IndusAGI (12).
 Our own fast-agent runs: Opus 5.5 at medium and high (36 and 35), Sonnet 5.5 (16 and 15), GPT-6.1 Sol high (13), GPT-5.6 Sol medium (12).
-The last two columns: the run's pass rate as scored, and its pass rate over only the trials that were not stopped. For GPT-6 Astra max on Codex that is 86.7% against 89.3%. For Opus 5.5 medium it is 86.7% against 94.1%: the same published number, a very different model underneath.
-This is not a corrected score. A stopped trial is a real failure of the product as shipped. The point is that part of the gap between two rows on a leaderboard is the provider's classifier, not the model's ability, and the leaderboard doesn't say which.
+For GPT-6 Astra max on Codex the two columns are 86.7% and 89.3%. For Opus 5.5 medium, 86.7% and 94.1%: the same published number, a very different model underneath.
+This is not a corrected score. A stopped trial is a real failure of the product as shipped, and a fallback is a reasonable thing for a product to do. It just isn't a measurement of the model in the row's name. The point is that part of the gap between two rows on a leaderboard is the provider's classifier, not the model's ability, and the leaderboard doesn't say which.
 The pass rates here are rewarded trials over all trials in the row's files, rounded down; they can differ by a trial from the published figure.
 Left off, with fewer than 12 stops and not on the main leaderboard: GPT-6 Astra on IndusAGI (10), GPT-6.1 Terra and GPT-6.1 Sol medium on fast-agent (10 each), Haiku 5.5 low (4), Haiku 5.5 high (1), GPT-6 Astra high on fast-agent (1).
 -->
@@ -775,19 +805,21 @@ class: fa-lookup-slide
 
 <LookupKinds />
 
-<Receipt source="65 runs of Terminal-Bench 2.1, 28,932 trials · atif-scan v0.8.23, 10 Nov 2026 · flags for review, not verdicts · evalstate tb21-*-annotated Spaces" />
+<Receipt source="65 runs of Terminal-Bench 2.1, 28,932 trials · atif-scan v0.8.23 plus the sanitize-git-repo allowance of 11 Nov 2026 · flags for review, not verdicts" />
 
 <!--
 Same move as the chess slide: take one behaviour and split it by what the agent actually did.
 Why 28,932 and not the 181,732 from two slides back: this is the slice where the comparison is fair, not the only place it happens. Every one of these runs is the same 89 tasks, five attempts each, read by one scanner version, with the reward attached, and all of it is public. The full corpus is mostly what I chose to run (fast-agent is 94,602 of 164,870 trials), so a corpus-wide rate would describe my run list.
 The other benchmarks, from the private count of 94,119 deduplicated trials (8 Nov scan): Terminal-Bench 2.1 has 414 lookup-request flags in 55,569 trials; TB-lite 23 in 300; DeepSWE 216 in 22,291, none of them a solution URL; Terminal-Bench 4 none in 12,896. Not a league table: those checks were written for Terminal-Bench, DeepSWE has no network (its version of this is the git and upstream digging on the effort slide), and TB 4's tasks are newer with fewer public solutions.
 Population: every row of the three public annotated Spaces. 22 main-leaderboard rows, 14 pull-request submissions and 29 fast-agent runs: 65 runs, 28,932 trials (64 × 445 plus one of 452). One more submission, a scripted replay with no model, is left out here and comes back three slides on.
-A trial counts when atif-scan v0.8.23 has an unexcused medium-or-higher match in its answer-lookup family. 511 trials, 1.7%. 426 of them were rewarded.
+A trial counts when atif-scan v0.8.23 has an unexcused medium-or-higher match in its answer-lookup family. 478 trials, 1.6%. 425 of them were rewarded.
+This was 511 yesterday. atif-scan gained an allowance on 11 Nov (expected.tb21.sanitize_git_repo_git_inspection): on sanitize-git-repo the task is to leave no credentials anywhere in the repository, so looking through history and unreachable objects is the task's own verification, not a hunt for a dropped solution. That excuses 33 trials, 32 of them unrewarded. The Spaces' reports are still v0.8.23 without it; the extract applies it on top, so the Spaces show 511 until they are rebuilt.
+The prevailing rate, now in the note at the bottom: the median run has 3 flagged trials in 445, under 1%. 16 of the 65 runs have none. The four highest (81, 57, 50 and 43) hold 231 of the 478, so the 1.6% average is pulled up by a few runs.
 Each trial goes into the first kind that fits:
 - Its own task's solution or tests, 132: the lookup names this task's solution or test files, or a solution or test URL (which includes other agents' finished runs). 130 of the 132 also have benchmark material arriving. 122 rewarded, 92%.
 - Other benchmark material arrived, 187: the benchmark's repository, a mirror or a task page came back, without this task's solution files being named. 170 rewarded, 90%.
 - The upstream fix, 64: 62 of these are fix-ocaml-gc, where the agent fetches the real OCaml source for the bug. All 64 rewarded.
-- Git objects outside the history, 64: digging through unreachable objects in the task's own repository. 33 are sanitize-git-repo, 13 merge-diff-arc-agi-task. 29 rewarded, 45%. No web involved.
+- Git objects outside the history, 31: digging through unreachable objects in the task's own repository. 13 are merge-diff-arc-agi-task, 5 git-multibranch. 28 rewarded, 90%. No web involved. (64 before the sanitize-git-repo allowance.)
 - Searched, nothing arrived, 64: a search or request named the benchmark and nothing is recorded coming back. 41 rewarded, 64%.
 Overall reward rate is 78% (22,792 of 28,932). The two kinds where material arrives sit at 90% and above. That is a correlation: the flagged trials are on a different mix of tasks, so don't read it as "the lookup added 12 points".
 The 2,000-word version of the caveat: these are detector flags. Arrival is recorded; use is not established.
@@ -802,15 +834,15 @@ class: fa-lookup-slide
 
 <LookupTasks />
 
-<Receipt source="same 28,932 trials, 325 per task · atif-scan v0.8.23, 10 Nov 2026 · “needs the web” is from a separate review of the 89 tasks" />
+<Receipt source="same 28,932 trials, 325 per task · atif-scan v0.8.23 plus the 11 Nov allowance · “needs the web” is from a separate review of the 89 tasks" />
 
 <!--
-By task. Eight of 89 tasks hold 321 of the 511 flags (62%). 38 tasks have none at all.
+By task. Eight of 89 tasks hold 305 of the 478 flags (63%). 38 tasks have none at all.
 The colour mix changes from task to task, which is the point:
 - mteb-leaderboard, 67: the task needs outside leaderboard data, so the agent has to search. Mostly petrol: benchmark material came back. I haven't read these trials one by one.
 - fix-ocaml-gc, 63: all teal. The agent fetches the real upstream OCaml source. Every one rewarded.
 - extract-elf, 37: 20 orange. The task needs no network, and the reference implementation is on a public task page.
-- sanitize-git-repo, 35: nearly all git-object digging, and only 3 rewarded.
+- sanitize-git-repo is no longer on the chart: 33 of its 35 flags were git-object inspection, which the scanner now treats as the task's own work. 2 remain.
 - db-wal-recovery, 30: 14 orange. In one reviewed case the agent's own SQLite open deletes the WAL, and it restores the file from the public benchmark repo.
 "Needs the web" is the tb21-network review's verdict (required or expected): mteb-leaderboard, count-dataset-tokens, build-pov-ray and raman-fitting among these ten. On those, going to the web is part of the task. The other six can be done offline.
 This agrees with the earlier private-corpus count (55,569 TB 2.1 trials): four tasks, extract-elf, build-pov-ray, torch-pipeline-parallelism and db-wal-recovery, held 93 of 184 solution-URL flags.
@@ -825,15 +857,38 @@ class: fa-lookup-slide
 
 <LookupRows />
 
-<Receipt source="65 runs, 445 trials each (one of 452), dated 18 Nov 2025 – 7 Nov 2026 · atif-scan v0.8.23, 10 Nov 2026" />
+<Receipt source="65 runs, 445 trials each (one of 452), dated 18 Nov 2025 – 7 Nov 2026 · atif-scan v0.8.23 plus the 11 Nov allowance" />
 
 <!--
-By run: the chart shows the seven runs with 16 or more flagged trials. Underneath, every one of the 32 models is named: 22 had benchmark material arrive in at least one trial (the number after each name is how many trials, summed over all of that model's runs), 5 were flagged with nothing arriving, 5 have no flag. Whether a given arrival was deliberate or stumbled on is for the talk-over: the flag records that the material came back, not why. A run is one harness, one model and one effort setting over the same 89 tasks, five attempts each, so the counts are comparable.
-Top four: SWE-1.7 on Devin CLI, 81 of 445 (18%), 37 of them for its own task's solution or tests. DeepSeek V4.1 Flash on fast-agent, 58. Grok 4.5 on Cursor CLI, 50. GPT-5.6 Terra on Codex, 46: that is the Terra row from the leaderboard slide.
+By run: the chart shows the seven runs with 15 or more flagged trials. Underneath, every one of the 32 models is named: 22 had benchmark material arrive in at least one trial (the number after each name is how many trials, summed over all of that model's runs), 4 were flagged with nothing arriving, 6 have no flag. Whether a given arrival was deliberate or stumbled on is for the talk-over: the flag records that the material came back, not why. A run is one harness, one model and one effort setting over the same 89 tasks, five attempts each, so the counts are comparable.
+Top four: SWE-1.7 on Devin CLI, 81 of 445 (18%), 37 of them for its own task's solution or tests. DeepSeek V4.1 Flash on fast-agent, 57. Grok 4.5 on Cursor CLI, 50. GPT-5.6 Terra on Codex, 43: that is the Terra row from the leaderboard slide, which still shows the Space's 46 (three sanitize-git-repo trials, none rewarded, so its adjusted score doesn't move).
 The Devin run is a pull-request submission; the Terminal-Bench pipeline disqualified 56 of its trials.
-28 of the 65 runs have two or fewer flagged trials and 15 have none (no longer on the slide). The top four runs hold 235 of the 511.
+29 of the 65 runs have two or fewer flagged trials and 16 have none (no longer on the slide). The top four runs hold 231 of the 478.
 "Rewarded" is how many of the flagged trials passed.
 fast-agent rows are our own runs. They are on this chart because the same scanner read them.
+-->
+
+---
+class: fa-lookup-slide
+---
+
+# The whole corpus, as a rate
+
+<LookupRates />
+
+<Receipt source="179,944 trials, corpus scan of 8 Nov 2026 (atif-scan d469890, b344b40) · one check: benchmark content obtained from the web · web results not recorded count as not flagged, so rates are lower bounds" />
+
+<!--
+The last three slides were the 65 public Terminal-Bench 2.1 runs. This is everything: 179,944 trials after removing copies, all four benchmarks, public runs and our own.
+Why it wasn't done this way before, and why it is a rate now: the corpus is mostly what I chose to run. GPT-6 Luna alone is 23,628 of the 134,218 Terminal-Bench 2.x trials, and it has 30 of the 658 flags. A count would mostly show my run list. A rate per model doesn't.
+One check, the strictest in the lookup family: benchmark content came back from a web request. It needs no task-specific allowance, so the older corpus scan and the public reports mean the same thing by it. It is narrower than the 478 on the earlier slides: no git digging, no searches that returned nothing, no upstream fixes.
+The prevailing rate: 658 in 134,218 on Terminal-Bench 2.x, 4.9 per 1,000, about one trial in 200. TB-lite 13 in 3,281 (3.9 per 1,000). DeepSWE 2 in 35,003: it has no network. Terminal-Bench 4: none in 7,358; its instructions say not to use online solutions, and its tasks are newer.
+By model, 1,000 trials or more: DeepSeek V4.1 Flash 22.3 per 1,000 (113 of 5,064), Flint 16.7, DeepSeek V4 Flash 14.5, Grok 4.7 12.3, Grok 4.5 9.7, Ripple 8.1, Grok 4.6 7.4. Then the GPT-5.6 models at 2.9 to 5.2, GPT-6.1 Terra 4.4, GPT-6 Luna 1.2, GLM-5.3 Flash 1.0, GPT-5.5 0.8, Fable 5 0.5.
+None in 25,995 trials: GPT-6 Astra (11,718), GPT-6.1 Sol, Opus 4.8, Opus 5, Haiku 5.5, Fable 5.1, Sonnet 5.5, Opus 5.5.
+So the spread between models is about 40-fold, and it lines up with the public-run picture: DeepSeek and Grok at the top, Claude at zero.
+Smaller samples run much higher and are off the chart: SWE-1.7 115 per 1,000 on its single 441-trial run, DeepSeek Flash 84 on 695.
+Caveats. The corpus scan is an older scanner than the public reports. A trial whose web results weren't recorded can't be decided: 13,613 of the Terminal-Bench 2.x trials, counted here as not flagged. That is concentrated: 2,421 of GPT-6.1 Terra's 4,055 and 2,472 of GLM-5.3 Flash's 10,636. For GPT-6 Astra the public reports found material arriving in 3 trials across its 7 public runs (3,115 trials) where this older scan finds none in 11,718, so read its zero as "not seen". The same goes for GPT-6.1 Sol: 2 trials in the public reports, none here. The card is headed "None seen by this scan" for that reason. Harness, effort and date are mixed within each model.
+Source: data/lookup-rates.json (analysis/answer-lookup/corpus_rates.py).
 -->
 
 ---
@@ -844,14 +899,14 @@ class: fa-lookup-slide
 
 <LookupFactors />
 
-<Receipt source="flagged trials out of 445, one run per figure · fast-agent 0.9.30–0.10.43 · atif-scan v0.8.23, 10 Nov 2026" />
+<Receipt source="flagged trials out of 445, one run per figure · fast-agent 0.9.30–0.10.43 · atif-scan v0.8.23 plus the 11 Nov allowance" />
 
 <!--
 Three like-for-like comparisons. Each number is flagged trials out of 445.
-Change the model, keep fast-agent and max effort: 58 down to 7. The seven Claude runs on fast-agent (Opus 5.5, Sonnet 5.5, Haiku 5.5, low to high effort) have 1 flagged trial in 3,115. Model is the big lever.
-Change the effort, keep model and harness: GPT-6 Luna on fast-agent 0.10.42 goes 1, 3, 9, 5, 7 from low to max. GPT-6 Astra on Codex goes 0, 1, 1, 4, 4. More effort, more lookups, roughly. The DeepSWE slide, two on, shows the same thing with far more trials.
-Change the harness, keep model and effort: mostly close. GPT-5.6 Luna max is 7 on Codex and 11 on fast-agent; GPT-5.6 Sol xhigh is 11 on Dext and 10 on IndusAGI. The exception is Terminus 2: 0 in all five of its runs (2,225 trials), where the same models in their own CLIs give 2 to 6. I haven't established why; don't offer a cause.
-Not on the slide because the effort differs: Grok 4.5 is 50 on Cursor CLI (high) and 8 on Ouroboros (medium); GPT-5.6 Terra is 46 on Codex (max) and 10 on fast-agent (high).
+Change the model, keep fast-agent and max effort: 57 down to 4. The seven Claude runs on fast-agent (Opus 5.5, Sonnet 5.5, Haiku 5.5, low to high effort) have 1 flagged trial in 3,115. Model is the big lever.
+Change the effort, keep model and harness: GPT-6 Luna on fast-agent 0.10.42 goes 1, 3, 7, 5, 4 from low to max. GPT-6 Astra on Codex goes 0, 1, 1, 3, 4. More effort, more lookups, roughly. The DeepSWE slide, two on, shows the same thing with far more trials.
+Change the harness, keep model and effort: mostly close. GPT-5.6 Luna max is 7 on Codex and 10 on fast-agent; GPT-5.6 Sol xhigh is 10 on Dext and 10 on IndusAGI. The exception is Terminus 2: 0 in all five of its runs (2,225 trials), where the same models in their own CLIs give 2 to 6. I haven't established why; don't offer a cause.
+Not on the slide because the effort differs: Grok 4.5 is 50 on Cursor CLI (high) and 8 on Ouroboros (medium); GPT-5.6 Terra is 43 on Codex (max) and 5 on fast-agent (high).
 The streetlight caveat (this was the "drunk finding keys" note): we find lookups where the trace lets us look. Codex records a hosted web search call but not what came back, so for GPT-6 Astra 170 to 301 trials per run have search results we can't read. A low count there may be a blind spot, not good behaviour. Claude Code Fable 5 withholds 82% of its output tokens as hidden thinking.
 A fourth factor, off the slide: the prompt. Terminal-Bench 4 says "Do not cheat by using online solutions", and the private-corpus count is 0 flags in 12,896 TB 4 trials. Not proof: the tasks are newer and fewer solutions are public.
 These are single runs per cell. Dates, versions and providers differ between cells.
@@ -1127,6 +1182,11 @@ The strategies slide. When a request fails, these are the five things agents rea
 The counts are command shapes across the whole corpus, most of it tasks where network access is allowed. They are not bypasses and they are not rates of anything: one model family dominates some rows only because of how much it was run.
 Web archive, 546: most often Grok (136). Ordinary and usually fine. The case: GPT-5.6 Sol on build-pov-ray, 9 Jul, fetched the official POV-Ray archives from the Wayback Machine when the legacy file host stalled.
 Reader service, 431: a third party fetches the page and returns the text (r.jina.ai and similar). Most often DeepSeek V4.1 Flash (116). The case: GPT-6.1 Sol on dna-assembly, 8 Oct. The task tells it to check the manufacturer's requirements; five direct requests return 403; the reader returns an 83,705-byte enzyme reference. Reward 1. Task-authorised: the block was the manufacturer's site, not the sandbox.
+A variant to tell aloud here, not on the slide: the Google Translate proxy. The agent asks for the blocked site through Google Translate's proxy domain (www-fpbase-org.translate.goog), so Google fetches the page. 10 trials in about 180,000 made a request that way, August to November 2026, two or three a month; 7 of the 10 are GPT-5.6 Luna or GPT-6 Luna on fast-agent. Tasks: build-pov-ray 5, protein-assembly 3, mteb-leaderboard 1, dna-assembly 1: each time a site the task needs was refusing the agent. Mostly it returned 403. It worked against fpbase.org on protein-assembly, twice, and both traces are reviewed.
+GPT-6 Luna (xhigh), fast-agent 0.10.42, 2 Oct 2026, reward 1. The task needs fluorescent-protein data from FPbase, which the task names as a source. Step 5: FPbase returns 403. Step 9: the r.jina.ai reader gets Cloudflare's "Just a moment" page. Step 29: one command tries five routes at once: the translate proxy, a doubled reader, an image proxy and a CORS proxy. The translate proxy returns 403 for the API and 200 for the mCherry page. Step 30, its reasoning: "I've figured out that the translation for proxy pages works!" It reads the emission maximum, 610, from the page.
+GPT-6.1 Sol (high), fast-agent 0.10.51, 2 Nov 2026, reward 1. Step 19: five routes in parallel; direct and reader fail, the translate proxy returns FPbase's API record for Clover as JSON. Step 20: it fetches mCherry the same way. 23 steps in all.
+Neither final summary mentions the proxy. Both got data the task asks them to use, from the site the task points at: resourcefulness, not a lookup of the answer.
+One DeepSeek V4.1 Flash trial only thinks about it: "Cheesy but works sometimes."
 Skip DNS, 132: curl --resolve with a pinned address, or an edited /etc/hosts. Most often DeepSeek V4.1 Flash (29), then Ripple (20), GLM (18). This is the one that defeats a "no network" setting that is really only a DNS setting: the slide before.
 Go round the proxy, 80: --noproxy or unsetting the proxy variables. 76 of the 80 are DeepSeek V4 Pro on mini-swe-agent in Datacurve's public DeepSWE run. The case: it says "Network forbidden generally.", then tries the GitHub API, jsDelivr, unpkg, r.jina.ai, --noproxy and a pinned IP. The Squid proxy returns ERR_ACCESS_DENIED and the direct connection times out. The reviewed DeepSeek trials all show the direct route blocked: don't call the 76 bypasses.
 Ask another model, 84: a chat-completions request from inside the sandbox, usually with a provider key found in the environment. 31 got an answer. Next slide.
@@ -1444,33 +1504,109 @@ number: 8
 
 
 ---
-class: fa-case-slide
+class: fa-rl-loop-slide
+clicks: 2
 ---
 
-# RL environments look like benchmarks
+# Same verifier. A different destination.
 
-<div class="fa-case">
-<div>
+<RlFeedback :stage="$clicks" />
 
-- Same parts: an environment, a task, a time limit, a verifier, a reward.
-- A benchmark reports the reward as a score.
-- Post-training uses it to update the model. Whatever earned the reward is what the model learns to do.
+<p v-if="$clicks === 0" class="fa-research-takeaway">In evaluation, we record the score.</p>
+<p v-else-if="$clicks === 1" class="fa-research-takeaway">In training, the trajectory and reward also change the model.</p>
+<p v-else class="fa-research-takeaway">Now repeat across many tasks and parallel rollouts.</p>
 
-</div>
-<div>
-
-So a habit that pays in one lab's training environments can turn up in someone else's benchmark.
-
-Environments are built at very large scale. A verifier that can be satisfied the wrong way teaches the wrong thing many times over.
-
-</div>
-</div>
+<Receipt source="Illustrative RL flow, not a lab’s exact architecture. Inkling 2 Small launch, 5 Nov 2026; DeepSeek V4.1 Flash technical report, §5.2, Sep 2026.">Both successful and unsuccessful trajectories can contribute to learning.</Receipt>
 
 <!--
-From your talk draft: post-training RL environments look a lot like benchmark environments; rather than just report a score, the trajectory is used to train the model, so the strongest behaviours survive.
-This picks up the ace-research section just before: one reading of it is a habit learned in environments that looked like that sandbox. The trace can't say where; say that aloud.
-Public example to show: Xiaomi's livestreamed training run, https://mimo.xiaomi.com/rl/
-No numbers on this slide, so no receipt.
+This replaces the text-only “RL environments look like benchmarks” slide, using the same container/keyline language as the earlier Harbor trial animations.
+Start: model, agent/environment, verifier, reported score.
+Click: the trajectory and reward enter a training batch; the learner updates the model weights.
+Click again: parallel environment outlines appear. Move to the scale slide.
+The return arrow is a weight update, not merely a conversational memory or a prompt. The schematic is illustrative, not the literal shared architecture of every lab; the animation is not a measured timeline.
+Do not say the trainer just copies successful answers or discards every failed attempt. RL updates depend on trajectories and rewards, and unsuccessful attempts can contribute.
+This picks up the ace-research examples: a habit rewarded in one training sandbox could surface elsewhere. Those traces do not establish how it was learned.
+https://thinkingmachines.ai/news/inkling-2-small/
+https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf
+-->
+
+---
+class: fa-rl-scale-slide
+---
+
+# A million environments. Then repeat.
+
+<div class="fa-rl-scale">
+<div>
+<h2>1 million</h2>
+<p>training environments</p>
+<span>Coding, agentic work and STEM</span>
+</div>
+<span class="fa-rl-scale-arrow" aria-hidden="true">→</span>
+<div>
+<h2>100 million+</h2>
+<p>rollouts</p>
+<span>Repeated attempts, traces and rewards</span>
+</div>
+</div>
+
+<p class="fa-rl-scale-detail">Beam also reports <strong>about 1.3 billion sandbox uses</strong> for training and grading.</p>
+
+<p class="fa-research-takeaway">A weak verifier can reward the wrong behaviour at scale.</p>
+
+<Receipt n="1m environments; >100m rollouts; ≈1.3bn sandboxes" date="5 Oct 2026" model="Reflection Beam" harness="training infrastructure; version not disclosed" source="Reflection, Introducing Beam · High-Compute Reinforcement Learning">Developer-reported. Cumulative sandbox use, not unique tasks or concurrent capacity.</Receipt>
+
+<!--
+Return to Beam from the launch montage: benchmarks are not only how labs describe the model, but part of the apparatus used to train it.
+The source reports one million coding, agentic and STEM environments, over 100 million rollouts, and approximately 1.3 billion sandboxes used in training and grading.
+These are distinct units. Do not divide the counts to assert an exact attempt budget per environment; their scopes differ.
+The arrow represents repeated execution, not a claim that each environment was sampled equally.
+The point is the scale at which reward signals are applied, not a finding that Beam's verifiers were weak.
+https://reflection.ai/blog/introducing-beam
+Section: High-Compute Reinforcement Learning. Announcement 5 October 2026; weights followed 16 October.
+-->
+
+---
+class: fa-rl-evidence-slide
+---
+
+# Different counts. The same scale story.
+
+<div class="fa-rl-evidence">
+<section>
+<div class="fa-rl-evidence-line"><h3>Qwen · SWE-Universe</h3><strong>800,000+</strong><span>verifiable SWE tasks</span></div>
+<Receipt source="n = 807,693 instances / 52,960 repos · Qwen3-Max-Thinking pipeline · report v2, 21 Sep 2026, table 2">Dataset construction; not a final-model training total.</Receipt>
+</section>
+<section>
+<div class="fa-rl-evidence-line"><h3>Kimi K3</h3><strong>51 million</strong><span>sandbox creations</span></div>
+<Receipt source="n = 51,219,741 creations / 1,505,678 images · Kimi K3 report v2, 7 Aug 2026, §5.3">Training and evaluation combined. These are not unique tasks or K3.1 counts.</Receipt>
+</section>
+<section>
+<div class="fa-rl-evidence-line"><h3>Inkling 2 Small</h3><strong>17 million+</strong><span>rollouts in nine days</span></div>
+<Receipt source="n > 17m rollouts · Inkling 2 Small main RL run · Thinking Machines launch, 5 Nov 2026">Joint RL run across multiple task families.</Receipt>
+</section>
+<section>
+<div class="fa-rl-evidence-line"><h3>DeepSeek V4.1 Flash</h3><strong>Millions</strong><span>concurrent sandboxes</span></div>
+<Receipt source="n = millions, exact peak undisclosed · V4.1 Flash report, Sep 2026, §5.1.3, pp. 27–28">Training infrastructure demand, not a unique-environment count.</Receipt>
+</section>
+</div>
+
+<p class="fa-rl-evidence-note">Developer-reported · training harness versions not disclosed with these counts · not a like-for-like ranking</p>
+
+<!--
+Supporting receipts, not a leaderboard. Each row measures something different.
+Qwen: 807,693 executable instances across 52,960 repositories; round down on screen. Applied to Qwen3-Max-Thinking, not a disclosed Qwen3.8 training count.
+https://arxiv.org/html/2602.02361v2
+Kimi: 51,219,741 sandbox creations across 1,505,678 images during K3 training AND evaluation. Not 51m different tasks.
+https://arxiv.org/html/2607.24653v2
+K3.1 Pro's newer October blog says joint RL across hundreds of downstream domains, but does not provide an exact environment total. Do not transfer the K3 count to K3.1.
+https://www.kimi.com/en/blog/kimi-k3-1-pro
+Inkling 2 Small: over 17m rollouts over nine days in its main joint RL run. Not the original Inkling's separate >30m-rollout campaign.
+https://thinkingmachines.ai/news/inkling-2-small/
+DeepSeek: §5.1.3 says V4.1 training increased demand to millions of concurrent sandbox instances. This is infrastructure scale, not a count of distinct environments.
+https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf
+All counts are developer-reported. Harness implementation versions are not supplied with these aggregate counts.
+Transition: at that scale, how do you make sure the verifier actually distinguishes useful work from a reward hack? The next slide follows the construction and testing of an RL task.
 -->
 
 ---
@@ -1587,17 +1723,40 @@ The macro view of the awareness and medium-severity findings, split by where the
 Flagged in reasoning: the agent remarks on being benchmarked, names the benchmark, or reasons about evading a check, or a medium-or-higher behavioural check cites its reasoning text.
 Flagged in a tool call: a medium-or-higher behavioural check (access, lookup, side channel, tampering, network, recall, and the task-specific ones) cites a command, a path, a URL or a query.
 Matches that an allowance explains are left out of both. The info-level "hidden tests discussed" check is left out too: it fires on a third of the DeepSWE trials that have reasoning text and isn't awareness of being benchmarked.
-Top block: the 37,200 trials whose trace has some reasoning text. 5.7% are flagged in reasoning (2,135) and 10.1% in a tool call (3,761).
-The spread by model family is the point. Qwen 37.8%, DeepSeek 36.0%, GLM 21.9%, SWE-1.7 20.8%, Kimi 9.8% flagged in reasoning. Then Grok 3.0%, Claude 0.9%, GPT 0.6%, Gemini 0.4%. The tool-call column doesn't follow that order: GPT 9.2% and GLM 10.8% are flagged in tool calls about as often, and GLM is flagged in reasoning about 35 times as often. Grok is at 15.7% in tool calls and 3.0% in reasoning.
+Top block: the 37,200 trials whose trace has some reasoning text. 5.7% are flagged in reasoning (2,135) and 10.0% in a tool call (3,741).
+The spread by model family is the point. Qwen 37.8%, DeepSeek 36.0%, GLM 21.9%, SWE-1.7 20.8%, Kimi 9.8% flagged in reasoning. Then Grok 3.0%, Claude 0.9%, GPT 0.6%, Gemini 0.4%. The tool-call column doesn't follow that order: GPT 9.1% and GLM 10.8% are flagged in tool calls about as often, and GLM is flagged in reasoning about 35 times as often. Grok is at 15.7% in tool calls and 3.0% in reasoning.
 What I think that is: the first group records the model's full reasoning. For GPT, Claude and Gemini the recorded text is mostly a provider summary. I can't measure that from the reports: "recorded" means some text is present, not that it is complete. So this is how often awareness is expressed on the recorded surface, not a comparison of what the models know.
-Bottom block: 20,314 trials, 35%, record no reasoning text at all: 10,111 Claude (Fable 5, Opus 5 and Sonnet 5 on DeepSWE, and the Claude Code and Terminus rows), 5,789 GPT (mostly Codex), Muse, Gemini CLI, Grok on Ouroboros. They cannot be flagged in reasoning. 1,564 are flagged in a tool call, 7.6%, about the same rate as everyone else's.
+Bottom block: 20,314 trials, 35%, record no reasoning text at all: 10,111 Claude (Fable 5, Opus 5 and Sonnet 5 on DeepSWE, and the Claude Code and Terminus rows), 5,789 GPT (mostly Codex), Muse, Gemini CLI, Grok on Ouroboros. They cannot be flagged in reasoning. 1,555 are flagged in a tool call, 7.6%, about the same rate as everyone else's.
 The three numbers on the right.
-38% against 8%: among trials with text, 823 of the 2,135 flagged in reasoning also have a flagged tool call; of the 35,065 not flagged in reasoning, 2,938 do. That holds inside every family: DeepSeek 52% against 20%, GPT 46% against 8%, Claude 24% against 2%, Grok 61% against 14%. So a reasoning flag is a good pointer to which trials to read.
-1,312: flagged in reasoning with no flagged tool call. That is 61% of the reasoning flags. With hidden reasoning those trials have nothing on them. Many are harmless remarks; the concealment quotes in this talk are in that group too.
-35% and 1,564: a flagged tool call with no explanation recorded next to it. The same lookup can be research or the answer, and without the reasoning we can't tell which.
+38% against 8%: among trials with text, 819 of the 2,135 flagged in reasoning also have a flagged tool call; of the 35,065 not flagged in reasoning, 2,922 do. That holds inside every family: DeepSeek 51% against 20%, GPT 45% against 8%, Claude 24% against 2%, Grok 61% against 14%. So a reasoning flag is a good pointer to which trials to read.
+1,316: flagged in reasoning with no flagged tool call. That is 61% of the reasoning flags. With hidden reasoning those trials have nothing on them. Many are harmless remarks; the concealment quotes in this talk are in that group too.
+35% and 1,555: a flagged tool call with no explanation recorded next to it. The same lookup can be research or the answer, and without the reasoning we can't tell which.
 Caveats. This mixes two benchmarks and 128 runs that are not balanced by model: DeepSWE's upstream-lookup check supplies a lot of the tool-call flags. Messages are a third channel, not shown: in the runs that report no reasoning tokens at all, about 2% of trials carry a benchmark remark in a message, so some of it moves there. Low-severity awareness has no tool-call equivalent, so the two columns are not the same checks.
-What counts: benchmark-awareness checks and behavioural checks of medium severity or above, with allowance-explained matches removed. 65 Terminal-Bench 2.1 runs and 63 DeepSWE runs. Percentages are rounded down.
+What counts: benchmark-awareness checks and behavioural checks of medium severity or above, with allowance-explained matches removed, including the sanitize-git-repo allowance added to atif-scan on 11 Nov (it moves the tool-call counts by 29 trials). 65 Terminal-Bench 2.1 runs and 63 DeepSWE runs. Percentages are rounded down.
 Source: data/awareness-channels.json (analysis/awareness-channels/extract.py).
+-->
+
+---
+class: fa-lookup-slide
+---
+
+# At max effort, the tool calls match
+
+<FlagsAtMax />
+
+<Receipt source="DeepSWE 1.1, Datacurve public run · mini-swe-agent, max effort · 448 to 452 trials a model · atif-scan v0.8.23 · review candidates" />
+
+<!--
+Same harness too: every row is mini-swe-agent. Percentages are rounded down.
+The question the last slide raises: do the models whose reasoning we can't read behave differently, or do we just not see it? This is the cleanest cut the data has: one benchmark, one harness, one effort setting, about 452 trials for each of 13 models. DeepSWE tasks have no network, so the tool-call flags here are mostly two things: trying to reach the upstream project for the real fix, and digging through git objects outside the task's history.
+The tool calls look alike. GPT-5.6 Terra 62.7%, Sol 48.2%, Luna 47.7% of trials have a flagged tool call. DeepSeek V4 Flash is at 54.2%, in the middle of them. GLM-5.3 and GLM-5.3 Flash are at 19.6% and 19.8%, less than half the GPT-5.6 rate. Only DeepSeek V4 Pro is higher, 88.4%.
+The reasoning doesn't. GPT-5.6: 0.8% to 5.5% flagged in reasoning. DeepSeek V4 Flash 29.8%, V4 Pro 58.6%, GLM-5.3 49.3%, GLM-5.3 Flash 38.6%. So GPT-5.6 Sol is flagged in tool calls about as often as DeepSeek V4 Flash and in reasoning about 30 times less often.
+Or there is none. Sonnet 5 28.0%, Opus 5 16.9%, Fable 5 13.9% flagged tool calls, with no reasoning text in the trace at all. Opus 4.8, which does record text, is at 7.5% and 1.3%.
+So yes: on the one comparison we can make fairly, the proprietary models with summarised or hidden reasoning make the same kind of flagged tool calls as the open ones, as often or more. We just can't read why. The difference between the columns is what the trace exposes.
+What I can't say: that the hidden reasoning contains the same remarks. The GPT-5.6 text is a provider summary, so a low figure there is a property of the summary. DeepSeek and GLM record the reasoning in full. Kimi K3 sits in between at 13.9% and 15.0%.
+Effort matters more than anything else on this chart: the same GPT-5.6 Terra is at 4.2% at medium, 6.6% at high, 22.1% at xhigh and 62.7% at max. Max is used here because it is the setting every open model in the grid was run at.
+Flags are review candidates. An upstream lookup that returned nothing still counts as a flagged tool call, and the proxy blocked most of them.
+Source: data/awareness-channels.json, the deepswe list (analysis/awareness-channels/extract.py).
 -->
 
 ---
@@ -1626,6 +1785,52 @@ layout: section
 ---
 
 # Spare slides
+
+---
+class: fa-lookup-slide
+---
+
+# Safety stops: two labs, nobody else
+
+<SafetyLabs />
+
+<Receipt source="164,853 trials, corpus census of 8 Nov 2026 · stops as the harness recorded them · counts, not rates: models were not run equally" />
+
+<!--
+Some of what a model does on a task isn't its choice. The provider's safety classifier ends the run: the model call comes back as a safety stop or a refusal, the harness records an error, and the trial is over.
+This is every trial we hold, public and our own: 164,853 after removing copies. 790 ended that way. 545 are OpenAI models and 245 are Anthropic models. There are none from anybody else: 49,932 trials across Grok, GLM, DeepSeek, Gemini, Qwen, Muse, Kimi and eight other models.
+The earlier version of these slides counted 239, from the 65 public Terminal-Bench 2.1 runs only. The next two slides after the task grid still use that public set, because the leaderboard comparison needs it.
+Within the two labs it is the newer and larger models. Anthropic: Fable 5 96, Opus 5.5 92, Sonnet 5.5 32, Haiku 5.5 19. Opus 5 has 4, Opus 4.8 and Fable 5.1 one each. Sonnet 5, Opus 4.7, Sonnet 4.6 and Haiku 4.5 have none.
+OpenAI: GPT-6 Astra 317, GPT-5.6 Sol 101, GPT-6.1 Terra 69, GPT-6.1 Sol 54. GPT-6 Luna has 3 in 27,606 trials and GPT-5.5 has 1. GPT-5.6 Luna (15,275 trials), GPT-5.6 Terra, GPT-5.4 and GPT-6 Sol have none.
+These are counts, not rates. GPT-6 Astra has 12,706 trials and Opus 5.5 has 1,514, so the bars say who gets stopped, not who gets stopped most often. The grid on the next slide has the rates.
+One job accounts for 146 of the GPT-6 Astra stops: a low-effort run on 6 Sep 2026 that was stopped on 37 unrelated tasks, most of them nothing to do with security. I can't say what happened there; it is in the 790 and left out of the next slide.
+By benchmark: Terminal-Bench 2.x 759 of 115,618, Terminal-Bench 4 29 of 7,358, TB-lite 2 of 2,496, DeepSWE 0 of 39,366. DeepSWE is ordinary software engineering, and 24,343 of its trials are the public Datacurve grid, where the report files show no safety error either.
+44 of the 790 were still rewarded: the answer was already written when the stop came.
+Caveats. A stop is what the harness recorded. fast-agent, Codex, Claude Code, Dext and IndusAGI all record them; a harness that swallows the error, or a model that declines in ordinary prose, would not show up here. I searched the other error messages for policy and filter wording: one GPT-5.6 Luna trial failed on an "invalid prompt" usage-policy error and is not counted. Nothing turned up for the other labs' models.
+Source: data/safety-corpus.json, built by analysis/safety-stops/corpus.py from the census and each trial's result file.
+-->
+
+---
+class: fa-lookup-slide
+---
+
+# Safety stops: when, and what survives
+
+<SafetyTiming />
+
+<Receipt source="same 239 stops in 28,932 trials · a stop is a trial that ends in a safety-stop or safety-refusal error · atif-scan v0.8.23" />
+
+<!--
+When. For the Claude 5.5 models, 79 of 107 stops come before any tool has run: usually the very first model call, with no output tokens, a few seconds in. The prompt alone is enough. The other 28 come after the agent has started: all 10 dna-insert stops come after tool calls, so there it is something in the work, not the prompt.
+For the OpenAI models it is the other way round: 41 of 132 before any tool call, 91 after one to eight steps. On model-extraction-relu-logits only 2 of 18 are at the start.
+Recoverable? Not within a run. A stop is returned to the harness as an error, and the trial ends at that step. None of the 239 continues, and the trial files show no retry.
+13 were still rewarded, because the answer was already written when the stop came: sparql-university 4 of 4, feal-differential-cryptanalysis 4 of 5, break-filter-js-from-html 4, fix-code-vulnerability 1. So a late stop can cost nothing; an early one costs the task.
+Cost. Opus 5.5 loses 71 of 890 trials, 7% of the whole benchmark, before it has done anything. Sonnet 5.5 loses 31 of 890. The OpenAI runs lose 7 to 13 of 445 each. That is a ceiling on the score that has nothing to do with ability.
+Effort makes little difference for Claude (Opus 5.5: 36 at medium, 35 at high). For GPT-6 Astra on Codex it rises a little: 7, 7, 11, 13, 13 from low to max.
+Who never stops in these 65 public runs: every Luna run, GPT-5.5, GPT-5.6 Terra, and the Claude models on Claude Code, Terminus 2 and Ouroboros. That last group is not the same as never being stopped: Fable 5 is stopped on fast-agent, and on Claude Code and Terminus 2 another model answers instead (previous slide).
+One I can't explain: GPT-5.6 Sol on fast-agent has 12 stops at medium effort (23 Jul) and none at high (26 Jul).
+Whether it's recoverable outside a run, by rewording the task or retrying, isn't something these files can answer. The harness could retry or rephrase; none of these did.
+-->
 
 ---
 class: fa-case-slide

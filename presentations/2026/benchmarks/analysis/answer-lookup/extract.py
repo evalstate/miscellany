@@ -39,6 +39,10 @@ KINDS = [
     ("search", "Search only", set()),
 ]
 RECEIVED = {"access.benchmark_material_received"}
+# Allowances added to atif-scan after v0.8.23 (packs/tb21.py, expected.tb21.sanitize_git_repo_git_inspection, 11 Nov 2026)
+# and not yet in the Spaces' reports: on sanitize-git-repo, inspecting git history and unreachable objects is the task's
+# own verification. Applied here so the deck matches the scanner as it now stands.
+LATER_ALLOWANCES = {"sanitize-git-repo": {"lookup.git_history", "lookup.git_unreachable_objects"}}
 
 
 def is_lookup(check):
@@ -46,6 +50,7 @@ def is_lookup(check):
 
 
 rows, tasks, checks, kinds, kind_tasks = [], defaultdict(Counter), Counter(), defaultdict(Counter), defaultdict(Counter)
+excused_later = Counter()
 for site, (repo, exports) in SITES.items():
     board = json.loads(re.search(r"=\s*(\{.*\})\s*;?\s*$", (SRC / repo / "site/data/leaderboard.js").read_text(), re.S).group(1))
     assert board["scanner"]["tag"] == "v0.8.23", board["scanner"]
@@ -68,6 +73,14 @@ for site, (repo, exports) in SITES.items():
                    and SEV.get(a["severity"], -1) >= SEV["medium"] and is_lookup(a["id"])}
             c["trials"] += 1
             c["rewarded"] += won
+            if ids:  # as the Spaces publish it, before the later allowances
+                c["published"] += 1
+                c["publishedRewarded"] += won
+            excused = ids & LATER_ALLOWANCES.get(i["task"], set())
+            ids -= excused
+            if excused and not ids:
+                c["excusedLater"] += 1
+                excused_later[i["task"]] += 1
             if not replay:
                 tasks[i["task"]]["trials"] += 1
             if not ids:
@@ -92,7 +105,7 @@ for site, (repo, exports) in SITES.items():
                 kind_tasks[kind][i["task"]] += 1
                 checks.update(ids)
         published = row["scan"]["categories"].get("answer_lookup", {"trials": 0, "rewarded": 0})
-        assert (c["lookup"], c["lookupRewarded"]) == (published["trials"], published["rewarded"]), (folder, c, published)
+        assert (c["published"], c["publishedRewarded"]) == (published["trials"], published["rewarded"]), (folder, c, published)
         assert c["trials"] == row["scan"]["trials"], (folder, c["trials"])
         holes = row["scan"]["holes"]
         rows.append(dict(site=site, agent=row["agent"], model=row["model"], effort=row.get("effort"), date=row["date"],
@@ -120,7 +133,7 @@ for r in live:
         by_model[name][k] += r[k]
     by_model[name]["runs"] += 1
 models = sorted((dict(model=m, **c) for m, c in by_model.items()), key=lambda m: (-m["received"], -m["lookup"], m["model"]))
-out = dict(generated="2026-11-10", scanner="v0.8.23",
+out = dict(generated="2026-11-11", scanner="v0.8.23", excusedLater=dict(excused_later),
            sources=[f"https://evalstate-{repo}.static.hf.space" for repo, _ in SITES.values()],
            dates=[min(r["date"] for r in rows), max(r["date"] for r in rows)],
            total=dict(rows=len(live), **total),

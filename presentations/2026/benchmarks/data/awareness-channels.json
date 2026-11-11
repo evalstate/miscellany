@@ -11,25 +11,25 @@
  },
  "recorded": {
   "trials": 37200,
-  "tool": 3761,
+  "tool": 3741,
   "reasoning": 2135,
-  "both": 823
+  "both": 819
  },
  "notRecorded": {
   "trials": 20314,
-  "tool": 1564,
+  "tool": 1555,
   "reasoning": 0,
   "both": 0
  },
  "toolGivenReasoning": {
   "trials": 2135,
-  "tool": 823,
+  "tool": 819,
   "reasoning": 2135,
-  "both": 823
+  "both": 819
  },
  "toolGivenNoReasoning": {
   "trials": 35065,
-  "tool": 2938,
+  "tool": 2922,
   "reasoning": 0,
   "both": 0
  },
@@ -38,9 +38,9 @@
    "family": "GPT",
    "recorded": true,
    "trials": 16185,
-   "tool": 1492,
+   "tool": 1478,
    "reasoning": 100,
-   "both": 46
+   "both": 45
   },
   {
    "family": "Claude",
@@ -54,7 +54,7 @@
    "family": "Grok",
    "recorded": true,
    "trials": 4036,
-   "tool": 637,
+   "tool": 636,
    "reasoning": 123,
    "both": 76
   },
@@ -70,15 +70,15 @@
    "family": "DeepSeek",
    "recorded": true,
    "trials": 2624,
-   "tool": 839,
+   "tool": 836,
    "reasoning": 945,
-   "both": 492
+   "both": 490
   },
   {
    "family": "GLM",
    "recorded": true,
    "trials": 2249,
-   "tool": 244,
+   "tool": 243,
    "reasoning": 494,
    "both": 90
   },
@@ -86,9 +86,9 @@
    "family": "Kimi",
    "recorded": true,
    "trials": 1363,
-   "tool": 97,
+   "tool": 96,
    "reasoning": 134,
-   "both": 25
+   "both": 24
   },
   {
    "family": "Qwen",
@@ -110,7 +110,7 @@
    "family": "Claude",
    "recorded": false,
    "trials": 10111,
-   "tool": 1061,
+   "tool": 1058,
    "reasoning": 0,
    "both": 0
   },
@@ -118,7 +118,7 @@
    "family": "GPT",
    "recorded": false,
    "trials": 5789,
-   "tool": 250,
+   "tool": 245,
    "reasoning": 0,
    "both": 0
   },
@@ -150,7 +150,7 @@
    "family": "GLM",
    "recorded": false,
    "trials": 445,
-   "tool": 10,
+   "tool": 9,
    "reasoning": 0,
    "both": 0
   },
@@ -185,6 +185,575 @@
    "tool": 0,
    "reasoning": 0,
    "both": 0
+  }
+ ],
+ "deepswe": [
+  {
+   "run": "claude_fable_5_high",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 69,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_fable_5_low",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 26,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_fable_5_max",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 63,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_fable_5_medium",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 54,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_fable_5_xhigh",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 72,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_opus_4_8_high",
+   "family": "Claude",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 21,
+   "reasoning": 3,
+   "both": 0
+  },
+  {
+   "run": "claude_opus_4_8_low",
+   "family": "Claude",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 16,
+   "reasoning": 3,
+   "both": 0
+  },
+  {
+   "run": "claude_opus_4_8_max",
+   "family": "Claude",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 34,
+   "reasoning": 6,
+   "both": 4
+  },
+  {
+   "run": "claude_opus_4_8_medium",
+   "family": "Claude",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 19,
+   "reasoning": 8,
+   "both": 4
+  },
+  {
+   "run": "claude_opus_4_8_xhigh",
+   "family": "Claude",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 34,
+   "reasoning": 6,
+   "both": 3
+  },
+  {
+   "run": "claude_opus_5_high",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 61,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_opus_5_low",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 17,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_opus_5_max",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 449,
+   "tool": 76,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_opus_5_medium",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 41,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_opus_5_xhigh",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 451,
+   "tool": 72,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_sonnet_4_6_high",
+   "family": "Claude",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 15,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_sonnet_5_high",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 61,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_sonnet_5_low",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 16,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_sonnet_5_max",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 127,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_sonnet_5_medium",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 34,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "claude_sonnet_5_xhigh",
+   "family": "Claude",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 112,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "deepseek_v4_flash_max",
+   "family": "DeepSeek",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 245,
+   "reasoning": 135,
+   "both": 96
+  },
+  {
+   "run": "deepseek_v4_pro_max",
+   "family": "DeepSeek",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 400,
+   "reasoning": 265,
+   "both": 240
+  },
+  {
+   "run": "gemini_3_1_pro_preview_high",
+   "family": "Gemini",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 17,
+   "reasoning": 1,
+   "both": 1
+  },
+  {
+   "run": "gemini_3_5_flash_high",
+   "family": "Gemini",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 22,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gemini_3_6_flash_high",
+   "family": "Gemini",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 28,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gemini_3_7_flash_high",
+   "family": "Gemini",
+   "recordedTrials": 398,
+   "trials": 452,
+   "tool": 42,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gemini_3_7_flash_low",
+   "family": "Gemini",
+   "recordedTrials": 227,
+   "trials": 452,
+   "tool": 25,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gemini_3_7_flash_medium",
+   "family": "Gemini",
+   "recordedTrials": 343,
+   "trials": 452,
+   "tool": 45,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "glm_5_2_high",
+   "family": "GLM",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 22,
+   "reasoning": 7,
+   "both": 1
+  },
+  {
+   "run": "glm_5_2_max",
+   "family": "GLM",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 26,
+   "reasoning": 3,
+   "both": 0
+  },
+  {
+   "run": "glm_5_3_flash_max",
+   "family": "GLM",
+   "recordedTrials": 448,
+   "trials": 448,
+   "tool": 89,
+   "reasoning": 173,
+   "both": 35
+  },
+  {
+   "run": "glm_5_3_max",
+   "family": "GLM",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 89,
+   "reasoning": 223,
+   "both": 46
+  },
+  {
+   "run": "gpt_5_4_xhigh",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 29,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_5_high",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 17,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_5_low",
+   "family": "GPT",
+   "recordedTrials": 451,
+   "trials": 452,
+   "tool": 7,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_5_medium",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 14,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_5_xhigh",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 20,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_luna_high",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 43,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_luna_low",
+   "family": "GPT",
+   "recordedTrials": 447,
+   "trials": 452,
+   "tool": 18,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_luna_max",
+   "family": "GPT",
+   "recordedTrials": 448,
+   "trials": 448,
+   "tool": 214,
+   "reasoning": 7,
+   "both": 5
+  },
+  {
+   "run": "gpt_5_6_luna_medium",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 18,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_luna_xhigh",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 99,
+   "reasoning": 4,
+   "both": 2
+  },
+  {
+   "run": "gpt_5_6_sol_high",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 48,
+   "reasoning": 1,
+   "both": 1
+  },
+  {
+   "run": "gpt_5_6_sol_low",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 22,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_sol_max",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 218,
+   "reasoning": 4,
+   "both": 1
+  },
+  {
+   "run": "gpt_5_6_sol_medium",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 19,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_sol_xhigh",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 77,
+   "reasoning": 1,
+   "both": 1
+  },
+  {
+   "run": "gpt_5_6_terra_high",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 30,
+   "reasoning": 1,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_terra_low",
+   "family": "GPT",
+   "recordedTrials": 448,
+   "trials": 449,
+   "tool": 22,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_terra_max",
+   "family": "GPT",
+   "recordedTrials": 451,
+   "trials": 451,
+   "tool": 283,
+   "reasoning": 25,
+   "both": 20
+  },
+  {
+   "run": "gpt_5_6_terra_medium",
+   "family": "GPT",
+   "recordedTrials": 450,
+   "trials": 450,
+   "tool": 19,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "gpt_5_6_terra_xhigh",
+   "family": "GPT",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 100,
+   "reasoning": 1,
+   "both": 1
+  },
+  {
+   "run": "grok_4_5_high",
+   "family": "Grok",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 74,
+   "reasoning": 6,
+   "both": 6
+  },
+  {
+   "run": "grok_4_6_high",
+   "family": "Grok",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 79,
+   "reasoning": 3,
+   "both": 2
+  },
+  {
+   "run": "grok_4_6_low",
+   "family": "Grok",
+   "recordedTrials": 450,
+   "trials": 452,
+   "tool": 17,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "grok_4_6_medium",
+   "family": "Grok",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 84,
+   "reasoning": 10,
+   "both": 2
+  },
+  {
+   "run": "grok_4_6_xhigh",
+   "family": "Grok",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 139,
+   "reasoning": 9,
+   "both": 5
+  },
+  {
+   "run": "kimi_k2_7_code_default",
+   "family": "Kimi",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 18,
+   "reasoning": 3,
+   "both": 0
+  },
+  {
+   "run": "kimi_k3_max",
+   "family": "Kimi",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 63,
+   "reasoning": 68,
+   "both": 20
+  },
+  {
+   "run": "muse_spark_1_1_xhigh",
+   "family": "Muse",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 32,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "muse_spark_1_2_xhigh",
+   "family": "Muse",
+   "recordedTrials": 0,
+   "trials": 452,
+   "tool": 32,
+   "reasoning": 0,
+   "both": 0
+  },
+  {
+   "run": "qwen3_8_max_xhigh",
+   "family": "Qwen",
+   "recordedTrials": 452,
+   "trials": 452,
+   "tool": 45,
+   "reasoning": 171,
+   "both": 24
   }
  ]
 }

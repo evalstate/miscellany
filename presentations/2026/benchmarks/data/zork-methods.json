@@ -1,0 +1,208 @@
+{
+ "generated": "2026-11-11",
+ "trials": 850,
+ "rewarded": 436,
+ "unknownReward": 16,
+ "models": [
+  {
+   "model": "GPT-6.1 Sol",
+   "n": 45,
+   "rewarded": 45,
+   "steps": 45,
+   "fuzzy": 42,
+   "crop": 42,
+   "fixes": 25,
+   "image": 45
+  },
+  {
+   "model": "Opus 5.5",
+   "n": 10,
+   "rewarded": 10,
+   "steps": 61.0,
+   "fuzzy": 8,
+   "crop": 10,
+   "fixes": 1,
+   "image": 10
+  },
+  {
+   "model": "Sonnet 5.5",
+   "n": 20,
+   "rewarded": 20,
+   "steps": 49.0,
+   "fuzzy": 10,
+   "crop": 15,
+   "fixes": 1,
+   "image": 20
+  },
+  {
+   "model": "GPT-6 Astra",
+   "n": 77,
+   "rewarded": 72,
+   "steps": 29,
+   "fuzzy": 32,
+   "crop": 15,
+   "fixes": 13,
+   "image": 76
+  },
+  {
+   "model": "GPT-6.1 Terra",
+   "n": 55,
+   "rewarded": 50,
+   "steps": 25,
+   "fuzzy": 2,
+   "crop": 3,
+   "fixes": 1,
+   "image": 23
+  },
+  {
+   "model": "GPT-6 Luna",
+   "n": 213,
+   "rewarded": 95,
+   "steps": 35,
+   "fuzzy": 47,
+   "crop": 79,
+   "fixes": 40,
+   "image": 190
+  },
+  {
+   "model": "GLM",
+   "n": 49,
+   "rewarded": 17,
+   "steps": 127,
+   "fuzzy": 32,
+   "crop": 35,
+   "fixes": 13,
+   "image": 48
+  },
+  {
+   "model": "Haiku 5.5",
+   "n": 25,
+   "rewarded": 2,
+   "steps": 38,
+   "fuzzy": 8,
+   "crop": 4,
+   "fixes": 6,
+   "image": 22
+  },
+  {
+   "model": "DeepSeek V4 Flash",
+   "n": 34,
+   "rewarded": 0,
+   "steps": 67.0,
+   "fuzzy": 7,
+   "crop": 27,
+   "fixes": 0,
+   "image": 0
+  }
+ ],
+ "others": [
+  {
+   "model": "Grok",
+   "n": 100,
+   "rewarded": 32,
+   "fuzzy": 8
+  },
+  {
+   "model": "GPT-5.6 Sol",
+   "n": 71,
+   "rewarded": 30,
+   "fuzzy": 5
+  },
+  {
+   "model": "GPT-5.6 Luna",
+   "n": 78,
+   "rewarded": 25,
+   "fuzzy": 1
+  },
+  {
+   "model": "Fable 5",
+   "n": 6,
+   "rewarded": 1,
+   "fuzzy": 5
+  }
+ ],
+ "all": {
+  "fuzzy": {
+   "with": {
+    "n": 224,
+    "rewarded": 166
+   },
+   "without": {
+    "n": 626,
+    "rewarded": 270
+   }
+  },
+  "crop": {
+   "with": {
+    "n": 475,
+    "rewarded": 254
+   },
+   "without": {
+    "n": 375,
+    "rewarded": 182
+   }
+  },
+  "fixes": {
+   "with": {
+    "n": 127,
+    "rewarded": 90
+   },
+   "without": {
+    "n": 723,
+    "rewarded": 346
+   }
+  },
+  "image": {
+   "with": {
+    "n": 697,
+    "rewarded": 392
+   },
+   "without": {
+    "n": 153,
+    "rewarded": 44
+   }
+  }
+ },
+ "luna": {
+  "fuzzy": {
+   "with": {
+    "n": 47,
+    "rewarded": 38
+   },
+   "without": {
+    "n": 166,
+    "rewarded": 57
+   }
+  },
+  "crop": {
+   "with": {
+    "n": 79,
+    "rewarded": 59
+   },
+   "without": {
+    "n": 134,
+    "rewarded": 36
+   }
+  },
+  "fixes": {
+   "with": {
+    "n": 40,
+    "rewarded": 25
+   },
+   "without": {
+    "n": 173,
+    "rewarded": 70
+   }
+  },
+  "image": {
+   "with": {
+    "n": 190,
+    "rewarded": 92
+   },
+   "without": {
+    "n": 23,
+    "rewarded": 3
+   }
+  }
+ }
+}

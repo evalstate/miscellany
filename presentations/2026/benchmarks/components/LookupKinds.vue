@@ -16,6 +16,11 @@ const pct = (a: number, b: number) => Math.floor((a / b) * 100);
 const kinds = data.kinds.map((k) => ({ ...k, gloss: gloss[k.key], rate: pct(k.rewarded, k.trials) }));
 const columns = kinds.map((k) => `${k.trials}fr`).join(" ");
 const share = (Math.floor((total.lookup / total.trials) * 1000) / 10).toFixed(1);
+// the prevailing rate: what a typical run looks like, and how concentrated the flags are
+const perRun = data.rows.filter((r) => r.agent !== "Slai Agent Runtime").map((r) => r.lookup).sort((x, y) => x - y);
+const median = perRun[Math.floor((perRun.length - 1) / 2)];
+const top4 = perRun.slice(-4).reduce((s, v) => s + v, 0);
+const none = perRun.filter((v) => v === 0).length;
 </script>
 
 <template>
@@ -34,7 +39,7 @@ const share = (Math.floor((total.lookup / total.trials) * 1000) / 10).toFixed(1)
         <p>{{ k.gloss }}</p>
       </div>
     </div>
-    <p class="lk-note">Across all {{ total.trials.toLocaleString("en-GB") }} trials, <b>{{ pct(total.rewarded, total.trials) }}%</b> are rewarded.</p>
+    <p class="lk-note"><b>The typical run has {{ median }} flagged trials in 445.</b> {{ none }} of the {{ perRun.length }} runs have none, and four runs hold {{ top4 }} of the {{ total.lookup }}. Across all trials, {{ pct(total.rewarded, total.trials) }}% are rewarded.</p>
   </div>
 </template>
 

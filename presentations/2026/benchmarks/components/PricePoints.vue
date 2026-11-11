@@ -2,19 +2,21 @@
 // One run's tokens, priced at each tariff the provider offers. The recorded
 // run cost is the filled dot; other dots reprice the same recorded tokens.
 // `shown` steps through the price points (clicks).
-type Point = { label: string; cost: number; note: string; rate?: string; recorded?: boolean; muted?: boolean; step: number };
+type Point = { label: string; cost: number; note: string; rate?: string; recorded?: boolean; muted?: boolean; mutedFrom?: number; low?: boolean; step: number };
 type Row = { model: string; detail: string; harness: string; score: number; tone: "teal" | "petrol"; points: Point[] };
 type Rate = { model: string; tier: string; input: string; cached: string; output: string };
 const props = defineProps<{ rows: Row[]; shown: number; max: number; ticks: number[]; rates?: Rate[] }>();
 
 const X0 = 0;
 const pct = (c: number) => `${(c / props.max) * 100}%`;
+// a superseded price: once `shown` reaches mutedFrom it shrinks to a struck-through marker
+const old = (p: Point) => p.mutedFrom !== undefined && props.shown >= p.mutedFrom;
 </script>
 
 <template>
   <div class="pp">
     <div class="pp-axis">
-      <span class="pp-legend">Current rates per million tokens:<br />input / cached / output</span>
+      <span class="pp-legend">Rates per million tokens:<br />input / cached / output</span>
       <div class="pp-scale">
         <span v-for="t in ticks" :key="t" :style="{ left: pct(t) }">${{ t }}</span>
       </div>
@@ -30,7 +32,7 @@ const pct = (c: number) => `${(c / props.max) * 100}%`;
         <template v-for="p in r.points" :key="p.label">
           <div
             class="pp-pt"
-            :class="[p.muted ? 't-muted' : `t-${r.tone}`, { 'is-recorded': p.recorded, 'is-on': shown >= p.step }]"
+            :class="[p.muted || old(p) ? 't-muted' : `t-${r.tone}`, { 'is-recorded': p.recorded, 'is-on': shown >= p.step, 'is-old': old(p), 'is-low': p.low }]"
             :style="{ left: pct(p.cost) }"
           >
             <b :class="`f-${r.tone}`" />
@@ -53,7 +55,7 @@ const pct = (c: number) => `${(c / props.max) * 100}%`;
 .pp-row { align-items: center; padding: 6px 0; border-bottom: 2px solid var(--line); }
 .pp-name h3 { margin: 0; font-size: 24px; white-space: nowrap; }
 .pp-name p { margin: 4px 0 0; font-size: 14px; color: var(--text-muted); }
-.pp-track { position: relative; height: 150px; }
+.pp-track { position: relative; height: 158px; }
 .pp-grid { position: absolute; top: 0; bottom: 0; border-left: 2px solid var(--line); }
 .pp-pt {
   position: absolute;
@@ -72,6 +74,11 @@ const pct = (c: number) => `${(c / props.max) * 100}%`;
 .pp-pt em { margin-top: 3px; font: 700 13px/1.2 var(--font-read); font-variant-numeric: tabular-nums; font-style: normal; color: var(--petrol); white-space: nowrap; }
 .pp-legend { align-self: end; font: 600 12px/1.3 var(--font-read); color: var(--text-muted); }
 .pp-pt.is-on { opacity: 1; }
+.pp-pt.is-low { top: 40px; }
+.pp-pt.is-old { top: 0; }
+.pp-pt.is-old b { width: 12px; height: 12px; border-width: 2px; }
+.pp-pt.is-old strong { margin-top: 3px; font-size: 14px; }
+.pp-pt.is-old span, .pp-pt.is-old small, .pp-pt.is-old em { display: none; }
 .pp-pt b { width: 22px; height: 22px; border-radius: 50%; border: 3px solid currentColor; background: var(--ivory) !important; }
 .pp-pt.is-recorded b { background: currentColor !important; }
 .pp-pt strong { margin-top: 8px; font: 900 26px/1 var(--font-read); font-variant-numeric: tabular-nums; }

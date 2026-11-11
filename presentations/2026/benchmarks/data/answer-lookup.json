@@ -1,6 +1,9 @@
 {
- "generated": "2026-11-10",
+ "generated": "2026-11-11",
  "scanner": "v0.8.23",
+ "excusedLater": {
+  "sanitize-git-repo": 33
+ },
  "sources": [
   "https://evalstate-tb21-annotated.static.hf.space",
   "https://evalstate-tb21-submissions-annotated.static.hf.space",
@@ -14,8 +17,8 @@
   "rows": 65,
   "trials": 28932,
   "rewarded": 22792,
-  "lookup": 511,
-  "lookupRewarded": 426,
+  "lookup": 478,
+  "lookupRewarded": 425,
   "received": 317,
   "own": 132
  },
@@ -86,14 +89,10 @@
   {
    "key": "git",
    "label": "Git objects",
-   "trials": 64,
-   "rewarded": 29,
+   "trials": 31,
+   "rewarded": 28,
    "received": 0,
    "tasks": [
-    [
-     "sanitize-git-repo",
-     33
-    ],
     [
      "merge-diff-arc-agi-task",
      13
@@ -101,6 +100,10 @@
     [
      "git-multibranch",
      5
+    ],
+    [
+     "mteb-leaderboard",
+     4
     ]
    ]
   },
@@ -159,15 +162,15 @@
    "webTrials": 0,
    "trials": 445,
    "rewarded": 423,
-   "lookup": 58,
-   "lookupRewarded": 57,
+   "lookup": 57,
+   "lookupRewarded": 56,
    "received": 42,
    "own": 21,
    "kinds": {
     "own": 21,
     "material": 21,
     "upstream": 5,
-    "git": 5,
+    "git": 4,
     "search": 6
    }
   },
@@ -203,7 +206,7 @@
    "webTrials": 74,
    "trials": 445,
    "rewarded": 350,
-   "lookup": 46,
+   "lookup": 43,
    "lookupRewarded": 41,
    "received": 35,
    "own": 8,
@@ -211,7 +214,7 @@
     "own": 8,
     "material": 27,
     "upstream": 3,
-    "git": 5,
+    "git": 2,
     "search": 3
    }
   },
@@ -247,7 +250,7 @@
    "webTrials": 0,
    "trials": 445,
    "rewarded": 336,
-   "lookup": 20,
+   "lookup": 17,
    "lookupRewarded": 13,
    "received": 6,
    "own": 5,
@@ -255,7 +258,7 @@
     "own": 5,
     "material": 1,
     "upstream": 5,
-    "git": 3,
+    "git": 0,
     "search": 6
    }
   },
@@ -269,7 +272,7 @@
    "webTrials": 0,
    "trials": 445,
    "rewarded": 370,
-   "lookup": 17,
+   "lookup": 16,
    "lookupRewarded": 13,
    "received": 3,
    "own": 3,
@@ -277,7 +280,7 @@
     "own": 3,
     "material": 0,
     "upstream": 5,
-    "git": 1,
+    "git": 0,
     "search": 8
    }
   },
@@ -291,7 +294,7 @@
    "webTrials": 0,
    "trials": 445,
    "rewarded": 402,
-   "lookup": 16,
+   "lookup": 15,
    "lookupRewarded": 15,
    "received": 7,
    "own": 7,
@@ -299,7 +302,7 @@
     "own": 7,
     "material": 0,
     "upstream": 1,
-    "git": 1,
+    "git": 0,
     "search": 7
    }
   },
@@ -335,7 +338,7 @@
    "webTrials": 64,
    "trials": 445,
    "rewarded": 377,
-   "lookup": 11,
+   "lookup": 10,
    "lookupRewarded": 6,
    "received": 7,
    "own": 1,
@@ -343,74 +346,8 @@
     "own": 1,
     "material": 6,
     "upstream": 0,
-    "git": 1,
+    "git": 0,
     "search": 3
-   }
-  },
-  {
-   "site": "submissions",
-   "agent": "Dext",
-   "model": "GPT-5.6 Sol",
-   "effort": "xhigh",
-   "date": "2026-08-07",
-   "webHidden": 0,
-   "webTrials": 103,
-   "trials": 445,
-   "rewarded": 346,
-   "lookup": 11,
-   "lookupRewarded": 8,
-   "received": 2,
-   "own": 1,
-   "kinds": {
-    "own": 1,
-    "material": 1,
-    "upstream": 3,
-    "git": 1,
-    "search": 5
-   }
-  },
-  {
-   "site": "fast-agent",
-   "agent": "fast-agent 0.10.11",
-   "model": "GLM-5.3-Flash",
-   "effort": "max",
-   "date": "2026-08-27",
-   "webHidden": 0,
-   "webTrials": 0,
-   "trials": 445,
-   "rewarded": 376,
-   "lookup": 11,
-   "lookupRewarded": 10,
-   "received": 4,
-   "own": 4,
-   "kinds": {
-    "own": 4,
-    "material": 0,
-    "upstream": 5,
-    "git": 2,
-    "search": 0
-   }
-  },
-  {
-   "site": "fast-agent",
-   "agent": "fast-agent 0.10.12",
-   "model": "GPT-5.6 Luna",
-   "effort": "max",
-   "date": "2026-08-28",
-   "webHidden": 0,
-   "webTrials": 0,
-   "trials": 445,
-   "rewarded": 366,
-   "lookup": 11,
-   "lookupRewarded": 9,
-   "received": 3,
-   "own": 1,
-   "kinds": {
-    "own": 1,
-    "material": 2,
-    "upstream": 4,
-    "git": 2,
-    "search": 2
    }
   },
   {
@@ -436,69 +373,69 @@
    }
   },
   {
-   "site": "fast-agent",
-   "agent": "fast-agent 0.9.15",
-   "model": "GPT-5.6 Terra",
-   "effort": "high",
-   "date": "2026-07-18",
+   "site": "submissions",
+   "agent": "Dext",
+   "model": "GPT-5.6 Sol",
+   "effort": "xhigh",
+   "date": "2026-08-07",
    "webHidden": 0,
-   "webTrials": 0,
+   "webTrials": 103,
    "trials": 445,
    "rewarded": 346,
    "lookup": 10,
-   "lookupRewarded": 5,
-   "received": 0,
-   "own": 0,
+   "lookupRewarded": 8,
+   "received": 2,
+   "own": 1,
    "kinds": {
-    "own": 0,
+    "own": 1,
+    "material": 1,
+    "upstream": 3,
+    "git": 0,
+    "search": 5
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.11",
+   "model": "GLM-5.3-Flash",
+   "effort": "max",
+   "date": "2026-08-27",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 376,
+   "lookup": 10,
+   "lookupRewarded": 10,
+   "received": 4,
+   "own": 4,
+   "kinds": {
+    "own": 4,
     "material": 0,
-    "upstream": 2,
-    "git": 8,
+    "upstream": 5,
+    "git": 1,
     "search": 0
    }
   },
   {
    "site": "fast-agent",
-   "agent": "fast-agent 0.10.42",
-   "model": "GPT-6 Luna",
-   "effort": "high",
-   "date": "2026-10-03",
+   "agent": "fast-agent 0.10.12",
+   "model": "GPT-5.6 Luna",
+   "effort": "max",
+   "date": "2026-08-28",
    "webHidden": 0,
    "webTrials": 0,
    "trials": 445,
-   "rewarded": 336,
-   "lookup": 9,
-   "lookupRewarded": 5,
-   "received": 7,
-   "own": 0,
+   "rewarded": 366,
+   "lookup": 10,
+   "lookupRewarded": 9,
+   "received": 3,
+   "own": 1,
    "kinds": {
-    "own": 0,
-    "material": 7,
-    "upstream": 0,
-    "git": 2,
-    "search": 0
-   }
-  },
-  {
-   "site": "leaderboard",
-   "agent": "Claude Code",
-   "model": "Sonnet 5",
-   "effort": "high",
-   "date": "2026-06-30",
-   "webHidden": 0,
-   "webTrials": 0,
-   "trials": 445,
-   "rewarded": 335,
-   "lookup": 8,
-   "lookupRewarded": 5,
-   "received": 1,
-   "own": 0,
-   "kinds": {
-    "own": 0,
-    "material": 1,
+    "own": 1,
+    "material": 2,
     "upstream": 4,
-    "git": 2,
-    "search": 1
+    "git": 1,
+    "search": 2
    }
   },
   {
@@ -637,22 +574,44 @@
    "site": "fast-agent",
    "agent": "fast-agent 0.10.42",
    "model": "GPT-6 Luna",
-   "effort": "max",
+   "effort": "high",
    "date": "2026-10-03",
    "webHidden": 0,
    "webTrials": 0,
    "trials": 445,
-   "rewarded": 359,
+   "rewarded": 336,
    "lookup": 7,
-   "lookupRewarded": 4,
-   "received": 4,
+   "lookupRewarded": 5,
+   "received": 7,
    "own": 0,
    "kinds": {
     "own": 0,
-    "material": 4,
+    "material": 7,
     "upstream": 0,
-    "git": 3,
+    "git": 0,
     "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Claude Code",
+   "model": "Sonnet 5",
+   "effort": "high",
+   "date": "2026-06-30",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 335,
+   "lookup": 6,
+   "lookupRewarded": 5,
+   "received": 1,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 1,
+    "upstream": 4,
+    "git": 0,
+    "search": 1
    }
   },
   {
@@ -687,7 +646,7 @@
    "webTrials": 0,
    "trials": 445,
    "rewarded": 393,
-   "lookup": 6,
+   "lookup": 5,
    "lookupRewarded": 5,
    "received": 0,
    "own": 0,
@@ -695,7 +654,7 @@
     "own": 0,
     "material": 0,
     "upstream": 4,
-    "git": 2,
+    "git": 1,
     "search": 0
    }
   },
@@ -709,7 +668,7 @@
    "webTrials": 0,
    "trials": 445,
    "rewarded": 392,
-   "lookup": 6,
+   "lookup": 5,
    "lookupRewarded": 5,
    "received": 1,
    "own": 0,
@@ -717,7 +676,7 @@
     "own": 0,
     "material": 1,
     "upstream": 4,
-    "git": 1,
+    "git": 0,
     "search": 0
    }
   },
@@ -745,23 +704,23 @@
   },
   {
    "site": "fast-agent",
-   "agent": "fast-agent 0.10.46",
-   "model": "GPT-5.6 Luna",
+   "agent": "fast-agent 0.9.15",
+   "model": "GPT-5.6 Terra",
    "effort": "high",
-   "date": "2026-10-18",
+   "date": "2026-07-18",
    "webHidden": 0,
    "webTrials": 0,
    "trials": 445,
-   "rewarded": 339,
+   "rewarded": 346,
    "lookup": 5,
-   "lookupRewarded": 4,
-   "received": 2,
-   "own": 1,
+   "lookupRewarded": 5,
+   "received": 0,
+   "own": 0,
    "kinds": {
-    "own": 1,
-    "material": 1,
+    "own": 0,
+    "material": 0,
     "upstream": 2,
-    "git": 1,
+    "git": 3,
     "search": 0
    }
   },
@@ -784,28 +743,6 @@
     "material": 0,
     "upstream": 1,
     "git": 3,
-    "search": 0
-   }
-  },
-  {
-   "site": "leaderboard",
-   "agent": "Codex",
-   "model": "GPT-6 Astra",
-   "effort": "xhigh",
-   "date": "2026-09-03",
-   "webHidden": 279,
-   "webTrials": 282,
-   "trials": 445,
-   "rewarded": 382,
-   "lookup": 4,
-   "lookupRewarded": 3,
-   "received": 0,
-   "own": 0,
-   "kinds": {
-    "own": 0,
-    "material": 0,
-    "upstream": 0,
-    "git": 4,
     "search": 0
    }
   },
@@ -851,6 +788,72 @@
     "upstream": 0,
     "git": 0,
     "search": 1
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.42",
+   "model": "GPT-6 Luna",
+   "effort": "max",
+   "date": "2026-10-03",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 359,
+   "lookup": 4,
+   "lookupRewarded": 4,
+   "received": 4,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 4,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.10.46",
+   "model": "GPT-5.6 Luna",
+   "effort": "high",
+   "date": "2026-10-18",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 339,
+   "lookup": 4,
+   "lookupRewarded": 4,
+   "received": 2,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 1,
+    "upstream": 2,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "xhigh",
+   "date": "2026-09-03",
+   "webHidden": 279,
+   "webTrials": 282,
+   "trials": 445,
+   "rewarded": 382,
+   "lookup": 3,
+   "lookupRewarded": 3,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 3,
+    "search": 0
    }
   },
   {
@@ -921,28 +924,6 @@
   },
   {
    "site": "fast-agent",
-   "agent": "fast-agent 0.9.21",
-   "model": "GPT-5.6 Sol",
-   "effort": "medium",
-   "date": "2026-07-23",
-   "webHidden": 0,
-   "webTrials": 0,
-   "trials": 445,
-   "rewarded": 365,
-   "lookup": 3,
-   "lookupRewarded": 1,
-   "received": 0,
-   "own": 0,
-   "kinds": {
-    "own": 0,
-    "material": 0,
-    "upstream": 0,
-    "git": 2,
-    "search": 1
-   }
-  },
-  {
-   "site": "fast-agent",
    "agent": "fast-agent 0.10.42",
    "model": "GPT-6 Luna",
    "effort": "medium",
@@ -960,28 +941,6 @@
     "material": 3,
     "upstream": 0,
     "git": 0,
-    "search": 0
-   }
-  },
-  {
-   "site": "leaderboard",
-   "agent": "Claude Code",
-   "model": "Fable 5",
-   "effort": "xhigh",
-   "date": "2026-06-09",
-   "webHidden": 0,
-   "webTrials": 0,
-   "trials": 445,
-   "rewarded": 374,
-   "lookup": 2,
-   "lookupRewarded": 1,
-   "received": 1,
-   "own": 1,
-   "kinds": {
-    "own": 1,
-    "material": 0,
-    "upstream": 0,
-    "git": 1,
     "search": 0
    }
   },
@@ -1096,6 +1055,28 @@
    }
   },
   {
+   "site": "leaderboard",
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "effort": "xhigh",
+   "date": "2026-06-09",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 374,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 1,
+   "own": 1,
+   "kinds": {
+    "own": 1,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
    "site": "submissions",
    "agent": "Ouroboros",
    "model": "Claude Opus 5",
@@ -1162,28 +1143,6 @@
    }
   },
   {
-   "site": "submissions",
-   "agent": "OrcaTerm AI",
-   "model": "GLM-5.2-FP8",
-   "effort": "none",
-   "date": "2026-08-05",
-   "webHidden": 0,
-   "webTrials": 0,
-   "trials": 445,
-   "rewarded": 285,
-   "lookup": 1,
-   "lookupRewarded": 0,
-   "received": 0,
-   "own": 0,
-   "kinds": {
-    "own": 0,
-    "material": 0,
-    "upstream": 0,
-    "git": 1,
-    "search": 0
-   }
-  },
-  {
    "site": "fast-agent",
    "agent": "fast-agent 0.10.43",
    "model": "Haiku 5.5",
@@ -1225,6 +1184,28 @@
     "upstream": 0,
     "git": 0,
     "search": 0
+   }
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent 0.9.21",
+   "model": "GPT-5.6 Sol",
+   "effort": "medium",
+   "date": "2026-07-23",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 365,
+   "lookup": 1,
+   "lookupRewarded": 1,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 1
    }
   },
   {
@@ -1427,6 +1408,28 @@
   },
   {
    "site": "submissions",
+   "agent": "OrcaTerm AI",
+   "model": "GLM-5.2-FP8",
+   "effort": "none",
+   "date": "2026-08-05",
+   "webHidden": 0,
+   "webTrials": 0,
+   "trials": 445,
+   "rewarded": 285,
+   "lookup": 0,
+   "lookupRewarded": 0,
+   "received": 0,
+   "own": 0,
+   "kinds": {
+    "own": 0,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   }
+  },
+  {
+   "site": "submissions",
    "agent": "ACE",
    "model": "Doubao-Seed-2.1-Pro",
    "effort": "none",
@@ -1598,42 +1601,42 @@
   {
    "model": "DeepSeek V4.1 Flash",
    "trials": 445,
-   "lookup": 58,
+   "lookup": 57,
    "received": 42,
    "runs": 1
   },
   {
    "model": "GPT-5.6 Terra",
    "trials": 890,
-   "lookup": 56,
+   "lookup": 48,
    "received": 35,
    "runs": 2
   },
   {
    "model": "GPT-6 Luna",
    "trials": 2225,
-   "lookup": 25,
+   "lookup": 20,
    "received": 19,
    "runs": 5
   },
   {
    "model": "GPT-5.6 Luna",
    "trials": 1335,
-   "lookup": 23,
+   "lookup": 21,
    "received": 12,
    "runs": 3
   },
   {
    "model": "DeepSeek V4 Flash",
    "trials": 890,
-   "lookup": 33,
+   "lookup": 30,
    "received": 11,
    "runs": 2
   },
   {
    "model": "GPT-5.5",
    "trials": 2225,
-   "lookup": 17,
+   "lookup": 16,
    "received": 9,
    "runs": 5
   },
@@ -1654,14 +1657,14 @@
   {
    "model": "GPT-5.6 Sol",
    "trials": 1787,
-   "lookup": 30,
+   "lookup": 26,
    "received": 7,
    "runs": 4
   },
   {
    "model": "Grok 4.7",
    "trials": 445,
-   "lookup": 16,
+   "lookup": 15,
    "received": 7,
    "runs": 1
   },
@@ -1675,21 +1678,21 @@
   {
    "model": "GLM-5.3-Flash",
    "trials": 445,
-   "lookup": 11,
+   "lookup": 10,
    "received": 4,
    "runs": 1
   },
   {
    "model": "DeepSeek V4 Flash Vision (exp)",
    "trials": 445,
-   "lookup": 17,
+   "lookup": 16,
    "received": 3,
    "runs": 1
   },
   {
    "model": "GPT-6 Astra",
    "trials": 3115,
-   "lookup": 15,
+   "lookup": 14,
    "received": 3,
    "runs": 7
   },
@@ -1717,21 +1720,21 @@
   {
    "model": "Sonnet 5",
    "trials": 445,
-   "lookup": 8,
+   "lookup": 6,
    "received": 1,
    "runs": 1
   },
   {
    "model": "Kimi K3.1 Pro",
    "trials": 445,
-   "lookup": 6,
+   "lookup": 5,
    "received": 1,
    "runs": 1
   },
   {
    "model": "Fable 5",
    "trials": 890,
-   "lookup": 2,
+   "lookup": 1,
    "received": 1,
    "runs": 2
   },
@@ -1748,13 +1751,6 @@
    "lookup": 3,
    "received": 0,
    "runs": 2
-  },
-  {
-   "model": "GLM-5.2-FP8",
-   "trials": 445,
-   "lookup": 1,
-   "received": 0,
-   "runs": 1
   },
   {
    "model": "Haiku 5.5",
@@ -1779,6 +1775,13 @@
   },
   {
    "model": "GLM-5.1",
+   "trials": 445,
+   "lookup": 0,
+   "received": 0,
+   "runs": 1
+  },
+  {
+   "model": "GLM-5.2-FP8",
    "trials": 445,
    "lookup": 0,
    "received": 0,
@@ -1870,22 +1873,6 @@
     "search": 6
    },
    "network": "required"
-  },
-  {
-   "task": "sanitize-git-repo",
-   "trials": 325,
-   "lookup": 35,
-   "lookupRewarded": 3,
-   "received": 2,
-   "own": 2,
-   "kinds": {
-    "own": 2,
-    "material": 0,
-    "upstream": 0,
-    "git": 33,
-    "search": 0
-   },
-   "network": "not_needed"
   },
   {
    "task": "db-wal-recovery",
@@ -2414,6 +2401,22 @@
     "search": 1
    },
    "network": "expected"
+  },
+  {
+   "task": "sanitize-git-repo",
+   "trials": 325,
+   "lookup": 2,
+   "lookupRewarded": 2,
+   "received": 2,
+   "own": 2,
+   "kinds": {
+    "own": 2,
+    "material": 0,
+    "upstream": 0,
+    "git": 0,
+    "search": 0
+   },
+   "network": "not_needed"
   },
   {
    "task": "video-processing",
@@ -3244,10 +3247,10 @@
   "lookup.benchmark_oracle_named": 143,
   "lookup.own_task_files": 124,
   "lookup.benchmark_solution_url": 92,
-  "lookup.git_unreachable_objects": 70,
   "tb21.fix_ocaml_gc.upstream_source": 63,
   "lookup.task_fingerprint_code_search": 53,
   "lookup.instruction_phrase_search": 53,
+  "lookup.git_unreachable_objects": 36,
   "lookup.task_named_skill": 14,
   "lookup.task_named_skill_obtained": 13,
   "tb21.task_origin_solution": 12,

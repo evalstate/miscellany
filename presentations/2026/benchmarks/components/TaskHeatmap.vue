@@ -39,12 +39,13 @@ const groupDefs = [
 
 const W = 1000;
 const LABEL = 84;
-const PANEL = 212;
+const PANEL = 236;
 const GRID = W - LABEL - PANEL - 12;
 const cell = GRID / tasks.length;
-const rowH = 48;
+const rowH = 57;
 const gridH = levels.length * rowH;
-const H = gridH + 58;
+const TOP = 22;
+const H = TOP + gridH + 58;
 const groups = groupDefs.map((g) => {
   const idx = tasks.map((t, i) => [t, i] as const).filter(([t]) => firstSolve(t) >= g.from && firstSolve(t) <= g.to);
   const start = idx.length ? idx[0][1] : 0;
@@ -61,6 +62,9 @@ const PX = W - PANEL + 8;
 
 <template>
   <svg class="th" :viewBox="`0 0 ${W} ${H}`" role="img" aria-label="Pass count by task and reasoning level, tasks ordered easiest to hardest">
+    <text :x="PX" :y="14" class="th-head">Score</text>
+    <text :x="PX + 84" :y="14" class="th-head">Cost of the run</text>
+    <g :transform="`translate(0 ${TOP})`">
     <g v-for="(lv, r) in levels" :key="lv">
       <rect v-if="lv === pick" :x="2" :y="r * rowH" :width="W - 4" :height="rowH" rx="10" class="th-pick" />
       <text :x="LABEL - 10" :y="r * rowH + rowH / 2 + 5" text-anchor="end" class="th-lv">{{ lv }}</text>
@@ -77,15 +81,16 @@ const PX = W - PANEL + 8;
       />
       <line v-if="reach" :x1="reachX[r]" :x2="reachX[r]" :y1="r * rowH" :y2="r * rowH + rowH" class="th-reach" />
       <template v-if="run(lv)">
-        <text :x="PX" :y="r * rowH + rowH / 2 + 10" class="th-score">{{ Math.floor(run(lv)!.score) }}%</text>
-        <text :x="PX + 76" :y="r * rowH + rowH / 2 - 2" class="th-meta">{{ k(meanTokens[lv]) }} reasoning / trial</text>
-        <text :x="PX + 76" :y="r * rowH + rowH / 2 + 14" class="th-meta">${{ run(lv)!.cost.toFixed(2) }} a run</text>
+        <text :x="PX" :y="r * rowH + rowH / 2 + 4" class="th-score">{{ Math.floor(run(lv)!.score) }}%</text>
+        <text :x="PX + 84" :y="r * rowH + rowH / 2 + 4" class="th-score">${{ run(lv)!.cost.toFixed(2) }}</text>
+        <text :x="PX" :y="r * rowH + rowH / 2 + 21" class="th-meta">{{ k(meanTokens[lv]) }} reasoning tokens a trial</text>
       </template>
     </g>
     <g v-for="g in groups" :key="g.label">
       <line :x1="g.x0 + 1" :x2="g.x1 - 1" :y1="gridH + 8" :y2="gridH + 8" class="th-axis" />
       <text :x="g.x0 + 2" :y="gridH + 27" class="th-group"><tspan class="th-n">{{ g.n }}</tspan> {{ g.label }}</text>
       <text v-if="g.need && g.to < 5" :x="g.x0 + 2" :y="gridH + 44" class="th-need">≈{{ k(g.need) }} reasoning tokens</text>
+    </g>
     </g>
   </svg>
 </template>
@@ -100,6 +105,7 @@ const PX = W - PANEL + 8;
 .th-group { font: 700 13px var(--font-read); fill: var(--petrol); }
 .th-n { font-weight: 900; }
 .th-need { font: 600 12px var(--font-read); fill: var(--text-muted); }
-.th-score { font: 900 28px var(--font-read); fill: var(--petrol); font-variant-numeric: tabular-nums; }
+.th-head { font: 700 12px var(--font-read); fill: var(--text-muted); }
+.th-score { font: 900 30px var(--font-read); fill: var(--petrol); font-variant-numeric: tabular-nums; }
 .th-meta { font: 600 12px var(--font-read); fill: var(--text-muted); font-variant-numeric: tabular-nums; }
 </style>

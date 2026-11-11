@@ -79,44 +79,23 @@ class: zork-slide
 
 # Same OCR, from 0% to 100%
 
-<div class="zork-columns">
-<div style="--rates-label: 150px">
+<ZorkMethods />
 
-<RateBars :rows="[
-  { label: 'GPT-6.1 Sol', won: 45, n: 45 },
-  { label: 'GPT-6 Astra', won: 72, n: 77 },
-  { label: 'GPT-6.1 Terra', won: 50, n: 55 },
-  { label: 'GPT-6 Luna', won: 95, n: 213 },
-  { label: 'GLM', won: 17, n: 49 },
-  { label: 'DeepSeek V4 Flash', won: 0, n: 34 },
-]" />
-
-<p class="zork-small">Share of trials rewarded. All six run OCR in nearly every trial.</p>
-
-</div>
-<Card>
-
-### What GPT-6.1 Sol does differently
-
-Same tools as everyone else, plus bookkeeping:
-
-1. lines up scrolling screens by fuzzy overlap
-2. keeps explicit tables of OCR fixes
-3. re-crops the regions it can't read
-
-<p class="zork-quote-line"><q>My plan is to do line fuzzy matching against the previous screen by selecting the longest contiguous approximate run.</q></p>
-
-</Card>
-</div>
-
-<Receipt n="866 trials, 6 families shown" date="snapshot 8 Nov 2026" model="as listed" harness="fast-agent · TB 2.1 extract-moves-from-video" />
+<Receipt source="850 fast-agent trials with a known reward, 9 models shown · TB 2.1 extract-moves-from-video · snapshot 8 Nov 2026 · method labels are pattern matches on the agent's own tool calls" />
 
 <!--
-The point of the segment: on this task the tool choice doesn't separate the models. Careful handling of the OCR output does.
+The point of the segment: on this task the tool choice doesn't separate the models. All nine run OCR in nearly every trial.
+The earlier version of this slide said what GPT-6.1 Sol does differently: it lines up the scrolling screens by fuzzy overlap, keeps tables of OCR fixes and re-crops what it can't read. That came from one trace. Checked across all 45 of its trials: fuzzy matching in 42, cropping in 42, a named fix table in 25. So nearly always for the first two, about half the time for the third.
+It is not what earns the 100%. GPT-6.1 Terra has fuzzy matching in 2 of 55 trials, reads frames as images in only 23, takes a median 25 steps, and is rewarded 50 times. GPT-6 Astra: 32 of 77 with fuzzy matching, 72 rewarded.
+Claude, which the earlier slide left out: Opus 5.5 10 of 10 and Sonnet 5.5 20 of 20, the same 100% as Sol. Opus has fuzzy matching in 8 of 10, Sonnet in 10 of 20. Haiku 5.5 is rewarded 2 of 25 times and Fable 5 1 of 6 (not on the slide: six trials).
+Where the method does show: GPT-6 Luna, the largest group. With fuzzy matching 38 of 47 rewarded (80%); without it 57 of 166 (34%). With cropping 59 of 79 against 36 of 134. Across all 850 trials: 166 of 224 with fuzzy matching against 270 of 626 without.
+So: the strong models pass however they do it, the method separates the middle of the table, and it doesn't rescue the bottom. GLM has fuzzy matching in 32 of 49 trials and is rewarded 17 times; DeepSeek V4 Flash in 7 of 34 and never.
+Fuzzy matching means the trial's code uses difflib, SequenceMatcher, rapidfuzz, Levenshtein or similar. It is a pattern match on the code the agent wrote: it says the code is there, not that it was the reason for the reward. This is correlation: within Luna, the trials that write this code may also be the ones run at higher effort.
 OCR use: GPT-6.1 Sol 45 of 46 trials, Astra 73 of 80, Terra 52 of 55, Luna 157 of 213, GLM 49 of 52, DeepSeek V4 Flash 33 of 34.
 DeepSeek V4 Flash can't read images (0 image reads recorded) and is rewarded 0 of 34 times. GPT-6 Luna reads images in 190 of 213 trials and is rewarded 95 times.
 The Sol quote is an exact substring of masked reasoning (fast-agent 0.10.42, reward 1), checked against the recorded tool calls. That run also reads some frames as images, so don't call it OCR-only. Alignment, repair tables and re-crops are actions in the trace; that is not a claim about why the grader rewarded it.
 Trials with an unknown reward are left out of each count; GLM is mixed versions.
 Corrections to older rollups: Sol alone is 45 of 45 known plus one unknown; the earlier 95% was Sol and Terra together. The earlier 15% DeepSeek figure mixed versions; V4 Flash alone is 0 of 34.
 Unfiltered fast-agent cohort, including short failures. Versions, effort settings and dates differ, so this is correlation.
+Source: data/zork-methods.json (analysis/zork-methods/extract.py).
 -->

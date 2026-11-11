@@ -414,7 +414,7 @@
 
 /* ---------- Reasoning calibration ---------- */
 
-.fa-ladder-slide h1 { font-size: 46px; }
+.fa-ladder-slide h1 { font-size: 38px; white-space: nowrap; }
 .slidev-layout p.fa-heat-copy { margin: 14px 0 0; font-size: 21px; line-height: 1.35; }
 .slidev-layout p.fa-ladder-meta { font-size: 13px; line-height: 1.4; color: var(--text-muted); margin-top: 8px; }
 
@@ -642,3 +642,215 @@
 .fa-figure-fit iframe { width: 1100px; height: 370px; border: 0; background: transparent; transform: scale(0.789); transform-origin: top left; }
 .fa-safe-points ul { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 28px; margin: 6px 0 0; }
 .fa-safe-points li { font-size: 14px; line-height: 1.3; margin: 0; }
+
+/* ---------- Launch evidence and RL training loop ---------- */
+
+.slidev-layout .fa-research-takeaway {
+  margin: 12px 0;
+  color: var(--petrol);
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1.25;
+}
+.fa-rl-loop-slide .fa-receipt,
+.fa-rl-scale-slide .fa-receipt { margin: 0; }
+.rlf { width: 100%; }
+.rlf svg { display: block; width: 100%; height: 292px; overflow: visible; }
+.rlf text { fill: var(--petrol); font-family: var(--font-read); }
+.rlf .rlf-title { font-size: 20px; font-weight: 800; }
+.rlf .rlf-small { font-size: 15px; fill: var(--text-muted); }
+.rlf .rlf-caption { font-size: 16px; font-weight: 700; }
+.rlf .rlf-eval-note { font-size: 23px; font-weight: 600; }
+.rlf-node rect, .rlf-parallel rect {
+  fill: var(--paper);
+  stroke: var(--petrol);
+  stroke-width: 2px;
+}
+.rlf-parallel rect { fill: var(--ivory-deep); }
+.rlf-result rect { fill: var(--petrol); }
+.rlf-result .rlf-title, .rlf-result .rlf-small { fill: var(--ivory); }
+.rlf-learner rect { fill: var(--ivory-deep); }
+.rlf-arrowhead, .rlf-flow path {
+  fill: none;
+  stroke: var(--petrol);
+  stroke-width: 2px;
+  stroke-linejoin: round;
+}
+.rlf-flow path { stroke-dasharray: 6 5; }
+.rlf.is-active .rlf-flow path { animation: rlf-flow 1.3s linear infinite; }
+.rlf.is-active .rlf-training { animation: rlf-reveal 240ms ease-out both; }
+@keyframes rlf-flow { to { stroke-dashoffset: -22; } }
+@keyframes rlf-reveal { from { opacity: 0; } to { opacity: 1; } }
+
+.fa-rl-scale {
+  display: grid;
+  grid-template-columns: 1fr 64px 1fr;
+  align-items: center;
+  margin: 52px 0 30px;
+}
+.slidev-layout .fa-rl-scale h2 {
+  font-family: var(--font-read);
+  font-size: 60px;
+  font-weight: 900;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  margin-bottom: 12px;
+  white-space: nowrap;
+}
+.slidev-layout .fa-rl-scale p { font-size: 25px; margin: 0 0 8px; line-height: 1.25; }
+.fa-rl-scale div > span { font-size: 16px; color: var(--text-muted); }
+.fa-rl-scale-arrow { font-size: 44px; color: var(--petrol); align-self: start; }
+.slidev-layout .fa-rl-scale-detail {
+  border-top: 2px solid var(--petrol);
+  padding-top: 16px;
+  margin-bottom: 24px;
+  font-size: 21px;
+}
+.fa-rl-scale-slide .fa-research-takeaway { margin: 18px 0; }
+.fa-rl-evidence { display: grid; gap: 12px; }
+.fa-rl-evidence-line {
+  display: grid;
+  grid-template-columns: 250px 200px 1fr;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+.slidev-layout .fa-rl-evidence h3 { font-size: 20px; margin: 0; }
+.fa-rl-evidence-line strong {
+  font: 900 31px/1.1 var(--font-read);
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+.fa-rl-evidence-line > span { font-size: 18px; line-height: 1.2; }
+.fa-rl-evidence .fa-receipt { margin: 0; padding-top: 4px; }
+.slidev-layout .fa-rl-evidence-note {
+  margin: 14px 0 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--text-muted);
+}
+@media (prefers-reduced-motion: reduce) {
+  .rlf.is-active .rlf-flow path, .rlf.is-active .rlf-training { animation: none; }
+}
+
+/* ---------- Full-canvas launch / benchmark news desk ---------- */
+
+.slidev-layout.fa-launch-desk-slide { position: relative; padding: 0; }
+.fa-launch-desk-slide .fa-default-body { position: absolute; inset: 0; }
+.launch-desk { position: absolute; inset: 0; overflow: hidden; background: var(--ivory); }
+.slidev-layout .launch-desk h1 {
+  position: absolute;
+  z-index: 8;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 12px 22px 14px 28px;
+  border-radius: 0 0 var(--radius-lg) 0;
+  background: var(--petrol);
+  color: var(--ivory);
+  font-size: 34px;
+}
+.launch-desk-papers { position: absolute; inset: 0; }
+.launch-desk-paper {
+  position: absolute;
+  margin: 0;
+  border: 2px solid var(--petrol);
+  background: var(--paper);
+  overflow: hidden;
+}
+.launch-desk.is-active .launch-desk-paper {
+  transition:
+    left 750ms var(--ease-ui), top 750ms var(--ease-ui),
+    width 750ms var(--ease-ui), height 750ms var(--ease-ui),
+    opacity 300ms var(--ease-ui), visibility 300ms;
+}
+.launch-desk-paper img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.launch-desk-scrim {
+  position: absolute;
+  z-index: 5;
+  inset: 0;
+  background: var(--petrol);
+  opacity: 0;
+  pointer-events: none;
+}
+.launch-desk.is-active .launch-desk-scrim { transition: opacity 350ms var(--ease-ui); }
+.launch-desk-scrim.on { opacity: 0.8; }
+.launch-desk-receipt {
+  position: absolute;
+  z-index: 8;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 8px 18px 10px;
+  background: var(--ivory);
+  border-top: 2px solid var(--petrol);
+}
+.slidev-layout .launch-desk-receipt .fa-receipt { border: 0; padding: 0; margin: 0; line-height: 1.3; }
+@media (prefers-reduced-motion: reduce) {
+  .launch-desk.is-active .launch-desk-paper,
+  .launch-desk.is-active .launch-desk-scrim { transition: none; }
+}
+
+/* Section-divider fireflies: broad, closed curves in the empty upper and
+   lower margins (980 × 552 slide coordinates). Linear path progress avoids
+   long pauses at the ends; the curves turn smoothly without snapping back.
+   The approved artwork stays upright, sharp and clear of the headings. */
+.fa-section-spark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: var(--spark, 34px);
+  aspect-ratio: 1;
+  pointer-events: none;
+  background: var(--amber);
+  mask: url("/fa/sparkle-atomic.svg") center / contain no-repeat;
+  opacity: 0.65;
+  offset-path: var(--flight);
+  offset-anchor: center;
+  offset-rotate: 0deg;
+  animation:
+    fa-spark-wander var(--flight-time, 110s) linear var(--phase, 0s) infinite,
+    fa-spark-dim var(--dim, 16s) ease-in-out var(--phase, 0s) infinite alternate;
+}
+.fa-section-spark.is-1 {
+  --flight: path("M 610 64 C 710 36 920 42 922 88 C 924 136 700 138 610 106 C 570 92 570 76 610 64 Z");
+  --flight-time: 108s; --phase: -29s;
+}
+.fa-section-spark.is-2 {
+  --spark: 28px;
+  --flight: path("M 420 118 C 340 130 300 88 352 68 C 430 38 690 56 716 96 C 744 138 530 102 420 118 Z");
+  --flight-time: 124s; --phase: -12s; --dim: 19s;
+}
+.fa-section-spark.is-3 {
+  --spark: 38px;
+  --flight: path("M 580 464 C 678 420 914 422 920 466 C 926 510 682 518 580 494 C 536 484 536 484 580 464 Z");
+  --flight-time: 116s; --phase: -53s; --dim: 21s;
+}
+.fa-section-spark.is-4 {
+  --spark: 30px;
+  --flight: path("M 82 64 C 170 34 354 48 368 90 C 382 132 168 128 82 106 C 42 96 42 78 82 64 Z");
+  --flight-time: 102s; --phase: -5s; --dim: 17s;
+}
+.fa-section-spark.is-5 {
+  --spark: 32px;
+  --flight: path("M 140 470 C 230 424 470 418 502 458 C 534 498 290 520 160 502 C 114 496 108 486 140 470 Z");
+  --flight-time: 128s; --phase: -72s; --dim: 23s;
+}
+@keyframes fa-spark-wander {
+  from { offset-distance: 0%; }
+  to { offset-distance: 100%; }
+}
+@keyframes fa-spark-dim {
+  from { opacity: 0.76; }
+  to { opacity: 0.5; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fa-section-spark { animation: none; opacity: 0.65; }
+}

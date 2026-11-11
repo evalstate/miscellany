@@ -230,7 +230,12 @@
    "rewarded": 386,
    "stopsRewarded": 1,
    "trials": 445,
-   "stops": 36
+   "stops": 36,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -241,7 +246,12 @@
    "rewarded": 394,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 35
+   "stops": 35,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -252,7 +262,12 @@
    "rewarded": 378,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 16
+   "stops": 16,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -263,7 +278,12 @@
    "rewarded": 364,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 15
+   "stops": 15,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "leaderboard",
@@ -274,7 +294,12 @@
    "rewarded": 386,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 13
+   "stops": 13,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "leaderboard",
@@ -285,7 +310,12 @@
    "rewarded": 382,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 13
+   "stops": 13,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "submissions",
@@ -296,7 +326,12 @@
    "rewarded": 346,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 13
+   "stops": 13,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -307,7 +342,12 @@
    "rewarded": 381,
    "stopsRewarded": 1,
    "trials": 445,
-   "stops": 13
+   "stops": 13,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "submissions",
@@ -318,7 +358,12 @@
    "rewarded": 356,
    "stopsRewarded": 2,
    "trials": 452,
-   "stops": 12
+   "stops": 12,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -329,7 +374,12 @@
    "rewarded": 365,
    "stopsRewarded": 2,
    "trials": 445,
-   "stops": 12
+   "stops": 12,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "leaderboard",
@@ -340,7 +390,12 @@
    "rewarded": 389,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 11
+   "stops": 11,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "submissions",
@@ -351,7 +406,12 @@
    "rewarded": 386,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 10
+   "stops": 10,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -362,7 +422,12 @@
    "rewarded": 385,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 10
+   "stops": 10,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -373,7 +438,12 @@
    "rewarded": 364,
    "stopsRewarded": 1,
    "trials": 445,
-   "stops": 10
+   "stops": 10,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "leaderboard",
@@ -384,7 +454,12 @@
    "rewarded": 387,
    "stopsRewarded": 1,
    "trials": 445,
-   "stops": 7
+   "stops": 7,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "leaderboard",
@@ -395,7 +470,12 @@
    "rewarded": 386,
    "stopsRewarded": 1,
    "trials": 445,
-   "stops": 7
+   "stops": 7,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -406,7 +486,12 @@
    "rewarded": 356,
    "stopsRewarded": 4,
    "trials": 445,
-   "stops": 4
+   "stops": 4,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -417,7 +502,12 @@
    "rewarded": 394,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 1
+   "stops": 1,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
   },
   {
    "site": "fast-agent",
@@ -428,7 +518,326 @@
    "rewarded": 370,
    "stopsRewarded": 0,
    "trials": 445,
-   "stops": 1
+   "stops": 1,
+   "handed": 0,
+   "handedRewarded": 0,
+   "handedTo": null,
+   "handedTasks": 0,
+   "handedErrors": 0
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "effort": "xhigh",
+   "lab": "Claude",
+   "rewarded": 374,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 0,
+   "handed": 103,
+   "handedRewarded": 79,
+   "handedTo": "claude-opus-4-8",
+   "handedTasks": 24,
+   "handedErrors": 0
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "effort": "high",
+   "lab": "Claude",
+   "rewarded": 358,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 0,
+   "handed": 79,
+   "handedRewarded": 55,
+   "handedTo": "claude-opus-4-8",
+   "handedTasks": 16,
+   "handedErrors": 0
+  }
+ ],
+ "handoffTasks": [
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "break-filter-js-from-html",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "code-from-image",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "crack-7z-hash",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "db-wal-recovery",
+   "handed": 5,
+   "rewarded": 2
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "dna-assembly",
+   "handed": 5,
+   "rewarded": 4
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "dna-insert",
+   "handed": 5,
+   "rewarded": 0
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "extract-elf",
+   "handed": 5,
+   "rewarded": 1
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "feal-differential-cryptanalysis",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "feal-linear-cryptanalysis",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "filter-js-from-html",
+   "handed": 2,
+   "rewarded": 0
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "gcode-to-text",
+   "handed": 1,
+   "rewarded": 1
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "git-leak-recovery",
+   "handed": 4,
+   "rewarded": 4
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "headless-terminal",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "install-windows-3.11",
+   "handed": 1,
+   "rewarded": 1
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "make-doom-for-mips",
+   "handed": 2,
+   "rewarded": 0
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "model-extraction-relu-logits",
+   "handed": 5,
+   "rewarded": 3
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "password-recovery",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "path-tracing-reverse",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "protein-assembly",
+   "handed": 5,
+   "rewarded": 0
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "qemu-startup",
+   "handed": 3,
+   "rewarded": 3
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "sam-cell-seg",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "sqlite-with-gcov",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "vulnerable-secret",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Claude Code",
+   "model": "Fable 5",
+   "task": "write-compressor",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "break-filter-js-from-html",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "code-from-image",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "crack-7z-hash",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "dna-assembly",
+   "handed": 5,
+   "rewarded": 2
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "dna-insert",
+   "handed": 5,
+   "rewarded": 0
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "extract-elf",
+   "handed": 5,
+   "rewarded": 3
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "feal-differential-cryptanalysis",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "feal-linear-cryptanalysis",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "git-leak-recovery",
+   "handed": 4,
+   "rewarded": 4
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "model-extraction-relu-logits",
+   "handed": 5,
+   "rewarded": 0
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "password-recovery",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "path-tracing-reverse",
+   "handed": 5,
+   "rewarded": 0
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "protein-assembly",
+   "handed": 5,
+   "rewarded": 3
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "sam-cell-seg",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "vulnerable-secret",
+   "handed": 5,
+   "rewarded": 5
+  },
+  {
+   "agent": "Terminus 2",
+   "model": "Fable 5",
+   "task": "write-compressor",
+   "handed": 5,
+   "rewarded": 3
   }
  ],
  "noStops": {
@@ -442,7 +851,12 @@
     "rewarded": 374,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 103,
+    "handedRewarded": 79,
+    "handedTo": "claude-opus-4-8",
+    "handedTasks": 24,
+    "handedErrors": 0
    },
    {
     "site": "leaderboard",
@@ -453,7 +867,12 @@
     "rewarded": 358,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 79,
+    "handedRewarded": 55,
+    "handedTo": "claude-opus-4-8",
+    "handedTasks": 16,
+    "handedErrors": 0
    },
    {
     "site": "leaderboard",
@@ -464,7 +883,12 @@
     "rewarded": 351,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "leaderboard",
@@ -475,7 +899,12 @@
     "rewarded": 335,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "leaderboard",
@@ -486,7 +915,12 @@
     "rewarded": 310,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "leaderboard",
@@ -497,7 +931,12 @@
     "rewarded": 294,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "submissions",
@@ -508,7 +947,12 @@
     "rewarded": 387,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "submissions",
@@ -519,7 +963,12 @@
     "rewarded": 172,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -530,7 +979,12 @@
     "rewarded": 368,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    }
   ],
   "OpenAI": [
@@ -543,7 +997,12 @@
     "rewarded": 371,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "leaderboard",
@@ -554,7 +1013,12 @@
     "rewarded": 350,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "leaderboard",
@@ -565,7 +1029,12 @@
     "rewarded": 348,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "leaderboard",
@@ -576,7 +1045,12 @@
     "rewarded": 341,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "submissions",
@@ -587,7 +1061,12 @@
     "rewarded": 377,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "submissions",
@@ -598,7 +1077,12 @@
     "rewarded": 374,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "submissions",
@@ -609,7 +1093,12 @@
     "rewarded": 349,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -620,7 +1109,12 @@
     "rewarded": 393,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -631,7 +1125,12 @@
     "rewarded": 366,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -642,7 +1141,12 @@
     "rewarded": 359,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -653,7 +1157,12 @@
     "rewarded": 347,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -664,7 +1173,12 @@
     "rewarded": 346,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -675,7 +1189,12 @@
     "rewarded": 334,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -686,7 +1205,12 @@
     "rewarded": 339,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -697,7 +1221,12 @@
     "rewarded": 336,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    },
    {
     "site": "fast-agent",
@@ -708,7 +1237,12 @@
     "rewarded": 203,
     "stopsRewarded": 0,
     "trials": 445,
-    "stops": 0
+    "stops": 0,
+    "handed": 0,
+    "handedRewarded": 0,
+    "handedTo": null,
+    "handedTasks": 0,
+    "handedErrors": 0
    }
   ]
  }

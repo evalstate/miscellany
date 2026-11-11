@@ -19,7 +19,7 @@ SITES = {"leaderboard": ("tb21-annotated", "rows-v4"), "submissions": ("tb21-sub
          "fast-agent": ("tb21-fast-agent-annotated", "rows-v3")}
 LAB = [("Claude", r"Opus|Sonnet|Haiku|Fable"), ("OpenAI", r"GPT")]
 
-rows, stops = [], []
+rows, stops, handoffs = [], [], []
 task_trials = defaultdict(Counter)  # lab -> task -> trials, over the runs of that lab that had at least one stop
 for site, (repo, exports) in SITES.items():
     board = json.loads(re.search(r"=\s*(\{.*\})\s*;?\s*$", (SRC / repo / "site/data/leaderboard.js").read_text(), re.S).group(1))
@@ -34,9 +34,20 @@ for site, (repo, exports) in SITES.items():
             inputs = [i for i in inputs if i["input_id"].split("/")[0] in listed or i.get("hub_trial_id") in listed]
         lab = next((name for name, pat in LAB if re.search(pat, row["model"])), "other")
         mine = [i for i in inputs if "Safety" in str(i.get("error_type"))]
+        # Hand-offs: trials where a model other than the row's main model answered some steps (a harness fallback).
+        steps = Counter()
+        for i in inputs:
+            steps.update(i.get("step_models") or {})
+        main = steps.most_common(1)[0][0] if steps else None
+        handed = [i for i in inputs if any(m != main for m in (i.get("step_models") or {}))]
+        other = Counter(m for i in handed for m in i["step_models"] if m != main).most_common(1)
         rows.append(dict(site=site, agent=re.sub(r" \d+\.[\d.]+$", "", row["agent"]), model=row["model"], effort=row.get("effort"), lab=lab,
                          rewarded=sum((i.get("reward") or 0) > 0 for i in inputs), stopsRewarded=sum((i.get("reward") or 0) > 0 for i in inputs if "Safety" in str(i.get("error_type"))),
-                         trials=len(inputs), stops=len(mine)))
+                         trials=len(inputs), stops=len(mine), handed=len(handed), handedRewarded=sum((i.get("reward") or 0) > 0 for i in handed),
+                         handedTo=other[0][0] if other else None, handedTasks=len({i["task"] for i in handed}),
+                         handedErrors=sum("Safety" in str(i.get("error_type")) for i in handed)))
+        for i in handed:
+            handoffs.append(dict(agent=rows[-1]["agent"], model=row["model"], task=i["task"], rewarded=(i.get("reward") or 0) > 0))
         if mine:
             for i in inputs:
                 task_trials[lab][i["task"]] += 1
@@ -60,7 +71,9 @@ for lab in ("Claude", "OpenAI"):
                      steps=sorted(Counter(min(s["steps"], 6) for s in mine).items()))
 out = dict(generated="2026-11-10", scanner="v0.8.23", trials=sum(r["trials"] for r in rows), runs=len(rows), stops=len(stops),
            rewarded=sum(s["rewarded"] for s in stops), labs=labs,
-           rows=sorted((r for r in rows if r["stops"]), key=lambda r: -r["stops"]),
+           rows=sorted((r for r in rows if r["stops"] or r["handed"]), key=lambda r: -r["stops"]),
+           handoffTasks=[dict(agent=a, model=m, task=t, handed=n, rewarded=sum(h["rewarded"] for h in handoffs if (h["agent"], h["model"], h["task"]) == (a, m, t)))
+                         for (a, m, t), n in sorted(Counter((h["agent"], h["model"], h["task"]) for h in handoffs).items())],
            noStops=dict(Claude=[r for r in rows if r["lab"] == "Claude" and not r["stops"]],
                         OpenAI=[r for r in rows if r["lab"] == "OpenAI" and not r["stops"]]))
 (DECK / "data/safety-stops.json").write_text(json.dumps(out, indent=1))
@@ -71,4 +84,5 @@ for lab, v in labs.items():
         print("  ", t)
 for r in out["rows"]:
     print(r)
+print(len(out["handoffTasks"]))
 print("no stops:", [(r["agent"], r["model"], r["effort"]) for lab in out["noStops"].values() for r in lab])

@@ -10,6 +10,8 @@ Each folder has its own README with rebuild steps, inclusion rules and caveats.
 | `fable5-harness-charts/` | Fable 5 harness comparison on TB 2.1: Terminus 2 re-scored Fable-only, Strands, OpenCode, Oh-my-pi, fast-agent | `fable5_harness_comparison.png`, plus `install-windows-3.11/same_task_different_attempts.png` |
 | `safety-stops/` | Provider safety stops: `extract.py` (65 public TB 2.1 runs) and `corpus.py` (whole private corpus census, counts only) | `data/safety-stops.json`, `data/safety-corpus.json` |
 | `awareness-channels/` | Flags by evidence channel (reasoning text against tool calls), split by whether reasoning is recorded; 128 public runs | `data/awareness-channels.json` |
+| `zork-methods/` | extract-moves-from-video by model: reward and method labels (fuzzy matching, cropping, fix tables) from tool calls; 850 fast-agent trials | `data/zork-methods.json` |
+| `answer-lookup/corpus_rates.py` | Benchmark material obtained, as a rate per model and per benchmark over the whole private corpus scan (179,944 trials) | `data/lookup-rates.json` |
 
 ## Not copied (rebuildable)
 

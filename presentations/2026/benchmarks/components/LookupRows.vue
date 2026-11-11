@@ -1,12 +1,12 @@
 <script setup lang="ts">
 // Answer-lookup flags by run (one harness, one model, one effort, 445 trials):
-// the runs with 16 or more, then every model by whether benchmark material ever reached it. The replay row with no model calls is left out.
+// the runs with 15 or more, then every model by whether benchmark material ever reached it. The replay row with no model calls is left out.
 // Data: data/answer-lookup.json (analysis/answer-lookup/extract.py).
 import data from "../data/answer-lookup.json";
 
 const order = data.kinds.map((k) => ({ key: k.key, label: k.label }));
 const live = data.rows.filter((r) => r.agent !== "Slai Agent Runtime");
-const top = live.filter((r) => r.lookup >= 16);
+const top = live.filter((r) => r.lookup >= 15);
 const max = top[0].lookup;
 const rows = top.map((r) => ({
   ...r,
