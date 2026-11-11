@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Model × harness × alignment · links</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;900&family=Fraunces:opsz,wght,SOFT@9..144,900,100&family=DM+Mono:wght@500&display=swap" rel="stylesheet" />
+<style>
+  :root { --ivory: #FFF7E8; --paper: #FFFCF4; --petrol: #082C34; --teal: #277C80; --amber: #FFB52E; --muted: rgba(8, 44, 52, 0.72); --line: rgba(8, 44, 52, 0.14); }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--ivory); color: var(--petrol); font: 500 17px/1.5 Figtree, system-ui, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 40px 20px 64px; }
+  h1 { margin: 0 0 6px; font: 900 44px/1 Fraunces, Georgia, serif; letter-spacing: -0.035em; font-variation-settings: "SOFT" 100; }
+  h2 { margin: 36px 0 10px; font: 900 26px/1.1 Fraunces, Georgia, serif; letter-spacing: -0.035em; font-variation-settings: "SOFT" 100; }
+  p { margin: 0 0 8px; }
+  .who { color: var(--muted); }
+  .who img { width: 22px; height: 22px; vertical-align: -5px; margin-right: 4px; }
+  ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  li a { display: block; padding: 14px 18px; border: 2px solid var(--petrol); border-radius: 14px; background: var(--paper); color: var(--petrol); text-decoration: none; }
+  li a:hover, li a:focus-visible { background: var(--amber); outline: 3px solid var(--teal); outline-offset: 2px; }
+  li b { display: block; font-weight: 900; font-size: 19px; }
+  li span { display: block; color: var(--muted); font-size: 15px; }
+  li code { font: 500 12px "DM Mono", ui-monospace, monospace; color: var(--teal); word-break: break-all; }
+  .row { grid-template-columns: repeat(3, 1fr); }
+  @media (max-width: 560px) { .row { grid-template-columns: 1fr; } h1 { font-size: 36px; } }
+  footer { margin-top: 40px; padding-top: 12px; border-top: 2px solid var(--line); color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Model × harness × alignment</h1>
+  <p class="who"><img src="hf-logo.svg" alt="" />Shaun Smith, Hugging Face · secureai.se, Stockholm · 12 November 2026</p>
+
+  <h2>Find me</h2>
+  <ul class="row">
+    <li><a href="https://huggingface.co/evalstate"><b>Hugging Face</b><code>huggingface.co/evalstate</code></a></li>
+    <li><a href="https://github.com/evalstate"><b>GitHub</b><code>github.com/evalstate</code></a></li>
+    <li><a href="https://x.com/evalstate"><b>X</b><code>x.com/evalstate</code></a></li>
+  </ul>
+
+  <h2>Tools</h2>
+  <ul>
+    <li><a href="https://github.com/huggingface/atif-scan"><b>atif-scan</b><span>Reads agent traces offline and flags steps for review: lookups, lures, side channels, integrity gaps.</span><code>github.com/huggingface/atif-scan</code></a></li>
+    <li><a href="https://fast-agent.ai"><b>fast-agent</b><span>The harness behind most of the traces in the talk. Writes ATIF traces natively.</span><code>fast-agent.ai</code></a></li>
+    <li><a href="https://github.com/huggingface/safeagents"><b>safeagents</b><span>A check before every tool call, between the harness and the model.</span><code>github.com/huggingface/safeagents</code></a></li>
+    <li><a href="https://harness-hub-harness-adapters-rl.hf.space/"><b>Harness adapters: live training leaderboard</b><span>One LoRA adapter per model and harness, with reward, pass rate and tool-call checks.</span><code>harness-hub-harness-adapters-rl.hf.space</code></a></li>
+  </ul>
+
+  <h2>Annotated traces</h2>
+  <p class="who">Public benchmark runs, trial by trial, scanned with atif-scan. Findings are review candidates, not verdicts.</p>
+  <ul>
+    <li><a href="https://evalstate-tb21-annotated.static.hf.space/index.html"><b>Terminal-Bench 2.1 leaderboard</b><span>The main leaderboard's rows.</span><code>evalstate-tb21-annotated.static.hf.space</code></a></li>
+    <li><a href="https://evalstate-tb21-submissions-annotated.static.hf.space"><b>Terminal-Bench 2.1 submissions</b><span>Pull-request submissions.</span><code>evalstate-tb21-submissions-annotated.static.hf.space</code></a></li>
+    <li><a href="https://evalstate-deepswe-annotated.static.hf.space"><b>DeepSWE 1.1</b><span>Datacurve's public DeepSWE runs.</span><code>evalstate-deepswe-annotated.static.hf.space</code></a></li>
+  </ul>
+
+  <footer>Companion page for the talk. Links only.</footer>
+</main>
+</body>
+</html>
