@@ -35,7 +35,7 @@ const pairs = ["DeepSeek V4 Pro", "GPT-5.6 Terra", "GPT-5.6 Sol", "GPT-5.6 Luna"
     <div class="dsa-side">
       <p class="dsa-lead"><b>{{ t.attempt.toLocaleString("en-GB") }}</b> of {{ t.trials.toLocaleString("en-GB") }} trials try: {{ pct(t.attempt, t.trials) }}%.</p>
       <p>{{ t.upstream.toLocaleString("en-GB") }} ask for the task's upstream repository. {{ t.git.toLocaleString("en-GB") }} dig through git objects outside the history.</p>
-      <p>The sandbox has no network and the history is scrubbed. The scan sees the attempt, not what came back.</p>
+      <p>One run checked by hand, 27 flags: <b>19</b> real requests, <b>17</b> refused by the proxy, 2 unclear, <b>0</b> brought anything back. 8 were not requests.</p>
       <table>
         <thead><tr><th>Pass rate at max effort</th><th>tried</th><th>didn't</th></tr></thead>
         <tbody><tr v-for="p in pairs" :key="p.model"><td>{{ p.model }}</td><td>{{ p.tried }}%</td><td>{{ p.not }}%</td></tr></tbody>
@@ -58,6 +58,7 @@ const pairs = ["DeepSeek V4 Pro", "GPT-5.6 Terra", "GPT-5.6 Sol", "GPT-5.6 Luna"
 .dsa-row .none { background: transparent; }
 .dsa-side p { margin: 0 0 9px; font-size: 16px; line-height: 1.35; color: var(--petrol); }
 .dsa-side p.dsa-lead { font-size: 19px; }
+.dsa-side p b { font-weight: 800; }
 .dsa-lead b { font: 900 34px/1 var(--font-voice); margin-right: 4px; font-variant-numeric: tabular-nums; }
 .dsa-side table { width: 100%; margin-top: 4px; border-collapse: collapse; font-size: 14px; }
 .dsa-side th, .dsa-side td { padding: 3px 8px; border-bottom: 2px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; background: transparent; }

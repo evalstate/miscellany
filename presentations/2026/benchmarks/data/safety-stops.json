@@ -1,0 +1,715 @@
+{
+ "generated": "2026-11-10",
+ "scanner": "v0.8.23",
+ "trials": 28932,
+ "runs": 65,
+ "stops": 239,
+ "rewarded": 13,
+ "labs": {
+  "Claude": {
+   "stops": 107,
+   "beforeAnyTool": 79,
+   "rewarded": 5,
+   "runs": 6,
+   "trialsInThoseRuns": 2670,
+   "tasks": [
+    {
+     "task": "break-filter-js-from-html",
+     "stops": 20,
+     "trials": 30,
+     "rewarded": 0,
+     "beforeAnyTool": 20
+    },
+    {
+     "task": "crack-7z-hash",
+     "stops": 20,
+     "trials": 30,
+     "rewarded": 0,
+     "beforeAnyTool": 20
+    },
+    {
+     "task": "vulnerable-secret",
+     "stops": 20,
+     "trials": 30,
+     "rewarded": 0,
+     "beforeAnyTool": 10
+    },
+    {
+     "task": "password-recovery",
+     "stops": 11,
+     "trials": 30,
+     "rewarded": 0,
+     "beforeAnyTool": 11
+    },
+    {
+     "task": "protein-assembly",
+     "stops": 11,
+     "trials": 30,
+     "rewarded": 0,
+     "beforeAnyTool": 10
+    },
+    {
+     "task": "dna-assembly",
+     "stops": 10,
+     "trials": 30,
+     "rewarded": 0,
+     "beforeAnyTool": 8
+    },
+    {
+     "task": "dna-insert",
+     "stops": 10,
+     "trials": 30,
+     "rewarded": 0,
+     "beforeAnyTool": 0
+    },
+    {
+     "task": "sparql-university",
+     "stops": 4,
+     "trials": 30,
+     "rewarded": 4,
+     "beforeAnyTool": 0
+    },
+    {
+     "task": "fix-code-vulnerability",
+     "stops": 1,
+     "trials": 30,
+     "rewarded": 1,
+     "beforeAnyTool": 0
+    }
+   ],
+   "models": [
+    [
+     "Opus 5.5",
+     71
+    ],
+    [
+     "Sonnet 5.5",
+     31
+    ],
+    [
+     "Haiku 5.5",
+     5
+    ]
+   ],
+   "harnesses": [
+    [
+     "fast-agent",
+     107
+    ]
+   ],
+   "steps": [
+    [
+     1,
+     79
+    ],
+    [
+     2,
+     22
+    ],
+    [
+     4,
+     4
+    ],
+    [
+     6,
+     2
+    ]
+   ]
+  },
+  "OpenAI": {
+   "stops": 132,
+   "beforeAnyTool": 41,
+   "rewarded": 8,
+   "runs": 13,
+   "trialsInThoseRuns": 5792,
+   "tasks": [
+    {
+     "task": "vulnerable-secret",
+     "stops": 58,
+     "trials": 65,
+     "rewarded": 0,
+     "beforeAnyTool": 20
+    },
+    {
+     "task": "break-filter-js-from-html",
+     "stops": 51,
+     "trials": 65,
+     "rewarded": 4,
+     "beforeAnyTool": 19
+    },
+    {
+     "task": "model-extraction-relu-logits",
+     "stops": 18,
+     "trials": 65,
+     "rewarded": 0,
+     "beforeAnyTool": 2
+    },
+    {
+     "task": "feal-differential-cryptanalysis",
+     "stops": 5,
+     "trials": 65,
+     "rewarded": 4,
+     "beforeAnyTool": 0
+    }
+   ],
+   "models": [
+    [
+     "GPT-6 Astra",
+     62
+    ],
+    [
+     "GPT-5.6 Sol",
+     37
+    ],
+    [
+     "GPT-6.1 Sol",
+     23
+    ],
+    [
+     "GPT-6.1 Terra",
+     10
+    ]
+   ],
+   "harnesses": [
+    [
+     "Codex",
+     51
+    ],
+    [
+     "fast-agent",
+     46
+    ],
+    [
+     "IndusAGI",
+     22
+    ],
+    [
+     "Dext",
+     13
+    ]
+   ],
+   "steps": [
+    [
+     0,
+     34
+    ],
+    [
+     1,
+     45
+    ],
+    [
+     2,
+     14
+    ],
+    [
+     3,
+     14
+    ],
+    [
+     4,
+     13
+    ],
+    [
+     5,
+     3
+    ],
+    [
+     6,
+     9
+    ]
+   ]
+  }
+ },
+ "rows": [
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "Opus 5.5",
+   "effort": "medium",
+   "lab": "Claude",
+   "rewarded": 386,
+   "stopsRewarded": 1,
+   "trials": 445,
+   "stops": 36
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "Opus 5.5",
+   "effort": "high",
+   "lab": "Claude",
+   "rewarded": 394,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 35
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "Sonnet 5.5",
+   "effort": "high",
+   "lab": "Claude",
+   "rewarded": 378,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 16
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "Sonnet 5.5",
+   "effort": "medium",
+   "lab": "Claude",
+   "rewarded": 364,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 15
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "max",
+   "lab": "OpenAI",
+   "rewarded": 386,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 13
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "xhigh",
+   "lab": "OpenAI",
+   "rewarded": 382,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 13
+  },
+  {
+   "site": "submissions",
+   "agent": "Dext",
+   "model": "GPT-5.6 Sol",
+   "effort": "xhigh",
+   "lab": "OpenAI",
+   "rewarded": 346,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 13
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "GPT-6.1 Sol",
+   "effort": "high",
+   "lab": "OpenAI",
+   "rewarded": 381,
+   "stopsRewarded": 1,
+   "trials": 445,
+   "stops": 13
+  },
+  {
+   "site": "submissions",
+   "agent": "IndusAGI",
+   "model": "GPT-5.6 Sol",
+   "effort": "xhigh",
+   "lab": "OpenAI",
+   "rewarded": 356,
+   "stopsRewarded": 2,
+   "trials": 452,
+   "stops": 12
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "GPT-5.6 Sol",
+   "effort": "medium",
+   "lab": "OpenAI",
+   "rewarded": 365,
+   "stopsRewarded": 2,
+   "trials": 445,
+   "stops": 12
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "high",
+   "lab": "OpenAI",
+   "rewarded": 389,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 11
+  },
+  {
+   "site": "submissions",
+   "agent": "IndusAGI",
+   "model": "GPT-6 Astra",
+   "effort": "xhigh",
+   "lab": "OpenAI",
+   "rewarded": 386,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 10
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "GPT-6.1 Terra",
+   "effort": "medium",
+   "lab": "OpenAI",
+   "rewarded": 385,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 10
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "GPT-6.1 Sol",
+   "effort": "medium",
+   "lab": "OpenAI",
+   "rewarded": 364,
+   "stopsRewarded": 1,
+   "trials": 445,
+   "stops": 10
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "medium",
+   "lab": "OpenAI",
+   "rewarded": 387,
+   "stopsRewarded": 1,
+   "trials": 445,
+   "stops": 7
+  },
+  {
+   "site": "leaderboard",
+   "agent": "Codex",
+   "model": "GPT-6 Astra",
+   "effort": "low",
+   "lab": "OpenAI",
+   "rewarded": 386,
+   "stopsRewarded": 1,
+   "trials": 445,
+   "stops": 7
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "Haiku 5.5",
+   "effort": "low",
+   "lab": "Claude",
+   "rewarded": 356,
+   "stopsRewarded": 4,
+   "trials": 445,
+   "stops": 4
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "GPT-6 Astra",
+   "effort": "high",
+   "lab": "OpenAI",
+   "rewarded": 394,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 1
+  },
+  {
+   "site": "fast-agent",
+   "agent": "fast-agent",
+   "model": "Haiku 5.5",
+   "effort": "high",
+   "lab": "Claude",
+   "rewarded": 370,
+   "stopsRewarded": 0,
+   "trials": 445,
+   "stops": 1
+  }
+ ],
+ "noStops": {
+  "Claude": [
+   {
+    "site": "leaderboard",
+    "agent": "Claude Code",
+    "model": "Fable 5",
+    "effort": "xhigh",
+    "lab": "Claude",
+    "rewarded": 374,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "leaderboard",
+    "agent": "Terminus 2",
+    "model": "Fable 5",
+    "effort": "high",
+    "lab": "Claude",
+    "rewarded": 358,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "leaderboard",
+    "agent": "Claude Code",
+    "model": "Opus 4.8",
+    "effort": "high",
+    "lab": "Claude",
+    "rewarded": 351,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "leaderboard",
+    "agent": "Claude Code",
+    "model": "Sonnet 5",
+    "effort": "high",
+    "lab": "Claude",
+    "rewarded": 335,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "leaderboard",
+    "agent": "Claude Code",
+    "model": "Opus 4.7",
+    "effort": "max",
+    "lab": "Claude",
+    "rewarded": 310,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "leaderboard",
+    "agent": "Terminus 2",
+    "model": "Opus 4.7",
+    "effort": "max",
+    "lab": "Claude",
+    "rewarded": 294,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "submissions",
+    "agent": "Ouroboros",
+    "model": "Claude Opus 5",
+    "effort": "high",
+    "lab": "Claude",
+    "rewarded": 387,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "submissions",
+    "agent": "Claude Code",
+    "model": "Haiku 4.5",
+    "effort": "high",
+    "lab": "Claude",
+    "rewarded": 172,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "Haiku 5.5",
+    "effort": "medium",
+    "lab": "Claude",
+    "rewarded": 368,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   }
+  ],
+  "OpenAI": [
+   {
+    "site": "leaderboard",
+    "agent": "Codex",
+    "model": "GPT-5.5",
+    "effort": "xhigh",
+    "lab": "OpenAI",
+    "rewarded": 371,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "leaderboard",
+    "agent": "Codex",
+    "model": "GPT-5.6 Terra",
+    "effort": "max",
+    "lab": "OpenAI",
+    "rewarded": 350,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "leaderboard",
+    "agent": "Terminus 2",
+    "model": "GPT-5.5",
+    "effort": "xhigh",
+    "lab": "OpenAI",
+    "rewarded": 348,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "leaderboard",
+    "agent": "Codex",
+    "model": "GPT-5.6 Luna",
+    "effort": "max",
+    "lab": "OpenAI",
+    "rewarded": 341,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "submissions",
+    "agent": "Agav",
+    "model": "GPT-5.5",
+    "effort": "none",
+    "lab": "OpenAI",
+    "rewarded": 377,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "submissions",
+    "agent": "Ouroboros",
+    "model": "GPT-5.5",
+    "effort": "none",
+    "lab": "OpenAI",
+    "rewarded": 374,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "submissions",
+    "agent": "Linghun",
+    "model": "GPT-5.5",
+    "effort": "xhigh",
+    "lab": "OpenAI",
+    "rewarded": 349,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-5.6 Sol",
+    "effort": "high",
+    "lab": "OpenAI",
+    "rewarded": 393,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-5.6 Luna",
+    "effort": "max",
+    "lab": "OpenAI",
+    "rewarded": 366,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-6 Luna",
+    "effort": "max",
+    "lab": "OpenAI",
+    "rewarded": 359,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-6 Luna",
+    "effort": "xhigh",
+    "lab": "OpenAI",
+    "rewarded": 347,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-5.6 Terra",
+    "effort": "high",
+    "lab": "OpenAI",
+    "rewarded": 346,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-6 Luna",
+    "effort": "medium",
+    "lab": "OpenAI",
+    "rewarded": 334,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-5.6 Luna",
+    "effort": "high",
+    "lab": "OpenAI",
+    "rewarded": 339,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-6 Luna",
+    "effort": "high",
+    "lab": "OpenAI",
+    "rewarded": 336,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   },
+   {
+    "site": "fast-agent",
+    "agent": "fast-agent",
+    "model": "GPT-6 Luna",
+    "effort": "low",
+    "lab": "OpenAI",
+    "rewarded": 203,
+    "stopsRewarded": 0,
+    "trials": 445,
+    "stops": 0
+   }
+  ]
+ }
+}

@@ -641,6 +641,7 @@ onBeforeUnmount(() => cancelAnimationFrame(raf));
   background: var(--term-ground);
   border-block: 2px solid var(--term-ink);
   pointer-events: none;
+  z-index: 2; /* over the status, legend and whoami panels */
   clip-path: inset(50% 0);
   transition: clip-path 0.45s steps(9);
 }

@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head><script>window.huggingface={variables:{"SPACE_CREATOR_USER_ID":"62441d1d9fdefb55a0b7d12c"}};</script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>One trajectory, three patterns</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* Embedded in the blog post: no page chrome, the post's background shows through */
+  body { background: transparent; }
+  figure, figure.wide { margin: 0; }
+</style>
+<meta property="og:title" content="Harness adapters figures"><meta property="og:image" content="https://cdn-thumbnails.huggingface.co/social-thumbnails/spaces/harness-hub/harness-adapters-figures.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://cdn-thumbnails.huggingface.co/social-thumbnails/spaces/harness-hub/harness-adapters-figures.png"></head>
+<body>
+    <figure>
+      <div class="fx">
+        <div class="fx__header"><span class="fx__title">One trajectory, three patterns</span></div>
+        <div class="fx__body tt" id="tt-patterns"><svg viewBox="0 26 794 146" role="img" aria-label="a trajectory as a timeline of requests and commands, with the patterns that make it a build, extend or repair candidate"><rect x="10" y="36" width="88" height="42" rx="8" fill="color-mix(in oklab, var(--fx-accent) 14%, var(--surface-1))" stroke="var(--fx-accent)" stroke-width="1.4"/><text x="54.0" y="53" text-anchor="middle" class="tt-top">request 1</text><text x="54.0" y="69" text-anchor="middle" class="tt-sub" style="fill:var(--text-muted)">“build a CLI”</text><rect x="108" y="36" width="88" height="42" rx="8" fill="var(--surface-1)" stroke="var(--border)" stroke-width="1.4"/><text x="152.0" y="53" text-anchor="middle" class="tt-top">write</text><text x="152.0" y="69" text-anchor="middle" class="tt-sub" style="fill:var(--text-muted)">2 .py files</text><rect x="206" y="36" width="88" height="42" rx="8" fill="var(--surface-1)" stroke="var(--bad)" stroke-width="1.4"/><text x="250.0" y="53" text-anchor="middle" class="tt-top">pytest</text><text x="250.0" y="69" text-anchor="middle" class="tt-sub" style="fill:var(--bad)">exit 1</text><rect x="304" y="36" width="88" height="42" rx="8" fill="var(--surface-1)" stroke="var(--border)" stroke-width="1.4"/><text x="348.0" y="53" text-anchor="middle" class="tt-top">edit</text><text x="348.0" y="69" text-anchor="middle" class="tt-sub" style="fill:var(--text-muted)">util.py</text><rect x="402" y="36" width="88" height="42" rx="8" fill="var(--surface-1)" stroke="var(--good)" stroke-width="1.4"/><text x="446.0" y="53" text-anchor="middle" class="tt-top">pytest</text><text x="446.0" y="69" text-anchor="middle" class="tt-sub" style="fill:var(--good)">exit 0</text><rect x="500" y="36" width="88" height="42" rx="8" fill="color-mix(in oklab, var(--fx-accent) 14%, var(--surface-1))" stroke="var(--fx-accent)" stroke-width="1.4"/><text x="544.0" y="53" text-anchor="middle" class="tt-top">request 2</text><text x="544.0" y="69" text-anchor="middle" class="tt-sub" style="fill:var(--text-muted)">“add --json”</text><rect x="598" y="36" width="88" height="42" rx="8" fill="var(--surface-1)" stroke="var(--border)" stroke-width="1.4"/><text x="642.0" y="53" text-anchor="middle" class="tt-top">edit</text><text x="642.0" y="69" text-anchor="middle" class="tt-sub" style="fill:var(--text-muted)">cli.py</text><rect x="696" y="36" width="88" height="42" rx="8" fill="var(--surface-1)" stroke="var(--good)" stroke-width="1.4"/><text x="740.0" y="53" text-anchor="middle" class="tt-top">pytest</text><text x="740.0" y="69" text-anchor="middle" class="tt-sub" style="fill:var(--good)">exit 0</text><line x1="98" y1="57" x2="108" y2="57" stroke="var(--border)" stroke-width="1.5"/><line x1="196" y1="57" x2="206" y2="57" stroke="var(--border)" stroke-width="1.5"/><line x1="294" y1="57" x2="304" y2="57" stroke="var(--border)" stroke-width="1.5"/><line x1="392" y1="57" x2="402" y2="57" stroke="var(--border)" stroke-width="1.5"/><line x1="490" y1="57" x2="500" y2="57" stroke="var(--border)" stroke-width="1.5"/><line x1="588" y1="57" x2="598" y2="57" stroke="var(--border)" stroke-width="1.5"/><line x1="686" y1="57" x2="696" y2="57" stroke="var(--border)" stroke-width="1.5"/><path d="M10 94 V100 H490 V94" fill="none" stroke="#d29a12" stroke-width="1.8"/><text x="10" y="117" class="tt-lab" style="fill:#d29a12">build · request 1 ends with a passing Python check</text><path d="M500 94 V100 H784 V94" fill="none" stroke="#c2417a" stroke-width="1.8"/><text x="500" y="117" class="tt-lab" style="fill:#c2417a">extend · request 2 changes it, checks pass</text><path d="M206 140 V146 H490 V140" fill="none" stroke="#8e6bd8" stroke-width="1.8"/><text x="206" y="163" class="tt-lab" style="fill:#8e6bd8">repair · the same check fails, then passes after an edit</text></svg></div>
+        <div class="fx__caption">Read off exit codes, commands and file changes. One trajectory can yield several candidates.</div>
+      </div>
+    </figure>
+
+</body>
+</html>
