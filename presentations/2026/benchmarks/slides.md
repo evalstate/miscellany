@@ -17,7 +17,7 @@ drawings:
   persist: false
 ---
 
-<ChessAsciiIntro full scheme="amber" :titled="$clicks > 0" speaker="Shaun Smith" org="Hugging Face" event="secureai.se" location="Stockholm" date="12 November 2026" handle="evalstate" socials="line">Model × harness × alignment</ChessAsciiIntro>
+<ChessAsciiIntro full scheme="amber" :titled="$clicks > 0" speaker="Shaun Smith" org="Hugging Face" event="secureai.se" location="Stockholm" date="12 November 2026" handle="evalstate" socials="stack">Model × harness × alignment</ChessAsciiIntro>
 
 <!--
 Walk-in loop, about 55 seconds. Click to pause. Bottom right names the harness, model, step and date of what is on screen.
