@@ -1334,7 +1334,7 @@ layout: section
 number: 6
 ---
 
-# Finding Shaun Smith, the author of atif-scan
+# Finding Shaun, author of atif-scan
 
 ---
 class: fa-lookup-slide

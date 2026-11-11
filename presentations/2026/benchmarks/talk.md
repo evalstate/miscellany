@@ -138,3 +138,16 @@ Harder than it looks
 Reward Hacking
 Reinforcement Learning
 Escaping
+
+
+
+---
+
+
+
+
+
+atif-scan
+
+how do you price it fairly? a reward hack might be cheap. a harness crash might improve efficiency. a laptop lid close might extend the time period. 
+
