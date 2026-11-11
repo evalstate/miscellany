@@ -616,6 +616,8 @@
 }
 .fa-tool-url { margin: 0; font: 600 15px var(--font-code); color: var(--petrol); }
 .fa-tool ul { margin: 0; }
+.fa-tool-right .fa-tool { grid-template-columns: 1fr 300px; gap: 28px; }
+.fa-tool-right .fa-tool li { margin-bottom: 14px; }
 .fa-tool li { font-size: 24px; line-height: 1.3; margin: 0 0 18px; }
 
 /* ---------- Answer-lookup charts (LookupKinds, LookupTasks, LookupRows, LookupFactors) ---------- */
@@ -865,3 +867,18 @@
 @media (prefers-reduced-motion: reduce) {
   .fa-section-spark { animation: none; opacity: 0.65; }
 }
+
+/* ---------- Closing and summary slides: a few large bullets ---------- */
+.fa-big-slide h1 { margin-bottom: 28px; }
+.fa-big-slide li { font-size: 30px; line-height: 1.3; margin: 0 0 24px; }
+.fa-big-slide .fa-receipt { margin-top: 28px; }
+
+/* ---------- RL run sizes: one open table ---------- */
+.slidev-layout .fa-rl-table table { border: 0; border-radius: 0; background: none; font-size: 21px; }
+.slidev-layout .fa-rl-table th { background: none; border-bottom: var(--border); padding: 8px 14px 8px 0; font-size: 11px; }
+.slidev-layout .fa-rl-table td { padding: 7px 14px 7px 0; border-bottom: 2px solid var(--line); white-space: nowrap; }
+.slidev-layout .fa-rl-table td:nth-child(2) strong { font: 900 28px/1 var(--font-voice); letter-spacing: var(--track-voice); font-variant-numeric: tabular-nums; }
+.slidev-layout .fa-rl-table td:nth-child(3) { color: var(--text-muted); font-size: 18px; }
+.slidev-layout p.fa-rl-table-point { margin: 12px 0 0; font-size: 20px; white-space: nowrap; font-weight: 700; }
+.fa-rl-table-slide h1 { margin-bottom: 8px; }
+.fa-tool .fa-qr-img { width: 96px; height: 96px; border: 0; border-radius: 0; background: #fff; }

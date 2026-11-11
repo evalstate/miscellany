@@ -7,7 +7,7 @@ withDefaults(defineProps<{ footer?: boolean }>(), { footer: true });
   <section class="slidev-layout fa-default">
     <div class="fa-default-body"><slot /></div>
     <footer v-if="footer" class="fa-footer">
-      <span class="fa-footer-brand"><img src="/fa/icon-tile.svg" alt="" />fast-agent</span>
+      <span class="fa-footer-brand"><img src="/fa/providers/hf-logo.svg" alt="" />huggingface.co/evalstate</span>
       <span class="fa-footer-page">{{ $slidev.nav.currentPage }}</span>
     </footer>
   </section>
@@ -36,12 +36,9 @@ withDefaults(defineProps<{ footer?: boolean }>(), { footer: true });
 .fa-footer-brand {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-voice);
-  font-weight: 900;
-  font-size: 15px;
-  letter-spacing: var(--track-voice);
+  gap: 6px;
+  font: 700 13px/1 var(--font-read);
   color: var(--petrol);
 }
-.fa-footer-brand img { width: 20px; height: 20px; }
+.fa-footer-brand img { width: 24px; height: 24px; }
 </style>

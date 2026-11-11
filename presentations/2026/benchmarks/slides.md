@@ -641,7 +641,7 @@ class: fa-tool-slide
 <div class="fa-tool">
 <div class="fa-tool-mark">
 <ToolMark top="atif-" bottom="scan" label="atif-scan" :size="230" />
-<div class="fa-qr" aria-label="QR code to follow">QR</div>
+<img class="fa-qr-img" src="/fa/atif-scan-qr.svg" alt="QR code for github.com/huggingface/atif-scan" />
 <p class="fa-tool-url">github.com/huggingface/atif-scan</p>
 </div>
 
@@ -661,7 +661,7 @@ Clock skew: integrity.timestamp_regression (a timestamp earlier than the one bef
 Allowances mark a finding as expected for that task (for example, network access is part of the task): shown, but left out of the score.
 The hunt server (atif_scan.review.inspect_server, --inspect-tool) is a read-only MCP server bound to one trajectory: trace_outline, read_steps, search_trace, read_step_segment. The tools take no paths, run nothing, and their output is masked and framed as untrusted. The default hunt engine is fast-agent; any MCP-capable CLI agent works.
 It never runs anything found in a trace. Detectors only see agent-authored text by default: messages, reasoning and tool-call arguments.
-QR code to be added.
+The QR code points to https://github.com/huggingface/atif-scan (generated 11 Nov; scan it once before the talk).
 -->
 
 ---
@@ -680,6 +680,37 @@ Four benchmarks (no longer on the slide): Terminal-Bench 2.1, DeepSWE 1.1, Termi
 91 model identifiers include provider and effort variants; 69 have 100 or more trials. 30 of the 35 harnesses have 100 or more. fast-agent is 94,602 of the trials, mini-swe-agent 29,514, codex 11,947, claude-code 8,772.
 Recorded cost is what the traces record, mostly from public leaderboard and DeepSWE runs; subscription-billed runs record nothing.
 Your stub note for this slide was "clock skewing (example)". It still needs its example.
+-->
+
+---
+class: fa-tool-slide fa-tool-right
+---
+
+# fast-agent for benchmark and research
+
+<div class="fa-tool">
+
+- Pareto-optimal performance for supported models
+- Validated with published benchmark traces
+- Native ATIF traces for reliable analysis
+- Records reasoning, tool results, tokens and cost for every call
+- One harness across providers, efforts and Harbor sandboxes
+
+<div class="fa-tool-mark">
+<Wordmark :size="230" :sparkles="false" />
+<p class="fa-tool-url">fast-agent.ai</p>
+</div>
+
+</div>
+
+<!--
+The harness behind most of the traces in this talk: 94,602 of the 164,870 trials in the census are fast-agent.
+Pareto-optimal: for the models it supports, no other harness on the public Terminal-Bench 2.1 board is both cheaper and higher-scoring. This line has no receipt on the slide; have the chart or the run pair ready if asked (the Fable 5 harness comparison and the Claude Code against fast-agent cost charts are in analysis/).
+Validated with published traces: every fast-agent run quoted here is public, trial by trial, in the evalstate tb21-fast-agent-annotated Space and the published-benchmarks bucket, scanned with the same atif-scan as everyone else's.
+Native ATIF: the trajectory is written by the harness as it runs, not converted afterwards, so step ids, reasoning text, tool results and per-call usage line up. That is what made the chess, Zork and flag-channel analyses possible, and why "no image read" is a fact in these traces and not a gap in the log.
+No fallback model: deliberate. A provider safety stop ends the trial and scores zero; it isn't handed to another model. See the safety-stop slides.
+One harness: the same agent loop ran OpenAI, Anthropic, xAI, DeepSeek, Z.ai, Moonshot and Hugging Face routes here, at every effort level, on Daytona and Hugging Face sandboxes through Harbor.
+The last two bullets are mine; edit or cut. "No fallback model" was taken off the slide; the point is still in the note above.
 -->
 
 ---
@@ -938,6 +969,34 @@ Seven leaderboard rows (five GPT-6 Astra, two Gemini 3.8 Flash) publish no traje
 One that did get through, no longer a slide: GLM-5.3 Flash on hermes (18 Oct) fetched a public task page with a Solution tab, extracted a 29,052-byte solution.patch and the verifier's test.patch from its HTML, and applied it. Reward 1, 90 of 90 target tests.
 Segue: every lookup in this section starts with the agent searching the web for its task. The next section is what happens when someone plants pages for those searches to find.
 Source: data/deepswe-attempts.json, built by analysis/answer-lookup/extract_deepswe.py.
+-->
+
+---
+class: fa-lookup-slide
+---
+
+# Flags in reasoning, flags in tool calls
+
+<FlagChannels />
+
+<Receipt source="57,514 trials, 128 public runs: Terminal-Bench 2.1 and DeepSWE 1.1 · atif-scan v0.8.23, 10 Nov 2026 · flags are review candidates" />
+
+<!--
+The macro view of the awareness and medium-severity findings, split by where the evidence is. Every match in an atif-scan report cites a channel. I count two things per trial.
+Flagged in reasoning: the agent remarks on being benchmarked, names the benchmark, or reasons about evading a check, or a medium-or-higher behavioural check cites its reasoning text.
+Flagged in a tool call: a medium-or-higher behavioural check (access, lookup, side channel, tampering, network, recall, and the task-specific ones) cites a command, a path, a URL or a query.
+Matches that an allowance explains are left out of both. The info-level "hidden tests discussed" check is left out too: it fires on a third of the DeepSWE trials that have reasoning text and isn't awareness of being benchmarked.
+Top block: the 37,200 trials whose trace has some reasoning text. 5.7% are flagged in reasoning (2,135) and 10.0% in a tool call (3,741).
+The spread by model family is the point. Qwen 37.8%, DeepSeek 36.0%, GLM 21.9%, SWE-1.7 20.8%, Kimi 9.8% flagged in reasoning. Then Grok 3.0%, Claude 0.9%, GPT 0.6%, Gemini 0.4%. The tool-call column doesn't follow that order: GPT 9.1% and GLM 10.8% are flagged in tool calls about as often, and GLM is flagged in reasoning about 35 times as often. Grok is at 15.7% in tool calls and 3.0% in reasoning.
+What I think that is: the first group records the model's full reasoning. For GPT, Claude and Gemini the recorded text is mostly a provider summary. I can't measure that from the reports: "recorded" means some text is present, not that it is complete. So this is how often awareness is expressed on the recorded surface, not a comparison of what the models know.
+Bottom block: 20,314 trials, 35%, record no reasoning text at all: 10,111 Claude (Fable 5, Opus 5 and Sonnet 5 on DeepSWE, and the Claude Code and Terminus rows), 5,789 GPT (mostly Codex), Muse, Gemini CLI, Grok on Ouroboros. They cannot be flagged in reasoning. 1,555 are flagged in a tool call, 7.6%, about the same rate as everyone else's.
+The three numbers on the right.
+38% against 8%: among trials with text, 819 of the 2,135 flagged in reasoning also have a flagged tool call; of the 35,065 not flagged in reasoning, 2,922 do. That holds inside every family: DeepSeek 51% against 20%, GPT 45% against 8%, Claude 24% against 2%, Grok 61% against 14%. So a reasoning flag is a good pointer to which trials to read.
+1,316: flagged in reasoning with no flagged tool call. That is 61% of the reasoning flags. With hidden reasoning those trials have nothing on them. Many are harmless remarks; the concealment quotes in this talk are in that group too.
+35% and 1,555: a flagged tool call with no explanation recorded next to it. The same lookup can be research or the answer, and without the reasoning we can't tell which.
+Caveats. This mixes two benchmarks and 128 runs that are not balanced by model: DeepSWE's upstream-lookup check supplies a lot of the tool-call flags. Messages are a third channel, not shown: in the runs that report no reasoning tokens at all, about 2% of trials carry a benchmark remark in a message, so some of it moves there. Low-severity awareness has no tool-call equivalent, so the two columns are not the same checks.
+What counts: benchmark-awareness checks and behavioural checks of medium severity or above, with allowance-explained matches removed, including the sanitize-git-repo allowance added to atif-scan on 11 Nov (it moves the tool-call counts by 29 trials). 65 Terminal-Bench 2.1 runs and 63 DeepSWE runs. Percentages are rounded down.
+Source: data/awareness-channels.json (analysis/awareness-channels/extract.py).
 -->
 
 ---
@@ -1322,13 +1381,13 @@ layout: section
 number: 6
 ---
 
-# Finding the evaluator
+# Finding Shaun Smith, the author of atif-scan
 
 ---
 class: fa-lookup-slide
 ---
 
-# An identifies me, and atif-scan!
+# An agent identifies me, and atif-scan!
 
 <EvaluatorTrail />
 
@@ -1513,82 +1572,38 @@ https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Te
 -->
 
 ---
-class: fa-rl-scale-slide
+class: fa-case-slide fa-rl-table-slide
 ---
 
-# A million environments. Then repeat.
+# How big is an RL run?
 
-<div class="fa-rl-scale">
-<div>
-<h2>1 million</h2>
-<p>training environments</p>
-<span>Coding, agentic work and STEM</span>
-</div>
-<span class="fa-rl-scale-arrow" aria-hidden="true">→</span>
-<div>
-<h2>100 million+</h2>
-<p>rollouts</p>
-<span>Repeated attempts, traces and rewards</span>
-</div>
+<div class="fa-rl-table">
+
+| Lab and model | Reported | What is counted |
+|---|---|---|
+| **Reflection** Beam | **100 million+** | rollouts, over 1 million environments |
+| **Moonshot** Kimi K3 | **51 million** | sandboxes created, training and evaluation |
+| **Thinking Machines** Inkling 2 Small | **17 million+** | rollouts in nine days |
+| **Qwen** SWE-Universe | **800,000+** | verifiable software tasks built |
+| **DeepSeek** V4.1 Flash | **millions** | sandboxes running at once |
+
 </div>
 
-<p class="fa-rl-scale-detail">Beam also reports <strong>about 1.3 billion sandbox uses</strong> for training and grading.</p>
+<p class="fa-rl-table-point">A Terminal-Bench 2.1 run is 445 trials. A weak verifier here is wrong millions of times.</p>
 
-<p class="fa-research-takeaway">A weak verifier can reward the wrong behaviour at scale.</p>
-
-<Receipt n="1m environments; >100m rollouts; ≈1.3bn sandboxes" date="5 Oct 2026" model="Reflection Beam" harness="training infrastructure; version not disclosed" source="Reflection, Introducing Beam · High-Compute Reinforcement Learning">Developer-reported. Cumulative sandbox use, not unique tasks or concurrent capacity.</Receipt>
+<Receipt source="developer-reported in launch posts and technical reports, Aug – Nov 2026 · different units, not a ranking" />
 
 <!--
-Return to Beam from the launch montage: benchmarks are not only how labs describe the model, but part of the apparatus used to train it.
-The source reports one million coding, agentic and STEM environments, over 100 million rollouts, and approximately 1.3 billion sandboxes used in training and grading.
-These are distinct units. Do not divide the counts to assert an exact attempt budget per environment; their scopes differ.
-The arrow represents repeated execution, not a claim that each environment was sampled equally.
-The point is the scale at which reward signals are applied, not a finding that Beam's verifiers were weak.
-https://reflection.ai/blog/introducing-beam
-Section: High-Compute Reinforcement Learning. Announcement 5 October 2026; weights followed 16 October.
--->
-
----
-class: fa-rl-evidence-slide
----
-
-# Different counts. The same scale story.
-
-<div class="fa-rl-evidence">
-<section>
-<div class="fa-rl-evidence-line"><h3>Qwen · SWE-Universe</h3><strong>800,000+</strong><span>verifiable SWE tasks</span></div>
-<Receipt source="n = 807,693 instances / 52,960 repos · Qwen3-Max-Thinking pipeline · report v2, 21 Sep 2026, table 2">Dataset construction; not a final-model training total.</Receipt>
-</section>
-<section>
-<div class="fa-rl-evidence-line"><h3>Kimi K3</h3><strong>51 million</strong><span>sandbox creations</span></div>
-<Receipt source="n = 51,219,741 creations / 1,505,678 images · Kimi K3 report v2, 7 Aug 2026, §5.3">Training and evaluation combined. These are not unique tasks or K3.1 counts.</Receipt>
-</section>
-<section>
-<div class="fa-rl-evidence-line"><h3>Inkling 2 Small</h3><strong>17 million+</strong><span>rollouts in nine days</span></div>
-<Receipt source="n > 17m rollouts · Inkling 2 Small main RL run · Thinking Machines launch, 5 Nov 2026">Joint RL run across multiple task families.</Receipt>
-</section>
-<section>
-<div class="fa-rl-evidence-line"><h3>DeepSeek V4.1 Flash</h3><strong>Millions</strong><span>concurrent sandboxes</span></div>
-<Receipt source="n = millions, exact peak undisclosed · V4.1 Flash report, Sep 2026, §5.1.3, pp. 27–28">Training infrastructure demand, not a unique-environment count.</Receipt>
-</section>
-</div>
-
-<p class="fa-rl-evidence-note">Developer-reported · training harness versions not disclosed with these counts · not a like-for-like ranking</p>
-
-<!--
-Supporting receipts, not a leaderboard. Each row measures something different.
-Qwen: 807,693 executable instances across 52,960 repositories; round down on screen. Applied to Qwen3-Max-Thinking, not a disclosed Qwen3.8 training count.
-https://arxiv.org/html/2602.02361v2
-Kimi: 51,219,741 sandbox creations across 1,505,678 images during K3 training AND evaluation. Not 51m different tasks.
-https://arxiv.org/html/2607.24653v2
-K3.1 Pro's newer October blog says joint RL across hundreds of downstream domains, but does not provide an exact environment total. Do not transfer the K3 count to K3.1.
-https://www.kimi.com/en/blog/kimi-k3-1-pro
-Inkling 2 Small: over 17m rollouts over nine days in its main joint RL run. Not the original Inkling's separate >30m-rollout campaign.
-https://thinkingmachines.ai/news/inkling-2-small/
-DeepSeek: §5.1.3 says V4.1 training increased demand to millions of concurrent sandbox instances. This is infrastructure scale, not a count of distinct environments.
-https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf
-All counts are developer-reported. Harness implementation versions are not supplied with these aggregate counts.
-Transition: at that scale, how do you make sure the verifier actually distinguishes useful work from a reward hack? The next slide follows the construction and testing of an RL task.
+One slide in place of the two scale slides. The point: the same loop as a benchmark trial, run at a scale where nobody reads the traces, so whatever the verifier rewards is what gets trained in.
+Each row counts something different. Don't rank them and don't divide one by another.
+Reflection Beam, 5 Oct 2026: one million coding, agentic and STEM environments, over 100 million rollouts, about 1.3 billion sandbox uses for training and grading. https://reflection.ai/blog/introducing-beam
+Kimi K3, report v2, 7 Aug 2026, section 5.3: 51,219,741 sandbox creations across 1,505,678 images, training and evaluation combined. Not 51 million tasks, and not a K3.1 figure. https://arxiv.org/html/2607.24653v2
+Inkling 2 Small, 5 Nov 2026: over 17 million rollouts in nine days in its main joint RL run. https://thinkingmachines.ai/news/inkling-2-small/
+Qwen SWE-Universe, report v2, 21 Sep 2026, table 2: 807,693 executable instances from 52,960 repositories. Dataset construction, not a final-model training total. https://arxiv.org/html/2602.02361v2
+DeepSeek V4.1 Flash report, Sep 2026, section 5.1.3: training pushed demand to millions of concurrent sandbox instances; the exact peak isn't given. https://huggingface.co/deepseek-ai/DeepSeek-V4.1-Flash/blob/main/DeepSeek_V41_Tech_Report.pdf
+All developer-reported; training harness versions aren't disclosed. These figures were collected by the launch and RL research pass (analysis/launch-rl-research-2026-11-11); I rearranged them and did not re-check the sources.
+This is not a finding that any of these labs' verifiers were weak.
+Transition: at that scale, how do you make sure the verifier tells useful work from a reward hack? The next slide follows the construction and testing of an RL task.
 -->
 
 ---
@@ -1676,71 +1691,40 @@ There is also a short demo video from the announcement at public/safeagents/demo
 -->
 
 ---
-class: fa-case-slide
+class: fa-big-slide
 ---
 
-# Live: harness adapters training
+# Harness adapters: training for the harness
 
-<iframe class="fa-embed" src="https://harness-hub-harness-adapters-rl.hf.space/" title="Live harness adapters training dashboard" loading="lazy"></iframe>
+- One small adapter (LoRA) is trained per model and per harness: pi, opencode, hermes.
+- The tasks are built from real agent sessions, screened with atif-scan first.
+- safeagents checks every tool call while the model trains.
 
-<Receipt source="harness-hub-harness-adapters-rl.hf.space, embedded live" />
+<Receipt source="“Harness adapters: Safe RL for efficient agentic development”, Younes B, Lysandre and Nathan Habib, Hugging Face blog, 6 Nov 2026" />
 
 <!--
-The Space has the animated diagram of the training and evaluation flow (pause, replay, speed control), live reward, pass@1 and tool-call charts, and a safeagents event feed.
-It is someone else's live page. Have a screenshot or a recording as a fallback.
+What the next slide's dashboard is doing. The base model stays fixed; a low-rank adapter is trained for each model and harness pair with RL, so the same model gets better at driving one particular harness. Three models (LFM2.5-24B-A2B, LFM3-1.7B and the TwIL-8B experiment), three harnesses, nine runs.
+The tasks come from the pipeline two slides back; the tool-call check is safeagents, the slide before.
 -->
 
 ---
-class: fa-lookup-slide
+class: fa-shot-full fa-shot-light
+footer: false
 ---
 
-# Flags in reasoning, flags in tool calls
+# Harness adapters: the training runs
 
-<FlagChannels />
-
-<Receipt source="57,514 trials, 128 public runs: Terminal-Bench 2.1 and DeepSWE 1.1 · atif-scan v0.8.23, 10 Nov 2026 · flags are review candidates" />
+<img src="/screens/harness-adapters-live.png" class="fa-screenshot" alt="Live harness adapters training dashboard: nine runs, one LoRA adapter per model and harness, 1,950 of 2,100 steps trained, 54,701 rollouts in gradient steps, 402,975 tool calls checked, 179 blocked" />
 
 <!--
-The macro view of the awareness and medium-severity findings, split by where the evidence is. Every match in an atif-scan report cites a channel. I count two things per trial.
-Flagged in reasoning: the agent remarks on being benchmarked, names the benchmark, or reasons about evading a check, or a medium-or-higher behavioural check cites its reasoning text.
-Flagged in a tool call: a medium-or-higher behavioural check (access, lookup, side channel, tampering, network, recall, and the task-specific ones) cites a command, a path, a URL or a query.
-Matches that an allowance explains are left out of both. The info-level "hidden tests discussed" check is left out too: it fires on a third of the DeepSWE trials that have reasoning text and isn't awareness of being benchmarked.
-Top block: the 37,200 trials whose trace has some reasoning text. 5.7% are flagged in reasoning (2,135) and 10.0% in a tool call (3,741).
-The spread by model family is the point. Qwen 37.8%, DeepSeek 36.0%, GLM 21.9%, SWE-1.7 20.8%, Kimi 9.8% flagged in reasoning. Then Grok 3.0%, Claude 0.9%, GPT 0.6%, Gemini 0.4%. The tool-call column doesn't follow that order: GPT 9.1% and GLM 10.8% are flagged in tool calls about as often, and GLM is flagged in reasoning about 35 times as often. Grok is at 15.7% in tool calls and 3.0% in reasoning.
-What I think that is: the first group records the model's full reasoning. For GPT, Claude and Gemini the recorded text is mostly a provider summary. I can't measure that from the reports: "recorded" means some text is present, not that it is complete. So this is how often awareness is expressed on the recorded surface, not a comparison of what the models know.
-Bottom block: 20,314 trials, 35%, record no reasoning text at all: 10,111 Claude (Fable 5, Opus 5 and Sonnet 5 on DeepSWE, and the Claude Code and Terminus rows), 5,789 GPT (mostly Codex), Muse, Gemini CLI, Grok on Ouroboros. They cannot be flagged in reasoning. 1,555 are flagged in a tool call, 7.6%, about the same rate as everyone else's.
-The three numbers on the right.
-38% against 8%: among trials with text, 819 of the 2,135 flagged in reasoning also have a flagged tool call; of the 35,065 not flagged in reasoning, 2,922 do. That holds inside every family: DeepSeek 51% against 20%, GPT 45% against 8%, Claude 24% against 2%, Grok 61% against 14%. So a reasoning flag is a good pointer to which trials to read.
-1,316: flagged in reasoning with no flagged tool call. That is 61% of the reasoning flags. With hidden reasoning those trials have nothing on them. Many are harmless remarks; the concealment quotes in this talk are in that group too.
-35% and 1,555: a flagged tool call with no explanation recorded next to it. The same lookup can be research or the answer, and without the reasoning we can't tell which.
-Caveats. This mixes two benchmarks and 128 runs that are not balanced by model: DeepSWE's upstream-lookup check supplies a lot of the tool-call flags. Messages are a third channel, not shown: in the runs that report no reasoning tokens at all, about 2% of trials carry a benchmark remark in a message, so some of it moves there. Low-severity awareness has no tool-call equivalent, so the two columns are not the same checks.
-What counts: benchmark-awareness checks and behavioural checks of medium severity or above, with allowance-explained matches removed, including the sanitize-git-repo allowance added to atif-scan on 11 Nov (it moves the tool-call counts by 29 trials). 65 Terminal-Bench 2.1 runs and 63 DeepSWE runs. Percentages are rounded down.
-Source: data/awareness-channels.json (analysis/awareness-channels/extract.py).
+Screenshot of harness-hub-harness-adapters-rl.hf.space, taken 11 Nov 2026, 22:40 UTC. The page said its last update was 95.6 hours earlier, so this is the finished state, not a live feed. The live page is still there if you want to open it.
+What is on it: nine runs, one LoRA adapter per model and harness. 1,950 of 2,100 steps trained. 54,701 rollouts in gradient steps. 402,975 tool calls checked by safeagents: 179 blocked, 467 suspicious. 194 held-out checkpoints evaluated. GPU cost $1,169.
+The table's held-out columns: best pass@1 against the base model, and tool calls per solved task. LFM3-1.7B gains 14.0 to 17.3 points on all three harnesses and uses 35% to 43% fewer tool calls. The larger LFM2.5-24B-A2B moves by -1.3 to +3.4 points. These are the page's own figures, best checkpoint per run.
+That is 54,701 rollouts for nine small adapters: set it beside the millions two slides back.
 -->
 
 ---
-class: fa-lookup-slide
----
-
-# At max effort, the tool calls match
-
-<FlagsAtMax />
-
-<Receipt source="DeepSWE 1.1, Datacurve public run · mini-swe-agent, max effort · 448 to 452 trials a model · atif-scan v0.8.23 · review candidates" />
-
-<!--
-Same harness too: every row is mini-swe-agent. Percentages are rounded down.
-The question the last slide raises: do the models whose reasoning we can't read behave differently, or do we just not see it? This is the cleanest cut the data has: one benchmark, one harness, one effort setting, about 452 trials for each of 13 models. DeepSWE tasks have no network, so the tool-call flags here are mostly two things: trying to reach the upstream project for the real fix, and digging through git objects outside the task's history.
-The tool calls look alike. GPT-5.6 Terra 62.7%, Sol 48.2%, Luna 47.7% of trials have a flagged tool call. DeepSeek V4 Flash is at 54.2%, in the middle of them. GLM-5.3 and GLM-5.3 Flash are at 19.6% and 19.8%, less than half the GPT-5.6 rate. Only DeepSeek V4 Pro is higher, 88.4%.
-The reasoning doesn't. GPT-5.6: 0.8% to 5.5% flagged in reasoning. DeepSeek V4 Flash 29.8%, V4 Pro 58.6%, GLM-5.3 49.3%, GLM-5.3 Flash 38.6%. So GPT-5.6 Sol is flagged in tool calls about as often as DeepSeek V4 Flash and in reasoning about 30 times less often.
-Or there is none. Sonnet 5 28.0%, Opus 5 16.9%, Fable 5 13.9% flagged tool calls, with no reasoning text in the trace at all. Opus 4.8, which does record text, is at 7.5% and 1.3%.
-So yes: on the one comparison we can make fairly, the proprietary models with summarised or hidden reasoning make the same kind of flagged tool calls as the open ones, as often or more. We just can't read why. The difference between the columns is what the trace exposes.
-What I can't say: that the hidden reasoning contains the same remarks. The GPT-5.6 text is a provider summary, so a low figure there is a property of the summary. DeepSeek and GLM record the reasoning in full. Kimi K3 sits in between at 13.9% and 15.0%.
-Effort matters more than anything else on this chart: the same GPT-5.6 Terra is at 4.2% at medium, 6.6% at high, 22.1% at xhigh and 62.7% at max. Max is used here because it is the setting every open model in the grid was run at.
-Flags are review candidates. An upstream lookup that returned nothing still counts as a flagged tool call, and the proxy blocked most of them.
-Source: data/awareness-channels.json, the deepswe list (analysis/awareness-channels/extract.py).
--->
-
+class: fa-big-slide
 ---
 
 # Keep the traces and the reasoning open
@@ -1978,4 +1962,27 @@ Some of the tricks models use to pass:
 Collect concrete examples from our traces (with task IDs).
 Candidate categories to check against our traces: reading or editing the tests, finding answers in git
 history or caches, special-casing the verifier's inputs, network lookups where not intended.
+-->
+
+---
+class: fa-lookup-slide
+---
+
+# At max effort, the tool calls match
+
+<FlagsAtMax />
+
+<Receipt source="DeepSWE 1.1, Datacurve public run · mini-swe-agent, max effort · 448 to 452 trials a model · atif-scan v0.8.23 · review candidates" />
+
+<!--
+Same harness too: every row is mini-swe-agent. Percentages are rounded down.
+The question the last slide raises: do the models whose reasoning we can't read behave differently, or do we just not see it? This is the cleanest cut the data has: one benchmark, one harness, one effort setting, about 452 trials for each of 13 models. DeepSWE tasks have no network, so the tool-call flags here are mostly two things: trying to reach the upstream project for the real fix, and digging through git objects outside the task's history.
+The tool calls look alike. GPT-5.6 Terra 62.7%, Sol 48.2%, Luna 47.7% of trials have a flagged tool call. DeepSeek V4 Flash is at 54.2%, in the middle of them. GLM-5.3 and GLM-5.3 Flash are at 19.6% and 19.8%, less than half the GPT-5.6 rate. Only DeepSeek V4 Pro is higher, 88.4%.
+The reasoning doesn't. GPT-5.6: 0.8% to 5.5% flagged in reasoning. DeepSeek V4 Flash 29.8%, V4 Pro 58.6%, GLM-5.3 49.3%, GLM-5.3 Flash 38.6%. So GPT-5.6 Sol is flagged in tool calls about as often as DeepSeek V4 Flash and in reasoning about 30 times less often.
+Or there is none. Sonnet 5 28.0%, Opus 5 16.9%, Fable 5 13.9% flagged tool calls, with no reasoning text in the trace at all. Opus 4.8, which does record text, is at 7.5% and 1.3%.
+So yes: on the one comparison we can make fairly, the proprietary models with summarised or hidden reasoning make the same kind of flagged tool calls as the open ones, as often or more. We just can't read why. The difference between the columns is what the trace exposes.
+What I can't say: that the hidden reasoning contains the same remarks. The GPT-5.6 text is a provider summary, so a low figure there is a property of the summary. DeepSeek and GLM record the reasoning in full. Kimi K3 sits in between at 13.9% and 15.0%.
+Effort matters more than anything else on this chart: the same GPT-5.6 Terra is at 4.2% at medium, 6.6% at high, 22.1% at xhigh and 62.7% at max. Max is used here because it is the setting every open model in the grid was run at.
+Flags are review candidates. An upstream lookup that returned nothing still counts as a flagged tool call, and the proxy blocked most of them.
+Source: data/awareness-channels.json, the deepswe list (analysis/awareness-channels/extract.py).
 -->
