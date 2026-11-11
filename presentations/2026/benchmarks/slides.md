@@ -816,42 +816,14 @@ These establish that reference material was acquired, not that it was necessary 
 class: fa-lookup-slide
 ---
 
-# Five kinds of lookup
-
-<LookupKinds />
-
-<Receipt source="65 runs of Terminal-Bench 2.1, 28,932 trials · atif-scan v0.8.23 plus the sanitize-git-repo allowance of 11 Nov 2026 · flags for review, not verdicts" />
-
-<!--
-Same move as the chess slide: take one behaviour and split it by what the agent actually did.
-Why 28,932 and not the 181,732 from two slides back: this is the slice where the comparison is fair, not the only place it happens. Every one of these runs is the same 89 tasks, five attempts each, read by one scanner version, with the reward attached, and all of it is public. The full corpus is mostly what I chose to run (fast-agent is 94,602 of 164,870 trials), so a corpus-wide rate would describe my run list.
-The other benchmarks, from the private count of 94,119 deduplicated trials (8 Nov scan): Terminal-Bench 2.1 has 414 lookup-request flags in 55,569 trials; TB-lite 23 in 300; DeepSWE 216 in 22,291, none of them a solution URL; Terminal-Bench 4 none in 12,896. Not a league table: those checks were written for Terminal-Bench, DeepSWE has no network (its version of this is the git and upstream digging on the effort slide), and TB 4's tasks are newer with fewer public solutions.
-Population: every row of the three public annotated Spaces. 22 main-leaderboard rows, 14 pull-request submissions and 29 fast-agent runs: 65 runs, 28,932 trials (64 × 445 plus one of 452). One more submission, a scripted replay with no model, is left out here and comes back three slides on.
-A trial counts when atif-scan v0.8.23 has an unexcused medium-or-higher match in its answer-lookup family. 478 trials, 1.6%. 425 of them were rewarded.
-This was 511 yesterday. atif-scan gained an allowance on 11 Nov (expected.tb21.sanitize_git_repo_git_inspection): on sanitize-git-repo the task is to leave no credentials anywhere in the repository, so looking through history and unreachable objects is the task's own verification, not a hunt for a dropped solution. That excuses 33 trials, 32 of them unrewarded. The Spaces' reports are still v0.8.23 without it; the extract applies it on top, so the Spaces show 511 until they are rebuilt.
-The prevailing rate, now in the note at the bottom: the median run has 3 flagged trials in 445, under 1%. 16 of the 65 runs have none. The four highest (81, 57, 50 and 43) hold 231 of the 478, so the 1.6% average is pulled up by a few runs.
-Each trial goes into the first kind that fits:
-- Its own task's solution or tests, 132: the lookup names this task's solution or test files, or a solution or test URL (which includes other agents' finished runs). 130 of the 132 also have benchmark material arriving. 122 rewarded, 92%.
-- Other benchmark material arrived, 187: the benchmark's repository, a mirror or a task page came back, without this task's solution files being named. 170 rewarded, 90%.
-- The upstream fix, 64: 62 of these are fix-ocaml-gc, where the agent fetches the real OCaml source for the bug. All 64 rewarded.
-- Git objects outside the history, 31: digging through unreachable objects in the task's own repository. 13 are merge-diff-arc-agi-task, 5 git-multibranch. 28 rewarded, 90%. No web involved. (64 before the sanitize-git-repo allowance.)
-- Searched, nothing arrived, 64: a search or request named the benchmark and nothing is recorded coming back. 41 rewarded, 64%.
-Overall reward rate is 78% (22,792 of 28,932). The two kinds where material arrives sit at 90% and above. That is a correlation: the flagged trials are on a different mix of tasks, so don't read it as "the lookup added 12 points".
-The 2,000-word version of the caveat: these are detector flags. Arrival is recorded; use is not established.
-Source: data/answer-lookup.json, built by analysis/answer-lookup/extract.py from the Spaces' report files. The per-run totals reproduce the Spaces' published answer-lookup counts exactly.
--->
-
----
-class: fa-lookup-slide
----
-
 # Lookups by task
 
 <LookupTasks />
 
-<Receipt source="same 28,932 trials, 325 per task · atif-scan v0.8.23 plus the 11 Nov allowance · “needs the web” is from a separate review of the 89 tasks" />
+<Receipt source="65 public Terminal-Bench 2.1 runs, 28,932 trials, 325 per task · atif-scan v0.8.23 plus the 11 Nov allowance · “needs the web” is from a separate review of the 89 tasks" />
 
 <!--
+"Five kinds of lookup" and "Lookups by run" were moved to the spares on 11 Nov, so this slide now introduces the numbers: 478 of 28,932 trials in the 65 public runs carry an answer-lookup flag, 1.6%, and the typical run has 3 in 445. The colours are the five kinds: the task's own solution or tests, other benchmark material, the upstream fix, git objects, and searches where nothing came back.
 By task. Eight of 89 tasks hold 305 of the 478 flags (63%). 38 tasks have none at all.
 The colour mix changes from task to task, which is the point:
 - mteb-leaderboard, 67: the task needs outside leaderboard data, so the agent has to search. Mostly petrol: benchmark material came back. I haven't read these trials one by one.
@@ -862,25 +834,6 @@ The colour mix changes from task to task, which is the point:
 "Needs the web" is the tb21-network review's verdict (required or expected): mteb-leaderboard, count-dataset-tokens, build-pov-ray and raman-fitting among these ten. On those, going to the web is part of the task. The other six can be done offline.
 This agrees with the earlier private-corpus count (55,569 TB 2.1 trials): four tasks, extract-elf, build-pov-ray, torch-pipeline-parallelism and db-wal-recovery, held 93 of 184 solution-URL flags.
 Each task has 325 trials: 65 runs, five attempts (mteb-retrieve has 326).
--->
-
----
-class: fa-lookup-slide
----
-
-# Lookups by run
-
-<LookupRows />
-
-<Receipt source="65 runs, 445 trials each (one of 452), dated 18 Nov 2025 – 7 Nov 2026 · atif-scan v0.8.23 plus the 11 Nov allowance" />
-
-<!--
-By run: the chart shows the seven runs with 15 or more flagged trials. Underneath, every one of the 32 models is named: 22 had benchmark material arrive in at least one trial (the number after each name is how many trials, summed over all of that model's runs), 4 were flagged with nothing arriving, 6 have no flag. Whether a given arrival was deliberate or stumbled on is for the talk-over: the flag records that the material came back, not why. A run is one harness, one model and one effort setting over the same 89 tasks, five attempts each, so the counts are comparable.
-Top four: SWE-1.7 on Devin CLI, 81 of 445 (18%), 37 of them for its own task's solution or tests. DeepSeek V4.1 Flash on fast-agent, 57. Grok 4.5 on Cursor CLI, 50. GPT-5.6 Terra on Codex, 43: that is the Terra row from the leaderboard slide, which still shows the Space's 46 (three sanitize-git-repo trials, none rewarded, so its adjusted score doesn't move).
-The Devin run is a pull-request submission; the Terminal-Bench pipeline disqualified 56 of its trials.
-29 of the 65 runs have two or fewer flagged trials and 16 have none (no longer on the slide). The top four runs hold 231 of the 478.
-"Rewarded" is how many of the flagged trials passed.
-fast-agent rows are our own runs. They are on this chart because the same scanner read them.
 -->
 
 ---
@@ -1962,6 +1915,54 @@ Some of the tricks models use to pass:
 Collect concrete examples from our traces (with task IDs).
 Candidate categories to check against our traces: reading or editing the tests, finding answers in git
 history or caches, special-casing the verifier's inputs, network lookups where not intended.
+-->
+
+---
+class: fa-lookup-slide
+---
+
+# Five kinds of lookup
+
+<LookupKinds />
+
+<Receipt source="65 runs of Terminal-Bench 2.1, 28,932 trials · atif-scan v0.8.23 plus the sanitize-git-repo allowance of 11 Nov 2026 · flags for review, not verdicts" />
+
+<!--
+Same move as the chess slide: take one behaviour and split it by what the agent actually did.
+Why 28,932 and not the 181,732 from two slides back: this is the slice where the comparison is fair, not the only place it happens. Every one of these runs is the same 89 tasks, five attempts each, read by one scanner version, with the reward attached, and all of it is public. The full corpus is mostly what I chose to run (fast-agent is 94,602 of 164,870 trials), so a corpus-wide rate would describe my run list.
+The other benchmarks, from the private count of 94,119 deduplicated trials (8 Nov scan): Terminal-Bench 2.1 has 414 lookup-request flags in 55,569 trials; TB-lite 23 in 300; DeepSWE 216 in 22,291, none of them a solution URL; Terminal-Bench 4 none in 12,896. Not a league table: those checks were written for Terminal-Bench, DeepSWE has no network (its version of this is the git and upstream digging on the effort slide), and TB 4's tasks are newer with fewer public solutions.
+Population: every row of the three public annotated Spaces. 22 main-leaderboard rows, 14 pull-request submissions and 29 fast-agent runs: 65 runs, 28,932 trials (64 × 445 plus one of 452). One more submission, a scripted replay with no model, is left out here and comes back three slides on.
+A trial counts when atif-scan v0.8.23 has an unexcused medium-or-higher match in its answer-lookup family. 478 trials, 1.6%. 425 of them were rewarded.
+This was 511 yesterday. atif-scan gained an allowance on 11 Nov (expected.tb21.sanitize_git_repo_git_inspection): on sanitize-git-repo the task is to leave no credentials anywhere in the repository, so looking through history and unreachable objects is the task's own verification, not a hunt for a dropped solution. That excuses 33 trials, 32 of them unrewarded. The Spaces' reports are still v0.8.23 without it; the extract applies it on top, so the Spaces show 511 until they are rebuilt.
+The prevailing rate, now in the note at the bottom: the median run has 3 flagged trials in 445, under 1%. 16 of the 65 runs have none. The four highest (81, 57, 50 and 43) hold 231 of the 478, so the 1.6% average is pulled up by a few runs.
+Each trial goes into the first kind that fits:
+- Its own task's solution or tests, 132: the lookup names this task's solution or test files, or a solution or test URL (which includes other agents' finished runs). 130 of the 132 also have benchmark material arriving. 122 rewarded, 92%.
+- Other benchmark material arrived, 187: the benchmark's repository, a mirror or a task page came back, without this task's solution files being named. 170 rewarded, 90%.
+- The upstream fix, 64: 62 of these are fix-ocaml-gc, where the agent fetches the real OCaml source for the bug. All 64 rewarded.
+- Git objects outside the history, 31: digging through unreachable objects in the task's own repository. 13 are merge-diff-arc-agi-task, 5 git-multibranch. 28 rewarded, 90%. No web involved. (64 before the sanitize-git-repo allowance.)
+- Searched, nothing arrived, 64: a search or request named the benchmark and nothing is recorded coming back. 41 rewarded, 64%.
+Overall reward rate is 78% (22,792 of 28,932). The two kinds where material arrives sit at 90% and above. That is a correlation: the flagged trials are on a different mix of tasks, so don't read it as "the lookup added 12 points".
+The 2,000-word version of the caveat: these are detector flags. Arrival is recorded; use is not established.
+Source: data/answer-lookup.json, built by analysis/answer-lookup/extract.py from the Spaces' report files. The per-run totals reproduce the Spaces' published answer-lookup counts exactly.
+-->
+
+---
+class: fa-lookup-slide
+---
+
+# Lookups by run
+
+<LookupRows />
+
+<Receipt source="65 runs, 445 trials each (one of 452), dated 18 Nov 2025 – 7 Nov 2026 · atif-scan v0.8.23 plus the 11 Nov allowance" />
+
+<!--
+By run: the chart shows the seven runs with 15 or more flagged trials. Underneath, every one of the 32 models is named: 22 had benchmark material arrive in at least one trial (the number after each name is how many trials, summed over all of that model's runs), 4 were flagged with nothing arriving, 6 have no flag. Whether a given arrival was deliberate or stumbled on is for the talk-over: the flag records that the material came back, not why. A run is one harness, one model and one effort setting over the same 89 tasks, five attempts each, so the counts are comparable.
+Top four: SWE-1.7 on Devin CLI, 81 of 445 (18%), 37 of them for its own task's solution or tests. DeepSeek V4.1 Flash on fast-agent, 57. Grok 4.5 on Cursor CLI, 50. GPT-5.6 Terra on Codex, 43: that is the Terra row from the leaderboard slide, which still shows the Space's 46 (three sanitize-git-repo trials, none rewarded, so its adjusted score doesn't move).
+The Devin run is a pull-request submission; the Terminal-Bench pipeline disqualified 56 of its trials.
+29 of the 65 runs have two or fewer flagged trials and 16 have none (no longer on the slide). The top four runs hold 231 of the 478.
+"Rewarded" is how many of the flagged trials passed.
+fast-agent rows are our own runs. They are on this chart because the same scanner read them.
 -->
 
 ---
