@@ -640,7 +640,7 @@ class: fa-tool-slide
 
 <div class="fa-tool">
 <div class="fa-tool-mark">
-<ToolMark top="atif-" bottom="scan" label="atif-scan" :size="230" />
+<ToolMark top="atif-" bottom="scan" label="atif-scan" :size="185" />
 <img class="fa-qr-img" src="/fa/talk-qr.svg" alt="QR code for the talk's companion page of links" />
 <p class="fa-tool-url">github.com/huggingface/atif-scan</p>
 </div>
