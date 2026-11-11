@@ -640,8 +640,8 @@ class: fa-tool-slide
 
 <div class="fa-tool">
 <div class="fa-tool-mark">
-<ToolMark top="atif-" bottom="scan" label="atif-scan" :size="230" />
-<img class="fa-qr-img" src="/fa/atif-scan-qr.svg" alt="QR code for github.com/huggingface/atif-scan" />
+<ToolMark top="atif-" bottom="scan" label="atif-scan" :size="185" />
+<img class="fa-qr-img" src="/fa/talk-qr.svg" alt="QR code for the talk's companion page of links" />
 <p class="fa-tool-url">github.com/huggingface/atif-scan</p>
 </div>
 
@@ -661,7 +661,7 @@ Clock skew: integrity.timestamp_regression (a timestamp earlier than the one bef
 Allowances mark a finding as expected for that task (for example, network access is part of the task): shown, but left out of the score.
 The hunt server (atif_scan.review.inspect_server, --inspect-tool) is a read-only MCP server bound to one trajectory: trace_outline, read_steps, search_trace, read_step_segment. The tools take no paths, run nothing, and their output is masked and framed as untrusted. The default hunt engine is fast-agent; any MCP-capable CLI agent works.
 It never runs anything found in a trace. Detectors only see agent-authored text by default: messages, reasoning and tool-call arguments.
-The QR code points to https://github.com/huggingface/atif-scan (generated 11 Nov; scan it once before the talk).
+The QR code points to the talk's companion page, https://evalstate-benchmarks-talk.static.hf.space: links to atif-scan, fast-agent, safeagents, the harness-adapters leaderboard, the annotated-trace Spaces and my socials. Scan it once before the talk.
 -->
 
 ---
@@ -816,7 +816,7 @@ These establish that reference material was acquired, not that it was necessary 
 class: fa-lookup-slide
 ---
 
-# Lookups by task
+# Lookups by task (published runs)
 
 <LookupTasks />
 
@@ -1698,6 +1698,12 @@ layout: cover
 ::meta::
 
 huggingface.co/evalstate · github.com/evalstate · x.com/evalstate
+
+Links: evalstate-benchmarks-talk.static.hf.space
+
+::splash::
+
+<img class="fa-qr-big" src="/fa/talk-qr.svg" alt="QR code for the companion page of links" />
 
 ---
 layout: section
