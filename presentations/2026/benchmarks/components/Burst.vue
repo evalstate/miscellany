@@ -16,7 +16,10 @@ const props = withDefaults(
   { shape: "capsule", tone: "orange", size: 132, tilt: -8, shadow: true, pop: true },
 );
 
-const masks = { capsule: "/fa/mono/burst.svg", star: "/fa/mono/star.svg", score: "/fa/mono/score.svg" };
+// public files are addressed from the deck's base, so the build also works when hosted under a sub-path
+// made absolute against the page, because a CSS mask url would otherwise resolve against the stylesheet
+const base = new URL(import.meta.env.BASE_URL, document.baseURI).href;
+const masks = { capsule: `${base}fa/mono/burst.svg`, star: `${base}fa/mono/star.svg`, score: `${base}fa/mono/score.svg` };
 const fills = { orange: "var(--orange)", amber: "var(--amber)", petrol: "var(--petrol)", teal: "var(--teal)" };
 const inks = { orange: "var(--ivory)", amber: "var(--petrol)", petrol: "var(--ivory)", teal: "var(--ivory)" };
 const shadows = { orange: "var(--amber)", amber: "var(--petrol)", petrol: "var(--amber)", teal: "var(--amber)" };

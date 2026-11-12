@@ -19,7 +19,7 @@ const alts: Record<string, string> = {
   E: "Presenter in a teal suit leaning over a sign",
   F: "Presenter in a teal suit smiling with her palm up",
 };
-const src = computed(() => `/fa/illustration/poses/presenter-${props.pose}.png`);
+const src = computed(() => `${import.meta.env.BASE_URL}fa/illustration/poses/presenter-${props.pose}.png`);
 </script>
 
 <template>

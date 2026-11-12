@@ -1557,7 +1557,7 @@ class: fa-lookup-slide
 
 # From a shared agent session to an RL task
 
-<iframe class="fa-embed fa-embed-figure" src="/harness-adapters/pipeline.html" title="Animated diagram: trajectories pass six checks and become RL tasks"></iframe>
+<iframe class="fa-embed fa-embed-figure" src="./harness-adapters/pipeline.html" title="Animated diagram: trajectories pass six checks and become RL tasks"></iframe>
 
 <Receipt source="figure from “Harness adapters: Safe RL for efficient agentic development”, Younes B, Lysandre and Nathan Habib, Hugging Face blog, 6 Nov 2026" />
 
@@ -1581,7 +1581,7 @@ class: fa-lookup-slide
 
 # safeagents: a check before every tool call
 
-<div class="fa-figure-fit"><iframe src="/harness-adapters/proxy.html" title="Animated diagram: safeagents as a reverse proxy between the harness and the model"></iframe></div>
+<div class="fa-figure-fit"><iframe src="./harness-adapters/proxy.html" title="Animated diagram: safeagents as a reverse proxy between the harness and the model"></iframe></div>
 
 <div class="fa-safe-points">
 

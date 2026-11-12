@@ -59,7 +59,7 @@ function paperStyle(i: number, kind: typeof kinds[number]) {
   };
 }
 function src(site: Site, kind: typeof kinds[number]) {
-  return `/screens/launch-research/${kind === "press" ? site.press : `${site.id}-${kind}.png`}`;
+  return `${import.meta.env.BASE_URL}screens/launch-research/${kind === "press" ? site.press : `${site.id}-${kind}.png`}`;
 }
 const visibleSites = computed(() => props.sites.slice(0, count.value));
 const sources = computed(() => visibleSites.value.map(s =>
