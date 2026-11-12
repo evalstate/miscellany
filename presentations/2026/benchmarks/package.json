@@ -9,7 +9,8 @@
     "format": "prettier --write slides.md style.css components/**/*.vue layouts/**/*.vue setup/**/*.ts vite.config.ts",
     "preview": "slidev build slides.md --base ./ --router-mode hash --out dist && vite preview dist --host 127.0.0.1 --port 4173",
     "build:single": "SLIDEV_SINGLEFILE=1 slidev build slides.md --base ./ --router-mode hash --out dist-single",
-    "open:single": "npm run build:single && xdg-open dist-single/index.html"
+    "open:single": "npm run build:single && xdg-open dist-single/index.html",
+    "build:public": "python3 scripts/public_slides.py && slidev build slides.public.md --base ./ --router-mode hash --out dist-public"
   },
   "devDependencies": {
     "@lucide/vue": "^1.17.0",

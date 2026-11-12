@@ -5,6 +5,41 @@
     {
       "status": "published",
       "year": 2026,
+      "event": "secureai.se",
+      "eventUrl": "https://secureai.se",
+      "location": "Stockholm",
+      "title": "Model × harness × alignment",
+      "date": "Nov 2026",
+      "sortDate": "2026-11-12",
+      "source": "2026/benchmarks/dist-public",
+      "provenanceSource": "2026/benchmarks",
+      "build": {
+        "cwd": "2026/benchmarks",
+        "env": {
+          "PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD": "1"
+        },
+        "commands": [
+          [
+            "npm",
+            "ci"
+          ],
+          [
+            "npm",
+            "run",
+            "build:public"
+          ]
+        ]
+      },
+      "publishPath": "2026/benchmarks",
+      "entry": "index.html",
+      "include": [
+        "."
+      ],
+      "note": "Published without speaker notes or spare slides. Links: evalstate-benchmarks-talk.static.hf.space"
+    },
+    {
+      "status": "published",
+      "year": 2026,
       "event": "MCP Release Party",
       "eventUrl": "https://luma.com/klu2tegz",
       "location": "",
@@ -124,7 +159,7 @@
         "."
       ],
       "note": "Included live demonstration of fast-agent and mcp-webcam sampling"
-},
+    },
     {
       "status": "published",
       "year": 2026,
@@ -177,7 +212,7 @@
         "images"
       ],
       "note": "Included live demo of fast-agent / Monty Code Generation"
-},
+    },
     {
       "status": "published",
       "year": 2026,

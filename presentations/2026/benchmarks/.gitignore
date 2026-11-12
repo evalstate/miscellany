@@ -6,3 +6,6 @@ reports/
 .scratch/
 *.pdf
 .DS_Store
+dist-public/
+slides.public.md
+pages/*.public.md
