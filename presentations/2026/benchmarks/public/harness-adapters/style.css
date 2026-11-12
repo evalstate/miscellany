@@ -226,6 +226,3 @@ footer { max-width: 1040px; margin: 0 auto; padding: 24px 16px 48px; border-top:
 
 .hf-chip { display: inline-flex; align-items: center; gap: 9px; padding: 2px 10px; border: 1px solid var(--border); border-radius: 8px; background: var(--surface-1); color: var(--text-primary); text-decoration: none; white-space: nowrap; }
 .hf-chip:hover { border-color: var(--text-muted); }
-
-/* local copy for the talk: the harness logo files are not published, so hide the empty image boxes */
-img[src$="hermes.png"], img[src$="opencode.png"], img[src$="pi.svg"], image[href$="hermes.png"], image[href$="opencode.png"], image[href$="pi.svg"] { display: none; }
