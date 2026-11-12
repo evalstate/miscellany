@@ -9,7 +9,7 @@ remote-only source content.
 
 ## Files
 
-- `manifest.json` — selected decks and candidate decks.
+- `manifest.json` — selected decks and candidate decks. An item may carry `links`, a list of `{label, url}` shown as extra buttons on its card (for example a companion page).
 - `scripts/build.sh` — build configured decks and assemble `publish/site/` from the manifest.
 - `scripts/verify.sh` — check that published entries exist in `publish/site/`.
 - `scripts/deploy-space.sh` — upload `publish/site/` to the Space.

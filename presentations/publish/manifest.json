@@ -35,7 +35,13 @@
       "include": [
         "."
       ],
-      "note": "Published without speaker notes or spare slides. Links: evalstate-benchmarks-talk.static.hf.space"
+      "note": "Published without speaker notes or spare slides.",
+      "links": [
+        {
+          "label": "Links and traces",
+          "url": "https://evalstate-benchmarks-talk.static.hf.space"
+        }
+      ]
     },
     {
       "status": "published",

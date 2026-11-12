@@ -204,6 +204,11 @@ def render_index(manifest: dict, items: list[dict], build_meta: dict) -> str:
             path = html.escape(f"{item['publishPath'].rstrip('/')}/{item['entry']}")
             event = item.get("eventUrl")
             event_link = f'<a class="pill ghost" href="{html.escape(event)}">Event</a>' if event else ""
+            # Optional extra buttons, e.g. a companion page: "links": [{"label": "...", "url": "..."}]
+            extra_links = "".join(
+                f'<a class="pill ghost" href="{html.escape(link["url"])}">{html.escape(link["label"])}</a>'
+                for link in item.get("links", [])
+            )
             note = item.get("note")
             note_html = f'<p class="note">{html.escape(note)}</p>' if note else ""
             cards.append(f"""
@@ -217,6 +222,7 @@ def render_index(manifest: dict, items: list[dict], build_meta: dict) -> str:
           </a>
           <div class="card-actions">
             {event_link}
+            {extra_links}
             <a class="pill" href="{path}">View deck</a>
             <a class="arrow" href="{path}" aria-label="Open {item_title}">↗</a>
           </div>
