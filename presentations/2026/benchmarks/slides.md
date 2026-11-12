@@ -37,6 +37,9 @@ number: 1
 
 # Why benchmark?
 
+
+<!-- what can benchmarks tell us about how models behave -->
+
 ---
 clicks: 5
 class: fa-case-slide
@@ -47,6 +50,9 @@ class: fa-case-slide
 <RunCostByMonth :shown="$clicks + 1" />
 
 <!--
+
+The cost of intelligence has rapidly fallen in competiton; this also opens up scale testing
+
 Receipt, kept off the slide on purpose (this is a narrative slide): 12 runs of 445 trials (89 tasks × 5), 30 Apr – Nov 2026. GPT-5.5, then Sol at high effort; Luna at max effort (Nov medium). terminus-2 2.0.0 and Codex for the two public runs, fast-agent 0.9.24–0.10.52 for the rest, all on TB 2.1. Amber is list price for the tokens used at one rate table of 5 Nov 2026; petrol is cost as that run recorded it. Neither is money spent.
 Click through six steps. Each panel opens with a public leaderboard run (petrol), then the fast-agent runs for July to November (amber). There is no run for May or June.
 Luna opens with the public Codex run of GPT-5.6 Luna on 11 July: $241 at 76% (341 of 445). GPT-5.6 Luna's price was then cut about fivefold (our runs were configured at $1 / $0.10 / $6 per million tokens in July and $0.20 / $0.02 / $1.20 from August), which is most of the drop to the amber bars. The amber bars are all priced at the later rates. The Codex version isn't in the listing.
@@ -74,15 +80,13 @@ class: fa-case-slide
 <CompactionCost />
 
 <!--
-This is what a harness developer does with a cheap benchmark: change one setting, run it again, read score and cost side by side.
-About 45 seconds. Each chart is one model: cost per trial runs along the bottom, score up the side, so up and to the left is better. The grey dot is the old compaction point, the amber dot the new one, and the arrow is the move.
-Axes: both are zoomed. Cost runs $0.15 to $0.30 (GLM) and $5 to $8 (Grok), so the leftward move looks bigger than to scale; the 23% and 16% under each chart are the real sizes. Score shows 30% to 50%, so the 2-point rise looks steeper than on a full axis.
-Receipt, kept off the slide (narrative slide): Terminal-Bench 4.0, the 19-task subset, 95 trials per run (19 tasks × 5), fast-agent. GLM-5.3 Flash at high effort on Z.ai; Grok 4.7 at xhigh on xAI. The two Grok runs also differ in fast-agent version, 0.10.44 and 0.10.46. Chart drawn 4 Nov 2026; the four runs are not in the published benchmark manifest, so their dates aren't given here.
-GLM-5.3 Flash: no compaction (1M window) scores 35.8% at $0.28 a trial; compacting at 200k scores 37.9% at $0.21, 23% less.
-Grok 4.7: compacting at 425k (the default) scores 40.0% at $7.59 a trial; compacting at 190k scores 42.1% at $6.37, 16% less.
-Score is verifier reward ÷ 95, with ± one standard error clustered by task. With 19 tasks, differences under about 10 points are within noise; both score gaps here are about 2 points. The slide states the measured direction (score up 2 points in both pairs). If asked: on 19 tasks that gain is within one standard error, so the firm result is the cost.
-Cost is fast-agent's recorded cost at the provider's list prices, not billing. The later-compaction runs have more trials with incomplete usage records (11 against 3 for GLM, 17 against 1 for Grok), so their bars are, if anything, short, and the true saving may be larger.
-Not shown: GLM at 256k scored 35.8% at $0.35 a trial, or $0.22 without one trial that re-ran a script 2,238 times.
+
+Harness optimisers can find defects, and settings that work well. Figure out strategies that work against a common set of tasks.
+
+---
+
+
+
 Source: the fast-agent docs chart, docs/benchmark_data/tb4/compaction.py. Figures are copied from it, not re-derived.
 -->
 
@@ -271,33 +275,11 @@ sites:
 <LaunchCollage :stage="$clicks" :sites="$frontmatter.sites" heading="Launches come with benchmark scores" />
 
 <!--
-One full-canvas news-desk collage, immediately after Research: Checkpoint quality.
-The earlier headline and website-gallery slides have been consolidated here, rather than repeated.
-At entry: Thinking Machines' launch page, benchmark panel and press headline are spread across the canvas.
-Click 1: Reflection joins the desk; the first pair moves aside.
-Click 2: Recursive joins; all three launch/benchmark pairs and press headlines remain visible.
-Clicks 3–5: each benchmark panel grows forward from its position on the desk. It is the same image, not a redraw or a new slide. Its own receipt appears below.
-Click 6: pull back to the complete collage. Move on to Running a benchmark.
-Normal back/forward navigation reverses every step. Reduced-motion mode shows the same states without the spatial animation.
-Spoken link from checkpoint quality: “They use benchmarks during training. Then the launch arrives with a scorecard.”
-The investment point is capability signalling, not evidence that a particular score caused an investment. Semafor's Beam launch article places capability comparisons beside named investors and valuation:
-https://www.semafor.com/article/10/05/2026/reflection-ai-unveils-an-open-source-answer-to-chinese-labs
-Press originals:
-https://venturebeat.com/technology/thinking-machines-launches-inkling-2-small-with-near-frontier-performance-on-enterprise-benchmarks
-https://techcrunch.com/2026/10/05/reflection-debuts-beam-a-open-weight-ai-model-to-rival-chinese-models-at-lower-compute-cost/
-https://techcrunch.com/2026/10/21/recursive-launches-flint-a-laptop-coding-model-it-says-was-largely-built-by-AI/
-All images are local. The original panels are shown intact; the montage is not a claim that results are directly comparable.
-These are genuine browser screenshots, not re-created page mock-ups. Viewport crops preserve each site's typography, colours, navigation and chart labels. Reflection's cookie banner was rejected using its own control. No text or numbers were edited, hidden or rearranged.
-Source URLs:
-https://thinkingmachines.ai/news/inkling-2-small/
-https://reflection.ai/blog/introducing-beam
-https://recursive.com/updates/introducing-recursive-flint
-Publication dates here belong to the official pages. Recursive's page displays 18 October; the TechCrunch clipping on the previous slide is dated 21 October.
-Benchmark settings vary. The panels do not provide complete task denominators or exact harness versions, so this slide demonstrates how results are presented, not an independently harmonised comparison.
-Flint's surrounding methodology says single-turn average pass@1 across five attempts; agentic average pass@1 across at least five attempts, Terminus 2 XML for Terminal-Bench 2.1 and mini-swe-agent for SWE-bench. The task totals and harness versions are not provided with the panel.
-Caution: Beam's rendered chart image and hidden accessible HTML table currently differ for some rows. The image here is exactly what a visitor sees, not a reconciliation or a new score claim. Likewise, use the original chart labels rather than silently changing them to match prose elsewhere.
-Capture metadata: analysis/launch-rl-research-2026-11-11/site-captures.json.
+
+Benchmarks remain important for a number of audiences despite their problems
+
 -->
+
 
 ---
 layout: section
@@ -655,6 +637,10 @@ class: fa-tool-slide
 </div>
 
 <!--
+
+trace analysis is harder than it may first appear. its confusing for models, contains potentially unsafe data.
+
+
 atif-scan v0.8.23 (released before 10 Nov 2026). github.com/huggingface/atif-scan; run with uvx atif-scan@latest.
 Inputs: local directories, hf:// buckets, harbor:// jobs, Datacurve's public DeepSWE trial mirrors.
 Clock skew: integrity.timestamp_regression (a timestamp earlier than the one before) and timestamp_smearing (90% or more of timestamps identical, stamped at export). Other integrity checks: reasoning tokens above completion tokens, totals that are only the last call, missing cost, tool results not recorded.
@@ -724,6 +710,12 @@ class: fa-case-slide
 <Receipt source="TB-Lite git-repo-forensics · 35 trials, 9–13 Oct 2026 · rewards as recorded" />
 
 <!--
+
+The benchmark task was broken -- it didn't ship with the necessary files. Yet some models still passed it.
+
+---
+
+
 The task ships two files and no .git, and git isn't installed, so there is nothing to recover. Its reference solution falls back to writing the answers.
 Left: what every trial saw (two files, no .git, no git binary), then reward by model. Qwen's best is 0.355.
 Receipt, off the slide: 35 trials, 9–13 Oct 2026, TB-Lite; fast-agent 0.10.45 (DeepSeek, Luna), pi variants (Qwen).
@@ -859,9 +851,11 @@ Caveats. The corpus scan is an older scanner than the public reports. A trial wh
 Source: data/lookup-rates.json (analysis/answer-lookup/corpus_rates.py).
 -->
 
+<!-- 
 ---
 class: fa-lookup-slide
 ---
+
 
 # Lookups by model, effort and harness
 
@@ -879,6 +873,8 @@ The streetlight caveat (this was the "drunk finding keys" note): we find lookups
 A fourth factor, off the slide: the prompt. Terminal-Bench 4 says "Do not cheat by using online solutions", and the private-corpus count is 0 flags in 12,896 TB 4 trials. Not proof: the tasks are newer and fewer solutions are public.
 These are single runs per cell. Dates, versions and providers differ between cells.
 -->
+
+
 
 ---
 class: fa-lookup-slide
@@ -1115,6 +1111,46 @@ These three are unrelated to each other. The io_uring slide belongs to approach 
 Counts are command shapes in the 8 Nov scan, most of them on tasks where network access is allowed.
 -->
 
+
+---
+class: fa-case-slide
+---
+
+# Already inside: a newer Textual
+
+<div class="fa-case fa-case-big">
+<div>
+
+A DeepSWE task asks the agent to add a feature, Kitty keyboard phases, to the popular library **Textual** (version 7.5.0). The task has no network.
+
+The harness, mini-swe-agent, is installed in the same sandbox and depends on Textual. Its copy is the newer **8.2.7**, which already has Kitty keyboard support.
+
+**GPT-5.6 Terra finds that copy and uses it as its reference.**
+
+</div>
+<div>
+
+<ol class="fa-case-steps">
+  <li><b>Step 66</b> <q>The newer installed Textual implementation intentionally still requests only <code>>1u</code>.</q> It changes its own code to match.</li>
+  <li><b>Step 74</b> Searches the installed packages and finds the harness's Textual.</li>
+  <li><b>Step 75</b> <q>I'll inspect its version, <code>Key</code> event, and Kitty parser/driver implementation for a closer upstream reference.</q></li>
+  <li><b>Result</b> <code>Version: 8.2.7</code>. <b class="fa-case-end">Reward 1.</b></li>
+</ol>
+
+</div>
+</div>
+
+<Receipt source="1 trial, 7 Jul 2026 · GPT-5.6 Terra (max) · mini-swe-agent 2.4.2 · DeepSWE 1.1, Datacurve public run" />
+
+<!--
+Moved here from the spare slides. It isn't one of the three approaches: nothing leaves the sandbox. It belongs in this section because the agent ends up with content the task didn't intend it to have, and that content helps with the task. It is the same task as "Pin the IP" two slides back: there the agent went out to GitHub for Textual's source, here a newer Textual was already on disk.
+Source: talk-hunt-2026-11-08/wildcard/delta-datacurve.md DC-W01 and rerun/DELTA.md insight 2.
+The point to make aloud: the network block doesn't help when the harness has a newer version of the project under test as a dependency. That is a problem with how the environment was built, not a cheating verdict. Reading installed packages may well be allowed.
+GPT-5.6 Luna (max) reads the same copy on the same task and scores 0 (no longer on the slide). The slide says 8.2.7 "already has Kitty keyboard support": Terra reads its Kitty parser and driver. The newer source doesn't contain the exact hidden reference; what it contributed to Terra's reward is unknown.
+Terra had already done substantial independent work. The step 66 revert happens before 74–76 (it read the installed driver earlier, at 65).
+-->
+
+
 ---
 class: fa-trio-slide
 ---
@@ -1191,44 +1227,6 @@ Source: data/evasion.json (analysis/evasion/extract.py); talk-hunt-2026-11-08/ne
 -->
 
 ---
-class: fa-case-slide
----
-
-# Already inside: a newer Textual
-
-<div class="fa-case fa-case-big">
-<div>
-
-A DeepSWE task asks the agent to add a feature, Kitty keyboard phases, to the popular library **Textual** (version 7.5.0). The task has no network.
-
-The harness, mini-swe-agent, is installed in the same sandbox and depends on Textual. Its copy is the newer **8.2.7**, which already has Kitty keyboard support.
-
-**GPT-5.6 Terra finds that copy and uses it as its reference.**
-
-</div>
-<div>
-
-<ol class="fa-case-steps">
-  <li><b>Step 66</b> <q>The newer installed Textual implementation intentionally still requests only <code>>1u</code>.</q> It changes its own code to match.</li>
-  <li><b>Step 74</b> Searches the installed packages and finds the harness's Textual.</li>
-  <li><b>Step 75</b> <q>I'll inspect its version, <code>Key</code> event, and Kitty parser/driver implementation for a closer upstream reference.</q></li>
-  <li><b>Result</b> <code>Version: 8.2.7</code>. <b class="fa-case-end">Reward 1.</b></li>
-</ol>
-
-</div>
-</div>
-
-<Receipt source="1 trial, 7 Jul 2026 · GPT-5.6 Terra (max) · mini-swe-agent 2.4.2 · DeepSWE 1.1, Datacurve public run" />
-
-<!--
-Moved here from the spare slides. It isn't one of the three approaches: nothing leaves the sandbox. It belongs in this section because the agent ends up with content the task didn't intend it to have, and that content helps with the task. It is the same task as "Pin the IP" two slides back: there the agent went out to GitHub for Textual's source, here a newer Textual was already on disk.
-Source: talk-hunt-2026-11-08/wildcard/delta-datacurve.md DC-W01 and rerun/DELTA.md insight 2.
-The point to make aloud: the network block doesn't help when the harness has a newer version of the project under test as a dependency. That is a problem with how the environment was built, not a cheating verdict. Reading installed packages may well be allowed.
-GPT-5.6 Luna (max) reads the same copy on the same task and scores 0 (no longer on the slide). The slide says 8.2.7 "already has Kitty keyboard support": Terra reads its Kitty parser and driver. The newer source doesn't contain the exact hidden reference; what it contributed to Terra's reward is unknown.
-Terra had already done substantial independent work. The step 66 revert happens before 74–76 (it read the installed driver earlier, at 65).
--->
-
----
 class: fa-lookup-slide
 ---
 
@@ -1238,18 +1236,12 @@ class: fa-lookup-slide
 
 <Receipt source="143,069 trajectories, Apr – Nov 2026 (model-calls report, 7 Nov) · later line: 181,732 trajectories, scan of 8 Nov 2026" />
 
+
+
 <!--
-The second way out. This one is about harness design as much as the agent.
-Why the key is there: fast-agent, Codex, Claude Code and mini-swe-agent all run inside the sandbox and call their provider from there, so the provider credential is staged into the trial environment, and the agent's shell inherits it. Our own run profiles inject nine credential names. And the provider has to be reachable, so a "no network" sandbox still has that one route open.
-1,379 trials saw a provider key in their own listing of the environment. 20 used one to call a model or the provider. Every one of the 20 is DeepSeek (V4 Pro, V4 Flash, V4.1 Flash) or Muse Spark. No Claude, Gemini, GPT or Grok trial did, of more than 700 that saw a key.
-What for:
-- Vision model. Muse Spark 1.1 on mini-swe-agent, 9 Jul: on image and video tasks it used the harness's own key and endpoint to send images to a vision model. In one run it sent the key to an unrelated third-party reseller, and in another wrote it into files in the workspace. In the later harness-leaderboard runs GLM-5.3 Flash, DeepSeek V4.1 Flash and Flint do the same through the in-sandbox router: they list the router's models and send the task's images to a vision model.
-- The upstream code. DeepSeek V4 Pro on Datacurve's public DeepSWE run, 12–13 Aug. No network, but the key and the provider route are there. 9 trials ask deepseek-chat for the exact upstream implementation. Several say no first: the quote is step 67, and another reads "Not appropriate and key likely no internet through proxy?" Then they call it. The answers were mostly confabulated and the agents said so; 3 of the 9 passed. Counting an mteb-retrieve trial, 10 of the 29 DeepSeek V4 Pro trials that saw the key used it, the highest rate of any model.
-- The answer. DeepSeek V4 Flash on crack-7z-hash with a 0-byte archive, 5 Aug. The quote is step 99. A sibling run read the key from another process's environment, confirmed it against the provider and asked itself "I have a working LLM API. Can I use it to find the answer?" Both then took the word from the benchmark's published reference solution. Both rewarded.
-Results overall: the outside answers were mostly unhelpful or made up. Where these trials passed, the help that decided it usually came from the benchmark's own files.
-The later line: the 8 Nov scan adds the harness-leaderboard runs, which reach their model through an in-sandbox router carrying the operator's Hugging Face token, so any routed model is one request away. 84 trajectories call a model, 31 get an answer; 15 of the new ones are on DeepSWE.
-The fix is on the harness side: the router should allow only the run's own model, and the token shouldn't be readable from the agent's environment.
-Also in the scan, no longer on a slide: 93 calls use the harness's own key, 36 ask a hub who the token belongs to, 330 read another process's memory (151 of those on tasks where that is the job).
+
+Reasoning traces often contain concerns that things are unethical or improper -- but often a few steps later it takes the action anyway.
+
 Source: model-calls-2026-11-07/index.html and its 8 Nov update; data/evasion.json.
 -->
 
