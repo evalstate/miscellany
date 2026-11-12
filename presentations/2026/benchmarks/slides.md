@@ -690,11 +690,11 @@ class: fa-tool-slide fa-tool-right
 
 <div class="fa-tool">
 
-- Pareto-optimal performance for supported models
+- Pareto-optimal performance for open and proprietary models
 - Validated with published benchmark traces
-- Native ATIF traces for reliable analysis
+- Native ATIF traces for reliable analysis containing available reasoning, tool content etc.
 - Records reasoning, tool results, tokens and cost for every call
-- One harness across providers, efforts and Harbor sandboxes
+- Usable for atif-scan image and hack-hunt jobs
 
 <div class="fa-tool-mark">
 <Wordmark :size="230" :sparkles="false" />
@@ -1680,12 +1680,13 @@ That is 54,701 rollouts for nine small adapters: set it beside the millions two 
 class: fa-big-slide
 ---
 
-# Keep the traces and the reasoning open
+# Some final thoughts
 
-- Every quote in this talk came from recorded reasoning.
-- A tool call with no explanation beside it is ambiguous. The same lookup can be research or the answer.
-- Where reasoning was hidden, or search results weren't recorded, all we could write was "not observed".
-- Labs gain from this too. A reward hack nobody notices in an evaluation is one that gets trained in.
+- Browse the audited traces - report false positives.
+- Demand high standards of evidence and reproducability when assessing performance claims.
+- Hidden reasoning provides audit trail of why action was taken. **Open Models are auditable**.
+- Prefer tools that have high standards of session integrity and recording. ATIF is a good interop format.
+- A reward hack nobody notices in an evaluation is one that gets trained in - follow our work on **Harness LoRA adapters**.
 
 <!-- Labs don't want reward hacking as it leads to DQs -->
 

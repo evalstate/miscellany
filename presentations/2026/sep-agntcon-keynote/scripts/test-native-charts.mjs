@@ -56,11 +56,16 @@ try {
   }
   await page.evaluate(() => window.__deckCapture.configure({ client: 'overall', viewport: 'full' }));
   await page.evaluate(() => window.__deckCapture.renderAt(30000));
-  assert.equal(await page.locator('[data-role="daily"]').textContent().then(s => s.trim()), '54.9%');
-  assert.equal(await page.locator('[data-role="rolling"]').textContent().then(s => s.trim()), '49.3%');
+  assert.equal(await page.locator('[data-role="daily"]').textContent().then(s => s.trim()), '53.6%');
+  assert.equal(await page.locator('[data-role="rolling"]').textContent().then(s => s.trim()), '50.8%');
   assert.equal(await page.locator('[data-role="endpoint"] polygon').count(), 2);
-  assert.deepEqual((await page.locator('[data-role="endpoint"] text').allTextContents()).map(s => s.trim()).sort(), ['49.3%', '54.9%']);
+  assert.deepEqual((await page.locator('[data-role="endpoint"] text').allTextContents()).map(s => s.trim()).sort(), ['50.8%', '53.6%']);
   assert.equal((await page.locator('[data-role="half-reference"] text').textContent()).trim(), '50%');
+  assert.equal(await page.locator('[data-role="partial-label"]').textContent(), '');
+  assert.equal(await page.evaluate(() => window.__deckCapture.state.partial), false);
+  const final = adoption.series.find(s => s.id === 'overall').rows.at(-1);
+  assert.equal(final.rolling_start, '2026-09-09'); assert.equal(final.rolling_end, '2026-09-15');
+  assert.equal(final.counts.rolling_modern_calls, 199797); assert.equal(final.counts.rolling_valid_calls, 393660);
   assert.equal(await page.locator('.pa-stage text').first().evaluate(el => getComputedStyle(el).fontSize), '54px');
   // Real embedded controls, data downloads, pause and scrub behaviour.
   await open('protocol-adoption', false);
@@ -80,10 +85,12 @@ try {
   await page.goto(`${base}/${comparisonSlide}?capture=1`);
   const comparison = page.locator(`.slidev-page-${comparisonSlide} .client-adoption-comparison`);
   await comparison.waitFor();
-  assert.equal(await comparison.getAttribute('data-through'), '2026-09-14');
+  assert.equal(await comparison.getAttribute('data-through'), '2026-09-15');
   assert.equal(await comparison.getAttribute('data-min-valid-calls'), '100');
+  assert.equal(await comparison.getAttribute('data-partial-day'), null);
+  assert.equal(await comparison.locator('[data-role="rate-point"][data-partial="true"]').count(), 0);
   assert.deepEqual(await comparison.locator('[data-role="client-panel"]').evaluateAll(els => els.map(el => el.dataset.client)), ['claude-code','Anthropic/ClaudeAI','chat-ui-mcp','openai-mcp','openai-mcp (Codex)','codex-mcp-client']);
-  assert.deepEqual(await comparison.locator('[data-role="last7"]').allTextContents(), ['Last 7: 95.2%','Last 7: 99.3%','Last 7: 100.0%','Last 7: 28.4%','Last 7: 15.1%','Last 7: 0.0%']);
+  assert.deepEqual(await comparison.locator('[data-role="last7"]').allTextContents(), ['Last 7: 95.3%','Last 7: 99.5%','Last 7: 100.0%','Last 7: 32.6%','Last 7: 15.3%','Last 7: 0.0%']);
   assert.equal(await comparison.locator('[data-role="activity"][data-scale="independent"]').count(), 6);
   assert.equal(await comparison.locator('[data-action="provenance"]').count(), 0);
   const normalized = JSON.parse(await readFile('data/client-adoption-comparison/normalized.json', 'utf8'));
@@ -91,7 +98,7 @@ try {
     const panel = comparison.locator(`[data-client="${series.id}"]`);
     for (const field of ['daily_share','trailing7_share']) {
       const values = await panel.locator(`[data-series="${field}"] [data-role="rate-point"]`).evaluateAll(els => els.map(el => Number(el.dataset.value)));
-      assert.deepEqual(values, series.rows.filter(row => row[field] !== null).map(row => row[field]));
+      assert.deepEqual(values, series.rows.filter(row => row[field] !== null && !(row.partial && field !== 'daily_share')).map(row => row[field]));
     }
   }
   await open('tool-quality-version');

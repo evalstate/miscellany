@@ -4,8 +4,8 @@ Open index.html directly with file://; no server, network or autoplay. Private a
 
 Static snapshot, not live. Snapshot cutoff is source snapshot publication time, not a guarantee that all events were ingested. Logged tool calls, not protocol messages or users. Fixed five excluded across all clients/versions; missing hashes retained. Unknown/unreviewed protocols excluded from the denominator.
 
-Source: evalstate/hf-mcp-logs @ 1b5b83fbc3b4be2870345edf498b2644167caf18; window 2026-07-28–2026-09-15 UTC.
-Partial day: 2026-09-15. Publication cutoff: 2026-09-15T16:06:46+00:00. Revision discovered: 2026-09-15T16:12:21.881654+00:00.
+Source: evalstate/hf-mcp-logs @ cbbf32b5f6bf8f3d73fcc9f76ba91166644fd0c3; window 2026-07-28–2026-09-15 UTC.
+Partial day: none declared. Publication cutoff: 2026-09-16T00:28:15+00:00. Revision discovered: 2026-09-16T00:28:34.943276+00:00.
 
 Purple is selected-day tool-call share; slate is strict count-weighted rolling7. The source is the queries tool-operation log, not protocol-message counters. Reducer counts query rows excluding initialize/session_delete, failures included, no deduplication. The five hashes are removed across all identities before aggregation. Only recognized protocol versions enter the rate denominator; unknown/unreviewed versions remain in count tables. Ratios are 0..1 in JSON/CSV, percentages on stage. No sample threshold. Null is unavailable, not zero. A partial day uses the preceding seven completed calendar dates. The plot viewport selector changes only the visible dates, never the rolling metric. Straight daily connections are visual guides, not intraday estimates; playback progressively reveals straight connections as illustration only; numerical rates are unchanged. KPIs/date use floor(position), the last actually reached daily anchor. No connections bridge nulls or calendar gaps; no future point markers appear. Amber hollow point/dotted connection marks actual partial data.
 
@@ -17,5 +17,5 @@ Controls: native keyboard-accessible buttons/selectors; scrubber arrow/Home/End 
 
 Rebuild from repository root:
 ```
-.venv/bin/python scripts/build_protocol_adoption_dashboard.py --source summaries/client-protocol-20260915-current-v1 --output charts/protocol-adoption-NEW
+.venv/bin/python scripts/build_protocol_adoption_dashboard.py --source summaries/client-protocol-20260916-v1 --output charts/protocol-adoption-NEW
 ```

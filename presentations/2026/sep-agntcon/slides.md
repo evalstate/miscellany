@@ -242,218 +242,247 @@ Website icon provenance: public/hf-icons/SOURCES.md.
 -->
 
 ---
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>01 / 05</span></div>
+class: elicitation-overview
+---
 
-# Create a sandbox.
+<div class="eo-kicker">STATELESS ELICITATION · MULTI ROUND-TRIP REQUESTS</div>
 
-<div class="es-stage" data-flow="old" data-phase="request">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-transfer "><strong>Create sandbox →</strong><div class="es-arrow"></div><small>Client starts a tool call</small></div>
+# Multiple turns. Stateless round trips.
+
+<div class="eo-story" data-flow="modern" data-phase="independent-round-trips" role="img" aria-label="Two independent, complete round trips. First: Client requests a sandbox; Server responds with a question and context, ending that call. Between calls, Client asks User for approval and User answers Yes. No call remains pending on Server; Client holds the context. Second: Client sends a new request with original parameters, context and Yes; Server returns the sandbox and ends the second call.">
+<div class="eo-actor eo-user"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="10" r="5"/><path d="M6 28v-3a10 10 0 0 1 20 0v3"/></svg><strong>User</strong></div>
+<div class="eo-actor eo-client"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="4" width="24" height="18" rx="2"/><path d="M16 22v6M10 28h12M4 10h24"/></svg><strong>Client</strong></div>
+<div class="eo-actor eo-server"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="4" y="4" width="24" height="10" rx="2"/><rect x="4" y="18" width="24" height="10" rx="2"/><path d="M9 9h1M9 23h1M16 9h7M16 23h7"/></svg><strong>Server</strong></div>
+<div class="eo-lifeline eo-user-line"></div><div class="eo-lifeline eo-client-line"></div><div class="eo-lifeline eo-server-line"></div>
+<div class="eo-round eo-round-one"><strong>ROUND TRIP 1</strong><span>CALL ENDS</span></div>
+<div class="eo-round eo-round-two"><strong>ROUND TRIP 2</strong><span>NEW CALL</span></div>
+<div class="eo-between"><strong>No call pending</strong><span>Client holds the context</span></div>
+<div class="eo-message eo-server-lane eo-start"><span><b>1</b>Create sandbox</span></div>
+<div class="eo-message eo-server-lane eo-left eo-need"><span><b>2</b>Question + context</span></div>
+<div class="eo-message eo-user-lane eo-left eo-ask"><div class="eo-question"><b>3</b><span>Create a paid<br>GPU sandbox?</span></div></div>
+<div class="eo-message eo-user-lane eo-answer"><span><b>4</b>Yes</span></div>
+<div class="eo-message eo-server-lane eo-retry"><span><b>5</b>Original request + context + Yes</span></div>
+<div class="eo-message eo-server-lane eo-left eo-done"><span><b>6</b>Sandbox ready</span></div>
 </div>
 
-<div class="es-caption">The same starting point.</div>
-
 <!--
-Client initiates tools/call. No sandbox is created before approval.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/dcd ocs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Fresh one-slide explanation, not an old/new comparison. Two separate boxes are
+two independent request/response pairs; both terminate. The gap is the user turn,
+not a suspended server call. The server lifeline deliberately breaks across it.
+“Stateless” describes continuation of this conversation: the next request carries
+everything needed to resume, so a different server instance may process it without
+access to the prior pending call. It does not prohibit application state, remove
+authorization checks, or remove server-side enforcement of single-use invariants.
+Read the numbered arrows top to bottom. Client mediates both the question and the answer; there is no direct
+Server ↔ User channel in this form-mode example. User may also decline or cancel;
+we show the accepted path. No sandbox is created before approval. Dialog text is
+illustrative; nothing on this slide is an interactive control.
+
+Illustrated wire behavior is modern 2026-07-28 MRTR:
+1. Client initiates tools/call with the original sandbox parameters.
+2. Server responds with InputRequiredResult (resultType input_required), including
+   a keyed inputRequests entry for elicitation/create and optional requestState.
+   This is a RESPONSE that ends the initial call, not a reverse JSON-RPC request.
+3–4. Client presents the server's question to User and gathers an ElicitResult.
+   There is no pending call on Server during this user interaction. The Client UI
+   must identify the requesting server and allow decline/cancel. This example
+   asks for a decision, never payment credentials.
+5. Client retries tools/call with a NEW JSON-RPC id, original parameters, keyed
+   inputResponses, and EXACT unchanged opaque requestState if supplied. If absent,
+   requestState must not be added. Required per-request _meta is omitted visually.
+   “Request + context + Yes” / “Question context + Answer” is conceptual shorthand,
+   not a literal echo of the question or a growing transcript. Client must not
+   inspect or modify opaque state. Further input_required rounds are possible.
+6. Server validates the inputs, authorization and state integrity where required,
+   creates the approved sandbox, and returns the final result to Client.
+
+Sources rechecked: ~/reference/modelcontextprotocol/docs/specification/2026-07-28/
+basic/patterns/mrtr.mdx and client/elicitation.mdx. Static: no timers or animation.
 -->
 
 ---
+class: mrtr-slide
+---
 
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>02 / 05</span></div>
+<div class="mrtr-kicker">MODERN ELICITATIONS <span>OLD WAY</span></div>
 
-# The Server needs permission.
+# Ask back. Keep the call open.
 
-<div class="es-stage" data-flow="old" data-phase="question">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble"><small>QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div><div class="es-transfer es-left"><strong>Ask the Client</strong><div class="es-arrow"></div><small>Server → Client request</small></div>
+<div class="mrtr-story" data-flow="old" data-phase="shared-state" role="img" aria-label="Legacy: Client calls Server to create a sandbox. Server asks for permission in a reverse request. While the user decides, the original call and question remain open. Client answers Yes, then Server returns the sandbox.">
+<div class="mrtr-actor mrtr-client">Client</div><div class="mrtr-actor mrtr-server">Server</div>
+<div class="mrtr-rail mrtr-client-rail"></div><div class="mrtr-rail mrtr-server-rail"></div>
+<div class="mrtr-message mrtr-request"><span>Request: <b>Create sandbox</b></span></div>
+<div class="mrtr-message mrtr-left mrtr-question"><div class="mrtr-question-card"><div><strong>REQUEST</strong> back to the client</div><span>“Create a paid GPU sandbox?”</span></div></div>
+<div class="mrtr-pause"><div class="mrtr-user">User decides…<span>Conversation state on both sides</span></div><div class="mrtr-wait"><strong>OPEN / WAITING</strong><span>Original call still pending</span></div></div>
+<div class="mrtr-message mrtr-retry"><strong>Reply to the pending question</strong><span class="mrtr-example">Yes</span></div>
+<div class="mrtr-message mrtr-left mrtr-result"><span>Final response: <b>Sandbox ready</b></span></div>
 </div>
 
-<div class="es-caption">A paid resource needs a decision.</div>
-
 <!--
-Legacy: Server sends elicitation/create to the Client while the original tools/call remains pending.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Legacy 2025-11-25. Read this diagram top to bottom. Time flows down; Client stays
+left and Server stays right on both slides. Arrows are logical messages, not
+separate physical connections. This is the nested, form-mode elicitation path.
+
+Client sends tools/call. Server sends a separate elicitation/create request while
+tools/call remains pending. Client displays the question; Server retains the
+pending continuation. “Yes” stands for an ElicitResult (action + structured
+content), correlated to the server's elicitation request; it does not repeat the
+original tool parameters. Server then completes the original tools/call.
+
+The problem is a live conversation spanning both sides, not that a server thread
+must block or that all server work stops. Scaling/restarts require preserving or
+coordinating that pending state (e.g. affinity or shared storage). No sandbox is
+created before approval. This example requests a decision, not payment credentials.
+
+Verified against ~/reference/modelcontextprotocol/docs/specification/2025-11-25/client/elicitation.mdx.
+Static illustration, no animation or interactive dialog.
 -->
 
 ---
+class: mrtr-slide
+---
 
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>03 / 05</span></div>
+<div class="mrtr-kicker">MODERN ELICITATIONS <span>NEW WAY · MULTI ROUND-TRIP REQUESTS</span></div>
 
-# The Client shows the question.
+# Return the question. End the call.
 
-<div class="es-stage" data-flow="old" data-phase="dialog">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble"><small>QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div>
-<div class="es-dialog"><div class="es-dialog-bar"><span>Sandbox confirmation</span><span>×</span></div><div class="es-dialog-body"><small>SERVER ASKS</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong><div class="es-buttons"><span>No</span><span class="es-yes">Yes</span></div></div></div><div class="es-transfer es-left"><strong>Ask the Client</strong><div class="es-arrow"></div><small>Server → Client request</small></div><div class="es-status es-waiting es-rack-waiting"><strong>OPEN</strong><span><i class="es-spinner" aria-hidden="true"></i> WAITING</span></div>
+<div class="mrtr-story" data-flow="modern" data-phase="cumulative-retry" role="img" aria-label="MRTR: Client requests a sandbox. Server returns the question and context, ending call one. User decides with no call pending on the Server. Client makes a new request carrying the original sandbox request plus context plus Yes. Server returns the sandbox, ending call two.">
+<div class="mrtr-actor mrtr-client">Client</div><div class="mrtr-actor mrtr-server">Server</div>
+<div class="mrtr-rail mrtr-client-rail"></div><div class="mrtr-rail mrtr-server-rail"></div>
+<div class="mrtr-message mrtr-request"><span>Request: <b>Create sandbox</b></span></div>
+<div class="mrtr-message mrtr-left mrtr-question"><div class="mrtr-question-card"><div><strong>RESPONSE</strong> with question + context</div><span>“Create a paid GPU sandbox?”</span></div></div>
+<div class="mrtr-pause"><div class="mrtr-user">User decides…<span>Context waits with the client</span></div><div class="mrtr-free"><strong>CALL ENDED</strong><span>No pending call to remember</span></div></div>
+<div class="mrtr-message mrtr-retry"><strong>New request = original + context + answer</strong><span class="mrtr-bundle"><b>Create sandbox</b><i>+</i><b class="mrtr-context">context</b><i>+</i><b class="mrtr-answer">Yes</b></span></div>
+<div class="mrtr-message mrtr-left mrtr-result"><span>Final response: <b>Sandbox ready</b></span></div>
 </div>
 
-<div class="es-caption">The dialog is on the Client. The question is still open on the Server.</div>
-
 <!--
-Modern: input_required terminates the first request. Client displays the question and retains returned context. Legacy: elicitation/create remains pending. These are conceptual states, not literal wire payloads.
-Advance manually. Only the decorative waiting indicator spins; no timed slide transitions.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Modern 2026-07-28 MRTR basic workflow. Read top to bottom, comparing the same four
+message directions and same yellow question card with the legacy slide.
+
+Round trip 1: tools/call receives an InputRequiredResult (resultType:
+input_required), with a keyed inputRequests map containing elicitation/create,
+and optionally requestState. This is a response, not a separate reverse JSON-RPC
+request. It terminates call 1; the user interaction happens between independent
+calls. “CALL ENDED” describes this operation, not the whole server.
+
+Round trip 2: Client retries tools/call with a NEW JSON-RPC id, the original
+parameters, keyed inputResponses (e.g. approval: {action: accept, content: ...}),
+and the exact, unchanged opaque requestState if supplied. If requestState was
+absent, Client MUST NOT add it. Required per-request _meta is omitted here.
+
+“Context + Yes” / “Question context + Answer” is conceptual shorthand: not a
+literal echo of the question and not a growing chat transcript. Each retry carries
+the information needed to continue. More input_required rounds may follow; the
+latest returned opaque state may encapsulate prior progress. Do not suggest the
+client can inspect or merge requestState, or that all prior payloads must accumulate.
+
+The retry is self-contained for this continuation: another server instance can
+handle it without the original pending call. MRTR enables this stateless workflow;
+it does not ban all application state or remove business/security obligations.
+Server must validate inputs and authorization and protect requestState integrity
+where it influences business logic; single-use invariants still need enforcement.
+
+Verified against ~/reference/modelcontextprotocol/docs/specification/2026-07-28/basic/patterns/mrtr.mdx
+and 2026-07-28/client/elicitation.mdx. No sandbox is created before approval.
+Static illustration, no animation or interactive dialog.
 -->
 
 ---
+class: elicit-editorial
+---
 
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>04 / 05</span></div>
+<div class="ee-masthead"><span>MODERN ELICITATIONS</span><b>01 — OLD WAY</b></div>
 
-# Send just the answer.
+<div class="ee-composition" data-flow="old" data-phase="shared-state">
+<section class="ee-copy">
 
-<div class="es-stage" data-flow="old" data-phase="answer">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble"><small>OPEN QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div>
-<div class="es-dialog"><div class="es-dialog-bar"><span>Sandbox confirmation</span><span>×</span></div><div class="es-dialog-body"><small>SERVER ASKS</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong><div class="es-buttons"><span>No</span><span class="es-selected">✓ Yes</span></div></div></div><div class="es-transfer "><strong>Yes</strong><div class="es-arrow"></div><small>Response to the pending question</small></div><div class="es-status es-waiting es-rack-waiting"><strong>OPEN</strong><span><i class="es-spinner" aria-hidden="true"></i> WAITING</span></div>
+# Hold the<br>conversation.
+
+<div class="ee-explanation">The question is a<br><strong>request back</strong><br>to the client.</div>
+<div class="ee-principle"><i></i><span>Both sides keep<br>conversation state.</span></div>
+</section>
+<section class="ee-diagram" aria-label="One open call: Client requests a sandbox, Server asks back, both sides retain the conversation while the user decides, Client answers, then Server completes the original call.">
+<div class="ee-actors"><strong>Client</strong><strong>Server</strong></div>
+<div class="ee-open-call">
+<div class="ee-round-label"><span>ONE OPEN CALL</span><i></i></div>
+<div class="ee-message ee-outbound"><span>Create sandbox</span><i>→</i></div>
+<div class="ee-question"><i>←</i><div><strong>REQUEST BACK</strong><span>Create a paid GPU sandbox?</span></div></div>
+<div class="ee-wait"><span>User decides…</span><strong>OPEN / WAITING</strong></div>
+<div class="ee-message ee-outbound"><span>Yes <small>· answer only</small></span><i>→</i></div>
+<div class="ee-message ee-inbound"><i>←</i><span>Sandbox ready <small>· call ends</small></span></div>
+</div>
+</section>
 </div>
 
-<div class="es-caption">“Yes” relies on the question the Server kept pending.</div>
-
 <!--
-Yes is an illustrative user decision, not a literal JSON-RPC response. Modern retry: new id, original params, keyed inputResponses and unchanged requestState if supplied. Question context is not necessarily the literal question text. Server validates context and authorization.
-Advance manually. Only the decorative waiting indicator spins; no timed slide transitions.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Design variant of the legacy 2025-11-25 slide. Static. Client stays left and Server
+right. Read the exchange card top to bottom. The single enclosing boundary is the
+lifetime of the original tools/call, not a physical connection or a shared database.
+
+Server sends a separate elicitation/create request while tools/call remains
+pending. The yellow question is a new server-to-client request. Client displays it
+and returns an ElicitResult; “Yes” is conceptual shorthand, not a wire payload.
+Both sides retain parts of the live conversation. OPEN / WAITING applies to this
+call, not the entire server or a necessarily blocked thread. After approval,
+Server creates the sandbox and completes the original call. No payment credentials
+are requested. Scaling or restarts require preserving/coordinating pending state.
+
+Source: ~/reference/modelcontextprotocol/docs/specification/2025-11-25/client/elicitation.mdx.
 -->
 
 ---
-
-<div class="es-heading"><span class="es-mode ">OLD WAY</span><span>Modern Elicitations</span><span>05 / 05</span></div>
-
-# Now create the sandbox.
-
-<div class="es-stage" data-flow="old" data-phase="complete">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-result"><span>✓</span><strong>GPU Sandbox created</strong><small>Approved · ready to use</small></div><div class="es-transfer es-left"><strong>Sandbox ready</strong><div class="es-arrow"></div><small>Original call completes</small></div><div class="es-status es-free"><span>✓</span> Complete</div>
-</div>
-
-<div class="es-caption">The waiting question is resolved. The original call can finish.</div>
-
-<!--
-Approved path shown. No/decline does not create a paid sandbox. Modern has two independent calls; legacy has a pending elicitation within the original operation.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
-
+class: elicit-editorial
 ---
 
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>01 / 05</span></div>
+<div class="ee-masthead"><span>MODERN ELICITATIONS</span><b>02 — MULTI ROUND-TRIP REQUESTS</b></div>
 
-# Create a sandbox.
+<div class="ee-composition" data-flow="modern" data-phase="cumulative-retry">
+<section class="ee-copy">
 
-<div class="es-stage" data-flow="modern" data-phase="request">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-transfer "><strong>Create sandbox →</strong><div class="es-arrow"></div><small>Client starts a tool call</small></div>
+# Carry the<br>context.
+
+<div class="ee-explanation">The question is<br><strong>the response.</strong><br>That call is done.</div>
+<div class="ee-principle"><i></i><span>The next request<br>carries what it needs.</span></div>
+</section>
+<section class="ee-diagram" aria-label="Two independent round trips. First: request a sandbox, receive the question and context, end call. Between calls the client gathers the answer; no call is pending on the Server. Second: send the original request plus context plus answer, receive the sandbox.">
+<div class="ee-actors"><strong>Client</strong><strong>Server</strong></div>
+<div class="ee-round ee-first">
+<div class="ee-round-label"><span>ROUND TRIP 1</span><b>CALL ENDS</b></div>
+<div class="ee-message ee-outbound"><span>Create sandbox</span><i>→</i></div>
+<div class="ee-question"><i>←</i><div><strong>RESPONSE <em>+ context</em></strong><span>Create a paid GPU sandbox?</span></div></div>
+</div>
+<div class="ee-between"><span>User decides…</span><strong>No call pending</strong></div>
+<div class="ee-round ee-second">
+<div class="ee-round-label"><span>ROUND TRIP 2</span><b>NEW CALL</b></div>
+<div class="ee-message ee-outbound ee-retry"><div><strong>Original request + context + answer</strong><span>Create sandbox <i>+</i> <b>context</b> <i>+</i> <b>Yes</b></span></div><i>→</i></div>
+<div class="ee-message ee-inbound"><i>←</i><span>Sandbox ready <small>· call ends</small></span></div>
+</div>
+</section>
 </div>
 
-<div class="es-caption">The same starting point.</div>
-
 <!--
-Client initiates tools/call. No sandbox is created before approval.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
+Design variant of the modern 2026-07-28 MRTR basic workflow. Static. Two separate
+exchange cards show independent request/response pairs, with the user interaction
+in the gap. The same yellow question is now inside a response, not a reverse call.
 
----
+Round 1: tools/call receives InputRequiredResult (resultType input_required), a
+keyed inputRequests map containing elicitation/create, and optional requestState.
+The response terminates call 1. No call pending refers to this operation only.
+Round 2: Client retries tools/call with a NEW JSON-RPC id, original parameters,
+keyed inputResponses, and the EXACT unchanged opaque requestState if supplied.
+If requestState was absent, it MUST NOT be added. Required per-request _meta is
+omitted in this conceptual diagram. “Yes” stands for an ElicitResult.
 
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>02 / 05</span></div>
+“Question context + Answer” / “Original request + context + answer” is conceptual
+shorthand, not a literal echo of the question or a growing transcript. The latest
+opaque state may encapsulate prior progress; clients must not inspect or merge
+it. Further input_required rounds are possible. The retry is self-contained for
+this continuation and can be handled by another server instance. MRTR does not
+remove application state, authorization checks, or single-use enforcement.
+Server validates inputs and protects requestState integrity where required.
 
-# The Server needs permission.
-
-<div class="es-stage" data-flow="modern" data-phase="question">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble"><small>TOOL REQUIRES ELICITATION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div><div class="es-status ">Tool requires Elicitation</div>
-</div>
-
-<div class="es-caption">A paid resource needs a decision.</div>
-
-<!--
-This frame is before delivery. Modern server prepares input_required, including an elicitation and optional opaque requestState.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>03 / 05</span></div>
-
-# The Client shows the question.
-
-<div class="es-stage" data-flow="modern" data-phase="dialog">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble es-bubble-delivered"><small>DELIVERED QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div>
-<div class="es-dialog es-dialog-delivered"><div class="es-dialog-bar"><span>Sandbox confirmation</span><span>×</span></div><div class="es-dialog-body"><strong>Do you want to create a<br>paid GPU Sandbox?</strong><div class="es-buttons"><span>No</span><span class="es-yes">Yes</span></div><div class="es-context">▣ &nbsp; Question context attached</div></div></div><div class="es-transfer es-left"><strong>Question delivered</strong><div class="es-arrow"></div><small>First request ends</small></div><div class="es-status es-free"><span>✓</span> No open question</div>
-</div>
-
-<div class="es-caption">The user can take their time. Nothing is held open on the Server.</div>
-
-<!--
-Modern: input_required terminates the first request. Client displays the question and retains returned context. Legacy: elicitation/create remains pending. These are conceptual states, not literal wire payloads.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>04 / 05</span></div>
-
-# Send the question context with the answer.
-
-<div class="es-stage" data-flow="modern" data-phase="answer">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-bubble es-bubble-delivered"><small>DELIVERED QUESTION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div>
-<div class="es-dialog es-dialog-delivered"><div class="es-dialog-bar"><span>Sandbox confirmation</span><span>×</span></div><div class="es-dialog-body"><strong>Do you want to create a<br>paid GPU Sandbox?</strong><div class="es-buttons"><span>No</span><span class="es-selected">✓ Yes</span></div><div class="es-context">▣ &nbsp; Question context attached</div></div></div><div class="es-transfer "><strong>Question context + Yes</strong><div class="es-arrow"></div><small>New call · original arguments included</small></div><div class="es-status es-free"><span>✓</span> Ready for a new call</div>
-</div>
-
-<div class="es-caption">The Server receives what it needs to continue.</div>
-
-<!--
-Yes is an illustrative user decision, not a literal JSON-RPC response. Modern retry: new id, original params, keyed inputResponses and unchanged requestState if supplied. Question context is not necessarily the literal question text. Server validates context and authorization.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
--->
-
----
-
-<div class="es-heading"><span class="es-mode es-modern">MODERN WAY</span><span>Modern Elicitations</span><span>05 / 05</span></div>
-
-# Now create the sandbox.
-
-<div class="es-stage" data-flow="modern" data-phase="complete">
-<div class="es-client" aria-label="Client computer"><div class="es-screen"><i></i><i></i><i></i><div></div><div></div></div><div class="es-stand"></div></div>
-<div class="es-server" aria-label="Server"><div><i></i><span></span></div><div><i></i><span></span></div><div><i></i><span></span></div></div>
-<div class="es-name es-name-client">Client</div><div class="es-name es-name-server">Server</div>
-<div class="es-delivered-pair" aria-label="Question and confirmation received together"><div class="es-bubble"><small>QUESTION + CONFIRMATION</small><strong>Do you want to create a<br>paid GPU Sandbox?</strong></div><div class="es-confirmation"><small>CONFIRMATION</small><strong>✓ Yes</strong></div></div>
-<div class="es-result"><span>✓</span><strong>GPU Sandbox created</strong><small>Approved · ready to use</small></div><div class="es-transfer es-left"><strong>Sandbox ready</strong><div class="es-arrow"></div><small>New call completes</small></div><div class="es-status es-free"><span>✓</span> Complete</div>
-</div>
-
-<div class="es-caption">Question context + Answer. Not an open conversation.</div>
-
-<!--
-Question + Confirmation is conceptual shorthand, not a literal question echo. The retry carries original parameters, keyed inputResponses, and unchanged opaque requestState when supplied. Both context and answer arrive together on the Server.
-Approved path shown. No/decline does not create a paid sandbox. Modern has two independent calls; legacy has a pending elicitation within the original operation.
-Static storyboard: advance manually. Fixed actor positions, no timers or animation.
-Sources checked against local modelcontextprotocol/docs/specification: 2025-11-25/client/elicitation.mdx and 2026-07-28/basic/patterns/mrtr.mdx.
+Source: ~/reference/modelcontextprotocol/docs/specification/2026-07-28/basic/patterns/mrtr.mdx.
 -->
 
 ---

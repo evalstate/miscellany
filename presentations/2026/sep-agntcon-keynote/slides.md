@@ -189,20 +189,20 @@ class: native-data-slide
 <!--
 Native port of charts/protocol-adoption-dashboard from the local data-analysis workspace.
 Private aggregates: review before external sharing. This is a pinned snapshot, not live.
-Source evalstate/hf-mcp-logs @ 1b5b83fbc3b4be2870345edf498b2644167caf18.
-Window July 28–September 15, 2026 UTC; September 15 is partial. Source publication
-cutoff September 15 16:06:46 UTC does not guarantee ingestion completeness.
+Source evalstate/hf-mcp-logs @ cbbf32b5f6bf8f3d73fcc9f76ba91166644fd0c3.
+Window July 28–September 15, 2026 UTC; all dates are completed calendar days. Source publication
+cutoff September 16 00:28:15 UTC does not guarantee ingestion completeness.
 
 Logged tool calls, not protocol messages or users; failures included, no deduplication.
 Fixed five hashes excluded across every client/version; missing hashes retained.
 Only recognized protocol versions enter the rate denominator; unknown/unreviewed
 versions remain in count tables. Null is unavailable, not zero. No sample threshold.
 Rolling7 is a strict count-weighted ratio over seven completed UTC dates, not a mean
-of daily percentages. A partial day uses the preceding seven completed calendar dates.
+of daily percentages. Final rolling window is September 9–15, inclusive.
 Viewport selection changes visible dates, not the rolling denominator. KPIs use the
 last reached daily anchor (floor position). No lines bridge nulls/calendar gaps.
-Purple connections are illustrative reveals, not intraday estimates. Amber marks
-actual partial observations. Overall includes all retained client identities.
+Purple connections are illustrative reveals, not intraday estimates. No partial
+day is plotted in this snapshot. Overall includes all retained client identities.
 Chat UI = chat-ui-mcp, not chat-ui-intern. Codex CLI = codex-mcp-client, not openai-mcp.
 No version/event evidence or causal interpretation is inferred.
 
@@ -210,9 +210,12 @@ Data, raw selected-client count table and downloads are available via Data & pro
 Unmodified source JSON, CSV and provenance live in data/protocol-adoption/.
 Default playback is 4× (7.5 seconds of motion); source ratios/timestamps are unchanged.
 Reveal layout leads with the purple count-weighted trailing-seven share; daily is
-thin slate, with amber for the partial observation. The 0–100% axis is retained
+thin slate. All final-day points are completed-day observations. The 0–100% axis is retained
 with a 50% reference. Completion-only stars label actual final values, not forecasts.
-Final overall rolling share is 49.3% (nearly half), not a claim of crossing 50%.
+Final completed seven-day share is 199,797 / 393,660 = 50.7537%, displayed 50.8%.
+More than half of reviewed-valid tool calls over September 9–15 use 2026-07-28.
+September 15 daily share is 26,971 / 50,291 = 53.6299%, displayed 53.6%.
+This is a share above 50%, not a 50% increase or a user adoption rate.
 Stage decoration is omitted for keynote use; caveats remain in these notes and data.
 Append ?capture=1 for a controls-free stage; automated recording uses exact timestamps.
 -->
@@ -226,16 +229,18 @@ class: native-data-slide
 </div>
 
 <!--
-Six-client contact sheet restyled from client-migration-chat-ui-20260914/client_migration_focus.png.
+Six-client contact sheet refreshed from verified client-protocol-20260916-v1 aggregates.
 Native SVG; source data are accessible in data/client-adoption-comparison/ and via
 Data & provenance. Private review aggregates: review before public sharing.
 
-IMPORTANT: this reference uses the completed July 28–September 14 snapshot at
-12c284c96e556c16aa7cb09ff1370dbbd6342941, not the preceding dashboard's partial
-September 15 snapshot. It also requires ≥100 valid calls for rates, unlike the
-unsuppressed dashboard. Do not treat missing rates as zero or compare those
-snapshots as if their dates/support policy were identical. No rate recomputation.
-Last7 September 8–14: 95.2%, 99.3%, 100.0%, 28.4%, 15.1%, 0.0% in panel order.
+Both adoption visuals now use revision cbbf32b5f6bf8f3d73fcc9f76ba91166644fd0c3,
+July 28–September 15 completed calendar days, publication September 16 00:28:15 UTC.
+No partial-day markers. Daily and rolling curves end September 15.
+Last7 is September 9–15, inclusive. Late arrivals can still revise counts.
+This sheet requires ≥100 valid calls for rates, unlike the unsuppressed dashboard.
+Last7 in panel order: 95.3%, 99.5%, 100.0%, 32.6%, 15.3%, 0.0%.
+Fixed-five cohort and aggregates through September 14 are unchanged;
+September 15 counts are from the new completed-day publication.
 
 Purple daily / slate count-weighted strict trailing-seven shares, common 0–100% axes.
 Activity bars retain actual all-protocol call counts with independent client scales:
@@ -300,13 +305,10 @@ Website icon provenance: public/hf-icons/SOURCES.md.
 
 ---
 
-# Observability
+# Observabilityb
 
-- As models get smarter, we can make more token dense and efficient tools
-- Get better idea of interaction surfaces. 
-- Reduce Tool error rates, track Client capabilities and versions
-
-
+- Smarter models allow more token dense tools
+- Reduce error rates in a continual loop
 
 ---
 class: native-data-slide

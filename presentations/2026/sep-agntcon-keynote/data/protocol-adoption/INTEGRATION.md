@@ -53,7 +53,7 @@ and interpretation in parent markdown/speaker notes, not this component.
 
 Speaker-note recommendations: private aggregates require review before public
 sharing; logged tool calls are neither users nor protocol messages. This is a
-pinned **2026-09-15** partial snapshot, not live. Rolling7 is a count-weighted
+pinned completed-day snapshot through **2026-09-15**, not live. Rolling7 is a count-weighted
 ratio over exactly seven completed UTC dates, not a mean of daily percentages.
 Changing plot viewport never changes that denominator. Purple guide segments
 are illustrative reveals, not intraday estimates. Unknown/unreviewed protocols
@@ -80,10 +80,11 @@ includes retained clients beyond the six focus identities.
 ## Source preservation and compromises
 
 `data.json`, `daily.csv`, `provenance.json`, `README.md` are byte-for-byte copies
-of `/home/evalstate/source/data-analysis/charts/protocol-adoption-dashboard/`.
+of `/tmp/protocol-adoption-completed-sep15/ (rebuilt with the existing dashboard builder
+from summaries/client-protocol-20260916-v1)`.
 The original README describes the standalone HTML, not this Vue integration.
-No remote scan, source aggregation, denominator recalculation, or data updates
-were performed. Full source provenance and an accessible selected-client raw
+Refreshed locally from verified completed-day aggregates; no remote scan or
+denominator-policy change was performed. Full source provenance and an accessible selected-client raw
 count table are available in the Data & provenance overlay, alongside download
 links to all four copied files.
 
@@ -101,3 +102,6 @@ hollow partial point, deterministic re-render, speed mapping, slide departure,
 and final print state. Capture at 1600×900 and controls at 980×552 were visually
 reviewed; default SVG text was within canvas bounds. Parent should still verify
 actual Slidev routing, deck CSS interaction, print/export and wrapper sizing.
+
+Refresh: source revision cbbf32b5f6bf8f3d73fcc9f76ba91166644fd0c3, publication
+2026-09-16T00:28:15+00:00. Daily 53.6%; completed September 9–15 rolling7 50.8%.

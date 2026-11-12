@@ -30,15 +30,17 @@ try {
       const computed = getComputedStyle(node);
       for (const property of properties) copies[i].style.setProperty(property, computed.getPropertyValue(property));
     });
-    clone.style.background = '#f9fafb';
+    clone.style.background = '#ffffff';
     clone.style.fontVariantNumeric = 'tabular-nums';
     return new XMLSerializer().serializeToString(clone);
   });
   await writeFile(path.join(out, 'client-adoption-contact-sheet.svg'), svg);
   await writeFile(path.join(out, 'client-adoption-contact-sheet.capture.json'), JSON.stringify({
-    slide, source: 'Completed reference snapshot through September 14, not partial September 15 dashboard',
+    slide, source: 'Verified completed-day snapshot through September 15; last7 September 9–15',
+    revision: 'cbbf32b5f6bf8f3d73fcc9f76ba91166644fd0c3', partialDay: null,
+    snapshotPublicationUtc: '2026-09-16T00:28:15+00:00',
     privateAggregateWarning: 'Review before public sharing. No upload performed.',
-    minValidCalls: 100, last7Window: ['2026-09-08', '2026-09-14'],
+    minValidCalls: 100, last7Window: ['2026-09-09', '2026-09-15'],
     sourceSha256: createHash('sha256').update(await readFile('data/client-adoption-comparison/daily.csv')).digest('hex'),
     svgSha256: createHash('sha256').update(svg).digest('hex'),
   }, null, 2) + '\n');

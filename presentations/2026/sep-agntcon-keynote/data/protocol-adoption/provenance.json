@@ -1,7 +1,7 @@
 {
-  "source_directory": "summaries/client-protocol-20260915-current-v1",
+  "source_directory": "summaries/client-protocol-20260916-v1",
   "source": "evalstate/hf-mcp-logs",
-  "revision": "1b5b83fbc3b4be2870345edf498b2644167caf18",
+  "revision": "cbbf32b5f6bf8f3d73fcc9f76ba91166644fd0c3",
   "window": [
     "2026-07-28",
     "2026-09-15"
@@ -511,21 +511,32 @@
     },
     {
       "partition": "2026-09-15",
-      "files": 31,
-      "input_content_sha256": "e4f82bd27374c73d1969a5e5d794f9f72d4c8bf6093b5f5f9778406d6b671a13",
+      "files": 57,
+      "input_content_sha256": "98e2807609b7e00d0eee0cad7454038cbcfa9636a9bed4b7aa760d79f68bc6f8",
       "health": {
-        "rows_read": 37121,
-        "calls": 37121,
-        "missing_hash_calls": 1485
+        "rows_read": 51096,
+        "calls": 51096,
+        "missing_hash_calls": 2052
+      }
+    },
+    {
+      "partition": "2026-09-16",
+      "files": 2,
+      "input_content_sha256": "13eac7d888d15c05924a9baa62da310110365ce5987bf19e9e8c7adbe4c20b3a",
+      "health": {
+        "rows_read": 900,
+        "calls": 79,
+        "missing_hash_calls": 18,
+        "outside_window": 821
       }
     }
   ],
   "coverage_limits": "One preceding partition, plus one following partition only for completed end dates. Current UTC day is partial and has no following-day padding. Pinned source publication time is not complete event ingestion; late arrivals can revise counts. Static snapshot, not live.",
   "motion_policy": "30s full series at 1x; requestAnimationFrame fractional day position; linear connection revelation only, not intraday estimates or rate smoothing; KPIs/date floor(position); no null/calendar gap bridging or future markers; continuously translating seven-day viewport; reduced motion explicit daily steps; latest paused, hidden page pauses",
   "playback_duration_ms": 30000,
-  "partial_day": "2026-09-15",
-  "snapshot_observed_at_utc": "2026-09-15T16:12:21.881654+00:00",
-  "snapshot_last_modified_utc": "2026-09-15T16:06:46+00:00",
+  "partial_day": null,
+  "snapshot_observed_at_utc": "2026-09-16T00:28:34.943276+00:00",
+  "snapshot_last_modified_utc": "2026-09-16T00:28:15+00:00",
   "denominator": "logged tool calls using 2026-07-28 / logged tool calls with a reviewed protocol version; five hashes excluded before aggregation; unknown/unreviewed protocols excluded; no minimum-volume suppression",
   "rolling_policy": "sum modern / sum valid over exactly seven completed UTC calendar days ending on selected day, or preceding partial day; unavailable without full calendar coverage or positive denominator",
   "absence_policy": "Absent client cells on covered, reconciled cube dates are no observed calls, not a zero share. Null means unavailable.",
@@ -542,11 +553,11 @@
     "/home/evalstate/source/data-analysis/scripts/protocol_adoption_dashboard.html": "a87137b07f724ba5464b3e26133d9adf841c1ac01e168dbd11de0c319901ce35",
     "/home/evalstate/source/data-analysis/scripts/plot_client_migration_focus.py": "179cb529a72b975f58a91cc7d602b30e68337c3fd3d27f0281c5d02e9aca8d24",
     "/home/evalstate/source/data-analysis/summaries/manifest.json": "553056a83e98bfdd10978c1a001877ce06a48e2aff8d3316824d1771c8f4cf4d",
-    "summaries/client-protocol-20260915-current-v1/manifest.json": "8e5a03f77ad44c4f14e285d896370bbd254637fca0ac6438358f9b7cde5a14e5",
-    "summaries/client-protocol-20260915-current-v1/COMPLETE": "4ae88f161cef4eddf3dc1a66948f58e2417a5924f33c1490e45c26c30df38013"
+    "summaries/client-protocol-20260916-v1/manifest.json": "98e98ec622637e6e3ecb0cee56611bd8a50c9339e7ac144c3c5aadf4571ac3a7",
+    "summaries/client-protocol-20260916-v1/COMPLETE": "1af2609082426572d53133ca18f1ea474c237e846e957a0aab7ac650076284aa"
   },
   "input_hashes": {
-    "daily_client_protocol.csv": "56a81dd4b5f023a096262a089daaf78552f4b17e0c9a1c92794305c52bc79be6",
-    "daily_protocol.csv": "ce5ad9e110af65a2b677b57be5acf880de3af3f85739920364c68af1a602ef6c"
+    "daily_client_protocol.csv": "b59d866ac529e633e06bf703dc5efd839728633acaf0f839a185573007b09bf1",
+    "daily_protocol.csv": "ef30f681f85b4c992020cdd0e13aa2744cdc569287427646d3f84ba73d50f43d"
   }
 }

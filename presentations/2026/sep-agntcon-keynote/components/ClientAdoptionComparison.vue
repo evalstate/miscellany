@@ -5,7 +5,7 @@ import { useRoute } from 'vue-router';
 import data from '../data/client-adoption-comparison/normalized.json';
 import provenance from '../data/client-adoption-comparison/provenance.json';
 import dailyUrl from '../data/client-adoption-comparison/daily.csv?url';
-import summaryUrl from '../data/client-adoption-comparison/summary.csv?url';
+import comparisonUrl from '../data/client-adoption-comparison/day_on_day.csv?url';
 import statsUrl from '../data/client-adoption-comparison/stats.json?url';
 import provenanceUrl from '../data/client-adoption-comparison/provenance.json?url';
 import readmeUrl from '../data/client-adoption-comparison/README.md?url';
@@ -27,7 +27,7 @@ const pct = (v: number | null) => v === null ? '—' : `${(v * 100).toFixed(1)}%
 const x = (i: number) => 54 + i / (data.dates.length - 1) * 420;
 const y = (v: number) => 238 - v * 150;
 const fields = ['trailing7_share', 'daily_share'] as const;
-const ticks = [{ i: 0, label: 'Jul 28' }, { i: 24, label: 'Aug 21' }, { i: 48, label: 'Sep 14' }];
+const ticks = [{ i: 0, label: 'Jul 28' }, { i: 24, label: 'Aug 21' }, { i: data.dates.length - 1, label: 'Sep 15' }];
 // Geometry only: every point is a supplied rate. Nulls break paths, including
 // incomplete strict-seven windows; isolated observations remain visible as dots.
 const panels = data.series.map((s, panelIndex) => ({
@@ -49,21 +49,21 @@ const panels = data.series.map((s, panelIndex) => ({
   }),
 }));
 const downloads = [
-  { name: 'daily.csv', url: dailyUrl }, { name: 'summary.csv', url: summaryUrl },
+  { name: 'daily.csv', url: dailyUrl }, { name: 'day_on_day.csv', url: comparisonUrl },
   { name: 'stats.json', url: statsUrl }, { name: 'provenance.json', url: provenanceUrl },
   { name: 'README.md', url: readmeUrl }, { name: 'normalized.json', url: normalizedUrl },
 ];
 const columns = ['date', 'all_calls', 'valid_calls', 'modern_calls', 'daily_share',
-  'trailing7_days', 'trailing7_valid_calls', 'trailing7_modern_calls', 'trailing7_share'] as const;
+  'rolling_start', 'rolling_end', 'rolling_valid_calls', 'rolling_modern_calls', 'rolling_share', 'trailing7_share'] as const;
 </script>
 
 <template>
   <section class="client-adoption-comparison" data-chart="client-adoption-comparison"
-    data-through="2026-09-14" data-min-valid-calls="100">
+    :data-through="data.window[1]" :data-min-valid-calls="data.minimum_display_valid_calls">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" role="img"
       :aria-labelledby="`${uid}-title ${uid}-description`" data-role="comparison-svg">
       <title :id="`${uid}-title`">{{ title }}</title>
-      <desc :id="`${uid}-description`">Six clients in source order. Daily and strict trailing-seven shares of reviewed valid tool calls using protocol 2026-07-28, July 28 through September 14, 2026 UTC. Common 0–100% axes. Blank rates are unavailable, not zero. Miniature all-protocol activity bars use each client's own scale.</desc>
+      <desc :id="`${uid}-description`">Six clients in source order. Daily and strict trailing-seven shares of reviewed valid tool calls using protocol 2026-07-28, July 28 through September 15, 2026 UTC, completed calendar days. Last-seven KPIs cover September 9–15. Displayed rates require at least 100 valid calls. Common 0–100% axes. Blank rates are unavailable, not zero. Miniature all-protocol activity bars use each client's own scale.</desc>
       <rect width="1600" height="900" fill="white" />
       <rect x="45" y="36" width="9" height="48" rx="2" fill="#6430d8" />
       <text x="80" y="77" fill="#172032" :style="{ fontSize: '54px', fontWeight: 800 }" data-role="chart-title">{{ title }}</text>
@@ -73,7 +73,7 @@ const columns = ['date', 'all_calls', 'valid_calls', 'modern_calls', 'daily_shar
         <text x="105" y="123">Daily</text>
         <line x1="212" x2="256" y1="115" y2="115" :stroke="slate" stroke-width="5" />
         <text x="268" y="123">Rolling 7 days</text>
-        <text x="1548" y="123" text-anchor="end">Last 7: Sep 8–14, 2026</text>
+        <text x="1548" y="123" text-anchor="end">Last 7: Sep 9–15, 2026</text>
       </g>
       <g v-for="panel in panels" :key="panel.id" :transform="panel.transform"
         data-role="client-panel" :data-client="panel.id">
@@ -87,7 +87,7 @@ const columns = ['date', 'all_calls', 'valid_calls', 'modern_calls', 'daily_shar
         <g v-for="line in panel.lines" :key="line.field" :data-series="line.field">
           <path :d="line.path" fill="none" :stroke="line.color" :stroke-width="line.field === 'daily_share' ? 2.5 : 4.5" stroke-linejoin="round" stroke-linecap="round" />
           <circle v-for="point in line.points" :key="point.date" :cx="x(point.i)" :cy="y(point.value)"
-            :r="line.field === 'daily_share' ? 2.7 : 2.3" :fill="line.color"
+            :r="line.field === 'daily_share' ? 2.7 : 2.3" :fill="line.color" :stroke="line.color" stroke-width="0"
             :data-date="point.date" :data-value="point.value" data-role="rate-point">
             <title>{{ panel.id }} · {{ point.date }} · {{ line.field }}: {{ pct(point.value) }}</title>
           </circle>
@@ -95,7 +95,7 @@ const columns = ['date', 'all_calls', 'valid_calls', 'modern_calls', 'daily_shar
         <g data-role="activity" data-scale="independent" :data-max="panel.maxActivity">
           <rect v-for="(row, i) in panel.rows" :key="row.date" :x="x(i) - 3.4"
             :y="292 - row.all_calls / panel.maxActivity * 34" width="6.8"
-            :height="row.all_calls / panel.maxActivity * 34" :fill="purple" :style="{ opacity: 0.35 }"
+            :height="row.all_calls / panel.maxActivity * 34" :fill="purple" stroke="none" :style="{ opacity: 0.35 }"
             :data-date="row.date" :data-count="row.all_calls">
             <title>{{ row.date }} · {{ row.all_calls.toLocaleString('en-US') }} all-protocol calls</title>
           </rect>
@@ -116,11 +116,11 @@ const columns = ['date', 'all_calls', 'valid_calls', 'modern_calls', 'daily_shar
       aria-label="Data and provenance" data-role="data-overlay" @keydown.stop @keydown.esc="detailsOpen = false" @pointerdown.stop @click.stop>
       <button type="button" @click="detailsOpen = false">Close data &amp; provenance</button>
       <p><strong>Private review output — review before public sharing.</strong> Self-reported identities, not users or proven product migrations. Coverage does not establish complete real-world traffic.</p>
-      <p>Completed UTC dates only: July 28–September 14, 2026; last7 September 8–14. Supplied CSV shares require ≥100 valid calls. Rolling7 is count-weighted over exactly seven calendar days. Null means unavailable, not zero. No rates or denominators are recomputed. Unknown/unreviewed protocols are excluded from rates, retained in activity counts. Fixed five excluded; missing hashes retained.</p>
-      <p>Mini bars show actual all-protocol daily calls, independently scaled per client: compare activity patterns, not popularity. chat-ui-mcp is distinct from chat-ui-intern; codex-mcp-client is distinct from openai-mcp (Codex). This is not the September 15 dashboard snapshot.</p>
+      <p>July 28–September 15, 2026 UTC; all dates are completed calendar days. Last7 covers September 9–15. Snapshot publication: {{ data.snapshot_publication_utc }}. Publication time is not complete event ingestion; late arrivals can revise counts. Source daily CSV rates are unsuppressed; displayed rates require ≥100 valid calls. Rolling7 is count-weighted over exactly seven calendar days. Null means unavailable, not zero. The component does not recompute rates or denominators. Unknown/unreviewed protocols are excluded from rates, retained in activity counts. Fixed five excluded; missing hashes retained.</p>
+      <p>Mini bars show actual all-protocol daily calls, independently scaled per client: compare activity patterns, not popularity. chat-ui-mcp is distinct from chat-ui-intern; codex-mcp-client is distinct from openai-mcp (Codex).</p>
       <nav aria-label="Download source data"><a v-for="file in downloads" :key="file.name" :href="file.url" :download="file.name">{{ file.name }}</a></nav>
       <label>Client <select v-model="selectedId" data-control="table-client"><option v-for="s in data.series" :key="s.id" :value="s.id">{{ s.id }}</option></select></label>
-      <p>Supplied last7: {{ pct(selected.summary.last7_share) }} · {{ selected.summary.last7_modern_calls }} modern / {{ selected.summary.last7_valid_calls }} valid calls · {{ selected.summary.last7_days }} days.</p>
+      <p>Supplied last7: {{ pct(selected.summary.last7_share) }} · {{ selected.summary.last7_modern_calls }} modern / {{ selected.summary.last7_valid_calls }} valid calls · 7 completed days.</p>
       <div class="cac-table"><table>
         <caption>{{ selected.id }} · source values; shares are fractions, — means unavailable</caption>
         <thead><tr><th v-for="column in columns" :key="column" scope="col">{{ column }}</th></tr></thead>
